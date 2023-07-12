@@ -52,7 +52,7 @@ class ChatRobot(object):
             contact_res = chat_contact(self._sess_id, last_user_msg)
             if contact_res:
                 self._next_msg, algo_judge_intent = contact_res
-                if algo_judge_intent=='refuse':
+                if algo_judge_intent=='拒绝':
                     self._status = ChatStatus.FinishFail
                     self._next_msg+= '\n谢谢您的投递'
                     return
