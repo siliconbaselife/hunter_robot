@@ -1,5 +1,4 @@
 from chat_proxy import chat_contact
-from utils import fetch_last_user_msg
 from enum import Enum
 
 class ChatStatus(Enum):
