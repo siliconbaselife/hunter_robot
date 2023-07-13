@@ -1,5 +1,8 @@
 from chat_proxy import chat_contact
 from enum import Enum
+from config import config
+from logger import  get_logger
+logger = get_logger(config['log_file'])
 
 class ChatStatus(Enum):
     Init = 'init',
@@ -28,13 +31,14 @@ class ChatStatus(Enum):
 
 
 class ChatRobot(object):
-    def __init__(self, sess_id, history_msg, last_status, mock=False):
-        self._mock = mock
+    def __init__(self, sess_id, history_msg, last_status):
+        self._mock = config['chat']['mock']
         self._sess_id = sess_id
         self._status = ChatStatus.from_str(last_status)
         self._msg_list = history_msg
         self._next_msg = None
         self._init_and_contact()
+        logger.info(f"chat robot create for seeeion {sess_id}, is mock: {self._mock}")
 
     def _init_and_contact(self):
         chat_round = self._chat_round()
@@ -62,7 +66,7 @@ class ChatRobot(object):
             else:
                 self._next_msg = '您好，请稍等'
                 self._status = ChatStatus.AlgoAbnormal
-                
+        logger.info(f'robot reaction: {self._status} {self._next_msg}')       
         self._msg_list.append({
             'speaker':'robot', 'msg': self._next_msg
         })
@@ -101,7 +105,7 @@ class ChatRobot(object):
         round_cnt = 0
         for cur in self._msg_list:
             if cur['speaker']=='robot':
-                round+=1
+                round_cnt+=1
         return round_cnt
 
     def _check_contact(self):

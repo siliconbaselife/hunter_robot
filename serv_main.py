@@ -1,17 +1,19 @@
 import json
 from flask import Flask, request, Response
 from logger import get_logger
+from config import config
 from db_operator import get_db_conn, new_candidate, update_candidate, query_candidate
 from web_helper import get_web_res_suc_with_data, get_web_res_fail
 from chat import ChatRobot
 
+logger = get_logger(config['log_file'])
 app = Flask("robot_backend")
 
 @app.route("/test")
 def test():
     return "Hello, World!"
 
-@app.route("/recruit/candidate/report")
+@app.route("/recruit/candidate/report", methods=['POST'])
 def report_candidate():
     # request: 
     # loginAccountId: boss用户id,
@@ -25,11 +27,12 @@ def report_candidate():
 
     details  = json.dumps([
         {'speaker': 'robot', 'msg': first_msg}
-    ])
+    ], ensure_ascii=False)
+    logger.info(f'new candidate will rec: {login_id}, {candidate_id}, {first_msg}')
     new_candidate(get_db_conn(), login_id, candidate_id, details=details)
     return Response(json.dumps(get_web_res_suc_with_data('ok')))
 
-@app.route("/recruit/candidate/chat")
+@app.route("/recruit/candidate/chat", methods=['POST'])
 def chat():
     # request: 
     # loginAccountId: boss用户id,
@@ -52,7 +55,7 @@ def chat():
         'nextStep': robot.next_step,
         'nextStepContent': robot.next_msg 
     }
-    details = json.dumps(robot.msg_list)
+    details = json.dumps(robot.msg_list, ensure_ascii=False)
     update_candidate(get_db_conn(), login_id, candidate_id, robot.status, details)
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 

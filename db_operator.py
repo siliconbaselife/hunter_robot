@@ -41,6 +41,7 @@ def ensure_conn(cnx):
 
 
 def exec_sql(cnx, sql, insert=False, error_msg=None, try_cnt=3):
+    print(f'sql: {sql}')
     ensure_conn(cnx)
     while True:
         try:
@@ -120,8 +121,8 @@ def exec_sql(cnx, sql, insert=False, error_msg=None, try_cnt=3):
 
 
 def new_candidate(cnx, boss_id, candidate_id, status='init', details=None):
-    sql = "INSERT INTO `candidate` (boss_id, candidate_id, status, details)' \
-          'VALUES('{}', '{}', '{}', '{}') ".format(boss_id, candidate_id, status, details)
+    sql = "INSERT INTO `candidate` (boss_id, candidate_id, status, details)" \
+          "VALUES('{}', '{}', '{}', '{}') ".format(boss_id, candidate_id, status, details)
     return exec_sql(cnx, sql, insert=True)
 
 def update_candidate(cnx, boss_id, candidate_id, status, details):
@@ -134,8 +135,9 @@ def query_candidate(cnx, boss_id, candidate_id):
     sql = "SELECT status, details FROM candidate WHERE boss_id = '{}' AND candidate_id='{}' ".format(
         boss_id, candidate_id
     )
-    r = exec_sql(cnx, sql, insert=True)
+    r = exec_sql(cnx, sql)
     if r is not None:
+        r = r[0]
         return r[0], r[1]
     else:
         return None
