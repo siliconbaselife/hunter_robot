@@ -23,7 +23,7 @@ class ChatStatus(Enum):
         return ChatStatus.Unknown
     @staticmethod
     def response_str(status):
-        if status==ChatStatus.HasContact and status==ChatStatus.AlgoAbnormal:
+        if status==ChatStatus.HasContact:
             return 'normal_chat'
         elif status==ChatStatus.FinishSuc or status==ChatStatus.FinishFail:
             return 'finish'
@@ -57,14 +57,14 @@ class ChatRobot(object):
                 self._next_msg, algo_judge_intent = contact_res
                 if algo_judge_intent=='拒绝':
                     self._status = ChatStatus.FinishFail
-                    self._next_msg+= '\n谢谢您的投递'
+                    self._next_msg+= '\n好的，那知道了，如果后面有需要，再联系我。'
                     return
                 if chat_round >=5:
                     self._status= ChatStatus.NeedContact
-                    self._next_msg+= '\n方便留一下您的手机号么'
+                    # self._next_msg+= '\n方便留一下您的手机号么'
                     return
             else:
-                self._next_msg = '您好，请稍等'
+                # self._next_msg = '您好，请稍等'
                 self._status = ChatStatus.AlgoAbnormal
         logger.info(f'robot reaction: {self._status} {self._next_msg}')       
         self._msg_list.append({

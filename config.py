@@ -11,5 +11,5 @@ config['db']['user'] = 'chat_user'
 config['db']['pwd'] = '1'
 
 config['chat'] = dict()
-config['chat']['mock'] = True
-config['chat']['chat_url'] = ''
+config['chat']['mock'] = False
+config['chat']['chat_url'] = 'http://127.0.0.1:12222/vision/chat/receive/message/v1'
