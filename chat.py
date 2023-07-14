@@ -12,6 +12,7 @@ class ChatStatus(Enum):
     NeedEnsure = 'need_ensure',
     FinishSuc = 'finish_suc',
     FinishFail = 'finish_fail',
+    Dangerous = 'dangerous',
     AlgoAbnormal = 'algo_abnormal'
     Unknown = 100
 
@@ -25,7 +26,7 @@ class ChatStatus(Enum):
     def response_str(status):
         if status==ChatStatus.HasContact:
             return 'normal_chat'
-        elif status==ChatStatus.FinishSuc or status==ChatStatus.FinishFail:
+        elif status==ChatStatus.FinishSuc or status==ChatStatus.FinishFail or status==ChatStatus.Dangerous:
             return 'finish'
         return status.value[0]
 
@@ -58,8 +59,13 @@ class ChatRobot(object):
                 if algo_judge_intent=='拒绝':
                     self._status = ChatStatus.FinishFail
                     self._next_msg+= '\n好的，那知道了，如果后面有需要，再联系我。'
+                    logger.info(f'algo judge {self._sess_id} refuse, will finish')
                     return
-                if chat_round >=5:
+                elif '过激' in algo_judge_intent:
+                    self._status = ChatStatus.Dangerous
+                    logger.info(f'algo judge {self._sess_id} dangerous, will finish')
+                    return
+                if chat_round ==3:
                     self._status= ChatStatus.NeedContact
                     # self._next_msg+= '\n方便留一下您的手机号么'
                     return

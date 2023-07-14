@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS `candidate`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `candidate_id` ),
    CONSTRAINT `candidate_info` UNIQUE(`boss_id`, `candidate_id`)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;

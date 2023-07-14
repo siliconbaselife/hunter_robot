@@ -136,11 +136,11 @@ def query_candidate(cnx, boss_id, candidate_id):
         boss_id, candidate_id
     )
     r = exec_sql(cnx, sql)
-    if r is not None:
+    if r is None or len(r)==0:
+        return None
+    else:
         r = r[0]
         return r[0], r[1]
-    else:
-        return None
 
 thread_db_conn = {}
 db_rlock = RLock()

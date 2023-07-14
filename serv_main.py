@@ -46,7 +46,16 @@ def chat():
     login_id = request.json['loginAccountId']
     candidate_id = request.json['candidateId']
     history_msg = request.json['historyMsg']
-    last_status, _ = query_candidate(get_db_conn(), login_id, candidate_id)
+    logger.info(f'candidate chat: {login_id} {candidate_id} {history_msg}')
+
+    candidate_info = query_candidate(get_db_conn(), login_id, candidate_id)
+    last_status = 'init'
+    if candidate_info is None:
+        details = json.dumps(history_msg, ensure_ascii=False)
+        logger.info(f'new candidate will supply: {login_id}, {candidate_id}, {details}')
+        new_candidate(get_db_conn(), login_id, candidate_id, details=details)
+    else:
+        last_status, _ = candidate_info
 
     sess_id = f'{login_id}_{candidate_id}'
     robot = ChatRobot(sess_id, history_msg, last_status)
