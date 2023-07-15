@@ -32,11 +32,11 @@ class ChatStatus(Enum):
 
 
 class ChatRobot(object):
-    def __init__(self, sess_id, history_msg, last_status):
+    def __init__(self, sess_id, page_history_msg, last_status, db_history_msg=None):
         self._mock = config['chat']['mock']
         self._sess_id = sess_id
         self._status = ChatStatus.from_str(last_status)
-        self._msg_list = history_msg
+        self._merge_history(page_history_msg, db_history_msg)
         self._next_msg = None
         self._init_and_contact()
         logger.info(f"chat robot create for seeeion {sess_id}, is mock: {self._mock}")
@@ -49,11 +49,10 @@ class ChatRobot(object):
             mock_ret_list = ["十分感谢我们这边的职位", "您的问题我们已经记录了，确认好了之后给您回复", "祝您生活愉快"]
             self._next_msg = mock_ret_list[chat_round%len(mock_ret_list)]
         else:
-            last_user_msg = self._fetch_last_user_msg()
             if self._check_contact():
                 self._status = ChatStatus.HasContact
 
-            contact_res = chat_contact(self._sess_id, last_user_msg)
+            contact_res = chat_contact(self._sess_id, self._last_user_msg)
             if contact_res:
                 self._next_msg, algo_judge_intent = contact_res
                 if algo_judge_intent=='拒绝':
@@ -93,8 +92,7 @@ class ChatRobot(object):
     def status(self):
         return self._status.value[0]
 
-    def _fetch_last_user_msg(self):
-        msg_list = self._msg_list
+    def _fetch_last_user_msg(self, msg_list):
         assert msg_list and  msg_list[-1]['speaker']!='robot', f'msg list empty or last speaker not human: {msg_list}'
         merge_msg = msg_list[-1]['msg']
         until_idx = len(msg_list)-2
@@ -106,6 +104,15 @@ class ChatRobot(object):
             until_idx-=1
         return merge_msg
 
+    def _merge_history(self, page_history_msg, db_history_msg=None):
+        self._last_user_msg = self._fetch_last_user_msg(page_history_msg)
+        if db_history_msg is None:
+            self._msg_list = page_history_msg
+        else:
+            self._msg_list = db_history_msg
+            self._msg_list.append({
+                'speaker': 'user', 'msg': self._last_user_msg
+            })
 
     def _chat_round(self):
         round_cnt = 0

@@ -120,9 +120,10 @@ def exec_sql(cnx, sql, insert=False, error_msg=None, try_cnt=3):
 #         return None
 
 
-def new_candidate(cnx, boss_id, candidate_id, status='init', details=None):
-    sql = "INSERT INTO `candidate` (boss_id, candidate_id, status, details)" \
-          "VALUES('{}', '{}', '{}', '{}') ".format(boss_id, candidate_id, status, details)
+def new_candidate(cnx, boss_id, candidate_id, candidate_name=None, status='init', details=None):
+    sql = "INSERT INTO `candidate` (boss_id, candidate_id, candidate_name, status, details)" \
+          "VALUES('{}', '{}', '{}', '{}', '{}') ".format(
+        boss_id, candidate_id, candidate_name, status, details)
     return exec_sql(cnx, sql, insert=True)
 
 def update_candidate(cnx, boss_id, candidate_id, status, details):
