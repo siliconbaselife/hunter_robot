@@ -119,6 +119,24 @@ def exec_sql(cnx, sql, insert=False, error_msg=None, try_cnt=3):
 #     else:
 #         return None
 
+def new_job(cnx, job_name, job_jd, robot_api):
+    sql = "INSERT INTO `job` (job_name, job_jd, robot_api)" \
+          "VALUES('{}', '{}', '{}') ".format(job_name, job_jd, robot_api)
+    return exec_sql(cnx, sql, insert=True)
+
+
+def new_user(cnx, job_name, boss_id):
+    sql = "INSERT INTO `user` (job_name, boss_id)" \
+          "VALUES('{}', '{}') ".format(job_name, boss_id)
+    return exec_sql(cnx, sql, insert=True)
+
+def query_robotapi(cnx, boss_id):
+    sql = "SELECT job.robot_api from job, user where user.boss_id='{}' and job.job_name=user.job_name ".format(boss_id)
+    r = exec_sql(cnx, sql)
+    if r is None or len(r)==0:
+        return None
+    else:
+        return r[0][0]
 
 def new_candidate(cnx, boss_id, candidate_id, candidate_name=None, status='init', details=None):
     sql = "INSERT INTO `candidate` (boss_id, candidate_id, candidate_name, status, details)" \
@@ -130,7 +148,7 @@ def update_candidate(cnx, boss_id, candidate_id, status, details):
     sql = "UPDATE candidate SET status = '{}', details='{}' WHERE boss_id = '{}' AND candidate_id='{}' ".format(
         status, details, boss_id, candidate_id
     )
-    return exec_sql(cnx, sql, insert=True)
+    return exec_sql(cnx, sql)
 
 def query_candidate(cnx, boss_id, candidate_id):
     sql = "SELECT status, details FROM candidate WHERE boss_id = '{}' AND candidate_id='{}' ".format(
