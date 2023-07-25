@@ -101,6 +101,10 @@ def chat():
             db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
 
     robot_api = query_robotapi(get_db_conn(), boss_id=login_id)
+    if not robot_api:
+        reason = f'boss id {login_id} 未注册，没有对应的算法uri'
+        return Response(json.dumps(get_web_res_fail(reason)))
+
 
     sess_id = f'{login_id}_{candidate_id}'
     robot = ChatRobot(robot_api, sess_id, last_status, page_history_msg, db_history_msg=db_history_msg)
@@ -117,18 +121,17 @@ def chat():
 @app.route("/recruit/candidate/status", methods=['POST'])
 def candidate_status():
     # request: 
-    # loginAccountId: boss用户id,
     # candidateId: 候选人id
     # response
     # return {"ret":0, "msg":"success", "data": xxx} 
     # data: { status };
     # status: enum {'no_record', 'init', 'need_contact', 'normal_chat', ...}
 
-    login_id = request.json['loginAccountId']
+    # login_id = request.json['loginAccountId']
     candidate_id = request.json['candidateId']
-    logger.info(f'candidate status query: {login_id} {candidate_id}')
+    logger.info(f'candidate status query: {candidate_id}')
 
-    candidate_info = query_candidate(get_db_conn(), login_id, candidate_id)
+    candidate_info = query_unique_candidate(get_db_conn(), candidate_id)
     status = 'no_record'
     if candidate_info is not None:
         status, _ = candidate_info
@@ -136,7 +139,7 @@ def candidate_status():
     ret_data = {
         'status': status,
     }
-    logger.info(f'candidate status query {login_id} {candidate_id} ret: {ret_data}')
+    logger.info(f'candidate status query {candidate_id} ret: {ret_data}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 if __name__=="__main__":

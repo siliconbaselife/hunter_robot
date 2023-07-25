@@ -150,8 +150,19 @@ def update_candidate(cnx, boss_id, candidate_id, status, details):
     )
     return exec_sql(cnx, sql)
 
+def query_unique_candidate(cnx, candidate_id):
+    sql = "SELECT status, details FROM candidate WHERE candidate_id='{}' ".format(
+        candidate_id
+    )
+    r = exec_sql(cnx, sql)
+    if r is None or len(r)==0:
+        return None
+    else:
+        r = r[0]
+        return r[0], r[1]
+
 def query_candidate(cnx, boss_id, candidate_id):
-    sql = "SELECT status, details FROM candidate WHERE boss_id = '{}' AND candidate_id='{}' ".format(
+    sql = "SELECT status, details FROM candidate WHERE boss_id='{}' AND candidate_id='{}' ".format(
         boss_id, candidate_id
     )
     r = exec_sql(cnx, sql)
