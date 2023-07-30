@@ -7,7 +7,7 @@
 调用方式:            POST
 request params:     json的方式放在body里面
 request file:       上传文件
-返回的统一格式:      {'data':xxx, 'status': 0}
+返回的统一格式:      {'data':xxx, 'ret': 0}
 response data:      指的是上述的data字段，默认json方式
 ```
 
@@ -17,13 +17,14 @@ response data:      指的是上述的data字段，默认json方式
 ## request params:
 ### jobName         string      need      工作名称
 ### jobJD           string      need      工作介绍
+### robotApi        string      need      岗位对应的算法后端api
 ## response data:
 ### jobID           string      工作ID
 ```
 
 #### 查询jobID
 ```
-## uri: /recruit/job/register
+## uri: /recruit/job/query
 ## request params:
 ### jobName         string      need      工作名称
 ## response data:
