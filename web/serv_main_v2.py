@@ -3,6 +3,7 @@ from flask import Flask, request, Response
 from utils.logger import get_logger
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
+from utils.decorator import web_exception_handler
 
 logger = get_logger(config['log_file'])
 app = Flask("robot_backend")
@@ -13,6 +14,7 @@ def test():
 
 
 @app.route("/recruit/job/register", methods=['POST'])
+@web_exception_handler
 def register_job():
     job_name = request.json['jobName']
     jd = request.json.get('jobJD', None)
