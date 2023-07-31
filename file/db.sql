@@ -32,7 +32,7 @@ CREATE TABLE `account_exec_log` (
   `job_id` varchar(60) NOT NULL COMMENT '岗位id',
   `exec_date` varchar(60) NOT NULL COMMENT '任务执行日期',
   `hello_sum_need` int unsigned NOT NULL COMMENT '应打招呼数量',
-  `hello_sum_exec` int unsigned NOT NULL COMMENT '实际打招呼数量',
+  `hello_sum_exec` int unsigned NOT NULL DEFAULT 0  COMMENT '实际打招呼数量',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
