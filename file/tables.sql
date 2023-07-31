@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `account`(
    `account_id` VARCHAR(100) NOT NULL COMMENT '账号唯一标识',
    `platform_type` VARCHAR(256) NOT NULL COMMENT '招聘平台枚举，如：boss',
    `platform_id` VARCHAR(256) NOT NULL COMMENT '招聘平台内的id',
+   `jobs` LONGTEXT COMMENT '招聘的岗位job_id列表',
    `task_config` LONGTEXT COMMENT '任务配置，根据招聘的职位生成',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
