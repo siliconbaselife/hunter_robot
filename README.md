@@ -124,7 +124,6 @@ response data:      指的是上述的data字段，默认json方式
 ### jobID           string      need        要招聘的岗位ID
 ### candidateInfo   dict        need        候选人详情，例如：
 {
-  "id": "候选人在平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替"
   "name": "候选人姓名",
   "age": "20",
   "education": "大专",
@@ -141,6 +140,8 @@ response data:      指的是上述的data字段，默认json方式
 ## request params:
 ### accountID       string      need        账户ID
 ### jobID           string      need        要招聘的岗位ID
+### candidateID     string      need        候选人在招聘平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替
+### candidateName   string      need        候选人姓名
 ### historyMsg      list        need        候选人详情，例如：
 [
   {
@@ -168,6 +169,7 @@ normal_chat,finish,algo_abnormal,need_ensure
 ## request params:
 ### accountID       string      need        账户ID
 ### jobID           string      need        要招聘的岗位ID
+### candidateID     string      need        候选人在招聘平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替
 ### candidateName   string      need        候选人姓名
 ### phone           string      option      候选人手机号
 ### wechat          string      option      候选人微信号
