@@ -1,16 +1,41 @@
 from dao.task_dao import *
 import json
+import time
 
 
 
-## 处理重启的适配
+def filter_time(time_percent):
+    sum = 0
+    filter_time_res = []
+    t_now = time.strftime("%M:%S", time.localtime())
+    for t in time_percent:
+        if t["time"] > t_now:
+            filter_time_res.append(t)
+            sum += t["percent"]
+    for t in filter_time_res:
+        t["percent"] = round(t["percent"] / sum)
+    return filter_time_res
+
+
+## 处理重启后的任务的适配
 def re_org_task(config_data, today_sub_task_log):
+    sub_task_dict = {}
+    for t in today_sub_task_log:
+        sub_task_dict[t[2]] = t
     res = []
     for job_config in config_data:
+        retain_sum = job_config["hello_sum"] - sub_task_dict[job_config["job_id"]][5]
+
+        time_percent = job_config["time_percent"]
+        time_percent_filtered = filter_time(time_percent)
+
         r_job = {
-            "job_id":job_config["job_id"]
+            "job_id":job_config["job_id"],
+            "hello_sum": retain_sum,
+            "time_percent":time_percent_filtered
         }
-    return
+        res.append(r_job)
+    return res
 
 
 
@@ -29,10 +54,5 @@ def get_undo_task(account_id):
     else:
         return re_org_task(config_data, today_sub_task_log)
 
-
-
-def report_result():
-    #
-    return
 
 
