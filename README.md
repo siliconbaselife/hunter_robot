@@ -37,6 +37,7 @@ response data:      指的是上述的data字段，默认json方式
 ## request params:
 ### platformType    string      need      招聘平台，例如：'boss' 
 ### platformID      string      need      招聘平台给的ID，例如：'27175761'
+### jobs            string      need      账户招聘的岗位jobID列表
 ## response data:
 ### accountID       string      账户ID
 ```
@@ -123,6 +124,7 @@ response data:      指的是上述的data字段，默认json方式
 ### jobID           string      need        要招聘的岗位ID
 ### candidateInfo   dict        need        候选人详情，例如：
 {
+  "id": "候选人在平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替"
   "name": "候选人姓名",
   "age": "20",
   "education": "大专",
