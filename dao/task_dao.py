@@ -13,7 +13,8 @@ sql_dict = {
     "query_chat": "select status, source from chat where job_id={} and candidate_id={}",
     "add_task_count":"update account_exec_log set hello_sum_exec = hello_sum_exec+1 where account_id={} and job_id={} and exec_date={}",
     "get_task":"select * from account_config where account_id={}",
-    "insert_sub_task_log":"insert into account_exec_log(account_id, job_id, exec_date, hello_sum_need) values ({},{},{},{})"
+    "insert_sub_task_log":"insert into account_exec_log(account_id, job_id, exec_date, hello_sum_need) values ({},{},{},{})",
+    "get_sub_task_with_account_id":"select * from account_exec_log where account_id={} and exec_date={}"
 }
 
 def register_job(job_name, job_jd, robot_api):
@@ -52,12 +53,16 @@ def is_chatting(job_id, candidate_id):
     ret = dbm.query(sql_dict['query_chat'].format(job_id, candidate_id))
     return len(ret)>0
 
-def get_task(account_id):
+def get_task_db(account_id):
     return dbm.query(sql_dict["get_task"].format(account_id))
 
-def init_task_log(account_id, job_id, exec_date, hello_sum_need):
+def init_task_log_db(account_id, job_id, exec_date, hello_sum_need):
     d = [[account_id, job_id, exec_date, hello_sum_need]]
     return dbm.insert(sql_dict["insert_sub_task_log"], d)
 
-def hello_exec(account_id, job_id, exec_date):
+def get_sub_task_with_account_id_db(account_id, exec_date):
+    return dbm.query(sql_dict["get_sub_task_with_account_id"].format(account_id, exec_date))
+
+##打招呼那个接口要调一下，这个记录一下
+def hello_exec_db(account_id, job_id, exec_date):
     return dbm.update(sql_dict["add_task_count"].format(account_id, job_id, exec_date))

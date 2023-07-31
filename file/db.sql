@@ -15,11 +15,11 @@ CREATE TABLE `account_config` (
 		"time_percent": [
 		{
 			"time":"09:00",
-			"percent":"50"
+			"percent":50
 		}, 
 		{
 			"time":"16:00",
-			"percent":"50"
+			"percent":50
 		}
 		]
 	}
