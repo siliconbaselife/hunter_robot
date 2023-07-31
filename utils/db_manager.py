@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
 
-# @Time    : 2019/12/2 下午12:02
-# @Author  : gaoqi
 
 import pymysql
 from threading import Lock

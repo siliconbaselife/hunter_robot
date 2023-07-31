@@ -1,8 +1,8 @@
 import json
 from flask import Flask, request, Response
-from logger import get_logger
-from config import config
-from web_helper import get_web_res_suc_with_data, get_web_res_fail
+from utils.logger import get_logger
+from utils.config import config
+from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 
 logger = get_logger(config['log_file'])
 app = Flask("robot_backend")
