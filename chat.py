@@ -91,13 +91,18 @@ class ChatRobot(object):
             self._next_msg = self._preset_reply_dict['got_contact']
             logger.info(f'chat log {self._sess_id}: got user contact')
         elif user_msg_useless:
-            if has_contact:
-                logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, has contact already, will no reply')
-                self._next_msg = ''
-            else:
-                logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, no contact yet, will ask for')
-                self._status= ChatStatus.NeedContact
-                self._next_msg = self._preset_reply_dict.get(self._status.value[0], '')
+            # if has_contact:
+            #     logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, has contact already, will no reply')
+            #     self._next_msg = ''
+            # else:
+            #     logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, no contact yet, will ask for')
+            #     self._status= ChatStatus.NeedContact
+            #     self._next_msg = self._preset_reply_dict.get(self._status.value[0], '')
+
+            ## judge contact to need contact will cause toomuch need contact reply
+            logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, will reply expression')
+            self._next_msg = ''
+
         else:
             contact_res = chat_contact(self._robot_api, self._sess_id, self._last_user_msg)
             if contact_res:
@@ -120,13 +125,17 @@ class ChatRobot(object):
                 #     pass
 
                 if algo_judge_intent in self._trivial_reply_intent:
-                    if has_contact:
-                        logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, has contact already, will no reply')
-                        self._next_msg = ''
-                    else:
-                        logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, no contact yet, will ask for')
-                        self._status= ChatStatus.NeedContact
-                        self._next_msg = self._preset_reply_dict.get(self._status.value[0], '')
+                    # if has_contact:
+                    #     logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, has contact already, will no reply')
+                    #     self._next_msg = ''
+                    # else:
+                    #     logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, no contact yet, will ask for')
+                    #     self._status= ChatStatus.NeedContact
+                    #     self._next_msg = self._preset_reply_dict.get(self._status.value[0], '')
+
+                    ## judge contact to need contact will cause toomuch need contact reply
+                    logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, will reply expression')
+                    self._next_msg = ''
                 elif need_contact:
                     self._status= ChatStatus.NeedContact
                     self._next_msg += '\n'
