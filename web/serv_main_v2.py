@@ -1,9 +1,14 @@
 import json
 from flask import Flask, request, Response
-from utils.logger import get_logger
+from utils.log import get_logger
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
+from utils.utils import deal_json_invaild
+from dao.task_dao import *
+from service.task_service import generate_task, get_undo_task
+from service.chat_service import ChatRobot
+from service.candidate_filter import candidate_filter
 
 logger = get_logger(config['log_file'])
 app = Flask("robot_backend")
@@ -15,23 +20,26 @@ def test():
 
 @app.route("/recruit/job/register", methods=['POST'])
 @web_exception_handler
-def register_job():
+def register_job_api():
     job_name = request.json['jobName']
     jd = request.json.get('jobJD', None)
     robot_api = request.json['robotApi']
+    requirement_config = request.json.get('jobRequirement', None)
 
-    job_id = 'test_job_id'
-    logger.info(f'new job will register: {job_name}, {jd}, {robot_api}: {job_id}')
+    logger.info(f'new job request: {job_name} {requirement_config} {robot_api}')
+    job_id = register_job_db(job_name, requirement_config, jd, robot_api)
     ret_data = {
         'jobID': job_id
     }
+    logger.info(f'new job register: {job_name} {requirement_config} {robot_api}: {job_id}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 @app.route("/recruit/job/query", methods=['POST'])
-def query_job():
+def query_job_api():
     job_name = request.json['jobName']
+    logger.info(f'query job request: {job_name}, {jd}, {robot_api}')
 
-    job_id = 'test_job_id'
+    job_id = query_job_id_db(job_name)
     logger.info(f'job query: {job_name}: {job_id}')
     ret_data = {
         'jobID': job_id
@@ -40,53 +48,59 @@ def query_job():
 
 
 @app.route("/recruit/account/register", methods=['POST'])
-def register_account():
+def register_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
+    jobs = request.json['jobs']
+    logger.info(f'new account request: {platform_type}, {platform_id}, {jobs}')
 
-    accound_id = 'test_accound_id'
-    logger.info(f'new account will register: {platform_type}, {platform_id}: {accound_id}')
+    task_config = generate_task(json.loads(jobs))
+    account_id = register_account_db(platform_type, platform_id, jobs, task_config)
+    logger.info(f'new account register: {platform_type}, {platform_id}, {jobs}: {account_id}')
     ret_data = {
-        'accountID': accound_id
+        'accountID': account_id
     }
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
 @app.route("/recruit/account/query", methods=['POST'])
-def query_account():
+def query_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
 
-    accound_id = 'test_accound_id'
-    logger.info(f'account query: {platform_type}, {platform_id}: {accound_id}')
+    logger.info(f'query account request: {platform_type}, {platform_id}')
+
+    account_id = query_account_id_db(platform_type, platform_id)
+    logger.info(f'query account: {platform_type}, {platform_id}: {account_id}')
     ret_data = {
-        'accountID': accound_id
+        'accountID': account_id
     }
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 @app.route("/recruit/account/task/fetch", methods=['POST'])
-def task_fetch():
-    accound_id = request.json['accountID']
-
-    task_list = [{
-            "taskID": 1,
-            "execTime": "2023-07-28 09:10:00",
-            "jobID": "xxxx",
-            "taskType": "batchTouch",
-            "details": {
-            "mount": 50
-            }},{
-            "taskID": 2,
-            "execTime": "2023-07-28 11:33:00",
-            "jobID": "xxxx",
-            "taskType": "chat",
-            "details": {
-                "dstList": [{
-                    "candidateName": "xxx","candidateID": "xxx","msg": "xxx"}]
-            }
-        }
-    ]
-    logger.info(f'account task fetch {accound_id}: {task_list}')
+def task_fetch_api():
+    account_id = request.json['accountID']
+    logger.info(f'account task fetch request {account_id}')
+    task_list = get_undo_task(account_id)
+    # task_list = [{
+    #         "taskID": 1,
+    #         "execTime": "2023-07-28 09:10:00",
+    #         "jobID": "xxxx",
+    #         "taskType": "batchTouch",
+    #         "details": {
+    #         "mount": 50
+    #         }},{
+    #         "taskID": 2,
+    #         "execTime": "2023-07-28 11:33:00",
+    #         "jobID": "xxxx",
+    #         "taskType": "chat",
+    #         "details": {
+    #             "dstList": [{
+    #                 "candidateName": "xxx","candidateID": "xxx","msg": "xxx"}]
+    #         }
+    #     }
+    # ]
+    logger.info(f'account task fetch {account_id}: {task_list}')
     ret_data = {
         'task': task_list
     }
@@ -94,12 +108,13 @@ def task_fetch():
 
 
 @app.route("/recruit/account/task/report", methods=['POST'])
-def task_report():
-    accound_id = request.json['accountID']
+def task_report_api():
+    ### TODO
+    account_id = request.json['accountID']
 
     task_status = request.json['taskStatus']
 
-    logger.info(f'account task report {accound_id}, {task_status}')
+    logger.info(f'account task report {account_id}, {task_status}')
     ret_data = {
         'status': 'ok'
     }
@@ -107,49 +122,101 @@ def task_report():
 
 
 @app.route("/recruit/candidate/filter", methods=['POST'])
-def candidate_filter():
-    accound_id = request.json['accountID']
-
+def candidate_filter_api():
+    account_id = request.json['accountID']
     job_id = request.json['jobID']
-
+    candidate_id = request.json['candidateID']
     candidate_info = request.json['candidateInfo']
 
-    logger.info(f'candidate filter {accound_id}, {job_id}, {candidate_info}')
+    name = candidate_info['name']
+    age = candidate_info['age']
+    education = candidate_info['education']
+    details = candidate_info['details']
+    logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_info}')
+    if not query_candidate_exist(candidate_id):
+        new_candidate_db(candidate_id, name, age, education, details)
+    to_touch = candidate_filter(job_id, candidate_info)
     ret_data = {
-        'touch': True
+        'touch': to_touch
     }
+    if to_touch:
+        new_chat_db(account_id, job_id, candidate_id, name)
+    logger.info(f'candidate filter {account_id}, {job_id}, {candidate_info}: {to_touch}')
+
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
 @app.route("/recruit/candidate/chat", methods=['POST'])
-def candidate_chat():
-    accound_id = request.json['accountID']
+def candidate_chat_api():
+    account_id = request.json['accountID']
 
     job_id = request.json['jobID']
 
     history_msg = request.json['historyMsg']
 
-    logger.info(f'candidate chat {accound_id}, {job_id}, {history_msg}')
+    candidate_id = request.json['candidateID']
+    candidate_name = request.json.get('candidateName', None)
+    page_history_msg = request.json['historyMsg']
+    logger.info(f'candidate chat request: {account_id} {job_id} {candidate_id} {candidate_name} {page_history_msg}')
+
+    source = None
+    db_history_msg = None
+
+    candidate_info = query_chat_db(account_id, job_id, candidate_id)
+    if len(candidate_info) == 0:
+        details = json.dumps(page_history_msg, ensure_ascii=False)
+        logger.info(f'candidate chat not in db, new candidate will supply: {account_id} {job_id} {candidate_id} {candidate_name} {details}')
+        new_chat_db(account_id, job_id, candidate_id, candidate_name, source, details=details)
+    else:
+        source, db_history_msg = candidate_info[0]
+        try:
+            db_history_msg = json.loads(db_history_msg, strict=False)
+        except BaseException as e:
+            logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
+            db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
+
+    robot_api = query_robotapi_db(job_id)
+    if not robot_api:
+        reason = f'job id {job_id} 未注册，没有对应的算法uri'
+        return Response(json.dumps(get_web_res_fail(reason)))
+
+
+    sess_id = f'{account_id}_{job_id}_{candidate_id}'
+    robot = ChatRobot(robot_api, sess_id, page_history_msg, db_history_msg=db_history_msg, source=source)
+
     ret_data = {
-        'nextStep': 'need_contact',
-        'nextStepContent': '您好'
+        'nextStep': robot.next_step,
+        'nextStepContent': robot.next_msg 
     }
+    details = json.dumps(robot.msg_list, ensure_ascii=False)
+    update_chat_db(account_id, job_id, candidate_id, robot.source, robot.status, details)
+    logger.info(f'candidate chat: {account_id} {job_id} {candidate_id} {candidate_name}: {ret_data}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
+
 @app.route("/recruit/candidate/result", methods=['POST'])
-def candidate_result():
-    accound_id = request.json['accountID']
+def candidate_result_api():
+    account_id = request.json['accountID']
 
     job_id = request.json['jobID']
 
+    candidate_id = request.json['candidateID']
     name = request.json['candidateName']
     phone = request.json.get('phone', None)
     wechat = request.json.get('wechat', None)
 
-    logger.info(f'candidate result: {accound_id}, {job_id}, {name}, {phone}, {wechat}')
+    contact = {
+        'phone': phone,
+        'wechat': wechat
+    }
+
+    logger.info(f'candidate result request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}')
+    update_chat_contact_db(account_id, job_id, candidate_id, contact)
+    update_candidate_contact_db(candidate_id, contact)
     ret_data = {
         'status': 'ok'
     }
+    logger.info(f'candidate result update: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 if __name__=="__main__":

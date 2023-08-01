@@ -1,8 +1,8 @@
 from dao.task_dao import *
 import json
 import time
-
-
+from utils.config import config
+import copy
 
 def filter_time(time_percent):
     sum = 0
@@ -55,4 +55,12 @@ def get_undo_task(account_id):
         return re_org_task(config_data, today_sub_task_log)
 
 
+def generate_task(jobs):
+    base_config = config['task_config_base']
+    ret = []
+    for job_id in jobs:
+        item = copy.deepcopy(base_config)
+        item['job_id'] = job_id
+        ret.append(item)
+    return ret
 

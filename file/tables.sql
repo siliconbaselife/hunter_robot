@@ -30,12 +30,19 @@ CREATE TABLE IF NOT EXISTS `job`(
    `job_id` VARCHAR(100) NOT NULL COMMENT '岗位唯一标识',
    `job_name` VARCHAR(100) NOT NULL COMMENT '岗位名称',
    `job_jd` LONGTEXT COMMENT '岗位jd',
+   `requirement_config` LONGTEXT COMMENT '岗位需求配置',
    `robot_api` LONGTEXT COMMENT '算法调用api',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `job_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+=====requirement_config===========
+[
+   ["age", "range", 18, 35],
+   ["education", "min", "大专"],
+   ["experience", "contain", "客服"]
+]
 
 CREATE TABLE IF NOT EXISTS `account`(
    `account_id` VARCHAR(100) NOT NULL COMMENT '账号唯一标识',
@@ -49,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `account`(
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
-=====config===========
+=====task_config===========
 [
 	{
 		"job_id":"common_kefu",
