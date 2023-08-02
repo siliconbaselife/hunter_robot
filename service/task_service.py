@@ -9,13 +9,13 @@ from datetime import datetime
 def filter_time(time_percent):
     sum = 0
     filter_time_res = []
-    t_now = time.strftime("%M:%S", time.localtime())
+    t_now = time.strftime("%H:%M", time.localtime())
     for t in time_percent:
         if t["time"] > t_now:
             filter_time_res.append(t)
             sum += t["percent"]
     for t in filter_time_res:
-        t["percent"] = round(t["percent"] / sum)
+        t["percent"] = round(t["percent"] / sum * 100)
     return filter_time_res
 
 
@@ -34,6 +34,7 @@ def re_org_task(config_data, today_sub_task_log):
 
             r_job = {
                 "job_id":job_config["job_id"],
+                "task_type":job_config['task_type'],
                 "hello_sum": retain_sum,
                 "time_percent":time_percent_filtered
             }
