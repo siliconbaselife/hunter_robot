@@ -9,6 +9,7 @@ from service.task_service import generate_task, get_undo_task, update_touch_task
 from service.chat_service import ChatRobot
 from service.candidate_filter import candidate_filter, preprocess
 from utils.log import get_logger
+from utils.oss import generate_thumbnail
 
 logger = get_logger(config['log']['log_file'])
 app = Flask("robot_backend")
@@ -196,27 +197,34 @@ def candidate_chat_api():
 
 @app.route("/recruit/candidate/result", methods=['POST'])
 def candidate_result_api():
-    account_id = request.json['accountID']
+    logger.info(f'candidate result')
+    account_id = request.form['accountID']
 
-    job_id = request.json['jobID']
+    job_id = request.form['jobID']
 
-    candidate_id = request.json['candidateID']
-    name = request.json['candidateName']
-    phone = request.json.get('phone', None)
-    wechat = request.json.get('wechat', None)
+    candidate_id = request.form['candidateID']
+    name = request.form['candidateName']
+    phone = request.form.get('phone', None)
+    wechat = request.form.get('wechat', None)
 
+    logger.info(f'candidate result, files: {request.files}, {request.files.keys()}')
+
+    cv_filename = f'cv_{account_id}_{job_id}_{candidate_id}_{name}.pdf'
+    cv_file = request.files['cv'].read()
+    cv_addr = generate_thumbnail(cv_filename, cv_file)
     contact = {
         'phone': phone,
-        'wechat': wechat
+        'wechat': wechat,
+        'cv': cv_addr
     }
 
-    logger.info(f'candidate result request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}')
-    update_chat_contact_db(account_id, job_id, candidate_id, contact)
-    update_candidate_contact_db(candidate_id, contact)
+    logger.info(f'candidate result request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
+    update_chat_contact_db(account_id, job_id, candidate_id, json.dumps(contact, ensure_ascii=False))
+    update_candidate_contact_db(candidate_id, json.dumps(contact,ensure_ascii=False))
     ret_data = {
         'status': 'ok'
     }
-    logger.info(f'candidate result update: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}')
+    logger.info(f'candidate result update: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 if __name__=="__main__":

@@ -17,5 +17,5 @@ def preprocess(account_id, raw_candidate_info):
 def candidate_filter(job_id, candidate_info):
     # job_requirement = query_job_requirement_db(job_id)
     if is_chatting_db(job_id, candidate_info['id']):
-        return False
+        return {'judge': False}
     return __filter_dispatcher['custom_service'](candidate_info)

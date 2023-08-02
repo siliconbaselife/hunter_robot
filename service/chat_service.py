@@ -37,7 +37,6 @@ class ChatStatus(Enum):
 
 class ChatRobot(object):
     def __init__(self, robot_api, sess_id, page_history_msg, db_history_msg=None, source=None):
-        self._mock_apply_list = config['chat']['mock_preset']
         self._sess_id = sess_id
         # self._status = ChatStatus.from_str(last_status)
         # self._merge_history(page_history_msg, db_history_msg)
