@@ -7,7 +7,7 @@ import copy
 def filter_time(time_percent):
     sum = 0
     filter_time_res = []
-    t_now = time.strftime("%M:%S", time.localtime())
+    t_now = time.strftime("%H:%M", time.localtime())
     for t in time_percent:
         if t["time"] > t_now:
             filter_time_res.append(t)
