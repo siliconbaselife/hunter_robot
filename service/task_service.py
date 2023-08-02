@@ -34,6 +34,7 @@ def re_org_task(config_data, today_sub_task_log):
 
             r_job = {
                 "job_id":job_config["job_id"],
+                "task_type":job_config['task_type'],
                 "hello_sum": retain_sum,
                 "time_percent":time_percent_filtered
             }
