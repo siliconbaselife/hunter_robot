@@ -10,6 +10,7 @@ from service.chat_service import ChatRobot
 from service.candidate_filter import candidate_filter, preprocess
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
+from utils.group_msg import send_candidate_info
 
 logger = get_logger(config['log']['log_file'])
 app = Flask("robot_backend")
@@ -209,21 +210,34 @@ def candidate_result_api():
 
     logger.info(f'candidate result, files: {request.files}, {request.files.keys()}')
 
-    cv_filename = f'cv_{account_id}_{job_id}_{candidate_id}_{name}.pdf'
-    cv_file = request.files['cv'].read()
-    cv_addr = generate_thumbnail(cv_filename, cv_file)
+    cv_addr = None
+    if len(request.files.keys())>0:
+        cv_filename = f'cv_{account_id}_{job_id}_{candidate_id}_{name}.pdf'
+        cv_file = request.files['cv'].read()
+        cv_addr = generate_thumbnail(cv_filename, cv_file)
     contact = {
         'phone': phone,
         'wechat': wechat,
         'cv': cv_addr
     }
-
     logger.info(f'candidate result request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
+
+    candidate_info = query_chat_db(account_id, job_id, candidate_id)
+    if len(candidate_info) == 0:
+        logger.info(f'candidate result abnormal: {account_id} {job_id} candidate {candidate_id} not in db')
+        return Response(json.dumps(get_web_res_fail(f'{account_id} {job_id} candidate {candidate_id} not in db')))
     update_chat_contact_db(account_id, job_id, candidate_id, json.dumps(contact, ensure_ascii=False))
     update_candidate_contact_db(candidate_id, json.dumps(contact,ensure_ascii=False))
     ret_data = {
         'status': 'ok'
     }
+    db_history_msg = candidate_info[0][1]
+    try:
+        db_history_msg = json.loads(db_history_msg, strict=False)
+    except BaseException as e:
+        logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
+        db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
+    send_candidate_info(name, cv_addr, wechat, phone, db_history_msg)
     logger.info(f'candidate result update: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 

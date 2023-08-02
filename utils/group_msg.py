@@ -40,13 +40,27 @@ class GroupMsg:
         return json.loads(response_send.text)['errmsg'] == 'ok'
 
     def send_msg_info(self, msgs):
-        r_msgs = ""
-        r_msgs += "聊天:" + json.dumps(msgs["chat"], ensure_ascii=False) + "\n"
-        r_msgs += "简历:" + msgs["resume"] + "\n"
-        r_msgs += "微信:" + msgs["wx"] + "\n"
-        r_msgs += "电话" + msgs["phone"] + "\n"
+        r_msgs = "姓名："+ msgs['name'] + '\n'
+        r_msgs += "聊天：\n"
+        for item in msgs["chat"]:
+            r_msgs+= "\t"+json.dumps(item, ensure_ascii=False)+"\n"
+        r_msgs += "简历：" + msgs["resume"] + "\n"
+        r_msgs += "微信：" + msgs["wx"] + "\n"
+        r_msgs += "电话：" + msgs["phone"] + "\n"
 
         self.send_text(r_msgs, ['@all'])
+
+
+def send_candidate_info(name, cv, wechat, phone, history_msg):
+    group_msg = GroupMsg()
+    msgs = {
+        "name": name,
+        "resume": cv,
+        "chat": history_msg,
+        "wx": wechat,
+        "phone": phone
+    }
+    group_msg.send_msg_info(msgs)
 
 
 if __name__ == "__main__":
