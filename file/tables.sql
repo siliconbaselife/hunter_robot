@@ -17,9 +17,10 @@ CREATE TABLE IF NOT EXISTS `candidate`(
    `candidate_id` VARCHAR(100) NOT NULL COMMENT '候选人ID',
    `candidate_name` VARCHAR(100) NOT NULL COMMENT '候选人姓名',
    `age` int COMMENT '年龄',
-   `education` VARCHAR(100) COMMENT '学历',
+   `degree` VARCHAR(100) COMMENT '学历',
+   `location` VARCHAR(100) COMMENT '目标工作地点',
    `contact` LONGTEXT COMMENT '联系方式',
-   `desc` LONGTEXT COMMENT '候选人页面信息',
+   `details` LONGTEXT COMMENT '候选人详细信息',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `candidate_id` )
@@ -30,19 +31,19 @@ CREATE TABLE IF NOT EXISTS `job`(
    `job_id` VARCHAR(100) NOT NULL COMMENT '岗位唯一标识',
    `job_name` VARCHAR(100) NOT NULL COMMENT '岗位名称',
    `job_jd` LONGTEXT COMMENT '岗位jd',
-   `requirement_config` LONGTEXT COMMENT '岗位需求配置',
+   -- `requirement_config` LONGTEXT COMMENT '岗位需求配置',
    `robot_api` LONGTEXT COMMENT '算法调用api',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `job_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
-=====requirement_config===========
-[
-   ["age", "range", 18, 35],
-   ["education", "min", "大专"],
-   ["experience", "contain", "客服"]
-]
+-- =====requirement_config===========
+-- [
+--    ["age", "range", 18, 35],
+--    ["education", "min", "大专"],
+--    ["experience", "contain", "客服"]
+-- ]
 
 CREATE TABLE IF NOT EXISTS `account`(
    `account_id` VARCHAR(100) NOT NULL COMMENT '账号唯一标识',
@@ -52,13 +53,14 @@ CREATE TABLE IF NOT EXISTS `account`(
    `task_config` LONGTEXT COMMENT '任务配置，根据招聘的职位生成',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-   PRIMARY KEY ( `account_id` )
+   PRIMARY KEY ( `account_id` ),
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 =====task_config===========
 [
 	{
+      "task_type":"batchTouch",
 		"job_id":"common_kefu",
 		"hello_sum":50,
 		"time_percent": [
@@ -80,9 +82,8 @@ CREATE TABLE `account_exec_log` (
   `job_id` varchar(60) NOT NULL COMMENT '岗位id',
   `exec_date` varchar(60) NOT NULL COMMENT '任务执行日期',
   `hello_sum_need` int unsigned NOT NULL COMMENT '应打招呼数量',
-  `hello_sum_exec` int unsigned NOT NULL COMMENT '实际打招呼数量',
+  `hello_sum_exec` int unsigned NOT NULL DEFAULT 0  COMMENT '实际打招呼数量',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-  UNIQUE KEY `account_job_date` (`account_id`, `job_id`, `exec_date` )
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='账号任务执行记录'

@@ -2,16 +2,19 @@
 
 import pymysql
 from threading import Lock
+from utils.config import config
+from utils.log import  get_logger
 
+logger = get_logger(config['log']['log_file'])
 
 class DBManager:
-    def __init__(self, host, port, user, password, database, charset):
+    def __init__(self, host, port, user, password, database):
         self.host = host
         self.port = int(port)
         self.user = user
         self.password = password
         self.database = database
-        self.charset = charset
+        # self.charset = charset
         self.connection = None
         self.cursor = None
         self.lock = Lock()
@@ -19,7 +22,7 @@ class DBManager:
 
     def init_db(self):
         self.connection = pymysql.connect(host=self.host, port=self.port, user=self.user, password=self.password,
-                                          database=self.database, charset=self.charset, autocommit=True)
+                                          database=self.database,charset='utf8mb4', autocommit=True)
         self.cursor = self.connection.cursor()
 
     def reconnect(self):
@@ -29,76 +32,71 @@ class DBManager:
             self.connection()
 
     def close_db(self):
-        self.lock.acquire()
-        self.cursor.close()
-        self.connection.close()
-        self.lock.release()
+        with self.lock:
+            self.cursor.close()
+            self.connection.close()
 
     def query(self, sql):
-        self.lock.acquire()
-        self.reconnect()
-        self.cursor.execute(sql)
-        data = self.cursor.fetchall()
-        self.lock.release()
-        return data
+        logger.info(f'sql query: {sql}')
+        with self.lock:
+            self.reconnect()
+            self.cursor.execute(sql)
+            data = self.cursor.fetchall()
+            return data
 
     def update(self, sql):
-        self.lock.acquire()
-        self.reconnect()
-        self.cursor.execute(sql)
-        self.connection.commit()
-        self.lock.release()
+        logger.info(f'sql update: {sql}')
+        with self.lock:
+            self.reconnect()
+            self.cursor.execute(sql)
+            self.connection.commit()
 
     def alter(self, sql):
-        self.lock.acquire()
-        self.reconnect()
-        self.cursor.execute(sql)
-        self.connection.commit()
-        self.lock.release()
+        logger.info(f'sql alter: {sql}')
+        with self.lock:
+            self.reconnect()
+            self.cursor.execute(sql)
+            self.connection.commit()
 
     def delete(self, sql):
-        self.lock.acquire()
-        self.reconnect()
-        self.cursor.execute(sql)
-        self.connection.commit()
-        self.lock.release()
+        logger.info(f'sql delete: {sql}')
+        with self.lock:
+            self.reconnect()
+            self.cursor.execute(sql)
+            self.connection.commit()
 
-    def insert(self, sql, data):
-        self.lock.acquire()
-        self.reconnect()
-        self.cursor.executemany(sql, data)
-        self.connection.commit()
-        self.lock.release()
+    def insert_many(self, sql, data):
+        logger.info(f'sql insert: {sql}         {data}')
+        with self.lock:
+            self.reconnect()
+            self.cursor.executemany(sql, data)
+            self.connection.commit()
+
+    def insert(self, sql):
+        logger.info(f'sql insert: {sql}')
+        with self.lock:
+            self.reconnect()
+            self.cursor.execute(sql)
+            self.connection.commit()
 
     def drop_table(self, sql):
-        self.lock.acquire()
-        self.reconnect()
-        self.cursor.execute(sql)
-        self.connection.commit()
-        self.lock.release()
+        logger.info(f'sql drop_table: {sql}')
+        with self.lock:
+            self.reconnect()
+            self.cursor.execute(sql)
+            self.connection.commit()
 
     def exist_table(self, table_name):
-        self.lock.acquire()
-        self.reconnect()
-        exist = self.cursor.execute("show tables like '%s'" % table_name)
-        self.connection.commit()
-        self.lock.release()
-        return exist
+        logger.info(f'sql exist_table: {table_name}')
+        with self.lock:
+            self.reconnect()
+            exist = self.cursor.execute("show tables like '%s'" % table_name)
+            self.connection.commit()
+            return exist
 
 
-host = '127.0.0.1'
-port = 3306
-user = 'wordpress'
-password = 'wordpress'
-database = 'aistormy'
-charset = 'utf8'
-
-
-# host = '10.253.209.26'
-# port = 33006
-# user = 'beta'
-# password = 'kVkBhpSVa6!3'
-# database = 'fangdao_image_server'
-# charset = 'utf8'
-
-dbm = DBManager(host=host, port=port, user=user, password=password, database=database, charset=charset)
+dbm = DBManager(host=config['db']['host'], 
+                port=config['db']['port'], 
+                user=config['db']['user'], 
+                password=config['db']['pwd'], 
+                database=config['db']['name'])

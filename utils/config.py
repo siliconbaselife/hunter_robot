@@ -1,15 +1,26 @@
-config = dict()
+config = {
+    'log': {},
+    'task':{},
+    'chat':{},
+    'db': {}
+}
 
-config['log_file'] = 'recurit_service.log'
+config['db']['host'] = 'localhost'
+config['db']['port'] = 3306
+config['db']['name'] = 'recruit_data_v2'
+config['db']['user'] = 'chat_user'
+config['db']['pwd'] = '1'
 
-config['task_config_base'] = {
+config['log']['log_file'] = 'log/recurit_service.log'
+
+config['task']['task_config_base'] = {
 	"hello_sum":50,
 	"time_percent": [{
         "time":"09:00",
-		"percent":"50"
+		"percent":50
 	}, {
 		"time":"16:00",
-		"percent":"50"
+		"percent":50
 	}]
 }
 
