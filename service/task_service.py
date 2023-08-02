@@ -15,7 +15,7 @@ def filter_time(time_percent):
             filter_time_res.append(t)
             sum += t["percent"]
     for t in filter_time_res:
-        t["percent"] = round(t["percent"] / sum)
+        t["percent"] = round(t["percent"] / sum * 100)
     return filter_time_res
 
 
