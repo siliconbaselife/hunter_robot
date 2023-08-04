@@ -6,16 +6,21 @@ from utils.utils import format_time
 import copy
 from datetime import datetime
 
-def filter_time(time_percent):
+
+# def convert_to_int(time_percent):
+
+
+
+def filter_time(time_percent, retain_sum):
     sum = 0
     filter_time_res = []
     t_now = time.strftime("%H:%M", time.localtime())
     for t in time_percent:
         if t["time"] > t_now:
             filter_time_res.append(t)
-            sum += t["percent"]
+            sum += t["mount"]
     for t in filter_time_res:
-        t["percent"] = round(t["percent"] / sum * 100)
+        t["mount"] = round(t["mount"] / sum * retain_sum) 
     return filter_time_res
 
 
@@ -29,14 +34,14 @@ def re_org_task(config_data, today_sub_task_log):
         if job_config['task_type']=='batchTouch':
             retain_sum = job_config["hello_sum"] - sub_task_dict[job_config["job_id"]][5]
 
-            time_percent = job_config["time_percent"]
-            time_percent_filtered = filter_time(time_percent)
+            time_percent = job_config["time_mount"]
+            time_percent_filtered = filter_time(time_percent, retain_sum)
 
             r_job = {
                 "job_id":job_config["job_id"],
                 "task_type":job_config['task_type'],
                 "hello_sum": retain_sum,
-                "time_percent":time_percent_filtered
+                "time_mountt":time_percent_filtered
             }
             res.append(r_job)
     return res
