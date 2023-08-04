@@ -40,7 +40,7 @@ response data:      指的是上述的data字段，默认json方式
 ## request params:
 ### platformType    string      need      招聘平台，例如：'boss' 
 ### platformID      string      need      招聘平台给的账户ID，例如：'27175761'
-### jobs            string      need      账户招聘的岗位jobID列表
+### jobs            list        need      账户招聘的岗位jobID列表
 ## response data:
 ### accountID       string      账户ID
 ```
