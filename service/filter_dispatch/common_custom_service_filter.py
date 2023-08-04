@@ -22,7 +22,7 @@ def common_custom_service_filter(candidate_info):
     for item in candidate_info['work']:
         if has_experience:
             break
-        judge_str = item['position']+item['responsibility']+item['emphasis']+item['department']
+        judge_str = item['position']+item['responsibility']+item['emphasis']+item.get('department', '')
         for tag in job_tags:
             if tag in judge_str:
                 has_experience = True
