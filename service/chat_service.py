@@ -81,11 +81,8 @@ class ChatRobot(object):
 
         ### user ask and say hello, just reply and need contact
         algo_judge_intent = None
-        if hello_msg and user_ask:
-            self._next_msg = self._preset_reply_dict['need_contact']
-            self._status= ChatStatus.NeedContact
-            logger.info(f'chat log {self._sess_id}: reply user hello mode, ask for contact directly')
-        elif has_system_msg:
+
+        if has_system_msg:
             self._next_msg = self._preset_reply_dict['got_contact']
             logger.info(f'chat log {self._sess_id}: got user contact')
         elif user_msg_useless:
@@ -100,6 +97,17 @@ class ChatRobot(object):
             ## judge contact to need contact will cause toomuch need contact reply
             logger.info(f'chat log {self._sess_id}: trivial case, intent: {algo_judge_intent}, will reply expression')
             self._next_msg = ''
+        elif hello_msg and user_ask:
+            contact_res = self._chat_request()
+            if contact_res:
+                self._next_msg, algo_judge_intent = contact_res
+                if algo_judge_intent in self._trivial_reply_intent:
+                    ## judge contact to need contact will cause toomuch need contact reply
+                    logger.info(f'chat log {self._sess_id}: user hello msg trivial case, intent: {algo_judge_intent}, will reply expression')
+                    self._next_msg = ''
+            self._next_msg += self._preset_reply_dict['need_contact']
+            self._status= ChatStatus.NeedContact
+            logger.info(f'chat log {self._sess_id}: reply user hello mode, ask for contact')
         else:
             contact_res = self._chat_request()
             if contact_res:
