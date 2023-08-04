@@ -17,7 +17,7 @@ sql_dict = {
     "new_candidate": "insert into candidate(candidate_id, candidate_name, age, degree, location, position, details) values ('{}','{}','{}','{}','{}','{}','{}')",
     "update_candidate_contact": "update candidate set contact='{}' where candidate_id='{}'",
     "query_candidate": "select candidate_name, age, degree, location, position, contact, details from candidate where candidate_id='{}'",
-    "query_chat_details": "select source, details from chat where account_id='{}' and job_id='{}' and candidate_id='{}'",
+    "query_chat_details": "select source, details, contact from chat where account_id='{}' and job_id='{}' and candidate_id='{}'",
     "new_chat": "insert into chat(account_id, job_id, candidate_id, candidate_name, source, status, details) values ('{}','{}','{}','{}','{}','{}','{}')",
     "update_chat": "update chat set source='{}', status='{}', details='{}' where account_id='{}' and job_id='{}' and candidate_id='{}'",
     "update_chat_contact": "update chat set contact='{}' where account_id='{}' and job_id='{}' and candidate_id='{}'",

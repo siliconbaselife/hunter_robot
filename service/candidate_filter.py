@@ -2,7 +2,7 @@ from dao.task_dao import query_account_type_db, is_chatting_db
 from .filter_dispatch import *
 
 __preprocess_dispatcher = {
-    'boss': boss_preprocess
+    'Boss': boss_preprocess
 }
 
 __filter_dispatcher = {

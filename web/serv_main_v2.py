@@ -169,7 +169,7 @@ def candidate_chat_api():
         logger.info(f'candidate chat not in db, new candidate will supply: {account_id} {job_id} {candidate_id} {candidate_name} {details}')
         new_chat_db(account_id, job_id, candidate_id, candidate_name, source, details=details)
     else:
-        source, db_history_msg = candidate_info[0]
+        source, db_history_msg, _ = candidate_info[0]
         # logger.info(f'show candidate: {source} {db_history_msg}: {db_history_msg is not None}')
         if db_history_msg is None or db_history_msg =='None':
             source=None
@@ -215,6 +215,16 @@ def candidate_result_api():
     wechat = request.form.get('wechat', None)
 
     logger.info(f'candidate result, files: {request.files}, {request.files.keys()}')
+    candidate_info = query_chat_db(account_id, job_id, candidate_id)
+    if len(candidate_info) == 0:
+        info_str = f'candidate result abnormal: {account_id} {job_id} candidate {candidate_id} not in db'
+        logger.info(info_str)
+        return Response(json.dumps(get_web_res_fail(info_str)))
+    _,_,contact = candidate_info[0]
+    if contact is not None and contact!='None':
+        info_str = f'candidate result for {account_id} {job_id} {candidate_id} already in db'
+        logger.info(info_str)
+        return Response(json.dumps(get_web_res_fail(info_str)))
 
     cv_addr = None
     if len(request.files.keys())>0:
@@ -228,10 +238,6 @@ def candidate_result_api():
     }
     logger.info(f'candidate result request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
 
-    candidate_info = query_chat_db(account_id, job_id, candidate_id)
-    if len(candidate_info) == 0:
-        logger.info(f'candidate result abnormal: {account_id} {job_id} candidate {candidate_id} not in db')
-        return Response(json.dumps(get_web_res_fail(f'{account_id} {job_id} candidate {candidate_id} not in db')))
     update_chat_contact_db(account_id, job_id, candidate_id, json.dumps(contact, ensure_ascii=False))
     update_candidate_contact_db(candidate_id, json.dumps(contact,ensure_ascii=False))
     ret_data = {
