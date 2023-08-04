@@ -170,11 +170,16 @@ def candidate_chat_api():
         new_chat_db(account_id, job_id, candidate_id, candidate_name, source, details=details)
     else:
         source, db_history_msg = candidate_info[0]
-        try:
-            db_history_msg = json.loads(db_history_msg, strict=False)
-        except BaseException as e:
-            logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
-            db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
+        # logger.info(f'show candidate: {source} {db_history_msg}: {db_history_msg is not None}')
+        if db_history_msg is None or db_history_msg =='None':
+            source=None
+            db_history_msg=None
+        else:
+            try:
+                db_history_msg = json.loads(db_history_msg, strict=False)
+            except BaseException as e:
+                logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
+                db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
 
     robot_api = query_robotapi_db(job_id)
     if not robot_api:
