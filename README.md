@@ -103,7 +103,7 @@ response data:      指的是上述的data字段，默认json方式
 ## uri: /recruit/candidate/filter
 ## request params:
 ### accountID       string      need        账户ID
-### jobID           string      option      要招聘的岗位ID。如果不传，默认是account里面注册的第一个job
+### jobID           string      deprecated  要招聘的岗位ID。当前版本不再传这个字段，默认使用account注册的第一个job
 ### candidateID     string      need        候选人在招聘平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替
 ### candidateInfo   dict        need        候选人详情，例如，boss平台候选人页面的json信息
 ## response data:
@@ -115,7 +115,7 @@ response data:      指的是上述的data字段，默认json方式
 ## uri: /recruit/candidate/chat
 ## request params:
 ### accountID       string      need        账户ID
-### jobID           string      option      要招聘的岗位ID。如果不传，默认是account里面注册的第一个job
+### jobID           string      deprecated  要招聘的岗位ID。当前版本不再传这个字段，默认使用account注册的第一个job
 ### candidateID     string      need        候选人在招聘平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替
 ### candidateName   string      need        候选人姓名
 ### historyMsg      list        need        候选人详情，例如：
@@ -145,7 +145,7 @@ normal_chat,finish,algo_abnormal,need_ensure
 ## request params:
 ### accountID       string      need        账户ID
 ### jobID           string      need        要招聘的岗位ID
-### candidateID     string      need        候选人在招聘平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替
+### jobID           string      deprecated  要招聘的岗位ID。当前版本不再传这个字段，默认使用account注册的第一个job{name}_{age}_{education}的方法代替
 ### candidateName   string      need        候选人姓名
 ### phone           string      option      候选人手机号
 ### wechat          string      option      候选人微信号
