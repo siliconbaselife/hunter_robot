@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `candidate`(
    PRIMARY KEY ( `candidate_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
-ALTER TABLE candidate ADD position INT(11) AFTER location;
+ALTER TABLE candidate ADD position VARCHAR(100) COMMENT '目标工作职位' AFTER location;
 
 CREATE TABLE IF NOT EXISTS `job`(
    `job_id` VARCHAR(100) NOT NULL COMMENT '岗位唯一标识',

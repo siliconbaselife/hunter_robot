@@ -5,7 +5,7 @@ from utils.log import get_logger
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api) values ('{}','{}','{}','{}')",
+    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api) values ('{}','{}','{}','{}','{}','{}')",
     "query_job_id": "select job_id from job where platform_type = '{}' and platform_id= '{}'",
     # "query_job_requirement": "select requirement_config from job where job_id = {}",
     "query_job_robotapi": "select robot_api from job where job_id='{}'",
@@ -14,7 +14,7 @@ sql_dict = {
     "query_account_type": "select platform_type from account where account_id='{}'",
     "get_jobs":"select jobs from account where account_id='{}'",
     "get_task":"select task_config from account where account_id='{}'",
-    "new_candidate": "insert into candidate(candidate_id, candidate_name, age, degree, location, details) values ('{}','{}','{}','{}','{}','{}')",
+    "new_candidate": "insert into candidate(candidate_id, candidate_name, age, degree, location, position, details) values ('{}','{}','{}','{}','{}','{}','{}')",
     "update_candidate_contact": "update candidate set contact='{}' where candidate_id='{}'",
     "query_candidate": "select candidate_name, age, degree, location, position, contact, details from candidate where candidate_id='{}'",
     "query_chat_details": "select source, details from chat where account_id='{}' and job_id='{}' and candidate_id='{}'",
@@ -52,9 +52,8 @@ def query_account_id_db(platform_type, platform_id):
 def query_account_type_db(account_id):
     return dbm.query(sql_dict['query_account_type'].format(account_id))[0][0]
 
-def new_candidate_db(candidate_id, candidate_name, age, degree, location, details):
-    # d = [[candidate_id, candidate_name, age, degree, location, details]]
-    dbm.insert(sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, details))
+def new_candidate_db(candidate_id, candidate_name, age, degree, location, position, details):
+    dbm.insert(sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details))
 
 def query_candidate_exist(candidate_id):
     return len(dbm.query(sql_dict['query_candidate'].format(candidate_id)))>0
