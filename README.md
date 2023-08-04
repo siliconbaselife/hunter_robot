@@ -15,6 +15,8 @@ response data:      指的是上述的data字段，默认json方式
 ```
 ## uri: /recruit/job/register
 ## request params:
+### platformType    string      need      平台类型，如：boss
+### platformID      string      need      平台上job的id
 ### jobName         string      need      工作名称
 ### jobJD           string      need      工作介绍
 ### robotApi        string      need      岗位对应的算法后端api
@@ -26,7 +28,8 @@ response data:      指的是上述的data字段，默认json方式
 ```
 ## uri: /recruit/job/query
 ## request params:
-### jobName         string      need      工作名称
+### platformType    string      need      平台类型，如：boss
+### platformID      string      need      平台上job的id
 ## response data:
 ### jobID           string      工作ID
 ```
@@ -36,7 +39,7 @@ response data:      指的是上述的data字段，默认json方式
 ## uri: /recruit/account/register
 ## request params:
 ### platformType    string      need      招聘平台，例如：'boss' 
-### platformID      string      need      招聘平台给的ID，例如：'27175761'
+### platformID      string      need      招聘平台给的账户ID，例如：'27175761'
 ### jobs            string      need      账户招聘的岗位jobID列表
 ## response data:
 ### accountID       string      账户ID
@@ -47,7 +50,7 @@ response data:      指的是上述的data字段，默认json方式
 ## uri: /recruit/account/query
 ## request params:
 ### platformType    string      need      招聘平台，例如：'boss' 
-### platformID      string      need      招聘平台给的ID，例如：'27175761'
+### platformID      string      need      招聘平台给的账户ID，例如：'27175761'
 ## response data:
 ### accountID       string      账户ID
 ```
@@ -58,29 +61,21 @@ response data:      指的是上述的data字段，默认json方式
 ## request params:
 ### accountID       string      need      账户ID
 ## response data:
-### task            list        当天任务，例如：
+### task            list        当天任务(要给所有job都执行任务)，例如：
 [
   {
-    "taskID": 1,
-    "execTime": "2023-07-28 09:10:00",
-    "jobID": "xxxx",
+    "helloSum": 50,
     "taskType": "batchTouch",
-    "details": {
-      "mount": 50
-    }
-  },
-  {
-    "taskID": 2,
-    "execTime": "2023-07-28 11:33:00",
-    "jobID": "xxxx",
-    "taskType": "chat",
-    "details": {
-      "dstList": [
-        {
-          "candidateName": "xxx","candidateID": "xxx","msg": "xxx"
-        }
-      ]
-    }
+    "timeMount": [
+      {
+        "time": "09:00",
+        "mount": 25
+      },
+      {
+        "time": "16:00",
+        "mount": 25
+      }
+    ]
   }
 ]
 ```
@@ -93,22 +88,9 @@ response data:      指的是上述的data字段，默认json方式
 ### taskStatus      list        need        任务完成情况，例如：
 [
   {
-    "taskID": 1,
+    "taskType": "batchTouch",
     "details": {
-      "mount": 40
-    }
-  },
-  {
-    "taskID": 2,
-    "execTime": "2023-07-28 11:33:00",
-    "jobID": "xxxx",
-    "taskType": "chat",
-    "details": {
-      "dstList": [
-        {
-          "candidateName": "xxx","candidateID": "xxx"
-        }
-      ]
+      "candidateList": ["123445", "333442"]  ##这里就是打过招呼的候选人的candidateID列表 
     }
   }
 ]
@@ -121,15 +103,9 @@ response data:      指的是上述的data字段，默认json方式
 ## uri: /recruit/candidate/filter
 ## request params:
 ### accountID       string      need        账户ID
-### jobID           string      need        要招聘的岗位ID
-### candidateInfo   dict        need        候选人详情，例如：
-{
-  "name": "候选人姓名",
-  "age": "20",
-  "education": "大专",
-  "active": true,
-  "details": "xxx可能是平台相关的html等xxx"
-}
+### jobID           string      option      要招聘的岗位ID。如果不传，默认是account里面注册的第一个job
+### candidateID     string      need        候选人在招聘平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替
+### candidateInfo   dict        need        候选人详情，例如，boss平台候选人页面的json信息
 ## response data:
 ### touch           bool        true        
 ```
@@ -139,7 +115,7 @@ response data:      指的是上述的data字段，默认json方式
 ## uri: /recruit/candidate/chat
 ## request params:
 ### accountID       string      need        账户ID
-### jobID           string      need        要招聘的岗位ID
+### jobID           string      option      要招聘的岗位ID。如果不传，默认是account里面注册的第一个job
 ### candidateID     string      need        候选人在招聘平台上的id，比如boss上的geekid，如果别的平台没有这个标识，可以用类似{name}_{age}_{education}的方法代替
 ### candidateName   string      need        候选人姓名
 ### historyMsg      list        need        候选人详情，例如：
