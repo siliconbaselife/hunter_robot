@@ -14,14 +14,18 @@ config['db']['pwd'] = '1'
 config['log']['log_file'] = 'log/recurit_service.log'
 
 config['task']['task_config_base'] = {
-	"hello_sum":50,
-	"time_percent": [{
-        "time":"09:00",
-		"percent":50
-	}, {
-		"time":"16:00",
-		"percent":50
-	}]
+    "helloSum": 50,
+    "taskType": "batchTouch",
+    "timeMount": [
+      {
+        "time": "09:00",
+        "mount": 25
+      },
+      {
+        "time": "16:00",
+        "mount": 25
+      }
+    ]
 }
 
 config['chat'] = dict()

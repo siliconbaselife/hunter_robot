@@ -26,16 +26,20 @@ CREATE TABLE IF NOT EXISTS `candidate`(
    PRIMARY KEY ( `candidate_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+ALTER TABLE candidate ADD position INT(11) AFTER location;
 
 CREATE TABLE IF NOT EXISTS `job`(
    `job_id` VARCHAR(100) NOT NULL COMMENT '岗位唯一标识',
+   `platform_type` VARCHAR(256) NOT NULL COMMENT '招聘平台枚举，如：boss',
+   `platform_id` VARCHAR(256) NOT NULL COMMENT '招聘平台内的job id',
    `job_name` VARCHAR(100) NOT NULL COMMENT '岗位名称',
    `job_jd` LONGTEXT COMMENT '岗位jd',
    -- `requirement_config` LONGTEXT COMMENT '岗位需求配置',
    `robot_api` LONGTEXT COMMENT '算法调用api',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-   PRIMARY KEY ( `job_id` )
+   PRIMARY KEY ( `job_id` ),
+   CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 -- =====requirement_config===========
@@ -48,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `job`(
 CREATE TABLE IF NOT EXISTS `account`(
    `account_id` VARCHAR(100) NOT NULL COMMENT '账号唯一标识',
    `platform_type` VARCHAR(256) NOT NULL COMMENT '招聘平台枚举，如：boss',
-   `platform_id` VARCHAR(256) NOT NULL COMMENT '招聘平台内的id',
+   `platform_id` VARCHAR(256) NOT NULL COMMENT '招聘平台内的账号id',
    `jobs` LONGTEXT COMMENT '招聘的岗位job_id列表',
    `task_config` LONGTEXT COMMENT '任务配置，根据招聘的职位生成',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
