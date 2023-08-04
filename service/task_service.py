@@ -6,7 +6,12 @@ from utils.utils import format_time
 import copy
 from datetime import datetime
 
-def filter_time(time_percent):
+
+# def convert_to_int(time_percent):
+
+
+
+def filter_time(time_percent, retain_sum):
     sum = 0
     filter_time_res = []
     t_now = time.strftime("%H:%M", time.localtime())
@@ -15,7 +20,7 @@ def filter_time(time_percent):
             filter_time_res.append(t)
             sum += t["percent"]
     for t in filter_time_res:
-        t["percent"] = round(t["percent"] / sum * 100)
+        t["percent"] = round(t["percent"] / sum * retain_sum) 
     return filter_time_res
 
 
@@ -30,7 +35,7 @@ def re_org_task(config_data, today_sub_task_log):
             retain_sum = job_config["hello_sum"] - sub_task_dict[job_config["job_id"]][5]
 
             time_percent = job_config["time_percent"]
-            time_percent_filtered = filter_time(time_percent)
+            time_percent_filtered = filter_time(time_percent, retain_sum)
 
             r_job = {
                 "job_id":job_config["job_id"],
