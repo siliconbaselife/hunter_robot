@@ -1,0 +1,230 @@
+{
+  "encryptGeekId": "49594af9f57f57b50n1-29S8FVVX",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "zmg60o-lX17j5-91QX1DDpmn4Td9sdl80WOWWZv-sdQ6Zs2ZDS6r1joFtnXV82AIrpf-_Bgo-lHVGgXdorfO8IYIdMINr94ZJTnDfBkRy8qix2uvJkTS3m5tZy_1SRZj7kqOQxm8apjAOjf9c9vfvrYkg2dT7pgvnud3o8B_Ha4LVXPI8sKE7BrKR66NVhRAKXsJ2Bq0YAmJ3QKcUe-wVnKzcggZZTIWD33BU0aq8xegNRBe1SNSwi6sMWnD4IU94-VIU0P-XT1QqPIZm2mJK0ZZ9LHiXeHHpkl1bErST8oonP9M36PDJyhcReyKoMxjBIAzD-ATYE-sTSkiqBU9VMfgRGaoqf5Zg0_PwcdVpFJECXFZmaZ-cpgowHO8wGuKHFYdtdCBPxZT6jgtQEKBbGrin2GP6a8DrWYYjJt3g3I5xS8HCWH0H5TiouWO5nM9dr72XmLUcAYEk8jmnvTL2j6a62_fe8hIFr-MGMuYOsQV0CZs5qvY_JaOcJ9mbhDoJ9oxwuouYWlYGn8vXiGCLgGOjIop2w4mPE8mHAdSPUwdXHhL9byPV0bsdIfvxAU_6yNTO-xjPa33_OEJHgoYUoUdcfAYjwHdBtJ-CyUVhWc6zRI~",
+    "geekId": 594091577,
+    "geekName": "李想",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/boss/avatar/avatar_14.png",
+    "geekGender": 1,
+    "geekWorkYear": "10年以上",
+    "geekDegree": "初中及以下",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "找客服客服专员的工作！谢谢",
+      "indexList": []
+    },
+    "expectId": 612257026,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "面议",
+    "lowSalary": 0,
+    "highSalary": 0,
+    "middleContent": {
+      "content": "毕业于 初中及以下·",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "97949830-bb5d-481e-9fef-3f44779539a8.f1:common.eyJzZXNzaW9uSWQiOiI1ZTQ2YmNmOS0yYzY3LTRmY2YtOWQ5Yy1iNDQzNTFmZjU5ZGUiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.10",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691221447,
+    "birthday": "19921201",
+    "ageDesc": "30岁",
+    "ageLight": {
+      "content": "30岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "初中及以下",
+      "schoolId": 0,
+      "major": "",
+      "degree": 0,
+      "degreeName": "初中及以下",
+      "eduType": 0,
+      "startDate": "20100101",
+      "endDate": "20130101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "初中及以下",
+        "schoolId": 0,
+        "major": "",
+        "degree": 0,
+        "degreeName": "初中及以下",
+        "eduType": 0,
+        "startDate": "2010.01",
+        "endDate": "2013.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [],
+    "geekDoneWorks": [
+      {
+        "code": 0,
+        "name": "商务司机"
+      }
+    ],
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "49594af9f57f57b50n1-29S8FVVX",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 3,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 612257026,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 0,
+      "highSalary": 0,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": null,
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "初中及以下",
+      "schoolId": 0,
+      "major": "",
+      "degree": 0,
+      "degreeName": "初中及以下",
+      "eduType": 0,
+      "startDate": "2010.01",
+      "endDate": "2013.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑初中及以下",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

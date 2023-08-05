@@ -1,0 +1,231 @@
+{
+  "encryptGeekId": "1442e4b76bb91b4d1nV-2di_EVNU",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "Qlm31nfJAQm4E-w1xX9BFv2rAY9irh5jNLHcj7pAnKAx08ARjmbPIzGDz_x-jalgLr2V-s8rVeBzBlae-Ok_dXFPdoLr2PEJ_HC3QO3RhfhIHT5ZGTgPKL_wtQ3oEf0lgrQHDShGEWiBwQ-I87R8AsjglTNBcDsCnR_krg616PlLIGppPwh2663gVovmbhyW9XxKKUYhy-igeGDYffkc_kuSblxsCCU5uQzm1C272F7R8VF_BYIFPGQJ7nSjJlkDO4_GPmdKbsMJdDrPFbZd-JMNyRuXOyJ9pJIdKx667PvozopQy2xb93CTUu9w5Y-Hwpb1FsWJSvrq1UtwXUN2SuCc_9bOX9xbu_zudXTxw0uMAHyx30L9T_Qg6OE-mTDshHxOdQkvI6OomAzbmYPALkIYyXKbGzLnKpXGZ6gw5foZxoQd2oH1f23gdOLaPJMCx3w_PXWBzq_Qnapsoqj_57xpBAxA4iLwWmYvT1IUWWZxRCFg8tsUzBpx_0TLzK55TwI5vIj-7iRZtEYUQtzhGI_z2Cgy7jIXendn6Q1DyJfagNllUMmYw360bQhQr0JB_x-9EiPiOGdq_THAV2RLMVQ-LUOioyDq_kdWThmyLnhE8WA~",
+    "geekId": 114252114,
+    "geekName": "王子涵",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/boss/avatar/avatar_13.png",
+    "geekGender": 1,
+    "geekWorkYear": "21年毕业",
+    "geekDegree": "大专",
+    "freshGraduate": 3,
+    "geekDesc": {
+      "content": "本人热情开朗诚实守信，能够很快融入新集体，听招呼、守规矩，始终保持服从命令优良作风。有较强的学习能力，思维敏捷，善于思考，勇于实践，抗压性强，积极热情，善于人际交往，有良好的团队精神，喜欢接触新事物，并热衷学习，上进心很强，沟通理解能力强，适应环境较快，特别能够吃苦耐劳，能较好的完成自己的任务和工作，有高度的责任感，有良好的专业素养和一定的工作经验。、善于学习、工作踏实、擅长沟通",
+      "indexList": []
+    },
+    "expectId": 550069930,
+    "expectType": 1,
+    "expectPositionType": 0,
+    "salary": "5-6K",
+    "lowSalary": 5,
+    "highSalary": 6,
+    "middleContent": {
+      "content": "毕业于 北京信息职业技术学院·机电一体化",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "7058e6af-54e0-4df8-9361-2899da3d8bc4.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.11",
+    "actionDateDesc": null,
+    "expectPositionCode": 30000038,
+    "expectPositionName": "后勤",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "",
+    "activeTime": 1691243440,
+    "birthday": "20010101",
+    "ageDesc": "22岁",
+    "ageLight": {
+      "content": "22岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "北京信息职业技术学院",
+      "schoolId": 0,
+      "major": "机电一体化",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20190101",
+      "endDate": "20210101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "北京信息职业技术学院",
+        "schoolId": 0,
+        "major": "机电一体化",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2019.01",
+        "endDate": "2021.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": {
+      "listingOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      },
+      "detailOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      }
+    },
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "1442e4b76bb91b4d1nV-2di_EVNU",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 550069930,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 30000038,
+      "positionName": "后勤",
+      "lowSalary": 5,
+      "highSalary": 6,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": null,
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "北京信息职业技术学院",
+      "schoolId": 0,
+      "major": "机电一体化",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2019.01",
+      "endDate": "2021.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

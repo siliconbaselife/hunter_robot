@@ -1,0 +1,502 @@
+{
+  "encryptGeekId": "90562d5b6c2bfc750nV80tq8GVVV",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 2,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "GlastCd9UDWvS--16Fm4LytGLOaISv4WadwVUvLbERIKiDRqdAfgYT79S_JWs44MA8Hv0axnlVCarwW2O6XMBXwvVB3pbR3dSt7aViLzgEhpS9eptA6489mpC7lS5LANeYmZLZDU4UBIaIps5xqm9IyMGsiMyJSeYU6g7rFbAITIa0B2XIKyECgJELrAIy6oEiC6USaU0QrhcK5hPX_y5_e6h1aiDKwqWc4-MoF1E0e6mpqE-Y4EQD1gyMXaj21zDkR5rq17HbQ0hiLnONuOfBjSEGWXMsS1oOyKkuLnIU55GO-tt239Iu4QzdpvEFrnmUgN1ZRUynbk4bjfRsovmAWex4fJ94E0yAGBbKCI4LmuqR8uHgRa85ppQGcAlbY2gqcN16nWgkECUaVae2wZF2xJKc-y6AYlkNKv8I2lEtTI-g51UNu-6Ahl9fgXy5-EZhV4Fe9YnTPgv9iM99rjPxjdsusmhd0R7Zuzqyo7vgVijyIcgVfVhH7M3cZm38aiujFTleSg_svQWAkc7IpF0G3z3-W6qNIT-eANCD2cyw6-b-YYyDOZUTl2wOpXpx14sQ4vSlOz2gAeTC03mR7s1RoB_m0y0qSct76LhjAogVQegf4~",
+    "geekId": 516971975,
+    "geekName": "张迪",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20210221/6562c1a22fdec3ab4c755de8da2b93f516fbb915565ee47c194cade15e094bea_s.png",
+    "geekGender": 1,
+    "geekWorkYear": "4年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "学习能力较强，开朗",
+      "indexList": []
+    },
+    "expectId": 610695083,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "6-11K",
+    "lowSalary": 6,
+    "highSalary": 11,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "01b94e08-7145-438b-8c5b-1029bf1f40a2.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.6",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691231228,
+    "birthday": "20001201",
+    "ageDesc": "22岁",
+    "ageLight": {
+      "content": "22岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "黑龙江能源职业学院",
+      "schoolId": 0,
+      "major": "高速铁路客运乘务",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20190101",
+      "endDate": "20220101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "黑龙江能源职业学院",
+        "schoolId": 0,
+        "major": "高速铁路客运乘务",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2019.01",
+        "endDate": "2022.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 208944169,
+        "geekId": 0,
+        "company": "轨道交通运营管理",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "文员",
+        "blueCollarPosition": false,
+        "positionName": "文员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "负责人员管理，日常统计，文件档案管理，报表编辑，做表，处理人员投诉，统计考勤，负责部门的档案，文件的管理，归档上传，熟练使用办公软件，和领导交代的其他工作。",
+        "startDate": "2022.03",
+        "endDate": "2023.05",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "有一定的管理能力",
+          "熟练使用电脑"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "轨道交通运营管理",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "文员",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 208943536,
+        "geekId": 0,
+        "company": "中电瑞达物业",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "客服专员",
+        "blueCollarPosition": false,
+        "positionName": "客服",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "收物业费，处理各类突发事件，解决客户投诉，日常维护住户，园区绿化的日常管理。",
+        "startDate": "2021.03",
+        "endDate": "2022.03",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "投诉客服"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "中电瑞达物业",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "客服专员",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 156297262,
+        "geekId": 0,
+        "company": "国家海洋局",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "物业经理",
+        "blueCollarPosition": false,
+        "positionName": "会服",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "",
+        "startDate": "2019.08",
+        "endDate": "2020.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "熟练使用电脑"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "国家海洋局",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "物业经理",
+          "indexList": []
+        },
+        "workTime": "5个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "90562d5b6c2bfc750nV80tq8GVVV",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 610695083,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 6,
+      "highSalary": 11,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 208944169,
+    "geekId": 0,
+    "company": "轨道交通运营管理",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "文员",
+    "blueCollarPosition": false,
+    "positionName": "文员",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "负责人员管理，日常统计，文件档案管理，报表编辑，做表，处理人员投诉，统计考勤，负责部门的档案，文件的管理，归档上传，熟练使用办公软件，和领导交代的其他工作。",
+    "startDate": "2022.03",
+    "endDate": "2023.05",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "有一定的管理能力",
+      "熟练使用电脑"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "轨道交通运营管理",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "文员",
+      "indexList": []
+    },
+    "workTime": "1年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "黑龙江能源职业学院",
+      "schoolId": 0,
+      "major": "高速铁路客运乘务",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2019.01",
+      "endDate": "2022.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 208944169,
+      "geekId": 0,
+      "company": "轨道交通运营管理",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "文员",
+      "blueCollarPosition": false,
+      "positionName": "文员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "负责人员管理，日常统计，文件档案管理，报表编辑，做表，处理人员投诉，统计考勤，负责部门的档案，文件的管理，归档上传，熟练使用办公软件，和领导交代的其他工作。",
+      "startDate": "2022.03",
+      "endDate": "2023.05",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "有一定的管理能力",
+        "熟练使用电脑"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "轨道交通运营管理",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "文员",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 208943536,
+      "geekId": 0,
+      "company": "中电瑞达物业",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "客服专员",
+      "blueCollarPosition": false,
+      "positionName": "客服",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "收物业费，处理各类突发事件，解决客户投诉，日常维护住户，园区绿化的日常管理。",
+      "startDate": "2021.03",
+      "endDate": "2022.03",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "投诉客服"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "中电瑞达物业",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "客服专员",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 156297262,
+      "geekId": 0,
+      "company": "国家海洋局",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "物业经理",
+      "blueCollarPosition": false,
+      "positionName": "会服",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "",
+      "startDate": "2019.08",
+      "endDate": "2020.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "熟练使用电脑"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "国家海洋局",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "物业经理",
+        "indexList": []
+      },
+      "workTime": "5个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

@@ -1,0 +1,512 @@
+{
+  "encryptGeekId": "76fd07077fbb42700Hd43928FQ~~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "F20K_vAjUvM6H-p1TAfA35ZN6fJpJZK3H-Qf7zlDkJ2kmyt-7-uMkTPjNmOP4wrHDJBftmbv0A6rnmwoRDMlsDqKaasJ9jjoB3qByN-UmMTiHSpU0LiHBenmDO4JBQsCEjqHG3mvjMcQAdwXyQPIPF9sGongSMFKCcl96j0QTjC_4Eck6tU9d6MK3890BXmeCkVfsFrYPJaxkKz2pGN7RyEF72dg8ox-lJDGhDNbTQHj88N5dU8dEshtCML1-TFR8SlXSm-_vAC4-tof11bvDJUGAsx7M6M_S-loGs_tT4rP6jq6p531ryXoHVUEnUcKOlbZG7vVGLRJTsmRcdWBeUNS84pmAS1_Mwcc-BPhfJj589xik6tH2BTgbIqnIOZxLh-YRK3-4If3kU0Z710ao98MhaEHywZNtKMhqMstK2IERltwbET4i7NUbD2BNAX0sCqqqWT0g7ujF3tZNS_xL8_Cshpt-dsKegZMxVVEbzuMSPomsZQDEDKnLi2o3jwK6ZqmX7OpGqESqaEzBpjBP88oJtTpt2dtgkiBfNlS3tzjD5_9apGCaiPJSCmhzWT0n660kgvnmMIF913ZFJ98C7SSBL9kOM6RL8u0EIw4R8qo",
+    "geekId": 7324015,
+    "geekName": "刘雨佳",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20211129/607f1f3d68754fd06a445b4e75ea673bfea0fdd7342885598e0122f0704a14ab5dc42607e133242f_s.jpg",
+    "geekGender": 1,
+    "geekWorkYear": "10年以上",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "思维逻辑 沟通能力 处突能力强 善于思考 做事注重结果 自学教育理论 教育心理学等系热教育课程",
+      "indexList": []
+    },
+    "expectId": 453935247,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "8-10K",
+    "lowSalary": 8,
+    "highSalary": 10,
+    "middleContent": {
+      "content": "期望职位 产品经理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "52d677a3-e50f-47e1-96ec-098aae1a9fcb.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.10",
+    "actionDateDesc": null,
+    "expectPositionCode": 110101,
+    "expectPositionName": "产品经理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691240328,
+    "birthday": "19900701",
+    "ageDesc": "33岁",
+    "ageLight": {
+      "content": "33岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "北京城市学院",
+      "schoolId": 0,
+      "major": "西班牙语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20080101",
+      "endDate": "20120101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "北京城市学院",
+        "schoolId": 0,
+        "major": "西班牙语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2008.01",
+        "endDate": "2012.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 142063200,
+        "geekId": 0,
+        "company": "启智荣和教育",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "运营经理/主管",
+        "blueCollarPosition": false,
+        "positionName": "运营经理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1 0-1 周末营运营工作（产品设计搭建 服务流程制定等）；\r2 北京重要展览（何以中国）及各大展馆视频课录制剪辑；\n3 周末营 夏令营产品销售进度分析及汇报；\n4 活动方案编写；\n5 相关产品培训；\n6 部门运营 sop；",
+        "startDate": "2021.12",
+        "endDate": "2022.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "C端运营",
+          "校区运营"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "启智荣和教育",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "运营经理/主管",
+          "indexList": []
+        },
+        "workTime": "7个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 133479789,
+        "geekId": 0,
+        "company": "江博教育培训学校",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "运营经理/主管",
+        "blueCollarPosition": false,
+        "positionName": "运营经理/主管",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1 研学/SAT考试团项目运营；\n2 编写研学/美国留学申请等活动策划方案；\n3 统筹并执行大型讲座活动方案；\n4 与市场部配合落地活动宣传\n（线下：地推及校区宣传，线上：官网落地页/微信端）；\n5 复盘活动效果及活动数据后期转化；\n6 参加学科教学教研活动并落地相关教研方案；\n7 整理并优化各部门KPI数据；\n8 活动后期数据分析；\n9 初高中学生升学规划；",
+        "startDate": "2018.08",
+        "endDate": "2021.11",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "活动运营",
+          "校区运营",
+          "线上运营",
+          "线下运营",
+          "数据分析"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "江博教育培训学校",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "运营经理/主管",
+          "indexList": []
+        },
+        "workTime": "3年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 142061446,
+        "geekId": 0,
+        "company": "京翰教育集团",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "旅游产品经理",
+        "blueCollarPosition": false,
+        "positionName": "旅游产品经理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "工作：\r1 带领团队完成对应销售任务；\r2 开发、维护相关同业合作渠道；\r3 管理出境后台上下游资源；\r4 制作相关销售工具及培训；\r5 策划相关游学产品会销活动；\r6 配合相关部门开展游学产品策划推广活动；\r7 游学产品更新迭代；",
+        "startDate": "2015.07",
+        "endDate": "2018.08",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "研学旅行",
+          "出境游"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "京翰教育集团",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "旅游产品经理",
+          "indexList": []
+        },
+        "workTime": "3年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "76fd07077fbb42700Hd43928FQ~~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 453935247,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 110101,
+      "positionName": "产品经理",
+      "lowSalary": 8,
+      "highSalary": 10,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 142063200,
+    "geekId": 0,
+    "company": "启智荣和教育",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "运营经理/主管",
+    "blueCollarPosition": false,
+    "positionName": "运营经理",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1 0-1 周末营运营工作（产品设计搭建 服务流程制定等）；\r2 北京重要展览（何以中国）及各大展馆视频课录制剪辑；\n3 周末营 夏令营产品销售进度分析及汇报；\n4 活动方案编写；\n5 相关产品培训；\n6 部门运营 sop；",
+    "startDate": "2021.12",
+    "endDate": "2022.07",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "C端运营",
+      "校区运营"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "启智荣和教育",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "运营经理/主管",
+      "indexList": []
+    },
+    "workTime": "7个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "北京城市学院",
+      "schoolId": 0,
+      "major": "西班牙语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2008.01",
+      "endDate": "2012.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 142063200,
+      "geekId": 0,
+      "company": "启智荣和教育",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "运营经理/主管",
+      "blueCollarPosition": false,
+      "positionName": "运营经理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1 0-1 周末营运营工作（产品设计搭建 服务流程制定等）；\r2 北京重要展览（何以中国）及各大展馆视频课录制剪辑；\n3 周末营 夏令营产品销售进度分析及汇报；\n4 活动方案编写；\n5 相关产品培训；\n6 部门运营 sop；",
+      "startDate": "2021.12",
+      "endDate": "2022.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "C端运营",
+        "校区运营"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "启智荣和教育",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "运营经理/主管",
+        "indexList": []
+      },
+      "workTime": "7个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 133479789,
+      "geekId": 0,
+      "company": "江博教育培训学校",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "运营经理/主管",
+      "blueCollarPosition": false,
+      "positionName": "运营经理/主管",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1 研学/SAT考试团项目运营；\n2 编写研学/美国留学申请等活动策划方案；\n3 统筹并执行大型讲座活动方案；\n4 与市场部配合落地活动宣传\n（线下：地推及校区宣传，线上：官网落地页/微信端）；\n5 复盘活动效果及活动数据后期转化；\n6 参加学科教学教研活动并落地相关教研方案；\n7 整理并优化各部门KPI数据；\n8 活动后期数据分析；\n9 初高中学生升学规划；",
+      "startDate": "2018.08",
+      "endDate": "2021.11",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "活动运营",
+        "校区运营",
+        "线上运营",
+        "线下运营",
+        "数据分析"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "江博教育培训学校",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "运营经理/主管",
+        "indexList": []
+      },
+      "workTime": "3年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 142061446,
+      "geekId": 0,
+      "company": "京翰教育集团",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "旅游产品经理",
+      "blueCollarPosition": false,
+      "positionName": "旅游产品经理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "工作：\r1 带领团队完成对应销售任务；\r2 开发、维护相关同业合作渠道；\r3 管理出境后台上下游资源；\r4 制作相关销售工具及培训；\r5 策划相关游学产品会销活动；\r6 配合相关部门开展游学产品策划推广活动；\r7 游学产品更新迭代；",
+      "startDate": "2015.07",
+      "endDate": "2018.08",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "研学旅行",
+        "出境游"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "京翰教育集团",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "旅游产品经理",
+        "indexList": []
+      },
+      "workTime": "3年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（产品经理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

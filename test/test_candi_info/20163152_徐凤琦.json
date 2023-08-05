@@ -1,0 +1,503 @@
+{
+  "encryptGeekId": "a55e96e3d0db818a1XR73d68FVA~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "yoO1kBoDUZo5o-E1J6lNEiv8EJryV09l4M1wkMvEsA83s7vdJJJE1GR-DAbj-70WH8SiRrknpSgTDV5HQl2f1bIYT4tXd1Jlazp7yyKDVF0v0255njGkAB4M8nvhpb5d9TKPSQgqD903wo1UOXQKRyrGS0S0kmNAVWmTT0ujolpefOFUVM0SoyjbKeBGt1xd95V8CSt8Q2Ew7CmRg4khDkFwCin4R1eOWhqxdJ8uQZ5HX6FDX79sAi6nTP1OP9CR6ev_LfmB1s0_oNaGe7HurCdH2nkOqLMpFFsuWUQ7r5wJJq_l3PtAIunuhhVMex-ymddTSsVgkt60WTa2l_JnLkXPFJrdRnRiIzEYkNxhXgC6o3ijlLnZ7LmVoDULh5Sin3Le9sOunWu7n7WocBzBXOuf5DWr4t0hjNYdiO-yxzaFv1PORU9dcYbmPSJwLGOlfwdBcFYaIViiR7i8FJaO16-TDa5mQc8bZv1jqUBrUvsRbXpvgJ-vBJedh8Z3JxcGChCzKOnZEuE9484a0QNE57y4mk4uL78YTQ1IP2n8Sj_xSMNTOIgKTj-82CRoX5P3q43B4gMcQDzsTGtxRADtezVhyXl8j9ted2mB9nVbGMbAYw~~",
+    "geekId": 20163152,
+    "geekName": "徐凤琦",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20200425/ab5b4c3542d49375ec55e022658758cce1235e7974db52a012f8bf31dc13c73e_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "7年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "两年销售经验，一年管理经验，性格开朗，可以接受新鲜事务，适应能力快，喜欢挑战！",
+      "indexList": []
+    },
+    "expectId": 277203862,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "8-10K",
+    "lowSalary": 8,
+    "highSalary": 10,
+    "middleContent": {
+      "content": "期望职位 导购",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "4089c859-6edc-45d7-843f-1456ceeefb33.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.3",
+    "actionDateDesc": null,
+    "expectPositionCode": 290302,
+    "expectPositionName": "导购",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691216787,
+    "birthday": "19981103",
+    "ageDesc": "24岁",
+    "ageLight": {
+      "content": "24岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "绥芬河市职业技术教育中心学校",
+      "schoolId": 0,
+      "major": "俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20130101",
+      "endDate": "20150101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "绥芬河市职业技术教育中心学校",
+        "schoolId": 0,
+        "major": "俄语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2013.01",
+        "endDate": "2015.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 120188018,
+        "geekId": 0,
+        "company": "津梁生活",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "销售经理",
+        "blueCollarPosition": false,
+        "positionName": "销售管理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.负责整体卖场商品陈列\n2.接待进店顾客，发展需求，跟进完成销售\n3.负责员工每天销售额分析，团队管理",
+        "startDate": "2020.12",
+        "endDate": "2022.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "曾在丝芙兰八折期间，一天销售额达四万五\n在津梁生活任职第一个月销售业绩全店第二",
+        "workEmphasisList": [
+          "面销"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "津梁生活",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "销售经理",
+          "indexList": []
+        },
+        "workTime": "2年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 72654293,
+        "geekId": 0,
+        "company": "丝芙兰（上海）化妆品销售",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "导购",
+        "blueCollarPosition": false,
+        "positionName": "销售导购",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.主要负责产品区域整齐，填补空缺\n2.接待好每一位顾客，发现需求，达成销售\n3.每日学习产品知识，提高自己",
+        "startDate": "2018.12",
+        "endDate": "2020.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "化妆品导购",
+          "服装导购",
+          "店面导购"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "丝芙兰（上海）化妆品销售",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "导购",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 72940192,
+        "geekId": 0,
+        "company": "阳光起跑线商业管理",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "导购",
+        "blueCollarPosition": false,
+        "positionName": "导购",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "",
+        "startDate": "2017.06",
+        "endDate": "2018.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "服装导购"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "阳光起跑线商业管理",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "导购",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "a55e96e3d0db818a1XR73d68FVA~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 277203862,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 290302,
+      "positionName": "导购",
+      "lowSalary": 8,
+      "highSalary": 10,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 120188018,
+    "geekId": 0,
+    "company": "津梁生活",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "销售经理",
+    "blueCollarPosition": false,
+    "positionName": "销售管理",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1.负责整体卖场商品陈列\n2.接待进店顾客，发展需求，跟进完成销售\n3.负责员工每天销售额分析，团队管理",
+    "startDate": "2020.12",
+    "endDate": "2022.12",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "曾在丝芙兰八折期间，一天销售额达四万五\n在津梁生活任职第一个月销售业绩全店第二",
+    "workEmphasisList": [
+      "面销"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "津梁生活",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "销售经理",
+      "indexList": []
+    },
+    "workTime": "2年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "绥芬河市职业技术教育中心学校",
+      "schoolId": 0,
+      "major": "俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2013.01",
+      "endDate": "2015.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 120188018,
+      "geekId": 0,
+      "company": "津梁生活",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "销售经理",
+      "blueCollarPosition": false,
+      "positionName": "销售管理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.负责整体卖场商品陈列\n2.接待进店顾客，发展需求，跟进完成销售\n3.负责员工每天销售额分析，团队管理",
+      "startDate": "2020.12",
+      "endDate": "2022.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "曾在丝芙兰八折期间，一天销售额达四万五\n在津梁生活任职第一个月销售业绩全店第二",
+      "workEmphasisList": [
+        "面销"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "津梁生活",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "销售经理",
+        "indexList": []
+      },
+      "workTime": "2年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 72654293,
+      "geekId": 0,
+      "company": "丝芙兰（上海）化妆品销售",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "导购",
+      "blueCollarPosition": false,
+      "positionName": "销售导购",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.主要负责产品区域整齐，填补空缺\n2.接待好每一位顾客，发现需求，达成销售\n3.每日学习产品知识，提高自己",
+      "startDate": "2018.12",
+      "endDate": "2020.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "化妆品导购",
+        "服装导购",
+        "店面导购"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "丝芙兰（上海）化妆品销售",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "导购",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 72940192,
+      "geekId": 0,
+      "company": "阳光起跑线商业管理",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "导购",
+      "blueCollarPosition": false,
+      "positionName": "导购",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "",
+      "startDate": "2017.06",
+      "endDate": "2018.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "服装导购"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "阳光起跑线商业管理",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "导购",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（导购）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

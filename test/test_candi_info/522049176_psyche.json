@@ -1,0 +1,433 @@
+{
+  "encryptGeekId": "d3ba167b191ee6720nZ429m0EVVW",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "Bjqn4USeAfj7Y-j1IpFti1QXC50bYZAGGytfMARQ-om5Ugs4DEvgfYLu13eS-4ddNLP0kDLxrWJPjqFOn6EaLpg7hdlksIPtqkizIMT6qfvCY8UJ9OYPRlFsUbV4WhYSCSqc-kBTXX9wwSjrGB2178CIOaoUhmc9-_wNM2F5JTbFgxUfBWTsh0AmklMJd6cl0pxOIWEN182SquvZMyJnOJdVpTu0a52d2dcmU0QsrZtsQDKSrmuTFeY5B4SfUf6wq5jsggOP4siMr7szWfALnx0OOQw86pm1oVm7ST4bM_fTSpDqaWvvdCyHH4q8A4MK1cjjkJ_y5OkzqSq6x5PIwGpSbLZfZajW22XFSTIVson2_Oo_mNPmukuZMSfctbEtTrC9Av75s18QisNEteVii9CgwZPcQBTnEExP82P0d1OJc27UrFtIHKDMPMt7iv1r3h0odeEWEDzLPc3LL7IGp2cSHXQgFJwKF3G8eer8r9ZQMwj-0P-aeQM3qiT1iRrfHBWMWyqxfxOrBOwVueMf4WdGHlCYLv3RgdpJgkg6gpIIumMol2APuwBG6kJF53cbdLq3dEt2Q5LpKUARYC9oInbIGLtI4T_JaItSabVbf1YTtd8~",
+    "geekId": 522049176,
+    "geekName": "psyche",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20220811/607f1f3d68754fd0fe35097912ee5a2d12339372569f9aac5a7d68ff1d31b9ea17c3817e5e0d4131_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "4年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "很喜欢运动。喜欢独立思考。平时喜欢看 NBA 、打羽毛球、健身、听歌、偶尔看美剧。进取精神，工作热情善于学习，进取精神，英语四级以上",
+      "indexList": []
+    },
+    "expectId": 514474971,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "7-11K",
+    "lowSalary": 7,
+    "highSalary": 11,
+    "middleContent": {
+      "content": "家具·贸易跟单",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "0db00f98-1e70-49f1-8991-ef979bb03eec.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.9",
+    "actionDateDesc": null,
+    "expectPositionCode": 250203,
+    "expectPositionName": "外贸业务员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691242350,
+    "birthday": "19991101",
+    "ageDesc": "23岁",
+    "ageLight": {
+      "content": "23岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "秦皇岛职业技术学院",
+      "schoolId": 0,
+      "major": "国际商务",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20170101",
+      "endDate": "20200101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "秦皇岛职业技术学院",
+        "schoolId": 0,
+        "major": "国际商务",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2017.01",
+        "endDate": "2020.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 216178564,
+        "geekId": 0,
+        "company": "家具",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "贸易跟单",
+        "blueCollarPosition": false,
+        "positionName": "贸易跟单",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、根据国外客户的 PO做 PI  跟进样品、录单做生产单、下单给工厂的跟单、做唛头与印刷厂沟通修改并\r确认贴纸跟进大货和样品的进度、协调验货时间以及客户需要产品分解后的详细资料等，\r与客户沟通合适的 ETD ，与船务沟通船期和派车时间，提供需要做商检的产品的单据，报装柜数据，核对提单\r做清关单据提供给国外客户，留意 ETA  时间去催国外客户的货款，上传单据和提单到客户的系统。\r\n2、和国外客户和国内办公室沟通日常需要解决的问题或突发事件等等。\r\n3、所负责的客户，跟单年销售额在八百万人民币左右\r4.涉及到的贸易术语与付款方式主要是 FOBEXW  和后 TT  或预付加尾款的付款方式，信用证较少",
+        "startDate": "2020.01",
+        "endDate": "2023.06",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "Office",
+          "家居用品",
+          "Excel",
+          "全职兼职均可",
+          "全职"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "家具",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "贸易跟单",
+          "indexList": []
+        },
+        "workTime": "3年半",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 178777392,
+        "geekId": 0,
+        "company": "少儿英语培训中心",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "海外市场",
+        "blueCollarPosition": false,
+        "positionName": "海外市场",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、 负责配合外教一起上课\r2019.12-2023.1 家具类型外贸公司\r1、 负责做 PI 跟进样品 、录单 做生产单 、下单给工厂的跟单、跟进大货的进度、协调验货时间以及客户需要产品分解后的详细资料等，与客户沟通合适的ETD，与船务沟通船期和派车时间，提供需要做商检的产品的单据， 报数据，核对提单，做清关单据提供给客户，催款，上传单据和提单到客户的系统。\r2、和国外客户或国内办公室沟通日常需要解决的问题或突发事件等等 。\r岗位： 外教助教\r岗位： 外贸跟单",
+        "startDate": "2019.11",
+        "endDate": "2019.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "海外市场"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "少儿英语培训中心",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "海外市场",
+          "indexList": []
+        },
+        "workTime": "1个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "d3ba167b191ee6720nZ429m0EVVW",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 514474971,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 250203,
+      "positionName": "外贸业务员",
+      "lowSalary": 7,
+      "highSalary": 11,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 216178564,
+    "geekId": 0,
+    "company": "家具",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "贸易跟单",
+    "blueCollarPosition": false,
+    "positionName": "贸易跟单",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1、根据国外客户的 PO做 PI  跟进样品、录单做生产单、下单给工厂的跟单、做唛头与印刷厂沟通修改并\r确认贴纸跟进大货和样品的进度、协调验货时间以及客户需要产品分解后的详细资料等，\r与客户沟通合适的 ETD ，与船务沟通船期和派车时间，提供需要做商检的产品的单据，报装柜数据，核对提单\r做清关单据提供给国外客户，留意 ETA  时间去催国外客户的货款，上传单据和提单到客户的系统。\r\n2、和国外客户和国内办公室沟通日常需要解决的问题或突发事件等等。\r\n3、所负责的客户，跟单年销售额在八百万人民币左右\r4.涉及到的贸易术语与付款方式主要是 FOBEXW  和后 TT  或预付加尾款的付款方式，信用证较少",
+    "startDate": "2020.01",
+    "endDate": "2023.06",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "Office",
+      "家居用品",
+      "Excel",
+      "全职兼职均可",
+      "全职"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "家具",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "贸易跟单",
+      "indexList": []
+    },
+    "workTime": "3年半",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "秦皇岛职业技术学院",
+      "schoolId": 0,
+      "major": "国际商务",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2017.01",
+      "endDate": "2020.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 216178564,
+      "geekId": 0,
+      "company": "家具",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "贸易跟单",
+      "blueCollarPosition": false,
+      "positionName": "贸易跟单",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、根据国外客户的 PO做 PI  跟进样品、录单做生产单、下单给工厂的跟单、做唛头与印刷厂沟通修改并\r确认贴纸跟进大货和样品的进度、协调验货时间以及客户需要产品分解后的详细资料等，\r与客户沟通合适的 ETD ，与船务沟通船期和派车时间，提供需要做商检的产品的单据，报装柜数据，核对提单\r做清关单据提供给国外客户，留意 ETA  时间去催国外客户的货款，上传单据和提单到客户的系统。\r\n2、和国外客户和国内办公室沟通日常需要解决的问题或突发事件等等。\r\n3、所负责的客户，跟单年销售额在八百万人民币左右\r4.涉及到的贸易术语与付款方式主要是 FOBEXW  和后 TT  或预付加尾款的付款方式，信用证较少",
+      "startDate": "2020.01",
+      "endDate": "2023.06",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "Office",
+        "家居用品",
+        "Excel",
+        "全职兼职均可",
+        "全职"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "家具",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "贸易跟单",
+        "indexList": []
+      },
+      "workTime": "3年半",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 178777392,
+      "geekId": 0,
+      "company": "少儿英语培训中心",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "海外市场",
+      "blueCollarPosition": false,
+      "positionName": "海外市场",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、 负责配合外教一起上课\r2019.12-2023.1 家具类型外贸公司\r1、 负责做 PI 跟进样品 、录单 做生产单 、下单给工厂的跟单、跟进大货的进度、协调验货时间以及客户需要产品分解后的详细资料等，与客户沟通合适的ETD，与船务沟通船期和派车时间，提供需要做商检的产品的单据， 报数据，核对提单，做清关单据提供给客户，催款，上传单据和提单到客户的系统。\r2、和国外客户或国内办公室沟通日常需要解决的问题或突发事件等等 。\r岗位： 外教助教\r岗位： 外贸跟单",
+      "startDate": "2019.11",
+      "endDate": "2019.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "海外市场"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "少儿英语培训中心",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "海外市场",
+        "indexList": []
+      },
+      "workTime": "1个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（外贸业务员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

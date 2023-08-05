@@ -1,0 +1,388 @@
+{
+  "encryptGeekId": "54ba259f033d3f3e0nd939m7EVRS",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "lZrN9WjbRdw0S-y1DNUQYx3NedcV0MC6ERDbfccuO3nC2gZA2OcL5fG23FiTn4TiD0oRZQMfArS2l30XgA9Czq9CpKfbVt4bvzwcn0yyjaDsqAJ-kEv3gpDbBZ86hlCAdYb7CGj0K0W3oANN-nKNpFVN-ZFD65g2ZOe74zCSfDT18Wi2AnSrcwEcV29cU4i1RnyBz_Y0oWPgJA2ZA9o1Mb6TxjbY1q15cgiot5gaig3HfNGYv2jZpJjwEsLVf599CPr_rrJu4sX8cVF_RhnzmQBJ_nHFZaemxvAKOxQlGqtJuv1_cRRnj6rEFyZBeLPddLeBZ7ScVBm-R6KvXnxPf7_VK-oE4UsyBeniJf50uD46iPX_y80r-RLkaTFTPhry78Z_oe7lpNiWq9jh7cepwLEFl2LPJGRM1fCSZBpjXHpX-ISo2FnqNCn-ABqHCYW-QHZnHErTmaU1aiPCg8fh7TNLLvDw3bO64Cz9OGIle_ejLJuXMK-nLtGHRQk9zIP_49mlYbxmzY9eEtPy5o2QjE9dKZFZ-uq-0KrKeSfcR2K4rk12R85BfpfVAIlD2d8iEVZjRhDCL7-Ak3S2ZQq7jmHmT2sCmzuWl4ivFpTzUGnW6GA~",
+    "geekId": 537446162,
+    "geekName": "孙金龙",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230320/607f1f3d68754fd02a67cf7984a1edb84aa3237c0ec0323d8e19955ffbf1ab333ad5289a6e8a738d_s.jpg",
+    "geekGender": 1,
+    "geekWorkYear": "2年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "学习能力：电气工程及其自动化专业学习经历，有一定专业知识储备，能快速掌握行业内知识，短期培 训后即可独立完成工作任务。综合能力：能够不断研究专业知识，配合团队完成工作项目的交流及问题处理，提高工作效率、保证工 作质量。有规范化工作的意识，能够在以后的工作中快速进入到项目中，配合团队工作开展。个人性格：开朗和善、踏实上进、虚心好学，有优秀的创新意识，语言组织能力较好，善于沟通",
+      "indexList": []
+    },
+    "expectId": 630306266,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "6-8K",
+    "lowSalary": 6,
+    "highSalary": 8,
+    "middleContent": {
+      "content": "期望职位 人力资源专员/助理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "89e88491-0ac3-4e82-9d08-c38d01767f0a.f1:common.eyJzZXNzaW9uSWQiOiIxMmM4ZTk2Ni05YWEyLTQ2YmQtYjBiYS03YTllZmY5MzdlNDEiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.1",
+    "actionDateDesc": null,
+    "expectPositionCode": 150104,
+    "expectPositionName": "人力资源专员/助理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691252997,
+    "birthday": "20011201",
+    "ageDesc": "21岁",
+    "ageLight": {
+      "content": "21岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "承德石油高等专科学校",
+      "schoolId": 0,
+      "major": "电气工程及其自动化",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20200101",
+      "endDate": "20230101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "承德石油高等专科学校",
+        "schoolId": 0,
+        "major": "电气工程及其自动化",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2020.01",
+        "endDate": "2023.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      },
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "河北石油职业技术大学",
+        "schoolId": 0,
+        "major": "工业机器人",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2020.01",
+        "endDate": "2023.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 178067885,
+        "geekId": 0,
+        "company": "恩义教育集团",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "电话销售",
+        "blueCollarPosition": false,
+        "positionName": "电话销售",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "客户拓展：主要利用电话的方式完成客户资源拓展，任职期间单日外呼电话40余通，在沟通过程中定\r位客户需求，针对性完成课程推荐、解答客户疑问，个人转化率在70%。\r数据分析：记录客户咨询问题、对未成交客户原因进行记录，同时对政策信息进行及时学习了解，整合\r数据，完成销售话术调整优化；主动对接内部团队，沟通客户对于课程产品存在的疑问以及\r同类型竞品课程信息，推动课程产品优化。\r社团经历\r起止时间 班委\r费用管理：建立班费台账，记录班级收支情况，定期复盘，维护台账稳定性；以月为单位，公布班费信\r息，具体到每笔进出款项，实现费用透明化。\r班级管理：配合班长管理班级，定期参与班会，了解当下工作重点，做好班风建设，维护学务、考务工\r作。任职期间对宿舍卫生进行管理，最终宿舍卫生考评高达98分。\r物资管理：主动完成班级日常使用物资、活动物资等的采购工作，利用视频电话的方式拓展5家供应\r商，降低班级物品采购成本20%。",
+        "startDate": "2021.08",
+        "endDate": "2021.09",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "课程销售"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "恩义教育集团",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "电话销售",
+          "indexList": []
+        },
+        "workTime": "1个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": {
+      "listingOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      },
+      "detailOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      }
+    },
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "54ba259f033d3f3e0nd939m7EVRS",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 630306266,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150104,
+      "positionName": "人力资源专员/助理",
+      "lowSalary": 6,
+      "highSalary": 8,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 178067885,
+    "geekId": 0,
+    "company": "恩义教育集团",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "电话销售",
+    "blueCollarPosition": false,
+    "positionName": "电话销售",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "客户拓展：主要利用电话的方式完成客户资源拓展，任职期间单日外呼电话40余通，在沟通过程中定\r位客户需求，针对性完成课程推荐、解答客户疑问，个人转化率在70%。\r数据分析：记录客户咨询问题、对未成交客户原因进行记录，同时对政策信息进行及时学习了解，整合\r数据，完成销售话术调整优化；主动对接内部团队，沟通客户对于课程产品存在的疑问以及\r同类型竞品课程信息，推动课程产品优化。\r社团经历\r起止时间 班委\r费用管理：建立班费台账，记录班级收支情况，定期复盘，维护台账稳定性；以月为单位，公布班费信\r息，具体到每笔进出款项，实现费用透明化。\r班级管理：配合班长管理班级，定期参与班会，了解当下工作重点，做好班风建设，维护学务、考务工\r作。任职期间对宿舍卫生进行管理，最终宿舍卫生考评高达98分。\r物资管理：主动完成班级日常使用物资、活动物资等的采购工作，利用视频电话的方式拓展5家供应\r商，降低班级物品采购成本20%。",
+    "startDate": "2021.08",
+    "endDate": "2021.09",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "课程销售"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "恩义教育集团",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "电话销售",
+      "indexList": []
+    },
+    "workTime": "1个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "承德石油高等专科学校",
+      "schoolId": 0,
+      "major": "电气工程及其自动化",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2020.01",
+      "endDate": "2023.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "河北石油职业技术大学",
+      "schoolId": 0,
+      "major": "工业机器人",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2020.01",
+      "endDate": "2023.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 178067885,
+      "geekId": 0,
+      "company": "恩义教育集团",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "电话销售",
+      "blueCollarPosition": false,
+      "positionName": "电话销售",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "客户拓展：主要利用电话的方式完成客户资源拓展，任职期间单日外呼电话40余通，在沟通过程中定\r位客户需求，针对性完成课程推荐、解答客户疑问，个人转化率在70%。\r数据分析：记录客户咨询问题、对未成交客户原因进行记录，同时对政策信息进行及时学习了解，整合\r数据，完成销售话术调整优化；主动对接内部团队，沟通客户对于课程产品存在的疑问以及\r同类型竞品课程信息，推动课程产品优化。\r社团经历\r起止时间 班委\r费用管理：建立班费台账，记录班级收支情况，定期复盘，维护台账稳定性；以月为单位，公布班费信\r息，具体到每笔进出款项，实现费用透明化。\r班级管理：配合班长管理班级，定期参与班会，了解当下工作重点，做好班风建设，维护学务、考务工\r作。任职期间对宿舍卫生进行管理，最终宿舍卫生考评高达98分。\r物资管理：主动完成班级日常使用物资、活动物资等的采购工作，利用视频电话的方式拓展5家供应\r商，降低班级物品采购成本20%。",
+      "startDate": "2021.08",
+      "endDate": "2021.09",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "课程销售"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "恩义教育集团",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "电话销售",
+        "indexList": []
+      },
+      "workTime": "1个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（人力资源专员/助理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

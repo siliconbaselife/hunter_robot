@@ -1,0 +1,432 @@
+{
+  "encryptGeekId": "de50c13570a7c3e40nN_3N-4GVpX",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "KNSwxeUgX9jp5-V1oGtftsa4GtRkIzS8U_rPlcTAwxfhNxqH76NfMLI9hkriKuSbt2XBqoJmZ97xdBNv-w76SZvt92qKZKZ7QKVY8KkVGUvFLq-Z3xhgbyef85SHTj78VI-i1XGou8Wjp6Znzrx5zqbP6cj9koz3xLsxh-uu_mgoAKKnLkC9CUhJxOQ0Xne_IeZBkQzFLumckfT4yIVpLjWMYoQnsIl7t2O4IR0OU7cImj6zzNbLsPLRsrQOS4nYwDXDj0EO5QC7MVbyAImCM8CuZXVPLewEHIqbJouag5yK7WFsXIiEuepHKbLWY-qyNCjtaEQ3wj_RGCRczTgT3YFtUTp71HHzcC47Ztjw6RMLMps_8SP7Ns5SnLoYMEuUrFTUefPNzy__54sgO1A3Eh3Rk3-1-dA7vMTjLjIa45Jzrv1ftQNijlffZYi93FILYBtSoxRrB-v6Xn0TB4rVydiJWlHKYXMGMvUKlVK783bw75jLAUFdxBRSeSPPpbG2flidPcoOceHMIWYUOa7tvATsD4SSIMgfK6Qg3Q0RwaNU73PNNcGJ7pdgEPuDnU0lKxB9ltTiTJNW6J4QhB5xGj-JTdFK92P-_H9WYqxTlqrV3xA~",
+    "geekId": 575725987,
+    "geekName": "王红玉",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230130/607f1f3d68754fd0da3e6775248ec33700f448fcdf76032e0c63608ad1f95acd0cfb7042347535be_s.png",
+    "geekGender": 0,
+    "geekWorkYear": "10年以上",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "1.本人性格开朗,工作认真，责任心强，亲和力和较强的团队意识。2.本人曾获得由台湾服务礼仪品质管理协会颁发的IBM 客户服务管理师证书。有极强的服务意识，和较好的沟通，表达能力，普通话标准。",
+      "indexList": []
+    },
+    "expectId": 498294818,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "5-8K",
+    "lowSalary": 5,
+    "highSalary": 8,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "c1efebea-6765-418c-9956-6292d5e0b59e.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.6",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691236003,
+    "birthday": "19740930",
+    "ageDesc": "48岁",
+    "ageLight": {
+      "content": "48岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "北京朝阳区职工大学",
+      "schoolId": 0,
+      "major": "财务学",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "19990101",
+      "endDate": "20020101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "北京朝阳区职工大学",
+        "schoolId": 0,
+        "major": "财务学",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "1999.01",
+        "endDate": "2002.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 180924888,
+        "geekId": 0,
+        "company": "京都儿童医院",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "客服专员",
+        "blueCollarPosition": false,
+        "positionName": "客服专员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "在京都儿童医院儿童保健科做 VIP  客户服务，主要工作内容有儿童体检套餐的推广，介绍体检套餐，协助客人办理套餐，套餐客人的预约就诊，全程陪同，咨询解答，维护客户关系，以及就诊客人的建档，协助护士做科室的检查以及测量的工作，和科室主任安排与其他科室的沟通，和客人的电话回访工作。",
+        "startDate": "2018.12",
+        "endDate": "2022.11",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "接听客服",
+          "投诉客服",
+          "售前客服",
+          "售后客服"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "京都儿童医院",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "客服专员",
+          "indexList": []
+        },
+        "workTime": "4年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 181158065,
+        "geekId": 0,
+        "company": "玛丽妇婴医院",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "出纳",
+        "blueCollarPosition": false,
+        "positionName": "财务部收费",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.办理客人的门诊缴费，开具发票，明细打印\n2.会员卡的充值，及办理产检套餐的全部流程\n3客人的入院登记及出院结算。\n4.医保系统上传，报盘。",
+        "startDate": "2006.03",
+        "endDate": "2018.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "现金管理",
+          "票据管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "玛丽妇婴医院",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "出纳",
+          "indexList": []
+        },
+        "workTime": "12年半",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "de50c13570a7c3e40nN_3N-4GVpX",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 498294818,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 5,
+      "highSalary": 8,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 180924888,
+    "geekId": 0,
+    "company": "京都儿童医院",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "客服专员",
+    "blueCollarPosition": false,
+    "positionName": "客服专员",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "在京都儿童医院儿童保健科做 VIP  客户服务，主要工作内容有儿童体检套餐的推广，介绍体检套餐，协助客人办理套餐，套餐客人的预约就诊，全程陪同，咨询解答，维护客户关系，以及就诊客人的建档，协助护士做科室的检查以及测量的工作，和科室主任安排与其他科室的沟通，和客人的电话回访工作。",
+    "startDate": "2018.12",
+    "endDate": "2022.11",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "接听客服",
+      "投诉客服",
+      "售前客服",
+      "售后客服"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "京都儿童医院",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "客服专员",
+      "indexList": []
+    },
+    "workTime": "4年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "北京朝阳区职工大学",
+      "schoolId": 0,
+      "major": "财务学",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "1999.01",
+      "endDate": "2002.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 180924888,
+      "geekId": 0,
+      "company": "京都儿童医院",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "客服专员",
+      "blueCollarPosition": false,
+      "positionName": "客服专员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "在京都儿童医院儿童保健科做 VIP  客户服务，主要工作内容有儿童体检套餐的推广，介绍体检套餐，协助客人办理套餐，套餐客人的预约就诊，全程陪同，咨询解答，维护客户关系，以及就诊客人的建档，协助护士做科室的检查以及测量的工作，和科室主任安排与其他科室的沟通，和客人的电话回访工作。",
+      "startDate": "2018.12",
+      "endDate": "2022.11",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "接听客服",
+        "投诉客服",
+        "售前客服",
+        "售后客服"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "京都儿童医院",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "客服专员",
+        "indexList": []
+      },
+      "workTime": "4年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 181158065,
+      "geekId": 0,
+      "company": "玛丽妇婴医院",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "出纳",
+      "blueCollarPosition": false,
+      "positionName": "财务部收费",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.办理客人的门诊缴费，开具发票，明细打印\n2.会员卡的充值，及办理产检套餐的全部流程\n3客人的入院登记及出院结算。\n4.医保系统上传，报盘。",
+      "startDate": "2006.03",
+      "endDate": "2018.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "现金管理",
+        "票据管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "玛丽妇婴医院",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "出纳",
+        "indexList": []
+      },
+      "workTime": "12年半",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

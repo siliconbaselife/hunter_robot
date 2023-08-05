@@ -1,0 +1,509 @@
+{
+  "encryptGeekId": "be4b255757e44a040HR939S1GVA~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "qLIB6xQwGcKVK-c1f7GRDWs-Bb2J-AhJLUlOEhRbe_8bYe1TtJt1OQb2yX-L2YHWELxd-MYn_uW-z8YPC5lcEV34xbsmP2bamxYItWRI7KWrg87lmbqAg0MtfhnAFxbYceFE2tA7i8f0WsBiDtS5eL0M5Drxjzb6hAxOv4daN63Z36m_YhPRBlYv9EnNQiII6xKskdluJRbqY-WIRBhvmkq1ltOpjN3tCNDL-l5eyvh0MFJP1CV23efFz5ZxD-qoE7ZbtJ5CuCBlpvuHyOynZ8DZVLfuGlcZJOAZE_MbVBoXjx-gJOuZNKJOP0sUWjZD9xa3BGSKhNyWU58qFwzUBMipF60hg46aZ9A9VqE4fLRi_DCxBPtkpLZlGYV6g3-iBrxS_GyKifd0ywELCpUHlsGLYF8nu3TdBEBPPlIKBvqk7Vc7xmSJPM9FOPP7vNmWqSwLhfAB7pRMST5rQO94D4EcE9sQV8Xi1EF7wSsUhhQPfyjFHx6EM8Wr7qgpNHDp1kcp1k3lEVWaVmJCLbK6LmPrc5gI_XFwHxnfYLRgDXHZgjlye5pKgc7-Z0gU3OxVRU9veiGdhKWm5-MQYBvtIcStP1LvpifE71QFMvEPC2vv",
+    "geekId": 70749892,
+    "geekName": "陈炫蓉",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20210612/72b9420c562231ac58cf4755ef1253e7426d27d112f192e29fffc50691f2d2ae_s.png",
+    "geekGender": 0,
+    "geekWorkYear": "10年以上",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "本人踏实稳重，做事细心，思维缜密，有团队合作精神，原则性和服务意识。有较强的沟通能力。",
+      "indexList": []
+    },
+    "expectId": 79341474,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "5-7K",
+    "lowSalary": 5,
+    "highSalary": 7,
+    "middleContent": {
+      "content": "期望职位 行政专员/助理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "0ed308d1-84c7-4d1e-bbd3-b8fdbea380a4.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.5",
+    "actionDateDesc": null,
+    "expectPositionCode": 150201,
+    "expectPositionName": "行政专员/助理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691202089,
+    "birthday": "19840801",
+    "ageDesc": "39岁",
+    "ageLight": {
+      "content": "39岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "黑龙江东方学院",
+      "schoolId": 0,
+      "major": "俄语专业",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20020101",
+      "endDate": "20050101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "黑龙江东方学院",
+        "schoolId": 0,
+        "major": "俄语专业",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2002.01",
+        "endDate": "2005.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 177443451,
+        "geekId": 0,
+        "company": "雷曼长乐健康管理",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "前台",
+        "blueCollarPosition": false,
+        "positionName": "前台",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.更新预约表。\n2.为客户准备饮品、水果、午餐。\n3.采购员工午餐食材和办公用品等。",
+        "startDate": "2022.03",
+        "endDate": "2023.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "会务接待",
+          "物业前台",
+          "行政前台"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "雷曼长乐健康管理",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "前台",
+          "indexList": []
+        },
+        "workTime": "10个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 122268739,
+        "geekId": 0,
+        "company": "塞舌尔国际商务支持中心（ibsc）有限公司北京代表处",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "前台",
+        "blueCollarPosition": false,
+        "positionName": "前台",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "前台、后勤的一切事宜，监督维护办公环境，采购办公用品，交话费、电费、绿植养护。做投保单录入，借助互联网工具翻译质检单和其他资料。后来增加了外贸采购询单业务。\r",
+        "startDate": "2019.09",
+        "endDate": "2021.05",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "与物业沟通禁烟事件，然后安装了烟感报警器。",
+        "workEmphasisList": [
+          "行政前台"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "塞舌尔国际商务支持中心（ibsc）有限公司北京代表处",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "前台",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 43093876,
+        "geekId": 0,
+        "company": "融益财富",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "行政专员/助理",
+        "blueCollarPosition": false,
+        "positionName": "行政专员/助理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "创业公司，一半工作是行政工作，一半工作是运营专员工作，行政工作包括办公用品申购、管理和发放；项目物料购买、制作情况跟进；监督维护办公环境，会议相关的后勤工作。项目组的项目讨论，出差参与项目执行。运营专员工作主要是更新网站和各个自媒体文章，编辑发送微信公众号文章，建立市场部的活动支付链接。",
+        "startDate": "2017.06",
+        "endDate": "2018.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "环境管理",
+          "办公用品管理",
+          "差旅管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "融益财富",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "行政专员/助理",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "be4b255757e44a040HR939S1GVA~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 79341474,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150201,
+      "positionName": "行政专员/助理",
+      "lowSalary": 5,
+      "highSalary": 7,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 177443451,
+    "geekId": 0,
+    "company": "雷曼长乐健康管理",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "前台",
+    "blueCollarPosition": false,
+    "positionName": "前台",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1.更新预约表。\n2.为客户准备饮品、水果、午餐。\n3.采购员工午餐食材和办公用品等。",
+    "startDate": "2022.03",
+    "endDate": "2023.01",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "会务接待",
+      "物业前台",
+      "行政前台"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "雷曼长乐健康管理",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "前台",
+      "indexList": []
+    },
+    "workTime": "10个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "黑龙江东方学院",
+      "schoolId": 0,
+      "major": "俄语专业",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2002.01",
+      "endDate": "2005.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 177443451,
+      "geekId": 0,
+      "company": "雷曼长乐健康管理",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "前台",
+      "blueCollarPosition": false,
+      "positionName": "前台",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.更新预约表。\n2.为客户准备饮品、水果、午餐。\n3.采购员工午餐食材和办公用品等。",
+      "startDate": "2022.03",
+      "endDate": "2023.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "会务接待",
+        "物业前台",
+        "行政前台"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "雷曼长乐健康管理",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "前台",
+        "indexList": []
+      },
+      "workTime": "10个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 122268739,
+      "geekId": 0,
+      "company": "塞舌尔国际商务支持中心（ibsc）有限公司北京代表处",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "前台",
+      "blueCollarPosition": false,
+      "positionName": "前台",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "前台、后勤的一切事宜，监督维护办公环境，采购办公用品，交话费、电费、绿植养护。做投保单录入，借助互联网工具翻译质检单和其他资料。后来增加了外贸采购询单业务。\r",
+      "startDate": "2019.09",
+      "endDate": "2021.05",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "与物业沟通禁烟事件，然后安装了烟感报警器。",
+      "workEmphasisList": [
+        "行政前台"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "塞舌尔国际商务支持中心（ibsc）有限公司北京代表处",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "前台",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 43093876,
+      "geekId": 0,
+      "company": "融益财富",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "行政专员/助理",
+      "blueCollarPosition": false,
+      "positionName": "行政专员/助理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "创业公司，一半工作是行政工作，一半工作是运营专员工作，行政工作包括办公用品申购、管理和发放；项目物料购买、制作情况跟进；监督维护办公环境，会议相关的后勤工作。项目组的项目讨论，出差参与项目执行。运营专员工作主要是更新网站和各个自媒体文章，编辑发送微信公众号文章，建立市场部的活动支付链接。",
+      "startDate": "2017.06",
+      "endDate": "2018.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "环境管理",
+        "办公用品管理",
+        "差旅管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "融益财富",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "行政专员/助理",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（行政专员/助理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

@@ -1,0 +1,508 @@
+{
+  "encryptGeekId": "a2eb072d1abf411a1XV_3tW9GVo~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "Gmx1qjjz2PboZ-W1f2HIT-JgL1uDRieQVUVvgzjlU9cBgYSWHRtBCac6RE8d87lrz0cEOgKS712NzsZFNs6M6V61ut6Nxdkdz0M8FsIfFKQJvs3WjtlYo1ODwb6Xa49E7OAudzjbec9PPPjf-OQ_3W0mzRftGII6j22d4Ea__jfmiglL7qGeccUu3lhrZnBUcjMkN6dI91GdAvo4UTIBMwitEhtNjhw6tnH0XrMSwLV5TzFtAGs5K782RHBgxdHsc8n3KNh0hsdwdhTJbdB-0zE3Kq-RgOJwz_pR0ihkspr9GlCYsnKVdHj5WvV07uoSz2xy2WekGq5-uyQinGij3vi7YuDrrvXW0aNR8JRXCMIEExgP0LHJZ4oe6v4ByhZDRXsPmFMdhT1-y_LgjnwcaUsVMBGnfvPb2R3Es0bhjGcHnnxVc2zuiNE71ChzKiTkbshJ8EkOZdZMthVRA-r303e-x5wafRCIPv0geEjBH3eBTyoWZIY11tPLbq8xg3VYWH_S6DvbtdJKcz6qApy0wSooAeovAHvbD4x6WAHMLx5DgkAi3YeSwI2URM4BlV-aoyCAENRuXb96T7ENVE_MSDufSi_s4cBsh79ypjov6ZUYkQ~~",
+    "geekId": 21558098,
+    "geekName": "施柏卉",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/mcs/useravatar/20170227/5fefc82ebe0049067bcea9e48d2d603c8c7dd922ad47494fc02c388e12c00eac_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "10年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "从事人力资源工作七年有余，具有独立完成月度或者年度薪酬管理工作经验，熟悉社保公积金相关业务；熟练掌握常用办公软件：excel表格、常用函数公式、数据透视图、word文档等。本人性格稳重，抗压性强，能吃苦耐劳，热情待人，有责任感；能够冷静地面对困难和挑战；快速适应环境，并融入其中。",
+      "indexList": []
+    },
+    "expectId": 182813798,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "10-11K",
+    "lowSalary": 10,
+    "highSalary": 11,
+    "middleContent": {
+      "content": "期望职位 员工关系",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "be261304-2552-48de-9dd9-0a429cb7d061.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.7",
+    "actionDateDesc": null,
+    "expectPositionCode": 150109,
+    "expectPositionName": "员工关系",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 2,
+    "applyStatusDesc": "在职-考虑机会",
+    "activeTime": 1690968149,
+    "birthday": "19920925",
+    "ageDesc": "30岁",
+    "ageLight": {
+      "content": "30岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "黑龙江省鸡西市硕航外国语学院",
+      "schoolId": 0,
+      "major": "俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20090101",
+      "endDate": "20120101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "黑龙江省鸡西市硕航外国语学院",
+        "schoolId": 0,
+        "major": "俄语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2009.01",
+        "endDate": "2012.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 123774789,
+        "geekId": 0,
+        "company": "神州在线",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "人力资源主管",
+        "blueCollarPosition": false,
+        "positionName": "人力资源主管",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.\t薪酬福利管理\na)\t四个项目及总部共计400人工资核算（包括但不限于绩效、业绩奖金、加班等）；\nb)\t总部招聘人员绩效审核，监控业绩输出，提出合理调薪意见；\nc)\t六个自营账户社保公积金维护（包括但不限于增员、减员等）\nd)\t三个合作机构（51社保、易才、蚂蚁）社保公积金及薪资发放对接工作；\ne)\t搭建五险一金及工资台账，完成人力成本测算。\n2.\t员工关系管理\na)\t办理入、离职相关手续，签订电子劳动合同（月均办理人数50人左右）；\nb)\t员工信息管理：建立并实时维护员工花名册信息以及人事档案；\nc)\t处理员工申诉，建立良好的工作关系，做好人文关怀工作。\n3.\t行政管理\na)\t六家公司证照及各类文件的管理；\nb)\t固定资产统计及盘点，办公用品采购、登记及发放工作；\nc)\t六家公司各类印章管理；\nd)\t公司证照年审工作。",
+        "startDate": "2021.03",
+        "endDate": "",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "员工关系",
+          "薪酬福利"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "神州在线",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "人力资源主管",
+          "indexList": []
+        },
+        "workTime": "2年半",
+        "workMonths": 0,
+        "current": true
+      },
+      {
+        "id": 68721145,
+        "geekId": 0,
+        "company": "中能源石油天然气",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "薪酬绩效",
+        "blueCollarPosition": false,
+        "positionName": "薪酬福利主管",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1. 制定公司年度人工成本预算,人力成本分析及管控,制定相关薪酬分析报表；\n2. 拟定及完善公司薪酬制度、福利框架、考勤制度等；\n3. 根据企业薪酬制度,参与制定与实施激励计划(员工季度、年度评优、奖金、项目奖励等)；\n4. 对绩效考核工作的执行及监督,对考核结果进行分析,为人才晋升、降职、调薪提供绩效考核依据；\n5. 预警绩效评级较低人员,针对绩效考核不合格人员,定期跟踪员工后期绩效表现,根据公司制度进一步做处理；\n6. 负责公司整体薪资核算、五险一金及公司其他福利政策的实施；\n7. 年度残保金核算与申报；\n8. 定期组织新员工培训、生日会及试用期员工活动策划工作；\n9. 完成领导安排的其他工作。",
+        "startDate": "2018.08",
+        "endDate": "2020.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "人力成本分析",
+          "薪酬核算",
+          "社保公积金管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "中能源石油天然气",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "薪酬绩效",
+          "indexList": []
+        },
+        "workTime": "2年半",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 89215933,
+        "geekId": 0,
+        "company": "掌合天下（北京）",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "薪酬绩效",
+        "blueCollarPosition": false,
+        "positionName": "薪资福利",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、负责公司450人左右的五险一金工作；\r2、办理各项五险一金业务：社保新参，转移，生育、医疗、工伤等报销、公积金各类提取等；\r\n3、新项目成立，负责社保及公积金开户，数字证书开通；\r\n4、与第三方代缴社保公司对接非本地工作人员的五险一金缴纳情况，核对每月账单并完成付款；\n\r5、办理员工工作居住证的申请、变更聘用单位及离职人员的账户注销；\r\n6、负责员工每月的考勤统计，汇总；\r\n7、负责公司人员的薪酬核算，及发放；\r\n8、每月按期将月度报表上交至集团总部。",
+        "startDate": "2017.04",
+        "endDate": "2018.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "社保公积金管理",
+          "薪酬核算"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "掌合天下（北京）",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "薪酬绩效",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "a2eb072d1abf411a1XV_3tW9GVo~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 182813798,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150109,
+      "positionName": "员工关系",
+      "lowSalary": 10,
+      "highSalary": 11,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 123774789,
+    "geekId": 0,
+    "company": "神州在线",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "人力资源主管",
+    "blueCollarPosition": false,
+    "positionName": "人力资源主管",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1.\t薪酬福利管理\na)\t四个项目及总部共计400人工资核算（包括但不限于绩效、业绩奖金、加班等）；\nb)\t总部招聘人员绩效审核，监控业绩输出，提出合理调薪意见；\nc)\t六个自营账户社保公积金维护（包括但不限于增员、减员等）\nd)\t三个合作机构（51社保、易才、蚂蚁）社保公积金及薪资发放对接工作；\ne)\t搭建五险一金及工资台账，完成人力成本测算。\n2.\t员工关系管理\na)\t办理入、离职相关手续，签订电子劳动合同（月均办理人数50人左右）；\nb)\t员工信息管理：建立并实时维护员工花名册信息以及人事档案；\nc)\t处理员工申诉，建立良好的工作关系，做好人文关怀工作。\n3.\t行政管理\na)\t六家公司证照及各类文件的管理；\nb)\t固定资产统计及盘点，办公用品采购、登记及发放工作；\nc)\t六家公司各类印章管理；\nd)\t公司证照年审工作。",
+    "startDate": "2021.03",
+    "endDate": "",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "员工关系",
+      "薪酬福利"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "神州在线",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "人力资源主管",
+      "indexList": []
+    },
+    "workTime": "2年半",
+    "workMonths": 0,
+    "current": true
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "黑龙江省鸡西市硕航外国语学院",
+      "schoolId": 0,
+      "major": "俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2009.01",
+      "endDate": "2012.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 123774789,
+      "geekId": 0,
+      "company": "神州在线",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "人力资源主管",
+      "blueCollarPosition": false,
+      "positionName": "人力资源主管",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.\t薪酬福利管理\na)\t四个项目及总部共计400人工资核算（包括但不限于绩效、业绩奖金、加班等）；\nb)\t总部招聘人员绩效审核，监控业绩输出，提出合理调薪意见；\nc)\t六个自营账户社保公积金维护（包括但不限于增员、减员等）\nd)\t三个合作机构（51社保、易才、蚂蚁）社保公积金及薪资发放对接工作；\ne)\t搭建五险一金及工资台账，完成人力成本测算。\n2.\t员工关系管理\na)\t办理入、离职相关手续，签订电子劳动合同（月均办理人数50人左右）；\nb)\t员工信息管理：建立并实时维护员工花名册信息以及人事档案；\nc)\t处理员工申诉，建立良好的工作关系，做好人文关怀工作。\n3.\t行政管理\na)\t六家公司证照及各类文件的管理；\nb)\t固定资产统计及盘点，办公用品采购、登记及发放工作；\nc)\t六家公司各类印章管理；\nd)\t公司证照年审工作。",
+      "startDate": "2021.03",
+      "endDate": "",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "员工关系",
+        "薪酬福利"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "神州在线",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "人力资源主管",
+        "indexList": []
+      },
+      "workTime": "2年半",
+      "workMonths": 0,
+      "current": true
+    },
+    {
+      "id": 68721145,
+      "geekId": 0,
+      "company": "中能源石油天然气",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "薪酬绩效",
+      "blueCollarPosition": false,
+      "positionName": "薪酬福利主管",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1. 制定公司年度人工成本预算,人力成本分析及管控,制定相关薪酬分析报表；\n2. 拟定及完善公司薪酬制度、福利框架、考勤制度等；\n3. 根据企业薪酬制度,参与制定与实施激励计划(员工季度、年度评优、奖金、项目奖励等)；\n4. 对绩效考核工作的执行及监督,对考核结果进行分析,为人才晋升、降职、调薪提供绩效考核依据；\n5. 预警绩效评级较低人员,针对绩效考核不合格人员,定期跟踪员工后期绩效表现,根据公司制度进一步做处理；\n6. 负责公司整体薪资核算、五险一金及公司其他福利政策的实施；\n7. 年度残保金核算与申报；\n8. 定期组织新员工培训、生日会及试用期员工活动策划工作；\n9. 完成领导安排的其他工作。",
+      "startDate": "2018.08",
+      "endDate": "2020.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "人力成本分析",
+        "薪酬核算",
+        "社保公积金管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "中能源石油天然气",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "薪酬绩效",
+        "indexList": []
+      },
+      "workTime": "2年半",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 89215933,
+      "geekId": 0,
+      "company": "掌合天下（北京）",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "薪酬绩效",
+      "blueCollarPosition": false,
+      "positionName": "薪资福利",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、负责公司450人左右的五险一金工作；\r2、办理各项五险一金业务：社保新参，转移，生育、医疗、工伤等报销、公积金各类提取等；\r\n3、新项目成立，负责社保及公积金开户，数字证书开通；\r\n4、与第三方代缴社保公司对接非本地工作人员的五险一金缴纳情况，核对每月账单并完成付款；\n\r5、办理员工工作居住证的申请、变更聘用单位及离职人员的账户注销；\r\n6、负责员工每月的考勤统计，汇总；\r\n7、负责公司人员的薪酬核算，及发放；\r\n8、每月按期将月度报表上交至集团总部。",
+      "startDate": "2017.04",
+      "endDate": "2018.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "社保公积金管理",
+        "薪酬核算"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "掌合天下（北京）",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "薪酬绩效",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "本周活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（员工关系）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

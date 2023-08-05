@@ -1,0 +1,504 @@
+{
+  "encryptGeekId": "2d05020887049c5d0nF43dS6GVU~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "23LrN2ge2pH27-b1UP6ZxC7Dj8syp0vVWZQXeRL90ozc8CIimyg3QOLeLWgymKB2UeIg9Nfg66gEjqPGN5ew16HHIS3AqxNUwvPbvhBQaEfGx-RxeDxCwLz2tYZ92EXAagPGxClcbRxyvm-4py4A0-zl1AaelYGmoLUwNEZUtzrT9HJjMTF-Lxru8S0efWHXcgkLisi-8jQB7YU9XgsJ9iPSQbuYhnKVcj_IrnY737khAyT8c1YllxDfHUY_nT5w8V4Asys7RYmOSD6AIBpurRoG7xthJRMSBh0P1ZhiEpA7NKDge604JPDEw3E7VCO1Szu5FXbSg6XHwO-x6fZFdDkgKeh6Fev9rU91yelzoLUDwmSTYWKWDn5Ufk8kZu3TcoYqISDDSxlc63JXmfzGBWPZl6fYXu_-G9mEPt1qezXklsi_J7fNPbW5DXjl2TNOjV9H6miTFp1aC-YqYlDZLmy6uFj_47B7f7MpdbzcYX_UqrTiAeRg-fVi4iZj2-i7wnDlWH_k4gSwRqOsf7LwHUkJL5JhZuonfwRkoQtasqhFHoYI9Wk_7S2j1-P6qtgDH9Vn-nntmkFaLLUp1WhgMCuE4e2EM41DHooy0GvUQM7SQg~~",
+    "geekId": 55269797,
+    "geekName": "小五",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/mcs/useravatar/20190227/bf07d366c5019db1dc4142a76dada7065a19fe72dc9497ef32ef9ffc4bebbabd_s.png",
+    "geekGender": 0,
+    "geekWorkYear": "9年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "积极乐观，抗压力好，有耐心且稳重！原则性强工作踏实",
+      "indexList": []
+    },
+    "expectId": 402766311,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "7-10K",
+    "lowSalary": 7,
+    "highSalary": 10,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "15541c6b-6086-47bc-b5e9-dcade21923dd.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.1",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691241279,
+    "birthday": "19931027",
+    "ageDesc": "29岁",
+    "ageLight": {
+      "content": "29岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "北京社会管理职业学院",
+      "schoolId": 0,
+      "major": "婚庆服务与管理",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20110101",
+      "endDate": "20140101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "北京社会管理职业学院",
+        "schoolId": 0,
+        "major": "婚庆服务与管理",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2011.01",
+        "endDate": "2014.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 128982247,
+        "geekId": 0,
+        "company": "汇京世纪汽车贸易发展",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "人力资源专员/助理",
+        "blueCollarPosition": false,
+        "positionName": "人力资源专员/助理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.组织并协调各部门进行招聘、福利建设等工作\n2.执行并完善员工入职、转正、异动、离职等相关流程\n3.办理员工社保、公积金等相关手续\n4.员工档案维护，核算员工考勤、薪酬统计及各种费用报销\n5.负责办公用品的采购、领用工作及领导交办的其他事宜",
+        "startDate": "2021.04",
+        "endDate": "2021.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "员工关系",
+          "招聘配置"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "汇京世纪汽车贸易发展",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "人力资源专员/助理",
+          "indexList": []
+        },
+        "workTime": "3个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 82525055,
+        "geekId": 0,
+        "company": "前锦网络信息技术（上海）有限公司北京分公司",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "员工关系",
+        "blueCollarPosition": false,
+        "positionName": "员工关系",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.办理入职，离职\n2.后台系统办理社保公积金的增减员和补缴\n3.办理公积金提取\n4.生育津贴等申领提交",
+        "startDate": "2019.10",
+        "endDate": "2020.10",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "公积金",
+          "社保"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "前锦网络信息技术（上海）有限公司北京分公司",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "员工关系",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 37484812,
+        "geekId": 0,
+        "company": "法本信息技术",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "招聘",
+        "blueCollarPosition": false,
+        "positionName": "招聘",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.每天发布职位并搜索简历\r\n2.将符合硬性要求的候选人简历统一整理后发送给甲方用人单位\r\n3.待甲方人员筛选合格者，电话邀约跟进面试。\r\n4.面试通过电话沟通谈薪。\r\n5.确定入职发offer，转介绍。\r\n6.给员工做初试。",
+        "startDate": "2019.04",
+        "endDate": "2019.10",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "这是第一次接触人事行业，在入职一个月时间里招了8个人面前通过，入职4人",
+        "workEmphasisList": [
+          "招聘"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "法本信息技术",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "招聘",
+          "indexList": []
+        },
+        "workTime": "6个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "2d05020887049c5d0nF43dS6GVU~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 402766311,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 7,
+      "highSalary": 10,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 128982247,
+    "geekId": 0,
+    "company": "汇京世纪汽车贸易发展",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "人力资源专员/助理",
+    "blueCollarPosition": false,
+    "positionName": "人力资源专员/助理",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1.组织并协调各部门进行招聘、福利建设等工作\n2.执行并完善员工入职、转正、异动、离职等相关流程\n3.办理员工社保、公积金等相关手续\n4.员工档案维护，核算员工考勤、薪酬统计及各种费用报销\n5.负责办公用品的采购、领用工作及领导交办的其他事宜",
+    "startDate": "2021.04",
+    "endDate": "2021.07",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "员工关系",
+      "招聘配置"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "汇京世纪汽车贸易发展",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "人力资源专员/助理",
+      "indexList": []
+    },
+    "workTime": "3个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "北京社会管理职业学院",
+      "schoolId": 0,
+      "major": "婚庆服务与管理",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2011.01",
+      "endDate": "2014.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 128982247,
+      "geekId": 0,
+      "company": "汇京世纪汽车贸易发展",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "人力资源专员/助理",
+      "blueCollarPosition": false,
+      "positionName": "人力资源专员/助理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.组织并协调各部门进行招聘、福利建设等工作\n2.执行并完善员工入职、转正、异动、离职等相关流程\n3.办理员工社保、公积金等相关手续\n4.员工档案维护，核算员工考勤、薪酬统计及各种费用报销\n5.负责办公用品的采购、领用工作及领导交办的其他事宜",
+      "startDate": "2021.04",
+      "endDate": "2021.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "员工关系",
+        "招聘配置"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "汇京世纪汽车贸易发展",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "人力资源专员/助理",
+        "indexList": []
+      },
+      "workTime": "3个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 82525055,
+      "geekId": 0,
+      "company": "前锦网络信息技术（上海）有限公司北京分公司",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "员工关系",
+      "blueCollarPosition": false,
+      "positionName": "员工关系",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.办理入职，离职\n2.后台系统办理社保公积金的增减员和补缴\n3.办理公积金提取\n4.生育津贴等申领提交",
+      "startDate": "2019.10",
+      "endDate": "2020.10",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "公积金",
+        "社保"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "前锦网络信息技术（上海）有限公司北京分公司",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "员工关系",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 37484812,
+      "geekId": 0,
+      "company": "法本信息技术",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "招聘",
+      "blueCollarPosition": false,
+      "positionName": "招聘",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.每天发布职位并搜索简历\r\n2.将符合硬性要求的候选人简历统一整理后发送给甲方用人单位\r\n3.待甲方人员筛选合格者，电话邀约跟进面试。\r\n4.面试通过电话沟通谈薪。\r\n5.确定入职发offer，转介绍。\r\n6.给员工做初试。",
+      "startDate": "2019.04",
+      "endDate": "2019.10",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "这是第一次接触人事行业，在入职一个月时间里招了8个人面前通过，入职4人",
+      "workEmphasisList": [
+        "招聘"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "法本信息技术",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "招聘",
+        "indexList": []
+      },
+      "workTime": "6个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

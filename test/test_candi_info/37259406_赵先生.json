@@ -1,0 +1,504 @@
+{
+  "encryptGeekId": "db63b14d57b66b091HN43tS5EFQ~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "rmmn45xAEanEg-C1Zj1WFPNI02XvR7qgL7AylDRZfAT8W-CSUJVKvC3jVtF-Q957kipfvuP-SsoZAitNXPRPPswQbfbhrIYYOo9W3tNdSuUwymLIhwxFbBPN-jAbKAHTMBy9FGtNkz3Jk8uvnczMw5NajLQxx0f-QBWKJ6kCH0bomWYoGXikIeDRWwNDf89MxPSiqVPZ2mcNwBYmozp600WlDWkMjGSMYTAv-0n5b27N9u_LwtSmtBOJtJTQ-xOdzaQNQQ3vZhMYk8ew6PBiQhL-_xisR-_ReMYRZyXUZiK-l9RnxrfSu2gZMntzuesgMmP1qdtkuxsLm6uMncAE8hA_Ukblod5QjpxB1IU5W1jRWQPPZK_UgtcX9p7RrYcVAew7xlFdE82hoK2CyIxrFF3xAMdapIlD9zwTvlWymV67fZySKmC6hibgIPr6A7AF-qLR0TCd3f1XWyBwcZaRurjyI_LNNUGDka3XknWtKJQV9DdBiuKnx2DdoF2g9HB_bwWcHvmBNenbqEDaNaFO5L7AI2nTxn7pwbOuiT8CCMyQ9k7qMVbvJgumFP55698xBG6HpPAaJHktcQXrZAI1DjdcgIOQ3-ZvCDHeDqy-5i131Q~~",
+    "geekId": 37259406,
+    "geekName": "赵先生",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/boss/avatar/avatar_14.png",
+    "geekGender": 1,
+    "geekWorkYear": "10年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "掌握技能 1.熟悉SEO原理及策略，掌握Baidu基本排名规律，熟悉各种网站优化方法；2.熟悉国内开源cms系统dedecms,wordpress 网站程序；3.熟悉SEO搜索引擎优化 SEM搜索引擎营销 等相关技术；4.熟悉关键字、meta标签、标题、网址URL等的优化。5.了解网站的基本原理，有HTMLCSS编写能力，熟悉HTML代码优化；",
+      "indexList": []
+    },
+    "expectId": 453724573,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "7-12K",
+    "lowSalary": 7,
+    "highSalary": 12,
+    "middleContent": {
+      "content": "期望职位 售后客服",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "2254395e-69f5-435d-adf8-e30ba15ef229.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.3",
+    "actionDateDesc": null,
+    "expectPositionCode": 130302,
+    "expectPositionName": "售后客服",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691146409,
+    "birthday": "19870528",
+    "ageDesc": "36岁",
+    "ageLight": {
+      "content": "36岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "郑州师范学院",
+      "schoolId": 0,
+      "major": "应用俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20090101",
+      "endDate": "20120101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "郑州师范学院",
+        "schoolId": 0,
+        "major": "应用俄语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2009.01",
+        "endDate": "2012.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 70714305,
+        "geekId": 0,
+        "company": "中国太平洋人寿保险股份有限公司北京市银河支公司",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "销售专员",
+        "blueCollarPosition": false,
+        "positionName": "销售专员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.按时学习培训内容；\r\n2.参加大早会二早会；\r\n3.按照科技个险工作任务情况做老客户续费提醒，生日祝福，红利领取等；\r\n4.每月5号前做好工作p50计划；\r\n5.按照工作要求完成智能面访，赠险等；\r\n6.注册网站做增员的相关人事招聘工作；\r\n7.配合领导交办的其他工作。\r\n工作业绩：\r\n1.招聘到不少新人\r\n1)工作时间：2018.7-2019.3 职业：网站运营",
+        "startDate": "2019.07",
+        "endDate": "2020.10",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "区域销售",
+          "售后支持"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "中国太平洋人寿保险股份有限公司北京市银河支公司",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "销售专员",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 34670760,
+        "geekId": 0,
+        "company": "菩提慧宾中医养生研究院",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "网站运营",
+        "blueCollarPosition": false,
+        "positionName": "网站运营",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.负责网站的定位，策划，首页，导航栏目，文章页，关键词等的设置\r\n2.负责网站的板块的布局建设搭建\r\n3.负责网站图片，文章，内容的编辑\r\n4.负责网站关键词，tdk,图片，内容，链接等的优化\r\n5.负责网站文章的日常更新，关键词布局选取优化\r\n6.负责网站上线的收录，ip访问量，关键词排名等网站运营\r\n7.负责网站的外部推广，外链的发布\r\n8.负责网站网上负面信息的检查，删除，维护网站的正常运营\r\n9.负责第2个网站的优化上线工作\r\n10.后期做了抖音短视频的选题，拍照，视频剪辑制作合成等",
+        "startDate": "2018.07",
+        "endDate": "2019.03",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "1.策划新的网站有无到有上线\r\n2. 文章编辑发布90%以上收录",
+        "workEmphasisList": [
+          "网络营销",
+          "网站内容编辑"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "菩提慧宾中医养生研究院",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "网站运营",
+          "indexList": []
+        },
+        "workTime": "8个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 14613590,
+        "geekId": 0,
+        "company": "潞州通用航空",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "SEO",
+        "blueCollarPosition": false,
+        "positionName": "SEO",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.  负责撰写整个网站及阶段性网站诊断（如域名是否与网站相关，服务器是否稳定，网站的备案情况等），及网站策划方案和优化分析方案；\r\n2.  分析公司所在的行业情况，选择适合公司的关键词；\r\n3.  合理布局网站，进行站内优化，如TDK的选取，robots是否抓取设定，代码优化调整，图片的优化，建立网站地图，301重定向，404页面，调整URL路径，页面关键词布局等；\r\n4.  负责网站运营数据的整理和分析（网站的收录情况，访问量，IP，及时调整网站方案，更新网站内容等）；\r\n5.  负责站外b2b平台,分类信息等平台的公司，产品等信息的发送，查看信息的收录情况和关键词排名状况；\r\n6.  协助编辑做好网站文章的采集，seo关键词的布局，素材整理和检查文章质量，文章发布，查看文章收录情况及更新频率； \r\n7.  配合及执行部门领导交代的其他工作。",
+        "startDate": "2017.04",
+        "endDate": "2018.04",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "1.负责改好网站的工作，比如，网站的布局、导航、网站结构、URL、关键词等;\r\n2.网站日均IP访问量由个位数增长到到100,关键词数量增长到53个,百度收录                           \r\n            增长到262条.",
+        "workEmphasisList": [
+          "SEO"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "潞州通用航空",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "SEO",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "db63b14d57b66b091HN43tS5EFQ~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 453724573,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130302,
+      "positionName": "售后客服",
+      "lowSalary": 7,
+      "highSalary": 12,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 70714305,
+    "geekId": 0,
+    "company": "中国太平洋人寿保险股份有限公司北京市银河支公司",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "销售专员",
+    "blueCollarPosition": false,
+    "positionName": "销售专员",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1.按时学习培训内容；\r\n2.参加大早会二早会；\r\n3.按照科技个险工作任务情况做老客户续费提醒，生日祝福，红利领取等；\r\n4.每月5号前做好工作p50计划；\r\n5.按照工作要求完成智能面访，赠险等；\r\n6.注册网站做增员的相关人事招聘工作；\r\n7.配合领导交办的其他工作。\r\n工作业绩：\r\n1.招聘到不少新人\r\n1)工作时间：2018.7-2019.3 职业：网站运营",
+    "startDate": "2019.07",
+    "endDate": "2020.10",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "区域销售",
+      "售后支持"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "中国太平洋人寿保险股份有限公司北京市银河支公司",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "销售专员",
+      "indexList": []
+    },
+    "workTime": "1年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "郑州师范学院",
+      "schoolId": 0,
+      "major": "应用俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2009.01",
+      "endDate": "2012.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 70714305,
+      "geekId": 0,
+      "company": "中国太平洋人寿保险股份有限公司北京市银河支公司",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "销售专员",
+      "blueCollarPosition": false,
+      "positionName": "销售专员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.按时学习培训内容；\r\n2.参加大早会二早会；\r\n3.按照科技个险工作任务情况做老客户续费提醒，生日祝福，红利领取等；\r\n4.每月5号前做好工作p50计划；\r\n5.按照工作要求完成智能面访，赠险等；\r\n6.注册网站做增员的相关人事招聘工作；\r\n7.配合领导交办的其他工作。\r\n工作业绩：\r\n1.招聘到不少新人\r\n1)工作时间：2018.7-2019.3 职业：网站运营",
+      "startDate": "2019.07",
+      "endDate": "2020.10",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "区域销售",
+        "售后支持"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "中国太平洋人寿保险股份有限公司北京市银河支公司",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "销售专员",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 34670760,
+      "geekId": 0,
+      "company": "菩提慧宾中医养生研究院",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "网站运营",
+      "blueCollarPosition": false,
+      "positionName": "网站运营",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.负责网站的定位，策划，首页，导航栏目，文章页，关键词等的设置\r\n2.负责网站的板块的布局建设搭建\r\n3.负责网站图片，文章，内容的编辑\r\n4.负责网站关键词，tdk,图片，内容，链接等的优化\r\n5.负责网站文章的日常更新，关键词布局选取优化\r\n6.负责网站上线的收录，ip访问量，关键词排名等网站运营\r\n7.负责网站的外部推广，外链的发布\r\n8.负责网站网上负面信息的检查，删除，维护网站的正常运营\r\n9.负责第2个网站的优化上线工作\r\n10.后期做了抖音短视频的选题，拍照，视频剪辑制作合成等",
+      "startDate": "2018.07",
+      "endDate": "2019.03",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "1.策划新的网站有无到有上线\r\n2. 文章编辑发布90%以上收录",
+      "workEmphasisList": [
+        "网络营销",
+        "网站内容编辑"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "菩提慧宾中医养生研究院",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "网站运营",
+        "indexList": []
+      },
+      "workTime": "8个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 14613590,
+      "geekId": 0,
+      "company": "潞州通用航空",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "SEO",
+      "blueCollarPosition": false,
+      "positionName": "SEO",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.  负责撰写整个网站及阶段性网站诊断（如域名是否与网站相关，服务器是否稳定，网站的备案情况等），及网站策划方案和优化分析方案；\r\n2.  分析公司所在的行业情况，选择适合公司的关键词；\r\n3.  合理布局网站，进行站内优化，如TDK的选取，robots是否抓取设定，代码优化调整，图片的优化，建立网站地图，301重定向，404页面，调整URL路径，页面关键词布局等；\r\n4.  负责网站运营数据的整理和分析（网站的收录情况，访问量，IP，及时调整网站方案，更新网站内容等）；\r\n5.  负责站外b2b平台,分类信息等平台的公司，产品等信息的发送，查看信息的收录情况和关键词排名状况；\r\n6.  协助编辑做好网站文章的采集，seo关键词的布局，素材整理和检查文章质量，文章发布，查看文章收录情况及更新频率； \r\n7.  配合及执行部门领导交代的其他工作。",
+      "startDate": "2017.04",
+      "endDate": "2018.04",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "1.负责改好网站的工作，比如，网站的布局、导航、网站结构、URL、关键词等;\r\n2.网站日均IP访问量由个位数增长到到100,关键词数量增长到53个,百度收录                           \r\n            增长到262条.",
+      "workEmphasisList": [
+        "SEO"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "潞州通用航空",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "SEO",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "3日内活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（售后客服）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

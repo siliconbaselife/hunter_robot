@@ -1,0 +1,499 @@
+{
+  "encryptGeekId": "df07543f318a95b31HFy09-9GVA~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "fIRvkHAAEhkbh-V1JfMEPJVuRkfdViCqCD2yLLlvjvmyxxYuIwpzgaC3Tr2T2A0OSvEoTEu00pasBxfpcq178KH3pSXMELq0utHmOGH-gqU4-cJ7c0Ks3SVaywp6GEXAgvwdoamFKBaapy2M5CJ3M1VR3_wUXIwkaO_2qzI65Ko5iumKkpzFP8vjsPvHGaW7GGn6BL3jwldF4LDxuLNeeMcg_RqycJTM59ryZ7girguPzUzQAZ_1ZKgMJuiIfdrGqGq2qxpMiFbkXIADqn4tK2W7aCT7pDFZeePz9UWt6w2Jwx2Tr2P2gJPMyzbIQ4DzSfWJqXbjp4ErTdWP-M72lmKrdX3ZGyqwZbOEKhwcZOptGoKchPC7LTGQ7XVG6dMm7PBtTSY9PtK0mUHkAmx5_sDGitDmH4R6aT6L_9ScIzpw1j_YALDlkdkxUMqyf-rW3wwG_WUGVYJ2CLEwgmgPBj0z-QWRK08-EsTqihCkAEUUqutrQyiFKeLExALw1sG7tuSreOuVcC6FSv_YhuCled6ACec5JhqCKR8u11H7Ug3CMZ6mALqepma2-D6zyhi3JbwhzDjdSCpFjbaaQzwxsDsCfT0IQzMuoMK4wn02CxqL",
+    "geekId": 35882092,
+    "geekName": "王鑫",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/mcs/useravatar/20180313/3ea5f0f9aa1440b885a6865bfe8426cdcfcd208495d565ef66e7dff9f98764da_s.jpg",
+    "geekGender": 1,
+    "geekWorkYear": "10年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "个人对英语比较感兴趣，也认同终身学习理念，拥有较强的自驱力。对所从事行业的知识，技能会进行不断学习。一直在兼职从事英语翻译相关工作，小说和部分通用文章翻译，已三年有余，希望能继续在此领域发展，并开拓学习更多所需的行业知识。考取了 CATTI 三级笔译证书。掌握 Trados 基本操作。掌握 Microsoft Office 的基本操作和使用。掌握 PS,PR 基本操作。",
+      "indexList": []
+    },
+    "expectId": 70703458,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "8-9K",
+    "lowSalary": 8,
+    "highSalary": 9,
+    "middleContent": {
+      "content": "三河市安霸生物·英语翻译",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "2254395e-69f5-435d-adf8-e30ba15ef229.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.13",
+    "actionDateDesc": null,
+    "expectPositionCode": 260301,
+    "expectPositionName": "英语翻译",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691239336,
+    "birthday": "19930901",
+    "ageDesc": "29岁",
+    "ageLight": {
+      "content": "29岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "内蒙古科技大学",
+      "schoolId": 0,
+      "major": "机电一体化技术",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20100101",
+      "endDate": "20130101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "内蒙古科技大学",
+        "schoolId": 0,
+        "major": "机电一体化技术",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2010.01",
+        "endDate": "2013.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 28301932,
+        "geekId": 0,
+        "company": "三河市安霸生物",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "英语翻译",
+        "blueCollarPosition": false,
+        "positionName": "英语翻译",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "在三河安霸生物技术有限公司任职近一年，该公司主营抗菌技术及产品的研发、生产和销售。在职期间主要负责翻译公司商务信件，翻译公司产品说明书，翻译公司用技术论文，起草部分产品说明书，翻译公司部分展会用资料并参加展会，针对公司技术及产品进行定向宣传，编写部分政府项目申请资料。",
+        "startDate": "2018.03",
+        "endDate": "2019.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "笔译"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "三河市安霸生物",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "英语翻译",
+          "indexList": []
+        },
+        "workTime": "10个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 13370368,
+        "geekId": 0,
+        "company": "优创（济南）数据",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "其他运营职位",
+        "blueCollarPosition": false,
+        "positionName": "其他运营职位",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "在优创(济南)数据有限公司，一家从事美国保险服务的跨国公司任职一年，对保险行比较为了解，能独立完成一套美国保险的制作，对保险行业术语了解。在职期间除了日常工作外，还积极在组内组织策划一些小型活动，增进公司员工感情，协调生活与工作。",
+        "startDate": "2017.03",
+        "endDate": "2018.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "助理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "优创（济南）数据",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "其他运营职位",
+          "indexList": []
+        },
+        "workTime": "10个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 51239427,
+        "geekId": 0,
+        "company": "中北煤化工",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "普工/操作工",
+        "blueCollarPosition": false,
+        "positionName": "普工/操作工",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "",
+        "startDate": "2013.07",
+        "endDate": "2015.08",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "数控"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "中北煤化工",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "普工/操作工",
+          "indexList": []
+        },
+        "workTime": "2年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "df07543f318a95b31HFy09-9GVA~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 70703458,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 260301,
+      "positionName": "英语翻译",
+      "lowSalary": 8,
+      "highSalary": 9,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 28301932,
+    "geekId": 0,
+    "company": "三河市安霸生物",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "英语翻译",
+    "blueCollarPosition": false,
+    "positionName": "英语翻译",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "在三河安霸生物技术有限公司任职近一年，该公司主营抗菌技术及产品的研发、生产和销售。在职期间主要负责翻译公司商务信件，翻译公司产品说明书，翻译公司用技术论文，起草部分产品说明书，翻译公司部分展会用资料并参加展会，针对公司技术及产品进行定向宣传，编写部分政府项目申请资料。",
+    "startDate": "2018.03",
+    "endDate": "2019.01",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "笔译"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "三河市安霸生物",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "英语翻译",
+      "indexList": []
+    },
+    "workTime": "10个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "内蒙古科技大学",
+      "schoolId": 0,
+      "major": "机电一体化技术",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2010.01",
+      "endDate": "2013.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 28301932,
+      "geekId": 0,
+      "company": "三河市安霸生物",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "英语翻译",
+      "blueCollarPosition": false,
+      "positionName": "英语翻译",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "在三河安霸生物技术有限公司任职近一年，该公司主营抗菌技术及产品的研发、生产和销售。在职期间主要负责翻译公司商务信件，翻译公司产品说明书，翻译公司用技术论文，起草部分产品说明书，翻译公司部分展会用资料并参加展会，针对公司技术及产品进行定向宣传，编写部分政府项目申请资料。",
+      "startDate": "2018.03",
+      "endDate": "2019.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "笔译"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "三河市安霸生物",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "英语翻译",
+        "indexList": []
+      },
+      "workTime": "10个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 13370368,
+      "geekId": 0,
+      "company": "优创（济南）数据",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "其他运营职位",
+      "blueCollarPosition": false,
+      "positionName": "其他运营职位",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "在优创(济南)数据有限公司，一家从事美国保险服务的跨国公司任职一年，对保险行比较为了解，能独立完成一套美国保险的制作，对保险行业术语了解。在职期间除了日常工作外，还积极在组内组织策划一些小型活动，增进公司员工感情，协调生活与工作。",
+      "startDate": "2017.03",
+      "endDate": "2018.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "助理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "优创（济南）数据",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "其他运营职位",
+        "indexList": []
+      },
+      "workTime": "10个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 51239427,
+      "geekId": 0,
+      "company": "中北煤化工",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "普工/操作工",
+      "blueCollarPosition": false,
+      "positionName": "普工/操作工",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "",
+      "startDate": "2013.07",
+      "endDate": "2015.08",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "数控"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "中北煤化工",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "普工/操作工",
+        "indexList": []
+      },
+      "workTime": "2年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（英语翻译）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

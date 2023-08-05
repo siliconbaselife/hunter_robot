@@ -1,0 +1,346 @@
+{
+  "encryptGeekId": "416b0203cfd9f70c1nV53Nq5EFpY",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "NdtHSm9WIzxn0-01at2JopJIXhG9PGI90FXpjIMo1hR4UNky7bacIJkrN0-MyJfHgmYV54uZYKRM7hPbF8A4-3HKh4oVueY2vC76HWTyE6CDYLoEZil3o8VSrAM3kxsNVzWD7QaUpjdkliyS3gcaulHbxCjZuDf4rAYNGwyXDKYpjkVSRxpgXVutLOHwsNTrEcEEBZZ_wtcN9qW0FNFd23OYhhYfv1cGU7k-oDkfNE_vl6vN3_tveGv-k1mSIv61GjetadawUGY1rrjA3qRNRWWb4MiiNYQvpqVfcF37StHSFhmrGSnfD13Dl0YVfjp7Ol2DPf_gpmIb2W7QWgJJiYoN-Li4eT-vAh88EWYnON3WmY1uq7l4aog1xpLemp4GDlU810OO47djd_SG2jxSXw92poABbDyr5HYa2o_lm0ek4qH4xrr6Jg7Z3Rf_Pj81v-EK921TwuEIrxPSU9OD_44-9NPF3gDy4zciS2htIXHdEa7JfdZ-PJReWZZ_AsjBKQhcRrm2PhXj4Oy_xIDeGXMqB9xv9Zg46IiyB6iLo7Jm9FaFOXJO2Hr8Q3bBz1c3P2xK_jUwsQ4lIIts_cK9QLul5D7RLp8qSTLyk2qkzBP9vy4~",
+    "geekId": 113774088,
+    "geekName": "狂吃不胖",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20221014/607f1f3d68754fd08e144712e8031375302a31854d2c272015bb8896be6f03748cbd1b9a3bc36c91_s.png",
+    "geekGender": 0,
+    "geekWorkYear": "5年",
+    "geekDegree": "高中",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "本人性格外向、服务热情、做事认真、活泼开朗、积极主动。",
+      "indexList": []
+    },
+    "expectId": 551807206,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "6-8K",
+    "lowSalary": 6,
+    "highSalary": 8,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "bf9eaae4-20b6-4f08-88d3-3c87d18c376f.f1:common.eyJzZXNzaW9uSWQiOiIxMmM4ZTk2Ni05YWEyLTQ2YmQtYjBiYS03YTllZmY5MzdlNDEiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.2",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691248207,
+    "birthday": "20021001",
+    "ageDesc": "20岁",
+    "ageLight": {
+      "content": "20岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "二高",
+      "schoolId": 0,
+      "major": "",
+      "degree": 0,
+      "degreeName": "高中",
+      "eduType": 0,
+      "startDate": "20180101",
+      "endDate": "20210101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "二高",
+        "schoolId": 0,
+        "major": "",
+        "degree": 0,
+        "degreeName": "高中",
+        "eduType": 0,
+        "startDate": "2018.01",
+        "endDate": "2021.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 79902435,
+        "geekId": 0,
+        "company": "京八大楼",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "服务员",
+        "blueCollarPosition": false,
+        "positionName": "服务员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "",
+        "startDate": "2020.10",
+        "endDate": "2021.05",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "中餐厅",
+          "面点小工"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "京八大楼",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "服务员",
+          "indexList": []
+        },
+        "workTime": "7个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "416b0203cfd9f70c1nV53Nq5EFpY",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 551807206,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 6,
+      "highSalary": 8,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 79902435,
+    "geekId": 0,
+    "company": "京八大楼",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "服务员",
+    "blueCollarPosition": false,
+    "positionName": "服务员",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "",
+    "startDate": "2020.10",
+    "endDate": "2021.05",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "中餐厅",
+      "面点小工"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "京八大楼",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "服务员",
+      "indexList": []
+    },
+    "workTime": "7个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "二高",
+      "schoolId": 0,
+      "major": "",
+      "degree": 0,
+      "degreeName": "高中",
+      "eduType": 0,
+      "startDate": "2018.01",
+      "endDate": "2021.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 79902435,
+      "geekId": 0,
+      "company": "京八大楼",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "服务员",
+      "blueCollarPosition": false,
+      "positionName": "服务员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "",
+      "startDate": "2020.10",
+      "endDate": "2021.05",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "中餐厅",
+        "面点小工"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "京八大楼",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "服务员",
+        "indexList": []
+      },
+      "workTime": "7个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑高中",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

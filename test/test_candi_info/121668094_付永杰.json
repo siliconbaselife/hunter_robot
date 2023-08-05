@@ -1,0 +1,432 @@
+{
+  "encryptGeekId": "ba888d2227d36e6f1nZ73du1EFtU",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "Lih8nXloCTHaP-e16Qge4WkUQK5udbnl_f1USwwbSJ4BqDTj50XHOyAdnKMZ2UcZf9ThrCLNH9qdC69kHjxpAPz_dhUXioUT1Cup7pF_DNrKWkfqDthbe4E9hFrvIVF8yWpVmK-vn66mwBf2xBhbVY-eJ7QroEF1ES0IAyujZOeZOLgRdBw3JXgNnVZ0W12ApRJqfYRzmXTwH9T8NDL17aFWivvERFTmSTzThkEsq0DGRl1jB-j9Mp7HixKkENDtQ2Cw1BCZA_AgVEsH7VtrHoj4XIGQblxXhLMr1FzVkm-ozTYhz7xlW7Qkpf9n3qMpOc3YRNVkVm5pHCyz3L2iMRETrDN6AaFmQ31sB1wKRk1aeWTYoQWpyIbHNS9IzGKgyXFzotelZfjrvYGyLCUpCGhrChOUUuj24K3wtoOHwMADyspz0QzDBvmxOA-s0tywIoCUhe_2EwucPzcJ3QfL99edZRH3ytGLbxFuk5mfj4olX5C0BjwfaMuIRGbcOo5m_msqmmIuSqF7qmnD1EdNo9EfedzeyvBKqa_uYEp2mZ7LrwOjGy1_notqeQCdx7ap2Pe7k8oSLchtm9WEcOg9S_6RbviLV8DKQOdQBSLqhQzvSt4~",
+    "geekId": 121668094,
+    "geekName": "付永杰",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20200810/7156bf56ceaa2bdec3377b7551e1e63cc8f0a3904595605eb20c6334606c1125_s.png",
+    "geekGender": 1,
+    "geekWorkYear": "4年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "做过核酸录入，保安，汽车装配，学习能力强，踏实稳定",
+      "indexList": []
+    },
+    "expectId": 578594837,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "3-6K",
+    "lowSalary": 3,
+    "highSalary": 6,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "f54350de-cf7b-4167-8a04-d094e2ff753f.f1:common.eyJzZXNzaW9uSWQiOiJiMjI3NjFlNS0zYzE4LTRhNTItYTdiZS00MGU2NGJlZTc0ZGEiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.6",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691244829,
+    "birthday": "19971001",
+    "ageDesc": "25岁",
+    "ageLight": {
+      "content": "25岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "河北旅游职业学院",
+      "schoolId": 0,
+      "major": "机械制造",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20160101",
+      "endDate": "20190101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "河北旅游职业学院",
+        "schoolId": 0,
+        "major": "机械制造",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2016.01",
+        "endDate": "2019.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 159255524,
+        "geekId": 0,
+        "company": "核酸录入",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "其他职位",
+        "blueCollarPosition": false,
+        "positionName": "核酸录入",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "录入身份证信息，使用东软系统",
+        "startDate": "2020.08",
+        "endDate": "2021.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": null,
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "核酸录入",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "其他职位",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 86021228,
+        "geekId": 0,
+        "company": "河北安旭专用汽车",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "组装工",
+        "blueCollarPosition": false,
+        "positionName": "组装工",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "完成汽车零件组装，调试等工作，定时定量完成生产任务。",
+        "startDate": "2019.03",
+        "endDate": "2020.05",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "装配",
+          "焊工",
+          "叉车"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "河北安旭专用汽车",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "组装工",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": {
+      "listingOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      },
+      "detailOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      }
+    },
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "ba888d2227d36e6f1nZ73du1EFtU",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 578594837,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 3,
+      "highSalary": 6,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 159255524,
+    "geekId": 0,
+    "company": "核酸录入",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "其他职位",
+    "blueCollarPosition": false,
+    "positionName": "核酸录入",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "录入身份证信息，使用东软系统",
+    "startDate": "2020.08",
+    "endDate": "2021.12",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": null,
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "核酸录入",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "其他职位",
+      "indexList": []
+    },
+    "workTime": "1年半",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "河北旅游职业学院",
+      "schoolId": 0,
+      "major": "机械制造",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2016.01",
+      "endDate": "2019.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 159255524,
+      "geekId": 0,
+      "company": "核酸录入",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "其他职位",
+      "blueCollarPosition": false,
+      "positionName": "核酸录入",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "录入身份证信息，使用东软系统",
+      "startDate": "2020.08",
+      "endDate": "2021.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": null,
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "核酸录入",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "其他职位",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 86021228,
+      "geekId": 0,
+      "company": "河北安旭专用汽车",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "组装工",
+      "blueCollarPosition": false,
+      "positionName": "组装工",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "完成汽车零件组装，调试等工作，定时定量完成生产任务。",
+      "startDate": "2019.03",
+      "endDate": "2020.05",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "装配",
+        "焊工",
+        "叉车"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "河北安旭专用汽车",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "组装工",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

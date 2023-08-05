@@ -1,0 +1,507 @@
+{
+  "encryptGeekId": "9a654deb89bcc7d91HF63d69EVs~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "2b6F50amU3Peq-41mswJIzjgquoYQIY7oQVthtBizwIHLhL66EB_AI3Ahw2XV931ihd2oTciVFFkddTxIPT2Cy4Fj2mn1O0UmhDw-IioXuJIoHoBsS3aZhEh_x1acyTDk1ImumY_wGgk-pE9p06KtGsvy3rMMUKTkZjv8DGu0ijRmhxphKhd9_xiytCqp4IJ5sWdRrAU3ml9oidX3AGHRZ57DKEikpBjJMIrzgIz9wagUmAlStUtVjJg_ES_Qpl1v7aGtztRs4L-pTjiV152HnEf2LgvW2abYr7fMdy4I6H-LEsdXxpOBCLwlUEXGShDTA_4sMgsGp9nq94_eHIS71WuACJ1Umzj1tuxU_PynATEiIar_-b4HWwIsetDyINcmOZb_upBbZOSKtZIIiLiT7qjBkzxcf1bk3_mskNKzRL3rQ45WsJOfjq7bwB8GvuBSnbb9U3T_iC1ShRwUPgRMDmATCg163yhjz460yvFsWHxoBgw3-IPEgnST98iZhm8bZZ5pBuYNzJuG3psYGBUpdPH51zcMufUgsLGEfroFSOUWIH6pEcXnsvoOmCWj-1nFV99AHkVFk7mlyGTyqjkc0_JEKhbWWgHPlrIwbXGoI9JEA~~",
+    "geekId": 35063019,
+    "geekName": "邹爽",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20220602/607f1f3d68754fd07170f1c61383aca4e8b10380bfcbac579e6b8a931faf6b2a99c2da9cdc798c92_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "8年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "在销售行业有丰富的经验，学习能力，适应能力，接受能力强 性格活泼开朗，乐于助人，谦虚好学",
+      "indexList": []
+    },
+    "expectId": 562291382,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "6-9K",
+    "lowSalary": 6,
+    "highSalary": 9,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "b6dda1cf-67d6-4b25-a315-54f36d157dae.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.13",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1690901377,
+    "birthday": "19960303",
+    "ageDesc": "27岁",
+    "ageLight": {
+      "content": "27岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "硕航外语",
+      "schoolId": 0,
+      "major": "西班牙语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20130101",
+      "endDate": "20150101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "硕航外语",
+        "schoolId": 0,
+        "major": "西班牙语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2013.01",
+        "endDate": "2015.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 200334903,
+        "geekId": 0,
+        "company": "钱道",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "网络客服",
+        "blueCollarPosition": false,
+        "positionName": "微信客服",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "客户购买产品后及时电话沟通指导使用方法\n介绍新上线产品促进2次购买",
+        "startDate": "2022.01",
+        "endDate": "",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "在线客服",
+          "客服专员",
+          "微信客服"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "钱道",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "网络客服",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": true
+      },
+      {
+        "id": 200334279,
+        "geekId": 0,
+        "company": "人人贷商务顾问（北京）",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "客服专员",
+        "blueCollarPosition": false,
+        "positionName": "客服",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "接听来电电话\n处理投诉问题并安抚客户\n及时反馈客户问题\n介绍产品",
+        "startDate": "2020.11",
+        "endDate": "2021.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "接听客服",
+          "投诉客服"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "人人贷商务顾问（北京）",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "客服专员",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 24815552,
+        "geekId": 0,
+        "company": "51talk 无忧英语",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "销售经理",
+        "blueCollarPosition": false,
+        "positionName": "销售主管",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.负责分发资源\n2.定制成单目标\n3.业务培训",
+        "startDate": "2018.06",
+        "endDate": "2020.10",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "网销"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "51talk 无忧英语",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "销售经理",
+          "indexList": []
+        },
+        "workTime": "2年半",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "9a654deb89bcc7d91HF63d69EVs~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 562291382,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 6,
+      "highSalary": 9,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 200334903,
+    "geekId": 0,
+    "company": "钱道",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "网络客服",
+    "blueCollarPosition": false,
+    "positionName": "微信客服",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "客户购买产品后及时电话沟通指导使用方法\n介绍新上线产品促进2次购买",
+    "startDate": "2022.01",
+    "endDate": "",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "在线客服",
+      "客服专员",
+      "微信客服"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "钱道",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "网络客服",
+      "indexList": []
+    },
+    "workTime": "1年半",
+    "workMonths": 0,
+    "current": true
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "硕航外语",
+      "schoolId": 0,
+      "major": "西班牙语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2013.01",
+      "endDate": "2015.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 200334903,
+      "geekId": 0,
+      "company": "钱道",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "网络客服",
+      "blueCollarPosition": false,
+      "positionName": "微信客服",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "客户购买产品后及时电话沟通指导使用方法\n介绍新上线产品促进2次购买",
+      "startDate": "2022.01",
+      "endDate": "",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "在线客服",
+        "客服专员",
+        "微信客服"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "钱道",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "网络客服",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": true
+    },
+    {
+      "id": 200334279,
+      "geekId": 0,
+      "company": "人人贷商务顾问（北京）",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "客服专员",
+      "blueCollarPosition": false,
+      "positionName": "客服",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "接听来电电话\n处理投诉问题并安抚客户\n及时反馈客户问题\n介绍产品",
+      "startDate": "2020.11",
+      "endDate": "2021.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "接听客服",
+        "投诉客服"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "人人贷商务顾问（北京）",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "客服专员",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 24815552,
+      "geekId": 0,
+      "company": "51talk 无忧英语",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "销售经理",
+      "blueCollarPosition": false,
+      "positionName": "销售主管",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.负责分发资源\n2.定制成单目标\n3.业务培训",
+      "startDate": "2018.06",
+      "endDate": "2020.10",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "网销"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "51talk 无忧英语",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "销售经理",
+        "indexList": []
+      },
+      "workTime": "2年半",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "本周活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

@@ -1,0 +1,505 @@
+{
+  "encryptGeekId": "592fe44efedd3c8c1XR52Nu-EVU~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "x1wTrgQVpN_wr-j1vgZUz39EG7itxaRfWjaUhLp3hzmv0b2jyFk023NrE6O3lcLHOrjbqFz53QMjE-d84ILeVLUeEczHAaEAa8f10tym6jkVZkask_fqDwKaBdFVTBjeHeKNPxDtCymU4IpraCODnJwAy6EfPG5qvcav-hGqyBO6qezqn0b0vrzYYEOp0gedOav13T03xL_hOZ9uRaESKlYqMXrg-eiirrdgMDH7K949cEAjQAmCephxRmfF1MWcvc4wlwRVrDp4Aaxo-wHzv3wWPz3Oq4yw7Ge-54xGNtfFcUxK03wNg4_IZaejZiouEvgCd69KdRYqPGi2t_IL7nt54rVcSudqGse9FbaHYH2IKhewdlgRSNbRvzNUrHQVBGMlDbv-6HDyBKjVLDYD3vXp9fDxq4zHKE0w1oFeDpGIEy1yjgn2GjDi5F_knjg3PHUZqdhG6ufokCObKqs2qneZX7Qgr2tqxM4sr4JmyoeOXrm4wIYgRQ8EjpukPgg2ij1jsMzCmzUMpvqOb_WsRt4s5Zn-DTvs4UVG17u-0kbVDd985EYdJ94UdDOUyU3O-ayxHUASlMnDZ8cacckooSkEaOsYKEAGQMwcRSLa1i1p-Q~~",
+    "geekId": 20336317,
+    "geekName": "阿珊",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20201129/8ea89f189073d73b0c0d358ffd004e7b91c7f87f63007ee7dcb9ebd4d6004bc1_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "7年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "有冲劲！有想法！不怕苦不怕累！性格开朗！",
+      "indexList": []
+    },
+    "expectId": 596776309,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "3-4K",
+    "lowSalary": 3,
+    "highSalary": 4,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "0ed308d1-84c7-4d1e-bbd3-b8fdbea380a4.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.6",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691239010,
+    "birthday": "19970201",
+    "ageDesc": "26岁",
+    "ageLight": {
+      "content": "26岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "绥芬河职业高中",
+      "schoolId": 0,
+      "major": "应用俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20100101",
+      "endDate": "20140101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "绥芬河职业高中",
+        "schoolId": 0,
+        "major": "应用俄语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2010.01",
+        "endDate": "2014.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 202420063,
+        "geekId": 0,
+        "company": "明德物业",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "物业管理员",
+        "blueCollarPosition": false,
+        "positionName": "物业管理员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "担任角色：物业管家\n负责工作：主要负责物业管理费收费通知单的发放和费用的催缴工作；负责收集辖区内用户资料，做好用户档案的管理；负责公司服务热线电话的值守，并收集掌握热线电话的所有记录，记录报修 情况和服务质量制，负责与业主和住户联系。\n获得业绩：曾获得过优秀微笑员工奖",
+        "startDate": "2019.12",
+        "endDate": "2022.06",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "物业前台物业客服收缴物业管理费物业服务\n中控值机一年",
+        "workEmphasisList": [
+          "物业前台",
+          "物业客服",
+          "费用催缴"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "明德物业",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "物业管理员",
+          "indexList": []
+        },
+        "workTime": "2年半",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 30157987,
+        "geekId": 0,
+        "company": "丰声乐动时代文化传播",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "后期制作",
+        "blueCollarPosition": false,
+        "positionName": "后期制作",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "影视后期制作\n前期剧组DIT",
+        "startDate": "2018.06",
+        "endDate": "2019.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "前期拍摄制作作品：三千鸦杀，新神雕侠侣\n后期制作作品：橙红年代，蜜汁炖鱿鱼",
+        "workEmphasisList": [
+          "后期编辑"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "丰声乐动时代文化传播",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "后期制作",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 5742972,
+        "geekId": 0,
+        "company": "火星人俱乐部",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "行政专员/助理",
+        "blueCollarPosition": false,
+        "positionName": "行政专员/助理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "教务资料总结，汇总，收费，排课，招生等",
+        "startDate": "2016.06",
+        "endDate": "2018.06",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "前台"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "火星人俱乐部",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "行政专员/助理",
+          "indexList": []
+        },
+        "workTime": "2年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "592fe44efedd3c8c1XR52Nu-EVU~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 596776309,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 3,
+      "highSalary": 4,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 202420063,
+    "geekId": 0,
+    "company": "明德物业",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "物业管理员",
+    "blueCollarPosition": false,
+    "positionName": "物业管理员",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "担任角色：物业管家\n负责工作：主要负责物业管理费收费通知单的发放和费用的催缴工作；负责收集辖区内用户资料，做好用户档案的管理；负责公司服务热线电话的值守，并收集掌握热线电话的所有记录，记录报修 情况和服务质量制，负责与业主和住户联系。\n获得业绩：曾获得过优秀微笑员工奖",
+    "startDate": "2019.12",
+    "endDate": "2022.06",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "物业前台物业客服收缴物业管理费物业服务\n中控值机一年",
+    "workEmphasisList": [
+      "物业前台",
+      "物业客服",
+      "费用催缴"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "明德物业",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "物业管理员",
+      "indexList": []
+    },
+    "workTime": "2年半",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "绥芬河职业高中",
+      "schoolId": 0,
+      "major": "应用俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2010.01",
+      "endDate": "2014.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 202420063,
+      "geekId": 0,
+      "company": "明德物业",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "物业管理员",
+      "blueCollarPosition": false,
+      "positionName": "物业管理员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "担任角色：物业管家\n负责工作：主要负责物业管理费收费通知单的发放和费用的催缴工作；负责收集辖区内用户资料，做好用户档案的管理；负责公司服务热线电话的值守，并收集掌握热线电话的所有记录，记录报修 情况和服务质量制，负责与业主和住户联系。\n获得业绩：曾获得过优秀微笑员工奖",
+      "startDate": "2019.12",
+      "endDate": "2022.06",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "物业前台物业客服收缴物业管理费物业服务\n中控值机一年",
+      "workEmphasisList": [
+        "物业前台",
+        "物业客服",
+        "费用催缴"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "明德物业",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "物业管理员",
+        "indexList": []
+      },
+      "workTime": "2年半",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 30157987,
+      "geekId": 0,
+      "company": "丰声乐动时代文化传播",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "后期制作",
+      "blueCollarPosition": false,
+      "positionName": "后期制作",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "影视后期制作\n前期剧组DIT",
+      "startDate": "2018.06",
+      "endDate": "2019.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "前期拍摄制作作品：三千鸦杀，新神雕侠侣\n后期制作作品：橙红年代，蜜汁炖鱿鱼",
+      "workEmphasisList": [
+        "后期编辑"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "丰声乐动时代文化传播",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "后期制作",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 5742972,
+      "geekId": 0,
+      "company": "火星人俱乐部",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "行政专员/助理",
+      "blueCollarPosition": false,
+      "positionName": "行政专员/助理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "教务资料总结，汇总，收费，排课，招生等",
+      "startDate": "2016.06",
+      "endDate": "2018.06",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "前台"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "火星人俱乐部",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "行政专员/助理",
+        "indexList": []
+      },
+      "workTime": "2年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}
