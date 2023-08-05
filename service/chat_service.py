@@ -191,7 +191,7 @@ class ChatRobot(object):
                 break
             if cur_item['speaker']=='system':
                 system_msgs.append(cur_item)
-            merge_user_msg = self._filter_useless(cur_item['msg']) +'。'+ merge_user_msg
+            merge_user_msg = self._filter_useless(cur_item.get('msg', '')) +'。'+ merge_user_msg
             until_idx-=1
         return msg_list[:until_idx+1], merge_user_msg, system_msgs
 
