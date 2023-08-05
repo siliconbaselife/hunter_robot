@@ -33,7 +33,7 @@ def boss_preprocess(raw_candidate_info):
             'company': item['company'],
             'position': item['positionName'],
             'responsibility': item['responsibility'],
-            'emphasis': ','.join(item['workEmphasisList']),
+            'emphasis': ','.join(item['workEmphasisList']) if item['workEmphasisList'] is not None else '',
             'start': item['startDate'],
             'end': item['endDate']
         })

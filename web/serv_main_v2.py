@@ -11,6 +11,7 @@ from service.candidate_filter import candidate_filter, preprocess
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
+import traceback
 
 logger = get_logger(config['log']['log_file'])
 app = Flask("robot_backend")
@@ -128,23 +129,31 @@ def candidate_filter_api():
     # job_id = request.json['jobID']
     job_id = json.loads(get_account_jobs_db(account_id))[0]
     raw_candidate_info = request.json['candidateInfo']
+    candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
+    candidate_info = None
+    try:
+        candidate_info = preprocess(account_id, raw_candidate_info)
 
-    candidate_info = preprocess(account_id, raw_candidate_info)
-    candidate_id, candidate_name, age, degree, location, position = candidate_info['id'], candidate_info['name'], candidate_info['age'],\
-                                                                     candidate_info['degree'], candidate_info['exp_location'], candidate_info['exp_position']
-    logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_id}, {candidate_name}, {age}, {degree}, {location}')
-    if not query_candidate_exist(candidate_id):
-        candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)
-        new_candidate_db(candidate_id, candidate_name, age, degree, location, position, candidate_info_json)
-    filter_result = candidate_filter(job_id, candidate_info)
-    to_touch = filter_result['judge']
-    ret_data = {
-        'touch': to_touch
-    }
+        candidate_id, candidate_name, age, degree, location, position = candidate_info['id'], candidate_info['name'], candidate_info['age'],\
+                                                                        candidate_info['degree'], candidate_info['exp_location'], candidate_info['exp_position']
+        logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_id}, {candidate_name}, {age}, {degree}, {location}')
+
+        if not query_candidate_exist(candidate_id):
+            candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)
+            new_candidate_db(candidate_id, candidate_name, age, degree, location, position, candidate_info_json)
+        filter_result = candidate_filter(job_id, candidate_info)
+        to_touch = filter_result['judge']
+        ret_data = {
+            'touch': to_touch
+        }
     # if to_touch:
     #     new_chat_db(account_id, job_id, candidate_id, candidate_name)
     #     update_touch_task(account_id, job_id)
-    logger.info(f'candidate filter {account_id}, {job_id}, {candidate_info}: {filter_result}')
+        logger.info(f'candidate filter {account_id}, {job_id}, {candidate_info}: {filter_result}')
+    except BaseException as e:
+        logger.info(f'candidate filter request {account_id} {job_id} {candidate_id}, {candidate_name} failed for {e}, {traceback.format_exc()}')
+        with open(f'test/fail/{candidate_id}_{candidate_name}.json', 'w') as f:
+            f.write(json.dumps(raw_candidate_info, indent=2, ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
@@ -202,40 +211,50 @@ def candidate_chat_api():
 
 @app.route("/recruit/candidate/result", methods=['POST'])
 def candidate_result_api():
-    logger.info(f'candidate result')
+    logger.info(f'candidate result, request form: {request.form}, request data: {request.data}, files: {request.files}, {request.files.keys()}')
     account_id = request.form['accountID']
 
     ## job use first register job of account:
     # job_id = request.form['jobID']
     job_id = json.loads(get_account_jobs_db(account_id))[0]
+    logger.info("job id: {}".format(job_id))
 
     candidate_id = request.form['candidateID']
     name = request.form['candidateName']
     phone = request.form.get('phone', None)
     wechat = request.form.get('wechat', None)
+    logger.info("candidate_id: {} name: {}".format(candidate_id, name))
 
-    logger.info(f'candidate result, files: {request.files}, {request.files.keys()}')
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
     if len(candidate_info) == 0:
         info_str = f'candidate result abnormal: {account_id} {job_id} candidate {candidate_id} not in db'
         logger.info(info_str)
         return Response(json.dumps(get_web_res_fail(info_str)))
     _,_,contact = candidate_info[0]
-    if contact is not None and contact!='None':
-        info_str = f'candidate result for {account_id} {job_id} {candidate_id} already in db'
-        logger.info(info_str)
-        return Response(json.dumps(get_web_res_fail(info_str)))
+    if contact is None or contact == 'None':
+        contact = {
+            'phone': None,
+            'wechat': None,
+            'cv': None
+        }
+    else:
+        contact = json.loads(contact)
+    # if contact is not None and contact!='None':
+    #     info_str = f'candidate result for {account_id} {job_id} {candidate_id} already in db'
+    #     logger.info(info_str)
+    #     return Response(json.dumps(get_web_res_fail(info_str)))
 
     cv_addr = None
     if len(request.files.keys())>0:
         cv_filename = f'cv_{account_id}_{job_id}_{candidate_id}_{name}.pdf'
         cv_file = request.files['cv'].read()
         cv_addr = generate_thumbnail(cv_filename, cv_file)
-    contact = {
-        'phone': phone,
-        'wechat': wechat,
-        'cv': cv_addr
-    }
+    if phone:
+        contact['phone'] = phone
+    if wechat:
+        contact['wechat'] = wechat
+    if cv_addr:
+        contact['cv'] = cv_addr
     logger.info(f'candidate result request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
 
     update_chat_contact_db(account_id, job_id, candidate_id, json.dumps(contact, ensure_ascii=False))

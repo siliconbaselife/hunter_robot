@@ -41,7 +41,8 @@ def re_org_task(config_data, today_sub_task_log):
                 "jobID":job_config["jobID"],
                 "taskType":job_config['taskType'],
                 "helloSum": retain_sum,
-                "timeMount":time_percent_filtered
+                "timeMount":time_percent_filtered,
+                "filter": job_config["filter"]
             }
             res.append(r_job)
     return res

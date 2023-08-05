@@ -41,12 +41,12 @@ class GroupMsg:
 
     def send_msg_info(self, msgs):
         r_msgs = "姓名："+ msgs['name'] + '\n'
-        r_msgs += "聊天：\n"
-        for item in msgs["chat"]:
-            r_msgs+= "\t"+json.dumps(item, ensure_ascii=False)+"\n"
         r_msgs += "简历：" + msgs["resume"] + "\n"
         r_msgs += "微信：" + msgs["wx"] + "\n"
         r_msgs += "电话：" + msgs["phone"] + "\n"
+        r_msgs += "聊天：\n"
+        for item in msgs["chat"]:
+            r_msgs+= "\t"+json.dumps(item, ensure_ascii=False)+"\n"
 
         self.send_text(r_msgs, ['@all'])
 
@@ -55,10 +55,10 @@ def send_candidate_info(name, cv, wechat, phone, history_msg):
     group_msg = GroupMsg()
     msgs = {
         "name": name,
-        "resume": cv,
+        "resume": '' if cv is None else cv,
         "chat": history_msg,
-        "wx": wechat,
-        "phone": phone
+        "wx": '' if wechat is None else wechat,
+        "phone": '' if phone is None else phone
     }
     group_msg.send_msg_info(msgs)
 

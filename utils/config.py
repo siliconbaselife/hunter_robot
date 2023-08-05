@@ -25,7 +25,13 @@ config['task']['task_config_base'] = {
         "time": "16:00",
         "mount": 25
       }
-    ]
+    ],
+    "filter": {
+        "city": {"area": "北京"},
+        "education": ["中专/中技","高中","大专","本科","硕士","博士"],
+        "pay": ["5-10K"],
+        "status": ["离职-随时到岗"]
+    }
 }
 
 config['chat'] = dict()
