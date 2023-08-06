@@ -68,7 +68,7 @@ config['group_msg']['shijiazhuang'] = {
         ],
     'agentid': 1000005,
     'corpsecret':'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM',
-    'request_url':""
+    'request_url':"https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=491e411f-c325-4096-aabc-294dadf8f8b8"
 }
 config['group_msg']['beijing'] = {
     'corpid':'ww0ee23e06934cd92c',
