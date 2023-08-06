@@ -42,6 +42,13 @@ CREATE TABLE IF NOT EXISTS `job`(
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+alter table job add job_config varchar(512) NOT NULL DEFAULT "" COMMENT '岗位配置' after robot_api;
+{
+   "group_msg":"beijing",
+   "filter_config":"common_custom_service_filter"
+}
+
+
 -- =====requirement_config===========
 -- [
 --    ["age", "range", 18, 35],
@@ -91,3 +98,12 @@ CREATE TABLE `account_exec_log` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='账号任务执行记录'
+
+
+
+
+alter table job add job_config varchar(512) NOT NULL DEFAULT "" COMMENT '岗位配置' after robot_api;
+{
+   "group_msg":"beijing",
+   "filter_config":"common_custom_service_filter"
+}

@@ -269,8 +269,8 @@ def candidate_result_api():
     except BaseException as e:
         logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
         db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
-    send_candidate_info(name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
-    logger.info(f'candidate result update: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
+    send_candidate_info(job_id, name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
+    logger.info(f'candidate result update: {job_id}, {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 if __name__=="__main__":
