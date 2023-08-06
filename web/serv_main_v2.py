@@ -239,6 +239,7 @@ def candidate_result_api():
         }
     else:
         contact = json.loads(contact)
+    # logger.info(f'candidate result: db contact: {account_id}, {job_id}, {candidate_id}, {name}, info: {candidate_info}, contact: {contact}')
     # if contact is not None and contact!='None':
     #     info_str = f'candidate result for {account_id} {job_id} {candidate_id} already in db'
     #     logger.info(info_str)
@@ -268,7 +269,7 @@ def candidate_result_api():
     except BaseException as e:
         logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
         db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
-    send_candidate_info(name, cv_addr, wechat, phone, db_history_msg)
+    send_candidate_info(name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
     logger.info(f'candidate result update: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
