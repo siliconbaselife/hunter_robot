@@ -1,5 +1,5 @@
 from .utils import degree_compare
-
+import time
 def common_custom_service_filter(candidate_info):
     age_range = (18, 35)
     min_degree = '中专'
@@ -11,6 +11,10 @@ def common_custom_service_filter(candidate_info):
     location_ok = candidate_info['exp_location']==location
     exp_position = candidate_info['exp_position']
     exp_salary = candidate_info['exp_salary']
+
+    ##3min以内打招呼
+    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 180
+
 
     has_wish = False
     for tag in job_tags:
@@ -29,13 +33,14 @@ def common_custom_service_filter(candidate_info):
                 break
 
     judge_result = {
-        'judge': age_ok and degree_ok and location_ok and (has_experience or has_wish),
+        'judge': age_ok and degree_ok and location_ok and (has_experience or has_wish) and is_active,
         'details': {
             'age': age_ok,
             'degree': degree_ok,
             'location': location_ok,
             'experience': has_experience,
-            'wish': has_wish
+            'wish': has_wish,
+            'is_active': is_active
         }
     }
     return judge_result

@@ -16,6 +16,9 @@ def boss_preprocess(raw_candidate_info):
     exp_salary = geek_card['salary']
     position_name = geek_card['expectPositionName']
 
+    ##active_time
+    active_time = geek_card['activeTime']
+
     ## parse edu info
     education = []
     for item in edu_experience:
@@ -48,5 +51,6 @@ def boss_preprocess(raw_candidate_info):
         'exp_salary': exp_salary,
         'exp_position': position_name,
         'education': education,
-        'work': work
+        'work': work,
+        "active_time": active_time
     }
