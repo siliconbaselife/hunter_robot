@@ -67,7 +67,8 @@ config['group_msg']['shijiazhuang'] = {
             (1000005, 'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM')
         ],
     'agentid': 1000005,
-    'corpsecret':'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM'
+    'corpsecret':'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM',
+    'request_url':""
 }
 config['group_msg']['beijing'] = {
     'corpid':'ww0ee23e06934cd92c',
@@ -75,7 +76,8 @@ config['group_msg']['beijing'] = {
             (1000005, 'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM')
         ],
     'agentid': 1000005,
-    'corpsecret':'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM'
+    'corpsecret':'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM',
+    'request_url':'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c407cd12-b7c7-4038-8cc4-4e9cb71dbbc1'
 }
 
 

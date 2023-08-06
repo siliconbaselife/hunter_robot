@@ -14,6 +14,7 @@ class GroupMsg:
         self.app_list = con['app_list']
         self.agentid = con['agentid']
         self.corpsecret = con['corpsecret']
+        self.request_url = con['request_url']
 
     def send_text(self, _message, useridlist=['name1|name2']):
         useridstr = "|".join(useridlist)  # userid 在企业微信-通讯录-成员-账号
@@ -35,8 +36,7 @@ class GroupMsg:
             "duplicate_check_interval": 1800
         }
         json_str = json.dumps(json_dict)
-        response_send = requests.post(
-            "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c407cd12-b7c7-4038-8cc4-4e9cb71dbbc1", data=json_str)
+        response_send = requests.post(self.request_url, data=json_str)
         print("send to " + useridstr + ' ' + json.loads(response_send.text)['errmsg'])
         return json.loads(response_send.text)['errmsg'] == 'ok'
 
