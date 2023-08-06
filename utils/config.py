@@ -2,7 +2,8 @@ config = {
     'log': {},
     'task':{},
     'chat':{},
-    'db': {}
+    'db': {},
+    'group_msg':{}
 }
 
 config['db']['host'] = 'localhost'
@@ -52,3 +53,30 @@ config['chat']['trivial_reply_intent'] = [
 ]
 
 config['chat']['chat_url'] = 'http://127.0.0.1:12222'
+
+
+
+
+
+#=========================
+# msg config
+config['group_msg'] = dict()
+config['group_msg']['shijiazhuang'] = {
+    'corpid':'ww0ee23e06934cd92c',
+    'app_list': [
+            (1000005, 'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM')
+        ],
+    'agentid': 1000005,
+    'corpsecret':'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM'
+}
+config['group_msg']['beijing'] = {
+    'corpid':'ww0ee23e06934cd92c',
+    'app_list': [
+            (1000005, 'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM')
+        ],
+    'agentid': 1000005,
+    'corpsecret':'yWATRUgt1kazQexpdzbqkisTGkMgGqpw7eSpd0qKPlM'
+}
+
+
+#==========================
