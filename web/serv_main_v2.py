@@ -60,12 +60,13 @@ def register_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
     jobs = request.json['jobs']
-    logger.info(f'new account request: {platform_type}, {platform_id}, {jobs}')
+    desc = request.json.get('desc', None)
+    logger.info(f'new account request: {platform_type} {platform_id} {jobs} {desc}')
     account_id = f'account_{platform_type}_{platform_id}'
 
     task_config = generate_task(jobs)
-    account_id = register_account_db(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False))
-    logger.info(f'new account register: {platform_type}, {platform_id}, {jobs}: {account_id}')
+    account_id = register_account_db(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), desc)
+    logger.info(f'new account register: {platform_type} {platform_id} {jobs} {desc}: {account_id}')
     ret_data = {
         'accountID': account_id
     }
@@ -227,9 +228,9 @@ def candidate_result_api():
 
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
     if len(candidate_info) == 0:
-        info_str = f'candidate result abnormal: {account_id} {job_id} candidate {candidate_id} not in db'
+        info_str = f'candidate result: {account_id} {job_id} candidate {candidate_id} {name} not in db, will new chat first'
         logger.info(info_str)
-        return Response(json.dumps(get_web_res_fail(info_str)))
+        new_chat_db(account_id, job_id, candidate_id, name)
     _,_,contact = candidate_info[0]
     if contact is None or contact == 'None':
         contact = {

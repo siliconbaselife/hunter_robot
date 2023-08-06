@@ -9,7 +9,7 @@ sql_dict = {
     "query_job_id": "select job_id from job where platform_type = '{}' and platform_id= '{}'",
     # "query_job_requirement": "select requirement_config from job where job_id = {}",
     "query_job_robotapi": "select robot_api from job where job_id='{}'",
-    "register_account": "insert into account(account_id, platform_type, platform_id, jobs, task_config) values ('{}','{}','{}','{}','{}')",
+    "register_account": "insert into account(account_id, platform_type, platform_id, jobs, task_config, description) values ('{}','{}','{}','{}','{}','{}')",
     "query_account_id": "select account_id from account where platform_type='{}' and platform_id='{}'",
     "query_account_type": "select platform_type from account where account_id='{}'",
     "get_jobs":"select jobs from account where account_id='{}'",
@@ -41,9 +41,9 @@ def query_job_id_db(platform_type, platform_id):
 def query_robotapi_db(job_id):
     return dbm.query(sql_dict['query_job_robotapi'].format(job_id))[0][0]
 
-def register_account_db(account_id, platform_type, platform_id, jobs, task_config):
+def register_account_db(account_id, platform_type, platform_id, jobs, task_config, desc):
     # d = [[account_id, platform_type, platform_id, jobs, task_config]]
-    dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config))
+    dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc))
     return account_id
 
 def query_account_id_db(platform_type, platform_id):

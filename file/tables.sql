@@ -61,6 +61,8 @@ CREATE TABLE IF NOT EXISTS `account`(
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+ALTER TABLE account ADD description VARCHAR(100) COMMENT '账号描述' AFTER task_config;
+
 =====task_config===========
 [
 	{
