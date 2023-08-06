@@ -29,16 +29,18 @@ def register_job_api():
     job_name = request.json['jobName']
     jd = request.json.get('jobJD', None)
     robot_api = request.json['robotApi']
-    # requirement_config = request.json.get('jobRequirement', None)
+    job_config = request.json.get('jobConfig', None)
+    if job_config is not None:
+        job_config = json.dumps(job_config, ensure_ascii=False)
 
     # logger.info(f'new job request: {job_name} {requirement_config} {robot_api}')
-    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api}')
+    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}')
     job_id = f'job_{platform_type}_{platform_id}'
-    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api)
+    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config)
     ret_data = {
         'jobID': job_id
     }
-    logger.info(f'new job register: {platform_type} {platform_id} {job_name} {robot_api}: {job_id}')
+    logger.info(f'new job register: {platform_type} {platform_id} {job_name} {robot_api} {job_config}: {job_id}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 @app.route("/recruit/job/query", methods=['POST'])
@@ -60,13 +62,15 @@ def register_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
     jobs = request.json['jobs']
+    task_config = request.json.get('taskConfig', None)
     desc = request.json.get('desc', None)
-    logger.info(f'new account request: {platform_type} {platform_id} {jobs} {desc}')
+    logger.info(f'new account request: {platform_type} {platform_id} {jobs} {desc} {task_config}')
     account_id = f'account_{platform_type}_{platform_id}'
 
-    task_config = generate_task(jobs)
+    if task_config is None:
+        task_config = generate_task(jobs)
     account_id = register_account_db(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), desc)
-    logger.info(f'new account register: {platform_type} {platform_id} {jobs} {desc}: {account_id}')
+    logger.info(f'new account register: {platform_type} {platform_id} {jobs} {desc}: {account_id} {task_config}')
     ret_data = {
         'accountID': account_id
     }

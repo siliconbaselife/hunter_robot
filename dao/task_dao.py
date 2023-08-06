@@ -5,7 +5,7 @@ from utils.log import get_logger
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api) values ('{}','{}','{}','{}','{}','{}')",
+    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config) values ('{}','{}','{}','{}','{}','{}','{}')",
     "query_job_id": "select job_id from job where platform_type = '{}' and platform_id= '{}'",
     # "query_job_requirement": "select requirement_config from job where job_id = {}",
     "query_job_robotapi": "select robot_api from job where job_id='{}'",
@@ -28,9 +28,8 @@ sql_dict = {
     "get_job_by_id":"select * from job where job_id='{}'"
 }
 
-def register_job_db(job_id, platform_type, platform_id, job_name, job_jd, robot_api):
-    # d = [[job_id, job_name, job_jd, robot_api]]
-    dbm.insert(sql_dict['register_job'].format(job_id, platform_type, platform_id, job_name, job_jd, robot_api))
+def register_job_db(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config):
+    dbm.insert(sql_dict['register_job'].format(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config))
     return job_id
 
 # def query_job_requirement_db(job_id):
