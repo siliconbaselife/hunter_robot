@@ -136,6 +136,9 @@ def candidate_filter_api():
     raw_candidate_info = request.json['candidateInfo']
     candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
     candidate_info = None
+    ret_data = {
+            'touch': False
+        }
     try:
         candidate_info = preprocess(account_id, raw_candidate_info)
 
@@ -235,6 +238,8 @@ def candidate_result_api():
         info_str = f'candidate result: {account_id} {job_id} candidate {candidate_id} {name} not in db, will new chat first'
         logger.info(info_str)
         new_chat_db(account_id, job_id, candidate_id, name)
+    #再查一次
+    candidate_info = query_chat_db(account_id, job_id, candidate_id)
     _,_,contact = candidate_info[0]
     if contact is None or contact == 'None':
         contact = {
