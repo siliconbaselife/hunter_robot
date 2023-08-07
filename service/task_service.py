@@ -7,9 +7,6 @@ import copy
 from datetime import datetime
 
 
-# def convert_to_int(time_percent):
-
-
 
 def filter_time(time_percent, retain_sum):
     sum = 0
@@ -78,4 +75,9 @@ def generate_task(jobs):
         item['jobID'] = job_id
         ret.append(item)
     return ret
+
+
+def need_recall():
+    
+    return
 
