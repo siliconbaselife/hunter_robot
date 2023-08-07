@@ -10,3 +10,8 @@ def degree_compare(degree, min_degree):
     else:
         degree_map = {degree: i for i, degree in enumerate(degree_list)} 
         return degree_map[degree] >= degree_map[min_degree]
+
+def ensure_valid(raw_str):
+    if type(raw_str) is not str:
+        raw_str = ""
+    return raw_str.replace("'", "").replace(" ", "")
