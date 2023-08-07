@@ -301,6 +301,7 @@ def candidate_list_web():
     start = limit * (int(page_num) - 1) + 1
     
     chat_sum, res_chat_list = candidate_list_service(job_id, start, limit)
+    logger.info(f"{chat_sum}")
     page_sum = int(chat_sum / limit) + 1
     res = {
         "page_sum" : page_sum,
