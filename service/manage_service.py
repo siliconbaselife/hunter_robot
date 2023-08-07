@@ -15,8 +15,9 @@ def candidate_list_service(job_id, start, limit):
             "candidate_id": chat[2],
             "candidate_name": chat[3],
             "source":chat[4],
-            "contact":chat[5],
-            "details":chat[6]
+            "contact":chat[6],
+            "details":chat[7],
+            "update_time":chat[9]
         }
         res_chat_list.append(res_chat)
     return res_chat_list
