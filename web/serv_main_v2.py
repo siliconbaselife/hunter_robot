@@ -299,7 +299,7 @@ def candidate_list_web():
     job_id = request.args.get('job_id')
     page_num = request.args.get('page_num')
     limit = request.args.get('limit')
-    if job_id == None or page_num == None:
+    if job_id == None or page_num == None or limit == None:
         logger.info(f'candidade_list_bad_request: job_id: {job_id}， page_num {page_num}')
         return Response(json.dumps(get_web_res_fail("no args")))
 
