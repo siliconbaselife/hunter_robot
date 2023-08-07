@@ -1,4 +1,5 @@
 import json
+import math
 from flask import Flask, request, Response
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
@@ -302,7 +303,7 @@ def candidate_list_web():
     
     chat_sum, res_chat_list = candidate_list_service(job_id, start, limit)
     # logger.info(f"{chat_sum}")
-    page_sum = int(chat_sum / limit) + 1
+    page_sum = math.ceil(chat_sum / limit)
     res = {
         "chat_sum" : chat_sum,
         "page_sum" : page_sum,
