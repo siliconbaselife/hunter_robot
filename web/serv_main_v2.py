@@ -303,9 +303,11 @@ def candidate_list_web():
         logger.info(f'candidade_list_bad_request: job_id: {job_id}， page_num {page_num}')
         return Response(json.dumps(get_web_res_fail("no args")))
 
+    limit = int(limit)
+    page_num = int(page_num)
 
     logger.info(f'candidade_list: job_id: {job_id}， page_num {page_num}')
-    start = limit * (int(page_num) - 1) + 1
+    start = limit * (page_num - 1) + 1
     
     chat_sum, res_chat_list = candidate_list_service(job_id, start, limit)
     # logger.info(f"{chat_sum}")
