@@ -302,7 +302,7 @@ def candidate_list_web():
     
     res_list = candidate_list_service(job_id, start, limit)
 
-    return Response(json.dumps(get_web_res_suc_with_data(res_list)))
+    return Response(json.dumps(get_web_res_suc_with_data(res_list), ensure_ascii=False))
 
     
 
