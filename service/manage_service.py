@@ -17,7 +17,7 @@ def candidate_list_service(job_id, start, limit):
             "source":chat[4],
             "contact":chat[6],
             "details":chat[7],
-            "update_time":chat[9]
+            "update_time":chat[9].strftime("%Y-%m-%d %H:%M:%S")
         }
         res_chat_list.append(res_chat)
     return res_chat_list
