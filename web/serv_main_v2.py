@@ -297,7 +297,7 @@ def candidate_list_web():
 
     logger.info(f'candidade_list: job_id: {job_id}， page_num {page_num}')
     limit = 50
-    start = limit * (page_num - 1) + 1
+    start = limit * (int(page_num) - 1) + 1
     
     res_list = candidate_list_service(job_id, start, limit)
 
