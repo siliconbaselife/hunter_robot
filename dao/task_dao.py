@@ -25,7 +25,8 @@ sql_dict = {
     "add_task_count":"update account_exec_log set hello_sum_exec = hello_sum_exec+{} where account_id='{}' and job_id='{}' and exec_date='{}'",
     "insert_sub_task_log":"insert into account_exec_log(account_id, job_id, exec_date, hello_sum_need) values ('{}','{}','{}','{}')",
     "get_sub_task_with_account_id":"select * from account_exec_log where account_id='{}' and exec_date='{}'",
-    "get_job_by_id":"select * from job where job_id='{}'"
+    "get_job_by_id":"select * from job where job_id='{}'",
+    "get_chats_by_job_id":"select * from chat where job_id={} and contact!='NULL' order by update_time desc limit {},{}"
 }
 
 def register_job_db(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config):
@@ -100,3 +101,6 @@ def hello_exec_db(account_id, job_id, exec_date, hello_cnt=1):
 
 def get_job_by_id(job_id):
     return dbm.query(sql_dict["get_job_by_id"].format(job_id))
+
+def get_chats_by_job_id(job_id, start, limit):
+    return dbm.query(sql_dict["get_chats_by_job_id"].format(job_id, start, limit))

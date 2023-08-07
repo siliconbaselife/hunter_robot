@@ -7,6 +7,7 @@ from utils.utils import deal_json_invaild
 from dao.task_dao import *
 from service.task_service import generate_task, get_undo_task, update_touch_task
 from service.chat_service import ChatRobot
+from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
@@ -281,6 +282,29 @@ def candidate_result_api():
     send_candidate_info(job_id, name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
     logger.info(f'candidate result update: {job_id}, {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+
+
+
+
+@app.route("/recruit/candidate/list", methods=['GET'])
+def candidate_list_web():
+    job_id = request.args.get('job_id')
+    page_num = request.args.get('page_num')
+    if job_id == None or page_num == None:
+        logger.info(f'candidade_list_bad_request: job_id: {job_id}， page_num {page_num}')
+        return Response(json.dumps(get_web_res_fail("no args")))
+
+
+    logger.info(f'candidade_list: job_id: {job_id}， page_num {page_num}')
+    limit = 50
+    start = limit * (page_num - 1) + 1
+    
+    res_list = candidate_list_service(job_id, start, limit)
+
+    return Response(json.dumps(get_web_res_suc_with_data(res_list)))
+
+    
+
 
 if __name__=="__main__":
     app.run(port=2040,host="0.0.0.0",debug=True)
