@@ -116,7 +116,7 @@ class ChatRobot(object):
                 # if user_ask:
                 #     need_contact = chat_round==1
                 # else:
-                need_contact = chat_round==3
+                need_contact = chat_round==1
 
                 # if algo_judge_intent=='拒绝':
                 #     self._status = ChatStatus.FinishFail

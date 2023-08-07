@@ -65,7 +65,7 @@ def send_candidate_info(job_id, name, cv, wechat, phone, history_msg):
     msgs = {
         "name": name,
         "resume": '' if cv is None else cv,
-        "chat": history_msg,
+        "chat": [] if history_msg is None else history_msg,
         "wx": '' if wechat is None else wechat,
         "phone": '' if phone is None else phone
     }
