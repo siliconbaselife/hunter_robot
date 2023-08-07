@@ -21,7 +21,7 @@ def candidate_list_service(job_id, start, limit):
         }
         res_chat_list.append(res_chat)
     
-    chat_sum = get_chats_num_by_job_id(job_id)[0]
+    chat_sum = get_chats_num_by_job_id(job_id)[0][0]
     return chat_sum, res_chat_list
 
 
