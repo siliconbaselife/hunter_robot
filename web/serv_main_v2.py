@@ -300,9 +300,13 @@ def candidate_list_web():
     limit = 50
     start = limit * (int(page_num) - 1) + 1
     
-    res_list = candidate_list_service(job_id, start, limit)
-
-    return Response(json.dumps(get_web_res_suc_with_data(res_list), ensure_ascii=False))
+    chat_sum, res_chat_list = candidate_list_service(job_id, start, limit)
+    page_sum = int(chat_sum / limit) + 1
+    res = {
+        "page_sum" : page_sum,
+        "chat_list" : res_chat_list
+    }
+    return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
 
     
 

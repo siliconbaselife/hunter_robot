@@ -20,7 +20,8 @@ def candidate_list_service(job_id, start, limit):
             "update_time":chat[9].strftime("%Y-%m-%d %H:%M:%S")
         }
         res_chat_list.append(res_chat)
-    return res_chat_list
-
+    
+    chat_sum = get_chats_num_by_job_id(job_id)[0]
+    return chat_sum, res_chat_list
 
 
