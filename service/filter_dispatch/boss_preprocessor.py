@@ -1,3 +1,4 @@
+from .utils import ensure_valid
 
 def boss_preprocess(raw_candidate_info):
     tmp = raw_candidate_info
@@ -24,21 +25,22 @@ def boss_preprocess(raw_candidate_info):
     for item in edu_experience:
         if item['degreeName']== degree:
             education.append({
-                'school': item['school'],
-                'major': item['major'],
+                'school': ensure_valid(item['school']),
+                'major': ensure_valid(item['major']),
             })
             break
 
     ## parse 
     work = []
     for item in work_experience:
+        emphasis = ','.join(item['workEmphasisList']) if item['workEmphasisList'] is not None else ''
         work.append({
-            'company': item['company'],
-            'position': item['positionName'],
-            'responsibility': item['responsibility'],
-            'emphasis': ','.join(item['workEmphasisList']) if item['workEmphasisList'] is not None else '',
-            'start': item['startDate'],
-            'end': item['endDate']
+            'company': ensure_valid(item['company']),
+            'position': ensure_valid(item['positionName']),
+            'responsibility': ensure_valid(item['responsibility']),
+            'emphasis': ensure_valid(emphasis),
+            'start': ensure_valid(item['startDate']),
+            'end': ensure_valid(item['endDate'])
         })
 
     return {

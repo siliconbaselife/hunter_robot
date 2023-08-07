@@ -1,5 +1,10 @@
 from .utils import degree_compare
 import time
+
+from utils.config import config
+from utils.log import get_logger
+logger = get_logger(config['log']['log_file'])
+
 def shijiazhuang_custom_service_filter(candidate_info):
     age_range = (18, 35)
     min_degree = '中专'
@@ -26,6 +31,7 @@ def shijiazhuang_custom_service_filter(candidate_info):
     for item in candidate_info['work']:
         if has_experience:
             break
+        logger.info(item['position'], item['responsibility'], item['emphasis'], item.get('department', ''))
         judge_str = item['position']+item['responsibility']+item['emphasis']+item.get('department', '')
         for tag in job_tags:
             if tag in judge_str:
