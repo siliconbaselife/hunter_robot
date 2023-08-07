@@ -291,19 +291,20 @@ def candidate_result_api():
 def candidate_list_web():
     job_id = request.args.get('job_id')
     page_num = request.args.get('page_num')
+    limit = request.args.get('limit')
     if job_id == None or page_num == None:
         logger.info(f'candidade_list_bad_request: job_id: {job_id}， page_num {page_num}')
         return Response(json.dumps(get_web_res_fail("no args")))
 
 
     logger.info(f'candidade_list: job_id: {job_id}， page_num {page_num}')
-    limit = 50
     start = limit * (int(page_num) - 1) + 1
     
     chat_sum, res_chat_list = candidate_list_service(job_id, start, limit)
-    logger.info(f"{chat_sum}")
+    # logger.info(f"{chat_sum}")
     page_sum = int(chat_sum / limit) + 1
     res = {
+        "chat_sum" : chat_sum,
         "page_sum" : page_sum,
         "chat_list" : res_chat_list
     }
