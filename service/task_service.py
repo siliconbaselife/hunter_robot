@@ -77,7 +77,8 @@ def generate_task(jobs):
     return ret
 
 
-def need_recall():
+def need_recall(account_id, job_id):
     
+
     return
 
