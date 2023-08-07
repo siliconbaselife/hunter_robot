@@ -171,7 +171,7 @@ def candidate_chat_api():
     ## job use first register job of account:
     # job_id = request.json['jobID']
     job_id = json.loads(get_account_jobs_db(account_id))[0]
-    history_msg = request.json['historyMsg']
+    # history_msg = request.json['historyMsg']
     candidate_id = request.json['candidateID']
     candidate_name = request.json.get('candidateName', None)
     page_history_msg = request.json['historyMsg']
