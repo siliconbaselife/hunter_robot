@@ -315,7 +315,6 @@ def candidate_list_web():
         "page_sum" : page_sum,
         "chat_list" : res_chat_list
     }
-    result_text = {"statusCode": 200,"message": "文件上传成功"}
     response = Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
