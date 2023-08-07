@@ -171,7 +171,7 @@ def candidate_chat_api():
     ## job use first register job of account:
     # job_id = request.json['jobID']
     job_id = json.loads(get_account_jobs_db(account_id))[0]
-    history_msg = request.json['historyMsg']
+    # history_msg = request.json['historyMsg']
     candidate_id = request.json['candidateID']
     candidate_name = request.json.get('candidateName', None)
     page_history_msg = request.json['historyMsg']
@@ -219,24 +219,23 @@ def candidate_chat_api():
 
 @app.route("/recruit/candidate/result", methods=['POST'])
 def candidate_result_api():
-    logger.info(f'candidate result, request form: {request.form}, request data: {request.data}, files: {request.files}, {request.files.keys()}')
+    
     account_id = request.form['accountID']
 
     ## job use first register job of account:
     # job_id = request.form['jobID']
     job_id = json.loads(get_account_jobs_db(account_id))[0]
-    logger.info("job id: {}".format(job_id))
 
     candidate_id = request.form['candidateID']
     name = request.form['candidateName']
     phone = request.form.get('phone', None)
     wechat = request.form.get('wechat', None)
-    logger.info("candidate_id: {} name: {}".format(candidate_id, name))
+
+    logger.info(f'candidate result, request form: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}; files: {request.files}, file keys:{request.files.keys()}')
 
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
     if len(candidate_info) == 0:
-        info_str = f'candidate result: {account_id} {job_id} candidate {candidate_id} {name} not in db, will new chat first'
-        logger.info(info_str)
+        logger.info(f'candidate result: {account_id} {job_id} candidate {candidate_id} {name} not in db, will new chat first')
         new_chat_db(account_id, job_id, candidate_id, name)
     #再查一次
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
