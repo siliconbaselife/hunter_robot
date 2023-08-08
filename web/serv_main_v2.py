@@ -1,4 +1,5 @@
 import json
+import math
 from flask import Flask, request, Response
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
@@ -14,8 +15,14 @@ from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
 import traceback
 
+from flask_cors import *
+
+
 logger = get_logger(config['log']['log_file'])
 app = Flask("robot_backend")
+
+CORS(app, supports_credentials=True)
+CORS(app, resources=r'/*')
 
 @app.route("/test")
 def test():
@@ -196,7 +203,7 @@ def candidate_chat_api():
             try:
                 db_history_msg = json.loads(db_history_msg, strict=False)
             except BaseException as e:
-                logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
+                logger.info(f'db msg json parse abnormal, proc instead (e: {e}), (msg: {db_history_msg})')
                 db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
 
     robot_api = query_robotapi_db(job_id)
@@ -274,11 +281,13 @@ def candidate_result_api():
         'status': 'ok'
     }
     db_history_msg = candidate_info[0][1]
-    if db_history_msg is not None:
+    if db_history_msg is None or db_history_msg =='None':
+        db_history_msg = None
+    else:
         try:
             db_history_msg = json.loads(db_history_msg, strict=False)
         except BaseException as e:
-            logger.info(f'db msg json parse abnormal, proc instead (e: {e})')
+            logger.info(f'db msg json parse abnormal, proc instead (e: {e}), (msg: {db_history_msg})')
             db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
     send_candidate_info(job_id, name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
     logger.info(f'candidate result update: {job_id}, {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
@@ -291,23 +300,30 @@ def candidate_result_api():
 def candidate_list_web():
     job_id = request.args.get('job_id')
     page_num = request.args.get('page_num')
-    if job_id == None or page_num == None:
+    limit = request.args.get('limit')
+    if job_id == None or page_num == None or limit == None:
         logger.info(f'candidade_list_bad_request: job_id: {job_id}， page_num {page_num}')
         return Response(json.dumps(get_web_res_fail("no args")))
 
+    limit = int(limit)
+    page_num = int(page_num)
 
     logger.info(f'candidade_list: job_id: {job_id}， page_num {page_num}')
-    limit = 50
-    start = limit * (int(page_num) - 1) + 1
+    start = limit * (page_num - 1)
     
     chat_sum, res_chat_list = candidate_list_service(job_id, start, limit)
-    logger.info(f"{chat_sum}")
-    page_sum = int(chat_sum / limit) + 1
+    # logger.info(f"{chat_sum}")
+    page_sum = math.ceil(chat_sum / limit)
     res = {
+        "chat_sum" : chat_sum,
         "page_sum" : page_sum,
         "chat_list" : res_chat_list
     }
-    return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
+    response = Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
+    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
+    return response
 
     
 

@@ -43,10 +43,7 @@ CREATE TABLE IF NOT EXISTS `job`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 alter table job add job_config varchar(512) NOT NULL DEFAULT "" COMMENT '岗位配置' after robot_api;
-{
-   "group_msg":"beijing",
-   "filter_config":"common_custom_service_filter"
-}
+{"group_msg":"beijing","filter_config":"common_custom_service_filter"}
 
 
 -- =====requirement_config===========
@@ -67,8 +64,6 @@ CREATE TABLE IF NOT EXISTS `account`(
    PRIMARY KEY ( `account_id` ),
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-
-ALTER TABLE account ADD description VARCHAR(100) COMMENT '账号描述' AFTER task_config;
 
 =====task_config===========
 [
