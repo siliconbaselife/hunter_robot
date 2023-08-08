@@ -37,20 +37,23 @@ config['task']['task_config_base'] = {
 
 config['chat'] = dict()
 config['chat']['preset_reply'] = {
-    'need_contact': '咱能不能留个简历和联系方式呢',
-    'finish_fail': '好的，那知道了，如果后面有需要，再联系我。',
-    'got_contact': 'hr稍后会跟您联系'
+    'need_contact_on_refuse': ['咱能不能留个简历和联系方式呢'],
+    'need_contact_normal': ['咱能不能留个简历和联系方式呢'],
+    'trivial_case': [''],
+    'got_contact': ['hr稍后会跟您联系']
 }
-config['chat']['trivial_reply_intent'] = [
+
+config['chat']['trivial_intent'] = [
     '询问此岗位不相关的概念',
     '询问人事其它业务',
-    '拒绝',
     '感谢',
     '过激语言',
     '考虑',
     '确认',
     '无法独立判断意图的语料'
 ]
+
+config['chat']['refuse_intent'] = ['拒绝']
 
 config['chat']['chat_url'] = 'http://127.0.0.1:12222'
 
