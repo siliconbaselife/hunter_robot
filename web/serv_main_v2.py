@@ -281,7 +281,9 @@ def candidate_result_api():
         'status': 'ok'
     }
     db_history_msg = candidate_info[0][1]
-    if db_history_msg is not None:
+    if db_history_msg is None or db_history_msg =='None':
+        db_history_msg = None
+    else:
         try:
             db_history_msg = json.loads(db_history_msg, strict=False)
         except BaseException as e:
