@@ -1,0 +1,508 @@
+{
+  "encryptGeekId": "d6110b960231255003Z-3tm-EVU~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "VR3H0bXtte0YE-Z1Wo10auZTv_ts2U6UEbObd9l8k2q4ApT45bdibRKEl4NBIQXJ_Qqw_1YuaFg5Hn8ZQnt6fuhc6zVMD8VFueXkX6-vV9Fwz2DiCgE-9Mfs67wnYF3bVB5xehEAW2Nl8o6-z5wVnVsxUIQ3P5LIO-3J3uvFwtBY4lOSEh6rp9vhhGbbZOzZoyHyeZ6DinbGufK_DTRtKFQLxClfqMm2uHmN9snt4ccR5KSkEz8YF2ximow48sDkLPt8LKAOsVAfHNGZdlbBGz_EEY7G6DlYl8U-nr9P5vzobpw-_SwGsWvs7XXL8xjnzX_7A53OBrUCh-6Uhw8KSMgc79RXwBCzuGcMYY5rGOMqIHhZfWn7sZ0irV0OhoENY4SOpAkL9H8-8Xl2-9qlG2mVflyMjeq41WTDgYHEz5Wr8PihqW6Nx1jEloaExpE3bxadNYT2grLk4YqmmCq8em4dWCitxhVZ33ULr5UG2ARXjjhcHrNO3vtGBfmQ0gVz9ln7GxbNYfQaxFdaWsgYE7tQpqjdeDO0lXnXpbxT6vhAXQnJc3H_y2JIdVQNxiJlyhMr9NRrZ7RLLyETzmT9-dOZESBB6XDWoXkskHtHJosZiQ~~",
+    "geekId": 42454317,
+    "geekName": "李女士",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230209/607f1f3d68754fd0e588807f61e85772fe562331b4e73ad4bfa45040b5e6de50419616adb7a5c03f_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "10年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "工作以来，一直从事销售、运营、培训、等相关工作 客户群以B端为主，服务近50多家加盟商完成从0-1的搭建及运营 每月1-2场片区培训及点对点扶持，提升管辖区域合作伙伴的存活率及复购率 承接管辖区域3年，连续完成区域同比30+销售增长",
+      "indexList": []
+    },
+    "expectId": 396525461,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "10-11K",
+    "lowSalary": 10,
+    "highSalary": 11,
+    "middleContent": {
+      "content": "期望职位 渠道销售",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "be261304-2552-48de-9dd9-0a429cb7d061.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.4",
+    "actionDateDesc": null,
+    "expectPositionCode": 140307,
+    "expectPositionName": "渠道销售",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 2,
+    "applyStatusDesc": "在职-考虑机会",
+    "activeTime": 1690889196,
+    "birthday": "19920313",
+    "ageDesc": "31岁",
+    "ageLight": {
+      "content": "31岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "长春广播电视大学",
+      "schoolId": 0,
+      "major": "应用俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20090101",
+      "endDate": "20120101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "长春广播电视大学",
+        "schoolId": 0,
+        "major": "应用俄语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2009.01",
+        "endDate": "2012.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 123578661,
+        "geekId": 0,
+        "company": "诺狮",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "渠道销售",
+        "blueCollarPosition": false,
+        "positionName": "渠道销售",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "项目描述： 羽心堂公司旗下康养品牌，为都市人提供高效康养产品，致力于改善都市人群亚健康的 问题。\n项目职责：\n1. B端新客户开发、老客户维护； \n2、渠道新品发布，推广销售；\n3、合作伙伴需求及渠道政策制定； \n4、合作伙伴的项目启动及运营扶持。\n 职责业绩：\n1、从公司视角，甄选开发签约优质B端客户资源，可以利益共享，长期良性合作。\n2、从业务视角，负责管辖区域用户存活率，活跃度，复购率，年度kpi指标超额完成等。 \n3、从客户视角，有好项目，好产品，好政策，可以资源共享，长期合作，互惠互利。",
+        "startDate": "2021.11",
+        "endDate": "",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "渠道销售",
+          "代理商销售",
+          "大客户销售",
+          "区域销售"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "诺狮",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "渠道销售",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": true
+      },
+      {
+        "id": 62118402,
+        "geekId": 0,
+        "company": "盈奥营养食品",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "渠道销售",
+        "blueCollarPosition": false,
+        "positionName": "渠道销售",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "项目职责：\n1 、负责已有大客户的运营维护、客户成长提升；\n2 、协同公司策略，落实到重点目标客户；\n3 、及时进行客户信息与需求的收集和反馈工作，了解客户需求并提出合理化建议；\n4、针对不同客户需求定制客户合作方案； \n5、 负责公司产品的销售及推广，完成部门销售指标，维护大客户客情关系；\n6 、KOL开发及转化成代理；\n7、大型展会参展寻找意向经销商，完成开发新客户指标；\n8、 负责小型健身赛事筹备， 从搭建到撤展，寻找目标客户及签约KOL。\n 职责业绩：\n1、从销售视角，开发优质B端用户，完成签约及追款进度，提升kpi达成率；\n2、从运营视角，负责新老客户日常维护工作、帮助客户解决问题；",
+        "startDate": "2020.07",
+        "endDate": "2021.10",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "保健品销售"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "盈奥营养食品",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "渠道销售",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 25955069,
+        "geekId": 0,
+        "company": "乐欣母婴用品",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "客户经理",
+        "blueCollarPosition": false,
+        "positionName": "客户经理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "项目职责：\n1 、负责每月加盟商回款跟进，完成月度任务；\n2、 已签约用户协助门店选址，盈利模式测算等；\n3 、已选址用户，协助做好产品盘点，入库，员工培训，货品陈列等筹备工作； \n4 、筹备完成的门店，协助做门店开业大酬宾，开业活动等，后续的工作流对接等；\n5 、每月下店寻店，做好门店动销活动，提升门店业绩；\n6、 售前、售中、售后一站式服务，订货会期间做好服务，接待，参观，签约等工作 \n职责业绩：\n1、 从售前视角，做好门店选址，盈利模式测算，区域是否有冲突，邀请参观公司，提供签 约用户地址实地考察，多维度的打消用户投资顾虑。 \n2、 从售中视角，做首批货制定，执行公司运营标准，公司后续可提供的服务，扶持等，合 同讲解及付款方式。\n3、从售后视角，前期承诺的各项售后，跨团队沟通做好衔接及服务，定时沟通门店的运营 状况，按需提供帮扶及支持等。",
+        "startDate": "2016.10",
+        "endDate": "2020.03",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "做培训"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "乐欣母婴用品",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "客户经理",
+          "indexList": []
+        },
+        "workTime": "3年半",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "d6110b960231255003Z-3tm-EVU~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 396525461,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 140307,
+      "positionName": "渠道销售",
+      "lowSalary": 10,
+      "highSalary": 11,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 123578661,
+    "geekId": 0,
+    "company": "诺狮",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "渠道销售",
+    "blueCollarPosition": false,
+    "positionName": "渠道销售",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "项目描述： 羽心堂公司旗下康养品牌，为都市人提供高效康养产品，致力于改善都市人群亚健康的 问题。\n项目职责：\n1. B端新客户开发、老客户维护； \n2、渠道新品发布，推广销售；\n3、合作伙伴需求及渠道政策制定； \n4、合作伙伴的项目启动及运营扶持。\n 职责业绩：\n1、从公司视角，甄选开发签约优质B端客户资源，可以利益共享，长期良性合作。\n2、从业务视角，负责管辖区域用户存活率，活跃度，复购率，年度kpi指标超额完成等。 \n3、从客户视角，有好项目，好产品，好政策，可以资源共享，长期合作，互惠互利。",
+    "startDate": "2021.11",
+    "endDate": "",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "渠道销售",
+      "代理商销售",
+      "大客户销售",
+      "区域销售"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "诺狮",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "渠道销售",
+      "indexList": []
+    },
+    "workTime": "1年半",
+    "workMonths": 0,
+    "current": true
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "长春广播电视大学",
+      "schoolId": 0,
+      "major": "应用俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2009.01",
+      "endDate": "2012.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 123578661,
+      "geekId": 0,
+      "company": "诺狮",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "渠道销售",
+      "blueCollarPosition": false,
+      "positionName": "渠道销售",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "项目描述： 羽心堂公司旗下康养品牌，为都市人提供高效康养产品，致力于改善都市人群亚健康的 问题。\n项目职责：\n1. B端新客户开发、老客户维护； \n2、渠道新品发布，推广销售；\n3、合作伙伴需求及渠道政策制定； \n4、合作伙伴的项目启动及运营扶持。\n 职责业绩：\n1、从公司视角，甄选开发签约优质B端客户资源，可以利益共享，长期良性合作。\n2、从业务视角，负责管辖区域用户存活率，活跃度，复购率，年度kpi指标超额完成等。 \n3、从客户视角，有好项目，好产品，好政策，可以资源共享，长期合作，互惠互利。",
+      "startDate": "2021.11",
+      "endDate": "",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "渠道销售",
+        "代理商销售",
+        "大客户销售",
+        "区域销售"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "诺狮",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "渠道销售",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": true
+    },
+    {
+      "id": 62118402,
+      "geekId": 0,
+      "company": "盈奥营养食品",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "渠道销售",
+      "blueCollarPosition": false,
+      "positionName": "渠道销售",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "项目职责：\n1 、负责已有大客户的运营维护、客户成长提升；\n2 、协同公司策略，落实到重点目标客户；\n3 、及时进行客户信息与需求的收集和反馈工作，了解客户需求并提出合理化建议；\n4、针对不同客户需求定制客户合作方案； \n5、 负责公司产品的销售及推广，完成部门销售指标，维护大客户客情关系；\n6 、KOL开发及转化成代理；\n7、大型展会参展寻找意向经销商，完成开发新客户指标；\n8、 负责小型健身赛事筹备， 从搭建到撤展，寻找目标客户及签约KOL。\n 职责业绩：\n1、从销售视角，开发优质B端用户，完成签约及追款进度，提升kpi达成率；\n2、从运营视角，负责新老客户日常维护工作、帮助客户解决问题；",
+      "startDate": "2020.07",
+      "endDate": "2021.10",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "保健品销售"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "盈奥营养食品",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "渠道销售",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 25955069,
+      "geekId": 0,
+      "company": "乐欣母婴用品",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "客户经理",
+      "blueCollarPosition": false,
+      "positionName": "客户经理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "项目职责：\n1 、负责每月加盟商回款跟进，完成月度任务；\n2、 已签约用户协助门店选址，盈利模式测算等；\n3 、已选址用户，协助做好产品盘点，入库，员工培训，货品陈列等筹备工作； \n4 、筹备完成的门店，协助做门店开业大酬宾，开业活动等，后续的工作流对接等；\n5 、每月下店寻店，做好门店动销活动，提升门店业绩；\n6、 售前、售中、售后一站式服务，订货会期间做好服务，接待，参观，签约等工作 \n职责业绩：\n1、 从售前视角，做好门店选址，盈利模式测算，区域是否有冲突，邀请参观公司，提供签 约用户地址实地考察，多维度的打消用户投资顾虑。 \n2、 从售中视角，做首批货制定，执行公司运营标准，公司后续可提供的服务，扶持等，合 同讲解及付款方式。\n3、从售后视角，前期承诺的各项售后，跨团队沟通做好衔接及服务，定时沟通门店的运营 状况，按需提供帮扶及支持等。",
+      "startDate": "2016.10",
+      "endDate": "2020.03",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "做培训"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "乐欣母婴用品",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "客户经理",
+        "indexList": []
+      },
+      "workTime": "3年半",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "本周活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（渠道销售）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

@@ -1,0 +1,346 @@
+{
+  "encryptGeekId": "2e3879d0d830f08d0XV73Nq8FVZY",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "qx2jDMTLpG4QB-d16sPMwINh0C93BxUW8IZCsmDqSz-rA9SwYDTJM5uo8qE3x6xHGDwd35xQVQo_DIpOyUHZlnNS0kzOxHHMx9P5Q_aylJeGsFjInSHdVqhV-6fzh5Y0m4nXb1RC4JH9MFDJ6K3w_P5iUPd4Kuy_4BBnjh3Whfx6GZSHjWJqaTs9Zja9IJLG0WdS-hWXbO3GXNHEKqKq8JaQFjfM5IvOKZqn0MwryMBNAWzVRMB3X8JevAjSDHY4lorUiMY_RzZ9t-5Z1R9xmkejZ107A5qaw91iCV05fHt_YPL9LftWa-fZEQwIMh4qpyAuSuje9e_MtuRuNYBvgMwpnzJhdJdX3FIM7cvVOv_lIU7jabbrQVLA4IMnPXCI0RQYgyOjMNboG6OOrFiitadxnslGbwLwE1cB_qItEZTPU5lLHoRQyfY399QsMZMcMPpiHHXVXfmfPp9i67zXXk7cbe4Z8CUnziVcczdcy4ZYLGSZRkgeJ1fB2iXBq8Dc6gHg7p0A7v6cKNwt3MlbTlVHF35Gq4_KE4J3BFjDoqdD-N_7BIq-vUhUFFT7l3zYhh4NNevVD2SD85BZZuzvCpub0esQNMoikM6_NS0W6iomEcg~",
+    "geekId": 611771548,
+    "geekName": "张建",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/boss/avatar/avatar_14.png",
+    "geekGender": 1,
+    "geekWorkYear": "10年以上",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "能够快速融入团队，仔细认真肯吃苦责任感强，对新鲜事物有好奇心，熟悉抖音，剪辑视频电商直播短视频剪辑直播卖货",
+      "indexList": []
+    },
+    "expectId": 639158646,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "1-2K",
+    "lowSalary": 1,
+    "highSalary": 2,
+    "middleContent": {
+      "content": "期望职位 运营助理/专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "be261304-2552-48de-9dd9-0a429cb7d061.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.6",
+    "actionDateDesc": null,
+    "expectPositionCode": 130118,
+    "expectPositionName": "运营助理/专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691142160,
+    "birthday": "19940101",
+    "ageDesc": "29岁",
+    "ageLight": {
+      "content": "29岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "河北广播电视中等专业学校",
+      "schoolId": 0,
+      "major": "工商管理",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20210101",
+      "endDate": "20240101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "河北广播电视中等专业学校",
+        "schoolId": 0,
+        "major": "工商管理",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2021.01",
+        "endDate": "2024.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 217954985,
+        "geekId": 0,
+        "company": "玖耀",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "直播运营",
+        "blueCollarPosition": false,
+        "positionName": "直播运营",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "负责配合主播与粉丝互动，提升直播间活跃气氛，提升在线人数，引导粉丝关注直播间，提升粉丝量，直播数据统计分析",
+        "startDate": "2023.04",
+        "endDate": "",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "直播电商",
+          "电商直播运营"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "玖耀",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "直播运营",
+          "indexList": []
+        },
+        "workTime": "4个月",
+        "workMonths": 0,
+        "current": true
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "2e3879d0d830f08d0XV73Nq8FVZY",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 639158646,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130118,
+      "positionName": "运营助理/专员",
+      "lowSalary": 1,
+      "highSalary": 2,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 217954985,
+    "geekId": 0,
+    "company": "玖耀",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "直播运营",
+    "blueCollarPosition": false,
+    "positionName": "直播运营",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "负责配合主播与粉丝互动，提升直播间活跃气氛，提升在线人数，引导粉丝关注直播间，提升粉丝量，直播数据统计分析",
+    "startDate": "2023.04",
+    "endDate": "",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "直播电商",
+      "电商直播运营"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "玖耀",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "直播运营",
+      "indexList": []
+    },
+    "workTime": "4个月",
+    "workMonths": 0,
+    "current": true
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "河北广播电视中等专业学校",
+      "schoolId": 0,
+      "major": "工商管理",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2021.01",
+      "endDate": "2024.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 217954985,
+      "geekId": 0,
+      "company": "玖耀",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "直播运营",
+      "blueCollarPosition": false,
+      "positionName": "直播运营",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "负责配合主播与粉丝互动，提升直播间活跃气氛，提升在线人数，引导粉丝关注直播间，提升粉丝量，直播数据统计分析",
+      "startDate": "2023.04",
+      "endDate": "",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "直播电商",
+        "电商直播运营"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "玖耀",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "直播运营",
+        "indexList": []
+      },
+      "workTime": "4个月",
+      "workMonths": 0,
+      "current": true
+    }
+  ],
+  "activeTimeDesc": "3日内活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（运营助理/专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

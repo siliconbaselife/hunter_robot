@@ -1,0 +1,346 @@
+{
+  "encryptGeekId": "1682a1f16eb5537f0XR43tq5EFJV",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "d2EfxPgtN6eV8-61u2OIGlWJM8vdC7maPkHyf0YH-Em0qGl3xV1g-cf9l_rELOMFqJWAMI3OuWg1U9vefa38-ZuVqBu6ZWC0WrZdIFktLGnbCLt9j74e9_xqo1btkrCS8lGS313rmR1xFnSF2QKi0QlQUa0g5RnwYG2GVqEmvZ5h4yAdanfbYmucIIc0guQHBmoYRUFqqBceKwKelRsxh2LgmSg-p6JKFdZFnfTRyuqkSGfUkOyfLwvXBKsYzpX-R28Kpinyb9PPnCbRs_cPGp0mbyqT_OjDWm0K7UgUFVN5f5k5vWCQ4YJzaZKjcktMP1eT0MNyLcsBwcV8qrwk3uVbv2YRRH72g9-RHnrcyN7jDPjT0DY8dJS0F0-NNPM9k-T0YVMoPJzuvwIB1UH0ikhDhyx7cIqT6UfG90jOujjAq_6N3BUzQqrYQxJgfkIBh6nBW_W3DvS6ocPgNvNDjnJPNHvk_u5aG2r4DD0ORC0BIufuyvtQ1Ds-kzREeFvxfzaE3H38DWl6WBhKsMEhWLQS7k6GnvUjvR2mG1C8AJ_MUrG02ocOmMewfMTQ5I896pHHqH56l339VbDu2t9dCfg9dJWIbeuZSd5i123GvQmwqhE~",
+    "geekId": 602574005,
+    "geekName": "许龙",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230703/607f1f3d68754fd055323a96d9b643b230b70b4f521dd6f00dabd8f08c9e93515d8c07435b60e851_s.jpg",
+    "geekGender": 1,
+    "geekWorkYear": "10年以上",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "1.拥有较强的执行力，能够贯彻执行上面下达的任务 2.11年的管理层，由20人团队，最多到260人的团队，拥有着丰富的管理经验，以及较强的抗压能力 3.曾经接手过2个困难区域，培养了较强的抗交付风险能力，风险识别，解决方法多样 4.业绩最高做到1200万，市场客户开发能力同样突出",
+      "indexList": []
+    },
+    "expectId": 607297462,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "20-25K",
+    "lowSalary": 20,
+    "highSalary": 25,
+    "middleContent": {
+      "content": "期望职位 物流/仓储项目经理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "2254395e-69f5-435d-adf8-e30ba15ef229.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.4",
+    "actionDateDesc": null,
+    "expectPositionCode": 240109,
+    "expectPositionName": "物流/仓储项目经理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 2,
+    "applyStatusDesc": "在职-考虑机会",
+    "activeTime": 1691236601,
+    "birthday": "19880701",
+    "ageDesc": "35岁",
+    "ageLight": {
+      "content": "35岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "河北外国语学院",
+      "schoolId": 0,
+      "major": "商务俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20080101",
+      "endDate": "20110101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "河北外国语学院",
+        "schoolId": 0,
+        "major": "商务俄语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2008.01",
+        "endDate": "2011.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 210725331,
+        "geekId": 0,
+        "company": "德邦物流",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "物流/仓储项目经理",
+        "blueCollarPosition": false,
+        "positionName": "物流/仓储项目经理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.  管理8-12个快递分部，日常揽派指标任务达成\n2. 识别区域内电商大促期间风险识别，提前补充资源，交付平稳度过，提升客户体验\n3. 搭建团队管理体系，梳理各个分部现场流程，现场培训，提升效率，培养下属晋升管理层\n4. 开发区域内潜在市场客户，签订业务合作合同，定期维护，助力区域业绩达成\n5. 组织协调内部与公司其他职能部门配合，按时按质按量完成上层下达的任务",
+        "startDate": "2011.09",
+        "endDate": "",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "1. 2011年入职，一年的时间内部选拔晋升经理管理层，在廊坊燕郊独立找点，成立\n分公司，有一定的开新店，对接政府流程经验\n2. 在燕郊4年内，站点业绩由10万突破100万，大区排名前三，市场客户开发突出，\n15年晋升选拔区域经理通过，16年晋升任命沧州南皮区域经理\n3. 区域经理轮岗4次，分别在沧州，廊坊霸州，廊坊安次，天津北辰，北京朝阳任\n职，管理团队最多260多人，期间业绩做到1200万，抗压能力，团队管理，人才培\n养，客情维护积累经验丰富",
+        "workEmphasisList": [
+          "TMS",
+          "WMS"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "德邦物流",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "物流/仓储项目经理",
+          "indexList": []
+        },
+        "workTime": "12年",
+        "workMonths": 0,
+        "current": true
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "1682a1f16eb5537f0XR43tq5EFJV",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 607297462,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 240109,
+      "positionName": "物流/仓储项目经理",
+      "lowSalary": 20,
+      "highSalary": 25,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 210725331,
+    "geekId": 0,
+    "company": "德邦物流",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "物流/仓储项目经理",
+    "blueCollarPosition": false,
+    "positionName": "物流/仓储项目经理",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1.  管理8-12个快递分部，日常揽派指标任务达成\n2. 识别区域内电商大促期间风险识别，提前补充资源，交付平稳度过，提升客户体验\n3. 搭建团队管理体系，梳理各个分部现场流程，现场培训，提升效率，培养下属晋升管理层\n4. 开发区域内潜在市场客户，签订业务合作合同，定期维护，助力区域业绩达成\n5. 组织协调内部与公司其他职能部门配合，按时按质按量完成上层下达的任务",
+    "startDate": "2011.09",
+    "endDate": "",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "1. 2011年入职，一年的时间内部选拔晋升经理管理层，在廊坊燕郊独立找点，成立\n分公司，有一定的开新店，对接政府流程经验\n2. 在燕郊4年内，站点业绩由10万突破100万，大区排名前三，市场客户开发突出，\n15年晋升选拔区域经理通过，16年晋升任命沧州南皮区域经理\n3. 区域经理轮岗4次，分别在沧州，廊坊霸州，廊坊安次，天津北辰，北京朝阳任\n职，管理团队最多260多人，期间业绩做到1200万，抗压能力，团队管理，人才培\n养，客情维护积累经验丰富",
+    "workEmphasisList": [
+      "TMS",
+      "WMS"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "德邦物流",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "物流/仓储项目经理",
+      "indexList": []
+    },
+    "workTime": "12年",
+    "workMonths": 0,
+    "current": true
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "河北外国语学院",
+      "schoolId": 0,
+      "major": "商务俄语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2008.01",
+      "endDate": "2011.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 210725331,
+      "geekId": 0,
+      "company": "德邦物流",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "物流/仓储项目经理",
+      "blueCollarPosition": false,
+      "positionName": "物流/仓储项目经理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.  管理8-12个快递分部，日常揽派指标任务达成\n2. 识别区域内电商大促期间风险识别，提前补充资源，交付平稳度过，提升客户体验\n3. 搭建团队管理体系，梳理各个分部现场流程，现场培训，提升效率，培养下属晋升管理层\n4. 开发区域内潜在市场客户，签订业务合作合同，定期维护，助力区域业绩达成\n5. 组织协调内部与公司其他职能部门配合，按时按质按量完成上层下达的任务",
+      "startDate": "2011.09",
+      "endDate": "",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "1. 2011年入职，一年的时间内部选拔晋升经理管理层，在廊坊燕郊独立找点，成立\n分公司，有一定的开新店，对接政府流程经验\n2. 在燕郊4年内，站点业绩由10万突破100万，大区排名前三，市场客户开发突出，\n15年晋升选拔区域经理通过，16年晋升任命沧州南皮区域经理\n3. 区域经理轮岗4次，分别在沧州，廊坊霸州，廊坊安次，天津北辰，北京朝阳任\n职，管理团队最多260多人，期间业绩做到1200万，抗压能力，团队管理，人才培\n养，客情维护积累经验丰富",
+      "workEmphasisList": [
+        "TMS",
+        "WMS"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "德邦物流",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "物流/仓储项目经理",
+        "indexList": []
+      },
+      "workTime": "12年",
+      "workMonths": 0,
+      "current": true
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（物流/仓储项目经理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

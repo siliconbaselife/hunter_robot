@@ -1,0 +1,503 @@
+{
+  "encryptGeekId": "c3583f361ca8ad191nVy0tm1GFo~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "15ehmdcqmxLLV-T1Y-ojwRxf9yncUY6G0SoKhANHKZi3DwAtUI2An_C4QE56F5WRvvEVUrhp8UXX3LA9y19_5y6IcIEoRb-dF60Grtf1i0JXyBISwF2cMbCjmTyf0mk3QuS4saj1IEv2rNbVYshvM14zXwtqFv-A444EqIJDcLsEPcqJQcSCQ4KOyRtx3WLxJ3kptO66b8-fv-eJbTtwDo4Xk9ZHy5lR0LJannYElO_SVTeCGUC17Zxm_xIs7G9BjPwKnaeeaKTPWAn1dU04sL6nPw-cOt-lp6ANlqFpMbb8PwqsIphM2o_gQ3epiI7RWcLJ2P8JP6-KRG5Eeto5yZeuuk5yx2DxgP1UP0plr4NjnniwFWSwwzzZ6YPYYSWWxvznnrRhm6rP8CuTBzgIaoRVBl8stKqp1DucE3GaFwHTTeoh_52x1NWDbvv1s_oGhORt9KvBYXuMpd_E14kGXKxHuca3_jVTCah-QG467CoRVO7-wOYrE2VOuyJeON-3vBYK46iPgV0NaVUqJE8ywcRj4OnVbnL28y4yxeantybv9IMeMU-gxRwpdRLSvkS2ekYEORB39re83a41zhg1nKsci7J98ppkaxb8s89ZkuHlZg~~",
+    "geekId": 11894888,
+    "geekName": "刘晓君",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20210402/a7ce8047c6fe87d0b019ef6f924e62ac8afb64ff17e7e56f8fa89dc190d3e4f3_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "6年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "1.STORYBOOK 北京 签约插画师 2.中国书法家协会毛笔段位等级评判 六段 3.全国百花杯软笔书法比赛 青年组一等奖 4.曾担任责任编辑，负责三本画册排板、内容编辑以及出版社印刷工作。完成吴冠中画册、任景钦作品集、中外艺术品简史三本书籍完整工作，全国新华书店均有售。",
+      "indexList": []
+    },
+    "expectId": 540502772,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "6-8K",
+    "lowSalary": 6,
+    "highSalary": 8,
+    "middleContent": {
+      "content": "期望职位 行政专员/助理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "53a07c7e-6b6e-4308-ab70-1dbdb05b129d.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.10",
+    "actionDateDesc": null,
+    "expectPositionCode": 150201,
+    "expectPositionName": "行政专员/助理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691241425,
+    "birthday": "19951201",
+    "ageDesc": "27岁",
+    "ageLight": {
+      "content": "27岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "北京青年政治学院",
+      "schoolId": 0,
+      "major": "油画系",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20140101",
+      "endDate": "20170101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "北京青年政治学院",
+        "schoolId": 0,
+        "major": "油画系",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2014.01",
+        "endDate": "2017.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 210416146,
+        "geekId": 0,
+        "company": "清华大学艺术博物馆",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "前台",
+        "blueCollarPosition": false,
+        "positionName": "前台行政",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、日常待人接物、办公用品采买\n2、负责盘点、账目核对等工作，按规定完成各项统计工作；\n3、日常入馆人员统计、制作表格、管理文件\n4、店内销售：清华大学相关文创产品、衍生品、代销品、复古 vintage  胸针项链戒指\n5、陪同入馆领导接待讲解",
+        "startDate": "2023.01",
+        "endDate": "",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "会务接待"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "清华大学艺术博物馆",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "前台",
+          "indexList": []
+        },
+        "workTime": "7个月",
+        "workMonths": 0,
+        "current": true
+      },
+      {
+        "id": 204279473,
+        "geekId": 0,
+        "company": "幻方（北京）规划设计院",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "销售专员",
+        "blueCollarPosition": false,
+        "positionName": "销售专员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "景区文创产品销售、根据公司及部门销售任务开展销售工作，完成各项销售指标；对现有市场和客户进行分析，发现客户的潜在需求，达成销售目标；为客户提供产品解决方案；负责与客户之间的商务谈判，建立客户关系等",
+        "startDate": "2021.09",
+        "endDate": "2023.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "网销",
+          "面销"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "幻方（北京）规划设计院",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "销售专员",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 112686483,
+        "geekId": 0,
+        "company": "Groovie Wifie",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "合伙人",
+        "blueCollarPosition": false,
+        "positionName": "合伙人",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "服装设计/时尚管理\n个人服装品牌社群运营、售前售后",
+        "startDate": "2020.01",
+        "endDate": "2021.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "运营管理",
+          "品牌管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "Groovie Wifie",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "合伙人",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "c3583f361ca8ad191nVy0tm1GFo~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 540502772,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150201,
+      "positionName": "行政专员/助理",
+      "lowSalary": 6,
+      "highSalary": 8,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 210416146,
+    "geekId": 0,
+    "company": "清华大学艺术博物馆",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "前台",
+    "blueCollarPosition": false,
+    "positionName": "前台行政",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1、日常待人接物、办公用品采买\n2、负责盘点、账目核对等工作，按规定完成各项统计工作；\n3、日常入馆人员统计、制作表格、管理文件\n4、店内销售：清华大学相关文创产品、衍生品、代销品、复古 vintage  胸针项链戒指\n5、陪同入馆领导接待讲解",
+    "startDate": "2023.01",
+    "endDate": "",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "会务接待"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "清华大学艺术博物馆",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "前台",
+      "indexList": []
+    },
+    "workTime": "7个月",
+    "workMonths": 0,
+    "current": true
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "北京青年政治学院",
+      "schoolId": 0,
+      "major": "油画系",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2014.01",
+      "endDate": "2017.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 210416146,
+      "geekId": 0,
+      "company": "清华大学艺术博物馆",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "前台",
+      "blueCollarPosition": false,
+      "positionName": "前台行政",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、日常待人接物、办公用品采买\n2、负责盘点、账目核对等工作，按规定完成各项统计工作；\n3、日常入馆人员统计、制作表格、管理文件\n4、店内销售：清华大学相关文创产品、衍生品、代销品、复古 vintage  胸针项链戒指\n5、陪同入馆领导接待讲解",
+      "startDate": "2023.01",
+      "endDate": "",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "会务接待"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "清华大学艺术博物馆",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "前台",
+        "indexList": []
+      },
+      "workTime": "7个月",
+      "workMonths": 0,
+      "current": true
+    },
+    {
+      "id": 204279473,
+      "geekId": 0,
+      "company": "幻方（北京）规划设计院",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "销售专员",
+      "blueCollarPosition": false,
+      "positionName": "销售专员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "景区文创产品销售、根据公司及部门销售任务开展销售工作，完成各项销售指标；对现有市场和客户进行分析，发现客户的潜在需求，达成销售目标；为客户提供产品解决方案；负责与客户之间的商务谈判，建立客户关系等",
+      "startDate": "2021.09",
+      "endDate": "2023.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "网销",
+        "面销"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "幻方（北京）规划设计院",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "销售专员",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 112686483,
+      "geekId": 0,
+      "company": "Groovie Wifie",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "合伙人",
+      "blueCollarPosition": false,
+      "positionName": "合伙人",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "服装设计/时尚管理\n个人服装品牌社群运营、售前售后",
+      "startDate": "2020.01",
+      "endDate": "2021.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "运营管理",
+        "品牌管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "Groovie Wifie",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "合伙人",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（行政专员/助理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

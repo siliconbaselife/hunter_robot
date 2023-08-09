@@ -1,0 +1,352 @@
+{
+  "encryptGeekId": "c5a196a1a9087e490nV_2tm0E1tY",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "QMnSPWMZLrlT6-p1jDTpE_bsTqdEBv333PRPB1E3-6SHQhHw3SjIG76ZBoD6eGxf-pApsXUZayuu-rGfP_0xI4XWljtHS8nQUZ5neJvzbCgAx3zxEcvAxcKfLeb-1ifsHuWKu3A_cdomNqibSpH-sjxlH3tZW5VLghV3OeTp37o9TtdgTvzonS9IIVMl3F8UQ5vHIwm_0CHiblkt-8OO6jRZ9JKSYD5d-YCYhbvVNiAORzuIY6YEB9jIhwEcEEwkSb8EYh_c_3i6Z0vhdpvZadv6XDhefWsfVd8tKr3dnDtuDLV2XOJQSPlDMlX0T-GaFeklX5C5mdNAWVPy5m_A5JvrYtnD6k4lk6cRpqgQGLkZzZH2WQ4BVBhKDF7hI9O_edax9McCA5ij-vnEwrs2V3pGIA0aTeNOBvdCbFN-ZfHk7eu772OP8h7Fvw3MiY2_ab2iuokR9zgiumAZVmIxBuC1djMRUJfQfn56DnavWxZjorTdcvj53GgEa6bDM8b3uKeINgN5ctrQWxKY7jYN5RzNH_0-9HT6V3ZDMge4n039Agi1BiximpW1QQ6067YoXqZh16VwC15tGXycvg-a2l-pxmMD9w5Vlk-9BCIO1kfRNIo~",
+    "geekId": 515149398,
+    "geekName": "宏斌",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20210701/156e4c555ab542a6f918c06d2c388492c96e2fd072850aabaab2db955aed61ff_s.jpg",
+    "geekGender": 1,
+    "geekWorkYear": "10年以上",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "本人已在像素种子完成前4个月 maya 影视动画学习和后4个月3Dmax 游戏动作学习，目前可以熟练运用 maya与3Dmax 软件。办事效率，认真负责，兴趣广泛，性格豪爽，思维活跃，学习力强，表达能力强。有良好的自主学习能力，习惯制定学习计划，勤于学习不断提高。希望完成学习之后可以达到初中级动画师的水平。",
+      "indexList": []
+    },
+    "expectId": 611624005,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "面议",
+    "lowSalary": 0,
+    "highSalary": 0,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "01b94e08-7145-438b-8c5b-1029bf1f40a2.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.10",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691242480,
+    "birthday": "19850101",
+    "ageDesc": "38岁",
+    "ageLight": {
+      "content": "38岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "海南科技职业大学",
+      "schoolId": 0,
+      "major": "视觉传播设计与制作",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20190101",
+      "endDate": "20210101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "海南科技职业大学",
+        "schoolId": 0,
+        "major": "视觉传播设计与制作",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2019.01",
+        "endDate": "2021.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 124888063,
+        "geekId": 0,
+        "company": "鑫康辰医学科技发展",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "车间主任",
+        "blueCollarPosition": false,
+        "positionName": "生产主管",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "2010.06 - 2021.06 解放军 304 医院全军骨科研究所\r\n（北京鑫康辰医学科技发展有限公司，隶属解放军总医院第四医学中心）\r\n—— 使我熟悉 男性人体 女性身体 老年身体 以及各种动物的骨骼结构。\r\n—— 对动作的联动性有着非常高的理解\r\n—— 荣获团队“骨干精英”荣誉称号\r\n—— 吃苦耐劳，工作热于奉献，有着一颗求追梦想的心。",
+        "startDate": "2010.06",
+        "endDate": "2021.06",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "实验室设备生产",
+          "介入器材质检",
+          "介入器材生产",
+          "耗材生产"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "鑫康辰医学科技发展",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "车间主任",
+          "indexList": []
+        },
+        "workTime": "11年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "c5a196a1a9087e490nV_2tm0E1tY",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 611624005,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 0,
+      "highSalary": 0,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 124888063,
+    "geekId": 0,
+    "company": "鑫康辰医学科技发展",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "车间主任",
+    "blueCollarPosition": false,
+    "positionName": "生产主管",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "2010.06 - 2021.06 解放军 304 医院全军骨科研究所\r\n（北京鑫康辰医学科技发展有限公司，隶属解放军总医院第四医学中心）\r\n—— 使我熟悉 男性人体 女性身体 老年身体 以及各种动物的骨骼结构。\r\n—— 对动作的联动性有着非常高的理解\r\n—— 荣获团队“骨干精英”荣誉称号\r\n—— 吃苦耐劳，工作热于奉献，有着一颗求追梦想的心。",
+    "startDate": "2010.06",
+    "endDate": "2021.06",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "实验室设备生产",
+      "介入器材质检",
+      "介入器材生产",
+      "耗材生产"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "鑫康辰医学科技发展",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "车间主任",
+      "indexList": []
+    },
+    "workTime": "11年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "海南科技职业大学",
+      "schoolId": 0,
+      "major": "视觉传播设计与制作",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2019.01",
+      "endDate": "2021.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 124888063,
+      "geekId": 0,
+      "company": "鑫康辰医学科技发展",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "车间主任",
+      "blueCollarPosition": false,
+      "positionName": "生产主管",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "2010.06 - 2021.06 解放军 304 医院全军骨科研究所\r\n（北京鑫康辰医学科技发展有限公司，隶属解放军总医院第四医学中心）\r\n—— 使我熟悉 男性人体 女性身体 老年身体 以及各种动物的骨骼结构。\r\n—— 对动作的联动性有着非常高的理解\r\n—— 荣获团队“骨干精英”荣誉称号\r\n—— 吃苦耐劳，工作热于奉献，有着一颗求追梦想的心。",
+      "startDate": "2010.06",
+      "endDate": "2021.06",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "实验室设备生产",
+        "介入器材质检",
+        "介入器材生产",
+        "耗材生产"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "鑫康辰医学科技发展",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "车间主任",
+        "indexList": []
+      },
+      "workTime": "11年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

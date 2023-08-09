@@ -1,0 +1,502 @@
+{
+  "encryptGeekId": "20a823abc1b365a903dy2N2-E1s~",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "cIMi_HCVY6AFq-I1dppnyfS-lemJiho8uzSQR3uYA-dMvDHTdjCJ7RhRayQIXbxjmn2dmlOTfykLco1ExNUH8c9zPJC07Pgwmv9s8xUe2mUiEWVGLF-C_lwgAG4OaD0Ff92dRM1PPtw9CzK61aslEqdULnCTy7gOlYRjPFLLa38sSguq78Uz_bL1A1U9wdV6NcpSP1wEdRnkWX8Hyg_ZFUq0wMCCjamyovoLIY8GJj0bQhOiXZQRvUkWmBSzAbAlZ9aNiGrPaB5IrOr5U_iDmTmqIK0w39iJ39F1n4CG-gcvQ3g-shng-2taBBXJqLyGN4ox0iL5cZsi9m2crqW59Fs4K_UcsY9vtiHFzWRGPO_MoMCAFdYs1Y0nb4IxZqXnOyWpVABYJmyh1jJwAqDHE8022kAkMGNYLT5QDAhvN3qioiuy6lUNRCQLrq-t5E2Wm5Q58WaJ5u8ReppBQusBgmFrBpja6c_vviIjKky_n5jz4HKELdmg8b8zgiK5JWdjX_5Z5w9F_jlBjdv0vGLUTFFmXfQAIMf5Ogj5w__uCJlwtQ3DIDARbv17mwcMMiJMAQG-avqDQJVyG_FsOjVYv3nF8I2-mv3YC2uwsc9qW0bqfw~~",
+    "geekId": 43830339,
+    "geekName": "李女士",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20220916/607f1f3d68754fd05f42b8b0524594fd5fde251222fd73dc09240187c7199578e31fadb15c052ee5_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "7年",
+    "geekDegree": "中专及以下",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "对待工作认真负责，善于沟通、执行力强、有团队精神。有上进心，勤于学历能不断的提高自身的能力和综合素质。",
+      "indexList": []
+    },
+    "expectId": 335289142,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "7-8K",
+    "lowSalary": 7,
+    "highSalary": 8,
+    "middleContent": {
+      "content": "期望职位 行政专员/助理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "11949fbc-15c9-46ec-8184-a3401fa173b0.f1:common.eyJzZXNzaW9uSWQiOiI0YjMyMzc3Ny0xYTUyLTQwYjQtOGJmNS03OTQ2ZjVlYTlkM2QiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.5",
+    "actionDateDesc": null,
+    "expectPositionCode": 150201,
+    "expectPositionName": "行政专员/助理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691243837,
+    "birthday": "19991124",
+    "ageDesc": "23岁",
+    "ageLight": {
+      "content": "23岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "邯郸工程高级技工学校",
+      "schoolId": 0,
+      "major": "高铁乘务",
+      "degree": 0,
+      "degreeName": "中专及以下",
+      "eduType": 0,
+      "startDate": "20150101",
+      "endDate": "20180101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "邯郸工程高级技工学校",
+        "schoolId": 0,
+        "major": "高铁乘务",
+        "degree": 0,
+        "degreeName": "中专及以下",
+        "eduType": 0,
+        "startDate": "2015.01",
+        "endDate": "2018.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 196232015,
+        "geekId": 0,
+        "company": "玖朳文化发展",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "行政经理/主管",
+        "blueCollarPosition": false,
+        "positionName": "行政主管",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、负责办公用车的日常保养及调度工作\n2、协助总经理处理日常公司内部沟通及外部协调工作；\n3、负责团队精神文化建设工作\n4、完成上级安排的其他工作任务\n5、协助执行公司的各项规章制度和维护工作秩序\n6、负责公司员工考勤管理\n7、负责公司办公用品购买及费用报销\n8、负责与工作内容相关的各类文件的归档管理",
+        "startDate": "2022.02",
+        "endDate": "2023.02",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "考勤管理",
+          "差旅管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "玖朳文化发展",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "行政经理/主管",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 141506513,
+        "geekId": 0,
+        "company": "欧盛文化传媒",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "前台",
+        "blueCollarPosition": false,
+        "positionName": "行政人事前台",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "行政前台\n1.妥善接待安排来访人员，做好来访登记、接待工作;\n2.员工入职办公用品发放;\n3.办公室设备报修、日用品补充，办公用品领用、会议室使用管理;\n4.负责物业报修和其他对接工作等；\n5.相关日常办公用品采买;\n6.公司相关快递文件的文件寄送、签收及费用结算工作;\n7.组织落实公司行政制度，日常行政类通知的发布。\n8.负责前台、行政日常数据、费用报表统计\n9.完成上级领导临时交办的其他工作\n人事工作\n1.公司缺编人员招聘\n2.办理员工入、离职相关手续\n3.员工考勤管理\n4. 完成上级领导临时交办的其他工作",
+        "startDate": "2021.08",
+        "endDate": "2022.01",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "行政前台"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "欧盛文化传媒",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "前台",
+          "indexList": []
+        },
+        "workTime": "5个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 134944812,
+        "geekId": 0,
+        "company": "罗马风情婚纱摄影",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "总助/CEO助理/董事长助理",
+        "blueCollarPosition": false,
+        "positionName": "总助",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、影棚巡场\n2、核对摄影部化妆部工作完成情况\n3、报销统计\n4、辅助总监完成日常工作",
+        "startDate": "2021.06",
+        "endDate": "2021.08",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "驾驶证"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "罗马风情婚纱摄影",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "总助/CEO助理/董事长助理",
+          "indexList": []
+        },
+        "workTime": "2个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "20a823abc1b365a903dy2N2-E1s~",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 335289142,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150201,
+      "positionName": "行政专员/助理",
+      "lowSalary": 7,
+      "highSalary": 8,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 196232015,
+    "geekId": 0,
+    "company": "玖朳文化发展",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "行政经理/主管",
+    "blueCollarPosition": false,
+    "positionName": "行政主管",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1、负责办公用车的日常保养及调度工作\n2、协助总经理处理日常公司内部沟通及外部协调工作；\n3、负责团队精神文化建设工作\n4、完成上级安排的其他工作任务\n5、协助执行公司的各项规章制度和维护工作秩序\n6、负责公司员工考勤管理\n7、负责公司办公用品购买及费用报销\n8、负责与工作内容相关的各类文件的归档管理",
+    "startDate": "2022.02",
+    "endDate": "2023.02",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "考勤管理",
+      "差旅管理"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "玖朳文化发展",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "行政经理/主管",
+      "indexList": []
+    },
+    "workTime": "1年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "邯郸工程高级技工学校",
+      "schoolId": 0,
+      "major": "高铁乘务",
+      "degree": 0,
+      "degreeName": "中专及以下",
+      "eduType": 0,
+      "startDate": "2015.01",
+      "endDate": "2018.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 196232015,
+      "geekId": 0,
+      "company": "玖朳文化发展",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "行政经理/主管",
+      "blueCollarPosition": false,
+      "positionName": "行政主管",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、负责办公用车的日常保养及调度工作\n2、协助总经理处理日常公司内部沟通及外部协调工作；\n3、负责团队精神文化建设工作\n4、完成上级安排的其他工作任务\n5、协助执行公司的各项规章制度和维护工作秩序\n6、负责公司员工考勤管理\n7、负责公司办公用品购买及费用报销\n8、负责与工作内容相关的各类文件的归档管理",
+      "startDate": "2022.02",
+      "endDate": "2023.02",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "考勤管理",
+        "差旅管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "玖朳文化发展",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "行政经理/主管",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 141506513,
+      "geekId": 0,
+      "company": "欧盛文化传媒",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "前台",
+      "blueCollarPosition": false,
+      "positionName": "行政人事前台",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "行政前台\n1.妥善接待安排来访人员，做好来访登记、接待工作;\n2.员工入职办公用品发放;\n3.办公室设备报修、日用品补充，办公用品领用、会议室使用管理;\n4.负责物业报修和其他对接工作等；\n5.相关日常办公用品采买;\n6.公司相关快递文件的文件寄送、签收及费用结算工作;\n7.组织落实公司行政制度，日常行政类通知的发布。\n8.负责前台、行政日常数据、费用报表统计\n9.完成上级领导临时交办的其他工作\n人事工作\n1.公司缺编人员招聘\n2.办理员工入、离职相关手续\n3.员工考勤管理\n4. 完成上级领导临时交办的其他工作",
+      "startDate": "2021.08",
+      "endDate": "2022.01",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "行政前台"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "欧盛文化传媒",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "前台",
+        "indexList": []
+      },
+      "workTime": "5个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 134944812,
+      "geekId": 0,
+      "company": "罗马风情婚纱摄影",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "总助/CEO助理/董事长助理",
+      "blueCollarPosition": false,
+      "positionName": "总助",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、影棚巡场\n2、核对摄影部化妆部工作完成情况\n3、报销统计\n4、辅助总监完成日常工作",
+      "startDate": "2021.06",
+      "endDate": "2021.08",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "驾驶证"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "罗马风情婚纱摄影",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "总助/CEO助理/董事长助理",
+        "indexList": []
+      },
+      "workTime": "2个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑中专及以下",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（行政专员/助理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

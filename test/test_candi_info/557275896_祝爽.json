@@ -1,0 +1,451 @@
+{
+  "encryptGeekId": "52130d24187ec6de0nF92dq4GFtW",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "I16iX47WyU-fi-B1vHOIFTZlXby1rru8EcY_PVnjB5qIlWegHZefMZpKh4kOHzFvcpoDLUmgGSdy4DdPxOHcLmfv3WHfbnW0DYmGhn3uGxsjpDhqqNrGmnlwbcx47rZCGuW3ZZz2p0zvsuUwWQLt8tzgj8CNjJTfBsBXutscOMrY5aSKmQtRc1XmNZ132t8-vUyYM6WUtHYUaUYW-gepMEKtkXxgcrNKcsdLaMnwrQ4Z_EMeJHl0jfSDPIx44Yvy5Dd-s5zo_KTQ1NehisXf2HoM6_XV5jCxofPLJ62YZ7uS7BvPtxpwNZk8dsFeSadeGPXWJDt8SOXlji0gAc37uLoemnGsdREbzTRDby0BmMuXm7ZuHELo3qLeg8YRZwG0bjJrAlefVEiO4TNsfxG6s39T4_dJfyWjNm5wu8tP1XK0Za9EtMVvl04qXKKCTMERvnCL8YMIcmXv8_zBd8cvaFUpYNLi9oAnJlXzTgGycpNox9br9iHRqeN91r9HdEzO_p4JWywT3OPrycAnuC2R12NMTzt7A_XpUqhf9ZrLEWFnWwRsm44Vkv_sQS_O6Ba8AFVO03rEaTwXl9xYA-0DBEWcx-vvXA9kLyDeF7T3ZzUt-BI~",
+    "geekId": 557275896,
+    "geekName": "祝爽",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20220826/607f1f3d68754fd020de58ebb34a7a0e4697ad0979c4309f4d9890c4b2a52196a3e0f13bbf368a7d_s.jpg",
+    "geekGender": 0,
+    "geekWorkYear": "2年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "本人自信稳重，有较强的责任感，能够处理突发事件，喜欢接触新事物。在工作中积极团结 同事，在面对困难时沉着冷静，与各部门紧密沟通合作，顺利完成会议的各项保障工作。",
+      "indexList": []
+    },
+    "expectId": 605849496,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "5-7K",
+    "lowSalary": 5,
+    "highSalary": 7,
+    "middleContent": {
+      "content": "期望职位 行政专员/助理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "ccc2dcb1-e5a2-41d3-a5b7-933f9da52603.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.11",
+    "actionDateDesc": null,
+    "expectPositionCode": 150201,
+    "expectPositionName": "行政专员/助理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691243644,
+    "birthday": "20010601",
+    "ageDesc": "22岁",
+    "ageLight": {
+      "content": "22岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "齐齐哈尔高等师范专科学校",
+      "schoolId": 0,
+      "major": "空中乘务",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20170101",
+      "endDate": "20220101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "齐齐哈尔高等师范专科学校",
+        "schoolId": 0,
+        "major": "空中乘务",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2017.01",
+        "endDate": "2022.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 210382879,
+        "geekId": 0,
+        "company": "科技",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "行政专员/助理",
+        "blueCollarPosition": false,
+        "positionName": "行政专员/助理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "一、岗位职责:1、前台接待(来访接待、登记与引导;来电转接与跟进)2、办公环境管理(办公照明、空调、办公家具、饮用水、打印机、绿化、卫生等管理与维修保障;前台或会议接待 室的卫生清洁及桌椅摆放，并保持整洁干净; )3、日常采购与物品管理(公司办公用品、礼品、活动物资的采购、发放、领用登记，合理节省费用)4、快递收发(快递信件、包裹的收发登记，异常情况跟进处理)5、费用报销(租赁费、物业费、快递、绿化、差旅、名片、打印机租赁费等)6、印刷管理(名片、工卡、宣传册、定制笔记本等)7、后勤管理与协调(物业事项对接，办公室电子门锁、钥 匙、储物柜管理; )8、人事流程办理(入离职与调岗手续跟进与办理，各类协议签订，人事系统维护)9、考勤管理10、月度人事行政数据统计11、档案管理与工商证照管理;12、.上级交办其他人事行政相关事 务。",
+        "startDate": "2022.12",
+        "endDate": "2023.05",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "办公环境管理",
+          "收发信件快递",
+          "考勤管理",
+          "数据处理",
+          "证照管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "科技",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "行政专员/助理",
+          "indexList": []
+        },
+        "workTime": "5个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 200026115,
+        "geekId": 0,
+        "company": "中国石化",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "会议活动执行",
+        "blueCollarPosition": false,
+        "positionName": "会议服务人员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "\n会议管理和会议组织助理（日期）\n- 应急事件处理：在一次关键行业会议中，面对技术故障，我迅速反应并与技术支持团队紧密合作，调整会议进程，保持与会者的参与度和兴趣，确保会议顺利进行。\n- 精确组织规划：在大型国际会议筹备中，我精心制定详细的计划和时间表，与团队紧密合作，与供应商和场地管理方进行高效沟通，确保各项任务按时完成，获得了与会者和团队成员的高度赞赏。\n- 会场安排和场纪管理：我负责会场的布置和安排，确保各项设施和资源的准备就绪，提供舒适的环境给与会者。同时，我严格管理现场纪律，确保会议秩序井然，减少干扰，使与会者能够专注于会议内容。\n1.会前准备提前会议室摆放好欢迎调幅、欢迎牌、签到台、指示牌等。\n2.会前准备:准备好会议所需要的会议资料，会议用品，会议演讲稿等会议相关物品。\n3.会议场所:专人到会议室检查会议室条幅、灯光、音响、茶饮等。\n4.会议住宿:房间楼层及房间号确认，询问是否有特殊要求。\n5.会议餐饮:用餐时间、用餐标准及特殊客人(回民)的确认。\n6.会议旅游:旅游线路行程、用车、导游是否增加景点等确认。\n7.会议娱乐:娱乐消费形式、消费标准、娱乐地点的确认。\n8.会议服务:会议代表合影留念、为代表提供文秘服务及相关服务。\n会后服务\n1.结帐:提供会议过程中的详细费用发生明细及说明,专人与客户进行核对并结帐，\n2.资料:会议后的资料收集，根据客户要求制作会议通讯录或花名册。\n3.定期回访和最新资讯反馈。",
+        "startDate": "2021.06",
+        "endDate": "2022.10",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "会议会展执行"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "中国石化",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "会议活动执行",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": [
+      {
+        "code": 0,
+        "name": "服务员"
+      }
+    ],
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": {
+      "listingOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      },
+      "detailOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      }
+    },
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "52130d24187ec6de0nF92dq4GFtW",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 605849496,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150201,
+      "positionName": "行政专员/助理",
+      "lowSalary": 5,
+      "highSalary": 7,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 210382879,
+    "geekId": 0,
+    "company": "科技",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "行政专员/助理",
+    "blueCollarPosition": false,
+    "positionName": "行政专员/助理",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "一、岗位职责:1、前台接待(来访接待、登记与引导;来电转接与跟进)2、办公环境管理(办公照明、空调、办公家具、饮用水、打印机、绿化、卫生等管理与维修保障;前台或会议接待 室的卫生清洁及桌椅摆放，并保持整洁干净; )3、日常采购与物品管理(公司办公用品、礼品、活动物资的采购、发放、领用登记，合理节省费用)4、快递收发(快递信件、包裹的收发登记，异常情况跟进处理)5、费用报销(租赁费、物业费、快递、绿化、差旅、名片、打印机租赁费等)6、印刷管理(名片、工卡、宣传册、定制笔记本等)7、后勤管理与协调(物业事项对接，办公室电子门锁、钥 匙、储物柜管理; )8、人事流程办理(入离职与调岗手续跟进与办理，各类协议签订，人事系统维护)9、考勤管理10、月度人事行政数据统计11、档案管理与工商证照管理;12、.上级交办其他人事行政相关事 务。",
+    "startDate": "2022.12",
+    "endDate": "2023.05",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "办公环境管理",
+      "收发信件快递",
+      "考勤管理",
+      "数据处理",
+      "证照管理"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "科技",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "行政专员/助理",
+      "indexList": []
+    },
+    "workTime": "5个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "齐齐哈尔高等师范专科学校",
+      "schoolId": 0,
+      "major": "空中乘务",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2017.01",
+      "endDate": "2022.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 210382879,
+      "geekId": 0,
+      "company": "科技",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "行政专员/助理",
+      "blueCollarPosition": false,
+      "positionName": "行政专员/助理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "一、岗位职责:1、前台接待(来访接待、登记与引导;来电转接与跟进)2、办公环境管理(办公照明、空调、办公家具、饮用水、打印机、绿化、卫生等管理与维修保障;前台或会议接待 室的卫生清洁及桌椅摆放，并保持整洁干净; )3、日常采购与物品管理(公司办公用品、礼品、活动物资的采购、发放、领用登记，合理节省费用)4、快递收发(快递信件、包裹的收发登记，异常情况跟进处理)5、费用报销(租赁费、物业费、快递、绿化、差旅、名片、打印机租赁费等)6、印刷管理(名片、工卡、宣传册、定制笔记本等)7、后勤管理与协调(物业事项对接，办公室电子门锁、钥 匙、储物柜管理; )8、人事流程办理(入离职与调岗手续跟进与办理，各类协议签订，人事系统维护)9、考勤管理10、月度人事行政数据统计11、档案管理与工商证照管理;12、.上级交办其他人事行政相关事 务。",
+      "startDate": "2022.12",
+      "endDate": "2023.05",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "办公环境管理",
+        "收发信件快递",
+        "考勤管理",
+        "数据处理",
+        "证照管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "科技",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "行政专员/助理",
+        "indexList": []
+      },
+      "workTime": "5个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 200026115,
+      "geekId": 0,
+      "company": "中国石化",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "会议活动执行",
+      "blueCollarPosition": false,
+      "positionName": "会议服务人员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "\n会议管理和会议组织助理（日期）\n- 应急事件处理：在一次关键行业会议中，面对技术故障，我迅速反应并与技术支持团队紧密合作，调整会议进程，保持与会者的参与度和兴趣，确保会议顺利进行。\n- 精确组织规划：在大型国际会议筹备中，我精心制定详细的计划和时间表，与团队紧密合作，与供应商和场地管理方进行高效沟通，确保各项任务按时完成，获得了与会者和团队成员的高度赞赏。\n- 会场安排和场纪管理：我负责会场的布置和安排，确保各项设施和资源的准备就绪，提供舒适的环境给与会者。同时，我严格管理现场纪律，确保会议秩序井然，减少干扰，使与会者能够专注于会议内容。\n1.会前准备提前会议室摆放好欢迎调幅、欢迎牌、签到台、指示牌等。\n2.会前准备:准备好会议所需要的会议资料，会议用品，会议演讲稿等会议相关物品。\n3.会议场所:专人到会议室检查会议室条幅、灯光、音响、茶饮等。\n4.会议住宿:房间楼层及房间号确认，询问是否有特殊要求。\n5.会议餐饮:用餐时间、用餐标准及特殊客人(回民)的确认。\n6.会议旅游:旅游线路行程、用车、导游是否增加景点等确认。\n7.会议娱乐:娱乐消费形式、消费标准、娱乐地点的确认。\n8.会议服务:会议代表合影留念、为代表提供文秘服务及相关服务。\n会后服务\n1.结帐:提供会议过程中的详细费用发生明细及说明,专人与客户进行核对并结帐，\n2.资料:会议后的资料收集，根据客户要求制作会议通讯录或花名册。\n3.定期回访和最新资讯反馈。",
+      "startDate": "2021.06",
+      "endDate": "2022.10",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "会议会展执行"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "中国石化",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "会议活动执行",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（行政专员/助理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

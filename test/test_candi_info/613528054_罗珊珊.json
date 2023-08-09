@@ -1,0 +1,426 @@
+{
+  "encryptGeekId": "7ffdf2246a059bfb0XV53t-1EFdU",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "8LGFTCy4n42lG-a1J2poZKgVqG5U-7fge5wgJZYW2bgRhjjoqL1hXT83pLN8H9F4h1Usl0IphWL1mdkr1QJRIHbpEQ3PjziXsODl-1v65Vmp2XNJpPohGiZqtAUq2odcXDmxKKXwN69QPm2lgoUmAT6DdJhPQMeLkQOhCxKCI9MOmHruVpSV7XEYQ0q7mEG_Iw-p34ILPyCr3kFSC6IEkF91AxEtZu2aF1joz8eZCmG4siFjbJG1wuweSqzpvjPAxR8EBIu_hGlz91WDGuTC6TNqjM9RQdP_7TCtWb8Y6og00cBbkm1wPBEK1V_Y7I5JbWQMFu5DXVNigpO5WRNfpPlU5p7Vm0ZQrK_fhhQzf90O3RnQ8tMDKy6Ib3SqCrak_BJDCLFHULPOJRqYYlS3AKulxisTUc8VHR2VvbinsSJKzfUk5wwA-xxFftCIHJafODCBprPeR3Hobnc40G9uf88uAK7jAuO6ALWdYVM5bNAJ2VRKC3x_Axbl358dXUgKBj2gwJ_K58QqGd9XSLufGJaxIhOJIt1ur9g9ifHp4rdjwJGZ3ampP-JDYl86yuhOWwfvaXcoJRkeq3ZzgfScoDFEKEW1yqmbtiEUv5V4PSQRNzM~",
+    "geekId": 613528054,
+    "geekName": "罗珊珊",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230803/607f1f3d68754fd0c03a8ed4626054e5511e520cc669573d0fac37bb7b0d4501349342404532ab76_s.png.webp",
+    "geekGender": 0,
+    "geekWorkYear": "4年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "1.本人性格属于外向活泼，善于交流和沟通，有着4年的售前售后客服的工作经。2.能充分熟练地应用于实际，细心，自信乐观，具有很强的上进心，善于发现解决问题，能够承受较大的工作压力，抗压性较好。能够虚心请教不懂的事情，具有一定的沟通能力。",
+      "indexList": []
+    },
+    "expectId": 642957204,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "2-5K",
+    "lowSalary": 2,
+    "highSalary": 5,
+    "middleContent": {
+      "content": "期望职位 网络客服",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "b6dda1cf-67d6-4b25-a315-54f36d157dae.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.7",
+    "actionDateDesc": null,
+    "expectPositionCode": 130303,
+    "expectPositionName": "网络客服",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 0,
+    "birthday": "20010601",
+    "ageDesc": "22岁",
+    "ageLight": {
+      "content": "22岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "西安外国语大学",
+      "schoolId": 0,
+      "major": "旅游英语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20140101",
+      "endDate": "20190101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "西安外国语大学",
+        "schoolId": 0,
+        "major": "旅游英语",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2014.01",
+        "endDate": "2019.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 219937048,
+        "geekId": 0,
+        "company": "彤缤珊女装旗舰店",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "网络客服",
+        "blueCollarPosition": false,
+        "positionName": "网络客服",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "本人性格属于外向活泼，善于交流和沟通，有着4年的售前售后客服的工作经。能充分熟练地应用于实际，细心，自信乐观，具有很强的上进心，善于发现解决问题，能够承受较大的工作压力，抗压性较好。能够虚心请教不懂的事情，具有一定的沟通能力，不怕苦不怕累，待人真诚，擅长交朋友，人际关系良好，对事认真负责，有很强的责任心和团队意识，具有一定的创新意识和创造能力。在竞争中树立我们的目标，谨慎踏实地把公司的业务做好，提高公司的知名度，通过个人的行动。从身边的点滴小事做起，努力上进，友善待人，把我们共同的事业做好",
+        "startDate": "2021.08",
+        "endDate": "2023.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "1.双十一活动业绩排前三。\n2.618活动中，转化率排名前三，",
+        "workEmphasisList": [
+          "电商客服",
+          "网络客服管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "彤缤珊女装旗舰店",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "网络客服",
+          "indexList": []
+        },
+        "workTime": "2年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 219943258,
+        "geekId": 0,
+        "company": "碧蜀青食品旗舰店",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "网络客服",
+        "blueCollarPosition": false,
+        "positionName": "电商客服",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、负责旺旺客户的咨询、电话回访；\n2、通过旺旺进行聊天、跟客户沟通。\n3、完成领导交代的其他事项。",
+        "startDate": "2019.07",
+        "endDate": "2021.06",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "1、曾连续三个月业绩排名前三\n2、曾因为仓库发货问题让客户直接给了差评，在我的再三沟通与交流下客户删了差评。",
+        "workEmphasisList": [
+          "网络客服管理",
+          "电商客服"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "碧蜀青食品旗舰店",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "网络客服",
+          "indexList": []
+        },
+        "workTime": "2年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "7ffdf2246a059bfb0XV53t-1EFdU",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 642957204,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130303,
+      "positionName": "网络客服",
+      "lowSalary": 2,
+      "highSalary": 5,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 219937048,
+    "geekId": 0,
+    "company": "彤缤珊女装旗舰店",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "网络客服",
+    "blueCollarPosition": false,
+    "positionName": "网络客服",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "本人性格属于外向活泼，善于交流和沟通，有着4年的售前售后客服的工作经。能充分熟练地应用于实际，细心，自信乐观，具有很强的上进心，善于发现解决问题，能够承受较大的工作压力，抗压性较好。能够虚心请教不懂的事情，具有一定的沟通能力，不怕苦不怕累，待人真诚，擅长交朋友，人际关系良好，对事认真负责，有很强的责任心和团队意识，具有一定的创新意识和创造能力。在竞争中树立我们的目标，谨慎踏实地把公司的业务做好，提高公司的知名度，通过个人的行动。从身边的点滴小事做起，努力上进，友善待人，把我们共同的事业做好",
+    "startDate": "2021.08",
+    "endDate": "2023.07",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "1.双十一活动业绩排前三。\n2.618活动中，转化率排名前三，",
+    "workEmphasisList": [
+      "电商客服",
+      "网络客服管理"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "彤缤珊女装旗舰店",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "网络客服",
+      "indexList": []
+    },
+    "workTime": "2年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "西安外国语大学",
+      "schoolId": 0,
+      "major": "旅游英语",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2014.01",
+      "endDate": "2019.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 219937048,
+      "geekId": 0,
+      "company": "彤缤珊女装旗舰店",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "网络客服",
+      "blueCollarPosition": false,
+      "positionName": "网络客服",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "本人性格属于外向活泼，善于交流和沟通，有着4年的售前售后客服的工作经。能充分熟练地应用于实际，细心，自信乐观，具有很强的上进心，善于发现解决问题，能够承受较大的工作压力，抗压性较好。能够虚心请教不懂的事情，具有一定的沟通能力，不怕苦不怕累，待人真诚，擅长交朋友，人际关系良好，对事认真负责，有很强的责任心和团队意识，具有一定的创新意识和创造能力。在竞争中树立我们的目标，谨慎踏实地把公司的业务做好，提高公司的知名度，通过个人的行动。从身边的点滴小事做起，努力上进，友善待人，把我们共同的事业做好",
+      "startDate": "2021.08",
+      "endDate": "2023.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "1.双十一活动业绩排前三。\n2.618活动中，转化率排名前三，",
+      "workEmphasisList": [
+        "电商客服",
+        "网络客服管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "彤缤珊女装旗舰店",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "网络客服",
+        "indexList": []
+      },
+      "workTime": "2年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 219943258,
+      "geekId": 0,
+      "company": "碧蜀青食品旗舰店",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "网络客服",
+      "blueCollarPosition": false,
+      "positionName": "电商客服",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、负责旺旺客户的咨询、电话回访；\n2、通过旺旺进行聊天、跟客户沟通。\n3、完成领导交代的其他事项。",
+      "startDate": "2019.07",
+      "endDate": "2021.06",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "1、曾连续三个月业绩排名前三\n2、曾因为仓库发货问题让客户直接给了差评，在我的再三沟通与交流下客户删了差评。",
+      "workEmphasisList": [
+        "网络客服管理",
+        "电商客服"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "碧蜀青食品旗舰店",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "网络客服",
+        "indexList": []
+      },
+      "workTime": "2年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（网络客服）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

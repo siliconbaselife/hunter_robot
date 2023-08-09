@@ -1,0 +1,506 @@
+{
+  "encryptGeekId": "914d922894e435090nRz3NS7GFZT",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "v9vno5F025hMB-o1GCkk6hsGQZX-tzjSla990aJRPcuMbVLBtQ9peLQsX6LfPY9bfVLF9nLRDMCKGqNvBw3Q_YmW9V44X1H37KSKuWOF-Ec0AhO3ksnxvpBeowUxecNcxwJDD024Ah8ikSsZOBt3yPiQAlazhsZAonZj8uyluf138jfpEpzhGY56nXHNeob4XiJ5kbQ9Uqy3c5X3k_CCQ9SgjAHaKzIxNtpzsLcrYXF_DNW77yLiIlgZggr14ow8ousMk4dJWeB0ajJkMkjSt458K5C-xWuq09aGDaTO_MyrIaZBOPa9wSEQpDTHyzXfaW5psXpKDTSE7Z-dBa2pXE0sqilOeIJd3lfMi50Rz34_7FznCkhVDmRu5TyJSChbyvurwEKF_vc4hZXRBINmQEM2_aEFwUCa1jUUHOUlnNEOo08q9HPPwgYA2nlzqqeQn4Kdc6N3G--S5sno8RHBNhX9pd3Fo8do8BG8sXPZXPebLfW91hwz_O4gYi1-zhToSsNX8gIWZgrdyAPMzxrDU99z37ikvT8XS2O0vtLhDmN1GbHHnB3TtNbvBjAt1RIHKZ2FmVuA8cV0JpwrQ4cp7_QJzJo5Ywd7wfK551KBZJ3n7Ak~",
+    "geekId": 509796843,
+    "geekName": "闫硕",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20210318/39f99d5f3159c0f5567444c60b5febbcfed78f998b04378db33c8b40dc07bbd4_s.png",
+    "geekGender": 1,
+    "geekWorkYear": "4年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "性格有点内向、乐观上进、有爱心并善于施教并行；对待工作认真负责，善于沟通、协调有较强的组织能力与团队精 神；上进 心强、勤于学习能不断进步自身的能力与综合素质。在未来的工作中，我将以充沛的精力，刻苦钻研的精神来 努力工作，稳定 地进步自己的工作能力，与公司同步发展。",
+      "indexList": []
+    },
+    "expectId": 635150862,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "8-10K",
+    "lowSalary": 8,
+    "highSalary": 10,
+    "middleContent": {
+      "content": "期望职位 运营助理/专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "4db0b98d-aa68-4d28-a020-43963e2950ac.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.5",
+    "actionDateDesc": null,
+    "expectPositionCode": 130118,
+    "expectPositionName": "运营助理/专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691211204,
+    "birthday": "19991001",
+    "ageDesc": "23岁",
+    "ageLight": {
+      "content": "23岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "河北工业职业技术学院",
+      "schoolId": 0,
+      "major": "电子信息工程技术",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20170101",
+      "endDate": "20200101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "河北工业职业技术学院",
+        "schoolId": 0,
+        "major": "电子信息工程技术",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2017.01",
+        "endDate": "2020.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 220049853,
+        "geekId": 0,
+        "company": "华熙生物",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "内容运营",
+        "blueCollarPosition": false,
+        "positionName": "内容运营",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": " 账号视频数据统计、计算及分析\r 账号人群分析，5A人群分析、八大人群分析\r 引流视频沟通投放根据消耗等数据，汇总爆款形势，帮助编导优化脚本内容\r 引流视频卡审点内部审核\r 内容视频选题、系列视频策划\r 主页内容视频 DOU +投放\r 内容视频数据分析\r工作成果：\r 荣获华熙生物董事长特别奖\r 通过视频数据及人群分析反哺引流视频，单条视频最高消耗破500W\r 整体引流视频投放过审率达83%高于行业大盘平均水平\r 单条主页视频自然流量播放达300W+\r DOU +投放成本控制单个粉丝成本低于 1；千次播放成本低于 10",
+        "startDate": "2021.07",
+        "endDate": "2023.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "内容审核",
+          "策划选题"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "华熙生物",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "内容运营",
+          "indexList": []
+        },
+        "workTime": "2年",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 147084566,
+        "geekId": 0,
+        "company": "华熙生物",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "直播运营",
+        "blueCollarPosition": false,
+        "positionName": "直播运营",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": " 活动策划执行，活动目标拆解\r\n 优化直播产品话术\r\n 协助直播上下架连接、数据复盘\r\n工作成果\r\n 协助完善话术，提高整体转化率及留存率\r\n 根据数据复盘得出最佳奖品节奏",
+        "startDate": "2020.12",
+        "endDate": "2021.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "通过视频及5A人群分析反哺引流视频，单条视频最高消耗破500W\r 整体引流视频投放过审率达83%高于行业大盘平均水平\r 审核内容视频多次避免事故发生",
+        "workEmphasisList": [
+          "选题策划",
+          "视频内容运营",
+          "内容审核"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "华熙生物",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "直播运营",
+          "indexList": []
+        },
+        "workTime": "7个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 98414599,
+        "geekId": 0,
+        "company": "知金大鹏教育",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "新媒体运营",
+        "blueCollarPosition": false,
+        "positionName": "新媒体运营",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1.对账号整体负责，文案脚本撰写，拍摄创作教学及引流短视频。\r\n2.负责运用抖音引流至私域，配合销售进行转化。\r\n工作成果：\r\n3.在职期间接受权重极低账号，对其进行加权，后期运营至正规\r\n4.月均播放量达30W以上\r\n5.单个视频播放量达22.3W\r\n6.月均引流千人",
+        "startDate": "2020.08",
+        "endDate": "2020.12",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "短视频运营"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "知金大鹏教育",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "新媒体运营",
+          "indexList": []
+        },
+        "workTime": "4个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "914d922894e435090nRz3NS7GFZT",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 635150862,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130118,
+      "positionName": "运营助理/专员",
+      "lowSalary": 8,
+      "highSalary": 10,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 220049853,
+    "geekId": 0,
+    "company": "华熙生物",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "内容运营",
+    "blueCollarPosition": false,
+    "positionName": "内容运营",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": " 账号视频数据统计、计算及分析\r 账号人群分析，5A人群分析、八大人群分析\r 引流视频沟通投放根据消耗等数据，汇总爆款形势，帮助编导优化脚本内容\r 引流视频卡审点内部审核\r 内容视频选题、系列视频策划\r 主页内容视频 DOU +投放\r 内容视频数据分析\r工作成果：\r 荣获华熙生物董事长特别奖\r 通过视频数据及人群分析反哺引流视频，单条视频最高消耗破500W\r 整体引流视频投放过审率达83%高于行业大盘平均水平\r 单条主页视频自然流量播放达300W+\r DOU +投放成本控制单个粉丝成本低于 1；千次播放成本低于 10",
+    "startDate": "2021.07",
+    "endDate": "2023.07",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "内容审核",
+      "策划选题"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "华熙生物",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "内容运营",
+      "indexList": []
+    },
+    "workTime": "2年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "河北工业职业技术学院",
+      "schoolId": 0,
+      "major": "电子信息工程技术",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2017.01",
+      "endDate": "2020.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 220049853,
+      "geekId": 0,
+      "company": "华熙生物",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "内容运营",
+      "blueCollarPosition": false,
+      "positionName": "内容运营",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": " 账号视频数据统计、计算及分析\r 账号人群分析，5A人群分析、八大人群分析\r 引流视频沟通投放根据消耗等数据，汇总爆款形势，帮助编导优化脚本内容\r 引流视频卡审点内部审核\r 内容视频选题、系列视频策划\r 主页内容视频 DOU +投放\r 内容视频数据分析\r工作成果：\r 荣获华熙生物董事长特别奖\r 通过视频数据及人群分析反哺引流视频，单条视频最高消耗破500W\r 整体引流视频投放过审率达83%高于行业大盘平均水平\r 单条主页视频自然流量播放达300W+\r DOU +投放成本控制单个粉丝成本低于 1；千次播放成本低于 10",
+      "startDate": "2021.07",
+      "endDate": "2023.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "内容审核",
+        "策划选题"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "华熙生物",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "内容运营",
+        "indexList": []
+      },
+      "workTime": "2年",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 147084566,
+      "geekId": 0,
+      "company": "华熙生物",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "直播运营",
+      "blueCollarPosition": false,
+      "positionName": "直播运营",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": " 活动策划执行，活动目标拆解\r\n 优化直播产品话术\r\n 协助直播上下架连接、数据复盘\r\n工作成果\r\n 协助完善话术，提高整体转化率及留存率\r\n 根据数据复盘得出最佳奖品节奏",
+      "startDate": "2020.12",
+      "endDate": "2021.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "通过视频及5A人群分析反哺引流视频，单条视频最高消耗破500W\r 整体引流视频投放过审率达83%高于行业大盘平均水平\r 审核内容视频多次避免事故发生",
+      "workEmphasisList": [
+        "选题策划",
+        "视频内容运营",
+        "内容审核"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "华熙生物",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "直播运营",
+        "indexList": []
+      },
+      "workTime": "7个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 98414599,
+      "geekId": 0,
+      "company": "知金大鹏教育",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "新媒体运营",
+      "blueCollarPosition": false,
+      "positionName": "新媒体运营",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1.对账号整体负责，文案脚本撰写，拍摄创作教学及引流短视频。\r\n2.负责运用抖音引流至私域，配合销售进行转化。\r\n工作成果：\r\n3.在职期间接受权重极低账号，对其进行加权，后期运营至正规\r\n4.月均播放量达30W以上\r\n5.单个视频播放量达22.3W\r\n6.月均引流千人",
+      "startDate": "2020.08",
+      "endDate": "2020.12",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "短视频运营"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "知金大鹏教育",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "新媒体运营",
+        "indexList": []
+      },
+      "workTime": "4个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（运营助理/专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

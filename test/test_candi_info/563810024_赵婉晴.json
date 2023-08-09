@@ -1,0 +1,362 @@
+{
+  "encryptGeekId": "b2b58453b9e761f80nJ509y9EFBU",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "IV0PbAPuiMtzj-X1wWmwEtggkhZ3fGHYIQnphIY4BK5j6LBl6ZK4ki9-81BemGwBUWuXIN6wE9cp9tIgU8I-fd5Cf6QRJBGo9hMaF4fVKJgQZdL23lqcVyXULYtc3NnIu1Nyg5IjBkOKggS8-QHe5AZxoCg7w1JvTIdKnSifOmkQhqv839hMc5Gdnb77CxQREoVhjkmsn-iTPmzUSV5hHsln_ATSBr7TM60T3F1jGpZUHnWYukUrBeWEgaah0XG5n6zkDDCaNspV-gq5ByCCS2BmNSkk66pJposERveZZctZZgLgtoQWqN3ehKJIJ3LLNfW85AghMIyoQ91dI7MYOMcOLosOYqt9dot8LFmhdf1RUuaDVolhaaBu20axQBFOgOYgQXTemnk-Jr6rQ41UBC3ldI-qpRlxSO7ogwGGaDzeFAac7WG-Ei0hDrh3gOTERQCHDpYUbWxUNylP-1YgwGioirb4KuxrREw_N9AxxHYvX0_6D79Ik7IrK8ZHYtancB5L7eVu5u3mh903d5n8Z5_vijkNsDUBvaJLMVfvehRSZEtPIUC9YwMBAEDvEzEJ3Duu4m8yjMJkI01eVbO6EO-s3kzzj0gRG1qTwKOpgzU4S3k~",
+    "geekId": 563810024,
+    "geekName": "赵婉晴",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230216/607f1f3d68754fd046a59317d604a371bfdf258fa0f56b8b43392754998296b9efb330d1e0421766_s.png",
+    "geekGender": 0,
+    "geekWorkYear": "1年",
+    "geekDegree": "本科",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "个人特长 熟练掌握办公软件。性格开朗 善于交际 获得俄语四级证书 在校期间负责学生会外联部工作 自我评价 1.拥有很强的学习能力及表达沟通能力；2.能适应各种环境，并融入其中，能在复杂环境下完成具挑战性的工作 3.工作态度认真，具有团队合作精神；4.有自制力 工作经历 实习北京链家，租赁经纪人，帮业主匹配合适的客户，根据营销计划，负责跟进客户，收集客户资料，然后进行需求匹配安排方案促成签约，业绩排名团队前三 。",
+      "indexList": []
+    },
+    "expectId": 636252647,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "10-12K",
+    "lowSalary": 10,
+    "highSalary": 12,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "fe458510-8eff-4ae6-9524-85f09b0d8723.f1:common.eyJzZXNzaW9uSWQiOiI1ZTQ2YmNmOS0yYzY3LTRmY2YtOWQ5Yy1iNDQzNTFmZjU5ZGUiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.1",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691243682,
+    "birthday": "20010501",
+    "ageDesc": "22岁",
+    "ageLight": {
+      "content": "22岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "黑河学院",
+      "schoolId": 0,
+      "major": "俄语",
+      "degree": 0,
+      "degreeName": "本科",
+      "eduType": 0,
+      "startDate": "20190101",
+      "endDate": "20230101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "黑河学院",
+        "schoolId": 0,
+        "major": "俄语",
+        "degree": 0,
+        "degreeName": "本科",
+        "eduType": 0,
+        "startDate": "2019.01",
+        "endDate": "2023.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 218099522,
+        "geekId": 0,
+        "company": "链家置地房地产",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "置业顾问",
+        "blueCollarPosition": false,
+        "positionName": "房地产",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "熟悉租赁业务，帮业主匹配合适的客户，根据营销计划，负责跟进客户，收集客户资料进行客户档案，然后进行需求匹配，安排出租方案，促成签约。同时与业务部门沟通，完成招聘需求的发布。",
+        "startDate": "2022.10",
+        "endDate": "2023.06",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "业绩排名团队前三",
+        "workEmphasisList": [
+          "房屋租赁",
+          "二手房销售",
+          "电话销售"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "链家置地房地产",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "置业顾问",
+          "indexList": []
+        },
+        "workTime": "8个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": {
+      "listingOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      },
+      "detailOnline": {
+        "onlineImgUrl": "https://img.bosszhipin.com/beijin/icon/60dd182bd83b38c354f85155090ba05140e1b2f2809c3065eadc31b1b40a8633.png",
+        "widthPx": 46,
+        "heightPx": 20,
+        "annotation": null
+      }
+    },
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "b2b58453b9e761f80nJ509y9EFBU",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 636252647,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 10,
+      "highSalary": 12,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 218099522,
+    "geekId": 0,
+    "company": "链家置地房地产",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "置业顾问",
+    "blueCollarPosition": false,
+    "positionName": "房地产",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "熟悉租赁业务，帮业主匹配合适的客户，根据营销计划，负责跟进客户，收集客户资料进行客户档案，然后进行需求匹配，安排出租方案，促成签约。同时与业务部门沟通，完成招聘需求的发布。",
+    "startDate": "2022.10",
+    "endDate": "2023.06",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "业绩排名团队前三",
+    "workEmphasisList": [
+      "房屋租赁",
+      "二手房销售",
+      "电话销售"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "链家置地房地产",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "置业顾问",
+      "indexList": []
+    },
+    "workTime": "8个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "黑河学院",
+      "schoolId": 0,
+      "major": "俄语",
+      "degree": 0,
+      "degreeName": "本科",
+      "eduType": 0,
+      "startDate": "2019.01",
+      "endDate": "2023.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 218099522,
+      "geekId": 0,
+      "company": "链家置地房地产",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "置业顾问",
+      "blueCollarPosition": false,
+      "positionName": "房地产",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "熟悉租赁业务，帮业主匹配合适的客户，根据营销计划，负责跟进客户，收集客户资料进行客户档案，然后进行需求匹配，安排出租方案，促成签约。同时与业务部门沟通，完成招聘需求的发布。",
+      "startDate": "2022.10",
+      "endDate": "2023.06",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "业绩排名团队前三",
+      "workEmphasisList": [
+        "房屋租赁",
+        "二手房销售",
+        "电话销售"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "链家置地房地产",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "置业顾问",
+        "indexList": []
+      },
+      "workTime": "8个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑本科",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

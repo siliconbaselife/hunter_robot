@@ -1,0 +1,349 @@
+{
+  "encryptGeekId": "9c9786699993621a0n1-3NW4FVtX",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "T6jrFp055mRUF-b1tq2FNWWzqriyq3QLAtYfaCuknApQ6yLmWCCqathmKF4dB0-0lFtEicqmj3FomMmhjLnVGdAZM76DnFbcEa50ZB4d7By51HHhcj-zlv7uOFkPSITzxcosqyDksHXZBBY2-BrvwF5rH0NXMY-yQciIAESZIYTVm8DDIY3c2MGeeUQL_k4zJlBJwqKQm4VsFdIr_nxcQCwqrpfualeOzHr_C5hN90dbYsQJ6RXOst31_-SAhirTRaIb1FpxehgQ7KwCLb3vt-bRp1r3_yhXsafpgJ4eh95RR8GOPNC5ONO1woCtVcZkBxIXtym6oDzgvMdrUHZTRaftPGUqhxIi90Bj63tW9RW9Xn0z96qzy-ag1XVZHw3zexa8E83Kw4YzIXefMCtkeYHjW7IFle3lCrty3nkHVntNs6Wqf1s8h5KHcZli6Zlul93KtsrNrG2uHA-mImG8rrqrYSYGFZ-pf7yir6qf5g1fylZBQNX2jzBNG4ME_Qb7R_mgFjtB33wgas93bmG3tF-xJKO-YiPJa8uzoY8W2dReZTdrMQXir_p8hL1SeaCQLyBSaV_0A1MpxVEvSigUACBTej6E4qJhnNiV53FkFLGCUps~",
+    "geekId": 594785597,
+    "geekName": "何传奥",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230425/607f1f3d68754fd07cecd3a778dd5d4c7f7b00ba1f920f02418a13323b7ae4c81f58673cff803329_s.jpg",
+    "geekGender": 1,
+    "geekWorkYear": "1年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "1.证书：CEA 电器智能技术应用高级技术员证；2.前期做信息录入工作，对工作认真负责，积极主动，乐于助人与同事相处融洽。3.善于发现提出合理化建议，希望求职项目专员和电信工程专业类职务。4.能够熟练使用 office 办公软件，PPT 制作等。5.数据分析能力和语言表达能力强。6.有C1驾照4年，具备熟练的驾驶技术。7.2023年正在备考工商管理专业成人本科。8.平时喜欢运动和听音乐，歌唱得较好！",
+      "indexList": []
+    },
+    "expectId": 609152766,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "6-9K",
+    "lowSalary": 6,
+    "highSalary": 9,
+    "middleContent": {
+      "content": "期望职位 行政专员/助理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "0db00f98-1e70-49f1-8991-ef979bb03eec.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.5",
+    "actionDateDesc": null,
+    "expectPositionCode": 150201,
+    "expectPositionName": "行政专员/助理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691239047,
+    "birthday": "19991201",
+    "ageDesc": "23岁",
+    "ageLight": {
+      "content": "23岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "北京电子科技职业学院",
+      "schoolId": 0,
+      "major": "电子信息工程(控制工程方向)",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20190101",
+      "endDate": "20220101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "北京电子科技职业学院",
+        "schoolId": 0,
+        "major": "电子信息工程(控制工程方向)",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2019.01",
+        "endDate": "2022.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 202719396,
+        "geekId": 0,
+        "company": "博奥森生物",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "医学编辑",
+        "blueCollarPosition": false,
+        "positionName": "医学编辑",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "1、核酸前处理（录入信息资料、向下发放样本）。\n2、负责资质文档的制作和排版工作。\n3、办公用品的采购、存储及发放等工作。\n4、会议室安排会议和管理工作。\n5、其他领导下发的工作等。",
+        "startDate": "2022.03",
+        "endDate": "2023.03",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "计算机相关专业优，功能测试和客户端性能良好。",
+        "workEmphasisList": [
+          "审稿改稿",
+          "原创撰稿",
+          "页面排版"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "博奥森生物",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "医学编辑",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "9c9786699993621a0n1-3NW4FVtX",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 609152766,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150201,
+      "positionName": "行政专员/助理",
+      "lowSalary": 6,
+      "highSalary": 9,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 202719396,
+    "geekId": 0,
+    "company": "博奥森生物",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "医学编辑",
+    "blueCollarPosition": false,
+    "positionName": "医学编辑",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "1、核酸前处理（录入信息资料、向下发放样本）。\n2、负责资质文档的制作和排版工作。\n3、办公用品的采购、存储及发放等工作。\n4、会议室安排会议和管理工作。\n5、其他领导下发的工作等。",
+    "startDate": "2022.03",
+    "endDate": "2023.03",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "计算机相关专业优，功能测试和客户端性能良好。",
+    "workEmphasisList": [
+      "审稿改稿",
+      "原创撰稿",
+      "页面排版"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "博奥森生物",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "医学编辑",
+      "indexList": []
+    },
+    "workTime": "1年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "北京电子科技职业学院",
+      "schoolId": 0,
+      "major": "电子信息工程(控制工程方向)",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2019.01",
+      "endDate": "2022.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 202719396,
+      "geekId": 0,
+      "company": "博奥森生物",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "医学编辑",
+      "blueCollarPosition": false,
+      "positionName": "医学编辑",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "1、核酸前处理（录入信息资料、向下发放样本）。\n2、负责资质文档的制作和排版工作。\n3、办公用品的采购、存储及发放等工作。\n4、会议室安排会议和管理工作。\n5、其他领导下发的工作等。",
+      "startDate": "2022.03",
+      "endDate": "2023.03",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "计算机相关专业优，功能测试和客户端性能良好。",
+      "workEmphasisList": [
+        "审稿改稿",
+        "原创撰稿",
+        "页面排版"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "博奥森生物",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "医学编辑",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（行政专员/助理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

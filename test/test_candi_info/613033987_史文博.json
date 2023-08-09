@@ -1,0 +1,343 @@
+{
+  "encryptGeekId": "3b87c233ccfdbf180XV5296-GVpX",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "yQdzAOFIU5GTx--1_oVOAWxUY99xdPjGeBXGTddTi3qGysxgLVGvBk0cP6vl4TtOASdO-myk63rOoxSskAh8HuY_5_daUCJOSJvVPAS0nf5NFhKIoDxJFGiJ-QmBTnCYqMwK9mdgtWDGqSDhlWiWxBdfse8belP7f3A2bcC4sCDXvhuqZJ5yWER4r_ROuhq3d-MxJt0bs6PxwHiDCPUr-pQMxwaZ-75ydycoflYoi-OAftQalLZiUFFxJ3gs0OLBmZG6xNA_t6sKMIlilTZWsSFc4_JUotSb8P8wendl_HzbNoQuUb2mlW2RHZTZTT-bQpTLNnRlulxSmDE8lhw7YSZDwR99E4bud6Pd4Gr_Dy0np5YsnU9tQGeDM4dvGej7C7m-Qaux_krO790A3Kdzth_OKyT0TheBJXWAKm2ayZJf2ddr9M8J7bd4SO47ltY6o0wdgAj8d_UKjNIAfIga5HcsKQNvF0kOumArmQad6PZ6MqgpfZmQX38g2tGcmY9Q2ZIIG-7ZBgcd8aRmxsv4hQABnZHu8j-APwW2pzHaOPJK79b3-BVvzUeWOvIszTmsaYNsnZA9dddcTSf2cLrhl7XSQ3677uR2Sxz_YjO5Rz1jGKc~",
+    "geekId": 613033987,
+    "geekName": "史文博",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230731/607f1f3d68754fd072de3d79c6cc73e80cc24e2ee7bb7a37a7be361e4ab1f2f8fae2318e9cee084d_s.jpg.webp",
+    "geekGender": 0,
+    "geekWorkYear": "5年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "1.工作经验丰富 2.擅长人际交流 3.工作积极努力 4.热爱行政工作",
+      "indexList": []
+    },
+    "expectId": 640806307,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "8-10K",
+    "lowSalary": 8,
+    "highSalary": 10,
+    "middleContent": {
+      "content": "期望职位 行政专员/助理",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "0db00f98-1e70-49f1-8991-ef979bb03eec.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.3",
+    "actionDateDesc": null,
+    "expectPositionCode": 150201,
+    "expectPositionName": "行政专员/助理",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 3,
+    "applyStatusDesc": "在职-月内到岗",
+    "activeTime": 1691242293,
+    "birthday": "19961201",
+    "ageDesc": "26岁",
+    "ageLight": {
+      "content": "26岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "大庆医学高等专科学校",
+      "schoolId": 0,
+      "major": "护理学",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20120101",
+      "endDate": "20150101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "大庆医学高等专科学校",
+        "schoolId": 0,
+        "major": "护理学",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2012.01",
+        "endDate": "2015.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 219316723,
+        "geekId": 0,
+        "company": "轻课",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "行政专员/助理",
+        "blueCollarPosition": false,
+        "positionName": "行政专员/助理",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "\r\n>劳动关系：负责员工入职、离职、转正、续签等各种手续的线上线下办理，保证按时完\r\n成 \r\n档案管理：负责员工人事档案的管理及维护，为员工出具在职证明、收入证明等文件。\r\n信息更新：负责公司员工花名册信息的更新管理及ERP系统维护，并将相关数据反馈至上\r\n级领导。\r\n社保办理：负责公司员工社保、公积金增减员的办理工作，做好相关材料的整理、归档，\r\n妥善保管。\r\n招聘辅助：负责在BOSS、智联、朋友圈等渠道发布招聘信息，筛选简历并电话邀约参加\r\n面试。 \r\n行政事务：负责员工考勤，为薪酬核算提供准确数据，负责公司公章、合同章、法人章的\r\n保管：负责公司办公用品采购及发放，固定资产管理等工作\r\n对外联络：负责与物业公司对接，按时完成水电费缴纳、设备故障保修等工作，保证公司\r\n正常运转。",
+        "startDate": "2021.09",
+        "endDate": "2023.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "外联管理"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "轻课",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "行政专员/助理",
+          "indexList": []
+        },
+        "workTime": "2年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "3b87c233ccfdbf180XV5296-GVpX",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 640806307,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150201,
+      "positionName": "行政专员/助理",
+      "lowSalary": 8,
+      "highSalary": 10,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 219316723,
+    "geekId": 0,
+    "company": "轻课",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "行政专员/助理",
+    "blueCollarPosition": false,
+    "positionName": "行政专员/助理",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "\r\n>劳动关系：负责员工入职、离职、转正、续签等各种手续的线上线下办理，保证按时完\r\n成 \r\n档案管理：负责员工人事档案的管理及维护，为员工出具在职证明、收入证明等文件。\r\n信息更新：负责公司员工花名册信息的更新管理及ERP系统维护，并将相关数据反馈至上\r\n级领导。\r\n社保办理：负责公司员工社保、公积金增减员的办理工作，做好相关材料的整理、归档，\r\n妥善保管。\r\n招聘辅助：负责在BOSS、智联、朋友圈等渠道发布招聘信息，筛选简历并电话邀约参加\r\n面试。 \r\n行政事务：负责员工考勤，为薪酬核算提供准确数据，负责公司公章、合同章、法人章的\r\n保管：负责公司办公用品采购及发放，固定资产管理等工作\r\n对外联络：负责与物业公司对接，按时完成水电费缴纳、设备故障保修等工作，保证公司\r\n正常运转。",
+    "startDate": "2021.09",
+    "endDate": "2023.07",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "外联管理"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "轻课",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "行政专员/助理",
+      "indexList": []
+    },
+    "workTime": "2年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "大庆医学高等专科学校",
+      "schoolId": 0,
+      "major": "护理学",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2012.01",
+      "endDate": "2015.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 219316723,
+      "geekId": 0,
+      "company": "轻课",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "行政专员/助理",
+      "blueCollarPosition": false,
+      "positionName": "行政专员/助理",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "\r\n>劳动关系：负责员工入职、离职、转正、续签等各种手续的线上线下办理，保证按时完\r\n成 \r\n档案管理：负责员工人事档案的管理及维护，为员工出具在职证明、收入证明等文件。\r\n信息更新：负责公司员工花名册信息的更新管理及ERP系统维护，并将相关数据反馈至上\r\n级领导。\r\n社保办理：负责公司员工社保、公积金增减员的办理工作，做好相关材料的整理、归档，\r\n妥善保管。\r\n招聘辅助：负责在BOSS、智联、朋友圈等渠道发布招聘信息，筛选简历并电话邀约参加\r\n面试。 \r\n行政事务：负责员工考勤，为薪酬核算提供准确数据，负责公司公章、合同章、法人章的\r\n保管：负责公司办公用品采购及发放，固定资产管理等工作\r\n对外联络：负责与物业公司对接，按时完成水电费缴纳、设备故障保修等工作，保证公司\r\n正常运转。",
+      "startDate": "2021.09",
+      "endDate": "2023.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "外联管理"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "轻课",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "行政专员/助理",
+        "indexList": []
+      },
+      "workTime": "2年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（行政专员/助理）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

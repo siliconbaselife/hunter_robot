@@ -1,0 +1,343 @@
+{
+  "encryptGeekId": "4dbf56ab04265eab0nZz0tm0FVRY",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "V56EAGxVvBwz1-11ZVpLA0ll4vOQTc8FQwKz0YEk6kDWBYVTMBYcZj-ZhzsZjPzawNaS_gwU-RGRsdtcF2l7Bc6FZfFAd-2g0vTynovvK4-WtsSgCJFU5-9XTLYsX_UmZ3gfgHdeaChDENfpzwepv1zTSMb_do1Dqe0c7siJfAWHVYA0nRZNO9qGaZ56niIfl601iErlVXLIU9vtvp0WzTmy77a_Y2CBnOHdVj--RDM4JhsLTEeXqqgceDziAYBDyovG2cqpmaHO86RupNxilbF4SK7We-WDYQIx7NpS35-5LfSHTln4Zowrr6Xe8umBMyqhpUQz4_TycW6AjfAO-HuB15MIjW_lYzF_ePazyeUt0IRFeWvYEhT-uh4i0ewXoX7jdZJKE20uZkcYloSWKfywIUyRw_pVWhAfRvquHhOa7eVlN7deuTRkuBZMO7CmOBt6OluwOkJ1YFGs_CN05vpDNJ6Cd_5wuHPzMcXXCnqRbQD5ny5dLsiSzEM2HxQKPEi6Yggpg03_9xIEFWtjja70rpsDW59sRRl4QFnijTvui8tOJ9RQ9Dbc4w88EW3tbHqwH6SCFYnecSRBsqmDimMJFNrTx4G_0kswOPLDbxx8EhM~",
+    "geekId": 529949568,
+    "geekName": "李兆强",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20210502/3f420c7b0f15a8256596ca44f83c373f38f8c599ab9ca5253093a4fd4f42ebd5_s.png",
+    "geekGender": 1,
+    "geekWorkYear": "1年以内",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "性格开朗，勤奋好学，有自己独特的想法，动手能力强，",
+      "indexList": []
+    },
+    "expectId": 627523543,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "7-12K",
+    "lowSalary": 7,
+    "highSalary": 12,
+    "middleContent": {
+      "content": "期望职位 国内电商运营",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "b6dda1cf-67d6-4b25-a315-54f36d157dae.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.4",
+    "actionDateDesc": null,
+    "expectPositionCode": 130117,
+    "expectPositionName": "国内电商运营",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 3,
+    "applyStatusDesc": "在职-月内到岗",
+    "activeTime": 1691238766,
+    "birthday": "20011201",
+    "ageDesc": "21岁",
+    "ageLight": {
+      "content": "21岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "天津渤海职业技术学院",
+      "schoolId": 0,
+      "major": "机械制造与自动化",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20200101",
+      "endDate": "20230101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "天津渤海职业技术学院",
+        "schoolId": 0,
+        "major": "机械制造与自动化",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2020.01",
+        "endDate": "2023.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 215836900,
+        "geekId": 0,
+        "company": "艾比森会务",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "电子维修技术员",
+        "blueCollarPosition": false,
+        "positionName": "电子维修技术员",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "调试音响设备 LED 屏等",
+        "startDate": "2023.04",
+        "endDate": "",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "CAD"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "艾比森会务",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "电子维修技术员",
+          "indexList": []
+        },
+        "workTime": "4个月",
+        "workMonths": 0,
+        "current": true
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "4dbf56ab04265eab0nZz0tm0FVRY",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 627523543,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130117,
+      "positionName": "国内电商运营",
+      "lowSalary": 7,
+      "highSalary": 12,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 215836900,
+    "geekId": 0,
+    "company": "艾比森会务",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "电子维修技术员",
+    "blueCollarPosition": false,
+    "positionName": "电子维修技术员",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "调试音响设备 LED 屏等",
+    "startDate": "2023.04",
+    "endDate": "",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "CAD"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "艾比森会务",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "电子维修技术员",
+      "indexList": []
+    },
+    "workTime": "4个月",
+    "workMonths": 0,
+    "current": true
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "天津渤海职业技术学院",
+      "schoolId": 0,
+      "major": "机械制造与自动化",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2020.01",
+      "endDate": "2023.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 215836900,
+      "geekId": 0,
+      "company": "艾比森会务",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "电子维修技术员",
+      "blueCollarPosition": false,
+      "positionName": "电子维修技术员",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "调试音响设备 LED 屏等",
+      "startDate": "2023.04",
+      "endDate": "",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "CAD"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "艾比森会务",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "电子维修技术员",
+        "indexList": []
+      },
+      "workTime": "4个月",
+      "workMonths": 0,
+      "current": true
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（国内电商运营）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

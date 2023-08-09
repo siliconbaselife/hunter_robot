@@ -1,0 +1,346 @@
+{
+  "encryptGeekId": "04f11acf225ddf7c0nJz2d68GVVS",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 2,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "Mjoj9o7030Q7c-P1B1QU9fmvu29YtJY6cmd4n2gyJi6OkZGfR91GDCWkubYYZ_Y8cEnKwxhJgEKWmyoaqKP83fKVx2sTXWoVT0C-3gVrMX7suoF0lWebkTxko5YtWPOxM-HorxIXT1whLJtiECD45NHPiyjJJKMi5tDwjhG29GUnlwCdatxTUPv3_z6e3sXXskNpVL0A7J9Fc_Auh76_sFHGFOO5jiA6crOI2gZ5mdBVXbyN10Lpx3YDXleUI1jtbox4FpcXhAAwkufAkGCAjF6rRSAuUVk3Acr9du8Hy75ZkUs3JbK9rCaOZd0FOnHEXPc1-wBDdTWweGfeK2ZTqCZCiRDZCcdDtPY31I6NuNDFZBsuclTjxvFerQWBUb9cDKiuVTEJnyLIWUbjbhrzT05gu8kRQ1dpCDNupBPA7h-OamTR-W1Oc6rspJLyuXrpuDLS_43uIYMvh8uovGC8KUvMotfY5CIfGVgN37ZyaD8SgHZ096mal6rGKQ-v1KWox6tp-8ymx05F0Z3FIK3BIzjB-Agp7ESwZB2ZdZxifqPl6bs3vHa-D2neuEdazbTZ3CPerfIpwSK0ivgP9rlT_WUlqk2vZ1UGN0x_HOubK-dqf9A~",
+    "geekId": 569231972,
+    "geekName": "余方丽",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/boss/avatar/avatar_16.png",
+    "geekGender": 0,
+    "geekWorkYear": "7年",
+    "geekDegree": "本科",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "乐观开朗,善于与人沟通，工作积极主动，服务意识很强",
+      "indexList": []
+    },
+    "expectId": 641261317,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "4-9K",
+    "lowSalary": 4,
+    "highSalary": 9,
+    "middleContent": {
+      "content": "期望职位 客服专员",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "97949830-bb5d-481e-9fef-3f44779539a8.f1:common.eyJzZXNzaW9uSWQiOiI1ZTQ2YmNmOS0yYzY3LTRmY2YtOWQ5Yy1iNDQzNTFmZjU5ZGUiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.4",
+    "actionDateDesc": null,
+    "expectPositionCode": 130305,
+    "expectPositionName": "客服专员",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691227504,
+    "birthday": "19930101",
+    "ageDesc": "30岁",
+    "ageLight": {
+      "content": "30岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "江汉大学文理学院",
+      "schoolId": 0,
+      "major": "金融学",
+      "degree": 0,
+      "degreeName": "本科",
+      "eduType": 0,
+      "startDate": "20120101",
+      "endDate": "20160101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "江汉大学文理学院",
+        "schoolId": 0,
+        "major": "金融学",
+        "degree": 0,
+        "degreeName": "本科",
+        "eduType": 0,
+        "startDate": "2012.01",
+        "endDate": "2016.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 174548043,
+        "geekId": 0,
+        "company": "东阿阿胶电子商务（北京）",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "网络客服",
+        "blueCollarPosition": false,
+        "positionName": "京东客服",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "接待顾客促成销售\n处理售后问题退换货，处理客户投诉\n每天盯后台",
+        "startDate": "2018.05",
+        "endDate": "2021.07",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "在东阿阿胶电子商务有限公司干了三年，学到了很多知识。",
+        "workEmphasisList": [
+          "客服专员",
+          "电商客服"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "东阿阿胶电子商务（北京）",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "网络客服",
+          "indexList": []
+        },
+        "workTime": "3年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "04f11acf225ddf7c0nJz2d68GVVS",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 641261317,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 130305,
+      "positionName": "客服专员",
+      "lowSalary": 4,
+      "highSalary": 9,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 174548043,
+    "geekId": 0,
+    "company": "东阿阿胶电子商务（北京）",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "网络客服",
+    "blueCollarPosition": false,
+    "positionName": "京东客服",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "接待顾客促成销售\n处理售后问题退换货，处理客户投诉\n每天盯后台",
+    "startDate": "2018.05",
+    "endDate": "2021.07",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "在东阿阿胶电子商务有限公司干了三年，学到了很多知识。",
+    "workEmphasisList": [
+      "客服专员",
+      "电商客服"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "东阿阿胶电子商务（北京）",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "网络客服",
+      "indexList": []
+    },
+    "workTime": "3年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "江汉大学文理学院",
+      "schoolId": 0,
+      "major": "金融学",
+      "degree": 0,
+      "degreeName": "本科",
+      "eduType": 0,
+      "startDate": "2012.01",
+      "endDate": "2016.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 174548043,
+      "geekId": 0,
+      "company": "东阿阿胶电子商务（北京）",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "网络客服",
+      "blueCollarPosition": false,
+      "positionName": "京东客服",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "接待顾客促成销售\n处理售后问题退换货，处理客户投诉\n每天盯后台",
+      "startDate": "2018.05",
+      "endDate": "2021.07",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "在东阿阿胶电子商务有限公司干了三年，学到了很多知识。",
+      "workEmphasisList": [
+        "客服专员",
+        "电商客服"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "东阿阿胶电子商务（北京）",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "网络客服",
+        "indexList": []
+      },
+      "workTime": "3年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑本科",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（客服专员）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

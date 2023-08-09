@@ -1,0 +1,348 @@
+{
+  "encryptGeekId": "1d53a8edad8b459c0nx83tm6GFRW",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "rv4wIbrJgiKCm-f1CfAM7lmqVhoT8OcHSZ059ondqprDy9yPAEQaVFt74x1ftJTVrFBDLIOnwMeW2yZT1cdOGXB3jCP6FLNPoGjeANw0qSAduz-eeDib5Vuf-UBkzfsgFDaAw_o9nVLB8s5b7fWGZSrZD38pBi3PxbpZ9c96EzXhMcjccfLiDhCZ7XEx4tHdhM8EZliB-7dxB-xTW7HdKTINxFWbZ-tmluCbJJdfIPC7Rgb5Dxbd8Acd5A6AaXuVrz-7la0FRERF1E2vVebEZze4ceeBac6t4g7BMkdgo1jA5aen1y4vsOt_FVC3ao6iEwSaLEBDU2i7nHdrF_IqCXjLh9iUvGRqrMuF2U-oAZ52coIJ1ovjjgE1deXnHf5eKG9aygLdn0PMpk_Efwa92PkAO2tDfvEXU53EdeAh170LQuSPXOrHN9Dzq6W4fWIPcqWGgkGoVt_Y64YLukSoFngHETOaVkNN_KZzd_UynjRQdyb5YECus7SSJz9s7rSqR0dMbmK0NF3PyGmMqXjXhgMgben5flSql0sktKF6yTAJm1KwDSCvW8ZBTpcrpx4LeJaU6HNpJs6Eka7WqWH2Cb8mnprNZTiuLi0c-cNEglmjVcE~",
+    "geekId": 586547866,
+    "geekName": "李飞",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230515/607f1f3d68754fd057e0b521fb0361763827e1c044a6a79862225065841f11629705e4cdc7da0f0d_s.png",
+    "geekGender": 1,
+    "geekWorkYear": "3年",
+    "geekDegree": "大专",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "1.熟练掌握 HTML、CSS ，根据项目需求和 UI 设计稿的要求，实现 web 端前端静态页面开发 2.熟悉掌握 vue 前端框架，组件化思想，vue-router 实现路由跳转，vuex 状态管理 3.熟练使用 Element-ui、Vant 、等前端框架进行快速布局，熟悉 Ajax、Axios 交互技术以及不同框架内的 HTTP 请求，可完成前后端数据的交互。4.了解微信小程序开发和 uni-app 开发。5.了解 Node.js 后端语言、express 框架、以及 MySql 语句",
+      "indexList": []
+    },
+    "expectId": 544439080,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "5-6K",
+    "lowSalary": 5,
+    "highSalary": 6,
+    "middleContent": {
+      "content": "期望职位 前端开发工程师",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "10fd0169-0d35-4243-a534-1ab7ea71be01.f1:common.eyJzZXNzaW9uSWQiOiJiZTEwZGY5NC1mNDlkLTQ5MjAtOGRkNy0zYTE4NzUxYzQzNjQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.14",
+    "actionDateDesc": null,
+    "expectPositionCode": 100901,
+    "expectPositionName": "前端开发工程师",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691241632,
+    "birthday": "19980601",
+    "ageDesc": "25岁",
+    "ageLight": {
+      "content": "25岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "三门峡社会管理职业学院",
+      "schoolId": 0,
+      "major": "信息安全与管理",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "20170101",
+      "endDate": "20200101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "三门峡社会管理职业学院",
+        "schoolId": 0,
+        "major": "信息安全与管理",
+        "degree": 0,
+        "degreeName": "大专",
+        "eduType": 0,
+        "startDate": "2017.01",
+        "endDate": "2020.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 197039055,
+        "geekId": 0,
+        "company": "灵彩来世(天津)信息",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "前端开发工程师",
+        "blueCollarPosition": false,
+        "positionName": "前端开发工程师",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "使用vue等前端框架完成项目的布局\r 与后端接口对接，实现前端交互，合作完成整个项目\r 配合团队进行调试阶段的Bug修复\r 负责前端项目更新维护\r项目名称：牛大厨后台菜品管理系统 (Vue) 2023.01 - 2023.03\r项目描述：\r牛大厨后台菜品管理系统一个针对于菜品的管理系统，它包含了菜单管理，角色管理，人员权限管理，\r轮播图管理，菜品管理等，首页大屏数据图表，对所有菜品进行统计，根据用户身份，实现增加、删除、更\r改、查询等功能。\r项目职责：\r1.主要负责登录模块，获取用户输入的信息，使用Element-UI的表单验证对用户的输入格式进行限制\r2.使用框架编写表单的三级联动和登录注册等表单页\r3..对路由进行页面跳转的设置\r4.使用vuex、props、$emit实现组件的通信\r5.配合后端的数据进行交互\r6.负责登陆逻辑和全局登录的拦截\r7.对各个模块进行bug测试\r8.后期上线，配合后端和测试人员进行维护和优化\r应用技术：\r项目基于vue2和Element ui开发。根据ui设计稿，快速搭建页面视图；使用axios和后端数据交互；利用\rElement ui封装业务组件不仅统一了各个业务模块的ui交互，而且减少了30%的开发时间，大大降低了研发成本；\r对网站数据动态增删改查；使用vuex管理数据；vue-router实现路由跳转；懒加载等，使用Echarts做首页的大屏\r数据可视化，展示一些饼图，折线图，可进行下载等功能。\r项目名称：宠物帮领养中心 (小程序 ) 2022.09 - 2022.12\r项目描述：\r宠物帮领养中心小程序集合宠物相关一体化的信息平台，可发布、寻宠、领养、义卖、救助、购买\r宠物等相关日常用品。\r项目职责：\r1. 主要负责的是对页面的布局搭建，接口调试，渲染数据，登录注册功能\r2. 自主完成页面布局搭建，对数据进行渲染，实现交互\r3. 使用wx内置组件swiper实线首页轮播，当点击某一个轮播图时，跳到某页\r4. 完成登陆部分逻辑处理\r5. 开发过程中，调试代码，确保正常工作\r应用技术：\r项目基于wx开发者工具开发。使用wxml和wxss对页面进行构建布局，使用wx.request请求接口对返回的\r结果进行处理，通过wx.navigateTo携带参数进行页面跳转、wx组件通信互相传值，使用wx小程序API获取设备\r信息，扫一扫，地理定位等，与后台开发工程师协作完成各种数据交互。\r项目名称：菁答（移动端） 2022.07 - 2022.09\r项目描述：\r菁答app利用大数据及人工智能技术为中小学生提供题库资源，作业辅导和错题管理，帮助家长精准了\r解学情。\r项目职责：\r1. 负责完成移动app原型、流程和交互设计\r2. 页面包括个人中心，首页教铺，试卷页面，课程详情，课程搜索页\r3. 负责页面商品的分类，以及详情类，实现登陆注册\r4. 根据产品需求负责设计完成软件功能的实现\r5. 项目上线后，配合后端测试人员进行开发测试\r应用技术：\r项目基于vue2和vant开发，使用rem和media(flexble.js)实现app的移动端适配;；vue-router实现单页面应用，\rvuex状态管理模式，方便数据共享和传递，与后台开发工程师协作完成各种数据交互。\r项目名称：菁舍（移动端） 2022.04 -2022.06\r项目描述：\r菁舍是绿地集团绿地香港旗下长租公寓品牌，致力于提供品质、舒适时尚的居住空间，打造国内领航创\r新的租房生活服务平台。\r项目职责：\r1. 与ui、产品、后台开发人员沟通、落实开发需求，解决平台兼容性问题\r2. 主要的页面有首页房源信息、找房、菁喜广场、我的页面\r3. 负责页面的布局，实现房源信息分类，详情页\r4. 通过手机号获取验证码一键登录提升用户体验\r5. 项目上线后，配合后端测试人员进行开发测试与改进\r应用技术：\r项目基于uni-app和uView开发。使用uView框架构内swiper做首页的轮播，通过uni.request请求接口，使用\ruView框架进行页面构建布局和vuex状态管理模式，方便数据共享和传递，与后台开发工程师协作完成各种数据\r交互。与后台开发工程师协作完成各种数据交互。",
+        "startDate": "2022.03",
+        "endDate": "2023.03",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "Vue"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "灵彩来世(天津)信息",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "前端开发工程师",
+          "indexList": []
+        },
+        "workTime": "1年",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": [
+      {
+        "code": 0,
+        "name": "保安"
+      }
+    ],
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "1d53a8edad8b459c0nx83tm6GFRW",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 544439080,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 100901,
+      "positionName": "前端开发工程师",
+      "lowSalary": 5,
+      "highSalary": 6,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 197039055,
+    "geekId": 0,
+    "company": "灵彩来世(天津)信息",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "前端开发工程师",
+    "blueCollarPosition": false,
+    "positionName": "前端开发工程师",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "使用vue等前端框架完成项目的布局\r 与后端接口对接，实现前端交互，合作完成整个项目\r 配合团队进行调试阶段的Bug修复\r 负责前端项目更新维护\r项目名称：牛大厨后台菜品管理系统 (Vue) 2023.01 - 2023.03\r项目描述：\r牛大厨后台菜品管理系统一个针对于菜品的管理系统，它包含了菜单管理，角色管理，人员权限管理，\r轮播图管理，菜品管理等，首页大屏数据图表，对所有菜品进行统计，根据用户身份，实现增加、删除、更\r改、查询等功能。\r项目职责：\r1.主要负责登录模块，获取用户输入的信息，使用Element-UI的表单验证对用户的输入格式进行限制\r2.使用框架编写表单的三级联动和登录注册等表单页\r3..对路由进行页面跳转的设置\r4.使用vuex、props、$emit实现组件的通信\r5.配合后端的数据进行交互\r6.负责登陆逻辑和全局登录的拦截\r7.对各个模块进行bug测试\r8.后期上线，配合后端和测试人员进行维护和优化\r应用技术：\r项目基于vue2和Element ui开发。根据ui设计稿，快速搭建页面视图；使用axios和后端数据交互；利用\rElement ui封装业务组件不仅统一了各个业务模块的ui交互，而且减少了30%的开发时间，大大降低了研发成本；\r对网站数据动态增删改查；使用vuex管理数据；vue-router实现路由跳转；懒加载等，使用Echarts做首页的大屏\r数据可视化，展示一些饼图，折线图，可进行下载等功能。\r项目名称：宠物帮领养中心 (小程序 ) 2022.09 - 2022.12\r项目描述：\r宠物帮领养中心小程序集合宠物相关一体化的信息平台，可发布、寻宠、领养、义卖、救助、购买\r宠物等相关日常用品。\r项目职责：\r1. 主要负责的是对页面的布局搭建，接口调试，渲染数据，登录注册功能\r2. 自主完成页面布局搭建，对数据进行渲染，实现交互\r3. 使用wx内置组件swiper实线首页轮播，当点击某一个轮播图时，跳到某页\r4. 完成登陆部分逻辑处理\r5. 开发过程中，调试代码，确保正常工作\r应用技术：\r项目基于wx开发者工具开发。使用wxml和wxss对页面进行构建布局，使用wx.request请求接口对返回的\r结果进行处理，通过wx.navigateTo携带参数进行页面跳转、wx组件通信互相传值，使用wx小程序API获取设备\r信息，扫一扫，地理定位等，与后台开发工程师协作完成各种数据交互。\r项目名称：菁答（移动端） 2022.07 - 2022.09\r项目描述：\r菁答app利用大数据及人工智能技术为中小学生提供题库资源，作业辅导和错题管理，帮助家长精准了\r解学情。\r项目职责：\r1. 负责完成移动app原型、流程和交互设计\r2. 页面包括个人中心，首页教铺，试卷页面，课程详情，课程搜索页\r3. 负责页面商品的分类，以及详情类，实现登陆注册\r4. 根据产品需求负责设计完成软件功能的实现\r5. 项目上线后，配合后端测试人员进行开发测试\r应用技术：\r项目基于vue2和vant开发，使用rem和media(flexble.js)实现app的移动端适配;；vue-router实现单页面应用，\rvuex状态管理模式，方便数据共享和传递，与后台开发工程师协作完成各种数据交互。\r项目名称：菁舍（移动端） 2022.04 -2022.06\r项目描述：\r菁舍是绿地集团绿地香港旗下长租公寓品牌，致力于提供品质、舒适时尚的居住空间，打造国内领航创\r新的租房生活服务平台。\r项目职责：\r1. 与ui、产品、后台开发人员沟通、落实开发需求，解决平台兼容性问题\r2. 主要的页面有首页房源信息、找房、菁喜广场、我的页面\r3. 负责页面的布局，实现房源信息分类，详情页\r4. 通过手机号获取验证码一键登录提升用户体验\r5. 项目上线后，配合后端测试人员进行开发测试与改进\r应用技术：\r项目基于uni-app和uView开发。使用uView框架构内swiper做首页的轮播，通过uni.request请求接口，使用\ruView框架进行页面构建布局和vuex状态管理模式，方便数据共享和传递，与后台开发工程师协作完成各种数据\r交互。与后台开发工程师协作完成各种数据交互。",
+    "startDate": "2022.03",
+    "endDate": "2023.03",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "Vue"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "灵彩来世(天津)信息",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "前端开发工程师",
+      "indexList": []
+    },
+    "workTime": "1年",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "三门峡社会管理职业学院",
+      "schoolId": 0,
+      "major": "信息安全与管理",
+      "degree": 0,
+      "degreeName": "大专",
+      "eduType": 0,
+      "startDate": "2017.01",
+      "endDate": "2020.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 197039055,
+      "geekId": 0,
+      "company": "灵彩来世(天津)信息",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "前端开发工程师",
+      "blueCollarPosition": false,
+      "positionName": "前端开发工程师",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "使用vue等前端框架完成项目的布局\r 与后端接口对接，实现前端交互，合作完成整个项目\r 配合团队进行调试阶段的Bug修复\r 负责前端项目更新维护\r项目名称：牛大厨后台菜品管理系统 (Vue) 2023.01 - 2023.03\r项目描述：\r牛大厨后台菜品管理系统一个针对于菜品的管理系统，它包含了菜单管理，角色管理，人员权限管理，\r轮播图管理，菜品管理等，首页大屏数据图表，对所有菜品进行统计，根据用户身份，实现增加、删除、更\r改、查询等功能。\r项目职责：\r1.主要负责登录模块，获取用户输入的信息，使用Element-UI的表单验证对用户的输入格式进行限制\r2.使用框架编写表单的三级联动和登录注册等表单页\r3..对路由进行页面跳转的设置\r4.使用vuex、props、$emit实现组件的通信\r5.配合后端的数据进行交互\r6.负责登陆逻辑和全局登录的拦截\r7.对各个模块进行bug测试\r8.后期上线，配合后端和测试人员进行维护和优化\r应用技术：\r项目基于vue2和Element ui开发。根据ui设计稿，快速搭建页面视图；使用axios和后端数据交互；利用\rElement ui封装业务组件不仅统一了各个业务模块的ui交互，而且减少了30%的开发时间，大大降低了研发成本；\r对网站数据动态增删改查；使用vuex管理数据；vue-router实现路由跳转；懒加载等，使用Echarts做首页的大屏\r数据可视化，展示一些饼图，折线图，可进行下载等功能。\r项目名称：宠物帮领养中心 (小程序 ) 2022.09 - 2022.12\r项目描述：\r宠物帮领养中心小程序集合宠物相关一体化的信息平台，可发布、寻宠、领养、义卖、救助、购买\r宠物等相关日常用品。\r项目职责：\r1. 主要负责的是对页面的布局搭建，接口调试，渲染数据，登录注册功能\r2. 自主完成页面布局搭建，对数据进行渲染，实现交互\r3. 使用wx内置组件swiper实线首页轮播，当点击某一个轮播图时，跳到某页\r4. 完成登陆部分逻辑处理\r5. 开发过程中，调试代码，确保正常工作\r应用技术：\r项目基于wx开发者工具开发。使用wxml和wxss对页面进行构建布局，使用wx.request请求接口对返回的\r结果进行处理，通过wx.navigateTo携带参数进行页面跳转、wx组件通信互相传值，使用wx小程序API获取设备\r信息，扫一扫，地理定位等，与后台开发工程师协作完成各种数据交互。\r项目名称：菁答（移动端） 2022.07 - 2022.09\r项目描述：\r菁答app利用大数据及人工智能技术为中小学生提供题库资源，作业辅导和错题管理，帮助家长精准了\r解学情。\r项目职责：\r1. 负责完成移动app原型、流程和交互设计\r2. 页面包括个人中心，首页教铺，试卷页面，课程详情，课程搜索页\r3. 负责页面商品的分类，以及详情类，实现登陆注册\r4. 根据产品需求负责设计完成软件功能的实现\r5. 项目上线后，配合后端测试人员进行开发测试\r应用技术：\r项目基于vue2和vant开发，使用rem和media(flexble.js)实现app的移动端适配;；vue-router实现单页面应用，\rvuex状态管理模式，方便数据共享和传递，与后台开发工程师协作完成各种数据交互。\r项目名称：菁舍（移动端） 2022.04 -2022.06\r项目描述：\r菁舍是绿地集团绿地香港旗下长租公寓品牌，致力于提供品质、舒适时尚的居住空间，打造国内领航创\r新的租房生活服务平台。\r项目职责：\r1. 与ui、产品、后台开发人员沟通、落实开发需求，解决平台兼容性问题\r2. 主要的页面有首页房源信息、找房、菁喜广场、我的页面\r3. 负责页面的布局，实现房源信息分类，详情页\r4. 通过手机号获取验证码一键登录提升用户体验\r5. 项目上线后，配合后端测试人员进行开发测试与改进\r应用技术：\r项目基于uni-app和uView开发。使用uView框架构内swiper做首页的轮播，通过uni.request请求接口，使用\ruView框架进行页面构建布局和vuex状态管理模式，方便数据共享和传递，与后台开发工程师协作完成各种数据\r交互。与后台开发工程师协作完成各种数据交互。",
+      "startDate": "2022.03",
+      "endDate": "2023.03",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "Vue"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "灵彩来世(天津)信息",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "前端开发工程师",
+        "indexList": []
+      },
+      "workTime": "1年",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑大专",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（前端开发工程师）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "blurGeek": false,
+  "friendGeek": false
+}

@@ -1,0 +1,346 @@
+{
+  "encryptGeekId": "acd76b725ba38a6c1nV43t26EVFV",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "6T2COsvbAxXMM-L18qDQ36hb9yCvdUFQkM__6synQNjLQ4fhRVU4K9l-WtWAk6NulCaoerDudNFQex93ceUaBDrcq_TCPAsl6NbMjI9UAGd8LwZHn85c0MTZivnGSw5L4Nngcd2oURccU0j51IvnefpKZo8dqPIrlCnLEhd4p5Q0zBiaYzT0kePp9TrZBjBRdbbUeJaQZAWcAOCgCH4TAmqEa5Of2BulS6-IN7FqUfIFTWZOJySMPwaYCKzkxGno99yIFwRMalmTmSADQKrLV8Gw_201U60L0fwF3Rh9ockotc6I1eCupJaA4m6pCjGyBVr2GBqjIvgIGA2dMW8TFMYHRZ4atGmhEe_UfN22PpIf4e0ZsQxdIIsAby6GoFeTlPsRctzTgTrxRo1xy4LQTnI2EaaHQBh11FfLK2adFOQrHVj_H4pzGadddARL-t8JilC5Mgi5hRJKg18_DAodYFI7lsrl-WX_uwMFVKMfgnITHZ_SnsBSUW1Hgv0uYj3FXViLeDQm0PKAJRya-J6R7sdOegCxQ-f-rgWIN3n7en0-ppnwpxuraPvfgE-VE5BNOBpKq1X7vREx-mhk5XSrOahPrV7OXGnGwDyqLr1yCofxLxk~",
+    "geekId": 112507135,
+    "geekName": "冯女士",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230727/607f1f3d68754fd02f996ad542e32048b88c844f7c2bbfb741431bc23a19f34590ab2178d236c337_s.jpg.webp",
+    "geekGender": 0,
+    "geekWorkYear": "4年",
+    "geekDegree": "中专/中技",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "有良好的社会背景，善于善于沟通，能应对和处理好各种投诉，为人正直乐观，有良好的沟通能力，做事认真负责，乐于学习新知识，对工作态度认真，对客服岗位有一定基础的了解",
+      "indexList": []
+    },
+    "expectId": 572726149,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "5-10K",
+    "lowSalary": 5,
+    "highSalary": 10,
+    "middleContent": {
+      "content": "期望职位 前台",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "33827006-4476-4a50-8400-f259957a53b6.f1:common.eyJzZXNzaW9uSWQiOiI5ZmRlN2VlMS02MzE5LTQzMWUtYjkyOS02NzBiYjc3NjI0YWQiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.8",
+    "actionDateDesc": null,
+    "expectPositionCode": 150202,
+    "expectPositionName": "前台",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691249313,
+    "birthday": "20040625",
+    "ageDesc": "19岁",
+    "ageLight": {
+      "content": "19岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "三河市职业技术教育中心",
+      "schoolId": 0,
+      "major": "电子信息工程",
+      "degree": 0,
+      "degreeName": "中专/中技",
+      "eduType": 0,
+      "startDate": "20180101",
+      "endDate": "20200101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "三河市职业技术教育中心",
+        "schoolId": 0,
+        "major": "电子信息工程",
+        "degree": 0,
+        "degreeName": "中专/中技",
+        "eduType": 0,
+        "startDate": "2018.01",
+        "endDate": "2020.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 78813398,
+        "geekId": 0,
+        "company": "一品华源文化传播",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "销售专员",
+        "blueCollarPosition": false,
+        "positionName": "电子商务销售",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "通过沟通与拜访了解客户实际需求与心理预算 分析客户需要的，根据公司的市场战略，负责各片区的市场拓展、产品销售以及现有客户关系维系，热情耐心地接待客户来访或来电，认真与客户联络、沟通，为公司建立良好的业务体系和客户渠道，进行销售团队的管理，每周对当周客户情况，订单进度进行统计，发现进展缓慢或困难的销售则予以一定的帮助",
+        "startDate": "2021.10",
+        "endDate": "2023.02",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "",
+        "workEmphasisList": [
+          "软件销售",
+          "网销"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "一品华源文化传播",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "销售专员",
+          "indexList": []
+        },
+        "workTime": "1年半",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "acd76b725ba38a6c1nV43t26EVFV",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 572726149,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 150202,
+      "positionName": "前台",
+      "lowSalary": 5,
+      "highSalary": 10,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 78813398,
+    "geekId": 0,
+    "company": "一品华源文化传播",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "销售专员",
+    "blueCollarPosition": false,
+    "positionName": "电子商务销售",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "通过沟通与拜访了解客户实际需求与心理预算 分析客户需要的，根据公司的市场战略，负责各片区的市场拓展、产品销售以及现有客户关系维系，热情耐心地接待客户来访或来电，认真与客户联络、沟通，为公司建立良好的业务体系和客户渠道，进行销售团队的管理，每周对当周客户情况，订单进度进行统计，发现进展缓慢或困难的销售则予以一定的帮助",
+    "startDate": "2021.10",
+    "endDate": "2023.02",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "",
+    "workEmphasisList": [
+      "软件销售",
+      "网销"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "一品华源文化传播",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "销售专员",
+      "indexList": []
+    },
+    "workTime": "1年半",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "三河市职业技术教育中心",
+      "schoolId": 0,
+      "major": "电子信息工程",
+      "degree": 0,
+      "degreeName": "中专/中技",
+      "eduType": 0,
+      "startDate": "2018.01",
+      "endDate": "2020.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 78813398,
+      "geekId": 0,
+      "company": "一品华源文化传播",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "销售专员",
+      "blueCollarPosition": false,
+      "positionName": "电子商务销售",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "通过沟通与拜访了解客户实际需求与心理预算 分析客户需要的，根据公司的市场战略，负责各片区的市场拓展、产品销售以及现有客户关系维系，热情耐心地接待客户来访或来电，认真与客户联络、沟通，为公司建立良好的业务体系和客户渠道，进行销售团队的管理，每周对当周客户情况，订单进度进行统计，发现进展缓慢或困难的销售则予以一定的帮助",
+      "startDate": "2021.10",
+      "endDate": "2023.02",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "",
+      "workEmphasisList": [
+        "软件销售",
+        "网销"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "一品华源文化传播",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "销售专员",
+        "indexList": []
+      },
+      "workTime": "1年半",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑中专/中技",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（前台）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}

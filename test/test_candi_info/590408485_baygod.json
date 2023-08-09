@@ -1,0 +1,423 @@
+{
+  "encryptGeekId": "d14a9840ec1aca5d0n163921FFpV",
+  "isFriend": 0,
+  "talkTimeDesc": null,
+  "cooperate": 0,
+  "blur": 0,
+  "mateName": null,
+  "shareNote": null,
+  "shareMessage": 0,
+  "encryptShareId": null,
+  "geekCallStatus": 0,
+  "suid": null,
+  "geekCard": {
+    "securityId": "LeVE1ohSMufvt-A1khcwzR_K4QIygZIHgPIroqlb03QIADkwY4no56hPbYS1yC1V7XYciGANdYdRKHgErNYGbOG5hQ3kDGs66LIay9r63Bin8-djpTY4ODluEiTipgSJeFKRGcAVmX56G9i_fq4bLpBrrJ7EDw0Mc5WieN6iJG2vg9-ocgiWrOWoe9yqp9olFUCvjnKPNTg161oPVthsKfh7rU2AsQTzdcziuCFg-gXNvEZUxDFJI72DubmYWD7v_TR_I7tkqnfqUBxzGHl9wXOsI_K7x4SrQ26rotdmrdG0_yJebMf1UDDudAj1qsCGkrrMIRyCyk0bbfxuF_8Vc7wQUA5N2USDbVsxomZdW2as61A6AxaQFJicsimtvH9THv9-gK-aw4FxNiIJ4r8wgJ8nwf2of-7BhQaFx1VIlKdiJohVt5csMuzwkn-XReO1pMyxmB6oLTu1wots5fpsuFJAzAHhoOmWC7ov6BLksIWZXy2HfenYcDlKH5fmT8LdMSU26aU20nxl53A2nqjWPx-lKMsp8-cXTsLf2D_rFqL_KIfwGwsnoyGulPTteGcfbl9mPs71DSUijXsDHw_fuFKTXuv0A8s6Q5Nz-GgWW6KS9-I~",
+    "geekId": 590408485,
+    "geekName": "baygod",
+    "groupName": null,
+    "groupNumber": 0,
+    "geekAvatar": "https://img.bosszhipin.com/beijin/upload/avatar/20230702/607f1f3d68754fd01ef8405871f747bf9a61c9da43dd589771ac3a24fd84af06bf988daf7e3ba406_s.png",
+    "geekGender": 1,
+    "geekWorkYear": "1年以内",
+    "geekDegree": "中专/中技",
+    "freshGraduate": 0,
+    "geekDesc": {
+      "content": "擅长朗诵，声音成熟，脸皮厚，热爱学习，提升自我热爱工作热爱生活勇于挑战微信沟通解决客户问题挖掘客户需求服务工作培训能力乐观积极",
+      "indexList": []
+    },
+    "expectId": 635674134,
+    "expectType": 0,
+    "expectPositionType": 0,
+    "salary": "4-5K",
+    "lowSalary": 4,
+    "highSalary": 5,
+    "middleContent": {
+      "content": "期望职位 健康顾问",
+      "indexList": []
+    },
+    "jobId": 298667904,
+    "lid": "fe458510-8eff-4ae6-9524-85f09b0d8723.f1:common.eyJzZXNzaW9uSWQiOiI1ZTQ2YmNmOS0yYzY3LTRmY2YtOWQ5Yy1iNDQzNTFmZjU5ZGUiLCJyY2RCelR5cGUiOiJmMV9icmNkIn0.8",
+    "actionDateDesc": null,
+    "expectPositionCode": 210504,
+    "expectPositionName": "健康顾问",
+    "expectPositionNameLv2": "",
+    "expectLocationCode": 101010100,
+    "expectLocationName": "北京",
+    "expectSubLocation": 0,
+    "expectSubLocationName": null,
+    "applyStatus": 0,
+    "applyStatusDesc": "离职-随时到岗",
+    "activeTime": 1691236694,
+    "birthday": "20051001",
+    "ageDesc": "17岁",
+    "ageLight": {
+      "content": "17岁",
+      "highlight": false
+    },
+    "geekEdu": {
+      "id": 0,
+      "userId": 0,
+      "school": "洛阳铁路信息工程学校",
+      "schoolId": 0,
+      "major": "铁道信号",
+      "degree": 0,
+      "degreeName": "中专/中技",
+      "eduType": 0,
+      "startDate": "20210101",
+      "endDate": "20240101",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    },
+    "geekEdus": [
+      {
+        "id": 0,
+        "userId": 0,
+        "school": "洛阳铁路信息工程学校",
+        "schoolId": 0,
+        "major": "铁道信号",
+        "degree": 0,
+        "degreeName": "中专/中技",
+        "eduType": 0,
+        "startDate": "2021.01",
+        "endDate": "2024.01",
+        "eduDescription": null,
+        "addTime": null,
+        "updateTime": null,
+        "timeSlot": null
+      }
+    ],
+    "geekWorks": [
+      {
+        "id": 214461290,
+        "geekId": 0,
+        "company": "中体盛世国际游泳健身",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "会籍顾问",
+        "blueCollarPosition": false,
+        "positionName": "会籍顾问",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "引导顾客消费去地推健身会所办卡",
+        "startDate": "2023.03",
+        "endDate": "2023.05",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "达标维护老客户的业务健身营销性格坚韧健身销售",
+        "workEmphasisList": [
+          "地推销售"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "中体盛世国际游泳健身",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "会籍顾问",
+          "indexList": []
+        },
+        "workTime": "2个月",
+        "workMonths": 0,
+        "current": false
+      },
+      {
+        "id": 205975476,
+        "geekId": 0,
+        "company": "丽池阳光（北京）国际健身俱乐部",
+        "industryCode": 0,
+        "industry": "",
+        "industryCategory": null,
+        "position": 0,
+        "positionCategory": "瘦身顾问",
+        "blueCollarPosition": false,
+        "positionName": "瘦身顾问",
+        "positionLv2": 0,
+        "isPublic": 0,
+        "department": null,
+        "responsibility": "销售",
+        "startDate": "2023.01",
+        "endDate": "2023.03",
+        "customPositionId": 0,
+        "customIndustryId": 0,
+        "workPerformance": "每天不断自我总结健康管理敢于挑战培训能力健身房决策能力",
+        "workEmphasisList": [
+          "地推销售",
+          "电话销售"
+        ],
+        "certStatus": 0,
+        "workType": 0,
+        "addTime": null,
+        "updateTime": null,
+        "companyHighlight": {
+          "content": "丽池阳光（北京）国际健身俱乐部",
+          "indexList": []
+        },
+        "positionNameHighlight": {
+          "content": "瘦身顾问",
+          "indexList": []
+        },
+        "workTime": "2个月",
+        "workMonths": 0,
+        "current": false
+      }
+    ],
+    "geekDoneWorks": null,
+    "productPictureList": null,
+    "geekHighestDegreeEdu": null,
+    "geekSource": 0,
+    "recOnline": null,
+    "chatButtonFlag": null,
+    "geekHighLightInfo": null,
+    "matches": null,
+    "hlmatches": null,
+    "markWords": null,
+    "encryptGeekId": "d14a9840ec1aca5d0n163921FFpV",
+    "encryptJobId": "e7619c11cdeb6c451X1y3du6GVJU",
+    "eliteGeek": 0,
+    "viewed": false,
+    "oldDetailed": false,
+    "completeType": 0,
+    "hasDesignResume": false,
+    "hasDesignWorks": false,
+    "showEyeBrow": false,
+    "viewExpect": {
+      "expectId": 635674134,
+      "location": 0,
+      "locationName": null,
+      "subLocation": 0,
+      "subLocationName": null,
+      "position": 210504,
+      "positionName": "健康顾问",
+      "lowSalary": 4,
+      "highSalary": 5,
+      "expectType": 0,
+      "positionNameLv2": null,
+      "positionType": 0,
+      "showExpect": false,
+      "eyeBrowCode": 0,
+      "eyeBrowName": null,
+      "reasonUnchange": null,
+      "hypoTag": null,
+      "buriedPoint": false
+    }
+  },
+  "geekLastWork": {
+    "id": 214461290,
+    "geekId": 0,
+    "company": "中体盛世国际游泳健身",
+    "industryCode": 0,
+    "industry": "",
+    "industryCategory": null,
+    "position": 0,
+    "positionCategory": "会籍顾问",
+    "blueCollarPosition": false,
+    "positionName": "会籍顾问",
+    "positionLv2": 0,
+    "isPublic": 0,
+    "department": null,
+    "responsibility": "引导顾客消费去地推健身会所办卡",
+    "startDate": "2023.03",
+    "endDate": "2023.05",
+    "customPositionId": 0,
+    "customIndustryId": 0,
+    "workPerformance": "达标维护老客户的业务健身营销性格坚韧健身销售",
+    "workEmphasisList": [
+      "地推销售"
+    ],
+    "certStatus": 0,
+    "workType": 0,
+    "addTime": null,
+    "updateTime": null,
+    "companyHighlight": {
+      "content": "中体盛世国际游泳健身",
+      "indexList": []
+    },
+    "positionNameHighlight": {
+      "content": "会籍顾问",
+      "indexList": []
+    },
+    "workTime": "2个月",
+    "workMonths": 0,
+    "current": false
+  },
+  "showEdus": [
+    {
+      "id": 0,
+      "userId": 0,
+      "school": "洛阳铁路信息工程学校",
+      "schoolId": 0,
+      "major": "铁道信号",
+      "degree": 0,
+      "degreeName": "中专/中技",
+      "eduType": 0,
+      "startDate": "2021.01",
+      "endDate": "2024.01",
+      "eduDescription": null,
+      "addTime": null,
+      "updateTime": null,
+      "timeSlot": null
+    }
+  ],
+  "showWorks": [
+    {
+      "id": 214461290,
+      "geekId": 0,
+      "company": "中体盛世国际游泳健身",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "会籍顾问",
+      "blueCollarPosition": false,
+      "positionName": "会籍顾问",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "引导顾客消费去地推健身会所办卡",
+      "startDate": "2023.03",
+      "endDate": "2023.05",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "达标维护老客户的业务健身营销性格坚韧健身销售",
+      "workEmphasisList": [
+        "地推销售"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "中体盛世国际游泳健身",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "会籍顾问",
+        "indexList": []
+      },
+      "workTime": "2个月",
+      "workMonths": 0,
+      "current": false
+    },
+    {
+      "id": 205975476,
+      "geekId": 0,
+      "company": "丽池阳光（北京）国际健身俱乐部",
+      "industryCode": 0,
+      "industry": "",
+      "industryCategory": null,
+      "position": 0,
+      "positionCategory": "瘦身顾问",
+      "blueCollarPosition": false,
+      "positionName": "瘦身顾问",
+      "positionLv2": 0,
+      "isPublic": 0,
+      "department": null,
+      "responsibility": "销售",
+      "startDate": "2023.01",
+      "endDate": "2023.03",
+      "customPositionId": 0,
+      "customIndustryId": 0,
+      "workPerformance": "每天不断自我总结健康管理敢于挑战培训能力健身房决策能力",
+      "workEmphasisList": [
+        "地推销售",
+        "电话销售"
+      ],
+      "certStatus": 0,
+      "workType": 0,
+      "addTime": null,
+      "updateTime": null,
+      "companyHighlight": {
+        "content": "丽池阳光（北京）国际健身俱乐部",
+        "indexList": []
+      },
+      "positionNameHighlight": {
+        "content": "瘦身顾问",
+        "indexList": []
+      },
+      "workTime": "2个月",
+      "workMonths": 0,
+      "current": false
+    }
+  ],
+  "activeTimeDesc": "刚刚活跃",
+  "anonymousGeek": 0,
+  "hasAttachmentResume": 0,
+  "haveChatted": 0,
+  "hasBg": 0,
+  "canUseDirectCall": false,
+  "feedback": [
+    {
+      "code": 13,
+      "memo": "牛人距离远",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 3,
+      "memo": "不考虑中专/中技",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 4,
+      "memo": "期望薪资偏高",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 16,
+      "memo": "期望（健康顾问）与职位不符",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 15,
+      "memo": "年龄不合适",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 2,
+      "memo": "工作经历和俄语翻译无关",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 36,
+      "memo": "重复推荐",
+      "showType": 0,
+      "titleL2": null,
+      "feedbackL2List": null
+    },
+    {
+      "code": 5,
+      "memo": "其他原因",
+      "showType": 1,
+      "titleL2": null,
+      "feedbackL2List": null
+    }
+  ],
+  "feedbackTitle": "选择不喜欢的原因，为您优化推荐",
+  "searchChatCardCostCount": 0,
+  "showSelectJob": false,
+  "hasJobCompetitive": false,
+  "recommendReason": null,
+  "recLabels": null,
+  "webRecommendReason": null,
+  "friendGeek": false,
+  "blurGeek": false
+}
