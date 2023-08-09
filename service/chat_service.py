@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 from enum import Enum
-
+import copy
 from utils.config import config
 from utils.log import  get_logger
 from utils.utils import format_time
@@ -110,7 +110,7 @@ class ChatRobot(object):
                 strategy_response = self._manual_response('trivial_case')
         if need_use_model and contact_res is None:
             self._status = ChatStatus.AlgoAbnormal
-            algo_judge_intent = 'algo_abnormal'
+            model_judge_intent = 'algo_abnormal'
 
         self._next_msg = model_response if model_response is not None else ''
         if to_cover_response:
@@ -127,7 +127,7 @@ class ChatRobot(object):
                             finally: {self._status}, {self._next_msg}')
 
         self._msg_list.append({
-            'speaker':'robot', 'msg': self._next_msg, 'algo_judge_intent': algo_judge_intent, 'time': format_time(datetime.now())
+            'speaker':'robot', 'msg': self._next_msg, 'algo_judge_intent': model_judge_intent, 'time': format_time(datetime.now())
         })
 
     def _preprocess(self, page_history_msg, db_history_msg):
@@ -142,7 +142,7 @@ class ChatRobot(object):
             if cur_item['speaker']=='robot':
                 break
             if cur_item['speaker']=='system':
-                system_msgs.append(cur_item)
+                system_msgs.append(copy.deepcopy(cur_item))
             if last_user_time is None and 'time' in cur_item:
                 last_user_time = format_time(datetime.fromtimestamp(cur_item['time']/1000))
             merge_user_msg = self._filter_useless(cur_item.get('msg', '')) +'。'+ merge_user_msg
@@ -153,14 +153,15 @@ class ChatRobot(object):
         ## ensure time for system msgs
         for item in system_msgs:
             if 'time' in item:
-                item['time'] = format_time(item['time'])
+                item['time'] = format_time(datetime.fromtimestamp(item['time']/1000))
             else:
                 item['time'] = last_user_time
         self._last_system_msgs = system_msgs
         ## ensure time for whole page msgs
         for item in page_history_msg:
             if 'time' in item:
-                item['time'] = format_time(item['time'])
+                # logger.info(f".......................page item: {item}, time: {item['time']}")
+                item['time'] = format_time(datetime.fromtimestamp(item['time']/1000))
             else:
                 item['time'] = format_time(datetime.now())
 
@@ -220,7 +221,7 @@ class ChatRobot(object):
         }
         url = config['chat']['chat_url']
         url += self._robot_api
-        response = requests.post(url=url, json=data)
+        response = requests.post(url=url, json=data, timeout=30)
         if response.status_code!=200 or response.json()['status']!=1:
             logger.info(f"request chat algo {url} failed, data: {data}, return {response.status_code} {response.text}")
             return None

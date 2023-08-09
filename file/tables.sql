@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS `account`(
    PRIMARY KEY ( `account_id` ),
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+alter table account add description varchar(100) NOT NULL DEFAULT "" COMMENT '账户描述' after task_config;
+
 
 =====task_config===========
 [
@@ -95,12 +97,3 @@ CREATE TABLE `account_exec_log` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='账号任务执行记录'
-
-
-
-
-alter table job add job_config varchar(512) NOT NULL DEFAULT "" COMMENT '岗位配置' after robot_api;
-{
-   "group_msg":"beijing",
-   "filter_config":"common_custom_service_filter"
-}

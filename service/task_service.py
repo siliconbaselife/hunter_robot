@@ -53,7 +53,7 @@ def get_undo_task(account_id):
     config_data = json.loads(get_account_task_db(account_id))
 
     today_date = format_time(datetime.now(), '%Y-%m-%d')
-    today_sub_task_log = get_sub_task_with_account_id_db(account_id, today_date)
+    today_sub_task_log = get_account_task_log_db(account_id, today_date)
     if len(today_sub_task_log)== 0:
         for j in config_data:
             if j['taskType']=='batchTouch':
