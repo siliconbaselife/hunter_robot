@@ -17,8 +17,9 @@ def shijiazhuang_custom_service_filter(candidate_info):
     exp_position = candidate_info['exp_position']
     exp_salary = candidate_info['exp_salary']
 
-    ##3min以内打招呼
-    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 180
+    # ##3min以内打招呼
+    # is_active = (int(time.time()) - int(candidate_info['active_time'])) < 180
+    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 21600
 
 
     has_wish = False

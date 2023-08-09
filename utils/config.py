@@ -8,7 +8,7 @@ config = {
 
 config['db']['host'] = 'localhost'
 config['db']['port'] = 3306
-config['db']['name'] = 'recruit_data_v2_beta'
+config['db']['name'] = 'recruit_data_v2'
 config['db']['user'] = 'chat_user'
 config['db']['pwd'] = '1'
 
