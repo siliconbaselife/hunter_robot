@@ -121,7 +121,7 @@ class ChatRobot(object):
             self._next_msg += strategy_response if strategy_response is not None else ''
 
         logger.info(f'chat log {self._sess_id}: info: robot_api: {self._robot_api}, source: {self._source}; \
-            tmp: system_msgs: {self._last_system_msgs}, user msg useless: {user_msg_useless}, \
+            tmp: system_msgs: {self._last_system_msgs}, user msgs: {self._last_user_msg}, user msg useless: {user_msg_useless}, \
             is_first: {is_first_msg}, user ask: {user_ask}, chat round: {chat_round}, has contact: {has_contact}, \
                 need contact: {need_contact}, need user algo: {need_use_model}, algo intent: {model_judge_intent},  \
                     is trivial: {is_trivial_intent}, is refuse: {is_refuse_intent}, to cover: {to_cover_response}, \
@@ -141,14 +141,15 @@ class ChatRobot(object):
         until_idx = len(page_history_msg)-1
         while until_idx>=0:
             cur_item = page_history_msg[until_idx]
+            until_idx-=1
             if cur_item['speaker']=='robot':
                 break
             if cur_item['speaker']=='system':
                 system_msgs.append(copy.deepcopy(cur_item))
+                continue
             if last_user_time is None and 'time' in cur_item:
                 last_user_time = format_time(datetime.fromtimestamp(cur_item['time']/1000))
             merge_user_msg = self._filter_useless(cur_item.get('msg', '')) +'。'+ merge_user_msg
-            until_idx-=1
         if last_user_time is None:
             last_user_time = format_time(datetime.now())
         self._last_user_msg = merge_user_msg
@@ -228,5 +229,5 @@ class ChatRobot(object):
             logger.info(f"request chat algo {url} failed, data: {data}, return {response.status_code} {response.text}")
             return None
         
-        logger.info(f"session {self._sess_id} got response: {response.json()['data']}")
+        logger.info(f"session {self._sess_id} request {self._last_user_msg} got response: {response.json()['data']}")
         return response.json()['data']['message'], response.json()['data']['last_message_intent']
