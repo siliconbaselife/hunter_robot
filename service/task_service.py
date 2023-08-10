@@ -58,9 +58,8 @@ def get_undo_task(account_id):
         for j in config_data:
             if j['taskType']=='batchTouch':
                 init_task_log_db(account_id, j["jobID"], today_date, j["helloSum"])
-        return config_data
-    else:
-        return re_org_task(config_data, today_sub_task_log)
+    today_sub_task_log = get_account_task_log_db(account_id, today_date)
+    return re_org_task(config_data, today_sub_task_log)
 
 
 def update_touch_task(account_id, job_id, hello_cnt=1):
