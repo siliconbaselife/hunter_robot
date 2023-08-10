@@ -11,7 +11,8 @@ __preprocess_dispatcher = {
 
 __filter_dispatcher = {
     'common_custom_service_filter': common_custom_service_filter, 
-    'shijiazhuang_custom_service_filter': shijiazhuang_custom_service_filter
+    'shijiazhuang_custom_service_filter': shijiazhuang_custom_service_filter,
+    'shijiazhuang_qinggan_service_filter': shijiazhuang_qinggan_service_filter
 }
 
 _account_force_context = {}

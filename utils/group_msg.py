@@ -41,6 +41,7 @@ class GroupMsg:
         return json.loads(response_send.text)['errmsg'] == 'ok'
 
     def send_msg_info(self, msgs):
+        r_msgs = "岗位名称："+ msgs['job_name'] + '\n'
         r_msgs = "姓名："+ msgs['name'] + '\n'
         r_msgs += "简历：" + msgs["resume"] + "\n"
         r_msgs += "微信：" + msgs["wx"] + "\n"
@@ -63,6 +64,7 @@ def send_candidate_info(job_id, name, cv, wechat, phone, history_msg):
     logger.info(f"group_msg_config: {job_id}, {name}, {con}")
     group_msg = GroupMsg(con)
     msgs = {
+        "job_name": job_res[0][3],
         "name": name,
         "resume": '' if cv is None else cv,
         "chat": [] if history_msg is None else history_msg,
