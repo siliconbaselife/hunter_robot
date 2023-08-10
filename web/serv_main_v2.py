@@ -9,7 +9,7 @@ from dao.task_dao import *
 from service.task_service import generate_task, get_undo_task, update_touch_task
 from service.chat_service import ChatRobot
 from service.manage_service import candidate_list_service
-from service.candidate_filter import candidate_filter, preprocess
+from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
@@ -114,7 +114,6 @@ def task_fetch_api():
 
 @app.route("/recruit/account/task/report", methods=['POST'])
 def task_report_api():
-    ### TODO
     account_id = request.json['accountID']
     ## job use first register job of account:
     job_id = json.loads(get_account_jobs_db(account_id))[0]
@@ -145,8 +144,8 @@ def candidate_filter_api():
     candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
     candidate_info = None
     ret_data = {
-            'touch': False
-        }
+        'touch': False
+    }
     try:
         candidate_info = preprocess(account_id, raw_candidate_info)
 
@@ -158,13 +157,11 @@ def candidate_filter_api():
             candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)
             new_candidate_db(candidate_id, candidate_name, age, degree, location, position, candidate_info_json)
         filter_result = candidate_filter(job_id, candidate_info)
+        filter_result = judge_and_update_force(account_id, filter_result)
         to_touch = filter_result['judge']
         ret_data = {
             'touch': to_touch
         }
-    # if to_touch:
-    #     new_chat_db(account_id, job_id, candidate_id, candidate_name)
-    #     update_touch_task(account_id, job_id)
         logger.info(f'candidate filter {account_id}, {job_id}, {candidate_info}: {filter_result}')
     except BaseException as e:
         logger.info(f'candidate filter request {account_id} {job_id} {candidate_id}, {candidate_name} failed for {e}, {traceback.format_exc()}')
