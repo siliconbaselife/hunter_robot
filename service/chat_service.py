@@ -116,6 +116,8 @@ class ChatRobot(object):
         if to_cover_response:
             self._next_msg = strategy_response if strategy_response is not None else ''
         else:
+            if len(self._next_msg)>0:
+                self._next_msg+= '\n'
             self._next_msg += strategy_response if strategy_response is not None else ''
 
         logger.info(f'chat log {self._sess_id}: info: robot_api: {self._robot_api}, source: {self._source}; \
