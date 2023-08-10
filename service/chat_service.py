@@ -86,6 +86,7 @@ class ChatRobot(object):
         model_judge_intent = None
         is_trivial_intent = False
         is_refuse_intent = False
+        is_no_prompt = False
 
         if need_use_model:
             contact_res = self._chat_request()
@@ -93,8 +94,9 @@ class ChatRobot(object):
             model_response, model_judge_intent = contact_res
             is_trivial_intent = model_judge_intent in self._trivial_intent
             is_refuse_intent = model_judge_intent in self._refuse_intent
+            is_no_prompt = self._is_no_prompt_case(model_response)
 
-        to_cover_response = user_msg_useless or is_trivial_intent or is_refuse_intent
+        to_cover_response = user_msg_useless or is_trivial_intent or is_refuse_intent or is_no_prompt
 
         strategy_response = None
         if need_contact:
@@ -108,6 +110,8 @@ class ChatRobot(object):
                 strategy_response = self._manual_response('got_contact')
             elif is_trivial_intent or is_refuse_intent or user_msg_useless:
                 strategy_response = self._manual_response('trivial_case')
+            elif is_no_prompt:
+                strategy_response = self._manual_response('no_prompt_case')
         if need_use_model and contact_res is None:
             self._status = ChatStatus.AlgoAbnormal
             model_judge_intent = 'algo_abnormal'
@@ -124,7 +128,7 @@ class ChatRobot(object):
             tmp: system_msgs: {self._last_system_msgs}, user msgs: {self._last_user_msg}, user msg useless: {user_msg_useless}, \
             is_first: {is_first_msg}, user ask: {user_ask}, chat round: {chat_round}, has contact: {has_contact}, \
                 need contact: {need_contact}, need user algo: {need_use_model}, algo intent: {model_judge_intent},  \
-                    is trivial: {is_trivial_intent}, is refuse: {is_refuse_intent}, to cover: {to_cover_response}, \
+                    is no prompt: {is_no_prompt}, is trivial: {is_trivial_intent}, is refuse: {is_refuse_intent}, to cover: {to_cover_response}, \
                         model response: {model_response}, strategy response: {strategy_response}; \
                             finally: {self._status}, {self._next_msg}')
 
@@ -201,6 +205,9 @@ class ChatRobot(object):
             if cur['speaker']=='system':
                 has_contact = True
         return is_first_msg, has_system_msg, user_msg_useless, user_ask, chat_round, has_contact
+
+    def _is_no_prompt_case(self, model_response):
+        return 'NB' in model_response
 
     def _manual_response(self, response_key):
         import random

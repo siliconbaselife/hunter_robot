@@ -57,6 +57,9 @@ config['chat']['preset_reply'] = {
         "您能将您的联系方式留一下么，我们好安排后续的面试流程。"
     ],
     'trivial_case': [''],
+    'no_prompt_case': [
+        "更具体的信息咱们电话详聊",
+    ],
     'got_contact': [
         '我们这边hr稍后会跟您详细沟通', 
         '好的，hr会跟您进一步沟通',
