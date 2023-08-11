@@ -53,14 +53,17 @@ def get_undo_task(account_id):
     config_data = json.loads(get_account_task_db(account_id))
 
     today_date = format_time(datetime.now(), '%Y-%m-%d')
-    today_sub_task_log = get_account_task_log_db(account_id, today_date)
+    job_id = json.loads(get_account_jobs_db(account_id))[0]
+    today_sub_task_log = get_job_task_log_db(account_id, job_id, today_date)
     if len(today_sub_task_log)== 0:
+        logger.info(f'get_undo_task for {account_id} {job_id} {today_date}, no task log, will init')
         for j in config_data:
             if j['taskType']=='batchTouch':
                 init_task_log_db(account_id, j["jobID"], today_date, j["helloSum"])
     today_sub_task_log = get_account_task_log_db(account_id, today_date)
-    return re_org_task(config_data, today_sub_task_log)
-
+    res = re_org_task(config_data, today_sub_task_log)
+    logger.info(f'get_undo_task for {account_id} {job_id} {today_date}, will return {res}')
+    return res
 
 def update_touch_task(account_id, job_id, hello_cnt=1):
     hello_exec_db(account_id, job_id, format_time(datetime.now(), '%Y-%m-%d'), hello_cnt)
