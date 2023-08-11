@@ -16,9 +16,9 @@ sql_dict = {
     "get_task":"select task_config from account where account_id='{}'",
     "new_candidate": "insert into candidate(candidate_id, candidate_name, age, degree, location, position, details) values ('{}','{}','{}','{}','{}','{}','{}')",
     "update_candidate_contact": "update candidate set contact='{}' where candidate_id='{}'",
-    "query_candidate": "select candidate_name, age, degree, location, position, contact, details from candidate where candidate_id='{}'",
+    "query_candidate": "select candidate_id, candidate_name, age, degree, location, position, contact, details, filter_result from candidate where candidate_id='{}'",
     "query_chat_details": "select source, details, contact from chat where account_id='{}' and job_id='{}' and candidate_id='{}'",
-    "new_chat": "insert into chat(account_id, job_id, candidate_id, candidate_name, source, status, details) values ('{}','{}','{}','{}','{}','{}','{}')",
+    "new_chat": "insert into chat(account_id, job_id, candidate_id, candidate_name, source, status, details, filter_result) values ('{}','{}','{}','{}','{}','{}','{}','{}')",
     "update_chat": "update chat set source='{}', status='{}', details='{}' where account_id='{}' and job_id='{}' and candidate_id='{}'",
     "update_chat_contact": "update chat set contact='{}' where account_id='{}' and job_id='{}' and candidate_id='{}'",
     "query_candidate_already_chat": "select status, source from chat where job_id='{}' and candidate_id='{}'",
@@ -61,15 +61,15 @@ def new_candidate_db(candidate_id, candidate_name, age, degree, location, positi
 def query_candidate_exist(candidate_id):
     return len(dbm.query(sql_dict['query_candidate'].format(candidate_id)))>0
 
-def query_candidate_name(candidate_id):
-    return dbm.query(sql_dict['query_candidate'].format(candidate_id))[0][0]
+def query_candidate_name_and_filter_result(candidate_id):
+    item = dbm.query(sql_dict['query_candidate'].format(candidate_id))[0]
+    return item[1], item[8]
 
 def update_candidate_contact_db(candidate_id, contact):
     dbm.update(sql_dict['update_candidate_contact'].format(contact, candidate_id))
 
-def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, status='init', details=None):
-    # d = [[account_id, job_id, candidate_id, candidate_name, source, status, details]]
-    dbm.insert(sql_dict['new_chat'].format(account_id, job_id, candidate_id, candidate_name, source, status, details))
+def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, status='init', details=None, filter_result=None):
+    dbm.insert(sql_dict['new_chat'].format(account_id, job_id, candidate_id, candidate_name, source, status, details, filter_result))
 
 def query_chat_db(account_id, job_id, candidate_id):
     return dbm.query(sql_dict['query_chat_details'].format(account_id, job_id, candidate_id))

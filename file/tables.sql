@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `candidate`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 ALTER TABLE candidate ADD position VARCHAR(100) COMMENT '目标工作职位' AFTER location;
+ALTER TABLE candidate ADD filter_result LONGTEXT COMMENT 'filter详情' AFTER details;
 
 CREATE TABLE IF NOT EXISTS `job`(
    `job_id` VARCHAR(100) NOT NULL COMMENT '岗位唯一标识',
