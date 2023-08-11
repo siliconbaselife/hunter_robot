@@ -27,7 +27,7 @@ sql_dict = {
     "get_account_task_log":"select * from account_exec_log where account_id='{}' and exec_date='{}'",
     "get_job_task_log": "select * from account_exec_log where account_id='{}' and job_id='{}' and exec_date='{}'",
     "get_job_by_id":"select * from job where job_id='{}'",
-    "get_chats_by_job_id":"select * from chat where job_id='{}' and contact!='NULL' order by update_time desc limit {},{}",
+    "get_chats_by_job_id":"select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, update_time from chat where job_id='{}' and contact!='NULL' order by update_time desc limit {},{}",
     "get_chats_num_by_job_id":"select count(1) from chat where job_id='{}' and contact!='NULL'"
 }
 

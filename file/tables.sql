@@ -12,6 +12,8 @@ CREATE TABLE IF NOT EXISTS `chat`(
    CONSTRAINT `candidate_info` UNIQUE(`account_id`, `job_id`, `candidate_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+ALTER TABLE chat ADD filter_result LONGTEXT COMMENT 'filter详情' AFTER details;
+
 
 CREATE TABLE IF NOT EXISTS `candidate`(
    `candidate_id` VARCHAR(100) NOT NULL COMMENT '候选人ID',
