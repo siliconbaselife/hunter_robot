@@ -9,7 +9,7 @@ def shijiazhuang_qinggan_service_filter(candidate_info):
     age_range = (26, 42)
     min_degree = '大专'
     location = '石家庄'
-    job_tags = ['电话销售','课程顾问', '心理咨询','网络客服']
+    job_tags = ['销售','课程顾问', '心理咨询']
 
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
@@ -19,7 +19,8 @@ def shijiazhuang_qinggan_service_filter(candidate_info):
 
     # ##3min以内打招呼
     # is_active = (int(time.time()) - int(candidate_info['active_time'])) < 180
-    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 21600
+    # is_active = (int(time.time()) - int(candidate_info['active_time'])) < 21600
+    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 300
 
 
     has_wish = False
