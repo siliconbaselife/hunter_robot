@@ -19,8 +19,8 @@ def shijiazhuang_qinggan_service_filter(candidate_info):
 
     # ##3min以内打招呼
     # is_active = (int(time.time()) - int(candidate_info['active_time'])) < 180
-    # is_active = (int(time.time()) - int(candidate_info['active_time'])) < 21600
-    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 300
+    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 10800
+    # is_active = (int(time.time()) - int(candidate_info['active_time'])) < 300
 
 
     has_wish = False
