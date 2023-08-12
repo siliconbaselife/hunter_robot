@@ -38,7 +38,7 @@ def common_need_recall_filter(chat_info):
         reject_intent = True
 
     ##范围内的才进行召回
-    time_match = (int(time.time()) - int(chat_info[5])) > 86400 and  (int(time.time()) - int(chat_info[5])) < 259200
+    time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 86400 and  (int(time.time()) - int(chat_info[5].timestamp())) < 259200
 
     #召回几次后不再进行召回
     count_threshold = 2
