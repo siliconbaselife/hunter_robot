@@ -182,7 +182,7 @@ def candidate_filter_api():
 def candidate_recall_api():
     account_id = request.json['accountID']
     candidate_ids_json = request.json['candidateIDs']
-    candidate_ids = json.dumps(candidate_ids_json, ensure_ascii=False)
+    candidate_ids = json.load(candidate_ids_json)
     logger.info(f'candidate recall request {account_id}, {candidate_ids}')
     res_data = recall_msg(account_id, candidate_ids)
     logger.info(f'candidate recall response {account_id}, {res_data}')
