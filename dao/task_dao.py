@@ -116,7 +116,9 @@ def get_chats_num_by_job_id(job_id):
     return dbm.query(sql_dict["get_chats_num_by_job_id"].format(job_id))
 
 def get_chats_by_ids(account_id, candidate_ids):
-    return dbm.query(sql_dict["get_chats_by_ids"].format(account_id, "('" + "','".join(candidate_ids) + "')"))
+    s = "('" + "','".join(candidate_ids) + "')"
+    logger.info(f"test_sql, {s}")
+    return dbm.query(sql_dict["get_chats_by_ids"].format(account_id, s))
 
 def add_recall_count(account_id, candidate_id):
     return dbm.query(sql_dict["recall_exec"].format(account_id, candidate_id))
