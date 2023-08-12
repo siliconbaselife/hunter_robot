@@ -185,7 +185,7 @@ def candidate_recall_api():
     logger.info(f'candidate recall request {account_id}, {candidate_ids}')
     res_data = recall_msg(account_id, candidate_ids)
     logger.info(f'candidate recall response {account_id}, {res_data}')
-    return Response(json.dumps(get_web_res_suc_with_data(res_data)))
+    return Response(json.dumps(get_web_res_suc_with_data(res_data), ensure_ascii=False))
 
 @app.route("/recruit/candidate/recallResult", methods=['POST'])
 @web_exception_handler
@@ -195,7 +195,7 @@ def candidate_recall_result_api():
     logger.info(f'candidate recall request {account_id}, {candidate_id}')
     res_data = recall_result(account_id, candidate_id)
     logger.info(f'candidate recall response {account_id}, {res_data}')
-    return Response(json.dumps(get_web_res_suc_with_data(res_data)))
+    return Response(json.dumps(get_web_res_suc_with_data(res_data), ensure_ascii=False))
 
 
 
