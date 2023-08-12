@@ -11,7 +11,7 @@ def get_msg(filter_result):
     ##主动来找且没给联系方式的
     if filter_result == 'NULL' or filter_result == None:
         return "亲, 您对我们感兴趣的话, hr会跟您详细沟通, 方便交换个联系方式或者简历吗?"
-    filter_dict = json.load(filter_result)
+    filter_dict = json.loads(filter_result)
     ##期望岗位相符的
     if filter_dict['details']['wish']:
         return "亲, 您的期望职位和我们岗位很相符呢，请问您方便交换个联系方式或者简历吗？"
