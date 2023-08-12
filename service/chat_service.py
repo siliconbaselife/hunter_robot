@@ -176,12 +176,15 @@ class ChatRobot(object):
             self._msg_list = page_history_msg
         else:
             self._msg_list = db_history_msg
-            self._msg_list.append({
-                'speaker': 'user',
-                'msg': merge_user_msg,
-                'time': last_user_time
-            })
-            self._msg_list+= self._last_system_msgs
+            append_msgs = self._get_append_msgs(page_history_msg, db_history_msg)
+            logger.info(f'chat log {self._sess_id}: echo append msgs: {append_msgs}')
+            self._msg_list += append_msgs
+            # self._msg_list.append({
+            #     'speaker': 'user',
+            #     'msg': merge_user_msg,
+            #     'time': last_user_time
+            # })
+            # self._msg_list+= self._last_system_msgs
 
         ## analysis msgs
         # hello_msg = False
@@ -205,6 +208,31 @@ class ChatRobot(object):
             if cur['speaker']=='system':
                 has_contact = True
         return is_first_msg, has_system_msg, user_msg_useless, user_ask, chat_round, has_contact
+
+    def _get_append_msgs(self, page_history_msg, db_history_msg):
+        assert db_history_msg is not None and len(db_history_msg) >0 and page_history_msg and len(page_history_msg)>0
+        win_size = 3 
+        if len(db_history_msg) < win_size or len(page_history_msg) < win_size:
+            win_size = min(len(db_history_msg), len(page_history_msg))
+
+        until_idx = len(page_history_msg)
+        find_match = False
+        while until_idx >=win_size:
+            is_match = True
+            for idx in range(-1, -1-win_size, -1):
+                # logger.info(f'page len {len(page_history_msg)}, until {until_idx}, cur iter {idx}, db len {len(db_history_msg)}')
+                if page_history_msg[until_idx+idx]['speaker']==db_history_msg[idx]['speaker'] and\
+                    page_history_msg[until_idx+idx].get('msg', None)== db_history_msg[idx].get('msg',None):
+                    continue
+                is_match = False
+                break
+            if is_match:
+                find_match = True
+                break
+            until_idx-=1
+        assert find_match, f"page {page_history_msg} no match to db {db_history_msg}, pleask check"
+        return page_history_msg[until_idx:]
+
 
     def _is_no_prompt_case(self, model_response):
         return 'NB' in model_response
