@@ -190,7 +190,7 @@ def candidate_recall_api():
 
 @app.route("/recruit/candidate/recallResult", methods=['POST'])
 @web_exception_handler
-def candidate_recall_api():
+def candidate_recall_result_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
     logger.info(f'candidate recall request {account_id}, {candidate_id}')
