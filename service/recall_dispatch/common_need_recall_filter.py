@@ -9,7 +9,7 @@ logger = get_logger(config['log']['log_file'])
 ##这里没更新chat表的detail，是把所有的更新动作，放到了用户回复的时候去append
 def get_msg(filter_result):
     ##主动来找且没给联系方式的
-    if filter_result == 'NULL':
+    if filter_result == 'NULL' or filter_result == None:
         return "您方便交换个联系方式或者简历吗?"
     filter_dict = json.load(filter_result)
     ##期望岗位相符的
