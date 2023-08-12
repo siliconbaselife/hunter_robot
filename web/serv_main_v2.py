@@ -10,6 +10,7 @@ from service.task_service import generate_task, get_undo_task, update_touch_task
 from service.chat_service import ChatRobot
 from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
+from service.recall_service import recall_msg, recall_result
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
@@ -52,6 +53,7 @@ def register_job_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 @app.route("/recruit/job/query", methods=['POST'])
+@web_exception_handler
 def query_job_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
@@ -66,6 +68,7 @@ def query_job_api():
 
 
 @app.route("/recruit/account/register", methods=['POST'])
+@web_exception_handler
 def register_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
@@ -86,6 +89,7 @@ def register_account_api():
 
 
 @app.route("/recruit/account/query", methods=['POST'])
+@web_exception_handler
 def query_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
@@ -100,6 +104,7 @@ def query_account_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 @app.route("/recruit/account/task/fetch", methods=['POST'])
+@web_exception_handler
 def task_fetch_api():
     account_id = request.json['accountID']
     logger.info(f'account task fetch request {account_id}')
@@ -113,6 +118,7 @@ def task_fetch_api():
 
 
 @app.route("/recruit/account/task/report", methods=['POST'])
+@web_exception_handler
 def task_report_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
@@ -135,6 +141,7 @@ def task_report_api():
 
 
 @app.route("/recruit/candidate/filter", methods=['POST'])
+@web_exception_handler
 def candidate_filter_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
@@ -170,7 +177,31 @@ def candidate_filter_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
+@app.route("/recruit/candidate/recallList", methods=['POST'])
+@web_exception_handler
+def candidate_recall_api():
+    account_id = request.json['accountID']
+    candidate_ids_json = request.json['candidateIDs']
+    candidate_ids = json.dumps(candidate_ids_json, ensure_ascii=False)
+    logger.info(f'candidate recall request {account_id}, {candidate_ids}')
+    res_data = recall_msg(account_id, candidate_ids)
+    logger.info(f'candidate recall response {account_id}, {res_data}')
+    return Response(json.dumps(get_web_res_suc_with_data(res_data)))
+
+@app.route("/recruit/candidate/recallResult", methods=['POST'])
+@web_exception_handler
+def candidate_recall_api():
+    account_id = request.json['accountID']
+    candidate_id = request.json['candidateID']
+    logger.info(f'candidate recall request {account_id}, {candidate_id}')
+    res_data = recall_result(account_id, candidate_id)
+    logger.info(f'candidate recall response {account_id}, {res_data}')
+    return Response(json.dumps(get_web_res_suc_with_data(res_data)))
+
+
+
 @app.route("/recruit/candidate/chat", methods=['POST'])
+@web_exception_handler
 def candidate_chat_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
@@ -223,6 +254,7 @@ def candidate_chat_api():
 
 
 @app.route("/recruit/candidate/result", methods=['POST'])
+@web_exception_handler
 def candidate_result_api():
     
     account_id = request.form['accountID']
@@ -294,6 +326,7 @@ def candidate_result_api():
 
 
 @app.route("/recruit/candidate/list", methods=['GET'])
+@web_exception_handler
 def candidate_list_web():
     job_id = request.args.get('job_id')
     page_num = request.args.get('page_num')
@@ -323,7 +356,6 @@ def candidate_list_web():
     return response
 
     
-
 
 if __name__=="__main__":
     app.run(port=2040,host="0.0.0.0",debug=True)

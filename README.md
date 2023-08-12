@@ -154,3 +154,39 @@ normal_chat,finish,algo_abnormal,need_ensure
 ## response data:
 ### status          string        ok        
 ```
+
+
+### 二次召回话术接口
+```
+## uri:   /recruit/candidate/recallList
+## request params:
+### accountID       string      need        账户ID
+### candidateIDs    list      need        候选人id
+[
+  "id1", "id2", "id3"
+]
+## response data:
+{'ret': 0, 'msg': 'success', 'data': data}
+##data
+[
+  {
+    "candidate_id":"id1",
+    "need_recall": True,
+    "recall_msg":"看您有心理咨询证书，和我们岗位要求非常匹配，请问您是否方便交换个联系方式或简历呢？"
+  }
+]
+
+```
+
+### 二次召回话术接口
+```
+## uri:   /recruit/candidate/recallResult
+## request params:
+### accountID       string      need        账户ID
+### candidateID    string      need        候选人id
+
+## response data:
+{'ret': 0, 'msg': 'success', 'data': data}
+
+
+```
