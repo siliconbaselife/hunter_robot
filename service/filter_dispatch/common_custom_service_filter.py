@@ -12,8 +12,12 @@ def common_custom_service_filter(candidate_info):
     exp_position = candidate_info['exp_position']
     exp_salary = candidate_info['exp_salary']
 
-    ##3min以内打招呼
-    is_active = (int(time.time()) - int(candidate_info['active_time'])) < 180
+    if time.localtime().tm_hour > 6 and time.localtime().tm_hour < 23:
+        threshold = 300
+    else:
+        threshold = 21600
+           
+    is_active = (int(time.time()) - int(candidate_info['active_time'])) < threshold
 
 
     has_wish = False
