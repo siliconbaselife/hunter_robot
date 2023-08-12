@@ -10,7 +10,7 @@ from service.task_service import generate_task, get_undo_task, update_touch_task
 from service.chat_service import ChatRobot
 from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
-from service.recall_service import recall_msg
+from service.recall_service import recall_msg, recall_result
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
@@ -177,7 +177,7 @@ def candidate_filter_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
-@app.route("/recruit/candidate/recall", methods=['POST'])
+@app.route("/recruit/candidate/recallList", methods=['POST'])
 @web_exception_handler
 def candidate_recall_api():
     account_id = request.json['accountID']
@@ -185,6 +185,16 @@ def candidate_recall_api():
     candidate_ids = json.dumps(candidate_ids_json, ensure_ascii=False)
     logger.info(f'candidate recall request {account_id}, {candidate_ids}')
     res_data = recall_msg(account_id, candidate_ids)
+    logger.info(f'candidate recall response {account_id}, {res_data}')
+    return Response(json.dumps(get_web_res_suc_with_data(res_data)))
+
+@app.route("/recruit/candidate/recallResult", methods=['POST'])
+@web_exception_handler
+def candidate_recall_api():
+    account_id = request.json['accountID']
+    candidate_id = request.json['candidateID']
+    logger.info(f'candidate recall request {account_id}, {candidate_id}')
+    res_data = recall_result(account_id, candidate_id)
     logger.info(f'candidate recall response {account_id}, {res_data}')
     return Response(json.dumps(get_web_res_suc_with_data(res_data)))
 

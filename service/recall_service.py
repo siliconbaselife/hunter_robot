@@ -33,4 +33,6 @@ def recall_msg(account_id, candidate_ids):
 
 
 
-
+def recall_result(account_id, candidate_id):
+    return add_recall_count(account_id, candidate_id)
+    
