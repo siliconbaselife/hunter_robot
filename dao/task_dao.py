@@ -66,6 +66,8 @@ def query_candidate_exist(candidate_id):
 def query_candidate_name_and_filter_result(candidate_id):
     item = dbm.query(sql_dict['query_candidate'].format(candidate_id))[0]
     return item[1], item[8]
+def query_candidate_by_id(candidate_id):
+    return dbm.query(sql_dict['query_candidate'].format(candidate_id))
 
 def update_candidate_contact_db(candidate_id, contact):
     dbm.update(sql_dict['update_candidate_contact'].format(contact, candidate_id))
