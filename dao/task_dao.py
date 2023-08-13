@@ -29,7 +29,7 @@ sql_dict = {
     "get_job_by_id":"select * from job where job_id='{}'",
     "get_chats_by_job_id":"select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' and contact!='NULL' order by update_time desc limit {},{}",
     "get_chats_num_by_job_id":"select count(1) from chat where job_id='{}' and contact!='NULL'",
-    "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt from chat where account_id='{}' and candidate_id in {}",
+    "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt from chat where account_id='{}' and candidate_id in {} order by update_time desc",
     "recall_exec":"update chat set recall_cnt = recall_cnt + 1 where account_id='{}' and candidate_id='{}'"
 }
 

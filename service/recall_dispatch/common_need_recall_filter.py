@@ -49,8 +49,6 @@ def common_need_recall_filter(chat_info):
     logger.info(f"candidate_recall,contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
     if contact_unget and not reject_intent and time_match and less_count:
         recall_msg = get_msg(filter_result)
-        ##todo 这里需要去更新一下chat表的聊天记录
-        # append_msg(chat_info[3])
         res = {
             "candidate_id": candidate_id,
             "candidate_name": candidate_name,
