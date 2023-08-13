@@ -176,15 +176,15 @@ class ChatRobot(object):
             self._msg_list = page_history_msg
         else:
             self._msg_list = db_history_msg
-            append_msgs = self._get_append_msgs(page_history_msg, db_history_msg)
-            logger.info(f'chat log {self._sess_id}: echo append msgs: {append_msgs}')
-            self._msg_list += append_msgs
-            # self._msg_list.append({
-            #     'speaker': 'user',
-            #     'msg': merge_user_msg,
-            #     'time': last_user_time
-            # })
-            # self._msg_list+= self._last_system_msgs
+            # append_msgs = self._get_append_msgs(page_history_msg, db_history_msg)
+            # logger.info(f'chat log {self._sess_id}: echo append msgs: {append_msgs}')
+            # self._msg_list += append_msgs
+            self._msg_list.append({
+                'speaker': 'user',
+                'msg': merge_user_msg,
+                'time': last_user_time
+            })
+            self._msg_list+= self._last_system_msgs
 
         ## analysis msgs
         # hello_msg = False
