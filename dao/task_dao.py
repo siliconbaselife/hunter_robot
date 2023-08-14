@@ -20,6 +20,7 @@ sql_dict = {
     "query_chat_details": "select source, details, contact from chat where account_id='{}' and job_id='{}' and candidate_id='{}'",
     "new_chat": "insert into chat(account_id, job_id, candidate_id, candidate_name, source, status, details, filter_result) values ('{}','{}','{}','{}','{}','{}','{}','{}')",
     "update_chat": "update chat set source='{}', status='{}', details='{}' where account_id='{}' and job_id='{}' and candidate_id='{}'",
+    "update_chat_only_details": "update chat set details='{}' where account_id='{}' and job_id='{}' and candidate_id='{}'",
     "update_chat_contact": "update chat set contact='{}' where account_id='{}' and job_id='{}' and candidate_id='{}'",
     "query_candidate_already_chat": "select status, source from chat where job_id='{}' and candidate_id='{}'",
     "add_task_count":"update account_exec_log set hello_sum_exec = hello_sum_exec+{} where account_id='{}' and job_id='{}' and exec_date='{}'",
@@ -78,6 +79,9 @@ def query_chat_db(account_id, job_id, candidate_id):
 
 def update_chat_db(account_id, job_id, candidate_id, source, status, details):
     dbm.update(sql_dict['update_chat'].format(source, status, details, account_id, job_id, candidate_id))
+
+def update_chat_only_details_db(account_id, job_id, candidate_id, details):
+    dbm.update(sql_dict['update_chat_only_details'].format(details, account_id, job_id, candidate_id))
 
 def update_chat_contact_db(account_id, job_id, candidate_id, contact):
     dbm.update(sql_dict['update_chat_contact'].format(contact, account_id, job_id, candidate_id))

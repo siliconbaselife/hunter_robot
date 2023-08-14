@@ -11,6 +11,8 @@ from service.chat_service import ChatRobot
 from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
 from service.recall_service import recall_msg, recall_result
+from service.db_service import append_chat_msg
+
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
@@ -192,9 +194,14 @@ def candidate_filter_api():
 @web_exception_handler
 def candidate_recall_api():
     account_id = request.json['accountID']
+    job_id = json.loads(get_account_jobs_db(account_id))[0]
     candidate_ids = request.json['candidateIDs']
     logger.info(f'candidate recall request {account_id}, {candidate_ids}')
     res_data = recall_msg(account_id, candidate_ids)
+    for item in res_data:
+        candidate_id = item['candidate_id']
+        msg = item['recall_msg']
+        append_chat_msg(account_id, job_id, candidate_id, msg)
     logger.info(f'candidate recall response {account_id}, {res_data}')
     return Response(json.dumps(get_web_res_suc_with_data(res_data), ensure_ascii=False))
 
