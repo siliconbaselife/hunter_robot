@@ -143,7 +143,7 @@ def task_report_api():
             'time': format_time(datetime.now())
         }
         details = json.dumps([init_msg], ensure_ascii=False)
-        new_chat_db(account_id, job_id, candidate_id, candidate_name, filter_result=filter_result, details=details)
+        new_chat_db(account_id, job_id, candidate_id, candidate_name, filter_result=filter_result, details=details, source='search')
 
     ret_data = {
         'status': 'ok'
