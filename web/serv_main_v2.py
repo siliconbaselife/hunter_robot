@@ -125,7 +125,7 @@ def task_report_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
     job_id = json.loads(get_account_jobs_db(account_id))[0]
-    job_config = json.loads(get_job_by_id(job_id)[0][6])
+    job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
     job_touch_msg = job_config['touch_msg']
 
     task_status = request.json['taskStatus']
