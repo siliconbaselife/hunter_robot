@@ -15,6 +15,8 @@ from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
 import traceback
+from utils.utils import format_time
+from datetime import datetime
 
 from flask_cors import *
 
@@ -123,6 +125,9 @@ def task_report_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
     job_id = json.loads(get_account_jobs_db(account_id))[0]
+    job_config = json.loads(get_job_by_id(job_id)[0][6])
+    job_touch_msg = job_config['touch_msg']
+
     task_status = request.json['taskStatus']
     logger.info(f'account task report {account_id}, {task_status}')
     touch_list = []
@@ -132,7 +137,13 @@ def task_report_api():
     update_touch_task(account_id, job_id, len(touch_list))
     for candidate_id in touch_list:
         candidate_name, filter_result = query_candidate_name_and_filter_result(candidate_id)
-        new_chat_db(account_id, job_id, candidate_id, candidate_name, filter_result=filter_result)
+        init_msg = {
+            'speaker': 'robot',
+            'msg': job_touch_msg,
+            'time': format_time(datetime.now())
+        }
+        details = json.dumps([init_msg], ensure_ascii=False)
+        new_chat_db(account_id, job_id, candidate_id, candidate_name, filter_result=filter_result, details=details)
 
     ret_data = {
         'status': 'ok'

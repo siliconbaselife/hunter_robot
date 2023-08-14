@@ -59,7 +59,7 @@ def send_candidate_info(job_id, name, cv, wechat, phone, history_msg):
     if len(job_res) == 0:
         logger.info(f"job config wrong, not exist: {job_id}, {name}")
         return
-    group_msg_config = json.loads(job_res[0][6])["group_msg"]
+    group_msg_config = json.loads(job_res[0][6],strict=False)["group_msg"]
 
     con = config['group_msg'][group_msg_config]
     logger.info(f"group_msg_config: {job_id}, {name}, {con}")
