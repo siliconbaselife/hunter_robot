@@ -4,7 +4,7 @@ def common_custom_service_filter(candidate_info):
     age_range = (18, 35)
     min_degree = '中专'
     location = '北京'
-    job_tags = ['客服','电话销售']
+    job_tags = ['客服','电话销售', '外呼', '电销']
 
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
