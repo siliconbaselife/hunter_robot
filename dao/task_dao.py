@@ -30,7 +30,7 @@ sql_dict = {
     "get_job_by_id":"select * from job where job_id='{}'",
     "get_chats_by_job_id":"select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' and contact!='NULL' order by update_time desc limit {},{}",
     "get_chats_num_by_job_id":"select count(1) from chat where job_id='{}' and contact!='NULL'",
-    "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt from chat where account_id='{}' and candidate_id in {} order by update_time desc",
+    "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt from chat where account_id='{}' and job_id='{}' and candidate_id in {} order by update_time desc",
     "recall_exec":"update chat set recall_cnt = recall_cnt + 1 where account_id='{}' and candidate_id='{}'"
 }
 
@@ -121,10 +121,10 @@ def get_chats_by_job_id(job_id, start, limit):
 def get_chats_num_by_job_id(job_id):
     return dbm.query(sql_dict["get_chats_num_by_job_id"].format(job_id))
 
-def get_chats_by_ids(account_id, candidate_ids):
+def get_chats_by_ids(account_id, job_id, candidate_ids):
     s = "('" + "','".join(candidate_ids) + "')"
     # logger.info(f"test_sql, {s}")
-    return dbm.query(sql_dict["get_chats_by_ids"].format(account_id, s))
+    return dbm.query(sql_dict["get_chats_by_ids"].format(account_id,job_id, s))
 
 def add_recall_count(account_id, candidate_id):
     return dbm.query(sql_dict["recall_exec"].format(account_id, candidate_id))
