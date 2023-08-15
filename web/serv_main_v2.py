@@ -196,13 +196,13 @@ def candidate_recall_api():
     account_id = request.json['accountID']
     job_id = json.loads(get_account_jobs_db(account_id))[0]
     candidate_ids = request.json['candidateIDs']
-    logger.info(f'candidate recall request {account_id}, {candidate_ids}')
+    logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}')
     res_data = recall_msg(account_id, candidate_ids)
     for item in res_data:
         candidate_id = item['candidate_id']
         msg = item['recall_msg']
         append_chat_msg(account_id, job_id, candidate_id, msg)
-    logger.info(f'candidate recall response {account_id}, {res_data}')
+    logger.info(f'candidate recall response {account_id}, {len(res_data)}')
     return Response(json.dumps(get_web_res_suc_with_data(res_data), ensure_ascii=False))
 
 @app.route("/recruit/candidate/recallResult", methods=['POST'])
@@ -372,7 +372,11 @@ def candidate_list_web():
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
 
+@app.route("/recruit/candidate/statistic", methods=['POST'])
+@web_exception_handler
+def candidate_statistic():
     
+    return
 
 if __name__=="__main__":
     app.run(port=2040,host="0.0.0.0",debug=True)

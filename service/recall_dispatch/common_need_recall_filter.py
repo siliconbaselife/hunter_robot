@@ -9,7 +9,7 @@ logger = get_logger(config['log']['log_file'])
 ##这里没更新chat表的detail，是把所有的更新动作，放到了用户回复的时候去append
 def get_msg(filter_result):
     ##主动来找且没给联系方式的
-    if filter_result == 'NULL' or filter_result == None:
+    if filter_result == 'NULL' or filter_result == None or filter_result == 'None':
         return "亲, 您对我们感兴趣的话, hr会跟您详细沟通, 方便交换个联系方式或者简历吗?"
     filter_dict = json.loads(filter_result)
     ##期望岗位相符的
@@ -24,13 +24,14 @@ def get_msg(filter_result):
 
 def common_need_recall_filter(chat_info):
     candidate_id = chat_info[0]
+    candidate_name = chat_info[1]
     recall_msg = ""
 
     contact_unget = False
     reject_intent = False
 
     ##还没拿到简历或联系方式
-    if chat_info[2] != 'NULL':
+    if chat_info[2] == 'NULL' or chat_info[2] == None or chat_info[2] == 'None':
         contact_unget = True
     
     ##是否过程里已经有了拒绝意图
@@ -41,16 +42,16 @@ def common_need_recall_filter(chat_info):
     time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 86400 and  (int(time.time()) - int(chat_info[5].timestamp())) < 259200
 
     #召回几次后不再进行召回
-    count_threshold = 2
+    count_threshold = 1
     less_count = int(chat_info[6]) < count_threshold
 
     filter_result = chat_info[4]
-    logger.info(f"candidate_recall,contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
+    logger.info(f"candidate_recall,{candidate_id},contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
     if contact_unget and not reject_intent and time_match and less_count:
         recall_msg = get_msg(filter_result)
-        # append_msg(chat_info[3])
         res = {
             "candidate_id": candidate_id,
+            "candidate_name": candidate_name,
             "need_recall": True,
             "recall_msg": recall_msg
         }
