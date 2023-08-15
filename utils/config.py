@@ -69,6 +69,12 @@ config['chat']['preset_reply'] = {
     ]
 }
 
+config['chat']['useless_user_msg'] = [
+    '对方想发送加密附件简历给您',
+    '的微信号',
+    '<copy>'
+]
+
 config['chat']['trivial_intent'] = [
     '询问此岗位不相关的概念',
     '询问人事其它业务',
@@ -76,7 +82,8 @@ config['chat']['trivial_intent'] = [
     '过激语言',
     '考虑',
     '确认',
-    '无法独立判断意图的语料'
+    '无法独立判断意图的语料',
+    'nlu_fallback'
 ]
 
 config['chat']['refuse_intent'] = ['拒绝']

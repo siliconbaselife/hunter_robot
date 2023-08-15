@@ -44,6 +44,7 @@ class ChatRobot(object):
         self._preset_reply_dict = config['chat']['preset_reply']
         self._trivial_intent = config['chat']['trivial_intent']
         self._refuse_intent = config['chat']['refuse_intent']
+        self._useless_msgs = config['chat']['useless_user_msg']
         self._robot_api = robot_api
         self._init_and_contact(page_history_msg, db_history_msg)
             
@@ -262,7 +263,9 @@ class ChatRobot(object):
         return cur_list[rand_idx]
 
     def _filter_useless(self, msg):
-        ## TODO if system msg in user msg
+        for item in self._useless_msgs:
+            if item in msg:
+                return ''
         if msg.find('[')<0 or msg.find(']')<0:
             return msg
         return msg[:msg.find('[')]+msg[msg.find(']')+1:]
