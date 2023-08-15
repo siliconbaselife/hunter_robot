@@ -177,7 +177,7 @@ def candidate_filter_api():
             candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)
             new_candidate_db(candidate_id, candidate_name, age, degree, location, position, candidate_info_json)
         filter_result = candidate_filter(job_id, candidate_info)
-        filter_result = judge_and_update_force(account_id, filter_result)
+        # filter_result = judge_and_update_force(account_id, filter_result)
         to_touch = filter_result['judge']
         ret_data = {
             'touch': to_touch
