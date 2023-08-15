@@ -31,7 +31,7 @@ def common_need_recall_filter(chat_info):
     reject_intent = False
 
     ##还没拿到简历或联系方式
-    if chat_info[2] != 'NULL':
+    if chat_info[2] == 'NULL' or chat_info[2] == None or chat_info[2] == 'None':
         contact_unget = True
     
     ##是否过程里已经有了拒绝意图
@@ -46,7 +46,7 @@ def common_need_recall_filter(chat_info):
     less_count = int(chat_info[6]) < count_threshold
 
     filter_result = chat_info[4]
-    logger.info(f"candidate_recall,contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
+    logger.info(f"candidate_recall,{candidate_id},contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
     if contact_unget and not reject_intent and time_match and less_count:
         recall_msg = get_msg(filter_result)
         res = {
