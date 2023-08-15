@@ -58,5 +58,5 @@ def candidate_filter(job_id, candidate_info):
     job_res = get_job_by_id(job_id)
     if len(job_res) == 0:
         logger.info(f"job config wrong, not exist: {job_id}, {candidate_info['id']}")
-    filter_config = json.loads(job_res[0][6])["filter_config"]
+    filter_config = json.loads(job_res[0][6],strict=False)["filter_config"]
     return __filter_dispatcher[filter_config](candidate_info)

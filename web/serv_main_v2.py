@@ -11,10 +11,14 @@ from service.chat_service import ChatRobot
 from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
 from service.recall_service import recall_msg, recall_result
+from service.db_service import append_chat_msg
+
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
 import traceback
+from utils.utils import format_time
+from datetime import datetime
 
 from flask_cors import *
 
@@ -123,6 +127,9 @@ def task_report_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
     job_id = json.loads(get_account_jobs_db(account_id))[0]
+    job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
+    job_touch_msg = job_config['touch_msg']
+
     task_status = request.json['taskStatus']
     logger.info(f'account task report {account_id}, {task_status}')
     touch_list = []
@@ -132,7 +139,13 @@ def task_report_api():
     update_touch_task(account_id, job_id, len(touch_list))
     for candidate_id in touch_list:
         candidate_name, filter_result = query_candidate_name_and_filter_result(candidate_id)
-        new_chat_db(account_id, job_id, candidate_id, candidate_name, filter_result=filter_result)
+        init_msg = {
+            'speaker': 'robot',
+            'msg': job_touch_msg,
+            'time': format_time(datetime.now())
+        }
+        details = json.dumps([init_msg], ensure_ascii=False)
+        new_chat_db(account_id, job_id, candidate_id, candidate_name, filter_result=filter_result, details=details, source='search')
 
     ret_data = {
         'status': 'ok'
@@ -181,9 +194,14 @@ def candidate_filter_api():
 @web_exception_handler
 def candidate_recall_api():
     account_id = request.json['accountID']
+    job_id = json.loads(get_account_jobs_db(account_id))[0]
     candidate_ids = request.json['candidateIDs']
     logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}')
     res_data = recall_msg(account_id, candidate_ids)
+    for item in res_data:
+        candidate_id = item['candidate_id']
+        msg = item['recall_msg']
+        append_chat_msg(account_id, job_id, candidate_id, msg)
     logger.info(f'candidate recall response {account_id}, {len(res_data)}')
     return Response(json.dumps(get_web_res_suc_with_data(res_data), ensure_ascii=False))
 
