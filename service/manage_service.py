@@ -22,7 +22,7 @@ def candidate_list_service(job_id, start, limit):
         else:
             source = chat[4]
         if chat[7] == None or chat[7] == 'NULL' or chat[7] == 'None':
-            detail = []
+            detail = '[]'
         else:
             detail = chat[7]
 
