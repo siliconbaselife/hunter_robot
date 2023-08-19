@@ -9,7 +9,7 @@ def shijiazhuang_qinggan_service_filter(candidate_info):
     age_range = (26, 42)
     min_degree = '大专'
     location = '石家庄'
-    job_tags = ['销售','课程顾问', '心理咨询', '电销', '网销']
+    job_tags = ['电话销售', '网络销售','课程顾问', '心理咨询', '电销', '网销']
 
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
