@@ -290,7 +290,7 @@ def candidate_result_api():
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
     if len(candidate_info) == 0:
         logger.info(f'candidate result: {account_id} {job_id} candidate {candidate_id} {name} not in db, will new chat first')
-        new_chat_db(account_id, job_id, candidate_id, name)
+        new_chat_db(account_id, job_id, candidate_id, name, source='user_ask')
     #再查一次
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
     _,_,contact = candidate_info[0]
