@@ -190,3 +190,55 @@ normal_chat,finish,algo_abnormal,need_ensure
 
 
 ```
+
+### 微信相关接口
+# 具体任务
+/wechat/candidate/taskToDo
+request param
+string account_id
+
+response
+task_list
+[{
+  "task_type":"send_msg",
+  "content":[{
+    "alias_id":"1111",
+    "msg":"dfdfdfdfd"
+  }]
+},
+{
+  "task_type":"add_friend",
+  "content":[
+    {
+      "search_id":"id1",
+      "alias_id":"xxxx"
+    }
+  ]
+}
+]
+
+# 上报消息发送
+/wechat/candidate/msgSendReport
+request 
+string account_id
+string alias_id
+string msg_send
+
+# 上报添加用户
+/wechat/candidate/addFriendReport
+request
+string account_id
+string search_id
+string alias_id
+
+# 上报用户新消息
+/wechat/candidate/userMsg
+request
+string account_id
+string alias_id
+string msg_receive
+
+response
+{'ret': 0, 'msg': 'success', 'data': {"msg":"xxxxxxxxx"}}
+
+

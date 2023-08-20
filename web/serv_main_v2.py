@@ -161,11 +161,13 @@ def candidate_filter_api():
     # job_id = request.json['jobID']
     job_id = json.loads(get_account_jobs_db(account_id))[0]
     raw_candidate_info = request.json['candidateInfo']
-    candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
+    #应该从下面取， 不应该在这取吧？@润和 如果是怕异常得换个地方,我换到实现类里面
+    # candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
     candidate_info = None
     ret_data = {
         'touch': False
     }
+    candidate_id, candidate_name = "", ""
     try:
         candidate_info = preprocess(account_id, raw_candidate_info)
 
