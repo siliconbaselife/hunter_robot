@@ -9,20 +9,20 @@ logger = get_logger(config['log']['log_file'])
 def linkedin_preprocess(raw_candidate_info):
     try:
         tmp = raw_candidate_info
-        cid = "" 
+        cid = tmp['trackingUrn'].split(':')[-1]
         cname = tmp['title']['text'],
         age = ""
         degree = ""
         active = ""
-        exp_location = ['secondarySubtitle']['text']
+        exp_location = tmp['secondarySubtitle']['text']
         exp_salary = ""
-        position_name = ['primarySubtitle']['text']
+        position_name = tmp['primarySubtitle']['text']
         education = ""
 
         work = []
         ## parse work
-        if '-' in ['primarySubtitle']['text']:
-            strs = ['primarySubtitle']['text'].split('-')
+        if '-' in tmp['primarySubtitle']['text']:
+            strs = tmp['primarySubtitle']['text'].split('-')
             work.append({
                 'company': strs[0].strip(),
                 'position': strs[1].strip(),
