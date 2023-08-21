@@ -53,6 +53,7 @@ def preprocess(account_id, raw_candidate_info):
 
 def candidate_filter(job_id, candidate_info):
     # job_requirement = query_job_requirement_db(job_id)
+    #多账号去重
     if is_chatting_db(job_id, candidate_info['id']):
         return {'judge': False}
     ##todo要用job_id去取数据库配置
