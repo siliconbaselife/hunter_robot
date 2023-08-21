@@ -18,7 +18,20 @@ def linkedin_preprocess(raw_candidate_info):
         exp_salary = ""
         position_name = ['primarySubtitle']['text']
         education = ""
-        work = ""
+
+        work = []
+        ## parse work
+        if '-' in ['primarySubtitle']['text']:
+            strs = ['primarySubtitle']['text'].split('-')
+            work.append({
+                'company': strs[0].strip(),
+                'position': strs[1].strip(),
+                'responsibility': strs[1].strip(),
+                'emphasis': "",
+                'start': "",
+                'end': ""
+            })
+
         active_time = ""
 
         return {

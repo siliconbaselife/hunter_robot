@@ -48,19 +48,19 @@ def boss_preprocess(raw_candidate_info):
                 'start': ensure_valid(item['startDate']),
                 'end': ensure_valid(item['endDate'])
             })
-            return {
-                'id': cid,
-                'name': cname,
-                'age': age,
-                'degree': degree,
-                'active': active,
-                'exp_location': exp_location,
-                'exp_salary': exp_salary,
-                'exp_position': position_name,
-                'education': education,
-                'work': work,
-                "active_time": active_time
-            }
+        return {
+            'id': cid,
+            'name': cname,
+            'age': age,
+            'degree': degree,
+            'active': active,
+            'exp_location': exp_location,
+            'exp_salary': exp_salary,
+            'exp_position': position_name,
+            'education': education,
+            'work': work,
+            "active_time": active_time
+        }
     except BaseException as e:
         logger.info(f'candidate filter preprocess fail  {cid}, {cname} failed for {e}, {traceback.format_exc()}')
         with open(f'test/fail/{cid}_{cname}.json', 'w') as f:
