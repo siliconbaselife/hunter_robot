@@ -36,7 +36,7 @@ def linkedin_preprocess(raw_candidate_info):
         active_time = ""
 
         return {
-            'id': "" if cid is None else cid,
+            'id': cid,
             'name': cname,
             'age': age,
             'degree': degree,
