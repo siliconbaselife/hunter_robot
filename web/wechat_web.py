@@ -44,7 +44,9 @@ def msg_send_report():
 @wechat_web.route("/wechat/candidate/addFriendReport", methods=['POST'])
 @web_exception_handler
 def add_friend_report():
-
+    wechat_account_id = request.json['account_id']
+    wechat_alias_id = request.json['alias_id']
+    wechat_id = request.json['search_id']
 
     return
 

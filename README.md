@@ -232,7 +232,7 @@ string search_id
 string alias_id
 
 # 上报用户新消息
-/wechat/candidate/userMsg
+/wechat/candidate/userMsguser
 request
 string account_id
 string alias_id
