@@ -10,7 +10,7 @@ def linkedin_preprocess(raw_candidate_info):
     try:
         tmp = raw_candidate_info
         cid = tmp['trackingUrn'].split(':')[-1]
-        cname = tmp['title']['text'],
+        cname = tmp['title']['text']
         logger.info(f"test_name: {cname}")
         age = ""
         degree = ""
