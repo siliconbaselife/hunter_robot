@@ -12,4 +12,9 @@ from datetime import datetime
 
 logger = get_logger(config['log']['log_file'])
 
-wechat_web = Blueprint('source_web', __name__, template_folder='templates')
+wechat_web = Blueprint('wechat_web', __name__, template_folder='templates')
+
+
+
+
+
