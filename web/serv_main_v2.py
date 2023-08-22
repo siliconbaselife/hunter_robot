@@ -3,6 +3,7 @@ from utils.log import get_logger
 from flask_cors import *
 from web.source_web import source_web
 from web.wechat_web import wechat_web
+from utils.config import config
 
 
 logger = get_logger(config['log']['log_file'])
