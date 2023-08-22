@@ -100,3 +100,36 @@ CREATE TABLE `account_exec_log` (
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='账号任务执行记录'
+
+
+CREATE TABLE IF NOT EXISTS `wechat_account`(
+   `wechat_account_id` VARCHAR(100) NOT NULL COMMENT '账号唯一标识',
+   `task_config` LONGTEXT COMMENT '日常任务',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `wechat_account_id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+
+CREATE TABLE IF NOT EXISTS `wechat_chat`(
+   `candidate_id` VARCHAR(100) NOT NULL COMMENT '候选人的id',
+   `candidate_name` VARCHAR(100) NOT NULL COMMENT '候选人名字',
+   `wechat_id` VARCHAR(256) NOT NULL COMMENT '候选人的微信id',
+   `wechat_alias_id` VARCHAR(256) NOT NULL COMMENT '给候选人的备注',
+   `wechat_accoount_id` VARCHAR(256) NOT NULL COMMENT '我们的微信账号',
+   `details` LONGTEXT COMMENT '对话详情',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `candidate_id`, `wechat_accoount_id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+
+
+
+
+
+
+
+
+
+
