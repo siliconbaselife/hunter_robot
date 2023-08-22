@@ -12,7 +12,7 @@ def linkedin_preprocess(raw_candidate_info):
         cid = tmp['trackingUrn'].split(':')[-1]
         cname = tmp['title']['text']
         logger.info(f"test_name: {cname}")
-        age = ""
+        age = 0
         degree = ""
         active = ""
         exp_location = tmp['secondarySubtitle']['text']
@@ -56,7 +56,7 @@ def linkedin_preprocess(raw_candidate_info):
         return {
             'id': "" if cid is None else cid,
             'name': "" if cname is None else cname,
-            'age': "" if age is None else age,
+            'age': 0 if age is None else age,
             'degree': "" if degree is None else degree,
             'active': "" if active is None else active,
             'exp_location': "" if exp_location is None else exp_location,
