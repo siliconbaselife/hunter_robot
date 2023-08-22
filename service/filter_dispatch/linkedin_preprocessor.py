@@ -11,6 +11,7 @@ def linkedin_preprocess(raw_candidate_info):
         tmp = raw_candidate_info
         cid = tmp['trackingUrn'].split(':')[-1]
         cname = tmp['title']['text'],
+        logger.info(f"test_name: {cname}")
         age = ""
         degree = ""
         active = ""
@@ -18,7 +19,7 @@ def linkedin_preprocess(raw_candidate_info):
         exp_salary = ""
         position_name = tmp['primarySubtitle']['text']
         education = ""
-
+        
         work = []
         ## parse work
         if '-' in tmp['primarySubtitle']['text']:
