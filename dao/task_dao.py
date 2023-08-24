@@ -1,5 +1,4 @@
 from utils.db_manager import dbm
-import uuid
 from utils.config import config
 from utils.log import get_logger
 
