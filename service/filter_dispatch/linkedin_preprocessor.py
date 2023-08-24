@@ -10,15 +10,16 @@ def linkedin_preprocess(raw_candidate_info):
     try:
         tmp = raw_candidate_info
         cid = tmp['trackingUrn'].split(':')[-1]
-        cname = tmp['title']['text'],
-        age = ""
+        cname = tmp['title']['text']
+        logger.info(f"test_name: {cname}")
+        age = 0
         degree = ""
         active = ""
         exp_location = tmp['secondarySubtitle']['text']
         exp_salary = ""
         position_name = tmp['primarySubtitle']['text']
         education = ""
-
+        
         work = []
         ## parse work
         if '-' in tmp['primarySubtitle']['text']:
@@ -35,7 +36,7 @@ def linkedin_preprocess(raw_candidate_info):
         active_time = ""
 
         return {
-            'id': "" if cid is None else cid,
+            'id': cid,
             'name': cname,
             'age': age,
             'degree': degree,
@@ -55,7 +56,7 @@ def linkedin_preprocess(raw_candidate_info):
         return {
             'id': "" if cid is None else cid,
             'name': "" if cname is None else cname,
-            'age': "" if age is None else age,
+            'age': 0 if age is None else age,
             'degree': "" if degree is None else degree,
             'active': "" if active is None else active,
             'exp_location': "" if exp_location is None else exp_location,

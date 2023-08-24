@@ -7,14 +7,16 @@ from threading import Lock
 logger = get_logger(config['log']['log_file'])
 __preprocess_dispatcher = {
     'Boss': boss_preprocess,
-    'Linkedin': linkedin_preprocess
+    'Linkedin': linkedin_preprocess,
+    'maimai': maimai_preprocess
 }
 
 __filter_dispatcher = {
     'common_custom_service_filter': common_custom_service_filter, 
     'shijiazhuang_custom_service_filter': shijiazhuang_custom_service_filter,
     'shijiazhuang_qinggan_service_filter': shijiazhuang_qinggan_service_filter,
-    'linkedin_common_service_filter': linkedin_common_service_filter
+    'linkedin_common_service_filter': linkedin_common_service_filter,
+    'nlp_maimai_service_filter': nlp_maimai_service_filter
 }
 
 _account_force_context = {}
