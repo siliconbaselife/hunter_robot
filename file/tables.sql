@@ -109,11 +109,8 @@ CREATE TABLE IF NOT EXISTS `wechat_account`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `wechat_account_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-<<<<<<< HEAD
-=======
 alter table wechat_account add description varchar(100) NOT NULL DEFAULT "" COMMENT '账户描述' after wechat_account_id;
 
->>>>>>> v2.0
 
 
 CREATE TABLE IF NOT EXISTS `wechat_chat`(
@@ -127,11 +124,7 @@ CREATE TABLE IF NOT EXISTS `wechat_chat`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `candidate_id`, `wechat_accoount_id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-<<<<<<< HEAD
-=======
 alter table wechat_chat add `status` int unsigned NOT NULL DEFAULT 0 COMMENT '状态0待添加，1已发送请求，2已添加成功' after `details`;
-
->>>>>>> v2.0
 
 
 
