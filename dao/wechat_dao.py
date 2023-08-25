@@ -1,22 +1,27 @@
 from utils.db_manager import dbm
 from utils.config import config
 from utils.log import get_logger
+from utils.db_manager import dbm
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "update_chat_status": "update wechat_chat set status={} where wechat_account_id={} and wechat_id={}",
-    "get_chat_by_wechat_id": "select candidate_id,candidate_name,wechat_id,wechat_alias_id,wechat_account_id,details,status from wechat_chat where wechat_alias_id={} and wechat_account_id={}"
+    "update_chat_status_by_id": "update wechat_chat set status={} where wechat_account_id='{}' and wechat_id='{}'",
+    "update_chat_status_by_alias_id": "update wechat_chat set status={} where wechat_account_id='{}' and wechat_alias_id='{}'",
+    "get_chat_by_alias_id": "select candidate_id,candidate_name,wechat_id,wechat_alias_id,wechat_account_id,details,status from wechat_chat where wechat_alias_id='{}' and wechat_account_id='{}'",
+    "update_detail": "update wechat_chat set detail='{}' where wechat_account_id='{}' and wechat_alias_id='{}'",
+    "get_wechat_account_info": "select wechat_account_id, task_config from wechat_account where wechat_account_id='{}'" 
 }
     
-def friend_status_update(wechat_account_id, wechat_id, status):
-    return sql_dict['update_chat_status'].format(status, wechat_account_id, wechat_id)
+def friend_status_update_by_id(wechat_account_id, wechat_id, status):
+    return dbm.update(sql_dict['update_chat_status_by_id'].format(status, wechat_account_id, wechat_id))
+def friend_status_update_by_alias_id(wechat_account_id, wechat_alias_id, status):
+    return dbm.update(sql_dict['update_chat_status_by_alias_id'].format(status, wechat_account_id, wechat_alias_id))
 
-def get_chat_by_wechat_id(wechat_alias_id, wechat_account_id):
-    return sql_dict["get_chat_by_wechat_id"].format(wechat_alias_id, wechat_account_id)[0]
+def get_chat_by_alias_id(wechat_alias_id, wechat_account_id):
+    return dbm.query(sql_dict["get_chat_by_alias_id"].format(wechat_alias_id, wechat_account_id))[0]
 
-def msg_append():
-    return
+def update_detail(wechat_alias_id, wechat_account_id, detail):
+    return dbm.update(sql_dict["update_detail"].format(wechat_alias_id, wechat_account_id))
 
-def wechat_chat():
-    
-    return
+def get_wechat_account_info(wechat_account_id):
+    return dbm.query(sql_dict["get_wechat_account_info"].format(wechat_account_id))[0]
