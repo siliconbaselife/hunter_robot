@@ -16,7 +16,8 @@ __filter_dispatcher = {
     'shijiazhuang_custom_service_filter': shijiazhuang_custom_service_filter,
     'shijiazhuang_qinggan_service_filter': shijiazhuang_qinggan_service_filter,
     'linkedin_common_service_filter': linkedin_common_service_filter,
-    'nlp_maimai_service_filter': nlp_maimai_service_filter
+    'nlp_maimai_service_filter': nlp_maimai_service_filter,
+    'no_condition_common_filter': no_condition_common_filter
 }
 
 _account_force_context = {}
