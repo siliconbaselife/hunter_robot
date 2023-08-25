@@ -35,12 +35,15 @@ def friend_report(wechat_account_id, wechat_alias_id, wechat_id):
     friend_status_update_by_id(wechat_account_id, wechat_id, 1)
 
 
-def _get_add_friend_task(wechat_account_id):
+def _get_add_friend_task(account_info):
+
+    ##先写一个简单策略
+
     return {
         "task_type":"add_friend",
         "content": []
     }
-def _get_send_msg_task(wechat_account_id):
+def _get_send_msg_task(account_info):
     return {
         "task_type":"send_msg",
         "content": []
@@ -49,6 +52,10 @@ def _get_send_msg_task(wechat_account_id):
 
 def task_to_do(wechat_account_id):
     account_info = get_wechat_account_info(wechat_account_id)
+
+
+
+
 
     task_list = [
         _get_add_friend_task(wechat_account_id),
