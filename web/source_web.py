@@ -10,8 +10,8 @@ from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
 from utils.utils import deal_json_invaild
 from dao.task_dao import *
-from service.task_service import generate_task, get_undo_task, update_touch_task
 from service.chat_service import chat_service
+from service.task_service import generate_task, get_undo_task, update_touch_task, friend_report_service
 from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
 from service.recall_service import recall_msg, recall_result
@@ -209,7 +209,14 @@ def candidate_recall_result_api():
     logger.info(f'candidate recall response {account_id}, {res_data}')
     return Response(json.dumps(get_web_res_suc_with_data(res_data), ensure_ascii=False))
 
-
+@source_web.route("/recruit/candidate/friendReport", methods=['POST'])
+@web_exception_handler
+def candidate_friend_report_api():
+    account_id = request.json['accountID']
+    candidate_id = request.json['candidateID']
+    logger.info(f'friend_report_request {account_id}, {candidate_id}')
+    friend_report_service(account_id, candidate_id)
+    return Response(json.dumps(get_web_res_suc_with_data(), ensure_ascii=False))
 
 @source_web.route("/recruit/candidate/chat", methods=['POST'])
 @web_exception_handler

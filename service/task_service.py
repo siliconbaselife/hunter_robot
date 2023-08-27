@@ -79,8 +79,6 @@ def generate_task(jobs):
     return ret
 
 
-def need_recall(account_id, job_id):
-    
-
-    return
+def friend_report_service(account_id, candidate_id):
+    add_friend_report(account_id, candidate_id)
 
