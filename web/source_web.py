@@ -11,7 +11,7 @@ from utils.decorator import web_exception_handler
 from utils.utils import deal_json_invaild
 from dao.task_dao import *
 from service.task_service import generate_task, get_undo_task, update_touch_task
-from service.chat_service import ChatRobot
+from service.chat_service import chat_service
 from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
 from service.recall_service import recall_msg, recall_result
@@ -250,16 +250,15 @@ def candidate_chat_api():
         reason = f'job id {job_id} 未注册，没有对应的算法uri'
         return Response(json.dumps(get_web_res_fail(reason)))
 
-
-    sess_id = f'{account_id}_{job_id}_{candidate_id}'
-    robot = ChatRobot(robot_api, sess_id, page_history_msg, db_history_msg=db_history_msg, source=source)
+    chat_context = chat_service(account_id, job_id, candidate_id, robot_api, \
+        page_history_msg, db_history_msg, source)
 
     ret_data = {
-        'nextStep': robot.next_step,
-        'nextStepContent': robot.next_msg 
+        'nextStep': chat_context['next_step'],
+        'nextStepContent': chat_context['next_msg'] 
     }
-    details = json.dumps(robot.msg_list, ensure_ascii=False)
-    update_chat_db(account_id, job_id, candidate_id, robot.source, robot.status, details)
+    details = json.dumps(chat_context['msg_list'], ensure_ascii=False)
+    update_chat_db(account_id, job_id, candidate_id, chat_context['source'], chat_context['status'], details)
     logger.info(f'candidate chat: {account_id} {job_id} {candidate_id} {candidate_name}: {ret_data}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
