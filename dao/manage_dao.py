@@ -19,7 +19,7 @@ def login_check_db(user_name):
 
 def jobs_query(account_id):
     jobs = dbm.query(sql_dict['jobs_query'].format(account_id))[0][0]
-    logger.info(f"test_jobs: {jobs}")
+    # logger.info(f"test_jobs: {jobs}")
     return json.loads(jobs)
 
 def jobs_update(jobs, account_id):
