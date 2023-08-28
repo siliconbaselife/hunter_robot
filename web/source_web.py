@@ -78,7 +78,8 @@ def task_fetch_api():
 def task_report_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
-    job_id = json.loads(get_account_jobs_db(account_id))[0]
+    # job_id = json.loads(get_account_jobs_db(account_id))[0]
+    job_id = request.json['jobID']
     job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
     job_touch_msg = job_config['touch_msg']
 
@@ -110,8 +111,8 @@ def task_report_api():
 def candidate_filter_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
-    # job_id = request.json['jobID']
-    job_id = json.loads(get_account_jobs_db(account_id))[0]
+    job_id = request.json['jobID']
+    # job_id = json.loads(get_account_jobs_db(account_id))[0]
     raw_candidate_info = request.json['candidateInfo']
     #应该从下面取， 不应该在这取吧？@润和 如果是怕异常得换个地方,我换到实现类里面
     # candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
@@ -148,12 +149,13 @@ def candidate_filter_api():
 @web_exception_handler
 def candidate_recall_api():
     account_id = request.json['accountID']
-    job_id = json.loads(get_account_jobs_db(account_id))[0]
+    # job_id = json.loads(get_account_jobs_db(account_id))[0]
     candidate_ids = request.json['candidateIDs']
     logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}')
     res_data = recall_msg(account_id, candidate_ids)
     for item in res_data:
         candidate_id = item['candidate_id']
+        job_id = item['job_id']
         msg = item['recall_msg']
         append_chat_msg(account_id, job_id, candidate_id, msg)
     logger.info(f'candidate recall response {account_id}, {len(res_data)}')
@@ -182,11 +184,17 @@ def candidate_friend_report_api():
 @web_exception_handler
 def candidate_chat_api():
     account_id = request.json['accountID']
-    ## job use first register job of account:
-    # job_id = request.json['jobID']
-    job_id = json.loads(get_account_jobs_db(account_id))[0]
-    # history_msg = request.json['historyMsg']
     candidate_id = request.json['candidateID']
+
+    ## job use first register job of account:
+    job_id = request.json['jobID']
+    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
+        job_id_info = get_job_id_in_chat(account_id, candidate_id)
+        if len(job_id_info) == 0:
+            job_id = json.loads(get_account_jobs_db(account_id))[0]
+        else:
+            job_id = job_id_info[0][0]
+    # history_msg = request.json['historyMsg']
     candidate_name = request.json.get('candidateName', None)
     page_history_msg = request.json['historyMsg']
     logger.info(f'candidate chat request: {account_id} {job_id} {candidate_id} {candidate_name} {page_history_msg}')
@@ -235,12 +243,16 @@ def candidate_chat_api():
 def candidate_result_api():
     
     account_id = request.form['accountID']
-
-    ## job use first register job of account:
-    # job_id = request.form['jobID']
-    job_id = json.loads(get_account_jobs_db(account_id))[0]
-
     candidate_id = request.form['candidateID']
+    ## job use first register job of account:
+    job_id = request.json['jobID']
+    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
+        job_id_info = get_job_id_in_chat(account_id, candidate_id)
+        if len(job_id_info) == 0:
+            job_id = json.loads(get_account_jobs_db(account_id))[0]
+        else:
+            job_id = job_id_info[0][0]
+
     name = request.form['candidateName']
     phone = request.form.get('phone', None)
     wechat = request.form.get('wechat', None)

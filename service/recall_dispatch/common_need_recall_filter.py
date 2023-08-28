@@ -25,6 +25,7 @@ def get_msg(filter_result):
 def common_need_recall_filter(chat_info):
     candidate_id = chat_info[0]
     candidate_name = chat_info[1]
+    job_id = chat_info[7]
     recall_msg = ""
 
     contact_unget = False
@@ -52,6 +53,7 @@ def common_need_recall_filter(chat_info):
         res = {
             "candidate_id": candidate_id,
             "candidate_name": candidate_name,
+            "job_id": job_id,
             "need_recall": True,
             "recall_msg": recall_msg
         }

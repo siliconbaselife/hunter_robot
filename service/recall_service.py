@@ -22,9 +22,8 @@ def need_recall(chat_info):
 
 
 def recall_msg(account_id, candidate_ids):
-    job_id = get_account_jobs_db(account_id)
     ##获得所有chat信息
-    chat_infos = get_chats_by_ids(account_id, job_id, candidate_ids)
+    chat_infos = get_chats_by_ids(account_id, candidate_ids)
     chat_res = []
     for chat_info in chat_infos:
         flag, res = need_recall(chat_info)
