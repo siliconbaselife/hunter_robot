@@ -109,7 +109,7 @@ def manage_account_login_api():
             "login_ret": flag,
             "errMsg": msg
         }
-    )))
+    ), ensure_ascii=False))
 
 @manage_web.route("/backend/manage/jobMapping", methods=['POST'])
 @web_exception_handler
