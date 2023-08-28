@@ -44,6 +44,9 @@ CREATE TABLE IF NOT EXISTS `job`(
    PRIMARY KEY ( `job_id` ),
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+alter table job add manage_account_id varchar(100) NOT NULL DEFAULT "" COMMENT '管理账户';
+alter table job add share tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否公共job';
+
 
 alter table job add job_config varchar(512) NOT NULL DEFAULT "" COMMENT '岗位配置' after robot_api;
 {"group_msg":"beijing","filter_config":"common_custom_service_filter"}
@@ -68,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `account`(
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table account add description varchar(100) NOT NULL DEFAULT "" COMMENT '账户描述' after task_config;
-
+alter table account add manage_account_id varchar(100) NOT NULL DEFAULT "" COMMENT '管理账户' after account_id;
 
 =====task_config===========
 [
@@ -127,8 +130,14 @@ CREATE TABLE IF NOT EXISTS `wechat_chat`(
 alter table wechat_chat add `status` int unsigned NOT NULL DEFAULT 0 COMMENT '状态0待添加，1已发送请求，2已添加成功' after `details`;
 
 
-
-
+CREATE TABLE IF NOT EXISTS `manage_account`(
+   `manage_account_id` VARCHAR(100) NOT NULL COMMENT '账号',
+   `password` VARCHAR(100) NOT NULL COMMENT '密码',
+   `desc` VARCHAR(100) NOT NULL COMMENT '备注',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `manage_account_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 
 
