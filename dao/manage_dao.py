@@ -18,7 +18,7 @@ def login_check_db(user_name):
     return dbm.query(sql_dict['login_check'].format(user_name))
 
 def jobs_query(account_id):
-    jobs = dbm.query(sql_dict['jobs_query'].format(account_id))[0]
+    jobs = dbm.query(sql_dict['jobs_query'].format(account_id))[0][0]
     logger.info(f"test_jobs: {jobs}")
     return json.loads(jobs)
 
