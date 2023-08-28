@@ -26,12 +26,15 @@ def job_mapping_service(account_id, job_id):
 def my_job_list_service(manage_account_id):
     jobs_db = my_job_list_db(manage_account_id)
     ret_list = []
+    
     for j_d in jobs_db:
+        logger.info(f"error: {j_d[3]}")
+        job_config = {} if j_d[3] == None else json.loads(j_d[3])
         job = {
             "job_id": j_d[0],
             "job_name": j_d[1],
             "share": j_d[2],
-            "job_config": {} if j_d[3] == None else json.loads(j_d[3])
+            "job_config": job_config
         }
         ret_list.append(job)
     return ret_list
