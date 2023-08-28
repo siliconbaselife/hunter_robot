@@ -20,7 +20,7 @@ def job_mapping_service(account_id, job_id):
     jobs = jobs_query(account_id)
     jobs.append(job_id)
     jobs_ret = list(set(jobs))
-    jobs_update(json.dumps(jobs_ret))
+    jobs_update(json.dumps(jobs_ret), account_id)
     return jobs_ret
 
 def my_job_list_service(manage_account_id):
