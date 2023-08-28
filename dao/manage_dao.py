@@ -32,4 +32,4 @@ def my_account_list_db(manage_account_id):
     return dbm.query(sql_dict['my_account_list_db'].format(manage_account_id))
 
 def account_config_update_db(manage_account_id, account_id, task_config_json):
-    return dbm.update(sql_dict['account_config_update_db'].format(task_config_json, manage_account_id, account_id))
+    return dbm.update(sql_dict['account_config_update_db'].format(json.dumps(task_config_json, ensure_ascii=False), manage_account_id, account_id))
