@@ -82,7 +82,7 @@ def register_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
     manage_account_id = request.json['manage_account_id']
-    jobs = request.json['jobs']
+    jobs = request.json.get('jobs', [])
     task_config = request.json.get('taskConfig', None)
     desc = request.json.get('desc', None)
     logger.info(f'new account request: {platform_type} {platform_id} {jobs} {desc} {task_config}, {manage_account_id}')
