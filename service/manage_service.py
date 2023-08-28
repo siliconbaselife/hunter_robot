@@ -29,7 +29,7 @@ def my_job_list_service(manage_account_id):
     
     for j_d in jobs_db:
         logger.info(f"error: {j_d[3]}")
-        job_config = {} if j_d[3] == None else json.loads(j_d[3])
+        job_config = {} if j_d[3] == None or j_d[3] == "None" else json.loads(j_d[3])
         job = {
             "job_id": j_d[0],
             "job_name": j_d[1],
@@ -55,7 +55,7 @@ def my_account_list_service(manage_account_id):
                 "job_id": job_db[0],
                 "job_name": job_db[3],
                 "share": job_db[9],
-                "job_config": {} if job_db[6] == None else json.loads(job_db[6])
+                "job_config": {} if job_db[6] is None or job_db[6] == "None" else json.loads(job_db[6])
             }
             jobs_ret.append(job)
         account = {
@@ -63,7 +63,7 @@ def my_account_list_service(manage_account_id):
             "platform_type": a_d[1],
             "description": a_d[2],
             "jobs":jobs_ret,
-            "task_config": {} if a_d[4] == None else json.loads(a_d[4])
+            "task_config": {} if a_d[4] is None or a_d[4] == "None" else json.loads(a_d[4])
         }
         ret_list.append(account)
     return ret_list
