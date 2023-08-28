@@ -5,11 +5,11 @@ from utils.log import get_logger
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config) values ('{}','{}','{}','{}','{}','{}','{}')",
+    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id) values ('{}','{}','{}','{}','{}','{}','{}', {}, '{}')",
     "query_job_id": "select job_id from job where platform_type = '{}' and platform_id= '{}'",
     # "query_job_requirement": "select requirement_config from job where job_id = {}",
     "query_job_robotapi": "select robot_api from job where job_id='{}'",
-    "register_account": "insert into account(account_id, platform_type, platform_id, jobs, task_config, description) values ('{}','{}','{}','{}','{}','{}')",
+    "register_account": "insert into account(account_id, platform_type, platform_id, jobs, task_config, description, manage_account_id) values ('{}','{}','{}','{}','{}','{}','{}')",
     "query_account_id": "select account_id from account where platform_type='{}' and platform_id='{}'",
     "query_account_type": "select platform_type from account where account_id='{}'",
     "get_jobs":"select jobs from account where account_id='{}'",
@@ -27,7 +27,7 @@ sql_dict = {
     "insert_sub_task_log":"insert into account_exec_log(account_id, job_id, exec_date, hello_sum_need) values ('{}','{}','{}','{}')",
     "get_account_task_log":"select * from account_exec_log where account_id='{}' and exec_date='{}'",
     "get_job_task_log": "select * from account_exec_log where account_id='{}' and job_id='{}' and exec_date='{}'",
-    "get_job_by_id":"select * from job where job_id='{}'",
+    "get_job_by_id":"select job_id,platform_type,platform_id,job_name,job_jd,robot_api,job_config,create_time,update_time,share from job where job_id='{}'",
     "get_chats_by_job_id":"select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' and contact!='NULL' order by update_time desc limit {},{}",
     "get_chats_num_by_job_id":"select count(1) from chat where job_id='{}' and contact!='NULL'",
     "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt from chat where account_id='{}' and job_id='{}' and candidate_id in {} order by update_time desc",
@@ -35,8 +35,10 @@ sql_dict = {
     "add_friend_report":"update chat set added_friend=1 where account_id='{}' and candidate_id='{}'"
 }
 
-def register_job_db(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config):
-    dbm.insert(sql_dict['register_job'].format(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config))
+def register_job_db(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id):
+    if share == None:
+        share = 0
+    dbm.insert(sql_dict['register_job'].format(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id))
     return job_id
 
 # def query_job_requirement_db(job_id):
@@ -48,9 +50,9 @@ def query_job_id_db(platform_type, platform_id):
 def query_robotapi_db(job_id):
     return dbm.query(sql_dict['query_job_robotapi'].format(job_id))[0][0]
 
-def register_account_db(account_id, platform_type, platform_id, jobs, task_config, desc):
+def register_account_db(account_id, platform_type, platform_id, jobs, task_config, desc, manage_account_id):
     # d = [[account_id, platform_type, platform_id, jobs, task_config]]
-    dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc))
+    dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc, manage_account_id))
     return account_id
 
 def query_account_id_db(platform_type, platform_id):

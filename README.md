@@ -242,3 +242,130 @@ response
 {'ret': 0, 'msg': 'success', 'data': {"msg":"xxxxxxxxx"}}
 
 
+## =====================管理后台
+
+## 
+/backend/manage/login
+# request
+user_name  string 
+password  string 
+# response
+{
+    "ret": 0,
+    "msg": "success",
+    "data": {
+        "login_ret": 1,
+        "errMsg": ""
+    }
+}
+
+#### 注册账户（招聘账户，账户的岗位信息在平台上面自行配置）
+```
+## uri: /recruit/account/register
+## request params:
+### platformType    string      need      招聘平台，例如：'boss' 
+### platformID      string      need      招聘平台给的账户ID，例如：'27175761'
+### jobs            list        need      账户招聘的岗位jobID列表
+## response data:
+### accountID       string      账户ID
+``
+
+#### 注册job
+```
+## uri: /recruit/job/register
+## request params:
+### platformType    string      need      平台类型，如：boss
+### platformID      string      need      平台上job的id
+### jobName         string      need      工作名称
+### jobJD           string      need      工作介绍
+### robotApi        string      need      岗位对应的算法后端api
+## share            string    是否共享0/1
+## response data:
+### jobID           string      工作ID
+
+## 可用job列表
+/backend/manage/myJobList
+request
+manage_account_id  string 
+
+response:
+{
+    "ret": 0,
+    "msg": "success",
+    "data": [{
+            "job_id":"xx",
+            "job_name":"",
+            "share":0,
+            job_config:{
+              "group_msg":"beijing",
+              "filter_config":"linkedin_common_service_filter",
+              "touch_msg":"老师您好，打扰一下，我这边有些岗位想和您分享，请问方便加个好友吗？"
+              }
+          }]
+}
+
+
+### 我的账号列表
+/backend/manage/myAccountList
+request
+string manage_account_id
+{
+    "ret": 0,
+    "msg": "success",
+    "data": [
+      {
+        "account_id":"xxx",
+        "platform_type":"x",
+        "description":"备注",
+        "task_config":[
+          {
+            "helloSum": 50,
+             "taskType": "batchTouch",
+              "timeMount": [
+                {"time": "09:00","mount": 10}, {"time": "12:00", "mount": 10},{"time": "15:00", "mount": 10},  {"time": "18:00", "mount": 10}, {"time": "22:00", "mount": 10}
+                ],
+            "filter": { 
+                "city": {"area": "北京"},
+                "education": ["中专/中技", "高中", "大专", "本科", "硕士", "博士"],
+                "pay": ["5-10K"],
+                "status": ["离职-随时到岗", "在职-考虑机会"]
+                },
+            "jobID": "job_Boss_general-beijing-kefu-manual-id"
+          }
+        ],
+        "create_time":"",
+        "update_time":"",
+        "job_config":[
+          {
+            "job_id":"xx",
+            "job_name":"",
+            job_config:{
+              "group_msg":"beijing",
+              "filter_config":"linkedin_common_service_filter",
+              "touch_msg":"老师您好，打扰一下，我这边有些岗位想和您分享，请问方便加个好友吗？"
+              }
+          }
+        ] 
+      }
+    ]
+}
+
+
+/backend/manage/jobMapping
+request
+string manage_account_id
+string account_id
+string job_id
+
+
+
+这俩更新接口尤其是filter部分，得再抽象一层，创建一个filter，否则不好配置，最后再实现这俩
+/backend/manage/accountUpdate
+
+
+
+/backend/manage/jobUpdate
+request
+string manage_account_id
+string account_id
+string touch_msg ##其他例如filter配置得再封装一层后面再加参数

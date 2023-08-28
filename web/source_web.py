@@ -12,7 +12,6 @@ from utils.utils import deal_json_invaild
 from dao.task_dao import *
 from service.task_service import generate_task, get_undo_task, update_touch_task, friend_report_service
 from service.chat_service import ChatRobot
-from service.manage_service import candidate_list_service
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
 from service.recall_service import recall_msg, recall_result
 from service.db_service import append_chat_msg
@@ -26,27 +25,7 @@ source_web = Blueprint('source_web', __name__, template_folder='templates')
 logger = get_logger(config['log']['log_file'])
 
 
-@source_web.route("/recruit/job/register", methods=['POST'])
-@web_exception_handler
-def register_job_api():
-    platform_type = request.json['platformType']
-    platform_id = request.json['platformID']
-    job_name = request.json['jobName']
-    jd = request.json.get('jobJD', None)
-    robot_api = request.json['robotApi']
-    job_config = request.json.get('jobConfig', None)
-    if job_config is not None:
-        job_config = json.dumps(job_config, ensure_ascii=False)
 
-    # logger.info(f'new job request: {job_name} {requirement_config} {robot_api}')
-    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}')
-    job_id = f'job_{platform_type}_{platform_id}'
-    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config)
-    ret_data = {
-        'jobID': job_id
-    }
-    logger.info(f'new job register: {platform_type} {platform_id} {job_name} {robot_api} {job_config}: {job_id}')
-    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 @source_web.route("/recruit/job/query", methods=['POST'])
 @web_exception_handler
@@ -63,25 +42,6 @@ def query_job_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
-@source_web.route("/recruit/account/register", methods=['POST'])
-@web_exception_handler
-def register_account_api():
-    platform_type = request.json['platformType']
-    platform_id = request.json['platformID']
-    jobs = request.json['jobs']
-    task_config = request.json.get('taskConfig', None)
-    desc = request.json.get('desc', None)
-    logger.info(f'new account request: {platform_type} {platform_id} {jobs} {desc} {task_config}')
-    account_id = f'account_{platform_type}_{platform_id}'
-
-    if task_config is None:
-        task_config = generate_task(jobs)
-    account_id = register_account_db(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), desc)
-    logger.info(f'new account register: {platform_type} {platform_id} {jobs} {desc}: {account_id} {task_config}')
-    ret_data = {
-        'accountID': account_id
-    }
-    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
 @source_web.route("/recruit/account/query", methods=['POST'])
@@ -343,35 +303,7 @@ def candidate_result_api():
 
 
 
-@source_web.route("/recruit/candidate/list", methods=['GET'])
-@web_exception_handler
-def candidate_list_web():
-    job_id = request.args.get('job_id')
-    page_num = request.args.get('page_num')
-    limit = request.args.get('limit')
-    if job_id == None or page_num == None or limit == None:
-        logger.info(f'candidade_list_bad_request: job_id: {job_id}， page_num {page_num}')
-        return Response(json.dumps(get_web_res_fail("no args")))
 
-    limit = int(limit)
-    page_num = int(page_num)
-
-    logger.info(f'candidade_list: job_id: {job_id}， page_num {page_num}')
-    start = limit * (page_num - 1)
-    
-    chat_sum, res_chat_list = candidate_list_service(job_id, start, limit)
-    # logger.info(f"{chat_sum}")
-    page_sum = math.ceil(chat_sum / limit)
-    res = {
-        "chat_sum" : chat_sum,
-        "page_sum" : page_sum,
-        "chat_list" : res_chat_list
-    }
-    response = Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'OPTIONS,HEAD,GET,POST'
-    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
-    return response
 
 @source_web.route("/recruit/candidate/statistic", methods=['POST'])
 @web_exception_handler

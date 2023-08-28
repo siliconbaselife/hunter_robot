@@ -1,4 +1,5 @@
 from dao.task_dao import *
+from dao.manage_dao import *
 import json
 import time
 from utils.config import config
@@ -6,6 +7,61 @@ from utils.utils import format_time
 import copy
 from datetime import datetime
 
+def login_check_service(user_name, password):
+    user_info = login_check_db(user_name)
+    if len(user_info) == 0:
+        return False, "用户不存在"
+    if user_info[0][1] == password:
+        return True, "登录成功"
+    else:
+        return False, "用户名密码错误"
+
+def job_mapping_service(account_id, job_id):
+    jobs = jobs_query(account_id)
+    jobs.append(job_id)
+    jobs_update(json.dumps(jobs))
+
+def my_job_list_service(manage_account_id):
+    jobs_db = my_job_list_db(manage_account_id)
+    ret_list = []
+    for j_d in jobs_db:
+        job = {
+            "job_id": j_d[0],
+            "job_name": j_d[1],
+            "share": j_d[2],
+            "job_config": json.loads(j_d[3])
+        }
+        ret_list.append(job)
+    return ret_list
+
+def account_config_update_service(manage_account_id, account_id, task_config):
+    return account_config_update_db(manage_account_id, account_id, task_config)
+    
+
+def my_account_list_service(manage_account_id):
+    accounts_db = my_account_list_db(manage_account_id)
+    ret_list = []
+    for a_d in accounts_db:
+        jobs = json.loads(a_d[3])
+        jobs_ret = []
+        for job_id in jobs:
+            job_db = get_job_by_id(job_id)[0]
+            job = {
+                "job_id": job_db[0],
+                "job_name": job_db[3],
+                "share": job_db[9],
+                "job_config": json.loads(job_db[6])
+            }
+            jobs_ret.append(job)
+        account = {
+            "account_id": a_d[0],
+            "platform_type": a_d[1],
+            "description": a_d[2],
+            "jobs":jobs_ret,
+            "task_config": json.loads(a_d[4])
+        }
+        ret_list.append(account)
+    return ret_list
 
 def candidate_list_service(job_id, start, limit):
     chat_list = get_chats_by_job_id(job_id, start, limit)
