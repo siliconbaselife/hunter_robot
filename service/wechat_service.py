@@ -36,13 +36,19 @@ def friend_report(wechat_account_id, wechat_alias_id, wechat_id):
 
 
 def _get_add_friend_task(account_info):
-
     ##先写一个简单策略
+    task_config = json.loads(account_info[1])
+    job_config = task_config['job_config']
+    for job_c in job_config:
+        job_id = job_c['job_id']
+        
 
     return {
         "task_type":"add_friend",
         "content": []
     }
+
+
 def _get_send_msg_task(account_info):
     return {
         "task_type":"send_msg",
@@ -52,8 +58,7 @@ def _get_send_msg_task(account_info):
 
 def task_to_do(wechat_account_id):
     account_info = get_wechat_account_info(wechat_account_id)
-
-
+    
 
 
 

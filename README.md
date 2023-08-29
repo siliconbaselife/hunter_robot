@@ -211,7 +211,8 @@ task_list
   "content":[
     {
       "search_id":"id1",
-      "alias_id":"xxxx"
+      "alias_id":"xxxx",
+      "hello_msg":"xxxx"
     }
   ]
 }
