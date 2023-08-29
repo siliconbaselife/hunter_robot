@@ -80,6 +80,8 @@ def task_report_api():
     ## job use first register job of account:
     # job_id = json.loads(get_account_jobs_db(account_id))[0]
     job_id = request.json['jobID']
+    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
+        job_id = json.loads(get_account_jobs_db(account_id))[0]
     job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
     job_touch_msg = job_config['touch_msg']
 
@@ -112,6 +114,8 @@ def candidate_filter_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
     job_id = request.json['jobID']
+    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
+        job_id = json.loads(get_account_jobs_db(account_id))[0]
     # job_id = json.loads(get_account_jobs_db(account_id))[0]
     raw_candidate_info = request.json['candidateInfo']
     #应该从下面取， 不应该在这取吧？@润和 如果是怕异常得换个地方,我换到实现类里面
