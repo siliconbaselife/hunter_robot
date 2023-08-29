@@ -19,7 +19,7 @@ def nlp_maimai_service_filter(candidate_info):
 
     age_range = (23, 32)
     min_degree = 2
-    location = ['北京', 'beijing', 'Beijing']
+    location = ['北京', 'beijing', 'Beijing', '深圳', 'shenzhen', 'ShenZhen']
     job_tags = ['算法工程师', '算法研究员', 'nlp', 'NLP', 'Nlp']
     
 
