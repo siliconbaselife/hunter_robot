@@ -79,7 +79,7 @@ def task_report_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
     # job_id = json.loads(get_account_jobs_db(account_id))[0]
-    job_id = request.json['jobID']
+    job_id = request.json.get('jobID', "")
     logger.info(f'job_test:{job_id}')
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         job_id = json.loads(get_account_jobs_db(account_id))[0]
@@ -114,7 +114,7 @@ def task_report_api():
 def candidate_filter_api():
     account_id = request.json['accountID']
     ## job use first register job of account:
-    job_id = request.json['jobID']
+    job_id = request.json.get('jobID', "")
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         job_id = json.loads(get_account_jobs_db(account_id))[0]
     # job_id = json.loads(get_account_jobs_db(account_id))[0]

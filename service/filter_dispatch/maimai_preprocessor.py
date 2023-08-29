@@ -107,7 +107,7 @@ def maimai_preprocess(raw_candidate_info):
             'candidate_status': candidate_status,
             'active': active,
             'exp_location': cur_location,
-            'exp_location_list': exp_location,
+            'exp_location_dict': exp_location,
             'exp_salary': exp_salary,
             'major': major,
             'exp_position': position_name,
