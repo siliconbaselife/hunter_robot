@@ -86,7 +86,7 @@ def task_report_api():
     job_touch_msg = job_config['touch_msg']
 
     task_status = request.json['taskStatus']
-    logger.info(f'account task report {account_id}, {task_status}')
+    logger.info(f'account task report {account_id},{job_id} {task_status}')
     touch_list = []
     for item in task_status:
         if item['taskType']=='batchTouch':
