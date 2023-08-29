@@ -11,10 +11,11 @@ def nlp_maimai_service_filter(candidate_info):
 
 ####阈值
     
-    if time.localtime().tm_hour > 6 and time.localtime().tm_hour < 23:
-        threshold = 10800
-    else:
-        threshold = 86400
+    # if time.localtime().tm_hour > 6 and time.localtime().tm_hour < 23:
+    #     threshold = 10800
+    # else:
+    #     threshold = 86400
+    threshold = 8640000
 
     age_range = (23, 32)
     min_degree = 2
