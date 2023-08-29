@@ -12,7 +12,7 @@ def nlp_maimai_service_filter(candidate_info):
 ####阈值
     
     if time.localtime().tm_hour > 6 and time.localtime().tm_hour < 23:
-        threshold = 600
+        threshold = 10800
     else:
         threshold = 86400
 
