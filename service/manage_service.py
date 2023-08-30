@@ -101,4 +101,8 @@ def candidate_list_service(job_id, start, limit):
     chat_sum = get_chats_num_by_job_id(job_id)[0][0]
     return chat_sum, res_chat_list
 
-
+def update_job_config_service(job_id, touch_msg, filter_args):
+    job_config = json.loads(get_job_by_id(job_id)[6])
+    job_config['touch_msg'] = touch_msg
+    job_config['filter_args'] = filter_args
+    return update_job_config(job_id, json.dumps(job_config, ensure_ascii=False))

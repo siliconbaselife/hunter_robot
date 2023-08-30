@@ -149,4 +149,9 @@ def account_update_api():
 @manage_web.route("/backend/manage/jobUpdate", methods=['POST'])
 @web_exception_handler
 def job_update_api():
-    return
+    job_id = request.json['job_id']
+    touch_msg = request.json['touch_msg']
+    filter_args = request.json['filter_args']
+    logger.info(f'account_update_request:{job_id}, {touch_msg}, {filter_args}')
+    ret = update_job_config_service(job_id, touch_msg, filter_args)
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
