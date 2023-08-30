@@ -6,7 +6,7 @@ from utils.log import get_logger
 logger = get_logger(config['log']['log_file'])
 
 def shijiazhuang_custom_service_filter(candidate_info, job_res):
-    age_range = (18, 35)
+    age_range = (18, 40)
     min_degree = '中专'
     location = '石家庄'
     job_tags = ['客服','电话销售']
@@ -15,7 +15,6 @@ def shijiazhuang_custom_service_filter(candidate_info, job_res):
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
     location_ok = candidate_info['exp_location']==location
     exp_position = candidate_info['exp_position']
-    exp_salary = candidate_info['exp_salary']
 
     if time.localtime().tm_hour > 6 and time.localtime().tm_hour < 23:
         threshold = 300
