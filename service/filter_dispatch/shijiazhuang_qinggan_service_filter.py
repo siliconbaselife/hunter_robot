@@ -5,7 +5,7 @@ from utils.config import config
 from utils.log import get_logger
 logger = get_logger(config['log']['log_file'])
 
-def shijiazhuang_qinggan_service_filter(candidate_info):
+def shijiazhuang_qinggan_service_filter(candidate_info, job_res):
     age_range = (26, 42)
     min_degree = '大专'
     location = '石家庄'

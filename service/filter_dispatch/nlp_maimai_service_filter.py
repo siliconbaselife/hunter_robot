@@ -6,7 +6,7 @@ from utils.utils import is_211
 from utils.log import get_logger
 logger = get_logger(config['log']['log_file'])
 
-def nlp_maimai_service_filter(candidate_info):
+def nlp_maimai_service_filter(candidate_info, job_res):
 
 
 ####阈值

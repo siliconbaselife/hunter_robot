@@ -27,3 +27,16 @@ def is_211(school):
 
 def is_985(school):
     return school in school_985
+
+degree_dict = {
+    "博士后": 4,
+    "博士": 3,
+    "硕士": 2,
+    "本科": 1,
+    "大专": 0,
+    "高中": -1,
+    "中专": -2,
+    "初中及以下": -3
+}
+def get_degree_num(degree_str):
+    return degree_dict[degree_str]

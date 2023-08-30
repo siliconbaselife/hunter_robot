@@ -5,6 +5,7 @@ from dao.task_dao import *
 import json
 from threading import Lock
 logger = get_logger(config['log']['log_file'])
+
 __preprocess_dispatcher = {
     'Boss': boss_preprocess,
     'Linkedin': linkedin_preprocess,
@@ -17,7 +18,9 @@ __filter_dispatcher = {
     'shijiazhuang_qinggan_service_filter': shijiazhuang_qinggan_service_filter,
     'linkedin_common_service_filter': linkedin_common_service_filter,
     'nlp_maimai_service_filter': nlp_maimai_service_filter,
-    'no_condition_common_filter': no_condition_common_filter
+    'no_condition_common_filter': no_condition_common_filter,
+    'maimai_autoload_filter': maimai_autoload_filter,
+    'boss_autoload_filter': boss_autoload_filter
 }
 
 _account_force_context = {}
@@ -65,4 +68,4 @@ def candidate_filter(job_id, candidate_info):
     if len(job_res) == 0:
         logger.info(f"job config wrong, not exist: {job_id}, {candidate_info['id']}")
     filter_config = json.loads(job_res[0][6],strict=False)["filter_config"]
-    return __filter_dispatcher[filter_config](candidate_info)
+    return __filter_dispatcher[filter_config](candidate_info, job_res)

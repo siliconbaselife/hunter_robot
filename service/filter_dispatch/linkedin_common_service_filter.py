@@ -1,7 +1,7 @@
 from .utils import degree_compare
 import time
 
-def linkedin_common_service_filter(candidate_info):
+def linkedin_common_service_filter(candidate_info, job_res):
     age_range = (18, 35)
     min_degree = '中专'
     location = '北京'
