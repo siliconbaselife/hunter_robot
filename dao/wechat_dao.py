@@ -10,7 +10,9 @@ sql_dict = {
     "get_chat_by_alias_id": "select candidate_id,candidate_name,wechat_id,wechat_alias_id,wechat_account_id,details,status from wechat_chat where wechat_alias_id='{}' and wechat_account_id='{}'",
     "update_detail": "update wechat_chat set detail='{}' where wechat_account_id='{}' and wechat_alias_id='{}'",
     "get_wechat_account_info": "select wechat_account_id, task_config from wechat_account where wechat_account_id='{}'",
-    "get_candidate_update_last_hour": "select job_id, candidate_id, candidate_name, contact from chat where job_id = '{}' and contact!='NULL' and update_time > DATE_SUB(NOW(), INTERVAL 60 MINUTE)"
+    "get_candidate_update_last_hour": "select job_id, candidate_id, candidate_name, contact from chat where job_id = '{}' and contact!='NULL' and update_time > DATE_SUB(NOW(), INTERVAL 60 MINUTE)",
+    "candidate_already_friend":"select candidate_id, wechat_account_id from wechat_chat where candidate_id='{}' and wechat_account_id='{}'",
+    "new_wechat_chat_db": "insert into wechat_chat(candidate_id, candidate_name, wechat_id, wechat_alias_id, wechat_accoount_id, details, status) values ('{}', '{}', '{}', '{}', '{}', '{}', {})"
 }
     
 def friend_status_update_by_id(wechat_account_id, wechat_id, status):
@@ -27,5 +29,11 @@ def update_detail(wechat_alias_id, wechat_account_id, detail):
 def get_wechat_account_info(wechat_account_id):
     return dbm.query(sql_dict["get_wechat_account_info"].format(wechat_account_id))[0]
 
-def get_candidate_update_last_hour():
-    return
+def get_candidate_update_last_hour(job_id):
+    return dbm.query(sql_dict["get_candidate_update_last_hour"].format(job_id))
+
+def candidate_already_friend(candidate_id, wechat_account_id):
+    return len(dbm.query(sql_dict["candidate_already_friend"].format(candidate_id, wechat_account_id))) > 0
+
+def new_wechat_chat_db(candidate_id, candidate_name, wechat_id, wechat_alias_id, wechat_account_id, detail, status):
+    dbm.insert(sql_dict["new_wechat_chat_db"].format(candidate_id, candidate_name, wechat_id, wechat_alias_id, wechat_account_id, detail, status))
