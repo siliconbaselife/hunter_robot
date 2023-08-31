@@ -192,7 +192,7 @@ def candidate_chat_api():
     candidate_id = request.json['candidateID']
 
     ## job use first register job of account:
-    job_id = request.json['jobID']
+    job_id = request.json.get('jobID', "")
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         job_id_info = get_job_id_in_chat(account_id, candidate_id)
         if len(job_id_info) == 0:
@@ -250,7 +250,7 @@ def candidate_result_api():
     account_id = request.form['accountID']
     candidate_id = request.form['candidateID']
     ## job use first register job of account:
-    job_id = request.json['jobID']
+    job_id = request.json.get('jobID', "")
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         job_id_info = get_job_id_in_chat(account_id, candidate_id)
         if len(job_id_info) == 0:
