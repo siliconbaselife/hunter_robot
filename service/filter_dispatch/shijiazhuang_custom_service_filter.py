@@ -9,7 +9,7 @@ def shijiazhuang_custom_service_filter(candidate_info, job_res):
     age_range = (18, 40)
     min_degree = '中专'
     location = '石家庄'
-    job_tags = ['客服','电话销售']
+    job_tags = ['客服']
 
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
