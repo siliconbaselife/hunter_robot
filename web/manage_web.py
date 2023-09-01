@@ -146,6 +146,7 @@ def account_update_api():
     logger.info(f'account_update_request:{manage_account_id}, {account_id}, {task_config}')
     ret = account_config_update_service(manage_account_id, account_id, task_config)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
 @manage_web.route("/backend/manage/jobUpdate", methods=['POST'])
 @web_exception_handler
 def job_update_api():
@@ -155,3 +156,8 @@ def job_update_api():
     logger.info(f'account_update_request:{job_id}, {touch_msg}, {filter_args}')
     ret = update_job_config_service(job_id, touch_msg, filter_args)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
+
+
+
+
