@@ -6,23 +6,12 @@ from utils.config import config
 
 logger = get_logger(config['log']['log_file'])
 
-##这里没更新chat表的detail，是把所有的更新动作，放到了用户回复的时候去append
 def get_msg(filter_result):
     ##主动来找且没给联系方式的
     if filter_result == 'NULL' or filter_result == None or filter_result == 'None':
         return "亲, 您对我们感兴趣的话, hr会跟您详细沟通, 方便交换个联系方式或者简历吗?"
     # filter_dict = json.loads(filter_result)
     return "亲，您的过往经验和我们岗位很相符呢，请问您方便交换个联系方式或者简历吗？"
-    
-    #感觉没必要做那么复杂
-    # ##期望岗位相符的
-    # if filter_dict['details']['wish']:
-    #     return "亲, 您的期望职位和我们岗位很相符呢，请问您方便交换个联系方式或者简历吗？"
-    # ##过往经验相符的
-    # if filter_dict['details']['experience']:
-    #     return "亲，您的过往经验和我们岗位很相符呢，请问您方便交换个联系方式或者简历吗？"
-    # ##应该只有那部分force的会漏到这里
-    # return "亲，您方便交换个联系方式或者简历吗?"
 
 
 def common_need_recall_filter(chat_info):
