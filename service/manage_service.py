@@ -15,6 +15,12 @@ def login_check_service(user_name, password):
         return True, "登录成功"
     else:
         return False, "用户名密码错误"
+def cookie_check_service(user_name):
+    user_info = login_check_db(user_name)
+    if len(user_info) == 0:
+        return False
+    else:
+        return True
 
 def job_mapping_service(account_id, job_id):
     jobs = jobs_query(account_id)
