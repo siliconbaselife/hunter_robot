@@ -7,7 +7,7 @@ from dao.task_dao import *
 logger = get_logger(config['log']['log_file'])
 __chat_dispatcher = {
     'base_common_chat': BaseChatRobot,
-    'maimai_common_chat': MaimaiRobot
+    'maimai_common_chat': MaimaiRobot,
     'maimai_simple_chat': MaimaiSimpleRobot
 }
 
