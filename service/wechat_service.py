@@ -36,8 +36,8 @@ def friend_report(wechat_account_id, wechat_alias_id, wechat_id):
     #添加好友的动作上报，这时对方尚未同意，对方同意那一刻有消息回溯，会在第一条消息再更新状态
     friend_status_update_by_id(wechat_account_id, wechat_id, 1)
 
-def new_wechat_chat_service(candidate_id, candidate_name, wechat_account_id, wechat_id, hello_msg):
-    wechat_alias_id = candidate_name + "-" + candidate_id
+def new_wechat_chat_service(candidate_id, candidate_name, wechat_account_id, wechat_id,wechat_alias_id,  hello_msg):
+    
     detail = [{
         "role" : "robot",
         "msg" : hello_msg
@@ -49,6 +49,7 @@ def new_wechat_chat_service(candidate_id, candidate_name, wechat_account_id, wec
 
 def _get_add_friend_task(account_info):
     ##先写一个简单策略
+    task_res = []
     wechat_account_id = account_info[0]
     task_config = json.loads(account_info[1])
     job_config = task_config['job_config']
@@ -66,16 +67,15 @@ def _get_add_friend_task(account_info):
                 continue
             if candidate_already_friend(candidate_id):
                 continue
-            new_wechat_chat_service(candidate_id, candidate_name, wechat_account_id, wechat_id, hello_msg)
-
-
-
+            wechat_alias_id = candidate_name + "-" + candidate_id
+            new_wechat_chat_service(candidate_id, candidate_name, wechat_account_id, wechat_id, wechat_alias_id, hello_msg)
+            task_res.append({
+                "alias_id": wechat_alias_id,
+                "msg": hello_msg
+            })
     return {
         "task_type":"add_friend",
-        "content": [{
-            "alias_id":"1111",
-            "msg":"dfdfdfdfd"
-        }]
+        "content": task_res
     }
 
 
