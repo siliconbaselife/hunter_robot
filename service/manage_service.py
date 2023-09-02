@@ -46,7 +46,11 @@ def my_job_list_service(manage_account_id):
     return ret_list
 
 def account_config_update_service(manage_account_id, account_id, task_config):
-    return account_config_update_db(manage_account_id, account_id, task_config)
+    job_list = []
+    task_config_list = json.loads(task_config)
+    for t in task_config_list:
+        job_list.append(t['jobID'])
+    return account_config_update_db(manage_account_id, account_id, json.dumps(task_config,ensure_ascii=False), json.dumps(job_list, ensure_ascii=False))
     
 
 def my_account_list_service(manage_account_id):

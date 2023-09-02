@@ -1,3 +1,4 @@
+import random
 def format_time(time_obj, f_str='%Y-%m-%d %H:%M:%S'):
     return time_obj.strftime(f_str)
 
@@ -74,3 +75,7 @@ decrypted_text = decrypt(encrypted_text, key)
 print("原始文本:", original_text)
 print("加密后:", encrypted_text)
 print("解密后:", decrypted_text)
+
+
+def generate_random_digits(length):
+    return ''.join(random.choice('0123456789') for _ in range(length))
