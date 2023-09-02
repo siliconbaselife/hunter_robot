@@ -40,7 +40,8 @@ def my_job_list_service(manage_account_id):
             "job_id": j_d[0],
             "job_name": j_d[1],
             "share": j_d[2],
-            "job_config": job_config
+            "job_config": job_config,
+            "platform_type":j_d[4]
         }
         ret_list.append(job)
     return ret_list
