@@ -53,12 +53,15 @@ def get_undo_task(account_id):
     config_data = json.loads(get_account_task_db(account_id))
 
     today_date = format_time(datetime.now(), '%Y-%m-%d')
-    today_sub_task_log = get_account_task_log_db(account_id, today_date)
-    if len(today_sub_task_log)== 0:
-        logger.info(f'get_undo_task for {account_id} {today_date}, no task log, will init')
-        for j in config_data:
-            if j['taskType']=='batchTouch':
-                init_task_log_db(account_id, j["jobID"], today_date, j["helloSum"])
+    today_sub_task_log = get_account_task_log_db(account_id, today_date)  
+    for j in config_data:
+        log_need_init = True
+        for log in today_sub_task_log:
+            if log[2] == j["jobID"]:
+                log_need_init = False
+        if j['taskType']=='batchTouch' and log_need_init:
+            logger.info(f'get_undo_task init job {account_id}, {j["jobID"]}, {today_date}, no task log, will init')
+            init_task_log_db(account_id, j["jobID"], today_date, j["helloSum"])
     today_sub_task_log = get_account_task_log_db(account_id, today_date)
     res = re_org_task(config_data, today_sub_task_log)
     logger.info(f'get_undo_task for {account_id} {today_date}, will return {res}')

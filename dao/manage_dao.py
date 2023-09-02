@@ -11,7 +11,8 @@ sql_dict = {
     "jobs_update":"update account set jobs='{}' where account_id='{}'",
     "my_job_list_db": "select job_id, job_name, share, job_config from job where manage_account_id='{}' or share=1",
     "my_account_list_db": "select account_id, platform_type, description, jobs, task_config from account where manage_account_id='{}'",
-    "account_config_update_db": "update account set task_config='{}' where manage_account_id='{}' and account_id='{}'"
+    "account_config_update_db": "update account set task_config='{}' where manage_account_id='{}' and account_id='{}'",
+    "update_job_config": "update job set job_config='{}' where job_id='{}'"
 }
     
 def login_check_db(user_name):
@@ -33,3 +34,6 @@ def my_account_list_db(manage_account_id):
 
 def account_config_update_db(manage_account_id, account_id, task_config_json):
     return dbm.update(sql_dict['account_config_update_db'].format(json.dumps(task_config_json, ensure_ascii=False), manage_account_id, account_id))
+
+def update_job_config(job_id, job_config):
+    return dbm.update(sql_dict['update_job_config'].format(job_config, job_id))

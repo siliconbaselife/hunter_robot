@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import deal_json_invaild
+from utils.utils import encrypt, decrypt
 from dao.task_dao import *
 from service.task_service import generate_task
 from service.manage_service import *
@@ -21,6 +21,8 @@ from datetime import datetime
 manage_web = Blueprint('manage_web', __name__, template_folder='templates')
 
 logger = get_logger(config['log']['log_file'])
+
+key = 11
 
 @manage_web.route("/recruit/candidate/list", methods=['GET'])
 @web_exception_handler
@@ -62,7 +64,14 @@ def register_job_api():
     robot_api = request.json.get('robotApi',None)
     job_config = request.json.get('jobConfig', None)
     share = request.json['share']
-    manage_account_id = request.json['manage_account_id']
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    # manage_account_id = request.json['manage_account_id']
     if job_config is not None:
         job_config = json.dumps(job_config, ensure_ascii=False)
 
@@ -81,7 +90,14 @@ def register_job_api():
 def register_account_api():
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
-    manage_account_id = request.json['manage_account_id']
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    # manage_account_id = request.json['manage_account_id']
     jobs = request.json.get('jobs', [])
     task_config = request.json.get('taskConfig', None)
     desc = request.json.get('desc', None)
@@ -104,17 +120,27 @@ def manage_account_login_api():
     password = request.json['password']
     logger.info(f'manage_account_login: {user_name}, {password}')
     flag, msg = login_check_service(user_name, password)
-    return Response(json.dumps(get_web_res_suc_with_data(
+    resp =  Response(json.dumps(get_web_res_suc_with_data(
         {
             "login_ret": flag,
             "errMsg": msg
         }
     ), ensure_ascii=False))
+    encode_user_name = encrypt(user_name, key)
+    resp.set_cookie('user_name', encode_user_name, max_age=None)
+    return resp
 
 @manage_web.route("/backend/manage/jobMapping", methods=['POST'])
 @web_exception_handler
 def job_mapping():
-    manage_account_id = request.json['manage_account_id']
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    # manage_account_id = request.json['manage_account_id']
     account_id = request.json['account_id']
     job_id = request.json['job_id']
     logger.info(f'job_mapping: {manage_account_id}, {account_id}, {job_id}')
@@ -124,7 +150,14 @@ def job_mapping():
 @manage_web.route("/backend/manage/myJobList", methods=['POST'])
 @web_exception_handler
 def my_job_list_api():
-    manage_account_id = request.json['manage_account_id']
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    # manage_account_id = request.json['manage_account_id']
     job_ret = my_job_list_service(manage_account_id)
     logger.info(f'job_list_query_result:{manage_account_id}, {job_ret}')
     return Response(json.dumps(get_web_res_suc_with_data(job_ret), ensure_ascii=False))
@@ -132,7 +165,14 @@ def my_job_list_api():
 @manage_web.route("/backend/manage/myAccountList", methods=['POST'])
 @web_exception_handler
 def my_account_list_api():
-    manage_account_id = request.json['manage_account_id']
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    # manage_account_id = request.json['manage_account_id']
     account_ret = my_account_list_service(manage_account_id)
     logger.info(f'account_list_query_result:{manage_account_id}, {account_ret}')
     return Response(json.dumps(get_web_res_suc_with_data(account_ret), ensure_ascii=False))
@@ -140,13 +180,38 @@ def my_account_list_api():
 @manage_web.route("/backend/manage/accountUpdate", methods=['POST'])
 @web_exception_handler
 def account_update_api():
-    manage_account_id = request.json['manage_account_id']
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    # manage_account_id = request.json['manage_account_id']
     account_id = request.json['account_id']
     task_config = request.json['task_config']
     logger.info(f'account_update_request:{manage_account_id}, {account_id}, {task_config}')
     ret = account_config_update_service(manage_account_id, account_id, task_config)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
 @manage_web.route("/backend/manage/jobUpdate", methods=['POST'])
 @web_exception_handler
 def job_update_api():
-    return
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    job_id = request.json['job_id']
+    touch_msg = request.json['touch_msg']
+    filter_args = request.json['filter_args']
+    logger.info(f'account_update_request:{job_id}, {touch_msg}, {filter_args}')
+    ret = update_job_config_service(job_id, touch_msg, filter_args)
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
+
+
+
+

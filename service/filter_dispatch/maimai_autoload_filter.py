@@ -1,33 +1,45 @@
-from .utils import degree_compare
+import json
 import time
-
 from utils.config import config
-from utils.utils import is_211
+from utils.utils import is_211, is_985, get_degree_num
 from utils.log import get_logger
 logger = get_logger(config['log']['log_file'])
 
-def nlp_maimai_service_filter(candidate_info, job_res):
+
+def maimai_autoload_filter(candidate_info, job_res):
+    filter_args = json.loads(job_res[6])['filter_args']
+
+    # ###
+    # {
+    #     'age_range':[18,35],
+    #     'min_degree':'中专',
+    #     'location':'北京',
+    #     'job_tags':['客服','电话销售'],
+    #      'school':2
+    # }
+    ###
+    age_range = (filter_args['age_range'][0], filter_args['age_range'][1])
+    min_degree = filter_args['min_degree']
+    location = filter_args['location']
+    job_tags =  filter_args['job_tags']
+    active_threshold = int(filter_args['active_threshold']) * 60
+    school_threshold = filter_args['school']
 
 
-####阈值
-    
-    # if time.localtime().tm_hour > 6 and time.localtime().tm_hour < 23:
-    #     threshold = 10800
-    # else:
-    #     threshold = 86400
-    threshold = 8640000
-
-    age_range = (23, 32)
-    min_degree = 2
-    location = ['北京', 'beijing', 'Beijing', '深圳', 'shenzhen', 'ShenZhen']
-    job_tags = ['算法工程师', '算法研究员', 'nlp', 'NLP', 'Nlp']
-    
-
-#####判定
-
-    is_active = (int(time.time()) - int(candidate_info['active_time'])) < threshold
+    is_active = (int(time.time()) - int(candidate_info['active_time'])) < active_threshold
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
-    degree_ok = int(candidate_info['degree']) >= min_degree
+    degree_ok = int(candidate_info['degree']) >= get_degree_num(min_degree)
+
+    school_ok = False
+    for edu in candidate_info['education']:
+        if school_threshold == 2:
+            if is_985(edu['school']):
+                school_ok = True
+        elif school_threshold == 1:
+            if is_211(edu['school']):
+                school_ok = True
+        else:
+            school_ok = True
 
 
     location_ok = False
@@ -52,10 +64,7 @@ def nlp_maimai_service_filter(candidate_info, job_res):
             if jt in ep:
                 job_ok = True
 
-    school_ok = False
-    for edu in candidate_info['education']:
-        if is_211(edu['school']):
-            school_ok = True
+    
            
     
 
@@ -71,3 +80,4 @@ def nlp_maimai_service_filter(candidate_info, job_res):
         }
     }
     return judge_result
+    return

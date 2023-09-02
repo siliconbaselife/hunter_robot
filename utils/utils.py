@@ -27,3 +27,50 @@ def is_211(school):
 
 def is_985(school):
     return school in school_985
+
+degree_dict = {
+    "博士后": 4,
+    "博士": 3,
+    "硕士": 2,
+    "本科": 1,
+    "大专": 0,
+    "高中": -1,
+    "中专": -2,
+    "初中及以下": -3
+}
+def get_degree_num(degree_str):
+    return degree_dict[degree_str]
+
+
+
+def encrypt(text, key):
+    encrypted_text = ""
+    for char in text:
+        if char.isalpha():
+            shift = 65 if char.isupper() else 97
+            encrypted_char = chr((ord(char) - shift + key) % 26 + shift)
+        else:
+            encrypted_char = char
+        encrypted_text += encrypted_char
+    return encrypted_text
+
+def decrypt(encrypted_text, key):
+    decrypted_text = ""
+    for char in encrypted_text:
+        if char.isalpha():
+            shift = 65 if char.isupper() else 97
+            decrypted_char = chr((ord(char) - shift - key) % 26 + shift)
+        else:
+            decrypted_char = char
+        decrypted_text += decrypted_char
+    return decrypted_text
+
+
+key = 3
+original_text = "Hello, World!"
+encrypted_text = encrypt(original_text, key)
+decrypted_text = decrypt(encrypted_text, key)
+
+print("原始文本:", original_text)
+print("加密后:", encrypted_text)
+print("解密后:", decrypted_text)
