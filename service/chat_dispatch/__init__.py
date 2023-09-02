@@ -1,3 +1,3 @@
 from .base_robot import BaseChatRobot
 from .maimai_robot import MaimaiRobot
-from .maimai_simple_chat import MaimaiSimpleRobot
+from .maimai_simple_robot import MaimaiSimpleRobot
