@@ -681,5 +681,6 @@ def meta_config():
             ]
         }]
         }
-    return Response(json.dumps(get_web_res_suc_with_data(json.dumps(a, ensure_ascii=False))))
+    
+    return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
 
