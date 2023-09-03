@@ -83,7 +83,7 @@ def register_job_api():
         'jobID': job_id
     }
     logger.info(f'new job register: {platform_type} {platform_id} {job_name} {robot_api} {job_config}  {job_id}, {share}, {manage_account_id}')
-    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data), ensure_ascii=False))
 
 
 @manage_web.route("/backend/manage/account/register", methods=['POST'])
