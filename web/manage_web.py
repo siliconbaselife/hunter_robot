@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import encrypt, decrypt
+from utils.utils import encrypt, decrypt, generate_random_digits
 from dao.task_dao import *
 from service.task_service import generate_task
 from service.manage_service import *
@@ -54,27 +54,29 @@ def candidate_list_web():
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
 
-@manage_web.route("/recruit/job/register", methods=['POST'])
+@manage_web.route("/backend/manage/job/register", methods=['POST'])
 @web_exception_handler
 def register_job_api():
     platform_type = request.json['platformType']
-    platform_id = request.json['platformID']
+    # platform_id = request.json['platformID']
+    platform_id = str(generate_random_digits(10))
     job_name = request.json['jobName']
     jd = request.json.get('jobJD', None)
     robot_api = request.json.get('robotApi',None)
     job_config = request.json.get('jobConfig', None)
-    share = request.json['share']
+    # share = request.json['share']
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     # manage_account_id = request.json['manage_account_id']
     if job_config is not None:
         job_config = json.dumps(job_config, ensure_ascii=False)
-
+    ##todo
+    share = 0
     logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id}')
     job_id = f'job_{platform_type}_{platform_id}'
     register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config, share, manage_account_id)
@@ -82,10 +84,10 @@ def register_job_api():
         'jobID': job_id
     }
     logger.info(f'new job register: {platform_type} {platform_id} {job_name} {robot_api} {job_config}  {job_id}, {share}, {manage_account_id}')
-    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data), ensure_ascii=False))
 
 
-@manage_web.route("/recruit/account/register", methods=['POST'])
+@manage_web.route("/backend/manage/account/register", methods=['POST'])
 @web_exception_handler
 def register_account_api():
     platform_type = request.json['platformType']
@@ -130,22 +132,22 @@ def manage_account_login_api():
     resp.set_cookie('user_name', encode_user_name, max_age=None)
     return resp
 
-@manage_web.route("/backend/manage/jobMapping", methods=['POST'])
-@web_exception_handler
-def job_mapping():
-    cookie_user_name = request.cookies.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
-    if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
-    # manage_account_id = request.json['manage_account_id']
-    account_id = request.json['account_id']
-    job_id = request.json['job_id']
-    logger.info(f'job_mapping: {manage_account_id}, {account_id}, {job_id}')
-    ret = job_mapping_service(account_id, job_id)
-    return Response(json.dumps(get_web_res_suc_with_data(ret)))
+# @manage_web.route("/backend/manage/jobMapping", methods=['POST'])
+# @web_exception_handler
+# def job_mapping():
+#     cookie_user_name = request.cookies.get('user_name', None)
+#     if cookie_user_name == None:
+#         return Response(json.dumps(get_web_res_fail("未登录")))
+#     else:
+#         manage_account_id = decrypt(cookie_user_name, key)
+#     if not cookie_check_service(manage_account_id):
+#         return Response(json.dumps(get_web_res_fail("用户不存在")))
+#     # manage_account_id = request.json['manage_account_id']
+#     account_id = request.json['account_id']
+#     job_id = request.json['job_id']
+#     logger.info(f'job_mapping: {manage_account_id}, {account_id}, {job_id}')
+#     ret = job_mapping_service(account_id, job_id)
+#     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 @manage_web.route("/backend/manage/myJobList", methods=['POST'])
 @web_exception_handler
@@ -213,5 +215,464 @@ def job_update_api():
 
 
 
-
+@manage_web.route("/backend/manage/metaConfig", methods=['POST'])
+@web_exception_handler
+def meta_config():
+    a = {
+        "platform_type":["Boss", "Linkedin", "maimai"],
+        "filter_config":[{
+            "platform": "Boss",
+            "account_meta_config":[
+                {
+                    "config_name":"地域",
+                    "config_value":"locations",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"北京",
+                            "label":"北京"
+                        },
+                        {
+                            "value":"上海",
+                            "label":"上海"
+                        },
+                        {
+                            "value":"天津",
+                            "label":"天津"
+                        },
+                        {
+                            "value":"深圳",
+                            "label":"深圳"
+                        },
+                        {
+                            "value":"石家庄",
+                            "label":"石家庄"
+                        },
+                        {
+                            "value":"成都",
+                            "label":"成都"
+                        }
+                    ]
+                }
+                ,{
+                    "config_name":"教育水平",
+                    "config_value":"education",
+                    "type":"multi_choice",
+                    "enum": [
+                        {
+                            "value":"初中及以下",
+                            "label":"初中及以下"
+                        },
+                        {
+                            "value":"中专/中技",
+                            "label":"中专/中技"
+                        },
+                        {
+                            "value":"高中",
+                            "label":"高中"
+                        },
+                        {
+                            "value":"大专",
+                            "label":"大专"
+                        },
+                        {
+                            "value":"本科",
+                            "label":"本科"
+                        },
+                        {
+                            "value":"硕士",
+                            "label":"硕士"
+                        },
+                        {
+                            "value":"博士",
+                            "label":"博士"
+                        }
+                    ]
+                },
+                {
+                    "config_name":"薪资范围",
+                    "config_value":"pay",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"3K以下",
+                            "label":"3K以下"
+                        },
+                        {
+                            "value":"3-5K",
+                            "label":"3-5K"
+                        },
+                        {
+                            "value":"5-10K",
+                            "label":"5-10K"
+                        },
+                        {
+                            "value":"10-20K",
+                            "label":"10-20K"
+                        },
+                        {
+                            "value":"20-50K",
+                            "label":"20-50K"
+                        },
+                        {
+                            "value":"50K以上",
+                            "label":"50K以上"
+                        }
+                    ]
+                },
+                {
+                    "config_name":"人选状态",
+                    "config_value":"status",
+                    "type":"multi_choice",
+                    "enum": [
+                        {
+                            "value":"离职-随时到岗",
+                            "label":"离职-随时到岗"
+                        },
+                        {
+                            "value":"在职-暂不考虑",
+                            "label":"在职-暂不考虑"
+                        },
+                        {
+                            "value":"在职-考虑机会",
+                            "label":"在职-考虑机会"
+                        },
+                        {
+                            "value":"在职-月内到岗",
+                            "label":"在职-月内到岗"
+                        },
+                        {
+                            "value":"20-50K",
+                            "label":"20-50K"
+                        },
+                        {
+                            "value":"50K以上",
+                            "label":"50K以上"
+                        }
+                    ]
+                }
+            ],
+            "job_meta_config": [
+                {
+                    "config_name":"问候信息",
+                    "config_value":"touchMsg",
+                    "type":"input"
+                },
+                {
+                    "config_name":"年龄范围",
+                    "config_value":"age_range",
+                    "type":"range"
+                },
+                {
+                    "config_name":"最低学历",
+                    "config_value":"min_degree",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"初中及以下",
+                            "label":"初中及以下"
+                        },
+                        {
+                            "value":"中专",
+                            "label":"中专"
+                        },
+                        {
+                            "value":"高中",
+                            "label":"高中"
+                        },
+                        {
+                            "value":"大专",
+                            "label":"大专"
+                        },
+                        {
+                            "value":"本科",
+                            "label":"本科"
+                        },
+                        {
+                            "value":"硕士",
+                            "label":"硕士"
+                        },
+                        {
+                            "value":"博士",
+                            "label":"博士"
+                        }
+                    ]
+                },
+                {
+                    "config_name":"地点",
+                    "config_value":"location",
+                    "type":"multi_choice",
+                    "enum": [
+                        {
+                            "value":"北京",
+                            "label":"北京"
+                        },
+                        {
+                            "value":"上海",
+                            "label":"上海"
+                        },
+                        {
+                            "value":"天津",
+                            "label":"天津"
+                        },
+                        {
+                            "value":"深圳",
+                            "label":"深圳"
+                        },
+                        {
+                            "value":"石家庄",
+                            "label":"石家庄"
+                        },
+                        {
+                            "value":"成都",
+                            "label":"成都"
+                        }
+                    ]
+                },{
+                    "config_name":"关键词",
+                    "config_value":"job_tags",
+                    "type":"multi_input",
+                },{
+                    "config_name":"活跃时间",
+                    "config_value":"active_threshold",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"60",
+                            "label":"一小时之内"
+                        },
+                        {
+                            "value":"180",
+                            "label":"三小时之内"
+                        },
+                        {
+                            "value":"1440",
+                            "label":"一天之内"
+                        },
+                        {
+                            "value":"10080",
+                            "label":"一周之内"
+                        },
+                        {
+                            "value":"500000",
+                            "label":"无限制"
+                        }
+                    ]
+                }, {
+                    "config_name":"学历附加",
+                    "config_value":"school",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"0",
+                            "label":"无要求"
+                        },
+                        {
+                            "value":"1",
+                            "label":"211学校"
+                        },
+                        {
+                            "value":"2",
+                            "label":"985学校"
+                        }
+                    ]
+                }
+            ]
+        }, {
+            "platform": "maimai",
+            "account_meta_config":[
+                {
+                    "config_name":"搜索",
+                    "config_value":"searchText",
+                    "type":"input"
+                },
+                {
+                    "config_name":"地域",
+                    "config_value":"locations",
+                    "type":"multi_choice",
+                    "enum": [
+                        {
+                            "value":"北京",
+                            "label":"北京"
+                        },
+                        {
+                            "value":"上海",
+                            "label":"上海"
+                        },
+                        {
+                            "value":"天津",
+                            "label":"天津"
+                        },
+                        {
+                            "value":"深圳",
+                            "label":"深圳"
+                        },
+                        {
+                            "value":"石家庄",
+                            "label":"石家庄"
+                        },
+                        {
+                            "value":"成都",
+                            "label":"成都"
+                        }
+                    ]
+                }
+            ],
+            "job_meta_config": [
+                {
+                    "config_name":"问候信息",
+                    "config_value":"touchMsg",
+                    "type":"input"
+                },
+                {
+                    "config_name":"年龄范围",
+                    "config_value":"age_range",
+                    "type":"range"
+                },
+                {
+                    "config_name":"最低学历",
+                    "config_value":"min_degree",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"初中及以下",
+                            "label":"初中及以下"
+                        },
+                        {
+                            "value":"中专",
+                            "label":"中专"
+                        },
+                        {
+                            "value":"高中",
+                            "label":"高中"
+                        },
+                        {
+                            "value":"大专",
+                            "label":"大专"
+                        },
+                        {
+                            "value":"本科",
+                            "label":"本科"
+                        },
+                        {
+                            "value":"硕士",
+                            "label":"硕士"
+                        },
+                        {
+                            "value":"博士",
+                            "label":"博士"
+                        }
+                    ]
+                },
+                {
+                    "config_name":"地点",
+                    "config_value":"location",
+                    "type":"multi_choice",
+                    "enum": [
+                        {
+                            "value":"北京",
+                            "label":"北京"
+                        },
+                        {
+                            "value":"上海",
+                            "label":"上海"
+                        },
+                        {
+                            "value":"天津",
+                            "label":"天津"
+                        },
+                        {
+                            "value":"深圳",
+                            "label":"深圳"
+                        },
+                        {
+                            "value":"石家庄",
+                            "label":"石家庄"
+                        },
+                        {
+                            "value":"成都",
+                            "label":"成都"
+                        }
+                    ]
+                },{
+                    "config_name":"关键词",
+                    "config_value":"job_tags",
+                    "type":"multi_input",
+                },{
+                    "config_name":"活跃时间",
+                    "config_value":"active_threshold",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"60",
+                            "label":"一小时之内"
+                        },
+                        {
+                            "value":"180",
+                            "label":"三小时之内"
+                        },
+                        {
+                            "value":"1440",
+                            "label":"一天之内"
+                        },
+                        {
+                            "value":"10080",
+                            "label":"一周之内"
+                        },
+                        {
+                            "value":"500000",
+                            "label":"无限制"
+                        }
+                    ]
+                }, {
+                    "config_name":"学历附加",
+                    "config_value":"school",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"0",
+                            "label":"无要求"
+                        },
+                        {
+                            "value":"1",
+                            "label":"211学校"
+                        },
+                        {
+                            "value":"2",
+                            "label":"985学校"
+                        }
+                    ]
+                }
+            ]
+        },{
+            "platform": "Linkedin",
+            "account_meta_config":[
+                {
+                    "config_name":"搜索",
+                    "config_value":"searchText",
+                    "type":"input"
+                },
+                {
+                    "config_name":"地域",
+                    "config_value":"location",
+                    "type":"multi_choice",
+                    "enum": [
+                        {
+                            "value":"China",
+                            "label":"China"
+                        }
+                    ]
+                }
+            ],
+            "job_meta_config":[
+                {
+                    "config_name":"问候信息",
+                    "config_value":"touchMsg",
+                    "type":"input"
+                }
+            ]
+        }]
+        }
+    
+    return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
 

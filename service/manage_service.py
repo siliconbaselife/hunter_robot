@@ -40,13 +40,18 @@ def my_job_list_service(manage_account_id):
             "job_id": j_d[0],
             "job_name": j_d[1],
             "share": j_d[2],
-            "job_config": job_config
+            "job_config": job_config,
+            "platform_type":j_d[4]
         }
         ret_list.append(job)
     return ret_list
 
 def account_config_update_service(manage_account_id, account_id, task_config):
-    return account_config_update_db(manage_account_id, account_id, task_config)
+    job_list = []
+    task_config_list = json.loads(task_config)
+    for t in task_config_list:
+        job_list.append(t['jobID'])
+    return account_config_update_db(manage_account_id, account_id, json.dumps(task_config,ensure_ascii=False), json.dumps(job_list, ensure_ascii=False))
     
 
 def my_account_list_service(manage_account_id):
@@ -108,7 +113,11 @@ def candidate_list_service(job_id, start, limit):
     return chat_sum, res_chat_list
 
 def update_job_config_service(job_id, touch_msg, filter_args):
-    job_config = json.loads(get_job_by_id(job_id)[0][6])
+    job_config_json = get_job_by_id(job_id)[0][6]
+    if job_config_json == None or job_config_json == 'None' or job_config_json == 'NULL' or job_config_json == "":
+        job_config = {}
+    else:
+        job_config = json.loads(job_config_json)
     job_config['touch_msg'] = touch_msg
     job_config['filter_args'] = filter_args
     return update_job_config(job_id, json.dumps(job_config, ensure_ascii=False))
