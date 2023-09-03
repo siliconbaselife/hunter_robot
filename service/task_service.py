@@ -34,12 +34,15 @@ def re_org_task(config_data, today_sub_task_log):
             time_percent = job_config["timeMount"]
             time_percent_filtered = filter_time(time_percent, retain_sum)
 
+            touch_msg = json.loads(get_job_by_id(job_config["jobID"])[0][6])["touch_msg"]
+
             r_job = {
                 "jobID":job_config["jobID"],
                 "taskType":job_config['taskType'],
                 "helloSum": retain_sum,
                 "timeMount":time_percent_filtered,
-                "filter": job_config["filter"]
+                "filter": job_config["filter"],
+                "touch_msg": touch_msg
             }
             res.append(r_job)
     return res

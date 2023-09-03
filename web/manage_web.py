@@ -487,10 +487,6 @@ def meta_config():
                     "type":"input"
                 },
                 {
-                    "config_name":"问候信息",
-                    "config_value":"hiMsg",
-                    "type":"input"
-                },{
                     "config_name":"地域",
                     "config_value":"locations",
                     "type":"multi_choice",
@@ -654,11 +650,6 @@ def meta_config():
                 {
                     "config_name":"搜索",
                     "config_value":"searchText",
-                    "type":"input"
-                },
-                {
-                    "config_name":"问候信息",
-                    "config_value":"msg",
                     "type":"input"
                 },
                 {
