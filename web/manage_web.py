@@ -67,11 +67,11 @@ def register_job_api():
     # share = request.json['share']
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     # manage_account_id = request.json['manage_account_id']
     if job_config is not None:
         job_config = json.dumps(job_config, ensure_ascii=False)
