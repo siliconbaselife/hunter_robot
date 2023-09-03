@@ -3,6 +3,7 @@ from utils.log import  get_logger
 from dao.task_dao import query_account_type_db
 from .chat_dispatch import *
 from dao.task_dao import *
+import json
 
 logger = get_logger(config['log']['log_file'])
 __chat_dispatcher = {
