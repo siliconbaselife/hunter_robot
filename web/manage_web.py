@@ -54,7 +54,7 @@ def candidate_list_web():
     response.headers['Access-Control-Allow-Headers'] = 'x-requested-with'
     return response
 
-@manage_web.route("/recruit/job/register", methods=['POST'])
+@manage_web.route("/backend/manage/register", methods=['POST'])
 @web_exception_handler
 def register_job_api():
     platform_type = request.json['platformType']
@@ -86,7 +86,7 @@ def register_job_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
-@manage_web.route("/recruit/account/register", methods=['POST'])
+@manage_web.route("/backend/manage/register", methods=['POST'])
 @web_exception_handler
 def register_account_api():
     platform_type = request.json['platformType']
@@ -225,7 +225,7 @@ def meta_config():
                 {
                     "config_name":"地域",
                     "config_value":"locations",
-                    "type":"multi_choice",
+                    "type":"single_choice",
                     "enum": [
                         {
                             "value":"北京",
