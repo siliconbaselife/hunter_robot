@@ -75,7 +75,8 @@ def register_job_api():
     # manage_account_id = request.json['manage_account_id']
     if job_config is not None:
         job_config = json.dumps(job_config, ensure_ascii=False)
-
+    ##todo
+    share = 0
     logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id}')
     job_id = f'job_{platform_type}_{platform_id}'
     register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config, share, manage_account_id)
