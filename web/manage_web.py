@@ -196,6 +196,7 @@ def account_update_api():
     ret = account_config_update_service(manage_account_id, account_id, task_config)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
+
 @manage_web.route("/backend/manage/jobUpdate", methods=['POST'])
 @web_exception_handler
 def job_update_api():
@@ -213,7 +214,24 @@ def job_update_api():
     ret = update_job_config_service(job_id, touch_msg, filter_args)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
+@manage_web.route("/backend/manage/taskUpdate", methods=['POST'])
+@web_exception_handler
+def task_update_api():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录")))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在")))
+    
+    account_id = request.json['account_id']
+    task_config = request.json['task_config']
+    logger.info(f'task_update_request:{manage_account_id}, {account_id}, {task_config}')
 
+    update_task_config_service(manage_account_id, account_id, task_config)
+
+    return Response(json.dumps(get_web_res_suc_with_data()))
 
 @manage_web.route("/backend/manage/metaConfig", methods=['POST'])
 @web_exception_handler
@@ -223,6 +241,33 @@ def meta_config():
         "filter_config":[{
             "platform": "Boss",
             "account_meta_config":[
+                {
+                    "config_name":"每天打招呼总数",
+                    "config_value":"helloSum",
+                    "type":"input"
+                },{
+                    "config_name":"打招呼策略",
+                    "config_value":"timeMount",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":[{"time": "09:00", "mount": 100}],
+                            "label":"9点100%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 50},{"time": "20:00", "mount": 50}],
+                            "label":"9/20各50%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 25},{"time": "12:00", "mount": 25},{"time": "17:00", "mount": 25},{"time": "20:00", "mount": 25}],
+                            "label":"9/12/17/20各25%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 10},{"time": "10:00", "mount": 10},{"time": "11:00", "mount": 10},{"time": "12:00", "mount": 10},{"time": "13:00", "mount": 10},{"time": "14:00", "mount": 10},{"time": "15:00", "mount": 10},{"time": "16:00", "mount": 10},{"time": "17:00", "mount": 10},{"time": "18:00", "mount": 10}],
+                            "label":"9-18每小时10%"
+                        }
+                    ]
+                },
                 {
                     "config_name":"地域",
                     "config_value":"locations",
@@ -431,7 +476,7 @@ def meta_config():
                 },{
                     "config_name":"关键词",
                     "config_value":"job_tags",
-                    "type":"multi_input",
+                    "type":"multi_input"
                 },{
                     "config_name":"活跃时间",
                     "config_value":"active_threshold",
@@ -481,6 +526,33 @@ def meta_config():
         }, {
             "platform": "maimai",
             "account_meta_config":[
+                {
+                    "config_name":"每天打招呼总数",
+                    "config_value":"helloSum",
+                    "type":"input"
+                },{
+                    "config_name":"打招呼策略",
+                    "config_value":"timeMount",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":[{"time": "09:00", "mount": 100}],
+                            "label":"9点100%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 50},{"time": "20:00", "mount": 50}],
+                            "label":"9/20各50%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 25},{"time": "12:00", "mount": 25},{"time": "17:00", "mount": 25},{"time": "20:00", "mount": 25}],
+                            "label":"9/12/17/20各25%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 10},{"time": "10:00", "mount": 10},{"time": "11:00", "mount": 10},{"time": "12:00", "mount": 10},{"time": "13:00", "mount": 10},{"time": "14:00", "mount": 10},{"time": "15:00", "mount": 10},{"time": "16:00", "mount": 10},{"time": "17:00", "mount": 10},{"time": "18:00", "mount": 10}],
+                            "label":"9-18每小时10%"
+                        }
+                    ]
+                },
                 {
                     "config_name":"搜索",
                     "config_value":"searchText",
@@ -597,7 +669,7 @@ def meta_config():
                 },{
                     "config_name":"关键词",
                     "config_value":"job_tags",
-                    "type":"multi_input",
+                    "type":"multi_input"
                 },{
                     "config_name":"活跃时间",
                     "config_value":"active_threshold",
@@ -647,6 +719,33 @@ def meta_config():
         },{
             "platform": "Linkedin",
             "account_meta_config":[
+                {
+                    "config_name":"每天打招呼总数",
+                    "config_value":"helloSum",
+                    "type":"input"
+                },{
+                    "config_name":"打招呼策略",
+                    "config_value":"timeMount",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":[{"time": "09:00", "mount": 100}],
+                            "label":"9点100%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 50},{"time": "20:00", "mount": 50}],
+                            "label":"9/20各50%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 25},{"time": "12:00", "mount": 25},{"time": "17:00", "mount": 25},{"time": "20:00", "mount": 25}],
+                            "label":"9/12/17/20各25%"
+                        },
+                        {
+                            "value":[{"time": "09:00", "mount": 10},{"time": "10:00", "mount": 10},{"time": "11:00", "mount": 10},{"time": "12:00", "mount": 10},{"time": "13:00", "mount": 10},{"time": "14:00", "mount": 10},{"time": "15:00", "mount": 10},{"time": "16:00", "mount": 10},{"time": "17:00", "mount": 10},{"time": "18:00", "mount": 10}],
+                            "label":"9-18每小时10%"
+                        }
+                    ]
+                },
                 {
                     "config_name":"搜索",
                     "config_value":"searchText",

@@ -121,3 +121,11 @@ def update_job_config_service(job_id, touch_msg, filter_args):
     job_config['touch_msg'] = touch_msg
     job_config['filter_args'] = filter_args
     return update_job_config(job_id, json.dumps(job_config, ensure_ascii=False))
+
+def update_task_config_service(manage_account_id, account_id, task_config):
+    task_config_dict = json.loads(task_config)
+    task_configs = json.loads(get_account_task_db(account_id))
+    for t in task_configs:
+        if t["taskType"] == "batchTouch" and t["jobID"] == task_config_dict["jobID"]:
+            t = task_config_dict
+    return account_config_update_service(manage_account_id, account_id, task_configs)
