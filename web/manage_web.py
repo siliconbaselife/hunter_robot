@@ -229,9 +229,9 @@ def task_update_api():
     task_config = request.json['task_config']
     logger.info(f'task_update_request:{manage_account_id}, {account_id}, {task_config}')
 
-    update_task_config_service(manage_account_id, account_id, task_config)
+    ret = update_task_config_service(manage_account_id, account_id, task_config)
 
-    return Response(json.dumps(get_web_res_suc_with_data()))
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 @manage_web.route("/backend/manage/metaConfig", methods=['POST'])
 @web_exception_handler
