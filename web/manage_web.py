@@ -94,11 +94,11 @@ def register_account_api():
     platform_id = request.json['platformID']
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     # manage_account_id = request.json['manage_account_id']
     jobs = request.json.get('jobs', [])
     task_config = request.json.get('taskConfig', None)
@@ -154,11 +154,11 @@ def manage_account_login_api():
 def my_job_list_api():
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     # manage_account_id = request.json['manage_account_id']
     job_ret = my_job_list_service(manage_account_id)
     logger.info(f'job_list_query_result:{manage_account_id}, {job_ret}')
@@ -169,11 +169,11 @@ def my_job_list_api():
 def my_account_list_api():
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     # manage_account_id = request.json['manage_account_id']
     account_ret = my_account_list_service(manage_account_id)
     logger.info(f'account_list_query_result:{manage_account_id}, {account_ret}')
@@ -202,11 +202,11 @@ def account_update_api():
 def job_update_api():
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     job_id = request.json['job_id']
     touch_msg = request.json['touch_msg']
     filter_args = request.json['filter_args']
@@ -219,11 +219,11 @@ def job_update_api():
 def task_update_api():
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录")))
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在")))
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     
     account_id = request.json['account_id']
     task_config = request.json['task_config']

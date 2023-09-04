@@ -143,7 +143,11 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
     task_config_dict['timeMount'] = time_mount_new
 
     task_configs = json.loads(get_account_task_db(account_id))
+    flag = True
     for i in range(0, len(task_configs)):
         if task_configs[i]["taskType"] == "batchTouch" and task_configs[i]["jobID"] == task_config_dict["jobID"]:
             task_configs[i] = task_config_dict
+            flag = False
+    if flag:
+        task_configs.append(task_config_dict)
     return account_config_update_service(manage_account_id, account_id, task_configs)
