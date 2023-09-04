@@ -150,4 +150,7 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
             flag = False
     if flag:
         task_configs.append(task_config_dict)
-    return account_config_update_service(manage_account_id, account_id, task_configs)
+    job_list = []
+    for t in task_configs:
+        job_list.append(t['jobID'])
+    return account_config_update_db(manage_account_id, account_id, json.dumps(task_configs,ensure_ascii=False), json.dumps(job_list, ensure_ascii=False))
