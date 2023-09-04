@@ -25,6 +25,13 @@ def maimai_autoload_filter(candidate_info, job_res):
     active_threshold = int(filter_args['active_threshold']) * 60
     school_threshold = filter_args['school']
 
+    neg_filter_ok = True
+    if 'neg_words' in filter_args:
+        neg_words = filter_args['neg_words']
+        for n in neg_words:
+            for w in candidate_info['work']:
+                if n in w['company']:
+                    neg_filter_ok = False
 
     is_active = (int(time.time()) - int(candidate_info['active_time'])) < active_threshold
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
@@ -69,15 +76,15 @@ def maimai_autoload_filter(candidate_info, job_res):
     
 
     judge_result = {
-        'judge': is_active and age_ok and degree_ok and location_ok and job_ok and school_ok,
+        'judge': is_active and age_ok and degree_ok and location_ok and job_ok and school_ok and neg_filter_ok,
         'details': {
             'is_active': is_active,
             'age': age_ok,
             'degree': degree_ok,
             'location': location_ok,
             'job_position': job_ok,
-            'school': school_ok
+            'school': school_ok,
+            'neg_filter_ok':neg_filter_ok
         }
     }
     return judge_result
-    return

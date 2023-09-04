@@ -29,6 +29,15 @@ def boss_autoload_filter(candidate_info, job_res):
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
 
+
+    neg_filter_ok = True
+    if 'neg_words' in filter_args:
+        neg_words = filter_args['neg_words']
+        for n in neg_words:
+            for w in candidate_info['work']:
+                if n in w['company']:
+                    neg_filter_ok = False
+
     location_ok = False
     for l in location:
         if l in candidate_info['exp_location']:
@@ -66,7 +75,7 @@ def boss_autoload_filter(candidate_info, job_res):
                 break
 
     judge_result = {
-        'judge': age_ok and degree_ok and location_ok and (has_experience or has_wish) and is_active and school_ok,
+        'judge': age_ok and degree_ok and location_ok and (has_experience or has_wish) and is_active and school_ok and neg_filter_ok,
         'details': {
             'age': age_ok,
             'degree': degree_ok,
@@ -74,7 +83,8 @@ def boss_autoload_filter(candidate_info, job_res):
             'experience': has_experience,
             'wish': has_wish,
             'is_active': is_active,
-            "school": school_ok
+            "school": school_ok,
+            "neg_filter_ok": neg_filter_ok
         }
     }
     return judge_result
