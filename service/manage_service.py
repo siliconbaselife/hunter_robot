@@ -46,10 +46,20 @@ def my_job_list_service(manage_account_id):
         ret_list.append(job)
     return ret_list
 
+
+
 def account_config_update_service(manage_account_id, account_id, task_config):
     job_list = []
-    task_config_list = json.loads(task_config)
-    for t in task_config_list:
+    for i in range(0, len(task_config)):
+        time_mount_new = []
+        helloSum = task_config[i]['helloSum']
+        for t in task_config[i]['timeMount']:
+            time_mount_new.append({
+                'time': t['time'],
+                'mount': int(helloSum * t['mount'] / 100)
+            })
+        task_config[i]['timeMount'] = time_mount_new
+    for t in task_config:
         job_list.append(t['jobID'])
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_config,ensure_ascii=False), json.dumps(job_list, ensure_ascii=False))
     
@@ -124,6 +134,15 @@ def update_job_config_service(job_id, touch_msg, filter_args):
 
 def update_task_config_service(manage_account_id, account_id, task_config):
     task_config_dict = json.loads(task_config)
+    time_mount_new = []
+    helloSum = task_config_dict['helloSum']
+    for t in task_config_dict['timeMount']:
+        time_mount_new.append({
+            'time': t['time'],
+            'mount': int(helloSum * t['mount'] / 100)
+        })
+    task_config_dict['timeMount'] = time_mount_new
+
     task_configs = json.loads(get_account_task_db(account_id))
     for i in range(0, len(task_configs)):
         if task_configs[i]["taskType"] == "batchTouch" and task_configs[i]["jobID"] == task_config_dict["jobID"]:
