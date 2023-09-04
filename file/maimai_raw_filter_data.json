@@ -1,0 +1,3381 @@
+[
+    {
+      "id": 233252165,
+      "trackable_token": "z83OCrMFHHYSbqyqsbNWOGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=233252165&trackable_token=z83OCrMFHHYSbqyqsbNWOGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 584950,
+      "name": "倪甜甜",
+      "byname": "宋兵乙",
+      "province": "北京",
+      "city": "海淀区",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "字节跳动",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/27687/7422_69_6QK173HK93fstL-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 10993,
+          "company": "字节跳动",
+          "v": "2021-04-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "2年4个月",
+          "start_date": "2021-04-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2021-04",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "字节跳动",
+            "cid": 10993,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/0df5f8759e180e40cc0738a365cb540e.png",
+            "share_url": "https://maimai.cn/company?webcid=jYZTTwkX"
+          }
+        },
+        {
+          "cid": 52421,
+          "company": "深圳兰宇网络科技有限公司",
+          "v": "2018-12至2021-04",
+          "description": "",
+          "position": "运营经理",
+          "worktime": "2年4个月",
+          "start_date": "2018-12-01",
+          "judge": 0,
+          "is_leave": 1,
+          "start_date_ym": "2018-12",
+          "end_date_ym": "2021-04",
+          "company_info": {
+            "name": "深圳兰宇网络科技有限公司",
+            "cid": 52421,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/c0e8aee988ee452887179c220a8c3289.jpg",
+            "share_url": "https://maimai.cn/company?webcid=2OZ479jY"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "字节跳动",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "2年4个月",
+        "is_former": 0
+      },
+      "companies": [
+        "字节跳动",
+        "深圳兰宇网络科技有限公司",
+        "巴斯夫上海涂料有限公司"
+      ],
+      "large_comps": "字节跳动,深圳兰宇网络科技有限公司,巴斯夫上海涂料有限公司",
+      "edu": [
+        {
+          "sid": 15523,
+          "school": "加州大学圣地亚哥分校",
+          "v": "2016-09至2017-12",
+          "description": "",
+          "department": "化学工程",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2016-09-01",
+          "start_date_ym": "2016-09",
+          "end_date_ym": "2017-12",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_4e5d7fd5f56e238f508cd9211da130f5.jpg"
+        }
+      ],
+      "school": "加州大学圣地亚哥分校",
+      "schools": [
+        {
+          "school": "加州大学圣地亚哥分校",
+          "profession": "化学工程",
+          "degree": 2
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "6年",
+      "worktime": "6年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "运营管理",
+        "内容运营",
+        "活动运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 158196995,
+      "trackable_token": "X1tbMrodbVoVNzSk2JENSWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=158196995&trackable_token=X1tbMrodbVoVNzSk2JENSWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 2098354,
+      "name": "缪雨婷",
+      "byname": "衡山弟子",
+      "province": "北京",
+      "city": "朝阳区",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "爱奇艺",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/24635/5616_3_8BweLw3gbpIeV5-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 8220,
+          "company": "爱奇艺",
+          "v": "2020-06-01至今",
+          "description": "我负责的业务/方向：海外市场/内容运营/运营分析\n我擅长的技能/能力：整合营销/内容策划/活动运营",
+          "position": "海外运营",
+          "worktime": "3年2个月",
+          "start_date": "2020-06-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2020-06",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "爱奇艺",
+            "cid": 8220,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/e12fc7ca8cada30f89ca7a63c5055f88.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=1cQmIXmji"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "爱奇艺",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "3年2个月",
+        "is_former": 0
+      },
+      "companies": [
+        "爱奇艺",
+        "华扬联众",
+        "上海迪士尼度假区"
+      ],
+      "large_comps": "爱奇艺,华扬联众,上海迪士尼度假区",
+      "edu": [
+        {
+          "sid": 1222,
+          "school": "纽约大学",
+          "v": "2018-01至2020-01",
+          "description": "",
+          "department": "整合市场营销",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2018-01-01",
+          "start_date_ym": "2018-01",
+          "end_date_ym": "2020-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_d5c5014d951d40829573df9788804836.png"
+        },
+        {
+          "sid": 15,
+          "school": "浙江大学",
+          "v": "2014-01至2018-01",
+          "description": "",
+          "department": "广告学",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2014-01-01",
+          "start_date_ym": "2014-01",
+          "end_date_ym": "2018-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_f592dea1ac55c3cf6e21ec22eb2a893e.jpg"
+        }
+      ],
+      "school": "纽约大学",
+      "schools": [
+        {
+          "school": "纽约大学",
+          "profession": "整合市场营销",
+          "degree": 2
+        },
+        {
+          "school": "浙江大学",
+          "profession": "广告学",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "3年",
+      "worktime": "3年",
+      "job_preferences": {
+        "positions": [
+          "策略运营",
+          "内容策略",
+          "经营分析"
+        ],
+        "regions": [
+          "上海"
+        ],
+        "province_cities": [
+          "上海"
+        ],
+        "salary": "15k-20k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "市场运营",
+        "产品运营",
+        "运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 68980316,
+      "trackable_token": "FZTAxmuw2Wpxnq-mBXVes156B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=68980316&trackable_token=FZTAxmuw2Wpxnq-mBXVes156B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "viewed": 1,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 178158,
+      "name": "夏悦怡",
+      "byname": "安东尼奥刘能",
+      "province": "广东",
+      "city": "广州",
+      "gender": 0,
+      "gender_str": "",
+      "company": "祖龙（天津）科技有限公司",
+      "position": "海外运营经理",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营经理"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/chfig/v5/24609",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 212092,
+          "company": "祖龙（天津）科技有限公司",
+          "v": "2022-03-01至今",
+          "description": "",
+          "position": "海外运营经理",
+          "worktime": "1年5个月",
+          "start_date": "2022-03-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2022-03",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "祖龙（天津）科技有限公司",
+            "cid": 212092,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/78bb857e42bbaf5ca316ad2b1ef13b90.jpg",
+            "share_url": "https://maimai.cn/company?webcid=YFWcKSCf"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "祖龙（天津）科技有限公司",
+        "position": "海外运营经理",
+        "job_judge": 0,
+        "worktime": "1年5个月",
+        "is_former": 0
+      },
+      "companies": [
+        "祖龙（天津）科技有限公司"
+      ],
+      "large_comps": "祖龙（天津）科技有限公司",
+      "edu": [
+        {
+          "sid": 436,
+          "school": "广东外语外贸大学",
+          "v": "2008-09至2012-06",
+          "description": "",
+          "department": "韩国语",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2008-09-01",
+          "start_date_ym": "2008-09",
+          "end_date_ym": "2012-06",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_3a124b60f3fcb2e40d0833c36923e318.jpg"
+        }
+      ],
+      "school": "广东外语外贸大学",
+      "schools": [
+        {
+          "school": "广东外语外贸大学",
+          "profession": "韩国语",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "10年",
+      "worktime": "10年",
+      "job_preferences": {
+        "positions": [
+          "海外运营经理"
+        ],
+        "regions": [
+          "广东广州"
+        ],
+        "province_cities": [
+          "广州"
+        ],
+        "salary": "35k-60k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "海外产品运营",
+        "运营部门管理",
+        "运营战略规划"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 221094008,
+      "trackable_token": "TCA7XX9eW3k5-Z5eKK2jGGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=221094008&trackable_token=TCA7XX9eW3k5-Z5eKK2jGGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 838767,
+      "name": "sharpay",
+      "byname": "衡山弟子",
+      "province": "北京",
+      "city": "朝阳区",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "阿里巴巴集团",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/31522/3084_120_n2Qv1jPIrKac3u-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 2938,
+          "company": "阿里巴巴集团",
+          "v": "2019-05-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "4年3个月",
+          "start_date": "2019-05-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2019-05",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "阿里巴巴集团",
+            "cid": 2938,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/c55879d15dc70478b167755e4db07279.png",
+            "share_url": "https://maimai.cn/company?webcid=EnT6guJz"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "阿里巴巴集团",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "4年3个月",
+        "is_former": 0
+      },
+      "companies": [
+        "阿里巴巴集团",
+        "北京优朋普乐科技有限公司"
+      ],
+      "large_comps": "阿里巴巴集团,北京优朋普乐科技有限公司",
+      "edu": [
+        {
+          "sid": 180,
+          "school": "北京联合大学",
+          "v": "未完善",
+          "description": "",
+          "department": "",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": null,
+          "start_date_ym": "",
+          "end_date_ym": "",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_c61daf4e66f5a8c9b5d08a241516cf55.png"
+        }
+      ],
+      "school": "北京联合大学",
+      "schools": [
+        {
+          "school": "北京联合大学",
+          "profession": "",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "7年",
+      "worktime": "7年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "内容运营",
+        "新媒体运营",
+        "数据分析"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 231282612,
+      "trackable_token": "m_rd3YdEUGtoPlRsTA0YBWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=231282612&trackable_token=m_rd3YdEUGtoPlRsTA0YBWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 1178343,
+      "name": "金敏慧",
+      "byname": "衡山弟子",
+      "province": "上海",
+      "city": "闵行区",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "字节跳动",
+      "position": "海外电商运营经理",
+      "positions": {
+        "matchs": [],
+        "name": "海外电商运营经理"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/24777/4960_52_12XstKTlfO51f4Bn-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 10993,
+          "company": "字节跳动",
+          "v": "2021-09-01至今",
+          "description": "",
+          "position": "海外电商运营经理",
+          "worktime": "1年11个月",
+          "start_date": "2021-09-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2021-09",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "字节跳动",
+            "cid": 10993,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/0df5f8759e180e40cc0738a365cb540e.png",
+            "share_url": "https://maimai.cn/company?webcid=jYZTTwkX"
+          }
+        },
+        {
+          "cid": 10993,
+          "company": "北京字节跳动科技有限公司",
+          "v": "2020-04至2021-09",
+          "description": "",
+          "position": "拉美内容运营",
+          "worktime": "1年5个月",
+          "start_date": "2020-04-01",
+          "judge": 1,
+          "is_leave": 1,
+          "start_date_ym": "2020-04",
+          "end_date_ym": "2021-09",
+          "company_info": {
+            "name": "北京字节跳动科技有限公司",
+            "cid": 10993,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/0df5f8759e180e40cc0738a365cb540e.png",
+            "share_url": "https://maimai.cn/company?webcid=jYZTTwkX"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "字节跳动",
+        "position": "海外电商运营经理",
+        "job_judge": 1,
+        "worktime": "1年11个月",
+        "is_former": 0
+      },
+      "companies": [
+        "字节跳动",
+        "北京字节跳动科技有限公司",
+        "海康威视"
+      ],
+      "large_comps": "字节跳动,北京字节跳动科技有限公司,海康威视",
+      "edu": [
+        {
+          "sid": 31138,
+          "school": "HEC Paris ",
+          "v": "2019-01至2020-01",
+          "description": "",
+          "department": "Marketing",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2019-01-01",
+          "start_date_ym": "2019-01",
+          "end_date_ym": "2020-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_5836f3e75ee45b23a91562a5c31380f3.png"
+        },
+        {
+          "sid": 32,
+          "school": "南京大学",
+          "v": "2011-01至2015-01",
+          "description": "",
+          "department": "西班牙语",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2011-01-01",
+          "start_date_ym": "2011-01",
+          "end_date_ym": "2015-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_ec341ca7c084aeee3baacb81bd54780a.jpg"
+        }
+      ],
+      "school": "HEC Paris ",
+      "schools": [
+        {
+          "school": "HEC Paris ",
+          "profession": "Marketing",
+          "degree": 2
+        },
+        {
+          "school": "南京大学",
+          "profession": "西班牙语",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "8年",
+      "worktime": "8年",
+      "job_preferences": {
+        "positions": [
+          "内容运营"
+        ],
+        "regions": [
+          "浙江杭州"
+        ],
+        "province_cities": [
+          "杭州"
+        ],
+        "salary": "",
+        "prefessions": [
+          "网络营销"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "电商数据运营",
+        "电商运营",
+        "市场运营"
+      ],
+      "resume_tags": [
+        "excel",
+        "python"
+      ]
+    },
+    {
+      "id": 190701365,
+      "trackable_token": "zrQ7PPPFfnR8xZh-EYdit2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=190701365&trackable_token=zrQ7PPPFfnR8xZh-EYdit2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 705257,
+      "name": "梁山伯",
+      "byname": "马春花",
+      "province": "广东",
+      "city": "广州",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "欢聚集团",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/24530/4281_53_472F1ERQHwczcM7B-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 8257,
+          "company": "欢聚集团",
+          "v": "2018-11-01至今",
+          "description": "运营\n",
+          "position": "海外运营",
+          "worktime": "4年9个月",
+          "start_date": "2018-11-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2018-11",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "欢聚集团",
+            "cid": 8257,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/189ca5c57d3d2e92284ed6294100d4e5.jpg",
+            "share_url": "https://maimai.cn/company?webcid=wtzarLM1"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "欢聚集团",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "4年9个月",
+        "is_former": 0
+      },
+      "companies": [
+        "欢聚集团",
+        "猎聘网"
+      ],
+      "large_comps": "欢聚集团,猎聘网",
+      "edu": [
+        {
+          "sid": 436,
+          "school": "广东外语外贸大学",
+          "v": "2015-01至2019-01",
+          "description": "",
+          "department": "越南语",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2015-01-01",
+          "start_date_ym": "2015-01",
+          "end_date_ym": "2019-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_3a124b60f3fcb2e40d0833c36923e318.jpg"
+        }
+      ],
+      "school": "广东外语外贸大学",
+      "schools": [
+        {
+          "school": "广东外语外贸大学",
+          "profession": "越南语",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "5年",
+      "worktime": "5年",
+      "job_preferences": {
+        "positions": [
+          "vip客户经理",
+          "直播运营",
+          "海外运营"
+        ],
+        "regions": [
+          "上海",
+          "广东深圳"
+        ],
+        "province_cities": [
+          "深圳",
+          "上海"
+        ],
+        "salary": "24k-30k/月",
+        "prefessions": [
+          "视频网站/直播",
+          "社交网络",
+          "网络营销"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "运营",
+        "线上运营",
+        "活动运营"
+      ],
+      "resume_tags": [
+        "数据分析",
+        "线上运营",
+        "渠道合作",
+        "数据分析",
+        "活动运营",
+        "活动策划"
+      ]
+    },
+    {
+      "id": 26311619,
+      "trackable_token": "f3iqVHz2UBDDtXOUD0R4QF56B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=26311619&trackable_token=f3iqVHz2UBDDtXOUD0R4QF56B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 3803456,
+      "name": "蔺志成",
+      "byname": "张鲁",
+      "province": "北京",
+      "city": "海淀区",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "腾讯",
+      "position": "腾讯云海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "腾讯云海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/22171/9271_67_42otP3by1dlXbYVG-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 776,
+          "company": "腾讯",
+          "v": "2017-02-01至今",
+          "description": "行业运营",
+          "position": "腾讯云海外运营",
+          "worktime": "6年6个月",
+          "start_date": "2017-02-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2017-02",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "腾讯",
+            "cid": 776,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/2579f7b5efb0969663f51dc817b77a57.png",
+            "share_url": "https://maimai.cn/company?webcid=167PEUToR"
+          }
+        },
+        {
+          "cid": 15592,
+          "company": "IBM中国有限公司",
+          "v": "2010-07至2017-02",
+          "description": " ",
+          "position": "销售运营主管",
+          "worktime": "6年7个月",
+          "start_date": "2010-07-01",
+          "judge": 0,
+          "is_leave": 1,
+          "start_date_ym": "2010-07",
+          "end_date_ym": "2017-02",
+          "company_info": {
+            "name": "IBM中国有限公司",
+            "cid": 15592,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/d3e74fd98e3fe89678fc3d9d8a9d2ca8.jpg",
+            "share_url": "https://maimai.cn/company?webcid=1ghe3rOz4"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "腾讯",
+        "position": "腾讯云海外运营",
+        "job_judge": 1,
+        "worktime": "6年6个月",
+        "is_former": 0
+      },
+      "companies": [
+        "腾讯",
+        "IBM中国有限公司"
+      ],
+      "large_comps": "腾讯,IBM中国有限公司",
+      "edu": [
+        {
+          "sid": 31,
+          "school": "北京科技大学",
+          "v": "2004-09至2010-07",
+          "description": "",
+          "department": "技术经济及管理",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2004-09-01",
+          "start_date_ym": "2004-09",
+          "end_date_ym": "2010-07",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_be92fe3029318bca318c65e2c461ea3c.jpg"
+        }
+      ],
+      "school": "北京科技大学",
+      "schools": [
+        {
+          "school": "北京科技大学",
+          "profession": "技术经济及管理",
+          "degree": 2
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "13年",
+      "worktime": "13年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "互联网运营",
+        "电子商务",
+        "云计算/大数据"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 106898125,
+      "trackable_token": "4KvOHjUw5X1wSNCpldNOrWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=106898125&trackable_token=4KvOHjUw5X1wSNCpldNOrWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 1,
+      "active_state": "今日活跃",
+      "active_state_v1": "今日活跃",
+      "active_state_v2": "今日活跃",
+      "second": 10204,
+      "name": "梁卓健",
+      "byname": "风波恶",
+      "province": "广东",
+      "city": "珠海",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "金山办公软件有限公司",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/3992/4049_77_f11YvY32bes7bi-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 1431015,
+          "company": "金山办公软件有限公司",
+          "v": "2016-03-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "7年5个月",
+          "start_date": "2016-03-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2016-03",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "金山办公软件有限公司",
+            "cid": 1431015,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/default.png",
+            "share_url": "https://maimai.cn/company?webcid=Rw6knt1R"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "金山办公软件有限公司",
+        "position": "海外运营",
+        "job_judge": 0,
+        "worktime": "7年5个月",
+        "is_former": 0
+      },
+      "companies": [
+        "金山办公软件有限公司"
+      ],
+      "large_comps": "金山办公软件有限公司",
+      "edu": [
+        {
+          "sid": 443,
+          "school": "深圳大学",
+          "v": "未完善",
+          "description": "",
+          "department": "",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": null,
+          "start_date_ym": "",
+          "end_date_ym": "",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_6c01243692eca6a3d15d1ecffa03c41b.jpeg"
+        }
+      ],
+      "school": "深圳大学",
+      "schools": [
+        {
+          "school": "深圳大学",
+          "profession": "",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "7年",
+      "worktime": "7年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [
+          "广东珠海"
+        ],
+        "province_cities": [
+          "珠海"
+        ],
+        "salary": "",
+        "prefessions": [
+          "牲畜饲养行业"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "渠道运营",
+        "房地产开发"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 230940336,
+      "trackable_token": "kXS0YobrHjmDYKFEdOqhq2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=230940336&trackable_token=kXS0YobrHjmDYKFEdOqhq2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 1,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 164980,
+      "name": "Dora",
+      "byname": "泰山弟子",
+      "province": "广东",
+      "city": "深圳",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "兰亭集势贸易（深圳）有限公司",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/32335/8759_48_6cA6Wt504h4XnO1b-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 11735,
+          "company": "兰亭集势贸易（深圳）有限公司",
+          "v": "2019-09-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "3年11个月",
+          "start_date": "2019-09-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2019-09",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "兰亭集势贸易（深圳）有限公司",
+            "cid": 11735,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/6ed9047d35d3c393fb427cf3b540ca6d.png",
+            "share_url": "https://maimai.cn/company?webcid=18ffUgMSa"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "兰亭集势贸易（深圳）有限公司",
+        "position": "海外运营",
+        "job_judge": 0,
+        "worktime": "3年11个月",
+        "is_former": 0
+      },
+      "companies": [
+        "兰亭集势贸易（深圳）有限公司"
+      ],
+      "large_comps": "兰亭集势贸易（深圳）有限公司",
+      "edu": [
+        {
+          "sid": 7478,
+          "school": "武汉纺织大学",
+          "v": "2012-01至2016-01",
+          "description": "",
+          "department": "物流管理",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2012-01-01",
+          "start_date_ym": "2012-01",
+          "end_date_ym": "2016-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_ce2ed4cbb3d0175634303b0ccec5a59e.jpg"
+        }
+      ],
+      "school": "武汉纺织大学",
+      "schools": [
+        {
+          "school": "武汉纺织大学",
+          "profession": "物流管理",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "7年",
+      "worktime": "7年",
+      "job_preferences": {
+        "positions": [
+          "海外运营"
+        ],
+        "regions": [
+          "广东深圳"
+        ],
+        "province_cities": [
+          "深圳"
+        ],
+        "salary": "",
+        "prefessions": [
+          "电子商务"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "用户运营",
+        "市场运营",
+        "沟通协调能力"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 232639698,
+      "trackable_token": "ypEhHZA1NV2caWIpi3SHimO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=232639698&trackable_token=ypEhHZA1NV2caWIpi3SHimO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 1087936,
+      "name": "曼丽",
+      "byname": "宋兵乙",
+      "province": "广东",
+      "city": "广州",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "BIGO",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/26887/6091_82_82okby1y07wlBsRL-a160",
+      "sdegree": "不限",
+      "degree": 255,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 31476,
+          "company": "BIGO",
+          "v": "2020-07-01至今",
+          "description": "我负责的业务/方向：用户运营\n我擅长的技能/能力：沟通协调能力，数据分析能力，领导力",
+          "position": "海外运营",
+          "worktime": "3年1个月",
+          "start_date": "2020-07-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2020-07",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "BIGO",
+            "cid": 31476,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/4547762419e8b79f583e09af408794cd.png",
+            "share_url": "https://maimai.cn/company?webcid=gvQmxwVU"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "BIGO",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "3年1个月",
+        "is_former": 0
+      },
+      "companies": [
+        "BIGO"
+      ],
+      "large_comps": "BIGO",
+      "edu": [],
+      "school": "未完善",
+      "schools": [],
+      "double_exposed": 0,
+      "work_time": "3年",
+      "worktime": "3年",
+      "job_preferences": {
+        "positions": [
+          "运营"
+        ],
+        "regions": [
+          "北京",
+          "上海",
+          "广东广州"
+        ],
+        "province_cities": [
+          "广州",
+          "上海",
+          "北京"
+        ],
+        "salary": "15k-25k/月",
+        "prefessions": [
+          "视频网站/直播"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [],
+      "resume_tags": []
+    },
+    {
+      "id": 232753386,
+      "trackable_token": "DCDaZ9JrnnobpCk_Uhw62mO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=232753386&trackable_token=DCDaZ9JrnnobpCk_Uhw62mO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "刚刚活跃",
+      "active_state_v1": "刚刚活跃",
+      "active_state_v2": "刚刚活跃",
+      "second": 2927,
+      "name": "超级菠萝酋长",
+      "byname": "昆仑弟子",
+      "province": "浙江",
+      "city": "杭州",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "阿里巴巴集团",
+      "position": "直播电商风控",
+      "positions": {
+        "matchs": [],
+        "name": "直播电商风控"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/27062/2313_106_5p979WFH2LjzGazH-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 2938,
+          "company": "阿里巴巴集团",
+          "v": "2018-10-01至今",
+          "description": "行业风险治理",
+          "position": "直播电商风控",
+          "worktime": "4年10个月",
+          "start_date": "2018-10-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2018-10",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "阿里巴巴集团",
+            "cid": 2938,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/c55879d15dc70478b167755e4db07279.png",
+            "share_url": "https://maimai.cn/company?webcid=EnT6guJz"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "阿里巴巴集团",
+        "position": "直播电商风控",
+        "job_judge": 1,
+        "worktime": "4年10个月",
+        "is_former": 0
+      },
+      "companies": [
+        "阿里巴巴集团"
+      ],
+      "large_comps": "阿里巴巴集团",
+      "edu": [
+        {
+          "sid": 14967,
+          "school": "曼彻斯特大学",
+          "v": "2017-01至2018-01",
+          "description": "",
+          "department": "国际市场零售",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2017-01-01",
+          "start_date_ym": "2017-01",
+          "end_date_ym": "2018-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_9a1ec9cae3bac77d502d96de9deaa00e.jpg"
+        }
+      ],
+      "school": "曼彻斯特大学",
+      "schools": [
+        {
+          "school": "曼彻斯特大学",
+          "profession": "国际市场零售",
+          "degree": 2
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "5年",
+      "worktime": "5年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [
+          "浙江杭州"
+        ],
+        "province_cities": [
+          "杭州"
+        ],
+        "salary": "",
+        "prefessions": [
+          "电子商务"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [],
+      "resume_tags": []
+    },
+    {
+      "id": 235479241,
+      "trackable_token": "nDTu1ihOeE-CQH3uljjyIGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=235479241&trackable_token=nDTu1ihOeE-CQH3uljjyIGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 1268498,
+      "name": "魏然",
+      "byname": "少林弟子",
+      "province": "广东",
+      "city": "深圳",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "美图",
+      "position": "海外商业化运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外商业化运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/30091/7578_73_71jNhso4qZHrc73h-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 245,
+          "company": "美图",
+          "v": "2020-06-01至今",
+          "description": "",
+          "position": "海外商业化运营",
+          "worktime": "3年2个月",
+          "start_date": "2020-06-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2020-06",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "美图",
+            "cid": 245,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/39a0fa1fbc157295e68657ccf73e8e2a.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=fTxxxOXz"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "美图",
+        "position": "海外商业化运营",
+        "job_judge": 1,
+        "worktime": "3年2个月",
+        "is_former": 0
+      },
+      "companies": [
+        "美图"
+      ],
+      "large_comps": "美图",
+      "edu": [
+        {
+          "sid": 339,
+          "school": "华威大学",
+          "v": "2018-10至2020-01",
+          "description": "",
+          "department": "信息系统管理与数字化创新",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2018-10-01",
+          "start_date_ym": "2018-10",
+          "end_date_ym": "2020-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_913eb474104721908f79752663603e03.jpg"
+        },
+        {
+          "sid": 14687,
+          "school": "北京师范大学-香港浸会大学联合国际学院",
+          "v": "2014-09至2018-07",
+          "description": "",
+          "department": "会计",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2014-09-01",
+          "start_date_ym": "2014-09",
+          "end_date_ym": "2018-07",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_043ea46161d6782f47b54d5552f94629.jpg"
+        }
+      ],
+      "school": "华威大学",
+      "schools": [
+        {
+          "school": "华威大学",
+          "profession": "信息系统管理与数字化创新",
+          "degree": 2
+        },
+        {
+          "school": "北京师范大学-香港浸会大学联合国际学院",
+          "profession": "会计",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "4年",
+      "worktime": "4年",
+      "job_preferences": {
+        "positions": [
+          "商业化运营经理",
+          "产品运营",
+          "海外市场"
+        ],
+        "regions": [
+          "广东深圳"
+        ],
+        "province_cities": [
+          "深圳"
+        ],
+        "salary": "25k-35k/月",
+        "prefessions": [
+          "IT互联网"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "渠道运营",
+        "产品运营",
+        "活动运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 233816444,
+      "trackable_token": "BQ0S0tqGCvcAw4u6JGdhCmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=233816444&trackable_token=BQ0S0tqGCvcAw4u6JGdhCmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 1,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 657518,
+      "name": "伊拉",
+      "byname": "宋兵甲",
+      "province": "广东",
+      "city": "深圳",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "Stary（排名全球第一的阅读app公司）",
+      "position": "海外内容运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外内容运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/28490/9294_124_48dgRpkhCthvbE5z-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 0,
+          "company": "Stary（排名全球第一的阅读app公司）",
+          "v": "2020-04-01至今",
+          "description": "",
+          "position": "海外内容运营",
+          "worktime": "3年4个月",
+          "start_date": "2020-04-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2020-04",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "Stary（排名全球第一的阅读app公司）",
+            "cid": 0,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/default.png",
+            "share_url": ""
+          }
+        }
+      ],
+      "current_company": {
+        "company": "Stary（排名全球第一的阅读app公司）",
+        "position": "海外内容运营",
+        "job_judge": 0,
+        "worktime": "3年4个月",
+        "is_former": 0
+      },
+      "companies": [
+        "Stary（排名全球第一的阅读app公司）"
+      ],
+      "large_comps": "Stary（排名全球第一的阅读app公司）",
+      "edu": [
+        {
+          "sid": 614,
+          "school": "西安外国语大学",
+          "v": "2013-01至2017-01",
+          "description": "",
+          "department": "俄语",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2013-01-01",
+          "start_date_ym": "2013-01",
+          "end_date_ym": "2017-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_d699922a2a78dedf7cfcf63c36c09b40.jpg"
+        }
+      ],
+      "school": "西安外国语大学",
+      "schools": [
+        {
+          "school": "西安外国语大学",
+          "profession": "俄语",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "6年",
+      "worktime": "6年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "用户运营",
+        "内容运营",
+        "运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 234810698,
+      "trackable_token": "gQgUAMbaJtAOXCgygGnGkmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=234810698&trackable_token=gQgUAMbaJtAOXCgygGnGkmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 873552,
+      "name": "张翔",
+      "byname": "安东尼奥刘能",
+      "province": "广东",
+      "city": "广州",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "阿里巴巴本地生活",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/29483/9760_74_InXvGIufYpBqR0v-a160",
+      "sdegree": "不限",
+      "degree": 255,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 420,
+          "company": "阿里巴巴本地生活",
+          "v": "2021-01-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "2年7个月",
+          "start_date": "2021-01-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2021-01",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "阿里巴巴本地生活",
+            "cid": 420,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/30a4349d2ca1d06937a9c0023d0501ca.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=58O3xWnM"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "阿里巴巴本地生活",
+        "position": "海外运营",
+        "job_judge": 0,
+        "worktime": "2年7个月",
+        "is_former": 0
+      },
+      "companies": [
+        "阿里巴巴本地生活"
+      ],
+      "large_comps": "阿里巴巴本地生活",
+      "edu": [],
+      "school": "未完善",
+      "schools": [],
+      "double_exposed": 0,
+      "work_time": "12年",
+      "worktime": "12年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "数据运营",
+        "产品运营",
+        "团队建设"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 232686963,
+      "trackable_token": "8LrWKAclLUKlZBxnXgEhPmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=232686963&trackable_token=8LrWKAclLUKlZBxnXgEhPmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 328253,
+      "name": "浑浑噩噩",
+      "byname": "嵩山弟子",
+      "province": "北京",
+      "city": "东城区",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "BIGO",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/26961/5739_115_UefeYACF6XwTDB-a160",
+      "sdegree": "不限",
+      "degree": 255,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 31476,
+          "company": "BIGO",
+          "v": "2019-03-01至今",
+          "description": "bigo海外运营",
+          "position": "海外运营",
+          "worktime": "4年5个月",
+          "start_date": "2019-03-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2019-03",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "BIGO",
+            "cid": 31476,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/4547762419e8b79f583e09af408794cd.png",
+            "share_url": "https://maimai.cn/company?webcid=gvQmxwVU"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "BIGO",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "4年5个月",
+        "is_former": 0
+      },
+      "companies": [
+        "BIGO"
+      ],
+      "large_comps": "BIGO",
+      "edu": [],
+      "school": "未完善",
+      "schools": [],
+      "double_exposed": 0,
+      "work_time": "3年",
+      "worktime": "3年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [
+          "北京东城区"
+        ],
+        "province_cities": [
+          "北京"
+        ],
+        "salary": "",
+        "prefessions": [
+          "IT系统集成"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "海外运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 170307022,
+      "trackable_token": "qeAF4fl9nv1ol0D4cnDMJ2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=170307022&trackable_token=qeAF4fl9nv1ol0D4cnDMJ2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 1904752,
+      "name": "王申佳",
+      "byname": "宋兵乙",
+      "province": "安徽",
+      "city": "合肥",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "科大讯飞股份有限公司",
+      "position": "海外运营总监",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营总监"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/24247/1563_78_7RdocbeTnh3r-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "age": 35,
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 1441,
+          "company": "科大讯飞股份有限公司",
+          "v": "2017-02-01至今",
+          "description": "",
+          "position": "海外运营总监",
+          "worktime": "6年6个月",
+          "start_date": "2017-02-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2017-02",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "科大讯飞股份有限公司",
+            "cid": 1441,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/dabde29f79f2657b71005c23b016ad8a.png",
+            "share_url": "https://maimai.cn/company?webcid=jQoRAYft"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "科大讯飞股份有限公司",
+        "position": "海外运营总监",
+        "job_judge": 1,
+        "worktime": "6年6个月",
+        "is_former": 0
+      },
+      "companies": [
+        "科大讯飞股份有限公司"
+      ],
+      "large_comps": "科大讯飞股份有限公司",
+      "edu": [
+        {
+          "sid": 0,
+          "school": "艾迪斯科文大学",
+          "v": "2012-06至2014-01",
+          "description": "",
+          "department": "人力资源管理",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2012-06-01",
+          "start_date_ym": "2012-06",
+          "end_date_ym": "2014-01",
+          "school_url": "https://i9.taou.com/maimai/c/interlogo/default.png"
+        },
+        {
+          "sid": 0,
+          "school": "艾迪斯科文大学",
+          "v": "2010-02至2012-12",
+          "description": "",
+          "department": "市场营销",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2010-02-01",
+          "start_date_ym": "2010-02",
+          "end_date_ym": "2012-12",
+          "school_url": "https://i9.taou.com/maimai/c/interlogo/default.png"
+        }
+      ],
+      "school": "艾迪斯科文大学",
+      "schools": [
+        {
+          "school": "艾迪斯科文大学",
+          "profession": "人力资源管理",
+          "degree": 2
+        },
+        {
+          "school": "艾迪斯科文大学",
+          "profession": "市场营销",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "10年",
+      "worktime": "10年",
+      "job_preferences": {
+        "positions": [
+          ""
+        ],
+        "regions": [
+          "安徽"
+        ],
+        "province_cities": [
+          "安徽"
+        ],
+        "salary": "7k-10k/月",
+        "prefessions": [
+          "大数据/人工智能"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "用户运营",
+        "运营",
+        "产品运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 236029131,
+      "trackable_token": "k4xx4KVUOps3eJ8b2tTfqGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=236029131&trackable_token=k4xx4KVUOps3eJ8b2tTfqGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 676414,
+      "name": "王臻宁",
+      "byname": "武当弟子",
+      "province": "广东",
+      "city": "深圳",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "富途网络科技（深圳）有限公司",
+      "position": "海外内容运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外内容运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/30650/5756_75_7i8tLXWroTIchrxt-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 53021,
+          "company": "富途网络科技（深圳）有限公司",
+          "v": "2021-06-01至今",
+          "description": "",
+          "position": "海外内容运营",
+          "worktime": "2年2个月",
+          "start_date": "2021-06-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2021-06",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "富途网络科技（深圳）有限公司",
+            "cid": 53021,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/b8b421132e8e767513aa3d29810f8bd8.png",
+            "share_url": "https://maimai.cn/company?webcid=sWjiuNWc"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "富途网络科技（深圳）有限公司",
+        "position": "海外内容运营",
+        "job_judge": 1,
+        "worktime": "2年2个月",
+        "is_former": 0
+      },
+      "companies": [
+        "富途网络科技（深圳）有限公司"
+      ],
+      "large_comps": "富途网络科技（深圳）有限公司",
+      "edu": [
+        {
+          "sid": 22699,
+          "school": "肯塔基大学",
+          "v": "2020-01至2021-01",
+          "description": "",
+          "department": "金融",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2020-01-01",
+          "start_date_ym": "2020-01",
+          "end_date_ym": "2021-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_5836f3e75ee45b23a91562a5c31380f3.png"
+        }
+      ],
+      "school": "肯塔基大学",
+      "schools": [
+        {
+          "school": "肯塔基大学",
+          "profession": "金融",
+          "degree": 2
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "2年",
+      "worktime": "2年",
+      "job_preferences": {
+        "positions": [
+          "内容运营",
+          "量化交易员",
+          "研究员"
+        ],
+        "regions": [
+          "广东深圳"
+        ],
+        "province_cities": [
+          "深圳"
+        ],
+        "salary": "10k-15k/月",
+        "prefessions": [
+          "互联网金融"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "付费内容运营",
+        "视频内容运营",
+        "社区内容运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 234361451,
+      "trackable_token": "bxVdcG1l-16HgE6At0jQoWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=234361451&trackable_token=bxVdcG1l-16HgE6At0jQoWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 107032,
+      "name": "李敏",
+      "byname": "尼古拉斯赵四",
+      "province": "广东",
+      "city": "深圳",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "360",
+      "position": "海外运营主管",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营主管"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/29042/2980_107_2nYVNJh0Efg5V01X-a160",
+      "sdegree": "不限",
+      "degree": 255,
+      "major": "销售",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 11020,
+          "company": "360",
+          "v": "2018-11-01至今",
+          "description": "",
+          "position": "海外运营主管",
+          "worktime": "4年9个月",
+          "start_date": "2018-11-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2018-11",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "360",
+            "cid": 11020,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/af8fd8fbafce8a745c19faa1206a801f.png",
+            "share_url": "https://maimai.cn/company?webcid=Bc3RqXxJ"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "360",
+        "position": "海外运营主管",
+        "job_judge": 1,
+        "worktime": "4年9个月",
+        "is_former": 0
+      },
+      "companies": [
+        "360"
+      ],
+      "large_comps": "360",
+      "edu": [],
+      "school": "未完善",
+      "schools": [],
+      "double_exposed": 0,
+      "work_time": "21年",
+      "worktime": "21年",
+      "job_preferences": {
+        "positions": [
+          "海外商务经理",
+          "海外运营经理",
+          "海外运营总监"
+        ],
+        "regions": [
+          "广东深圳"
+        ],
+        "province_cities": [
+          "深圳"
+        ],
+        "salary": "30k-40k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [],
+      "resume_tags": []
+    },
+    {
+      "id": 75776009,
+      "trackable_token": "bS7vEf1946qi2Gs9tTYADF56B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=75776009&trackable_token=bS7vEf1946qi2Gs9tTYADF56B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "viewed": 0,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 291505,
+      "name": "陈清",
+      "byname": "韦春花",
+      "province": "江苏",
+      "city": "苏州",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "宝时得科技（中国）有限公司",
+      "position": "跨境电商运营",
+      "positions": {
+        "matchs": [],
+        "name": "跨境电商运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/26461/9663_9_21zgK3FfT4FJ0KXo-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "age": 32,
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 874305,
+          "company": "宝时得科技（中国）有限公司",
+          "v": "2019-01至2020-11",
+          "description": "跨境电商运营",
+          "position": "跨境电商运营",
+          "worktime": "1年10个月",
+          "start_date": "2019-01-01",
+          "judge": 0,
+          "is_leave": 1,
+          "start_date_ym": "2019-01",
+          "end_date_ym": "2020-11",
+          "company_info": {
+            "name": "宝时得科技（中国）有限公司",
+            "cid": 874305,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/8ddabb1c0dde47149665c90b6530838a.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=xkvLzdC8"
+          }
+        },
+        {
+          "cid": 7855,
+          "company": "美的集团",
+          "v": "2018-03至2019-01",
+          "description": "工作内容/方向：\n亚马逊运营",
+          "position": "亚马逊运营",
+          "worktime": "10个月",
+          "start_date": "2018-03-01",
+          "judge": 0,
+          "is_leave": 1,
+          "start_date_ym": "2018-03",
+          "end_date_ym": "2019-01",
+          "company_info": {
+            "name": "美的集团",
+            "cid": 7855,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/45fe13780947bbaf30c629215a552d7e.png",
+            "share_url": "https://maimai.cn/company?webcid=hjIiS6kr"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "宝时得科技（中国）有限公司",
+        "position": "跨境电商运营",
+        "job_judge": 0,
+        "worktime": "1年10个月",
+        "is_former": 1
+      },
+      "companies": [
+        "宝时得科技（中国）有限公司",
+        "美的集团",
+        "同程旅行"
+      ],
+      "large_comps": "宝时得科技（中国）有限公司,美的集团,同程旅行",
+      "edu": [
+        {
+          "sid": 33,
+          "school": "东南大学",
+          "v": "2013-09至2015-06",
+          "description": "",
+          "department": "国际商务",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2013-09-01",
+          "start_date_ym": "2013-09",
+          "end_date_ym": "2015-06",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_20088e8e9e4c1f275c8e9024bbbc29fc.jpg"
+        }
+      ],
+      "school": "东南大学",
+      "schools": [
+        {
+          "school": "东南大学",
+          "profession": "国际商务",
+          "degree": 2
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "9年",
+      "worktime": "9年",
+      "job_preferences": {
+        "positions": [
+          "跨境电商运营"
+        ],
+        "regions": [
+          "江苏苏州"
+        ],
+        "province_cities": [
+          "苏州"
+        ],
+        "salary": "12k-16k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 237871723,
+      "trackable_token": "duQVQ0lHYYu5xYQAjxPn8WO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=237871723&trackable_token=duQVQ0lHYYu5xYQAjxPn8WO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 527909,
+      "name": "曲瑶",
+      "byname": "狐媚胡梅尔斯",
+      "province": "上海",
+      "city": "徐汇区",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "米哈游",
+      "position": "海外创作者运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外创作者运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/32597/1374_107_6dEb0hBVnOCrDPtB-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 41846,
+          "company": "米哈游",
+          "v": "2021-08-01至今",
+          "description": "英语创作者运营",
+          "position": "海外创作者运营",
+          "worktime": "2年",
+          "start_date": "2021-08-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2021-08",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "米哈游",
+            "cid": 41846,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/c13b95a8e1cb84aaf52a6541269de698.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=lNDSFTm0"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "米哈游",
+        "position": "海外创作者运营",
+        "job_judge": 1,
+        "worktime": "2年",
+        "is_former": 0
+      },
+      "companies": [
+        "米哈游"
+      ],
+      "large_comps": "米哈游",
+      "edu": [
+        {
+          "sid": 1222,
+          "school": "纽约大学",
+          "v": "2017-09至2020-05",
+          "description": "",
+          "department": "视觉艺术管理",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2017-09-01",
+          "start_date_ym": "2017-09",
+          "end_date_ym": "2020-05",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_d5c5014d951d40829573df9788804836.png"
+        },
+        {
+          "sid": 15523,
+          "school": "加利福尼亚大学圣迭戈分校",
+          "v": "2013-01至2017-06",
+          "description": "",
+          "department": "艺术历史与品鉴",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2013-01-01",
+          "start_date_ym": "2013-01",
+          "end_date_ym": "2017-06",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_4e5d7fd5f56e238f508cd9211da130f5.jpg"
+        }
+      ],
+      "school": "纽约大学",
+      "schools": [
+        {
+          "school": "纽约大学",
+          "profession": "视觉艺术管理",
+          "degree": 2
+        },
+        {
+          "school": "加利福尼亚大学圣迭戈分校",
+          "profession": "艺术历史与品鉴",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "2年",
+      "worktime": "2年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "28k-40k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "海外内容运营",
+        "社区内容运营",
+        "UGC"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 235428233,
+      "trackable_token": "SpdStjbSOpgibI-vLz9rxWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=235428233&trackable_token=SpdStjbSOpgibI-vLz9rxWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 1702324,
+      "name": "关乃承",
+      "byname": "武当弟子",
+      "province": "上海",
+      "city": "上海",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "友塔游戏",
+      "position": "海外游戏运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外游戏运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/30047/9444_9_3ii2MUCPhZKbKc3z-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 12887006,
+          "company": "友塔游戏",
+          "v": "2020-05-01至今",
+          "description": "",
+          "position": "海外游戏运营",
+          "worktime": "3年3个月",
+          "start_date": "2020-05-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2020-05",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "友塔游戏",
+            "cid": 12887006,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/fb47a183930dc9202851714bf0e850b2.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=pg1b9v71"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "友塔游戏",
+        "position": "海外游戏运营",
+        "job_judge": 1,
+        "worktime": "3年3个月",
+        "is_former": 0
+      },
+      "companies": [
+        "友塔游戏"
+      ],
+      "large_comps": "友塔游戏",
+      "edu": [
+        {
+          "sid": 15160,
+          "school": "乔治·华盛顿大学",
+          "v": "2018-08至2020-05",
+          "description": "",
+          "department": "电能",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2018-08-01",
+          "start_date_ym": "2018-08",
+          "end_date_ym": "2020-05",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_2a813e485e0f4d810219c80a48bbd0d6.png"
+        }
+      ],
+      "school": "乔治·华盛顿大学",
+      "schools": [
+        {
+          "school": "乔治·华盛顿大学",
+          "profession": "电能",
+          "degree": 2
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "3年",
+      "worktime": "3年",
+      "job_preferences": {
+        "positions": [
+          "游戏运营"
+        ],
+        "regions": [
+          "上海"
+        ],
+        "province_cities": [
+          "上海"
+        ],
+        "salary": "25k-35k/月",
+        "prefessions": [
+          "游戏行业"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "游戏活动运营",
+        "英语",
+        "SLG"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 3111955,
+      "trackable_token": "IYapbziRNa-cMY0W9wl3jTEwUWWpE0B05ezBInQsUfQ6h-yricHywzGfEekUB00H",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=3111955&trackable_token=IYapbziRNa-cMY0W9wl3jTEwUWWpE0B05ezBInQsUfQ6h-yricHywzGfEekUB00H",
+      "viewed": 1,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 252389776,
+      "name": "秦健",
+      "byname": "廖化",
+      "province": "北京",
+      "city": "东城区",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "北京有爱互娱有限公司",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/454/7492_19_F4o6M3S8Bi1Q-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 18615,
+          "company": "北京有爱互娱有限公司",
+          "v": "2015-10-16至今",
+          "description": "待完善",
+          "position": "海外运营",
+          "worktime": "7年10个月",
+          "start_date": "2015-10-16",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2015-10",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "北京有爱互娱有限公司",
+            "cid": 18615,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/2a2d1976acffe6d53f9ea7905dac163a.jpg",
+            "share_url": "https://maimai.cn/company?webcid=a3sSRBf8"
+          }
+        },
+        {
+          "cid": 18615,
+          "company": "北京有爱互动有限公司",
+          "v": "2014-01-01至今",
+          "description": "对接合作运营商，策划游戏运营活动，与技术人员沟通并解决游戏bug，跟进《全民挂机》项目，且顺利在日本和东南亚地区上线。",
+          "position": "海外运营",
+          "worktime": "9年7个月",
+          "start_date": "2014-01-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2014-01",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "北京有爱互动有限公司",
+            "cid": 18615,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/2a2d1976acffe6d53f9ea7905dac163a.jpg",
+            "share_url": "https://maimai.cn/company?webcid=a3sSRBf8"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "北京有爱互娱有限公司",
+        "position": "海外运营",
+        "job_judge": 0,
+        "worktime": "7年10个月",
+        "is_former": 0
+      },
+      "companies": [
+        "北京有爱互娱有限公司",
+        "北京有爱互动有限公司"
+      ],
+      "large_comps": "北京有爱互娱有限公司,北京有爱互动有限公司",
+      "edu": [
+        {
+          "sid": 82,
+          "school": "哈尔滨理工大学",
+          "v": "2011-09至2015-01",
+          "description": "",
+          "department": "应用科学学院",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2011-09-01",
+          "start_date_ym": "2011-09",
+          "end_date_ym": "2015-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_05c8883813834447fa50bf3ad154086c.jpg"
+        }
+      ],
+      "school": "哈尔滨理工大学",
+      "schools": [
+        {
+          "school": "哈尔滨理工大学",
+          "profession": "应用科学学院",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "10年",
+      "worktime": "10年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [],
+      "resume_tags": []
+    },
+    {
+      "id": 235690953,
+      "trackable_token": "UJPPhBqIZwxDILspI-z2CWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=235690953&trackable_token=UJPPhBqIZwxDILspI-z2CWO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 1,
+      "active_state": "近1月活跃",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 1891374,
+      "name": "卡卡",
+      "byname": "宋兵乙",
+      "province": "北京",
+      "city": "北京",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "快手",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/30326/7589_73_8hklL4o7qYOhnPZF-a160",
+      "sdegree": "不限",
+      "degree": 255,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 10055,
+          "company": "快手",
+          "v": "2019-03-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "4年5个月",
+          "start_date": "2019-03-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2019-03",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "快手",
+            "cid": 10055,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/68c13b4f96af528eab286caa6b382f0d.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=RO3MvtaT"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "快手",
+        "position": "海外运营",
+        "job_judge": 0,
+        "worktime": "4年5个月",
+        "is_former": 0
+      },
+      "companies": [
+        "快手"
+      ],
+      "large_comps": "快手",
+      "edu": [],
+      "school": "未完善",
+      "schools": [],
+      "double_exposed": 0,
+      "work_time": "8年",
+      "worktime": "8年",
+      "job_preferences": {
+        "positions": [
+          "海外运营"
+        ],
+        "regions": [
+          "北京"
+        ],
+        "province_cities": [
+          "北京"
+        ],
+        "salary": "20k-25k/月",
+        "prefessions": [
+          "搜索引擎"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [],
+      "resume_tags": []
+    },
+    {
+      "id": 233600156,
+      "trackable_token": "ZRCeuGZBTMuexPeWk_KFfGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=233600156&trackable_token=ZRCeuGZBTMuexPeWk_KFfGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 10344613,
+      "name": "王畅",
+      "byname": "宋兵乙",
+      "province": "北京",
+      "city": "丰台区",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "亚洲创新集团",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/28152/8423_28_1drJj8Kqk1r8cALn-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 1796369,
+          "company": "亚洲创新集团",
+          "v": "2021-08-01至今",
+          "description": "直播活动 ",
+          "position": "海外运营",
+          "worktime": "2年",
+          "start_date": "2021-08-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2021-08",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "亚洲创新集团",
+            "cid": 1796369,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/792259ccd3b9f094230839a0b270a7b6.png",
+            "share_url": "https://maimai.cn/company?webcid=1fwD7WjGE"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "亚洲创新集团",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "2年",
+        "is_former": 0
+      },
+      "companies": [
+        "亚洲创新集团",
+        "百利天下教育"
+      ],
+      "large_comps": "亚洲创新集团,百利天下教育",
+      "edu": [
+        {
+          "sid": 147,
+          "school": "河北大学",
+          "v": "2016-01至2019-01",
+          "description": "",
+          "department": "英语语言文学",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2016-01-01",
+          "start_date_ym": "2016-01",
+          "end_date_ym": "2019-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_94c2bb921fbb7694acfcb33069acd80a.jpg"
+        },
+        {
+          "sid": 326,
+          "school": "兰州交通大学",
+          "v": "2012-01至2016-01",
+          "description": "",
+          "department": "英语",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2012-01-01",
+          "start_date_ym": "2012-01",
+          "end_date_ym": "2016-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_6832b5ef45544fbab505704439f9a30b.jpg"
+        }
+      ],
+      "school": "河北大学",
+      "schools": [
+        {
+          "school": "河北大学",
+          "profession": "英语语言文学",
+          "degree": 2
+        },
+        {
+          "school": "兰州交通大学",
+          "profession": "英语",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "4年",
+      "worktime": "4年",
+      "job_preferences": {
+        "positions": [
+          "海外运营"
+        ],
+        "regions": [
+          "北京"
+        ],
+        "province_cities": [
+          "北京"
+        ],
+        "salary": "14k-19k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "直播运营"
+      ],
+      "resume_tags": [
+        "直播运营",
+        "数据分析",
+        "数据分析"
+      ]
+    },
+    {
+      "id": 39446156,
+      "trackable_token": "LXg7YRkygnkHZSIDsCqX_F56B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=39446156&trackable_token=LXg7YRkygnkHZSIDsCqX_F56B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 90045936,
+      "name": "郝行健",
+      "byname": "简雍",
+      "province": "上海",
+      "city": "徐汇区",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "智明星通 ELEX",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/21533/1565_12_71dVaiL0WjWekdP9-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "age": 31,
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 9933,
+          "company": "智明星通 ELEX",
+          "v": "2019-09-01至今",
+          "description": "负责海外手游运营",
+          "position": "海外运营",
+          "worktime": "3年11个月",
+          "start_date": "2019-09-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2019-09",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "智明星通 ELEX",
+            "cid": 9933,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/a055c7c5c72f8966ebb604075650b3f9.png",
+            "share_url": "https://maimai.cn/company?webcid=dxJWxXLN"
+          }
+        },
+        {
+          "cid": 10720,
+          "company": "蓝港互动",
+          "v": "2015-07至2019-06",
+          "description": "负责黎明之光手游的整体运营工作",
+          "position": "运营经理",
+          "worktime": "3年11个月",
+          "start_date": "2015-07-01",
+          "judge": 0,
+          "is_leave": 1,
+          "start_date_ym": "2015-07",
+          "end_date_ym": "2019-06",
+          "company_info": {
+            "name": "蓝港互动",
+            "cid": 10720,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/51c5280b63ba81a054bd8a2bf613aa89.jpg",
+            "share_url": "https://maimai.cn/company?webcid=KNtDIUxt"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "智明星通 ELEX",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "3年11个月",
+        "is_former": 0
+      },
+      "companies": [
+        "智明星通 ELEX",
+        "蓝港互动"
+      ],
+      "large_comps": "智明星通 ELEX,蓝港互动",
+      "edu": [
+        {
+          "sid": 11,
+          "school": "东北大学",
+          "v": "2010-09至2015-06",
+          "description": "",
+          "department": "自动化",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2010-09-01",
+          "start_date_ym": "2010-09",
+          "end_date_ym": "2015-06",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_92794dd1776ac1c792e7f9fa1ecc7331.jpg"
+        }
+      ],
+      "school": "东北大学",
+      "schools": [
+        {
+          "school": "东北大学",
+          "profession": "自动化",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "8年",
+      "worktime": "8年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "游戏运营"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 209007806,
+      "trackable_token": "zmOlAaeU07Gcczsqpo5oWmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=209007806&trackable_token=zmOlAaeU07Gcczsqpo5oWmO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 2219188,
+      "name": "罗生门",
+      "byname": "昆仑弟子",
+      "province": "北京",
+      "city": "北京",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "字节跳动",
+      "position": "海外商业化运营负责人",
+      "positions": {
+        "matchs": [],
+        "name": "海外商业化运营负责人"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/34425/2875_62_66S8t4oObq7l9Epl-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 10993,
+          "company": "字节跳动",
+          "v": "2021-04-01至今",
+          "description": "",
+          "position": "海外商业化运营负责人",
+          "worktime": "2年4个月",
+          "start_date": "2021-04-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2021-04",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "字节跳动",
+            "cid": 10993,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/0df5f8759e180e40cc0738a365cb540e.png",
+            "share_url": "https://maimai.cn/company?webcid=jYZTTwkX"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "字节跳动",
+        "position": "海外商业化运营负责人",
+        "job_judge": 1,
+        "worktime": "2年4个月",
+        "is_former": 0
+      },
+      "companies": [
+        "字节跳动"
+      ],
+      "large_comps": "字节跳动",
+      "edu": [
+        {
+          "sid": 4,
+          "school": "北京大学",
+          "v": "2006-09至2010-06",
+          "description": "",
+          "department": "历史学",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2006-09-01",
+          "start_date_ym": "2006-09",
+          "end_date_ym": "2010-06",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_6b508f69e33a316f8e2541e79e7ea668.jpg"
+        }
+      ],
+      "school": "北京大学",
+      "schools": [
+        {
+          "school": "北京大学",
+          "profession": "历史学",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "13年",
+      "worktime": "13年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [
+          "北京"
+        ],
+        "province_cities": [
+          "北京"
+        ],
+        "salary": "",
+        "prefessions": [
+          "投资银行"
+        ]
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "电商运营",
+        "责任心",
+        "时间管理"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 231923729,
+      "trackable_token": "NMpmIQI3k5y1kKOV8wYuPGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=231923729&trackable_token=NMpmIQI3k5y1kKOV8wYuPGO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "近1周活跃",
+      "active_state_v1": "近1周活跃",
+      "active_state_v2": "",
+      "second": 185375,
+      "name": "手机用户",
+      "byname": "尼古拉斯赵四",
+      "province": "北京",
+      "city": "北京",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "快手",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/29876/165_17_2dCU9zaS7YFSOHvh-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 10055,
+          "company": "快手",
+          "v": "2019-07-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "4年1个月",
+          "start_date": "2019-07-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2019-07",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "快手",
+            "cid": 10055,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/68c13b4f96af528eab286caa6b382f0d.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=RO3MvtaT"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "快手",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "4年1个月",
+        "is_former": 0
+      },
+      "companies": [
+        "快手"
+      ],
+      "large_comps": "快手",
+      "edu": [
+        {
+          "sid": 446,
+          "school": "北京语言大学",
+          "v": "2015-01至2019-01",
+          "description": "",
+          "department": "英土复语",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2015-01-01",
+          "start_date_ym": "2015-01",
+          "end_date_ym": "2019-01",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_a9832b5f4e8d8804163fa5a493eb0879.jpg"
+        }
+      ],
+      "school": "北京语言大学",
+      "schools": [
+        {
+          "school": "北京语言大学",
+          "profession": "英土复语",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "4年",
+      "worktime": "4年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [],
+      "resume_tags": []
+    },
+    {
+      "id": 39066556,
+      "trackable_token": "46ii2PnqahgGwlguPQgv0156B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=39066556&trackable_token=46ii2PnqahgGwlguPQgv0156B4a7I4iN6LbPWLcnKbkKCaCElfp9YhxUBDuK4sEs",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 181989659,
+      "name": "王伟龙",
+      "byname": "懒羊羊",
+      "province": "上海",
+      "city": "上海",
+      "gender": 1,
+      "gender_str": "男",
+      "company": "游族网络",
+      "position": "资深海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "资深海外运营"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/2605/1434_60_sevssFVfCYnDx9-a160",
+      "sdegree": "硕士",
+      "degree": 2,
+      "major": "运营/编辑",
+      "age": 34,
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 6742,
+          "company": "游族网络",
+          "v": "2014-11-01至今",
+          "description": "这家伙比较懒",
+          "position": "资深海外运营",
+          "worktime": "8年9个月",
+          "start_date": "2014-11-01",
+          "judge": 0,
+          "is_leave": 0,
+          "start_date_ym": "2014-11",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "游族网络",
+            "cid": 6742,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/632d0a5c1722a32c6207f8c3f58f565d.jpeg",
+            "share_url": "https://maimai.cn/company?webcid=exNIjI3c"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "游族网络",
+        "position": "资深海外运营",
+        "job_judge": 0,
+        "worktime": "8年9个月",
+        "is_former": 0
+      },
+      "companies": [
+        "游族网络"
+      ],
+      "large_comps": "游族网络",
+      "edu": [
+        {
+          "sid": 15603,
+          "school": "巴塞罗那大学",
+          "v": "2012-09至2014-07",
+          "description": "",
+          "department": "网上营销及市场战略",
+          "sdegree": "硕士",
+          "degree": 2,
+          "judge": 0,
+          "start_date": "2012-09-01",
+          "start_date_ym": "2012-09",
+          "end_date_ym": "2014-07",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_65a1e65288ef843b0a4cce0943bd4068.jpg"
+        }
+      ],
+      "school": "巴塞罗那大学",
+      "schools": [
+        {
+          "school": "巴塞罗那大学",
+          "profession": "网上营销及市场战略",
+          "degree": 2
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "9年",
+      "worktime": "9年",
+      "job_preferences": {
+        "positions": [],
+        "regions": [],
+        "province_cities": [],
+        "salary": "",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "互联网运营",
+        "IT互联网"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 239408183,
+      "trackable_token": "vGauavxwbzxWfFWKQwDy4mO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=239408183&trackable_token=vGauavxwbzxWfFWKQwDy4mO79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "今日活跃",
+      "active_state_v1": "今日活跃",
+      "active_state_v2": "今日活跃",
+      "second": 12097,
+      "name": "李恩智",
+      "byname": "狐媚胡梅尔斯",
+      "province": "广东",
+      "city": "广州",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "欢聚集团",
+      "position": "海外运营",
+      "positions": {
+        "matchs": [],
+        "name": "海外运营"
+      },
+      "judge": 1,
+      "avatar": "https://i9.taou.com/maimai/p/34192/3428_55_3cz2IMAnjmMnmd3N-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 8257,
+          "company": "欢聚集团",
+          "v": "2021-02-01至今",
+          "description": "",
+          "position": "海外运营",
+          "worktime": "2年6个月",
+          "start_date": "2021-02-01",
+          "judge": 1,
+          "is_leave": 0,
+          "start_date_ym": "2021-02",
+          "end_date_ym": "",
+          "company_info": {
+            "name": "欢聚集团",
+            "cid": 8257,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/189ca5c57d3d2e92284ed6294100d4e5.jpg",
+            "share_url": "https://maimai.cn/company?webcid=wtzarLM1"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "欢聚集团",
+        "position": "海外运营",
+        "job_judge": 1,
+        "worktime": "2年6个月",
+        "is_former": 0
+      },
+      "companies": [
+        "欢聚集团"
+      ],
+      "large_comps": "欢聚集团",
+      "edu": [
+        {
+          "sid": 6876,
+          "school": "大邱大学",
+          "v": "2011-03至2016-02",
+          "description": "",
+          "department": "英语教育",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2011-03-01",
+          "start_date_ym": "2011-03",
+          "end_date_ym": "2016-02",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_c174c128e9ecc05a2e70658743795c5a.jpg"
+        }
+      ],
+      "school": "大邱大学",
+      "schools": [
+        {
+          "school": "大邱大学",
+          "profession": "英语教育",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "3年",
+      "worktime": "3年",
+      "job_preferences": {
+        "positions": [
+          "海外运营"
+        ],
+        "regions": [
+          "广东广州"
+        ],
+        "province_cities": [
+          "广州"
+        ],
+        "salary": "24k-30k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "海外用户运营",
+        "活动运营",
+        "韩语"
+      ],
+      "resume_tags": []
+    },
+    {
+      "id": 236424540,
+      "trackable_token": "VpprpZFrWR8spmH4WEoUF2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "detail_url": "https://maimai.cn/profile/detail?dstu=236424540&trackable_token=VpprpZFrWR8spmH4WEoUF2O79SDUz09gEE65uZeQ3uvAxrKMCc3u5lDuMKUz_A2r",
+      "viewed": 0,
+      "active_state": "",
+      "active_state_v1": "",
+      "active_state_v2": "",
+      "second": 27372111,
+      "name": "Cora",
+      "byname": "嵩山弟子",
+      "province": "广东",
+      "city": "广州",
+      "gender": 2,
+      "gender_str": "女",
+      "company": "Fordeal",
+      "position": "运营经理",
+      "positions": {
+        "matchs": [],
+        "name": "运营经理"
+      },
+      "judge": 0,
+      "avatar": "https://i9.taou.com/maimai/p/30946/9800_92_7nIreycfytSDcSzT-a160",
+      "sdegree": "本科",
+      "degree": 1,
+      "major": "运营/编辑",
+      "age": 30,
+      "origin": 0,
+      "candidate_status": 0,
+      "unprocessed": 1,
+      "exp": [
+        {
+          "cid": 1795841,
+          "company": "Fordeal",
+          "v": "2021-06至2022-06",
+          "description": "l 6年跨境电商经历，熟悉亚马逊，eBay，独立站和自营平台运营技巧；\n\nl 5年管理经验，擅长销售目标拆解，团队效率提升&团队激励、管理过10人的团队；\n\nl 擅长数据分析，日常对接财报，精通财务数据分析&月度利润优化；\n\n平时擅长问题总结，具备良好的团队合作意识，有小规模团队团队管理能力，抗压能力强\n",
+          "position": "运营经理",
+          "worktime": "1年",
+          "start_date": "2021-06-01",
+          "judge": 0,
+          "is_leave": 1,
+          "start_date_ym": "2021-06",
+          "end_date_ym": "2022-06",
+          "company_info": {
+            "name": "Fordeal",
+            "cid": 1795841,
+            "clogo": "https://i9.taou.com/maimai/c/offlogo/8ea4e6dfc424991bd42f1cf819de2bfb.JPG",
+            "share_url": "https://maimai.cn/company?webcid=4HUZyzcv"
+          }
+        }
+      ],
+      "current_company": {
+        "company": "Fordeal",
+        "position": "运营经理",
+        "job_judge": 0,
+        "worktime": "1年",
+        "is_former": 1
+      },
+      "companies": [
+        "Fordeal"
+      ],
+      "large_comps": "Fordeal",
+      "edu": [
+        {
+          "sid": 5452,
+          "school": "广东外语外贸大学南国商学院",
+          "v": "2012-09至2016-06",
+          "description": "",
+          "department": "商务英语",
+          "sdegree": "本科",
+          "degree": 1,
+          "judge": 0,
+          "start_date": "2012-09-01",
+          "start_date_ym": "2012-09",
+          "end_date_ym": "2016-06",
+          "school_url": "https://i9.taou.com/maimai/p/school/small_51a1baee3a2460859f53b3a60c84d35d.jpg"
+        }
+      ],
+      "school": "广东外语外贸大学南国商学院",
+      "schools": [
+        {
+          "school": "广东外语外贸大学南国商学院",
+          "profession": "商务英语",
+          "degree": 1
+        }
+      ],
+      "double_exposed": 0,
+      "work_time": "8年",
+      "worktime": "8年",
+      "job_preferences": {
+        "positions": [
+          "亚马逊运营经理",
+          "跨境电商运营经理"
+        ],
+        "regions": [
+          "广东广州"
+        ],
+        "province_cities": [
+          "广州"
+        ],
+        "salary": "28k-35k/月",
+        "prefessions": []
+      },
+      "recall_src": 0,
+      "tag_list": [
+        "品类运营",
+        "电商运营",
+        "活动运营"
+      ],
+      "resume_tags": [
+        "商品管理",
+        "商品管理",
+        "售前咨询",
+        "物流管理",
+        "团队管理",
+        "数据分析",
+        "数据分析",
+        "团队管理"
+      ]
+    }
+  ]
+  
