@@ -385,14 +385,6 @@ def meta_config():
                         {
                             "value":"在职-月内到岗",
                             "label":"在职-月内到岗"
-                        },
-                        {
-                            "value":"20-50K",
-                            "label":"20-50K"
-                        },
-                        {
-                            "value":"50K以上",
-                            "label":"50K以上"
                         }
                     ]
                 }
