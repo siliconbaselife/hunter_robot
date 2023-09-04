@@ -132,8 +132,7 @@ def update_job_config_service(job_id, touch_msg, filter_args):
     job_config['filter_args'] = filter_args
     return update_job_config(job_id, json.dumps(job_config, ensure_ascii=False))
 
-def update_task_config_service(manage_account_id, account_id, task_config):
-    task_config_dict = json.loads(task_config)
+def update_task_config_service(manage_account_id, account_id, task_config_dict):
     time_mount_new = []
     helloSum = task_config_dict['helloSum']
     for t in task_config_dict['timeMount']:
