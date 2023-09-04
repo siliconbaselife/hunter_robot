@@ -478,6 +478,10 @@ def meta_config():
                     "config_value":"job_tags",
                     "type":"multi_input"
                 },{
+                    "config_name":"负向关键词（例如招聘公司）",
+                    "config_value":"neg_words",
+                    "type":"multi_input"
+                },{
                     "config_name":"活跃时间",
                     "config_value":"active_threshold",
                     "type":"single_choice",
@@ -670,7 +674,13 @@ def meta_config():
                     "config_name":"关键词",
                     "config_value":"job_tags",
                     "type":"multi_input"
-                },{
+                },
+                {
+                    "config_name":"负向关键词（例如招聘公司）",
+                    "config_value":"neg_words",
+                    "type":"multi_input"
+                },
+                {
                     "config_name":"活跃时间",
                     "config_value":"active_threshold",
                     "type":"single_choice",
