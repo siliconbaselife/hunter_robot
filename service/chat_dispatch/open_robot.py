@@ -21,6 +21,8 @@ class OpenChatRobot(BaseChatRobot):
         need_hello = chat_round==0
         self._status = ChatStatus.NormalChat
 
+        model_response = None
+        model_judge_intent = None
         if need_hello:
             self._next_msg = self._manual_response('hello')
         else:
