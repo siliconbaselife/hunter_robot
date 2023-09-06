@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import deal_json_invaild
+from utils.utils import deal_json_invaild, str_is_none
 from dao.task_dao import *
 from service.chat_service import chat_service
 from service.task_service import generate_task, get_undo_task, update_touch_task, friend_report_service
@@ -287,7 +287,12 @@ def candidate_result_api():
 
     cv_addr = None
     if len(request.files.keys())>0:
-        cv_filename = f'cv_{account_id}_{job_id}_{candidate_id}_{name}.pdf'
+        filename = request.form.get('filename', None)
+        if str_is_none(filename):
+            ext_name = 'pdf'
+        else:
+            ext_name = filename.split('.')[-1]
+        cv_filename = f'cv_{account_id}_{job_id}_{candidate_id}_{name}.{ext_name}'
         cv_file = request.files['cv'].read()
         cv_addr = generate_thumbnail(cv_filename, cv_file)
     if phone:
