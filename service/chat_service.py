@@ -9,7 +9,8 @@ logger = get_logger(config['log']['log_file'])
 __chat_dispatcher = {
     'base_common_chat': BaseChatRobot,
     'maimai_common_chat': MaimaiRobot,
-    'maimai_simple_chat': MaimaiSimpleRobot
+    'maimai_simple_chat': MaimaiSimpleRobot,
+    'open_chat': OpenChatRobot
 }
 
 def chat_service(account_id, job_id, candidate_id, robot_api, page_history_msg, db_history_msg, source):
