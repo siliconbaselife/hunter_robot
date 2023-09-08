@@ -191,8 +191,11 @@ class BaseChatRobot(object):
         return is_first_msg, has_system_msg, user_msg_useless, user_ask, chat_round, has_contact
 
     def _init_msgs(self, page_history_msg, db_history_msg):
-        assert page_history_msg and page_history_msg[-1]['speaker']!='robot', f'page_history_msg empty or last speaker not user: {page_history_msg}'
+        assert page_history_msg, f'page_history_msg empty {page_history_msg}'
+        if page_history_msg[-1]['speaker']!='robot':
+            logger.info(f"WARNING: _init_msgs got page history msg last speaker not user or system: {page_history_msg}")
         merge_user_msg = ''
+        has_user_msg = False
         last_user_time = None
         ## find last user msg and system msg and parse results from msg
         parse_dict_list = []
@@ -206,6 +209,7 @@ class BaseChatRobot(object):
             if cur_item['speaker']=='system':
                 system_msgs.append(copy.deepcopy(cur_item))
                 continue
+            has_user_msg = True
             if last_user_time is None and 'time' in cur_item:
                 last_user_time = format_time(datetime.fromtimestamp(cur_item['time']/1000))
             filter_msg, parse_dict = self._msg_filter(cur_item.get('msg', ''))
@@ -234,11 +238,12 @@ class BaseChatRobot(object):
             self._msg_list = page_history_msg
         else:
             self._msg_list = db_history_msg
-            self._msg_list.append({
-                'speaker': 'user',
-                'msg': merge_user_msg,
-                'time': last_user_time
-            })
+            if has_user_msg:
+                self._msg_list.append({
+                    'speaker': 'user',
+                    'msg': merge_user_msg,
+                    'time': last_user_time
+                })
             self._msg_list+= self._last_system_msgs
 
     def _calc_chat_round(self):
