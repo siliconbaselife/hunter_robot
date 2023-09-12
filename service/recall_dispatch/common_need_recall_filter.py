@@ -2,7 +2,7 @@ import json
 import time
 from utils.log import get_logger
 from utils.config import config
-from task_service import get_job_by_id_service
+from service.task_service import get_job_by_id_service
 
 logger = get_logger(config['log']['log_file'])
 
