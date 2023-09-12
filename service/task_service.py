@@ -47,7 +47,8 @@ def re_org_task(config_data, today_sub_task_log):
             res.append(r_job)
     return res
 
-
+def get_job_by_id_service(job_id):
+    return get_job_by_id(job_id)
 
 def get_undo_task(account_id):
     #取当天任务

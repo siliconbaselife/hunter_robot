@@ -60,16 +60,18 @@ def maimai_autoload_filter(candidate_info, job_res):
             if l in e_c:
                 location_ok = True  
 
-    job_ok = False
-    for jt in job_tags:
-        if jt in candidate_info['major']:
-            job_ok = True
-        for w in candidate_info['work']:
-            if jt in w['position']:
+    job_ok = True
+    if 'job_tags' in filter_args:
+        job_ok = False
+        for jt in job_tags:
+            if jt in candidate_info['major']:
                 job_ok = True
-        for ep in candidate_info['exp_positon_name']:
-            if jt in ep:
-                job_ok = True
+            for w in candidate_info['work']:
+                if jt in w['position']:
+                    job_ok = True
+            for ep in candidate_info['exp_positon_name']:
+                if jt in ep:
+                    job_ok = True
 
     
            

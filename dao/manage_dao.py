@@ -13,9 +13,13 @@ sql_dict = {
     "my_job_list_db": "select job_id, job_name, share, job_config, platform_type from job where manage_account_id='{}'",
     "my_account_list_db": "select account_id, platform_type, description, jobs, task_config from account where manage_account_id='{}'",
     "account_config_update_db": "update account set task_config='{}',jobs='{}' where manage_account_id='{}' and account_id='{}'",
-    "update_job_config": "update job set job_config='{}' where job_id='{}'"
+    "update_job_config": "update job set job_config='{}' where job_id='{}'",
+    "manage_config":"select config from manage_account where manage_account_id={}"
 }
     
+def get_manage_config_db(manage_account_id):
+    return dbm.query(sql_dict['manage_config'].format(manage_account_id))[0][0]
+
 def login_check_db(user_name):
     return dbm.query(sql_dict['login_check'].format(user_name))
 

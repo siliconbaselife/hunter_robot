@@ -138,6 +138,7 @@ CREATE TABLE IF NOT EXISTS `manage_account`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `manage_account_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+alter table manage_account add `config` varchar(512) NOT NULL DEFAULT "" COMMENT '账户配置' after `desc`;
 
 
 

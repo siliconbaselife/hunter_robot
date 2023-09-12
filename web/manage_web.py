@@ -24,6 +24,7 @@ logger = get_logger(config['log']['log_file'])
 
 key = 11
 
+
 @manage_web.route("/recruit/candidate/list", methods=['GET'])
 @web_exception_handler
 def candidate_list_web():
@@ -72,11 +73,18 @@ def register_job_api():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    # manage_account_id = request.json['manage_account_id']
+    
+    ##给字段设定默认值
+    share = 0
+    job_config['filter_config'] = config['job_register'][platform_type]["filter_config"]
+    job_config['chat_config'] = config['job_register'][platform_type]["chat_config"]
+    job_config['recall_config'] = config['job_register'][platform_type]["recall_config"]
+    manage_config = json.loads(get_manage_config_service(manage_account_id))
+    job_config['group_msg'] = manage_config['group_msg']
+
     if job_config is not None:
         job_config = json.dumps(job_config, ensure_ascii=False)
-    ##todo
-    share = 0
+
     logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id}')
     job_id = f'job_{platform_type}_{platform_id}'
     register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config, share, manage_account_id)

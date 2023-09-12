@@ -21,7 +21,7 @@ def boss_autoload_filter(candidate_info, job_res):
     age_range = (filter_args['age_range'][0], filter_args['age_range'][1])
     min_degree = filter_args['min_degree']
     location = filter_args['location']
-    job_tags =  filter_args['job_tags']
+    
     threshold = int(filter_args['active_threshold']) * 60
     school_threshold = filter_args['school']
 
@@ -57,22 +57,26 @@ def boss_autoload_filter(candidate_info, job_res):
         else:
             school_ok = True
 
+    has_wish = True
+    has_experience = True
+    if 'job_tags' in filter_args:
+        job_tags =  filter_args['job_tags']
 
-    has_wish = False
-    for tag in job_tags:
-        if tag in exp_position:
-            has_wish = True
-            break
-
-    has_experience = False
-    for item in candidate_info['work']:
-        if has_experience:
-            break
-        judge_str = item['position']+item['responsibility']+item['emphasis']+item.get('department', '')
+        has_wish = False
         for tag in job_tags:
-            if tag in judge_str:
-                has_experience = True
+            if tag in exp_position:
+                has_wish = True
                 break
+
+        has_experience = False
+        for item in candidate_info['work']:
+            if has_experience:
+                break
+            judge_str = item['position']+item['responsibility']+item['emphasis']+item.get('department', '')
+            for tag in job_tags:
+                if tag in judge_str:
+                    has_experience = True
+                    break
 
     judge_result = {
         'judge': age_ok and degree_ok and location_ok and (has_experience or has_wish) and is_active and school_ok and neg_filter_ok,
