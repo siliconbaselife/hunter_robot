@@ -14,7 +14,7 @@ sql_dict = {
     "my_account_list_db": "select account_id, platform_type, description, jobs, task_config from account where manage_account_id='{}'",
     "account_config_update_db": "update account set task_config='{}',jobs='{}' where manage_account_id='{}' and account_id='{}'",
     "update_job_config": "update job set job_config='{}' where job_id='{}'",
-    "manage_config":"select config from manage_account where manage_account_id={}"
+    "manage_config":"select config from manage_account where manage_account_id='{}'"
 }
     
 def get_manage_config_db(manage_account_id):
