@@ -78,6 +78,7 @@ def register_job_api():
 
     ##给字段设定默认值
     share = 0
+    job_config = {}
     job_config['filter_config'] = config['job_register'][platform_type]["filter_config"]
     job_config['chat_config'] = config['job_register'][platform_type]["chat_config"]
     job_config['recall_config'] = config['job_register'][platform_type]["recall_config"]
