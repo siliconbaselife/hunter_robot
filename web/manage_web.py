@@ -74,7 +74,7 @@ def register_job_api():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     
-    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id}')
+    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {manage_account_id}')
 
     ##给字段设定默认值
     share = 0
@@ -84,6 +84,8 @@ def register_job_api():
     manage_config = json.loads(get_manage_config_service(manage_account_id))
     job_config['group_msg'] = manage_config['group_msg']
 
+
+    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id}')
     if job_config is not None:
         job_config = json.dumps(job_config, ensure_ascii=False)
     
