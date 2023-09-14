@@ -37,8 +37,9 @@ def boss_autoload_filter(candidate_info, job_res):
         if l in candidate_info['exp_location']:
             location_ok = True
     exp_position = candidate_info['exp_position']
-           
-    is_active = (int(time.time()) - int(candidate_info['active_time'])) < threshold
+
+    is_active = True 
+    # is_active = (int(time.time()) - int(candidate_info['active_time'])) < threshold
 
     school_ok = False
     for edu in candidate_info['education']:
@@ -53,7 +54,7 @@ def boss_autoload_filter(candidate_info, job_res):
 
     has_wish = True
     has_experience = True
-    if 'job_tags' in filter_args and not str_is_none(filter_args['job_tags']):
+    if 'job_tags' in filter_args and filter_args['job_tags'] != "":
         job_tags =  filter_args['job_tags']
 
         has_wish = False
@@ -73,7 +74,7 @@ def boss_autoload_filter(candidate_info, job_res):
                     break
 
     neg_filter_ok = True
-    if 'neg_words' in filter_args and not str_is_none(filter_args['neg_words']):
+    if 'neg_words' in filter_args and filter_args['neg_words'] != "":
         neg_words = filter_args['neg_words']
         for n in neg_words:
             for w in candidate_info['work']:
