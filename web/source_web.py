@@ -126,27 +126,27 @@ def candidate_filter_api():
         'touch': False
     }
     candidate_id, candidate_name = "", ""
-    try:
-        candidate_info = preprocess(account_id, raw_candidate_info)
+    # try:
+    candidate_info = preprocess(account_id, raw_candidate_info)
 
-        candidate_id, candidate_name, age, degree, location, position,active_time = candidate_info['id'], candidate_info['name'], candidate_info['age'],\
-                                                                        candidate_info['degree'], candidate_info['exp_location'], candidate_info['exp_position'],candidate_info['active_time']
-        logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_id}, {candidate_name}, {age}, {degree}, {location}, {active_time}')
+    candidate_id, candidate_name, age, degree, location, position,active_time = candidate_info['id'], candidate_info['name'], candidate_info['age'],\
+                                                                    candidate_info['degree'], candidate_info['exp_location'], candidate_info['exp_position'],candidate_info['active_time']
+    logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_id}, {candidate_name}, {age}, {degree}, {location}, {active_time}')
 
-        if not query_candidate_exist(candidate_id):
-            candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)
-            new_candidate_db(candidate_id, candidate_name, age, degree, location, position, candidate_info_json)
-        filter_result = candidate_filter(job_id, candidate_info)
-        # filter_result = judge_and_update_force(account_id, filter_result)
-        to_touch = filter_result['judge']
-        ret_data = {
-            'touch': to_touch
-        }
-        logger.info(f'candidate filter {account_id}, {job_id}, {candidate_info}: {filter_result}')
-    except BaseException as e:
-        logger.info(f'candidate filter request {account_id} {job_id} {candidate_id}, {candidate_name} failed for {e}, {traceback.format_exc()}')
-        with open(f'test/fail/{candidate_id}_{candidate_name}.json', 'w') as f:
-            f.write(json.dumps(raw_candidate_info, indent=2, ensure_ascii=False))
+    if not query_candidate_exist(candidate_id):
+        candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)
+        new_candidate_db(candidate_id, candidate_name, age, degree, location, position, candidate_info_json)
+    filter_result = candidate_filter(job_id, candidate_info)
+    # filter_result = judge_and_update_force(account_id, filter_result)
+    to_touch = filter_result['judge']
+    ret_data = {
+        'touch': to_touch
+    }
+    logger.info(f'candidate filter {account_id}, {job_id}, {candidate_info}: {filter_result}')
+    # except BaseException as e:
+    #     logger.info(f'candidate filter request {account_id} {job_id} {candidate_id}, {candidate_name} failed for {e}, {traceback.format_exc()}')
+    #     with open(f'test/fail/{candidate_id}_{candidate_name}.json', 'w') as f:
+    #         f.write(json.dumps(raw_candidate_info, indent=2, ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
