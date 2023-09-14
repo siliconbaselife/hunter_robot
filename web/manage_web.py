@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import encrypt, decrypt, generate_random_digits
+from utils.utils import encrypt, decrypt, generate_random_digits,str_is_none
 from dao.task_dao import *
 from service.task_service import generate_task
 from service.manage_service import *
@@ -222,6 +222,8 @@ def job_update_api():
     job_id = request.json['job_id']
     touch_msg = request.json['touch_msg']
     filter_args = request.json['filter_args']
+    if 'neg_word' in filter_args and str_is_none(filter_args['neg_word']):
+        filter_args['neg_word'] = []
     logger.info(f'account_update_request:{job_id}, {touch_msg}, {filter_args}')
     ret = update_job_config_service(job_id, touch_msg, filter_args)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
