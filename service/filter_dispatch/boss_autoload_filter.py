@@ -1,7 +1,7 @@
 import json
 from .utils import degree_compare
 import time
-from utils.utils import is_211, is_985, get_degree_num
+from utils.utils import is_211, is_985, get_degree_num,str_is_none
 
 
 def boss_autoload_filter(candidate_info, job_res):
@@ -30,13 +30,7 @@ def boss_autoload_filter(candidate_info, job_res):
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
 
 
-    neg_filter_ok = True
-    if 'neg_words' in filter_args:
-        neg_words = filter_args['neg_words']
-        for n in neg_words:
-            for w in candidate_info['work']:
-                if n in w['company']:
-                    neg_filter_ok = False
+    
 
     location_ok = False
     for l in location:
@@ -59,7 +53,7 @@ def boss_autoload_filter(candidate_info, job_res):
 
     has_wish = True
     has_experience = True
-    if 'job_tags' in filter_args:
+    if 'job_tags' in filter_args and not str_is_none(filter_args['job_tags']):
         job_tags =  filter_args['job_tags']
 
         has_wish = False
@@ -77,6 +71,14 @@ def boss_autoload_filter(candidate_info, job_res):
                 if tag in judge_str:
                     has_experience = True
                     break
+
+    neg_filter_ok = True
+    if 'neg_words' in filter_args and not str_is_none(filter_args['neg_words']):
+        neg_words = filter_args['neg_words']
+        for n in neg_words:
+            for w in candidate_info['work']:
+                if n in w['company']:
+                    neg_filter_ok = False
 
     judge_result = {
         'judge': age_ok and degree_ok and location_ok and (has_experience or has_wish) and is_active and school_ok and neg_filter_ok,

@@ -84,7 +84,7 @@ def register_job_api():
     job_config['recall_config'] = config['job_register'][platform_type]["recall_config"]
     manage_config = json.loads(get_manage_config_service(manage_account_id))
     job_config['group_msg'] = manage_config['group_msg']
-
+    
 
     logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id}')
     if job_config is not None:

@@ -1,8 +1,9 @@
 import json
 import time
 from utils.config import config
-from utils.utils import is_211, is_985, get_degree_num
+from utils.utils import is_211, is_985, get_degree_num, str_is_none
 from utils.log import get_logger
+
 logger = get_logger(config['log']['log_file'])
 
 
@@ -25,13 +26,7 @@ def maimai_autoload_filter(candidate_info, job_res):
     active_threshold = int(filter_args['active_threshold']) * 60
     school_threshold = filter_args['school']
 
-    neg_filter_ok = True
-    if 'neg_words' in filter_args:
-        neg_words = filter_args['neg_words']
-        for n in neg_words:
-            for w in candidate_info['work']:
-                if n in w['company']:
-                    neg_filter_ok = False
+    
 
     is_active = (int(time.time()) - int(candidate_info['active_time'])) < active_threshold
     age_ok = candidate_info['age'] >= age_range[0] and candidate_info['age'] <= age_range[1]
@@ -61,7 +56,8 @@ def maimai_autoload_filter(candidate_info, job_res):
                 location_ok = True  
 
     job_ok = True
-    if 'job_tags' in filter_args:
+    
+    if 'job_tags' in filter_args and not str_is_none(filter_args['job_tags']):
         job_ok = False
         for jt in job_tags:
             if jt in candidate_info['major']:
@@ -73,7 +69,13 @@ def maimai_autoload_filter(candidate_info, job_res):
                 if jt in ep:
                     job_ok = True
 
-    
+    neg_filter_ok = True
+    if 'neg_words' in filter_args and not str_is_none(filter_args['neg_words']):
+        neg_words = filter_args['neg_words']
+        for n in neg_words:
+            for w in candidate_info['work']:
+                if n in w['company']:
+                    neg_filter_ok = False
            
     
 
