@@ -60,6 +60,8 @@ def maimai_autoload_filter(candidate_info, job_res):
     if 'job_tags' in filter_args and filter_args['job_tags'] != "":
         job_ok = False
         for jt in job_tags:
+            if str_is_none(jt):
+                continue
             if jt in candidate_info['major']:
                 job_ok = True
             for w in candidate_info['work']:
