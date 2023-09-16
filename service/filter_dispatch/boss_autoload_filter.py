@@ -59,6 +59,8 @@ def boss_autoload_filter(candidate_info, job_res):
 
         has_wish = False
         for tag in job_tags:
+            if str_is_none(tag):
+                continue
             if tag in exp_position:
                 has_wish = True
                 break
@@ -69,6 +71,8 @@ def boss_autoload_filter(candidate_info, job_res):
                 break
             judge_str = item['position']+item['responsibility']+item['emphasis']+item.get('department', '')
             for tag in job_tags:
+                if str_is_none(tag):
+                    continue
                 if tag in judge_str:
                     has_experience = True
                     break
@@ -77,6 +81,8 @@ def boss_autoload_filter(candidate_info, job_res):
     if 'neg_words' in filter_args and filter_args['neg_words'] != "":
         neg_words = filter_args['neg_words']
         for n in neg_words:
+            if str_is_none(n):
+                continue
             for w in candidate_info['work']:
                 if n in w['company']:
                     neg_filter_ok = False

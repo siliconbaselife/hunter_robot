@@ -73,6 +73,8 @@ def maimai_autoload_filter(candidate_info, job_res):
     if 'neg_words' in filter_args and filter_args['neg_words'] != "":
         neg_words = filter_args['neg_words']
         for n in neg_words:
+            if str_is_none(n):
+                continue
             for w in candidate_info['work']:
                 if n in w['company']:
                     neg_filter_ok = False
