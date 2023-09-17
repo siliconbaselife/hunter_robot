@@ -251,13 +251,13 @@ def task_update_api():
 @manage_web.route("/backend/manage/metaConfig", methods=['POST'])
 @web_exception_handler
 def meta_config():
-    # cookie_user_name = request.cookies.get('user_name', None)
-    # if cookie_user_name == None:
-    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    # else:
-    #     manage_account_id = decrypt(cookie_user_name, key)
-    # if not cookie_check_service(manage_account_id):
-    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     
     a = {
         "platform_type":["Boss", "Linkedin", "maimai"],
@@ -791,7 +791,7 @@ def meta_config():
             ]
         }]
         }
-    api_config = get_api_conifg("manage_test")
+    api_config = get_api_conifg(manage_account_id)
     for i in range(0, len(a["filter_config"])):
         a["filter_config"][i]["job_meta_config"].append({
             "config_name":"语言模型",
