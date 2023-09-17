@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 def str_is_none(str):
     return str == None or str == "" or str == "None" or str == "NULL" or  str == "NONE" or str == "Null"
@@ -84,3 +85,40 @@ print("解密后:", decrypted_text)
 
 def generate_random_digits(length):
     return ''.join(random.choice('0123456789') for _ in range(length))
+
+api_config = [
+    {
+        "label":"作业帮",
+        "value":"/vision/chat/receive/message/v1"
+    },{
+        "label":"民生银行",
+        "value":"/vision/chat/receive/message/minsheng/v1"
+    },{
+        "label":"滴滴客服",
+        "value":"/vision/chat/receive/message/unicom/v1"
+    },{
+        "label":"北京通用客服",
+        "value":"/vision/chat/receive/message/generic/v1"
+    },{
+        "label":"石家庄情感顾问",
+        "value":"/vision/chat/receive/message/emotional/v1"
+    },{
+        "label":"NLP算法工程师",
+        "value":"/vision/chat/receive/message/emotional/v1"
+    },{
+        "label":"remoly海外bd",
+        "value":"/vision/chat/receive/message/remoly/v1"
+    }
+]
+
+manage_account_dict = {
+    "jiajia.zhao": list(np.array(api_config).take([5])),
+    "manage_test": api_config,
+    "manage_test2": api_config,
+    "yao": list(np.array(api_config).take([0,2,4]))
+}
+
+def get_api_conifg(manage_account_id):
+    return manage_account_dict(manage_account_id)
+
+

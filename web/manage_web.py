@@ -4,7 +4,7 @@ from utils.decorator import web_exception_handler
 from utils.log import get_logger
 from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
-from utils.utils import format_time
+from utils.utils import format_time,get_api_conifg
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
@@ -247,9 +247,18 @@ def task_update_api():
 
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
+
 @manage_web.route("/backend/manage/metaConfig", methods=['POST'])
 @web_exception_handler
 def meta_config():
+    # cookie_user_name = request.cookies.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    
     a = {
         "platform_type":["Boss", "Linkedin", "maimai"],
         "filter_config":[{
@@ -782,6 +791,13 @@ def meta_config():
             ]
         }]
         }
-    
+    api_config = get_api_conifg(manage_account_id)
+    for i in range(0, len(a["filter_config"])):
+        a["filter_config"][i]["job_meta_config"].append({
+            "config_name":"语言模型",
+            "config_value":"robot_api",
+            "type":"single_choice",
+            "enum": api_config
+        })
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
 
