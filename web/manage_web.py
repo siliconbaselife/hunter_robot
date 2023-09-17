@@ -791,7 +791,7 @@ def meta_config():
             ]
         }]
         }
-    api_config = get_api_conifg(manage_account_id)
+    api_config = get_api_conifg("manage_test")
     for i in range(0, len(a["filter_config"])):
         a["filter_config"][i]["job_meta_config"].append({
             "config_name":"语言模型",
