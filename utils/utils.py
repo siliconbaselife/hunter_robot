@@ -119,6 +119,6 @@ manage_account_dict = {
 }
 
 def get_api_conifg(manage_account_id):
-    return manage_account_dict(manage_account_id)
+    return manage_account_dict[manage_account_id]
 
 
