@@ -792,12 +792,11 @@ def meta_config():
         }]
         }
     api_config = get_api_conifg(manage_account_id)
-    for i in range(0, len(a["filter_config"])):
-        a["filter_config"][i]["job_meta_config"].append({
-            "config_name":"语言模型",
-            "config_value":"robot_api",
-            "type":"single_choice",
-            "enum": api_config
-        })
+    a["filter_config"][0]["job_meta_config"].append({
+        "config_name":"语言模型",
+        "config_value":"robot_api",
+        "type":"single_choice",
+        "enum": api_config
+    })
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
 
