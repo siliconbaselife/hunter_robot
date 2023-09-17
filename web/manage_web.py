@@ -220,12 +220,13 @@ def job_update_api():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     job_id = request.json['job_id']
+    robot_api = request.json.get('robot_api', "")
     touch_msg = request.json['touch_msg']
     filter_args = request.json['filter_args']
     if 'neg_word' in filter_args and str_is_none(filter_args['neg_word']):
         filter_args['neg_word'] = []
-    logger.info(f'account_update_request:{job_id}, {touch_msg}, {filter_args}')
-    ret = update_job_config_service(job_id, touch_msg, filter_args)
+    logger.info(f'account_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api}')
+    ret = update_job_config_service(job_id, touch_msg, filter_args, robot_api)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 @manage_web.route("/backend/manage/taskUpdate", methods=['POST'])
