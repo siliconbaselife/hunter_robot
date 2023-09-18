@@ -84,7 +84,7 @@ def my_account_list_service(manage_account_id):
             "platform_type": a_d[1],
             "description": a_d[2],
             "jobs":jobs_ret,
-            "task_config": {} if a_d[4] is None or a_d[4] == "None" else json.loads(a_d[4])
+            "task_config": [] if a_d[4] is None or a_d[4] == "None" else json.loads(a_d[4])
         }
         ret_list.append(account)
     return ret_list
