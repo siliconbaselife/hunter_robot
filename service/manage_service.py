@@ -153,7 +153,9 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
     job_list = []
     for t in task_configs:
         job_list.append(t['jobID'])
-    return account_config_update_db(manage_account_id, account_id, json.dumps(task_configs,ensure_ascii=False), json.dumps(job_list, ensure_ascii=False))
+    task_str = json.dumps(task_configs,ensure_ascii=False)
+    task_str.replace('\r',',').replace('\n',',')
+    return account_config_update_db(manage_account_id, account_id, task_str, json.dumps(job_list, ensure_ascii=False))
 
 def get_manage_config_service(manage_account_id):
     return get_manage_config_db(manage_account_id)
