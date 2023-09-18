@@ -155,7 +155,7 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
         job_list.append(t['jobID'])
     task_str = json.dumps(task_configs,ensure_ascii=False)
     logger.info(f"test:{task_str}")
-    task_str.replace('\r',',').replace('\n',',')
+    task_str = task_str.replace('\r',',').replace('\n',',')
     logger.info(f"test:{task_str}")
     return account_config_update_db(manage_account_id, account_id, task_str, json.dumps(job_list, ensure_ascii=False))
 
