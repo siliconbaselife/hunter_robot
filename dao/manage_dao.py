@@ -9,7 +9,6 @@ sql_dict = {
     "login_check":"select manage_account_id,password from manage_account where manage_account_id='{}'",
     "jobs_query":"select jobs from account where account_id='{}'",
     "jobs_update":"update account set jobs='{}' where account_id='{}'",
-    "my_job_list_db": "select job_id, job_name, share, job_config from job where manage_account_id='{}'",
     "my_job_list_db": "select job_id, job_name, share, job_config, platform_type from job where manage_account_id='{}'",
     "my_account_list_db": "select account_id, platform_type, description, jobs, task_config from account where manage_account_id='{}'",
     "account_config_update_db": "update account set task_config='{}',jobs='{}' where manage_account_id='{}' and account_id='{}'",
