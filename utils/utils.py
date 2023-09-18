@@ -103,7 +103,7 @@ api_config = [
         "label":"石家庄情感顾问",
         "value":"/vision/chat/receive/message/emotional/v1"
     },{
-        "label":"NLP算法工程师",
+        "label":"NLP算法工程师-头条",
         "value":"/vision/chat/receive/message/emotional/v1"
     },{
         "label":"remoly海外bd",
