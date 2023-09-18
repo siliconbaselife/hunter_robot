@@ -128,7 +128,7 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api):
         job_config = {}
     else:
         job_config = json.loads(job_config_json)
-    job_config['touch_msg'] = touch_msg
+    job_config['touch_msg'] = touch_msg.replace('\\n',',')
     job_config['filter_args'] = filter_args
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False))
 
