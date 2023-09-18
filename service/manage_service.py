@@ -41,7 +41,8 @@ def my_job_list_service(manage_account_id):
             "job_name": j_d[1],
             "share": j_d[2],
             "job_config": job_config,
-            "platform_type":j_d[4]
+            "platform_type":j_d[4],
+            "robot_api":j_d[5]
         }
         ret_list.append(job)
     return ret_list
@@ -76,6 +77,7 @@ def my_account_list_service(manage_account_id):
                 "job_id": job_db[0],
                 "job_name": job_db[3],
                 "share": job_db[9],
+                "robot_api": job_db[10],
                 "job_config": {} if job_db[6] is None or job_db[6] == "None" else json.loads(job_db[6])
             }
             jobs_ret.append(job)
