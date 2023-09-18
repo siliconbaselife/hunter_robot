@@ -222,10 +222,12 @@ def job_update_api():
     job_id = request.json['job_id']
     robot_api = request.json.get('robot_api', "")
     touch_msg = request.json['touch_msg']
+    touch_msg = touch_msg.replace('\\n',',')
+    touch_msg = touch_msg.replace('\n',',')
     filter_args = request.json['filter_args']
     if 'neg_word' in filter_args and str_is_none(filter_args['neg_word']):
         filter_args['neg_word'] = []
-    logger.info(f'account_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api}')
+    logger.info(f'job_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api}')
     ret = update_job_config_service(job_id, touch_msg, filter_args, robot_api)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
