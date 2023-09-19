@@ -329,4 +329,4 @@ def candidate_result_api():
 @source_web.route("/recruit/candidate/statistic", methods=['POST'])
 @web_exception_handler
 def candidate_statistic():  
-    return
+    return Response(json.dumps(get_web_res_suc_with_data("test")))
