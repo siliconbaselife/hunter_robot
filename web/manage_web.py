@@ -806,3 +806,9 @@ def meta_config():
     # logger.info(f'test_  {a["filter_config"][0]["job_meta_config"]}')
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
 
+
+
+@manage_web.route("/backend/manage/getip", methods=['POST'])
+@web_exception_handler
+def get_ip():
+    return Response("111.193.189.140")
