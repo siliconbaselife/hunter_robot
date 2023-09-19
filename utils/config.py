@@ -13,7 +13,7 @@ config['db']['user'] = 'chat_user'
 config['db']['pwd'] = '1'
 
 config['log']['log_file'] = 'log/recurit_service.log'
-
+config['log']['db_log_file'] = 'log/db.log'
 config['task']['task_config_base'] = {
     "helloSum": 50,
     "taskType": "batchTouch",

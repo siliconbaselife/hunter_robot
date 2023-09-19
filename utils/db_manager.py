@@ -5,7 +5,7 @@ from threading import Lock
 from utils.config import config
 from utils.log import  get_logger
 
-logger = get_logger(config['log']['log_file'])
+logger = get_logger(config['log']['db_log_file'])
 
 class DBManager:
     def __init__(self, host, port, user, password, database):
