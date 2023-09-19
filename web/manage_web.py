@@ -222,8 +222,6 @@ def job_update_api():
     job_id = request.json['job_id']
     robot_api = request.json.get('robot_api', "")
     touch_msg = request.json['touch_msg']
-    touch_msg = touch_msg.replace('\\n',',')
-    touch_msg = touch_msg.replace('\n',',')
     filter_args = request.json['filter_args']
     if 'neg_word' in filter_args and str_is_none(filter_args['neg_word']):
         filter_args['neg_word'] = []

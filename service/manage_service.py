@@ -124,14 +124,27 @@ def candidate_list_service(job_id, start, limit):
     chat_sum = get_chats_num_by_job_id(job_id)[0][0]
     return chat_sum, res_chat_list
 
+def process(str_list):
+    ret = []
+    for s in str_list:
+        s = s.replace('\\n',',')
+        s = s.replace('\n',',')
+        ret.extend(s.split(','))
+    return ret
+
+
 def update_job_config_service(job_id, touch_msg, filter_args, robot_api):
     job_config_json = get_job_by_id(job_id)[0][6]
     if job_config_json == None or job_config_json == 'None' or job_config_json == 'NULL' or job_config_json == "":
         job_config = {}
     else:
         job_config = json.loads(job_config_json)
+    touch_msg = touch_msg.replace('\\n',',')
+    touch_msg = touch_msg.replace('\n',',')
     job_config['touch_msg'] = touch_msg
     job_config['filter_args'] = filter_args
+    job_config['filter_args']['job_tags'] = process(job_config['filter_args']['job_tags'])
+    job_config['filter_args']['neg_word'] = process(job_config['filter_args']['neg_word'])
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False))
 
 def update_task_config_service(manage_account_id, account_id, task_config_dict):
@@ -156,9 +169,9 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
     for t in task_configs:
         job_list.append(t['jobID'])
     task_str = json.dumps(task_configs,ensure_ascii=False)
-    logger.info(f"test:{task_str}")
+    # logger.info(f"test:{task_str}")
     task_str = task_str.replace('\\n',',')
-    logger.info(f"test:{task_str}")
+    # logger.info(f"test:{task_str}")
     return account_config_update_db(manage_account_id, account_id, task_str, json.dumps(job_list, ensure_ascii=False))
 
 def get_manage_config_service(manage_account_id):
