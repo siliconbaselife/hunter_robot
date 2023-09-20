@@ -779,7 +779,7 @@ def meta_config():
                 },
                 {
                     "config_name":"地域",
-                    "config_value":"location",
+                    "config_value":"locations",
                     "type":"input"
                 }
             ],
