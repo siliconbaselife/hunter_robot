@@ -111,11 +111,14 @@ api_config = [
     },{
         "label":"地平线自动驾驶感知算法工程师",
         "value":"/vision/chat/receive/message/drive/v1"
+    },{
+        "label":"海外销售岗",
+        "value":"/vision/chat/receive/message/overseas/v1"
     }
 ]
 
 manage_account_dict = {
-    "jiajia.zhao": list(np.array(api_config).take([5,7])),
+    "jiajia.zhao": list(np.array(api_config).take([5,7,8])),
     "manage_test": api_config,
     "manage_test2": api_config,
     "yao": list(np.array(api_config).take([0,2,4]))
