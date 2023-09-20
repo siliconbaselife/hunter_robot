@@ -15,7 +15,10 @@ def linkedin_preprocess(raw_candidate_info):
         age = 0
         degree = ""
         active = ""
-        exp_location = tmp['secondarySubtitle']['text']
+        if tmp['secondarySubtitle'] is not None:
+            exp_location = tmp['secondarySubtitle']['text']
+        else:
+            exp_location = ""
         exp_salary = ""
         position_name = tmp['primarySubtitle']['text']
         education = ""

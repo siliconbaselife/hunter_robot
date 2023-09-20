@@ -144,7 +144,7 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api):
     job_config['touch_msg'] = touch_msg
     job_config['filter_args'] = filter_args
     job_config['filter_args']['job_tags'] = process(job_config['filter_args']['job_tags'])
-    job_config['filter_args']['neg_word'] = process(job_config['filter_args']['neg_word'])
+    job_config['filter_args']['neg_words'] = process(job_config['filter_args']['neg_words'])
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False))
 
 def update_task_config_service(manage_account_id, account_id, task_config_dict):
