@@ -1,6 +1,7 @@
 from utils.db_manager import dbm
 from utils.config import config
 from utils.log import get_logger
+from utils.utils import deal_json_invaild
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
@@ -65,6 +66,7 @@ def query_account_type_db(account_id):
     return dbm.query(sql_dict['query_account_type'].format(account_id))[0][0]
 
 def new_candidate_db(candidate_id, candidate_name, age, degree, location, position, details):
+    details = deal_json_invaild(details)
     dbm.insert(sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details))
 
 def query_candidate_exist(candidate_id):
