@@ -147,6 +147,21 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api):
     job_config['filter_args']['neg_words'] = process(job_config['filter_args']['neg_words'])
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False))
 
+def delete_task(manage_account_id, account_id, job_id):
+    ret = get_jobs_task_by_id(account_id)
+    jobs = json.loads(ret[0])
+    for i in range(0, len(jobs)):
+        if job_id == jobs[i]:
+            jobs.pop(i)
+    task_config = json.loads(ret[1])
+    for i in range(0, len(task_config)):
+        if job_id == task_config[i]['jobID']:
+            task_config.pop(i)
+    return account_config_update_db(manage_account_id, account_id, json.dumps(task_config, ensure_ascii=False), json.dumps(jobs))
+    
+
+
+
 def update_task_config_service(manage_account_id, account_id, task_config_dict):
     time_mount_new = []
     helloSum = task_config_dict['helloSum']
