@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `job`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table job add manage_account_id varchar(100) NOT NULL DEFAULT "" COMMENT '管理账户';
 alter table job add share tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否公共job';
-
+alter table job add robot_template LONGTEXT NOT NULL comment "对话模板";
 
 alter table job add job_config varchar(512) NOT NULL DEFAULT "" COMMENT '岗位配置' after robot_api;
 {"group_msg":"beijing","filter_config":"common_custom_service_filter"}
