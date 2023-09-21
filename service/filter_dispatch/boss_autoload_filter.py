@@ -84,7 +84,7 @@ def boss_autoload_filter(candidate_info, job_res):
             if str_is_none(n):
                 continue
             for w in candidate_info['work']:
-                if n in w['company']:
+                if n in w['company'] or w['company'] in n:
                     neg_filter_ok = False
 
     judge_result = {

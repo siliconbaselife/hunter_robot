@@ -24,6 +24,8 @@ def deal_json_invaild(data):
     data = data.replace('"', r'\"')\
         .replace('&&testPassword1&&', '":"').replace('&&testPassword2&&','":').replace('$$testPassword$$', '","').replace('@@testPassword@@', '{"').replace('**testPassword**', '"}')
     # print(data)
+    data = data.replace("\'", "\"")
+    data = data.replace("\\'", "\"")
     return data
 
 

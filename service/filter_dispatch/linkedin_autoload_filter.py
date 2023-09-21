@@ -15,14 +15,14 @@ def linkedin_autoload_filter(candidate_info, job_res):
     if 'job_tags' in filter_args:
         job_ok = False
         for jt in job_tags:
-            if jt in exp_position:
+            if jt in exp_position or exp_position in jt:
                 job_ok = True
 
     neg_filter_ok = True
     if 'neg_words' in filter_args:
         neg_words = filter_args['neg_words']
         for n in neg_words:
-            if n in exp_position:
+            if n in exp_position or exp_position in n:
                 neg_filter_ok = False
 
                     
