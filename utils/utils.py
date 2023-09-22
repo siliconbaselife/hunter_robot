@@ -91,9 +91,8 @@ def generate_random_digits(length):
 api_config = [
     {
         "label": "自定义",
-        "value": ""
-    },
-    {
+        "value": "/vision/chat/receive/message/chat/v1"
+    },{
         "label":"作业帮",
         "value":"/vision/chat/receive/message/v1"
     },{

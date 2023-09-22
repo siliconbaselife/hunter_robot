@@ -1,12 +1,12 @@
 from utils.config import config
 from utils.log import  get_logger
 from utils.utils import format_time
-
+import json
 import requests
 from datetime import datetime
 from enum import Enum
 import copy
-
+from dao.task_dao import get_robot_template_by_job_id
 logger = get_logger(config['log']['log_file'])
 
 class ChatStatus(Enum):
@@ -40,7 +40,7 @@ class BaseChatRobot(object):
         self._sess_id = f'{account_id}_{job_id}_{candidate_id}'
         self._source = source
         self._robot_api = robot_api
-
+        self._job_id = job_id
         self._trivial_intent = config['chat']['trivial_intent']
         self._refuse_intent = config['chat']['refuse_intent']
         self._useless_msgs = [
@@ -292,6 +292,11 @@ class BaseChatRobot(object):
         }
         url = config['chat']['chat_url']
         url += self._robot_api
+
+        if self._robot_api == "/vision/chat/receive/message/chat/v1":
+            td = json.loads(get_robot_template_by_job_id(self._job_id))
+            data["template_data"] = td
+
         response = requests.post(url=url, json=data, timeout=30)
         if response.status_code!=200 or response.json()['status']!=1:
             logger.info(f"request chat algo {url} failed, data: {data}, return {response.status_code} {response.text}")

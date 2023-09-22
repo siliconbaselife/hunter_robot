@@ -36,13 +36,15 @@ def my_job_list_service(manage_account_id):
     for j_d in jobs_db:
         logger.info(f"error: {j_d[3]}")
         job_config = {} if j_d[3] == None or j_d[3] == "None" else json.loads(j_d[3])
+        robot_template =  {} if j_d[6] == None or j_d[6] == "None" else json.loads(j_d[6])
         job = {
             "job_id": j_d[0],
             "job_name": j_d[1],
             "share": j_d[2],
             "job_config": job_config,
             "platform_type":j_d[4],
-            "robot_api":j_d[5]
+            "robot_api":j_d[5],
+            "robot_template":robot_template
         }
         ret_list.append(job)
     return ret_list

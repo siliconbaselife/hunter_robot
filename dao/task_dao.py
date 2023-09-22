@@ -33,8 +33,12 @@ sql_dict = {
     "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt, job_id from chat where account_id='{}' and candidate_id in {} order by update_time desc",
     "recall_exec":"update chat set recall_cnt = recall_cnt + 1 where account_id='{}' and candidate_id='{}'",
     "add_friend_report":"update chat set added_friend=1 where account_id='{}' and candidate_id='{}'",
-    "get_job_id_in_chat":"select job_id from chat where account_id='{}' and candidate_id='{}'"
+    "get_job_id_in_chat":"select job_id from chat where account_id='{}' and candidate_id='{}'",
+    "get_robot_template_by_job_id":"select robot_template from job where job_id='{}'"
 }
+
+def get_robot_template_by_job_id(job_id):
+    return dbm.query(sql_dict['get_robot_template_by_job_id'].format(job_id))[0][0]
 
 def get_job_id_in_chat(account_id, candidate_id):
     return dbm.query(sql_dict['get_job_id_in_chat'].format(account_id, candidate_id))
