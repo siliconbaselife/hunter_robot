@@ -147,7 +147,8 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_t
     job_config['filter_args'] = filter_args
     job_config['filter_args']['job_tags'] = process_list(job_config['filter_args']['job_tags'])
     job_config['filter_args']['neg_words'] = process_list(job_config['filter_args']['neg_words'])
-    return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False))
+    robot_template_str = process_str(json.dumps(robot_template, ensure_ascii=False))
+    return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_str)
 
 def update_task_config_service(manage_account_id, account_id, task_config_dict):
     time_mount_new = []
