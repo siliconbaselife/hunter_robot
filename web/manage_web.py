@@ -249,6 +249,25 @@ def task_update_api():
 
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
+@manage_web.route("/backend/manage/deleteTask", methods=['POST'])
+@web_exception_handler
+def delete_task_api():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    # manage_account_id = "manage_test"
+    account_id = request.json['account_id']
+    job_id = request.json['job_id']
+    logger.info(f'task_update_request:{manage_account_id}, {account_id}, {job_id}')
+
+    ret = delete_task(manage_account_id, account_id, job_id)
+
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
 
 @manage_web.route("/backend/manage/metaConfig", methods=['POST'])
 @web_exception_handler
