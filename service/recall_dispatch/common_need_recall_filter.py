@@ -15,13 +15,13 @@ def get_msg(filter_result, job_already_recall_count, job_id):
     if recall_type == 'zp':
         if job_already_recall_count == 0:
             if filter_result == 'NULL' or filter_result == None or filter_result == 'None':
-                return "hi 亲, 您对我们感兴趣的话, hr会跟您详细沟通, 方便交换个联系方式或者简历吗?"
+                return "哈喽 哈喽 不知道看到消息了么？最近是在忙？方便看到消息回复一下么？我们做这个领域挺多年了，相信可以给你更好的帮助"
             else:
-                return "hi 亲，您的过往经验和我们岗位很相符呢，请问您方便交换个联系方式或者简历吗？"
+                return "哈喽 哈喽 不知道看到消息了么？最近是在忙？方便看到消息回复一下么？我们做这个领域挺多年了，相信可以给你更好的帮助"
         elif job_already_recall_count == 1:
-            return "hi 亲，近期有没有看机会的想法呢？我们有很多推荐成功的案例和经验可以给您分享呢"
+            return "hi 亲，您对我们感兴趣的话，方便交换个联系方式或者简历吗？咱们约个时间详细沟通一下，我可以给你分享客户详细的信息内容"
         elif job_already_recall_count == 2:
-            return "hi 亲，方不方便交换个联系方式，您有需要的时候随时联系我们啊？"
+            return "哈喽 亲 看给你发消息一直没有回复，是不感兴趣？其实除了这个客户，我们还有其他Top公司的机会，我也可以给你分享行业信息，大家交个朋友，认识交流一下，多个朋友多条路，你觉得呢？"
     elif recall_type == 'bd':
         if job_already_recall_count == 0:
             return "Hi,亲. 最近还很忙吗？我这边是提供海外人力解决方案的公司，如果您需要帮忙，欢迎随时与我联系哦~"
