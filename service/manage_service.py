@@ -36,13 +36,15 @@ def my_job_list_service(manage_account_id):
     for j_d in jobs_db:
         logger.info(f"error: {j_d[3]}")
         job_config = {} if j_d[3] == None or j_d[3] == "None" else json.loads(j_d[3])
+        robot_template =  {} if j_d[6] == None or j_d[6] == "None" else json.loads(j_d[6])
         job = {
             "job_id": j_d[0],
             "job_name": j_d[1],
             "share": j_d[2],
             "job_config": job_config,
             "platform_type":j_d[4],
-            "robot_api":j_d[5]
+            "robot_api":j_d[5],
+            "robot_template":robot_template
         }
         ret_list.append(job)
     return ret_list
@@ -124,28 +126,31 @@ def candidate_list_service(job_id, start, limit):
     chat_sum = get_chats_num_by_job_id(job_id)[0][0]
     return chat_sum, res_chat_list
 
-def process(str_list):
+def process_list(str_list):
     ret = []
     for s in str_list:
         s = s.replace('\\n',',')
         s = s.replace('\n',',')
         ret.extend(s.split(','))
     return ret
+def process_str(s):
+    s = s.replace('\\n',',')
+    s = s.replace('\n',',') 
+    return s
 
 
-def update_job_config_service(job_id, touch_msg, filter_args, robot_api):
+def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template):
     job_config_json = get_job_by_id(job_id)[0][6]
     if job_config_json == None or job_config_json == 'None' or job_config_json == 'NULL' or job_config_json == "":
         job_config = {}
     else:
         job_config = json.loads(job_config_json)
-    touch_msg = touch_msg.replace('\\n',',')
-    touch_msg = touch_msg.replace('\n',',')
-    job_config['touch_msg'] = touch_msg
+    job_config['touch_msg'] = process_str(touch_msg)
     job_config['filter_args'] = filter_args
-    job_config['filter_args']['job_tags'] = process(job_config['filter_args']['job_tags'])
-    job_config['filter_args']['neg_words'] = process(job_config['filter_args']['neg_words'])
-    return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False))
+    job_config['filter_args']['job_tags'] = process_list(job_config['filter_args']['job_tags'])
+    job_config['filter_args']['neg_words'] = process_list(job_config['filter_args']['neg_words'])
+    robot_template_str = process_str(json.dumps(robot_template, ensure_ascii=False))
+    return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_str)
 
 def delete_task(manage_account_id, account_id, job_id):
     ret = get_jobs_task_by_id(account_id)

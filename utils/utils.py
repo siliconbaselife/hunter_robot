@@ -90,6 +90,9 @@ def generate_random_digits(length):
 
 api_config = [
     {
+        "label": "自定义",
+        "value": "/vision/chat/receive/message/chat/v1"
+    },{
         "label":"作业帮",
         "value":"/vision/chat/receive/message/v1"
     },{
@@ -126,11 +129,11 @@ api_config = [
 ]
 
 manage_account_dict = {
-    "jiajia.zhao": list(np.array(api_config).take([5,7,8])),
-    "jiajia.zhao2": list(np.array(api_config).take([5,7,8])),
+    "jiajia.zhao": list(np.array(api_config).take([6,8,9])),
+    "jiajia.zhao2": list(np.array(api_config).take([6,8,9])),
     "manage_test": api_config,
     "manage_test2": api_config,
-    "yao": list(np.array(api_config).take([0,2,4]))
+    "yao": list(np.array(api_config).take([1,3,5]))
 }
 
 def get_api_conifg(manage_account_id):

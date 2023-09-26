@@ -223,10 +223,11 @@ def job_update_api():
     robot_api = request.json.get('robot_api', "")
     touch_msg = request.json['touch_msg']
     filter_args = request.json['filter_args']
+    robot_template = request.json.get('robot_template', "")
     if 'neg_words' in filter_args and str_is_none(filter_args['neg_words']):
         filter_args['neg_words'] = []
-    logger.info(f'job_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api}')
-    ret = update_job_config_service(job_id, touch_msg, filter_args, robot_api)
+    logger.info(f'job_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api},{robot_template}')
+    ret = update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 @manage_web.route("/backend/manage/taskUpdate", methods=['POST'])
