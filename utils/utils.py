@@ -90,53 +90,72 @@ def generate_random_digits(length):
 
 api_config = [
     {
-        "label": "自定义",
-        "value": "/vision/chat/receive/message/chat/v1"
-    },{
         "label":"作业帮",
-        "value":"/vision/chat/receive/message/v1"
+        "value":"/vision/chat/receive/message/v1",
+        "robot_template":""
     },{
         "label":"民生银行",
-        "value":"/vision/chat/receive/message/minsheng/v1"
+        "value":"/vision/chat/receive/message/minsheng/v1",
+        "robot_template":""
     },{
         "label":"滴滴客服",
-        "value":"/vision/chat/receive/message/unicom/v1"
+        "value":"/vision/chat/receive/message/unicom/v1",
+        "robot_template":""
     },{
         "label":"北京通用客服",
-        "value":"/vision/chat/receive/message/generic/v1"
+        "value":"/vision/chat/receive/message/generic/v1",
+        "robot_template":""
     },{
         "label":"石家庄情感顾问",
-        "value":"/vision/chat/receive/message/emotional/v1"
+        "value":"/vision/chat/receive/message/emotional/v1",
+        "robot_template":""
     },{
         "label":"NLP算法工程师-头条",
-        "value":"/vision/chat/receive/message/emotional/v1"
+        "value":"/vision/chat/receive/message/emotional/v1",
+        "robot_template":""
     },{
         "label":"remoly海外bd",
-        "value":"/vision/chat/receive/message/remoly/v1"
+        "value":"/vision/chat/receive/message/remoly/v1",
+        "robot_template":""
     },{
         "label":"地平线自动驾驶感知算法工程师",
-        "value":"/vision/chat/receive/message/drive/v1"
+        "value":"/vision/chat/receive/message/drive/v1",
+        "robot_template":""
     },{
         "label":"海外销售岗",
-        "value":"/vision/chat/receive/message/overseas/v1"
+        "value":"/vision/chat/receive/message/overseas/v1",
+        "robot_template":""
     },{
         "label":"快手商家一线",
-        "value":"/vision/chat/receive/message/kwai_service/v1"
+        "value":"/vision/chat/receive/message/kwai_service/v1",
+        "robot_template":""
     },{
         "label":"快手消费者二线",
-        "value":"/vision/chat/receive/message/kwai_outbound/v1"
+        "value":"/vision/chat/receive/message/kwai_outbound/v1",
+        "robot_template":""
     }
 ]
 
 manage_account_dict = {
-    "jiajia.zhao": list(np.array(api_config).take([6,8,9])),
-    "jiajia.zhao2": list(np.array(api_config).take([6,8,9])),
+    "jiajia.zhao": list(np.array(api_config).take([5,7,8])),
+    "jiajia.zhao2": list(np.array(api_config).take([5,7,8])),
     "manage_test": api_config,
     "manage_test2": api_config,
-    "yao": list(np.array(api_config).take([1,3,5]))
+    "yao": list(np.array(api_config).take([0,2,4]))
 }
 
 def get_api_conifg(manage_account_id):
     return manage_account_dict[manage_account_id]
 
+def process_str(s):
+    s = s.replace('\\n',',')
+    s = s.replace('\n',',') 
+    return s
 
+def process_list(str_list):
+    ret = []
+    for s in str_list:
+        s = s.replace('\\n',',')
+        s = s.replace('\n',',')
+        ret.extend(s.split(','))
+    return ret

@@ -142,6 +142,15 @@ alter table manage_account add `config` varchar(512) NOT NULL DEFAULT "" COMMENT
 
 
 
+CREATE TABLE IF NOT EXISTS `llm_template`(
+   `manage_account_id` VARCHAR(100) NOT NULL COMMENT '账号',
+   `template_id` VARCHAR(100) NOT NULL COMMENT '模板id',
+   `template_name` VARCHAR(100) NOT NULL COMMENT '模板名字',
+   `template_config` LONGTEXT NOT NULL COMMENT '模板',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `template_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 
 

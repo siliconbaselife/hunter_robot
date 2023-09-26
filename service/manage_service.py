@@ -3,9 +3,20 @@ from dao.manage_dao import *
 import json
 import time
 from utils.config import config
-from utils.utils import format_time
+from utils.utils import format_time,process_list,process_str
 import copy
 from datetime import datetime
+
+
+def manage_process_api_config(manage_account_id, api_config):
+    template_list = get_llm_template_by_manage_id_db(manage_account_id)
+    for t in template_list:
+        api_config.append({
+            "label":t[0],
+            "value":"/vision/chat/receive/message/chat/v1",
+            "robot_template": t[1]
+        })
+    return
 
 def login_check_service(user_name, password):
     user_info = login_check_db(user_name)
@@ -126,20 +137,11 @@ def candidate_list_service(job_id, start, limit):
     chat_sum = get_chats_num_by_job_id(job_id)[0][0]
     return chat_sum, res_chat_list
 
-def process_list(str_list):
-    ret = []
-    for s in str_list:
-        s = s.replace('\\n',',')
-        s = s.replace('\n',',')
-        ret.extend(s.split(','))
-    return ret
-def process_str(s):
-    s = s.replace('\\n',',')
-    s = s.replace('\n',',') 
-    return s
 
 
-def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template):
+
+
+def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template_id):
     job_config_json = get_job_by_id(job_id)[0][6]
     if job_config_json == None or job_config_json == 'None' or job_config_json == 'NULL' or job_config_json == "":
         job_config = {}
@@ -149,8 +151,7 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_t
     job_config['filter_args'] = filter_args
     job_config['filter_args']['job_tags'] = process_list(job_config['filter_args']['job_tags'])
     job_config['filter_args']['neg_words'] = process_list(job_config['filter_args']['neg_words'])
-    robot_template_str = process_str(json.dumps(robot_template, ensure_ascii=False))
-    return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_str)
+    return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_id)
 
 def delete_task(manage_account_id, account_id, job_id):
     ret = get_jobs_task_by_id(account_id)
@@ -196,3 +197,24 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
 
 def get_manage_config_service(manage_account_id):
     return get_manage_config_db(manage_account_id)
+
+
+def template_update_service(manage_account_id, template_id, template_name, template_config):
+    template_config_p = process_str(json.loads(template_config))
+    return update_llm_template(template_name, template_config_p, template_id)
+
+def template_insert_service(manage_account_id, template_id, template_name, template_config):
+    template_config_p = process_str(json.loads(template_config))
+    return update_llm_template(manage_account_id, template_id, template_name, template_config_p)
+
+def template_list_service(manage_account_id):
+    db_ret = get_llm_template_by_manage_id_db(manage_account_id)
+    ret = []
+    for dr in  db_ret:
+        ret.append({
+            "template_id": dr[1],
+            "template_name": dr[0],
+            "template_config":dr[2]
+        })
+    return ret
+    

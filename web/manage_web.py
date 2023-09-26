@@ -223,11 +223,11 @@ def job_update_api():
     robot_api = request.json.get('robot_api', "")
     touch_msg = request.json['touch_msg']
     filter_args = request.json['filter_args']
-    robot_template = request.json.get('robot_template', "")
+    robot_template_id = request.json.get('robot_template', "")
     if 'neg_words' in filter_args and str_is_none(filter_args['neg_words']):
         filter_args['neg_words'] = []
-    logger.info(f'job_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api},{robot_template}')
-    ret = update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template)
+    logger.info(f'job_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api},{robot_template_id}')
+    ret = update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template_id)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 @manage_web.route("/backend/manage/taskUpdate", methods=['POST'])
@@ -268,6 +268,52 @@ def delete_task_api():
 
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
+@manage_web.route("/backend/manage/templateUpdate", methods=['POST'])
+@web_exception_handler
+def template_update_api():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    template_id = request.json['template_id']
+    template_name = request.json['template_name']
+    template_config = request.json['template_config']
+    logger.info(f'template_update:{manage_account_id},{template_id}, {template_name}, {template_config}')
+    ret = template_update_service(manage_account_id, template_id, template_name, template_config)
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
+@manage_web.route("/backend/manage/templateInsert", methods=['POST'])
+@web_exception_handler
+def template_update_api():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    template_id = request.json['template_id']
+    template_name = request.json['template_name']
+    template_config = request.json['template_config']
+    logger.info(f'template_insert:{manage_account_id},{template_id}, {template_name}, {template_config}')
+    ret = template_insert_service(manage_account_id, template_id, template_name, template_config)
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
+@manage_web.route("/backend/manage/templateList", methods=['POST'])
+@web_exception_handler
+def template_update_api():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    ret = template_list_service(manage_account_id)
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 @manage_web.route("/backend/manage/metaConfig", methods=['POST'])
 @web_exception_handler
@@ -813,6 +859,8 @@ def meta_config():
         }]
         }
     api_config = get_api_conifg(manage_account_id)
+    api_config = manage_process_api_config(manage_account_id, api_config)
+
     # logger.info(f'test_  {a["filter_config"][0]["job_meta_config"]}')
     for i in range(0, len(a["filter_config"])):
         a["filter_config"][i]["job_meta_config"].append({

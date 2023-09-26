@@ -7,6 +7,7 @@ from datetime import datetime
 from enum import Enum
 import copy
 from dao.task_dao import get_robot_template_by_job_id
+from dao.manage_dao import get_llm_config_by_id_db
 logger = get_logger(config['log']['log_file'])
 
 class ChatStatus(Enum):
@@ -300,7 +301,8 @@ class BaseChatRobot(object):
         url += self._robot_api
 
         if self._robot_api == "/vision/chat/receive/message/chat/v1":
-            td = json.loads(get_robot_template_by_job_id(self._job_id))
+            t_id = get_robot_template_by_job_id(self._job_id)
+            td = json.loads(get_llm_config_by_id_db(t_id))
             data["template_data"] = td
 
         response = requests.post(url=url, json=data, timeout=30)
