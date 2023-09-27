@@ -200,11 +200,11 @@ def get_manage_config_service(manage_account_id):
 
 
 def template_update_service(manage_account_id, template_id, template_name, template_config):
-    template_config_p = process_str(json.loads(template_config))
+    template_config_p = process_str(json.dumps(template_config, ensure_ascii=False))
     return update_llm_template(template_name, template_config_p, template_id)
 
 def template_insert_service(manage_account_id, template_id, template_name, template_config):
-    template_config_p = process_str(json.loads(template_config))
+    template_config_p = process_str(json.dumps(template_config, ensure_ascii=False))
     return update_llm_template(manage_account_id, template_id, template_name, template_config_p)
 
 def template_list_service(manage_account_id):
