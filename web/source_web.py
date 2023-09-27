@@ -42,8 +42,6 @@ def query_job_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
-
-
 @source_web.route("/recruit/account/query", methods=['POST'])
 @web_exception_handler
 def query_account_api():
