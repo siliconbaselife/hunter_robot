@@ -205,7 +205,7 @@ def template_update_service(manage_account_id, template_id, template_name, templ
 
 def template_insert_service(manage_account_id, template_id, template_name, template_config):
     template_config_p = process_str(json.dumps(template_config, ensure_ascii=False))
-    return update_llm_template(manage_account_id, template_id, template_name, template_config_p)
+    return insert_llm_template(manage_account_id, template_id, template_name, template_config_p)
 
 def template_list_service(manage_account_id):
     db_ret = get_llm_template_by_manage_id_db(manage_account_id)
