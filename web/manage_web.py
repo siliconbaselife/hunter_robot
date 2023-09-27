@@ -297,9 +297,10 @@ def template_insert_api():
     # if not cookie_check_service(manage_account_id):
     #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     manage_account_id = "manage_test"
-    template_id = request.json['template_id']
+    # template_id = request.json['template_id']
     template_name = request.json['template_name']
     template_config = request.json['template_config']
+    template_id = manage_account_id + "_" + template_name
     logger.info(f'template_insert:{manage_account_id},{template_id}, {template_name}, {template_config}')
     ret = template_insert_service(manage_account_id, template_id, template_name, template_config)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
