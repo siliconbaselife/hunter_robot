@@ -271,14 +271,13 @@ def delete_task_api():
 @manage_web.route("/backend/manage/templateUpdate", methods=['POST'])
 @web_exception_handler
 def template_update_api():
-    # cookie_user_name = request.cookies.get('user_name', None)
-    # if cookie_user_name == None:
-    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    # else:
-    #     manage_account_id = decrypt(cookie_user_name, key)
-    # if not cookie_check_service(manage_account_id):
-    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    manage_account_id = "manage_test"
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     template_id = request.json['template_id']
     template_name = request.json['template_name']
     template_config = request.json['template_config']
@@ -289,14 +288,13 @@ def template_update_api():
 @manage_web.route("/backend/manage/templateInsert", methods=['POST'])
 @web_exception_handler
 def template_insert_api():
-    # cookie_user_name = request.cookies.get('user_name', None)
-    # if cookie_user_name == None:
-    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    # else:
-    #     manage_account_id = decrypt(cookie_user_name, key)
-    # if not cookie_check_service(manage_account_id):
-    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    manage_account_id = "manage_test"
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     # template_id = request.json['template_id']
     template_name = request.json['template_name']
     template_config = request.json['template_config']
@@ -308,14 +306,13 @@ def template_insert_api():
 @manage_web.route("/backend/manage/templateList", methods=['POST'])
 @web_exception_handler
 def template_list_api():
-    # cookie_user_name = request.cookies.get('user_name', None)
-    # if cookie_user_name == None:
-    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    # else:
-    #     manage_account_id = decrypt(cookie_user_name, key)
-    # if not cookie_check_service(manage_account_id):
-    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    manage_account_id = "manage_test"
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     ret = template_list_service(manage_account_id)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
