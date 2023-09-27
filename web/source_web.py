@@ -156,7 +156,8 @@ def candidate_recall_api():
     account_id = request.json['accountID']
     # job_id = json.loads(get_account_jobs_db(account_id))[0]
     candidate_ids = request.json['candidateIDs']
-    logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}')
+    candidate_ids_read = request.get('candidateIDs_read', [])
+    logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}', {len(candidate_ids_read)})
     res_data = recall_msg(account_id, candidate_ids)
     for item in res_data:
         candidate_id = item['candidate_id']
