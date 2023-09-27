@@ -16,7 +16,7 @@ def manage_process_api_config(manage_account_id, api_config):
             "value":"/vision/chat/receive/message/chat/v1",
             "robot_template": t[1]
         })
-    return
+    return api_config
 
 def login_check_service(user_name, password):
     user_info = login_check_db(user_name)
