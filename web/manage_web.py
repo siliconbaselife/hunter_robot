@@ -287,7 +287,7 @@ def template_update_api():
 
 @manage_web.route("/backend/manage/templateInsert", methods=['POST'])
 @web_exception_handler
-def template_update_api():
+def template_insert_api():
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
