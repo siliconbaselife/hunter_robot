@@ -860,7 +860,7 @@ def meta_config():
         }]
         }
     api_config = get_api_conifg(manage_account_id)
-    api_config = manage_process_api_config(manage_account_id, api_config)
+    api_config_p = manage_process_api_config(manage_account_id, api_config)
 
     # logger.info(f'test_  {a["filter_config"][0]["job_meta_config"]}')
     for i in range(0, len(a["filter_config"])):

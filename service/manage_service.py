@@ -9,14 +9,15 @@ from datetime import datetime
 
 
 def manage_process_api_config(manage_account_id, api_config):
+    api_config_p = copy.deepcopy(api_config)
     template_list = get_llm_template_by_manage_id_db(manage_account_id)
     for t in template_list:
-        api_config.append({
+        api_config_p.append({
             "label":t[0],
             "value":"/vision/chat/receive/message/chat/v1",
             "robot_template": t[1]
         })
-    return api_config
+    return api_config_p
 
 def login_check_service(user_name, password):
     user_info = login_check_db(user_name)
