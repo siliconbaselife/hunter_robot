@@ -133,12 +133,20 @@ api_config = [
         "label":"快手消费者二线",
         "value":"/vision/chat/receive/message/kwai_outbound/v1",
         "robot_template":""
+    },{
+        "label":"aigc工程师",
+        "value":"/vision/chat/receive/message/aigc/v1",
+        "robot_template":""
+    },{
+        "label":"图像算法工程师",
+        "value":"/vision/chat/receive/message/cv/v1",
+        "robot_template":""
     }
 ]
 
 manage_account_dict = {
-    "jiajia.zhao": list(np.array(api_config).take([5,7,8])),
-    "jiajia.zhao2": list(np.array(api_config).take([5,7,8])),
+    "jiajia.zhao": list(np.array(api_config).take([5,7,8,11,12])),
+    "jiajia.zhao2": list(np.array(api_config).take([5,7,8,11,12])),
     "manage_test": api_config,
     "manage_test2": api_config,
     "yao": list(np.array(api_config).take([0,2,4]))
