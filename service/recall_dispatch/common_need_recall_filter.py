@@ -33,7 +33,7 @@ def get_msg(filter_result, job_already_recall_count, job_id):
     return "亲，方便交换个联系方式，咱们后续保持联系吗？"
 
 
-def common_need_recall_filter(chat_info):
+def common_need_recall_filter(chat_info, flag):
     candidate_id = chat_info[0]
     candidate_name = chat_info[1]
     job_id = chat_info[7]
@@ -46,24 +46,27 @@ def common_need_recall_filter(chat_info):
     if chat_info[2] == 'NULL' or chat_info[2] == None or chat_info[2] == 'None':
         contact_unget = True
     
-    ##是否过程里已经有了拒绝意图
-    if '拒绝' in str(chat_info[3]):
-        reject_intent = True
+    ##是否过程里已经有了拒绝意图 ? 思考一下是不是不用判断拒绝，还是要拿简历
+    # if '拒绝' in str(chat_info[3]):
+    #     reject_intent = True
 
     #召回几次后不再进行召回
     count_threshold = 3
     less_count = int(chat_info[6]) < count_threshold
 
     ##时间范围内的才进行召回
-    already_recall_count = int(chat_info[6])
-    if already_recall_count < 1:
-        time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 86400 and (int(time.time()) - int(chat_info[5].timestamp())) < 259200
+    if flag:
+        time_match = True
     else:
-        time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 259200 and (int(time.time()) - int(chat_info[5].timestamp())) < 604800
+        already_recall_count = int(chat_info[6])
+        if already_recall_count < 2:
+            time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 86400 and (int(time.time()) - int(chat_info[5].timestamp())) < 259200
+        else:
+            time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 172800 and (int(time.time()) - int(chat_info[5].timestamp())) < 604800
 
     filter_result = chat_info[4]
     logger.info(f"candidate_recall,{candidate_id},contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
-    if contact_unget and not reject_intent and time_match and less_count:
+    if contact_unget and time_match and less_count:
         recall_msg = get_msg(filter_result, already_recall_count, job_id)
         res = {
             "candidate_id": candidate_id,
