@@ -860,7 +860,7 @@ def meta_config():
         }]
         }
     api_config = get_api_conifg(manage_account_id)
-    api_config_p = manage_process_api_config(manage_account_id, api_config)
+    api_config = manage_process_api_config(manage_account_id, api_config)
 
     # logger.info(f'test_  {a["filter_config"][0]["job_meta_config"]}')
     for i in range(0, len(a["filter_config"])):
@@ -868,7 +868,7 @@ def meta_config():
             "config_name":"语言模型",
             "config_value":"robot_api",
             "type":"single_choice",
-            "enum": api_config_p
+            "enum": api_config
         })
     # logger.info(f'test_  {a["filter_config"][0]["job_meta_config"]}')
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))

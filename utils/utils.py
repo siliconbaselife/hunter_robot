@@ -1,5 +1,6 @@
 import random
 import numpy as np
+import copy
 
 def str_is_none(str):
     return str == None or str == "" or str == "None" or str == "NULL" or  str == "NONE" or str == "Null"
@@ -153,7 +154,7 @@ manage_account_dict = {
 }
 
 def get_api_conifg(manage_account_id):
-    return manage_account_dict[manage_account_id]
+    return copy.deepcopy(manage_account_dict[manage_account_id])
 
 def process_str(s):
     s = s.replace('\\n',',')
