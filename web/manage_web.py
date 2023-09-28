@@ -62,9 +62,10 @@ def register_job_api():
     # platform_id = request.json['platformID']
     platform_id = str(generate_random_digits(10))
     job_name = request.json['jobName']
-    jd = request.json.get('jobJD', None)
-    robot_api = request.json.get('robotApi',None)
+    jd = request.json.get('jobJD', "")
+    robot_api = request.json.get('robotApi',"")
     job_config = request.json.get('jobConfig', None)
+    robot_template = request.json.get('robotTemplate', "")
     # share = request.json['share']
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
@@ -74,7 +75,7 @@ def register_job_api():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     
-    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {manage_account_id}')
+    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {manage_account_id}, {robot_template}')
 
     ##给字段设定默认值
     share = 0
@@ -86,12 +87,12 @@ def register_job_api():
     job_config['group_msg'] = manage_config['group_msg']
 
 
-    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id}')
+    logger.info(f'new job request: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id},{robot_template}')
     if job_config is not None:
         job_config = json.dumps(job_config, ensure_ascii=False)
     
     job_id = f'job_{platform_type}_{platform_id}'
-    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config, share, manage_account_id)
+    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config, share, manage_account_id,robot_template)
     ret_data = {
         'jobID': job_id
     }

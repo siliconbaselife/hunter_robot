@@ -5,7 +5,7 @@ from utils.utils import deal_json_invaild
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id) values ('{}','{}','{}','{}','{}','{}','{}', {}, '{}')",
+    "register_job": "insert into job(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id,robot_template) values ('{}','{}','{}','{}','{}','{}','{}', {}, '{}','{}')",
     "query_job_id": "select job_id from job where platform_type = '{}' and platform_id= '{}'",
     # "query_job_requirement": "select requirement_config from job where job_id = {}",
     "query_job_robotapi": "select robot_api from job where job_id='{}'",
@@ -43,10 +43,10 @@ def get_robot_template_by_job_id(job_id):
 def get_job_id_in_chat(account_id, candidate_id):
     return dbm.query(sql_dict['get_job_id_in_chat'].format(account_id, candidate_id))
 
-def register_job_db(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id):
+def register_job_db(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id, robot_template):
     if share == None:
         share = 0
-    dbm.insert(sql_dict['register_job'].format(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id))
+    dbm.insert(sql_dict['register_job'].format(job_id, platform_type, platform_id, job_name, job_jd, robot_api, job_config, share, manage_account_id,robot_template))
     return job_id
 
 # def query_job_requirement_db(job_id):
