@@ -38,7 +38,10 @@ def boss_autoload_filter(candidate_info, job_res):
             location_ok = True
     exp_position = candidate_info['exp_position']
 
-    is_active = True 
+    if candidate_info['active'] == "刚刚活跃":
+        is_active = True 
+    else:
+        is_active = False
     # is_active = (int(time.time()) - int(candidate_info['active_time'])) < threshold
 
     school_ok = False

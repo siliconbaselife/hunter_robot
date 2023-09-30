@@ -25,16 +25,17 @@ def linkedin_preprocess(raw_candidate_info):
         
         work = []
         ## parse work
-        if '-' in tmp['primarySubtitle']['text']:
-            strs = tmp['primarySubtitle']['text'].split('-')
-            work.append({
-                'company': strs[0].strip(),
-                'position': strs[1].strip(),
-                'responsibility': strs[1].strip(),
-                'emphasis': "",
-                'start': "",
-                'end': ""
-            })
+        if tmp['primarySubtitle'] != None:
+            if '-' in tmp['primarySubtitle']['text']:
+                strs = tmp['primarySubtitle']['text'].split('-')
+                work.append({
+                    'company': strs[0].strip(),
+                    'position': strs[1].strip(),
+                    'responsibility': strs[1].strip(),
+                    'emphasis': "",
+                    'start': "",
+                    'end': ""
+                })
 
         active_time = ""
 
