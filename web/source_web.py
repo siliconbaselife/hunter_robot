@@ -157,7 +157,10 @@ def candidate_recall_api():
     # job_id = json.loads(get_account_jobs_db(account_id))[0]
     candidate_ids = request.json['candidateIDs']
     candidate_ids_read = request.json.get('candidateIDs_read', [])
-    ##todo encode
+    ## encode
+    candidate_ids = process_independent_encode_multi(account_id, candidate_ids)
+    candidate_ids_read = process_independent_encode_multi(account_id, candidate_ids_read)
+
     logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}', {len(candidate_ids_read)})
     res_data = recall_msg(account_id, candidate_ids, candidate_ids_read)
     for item in res_data:
@@ -173,7 +176,10 @@ def candidate_recall_api():
 def candidate_recall_result_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
-    ##todo decode?
+    
+    #encode
+    candidate_id = process_independent_encode(account_id, candidate_id)
+
     logger.info(f'candidate recall request {account_id}, {candidate_id}')
     res_data = recall_result(account_id, candidate_id)
     logger.info(f'candidate recall response {account_id}, {res_data}')
@@ -184,7 +190,9 @@ def candidate_recall_result_api():
 def candidate_friend_report_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
-    #todo encode
+    #encode
+    candidate_id = process_independent_encode(account_id, candidate_id)
+
     logger.info(f'friend_report_request {account_id}, {candidate_id}')
     friend_report_service(account_id, candidate_id)
     return Response(json.dumps(get_web_res_suc_with_data(), ensure_ascii=False))
@@ -194,8 +202,9 @@ def candidate_friend_report_api():
 def candidate_chat_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
+    #encode
+    candidate_id = process_independent_encode(account_id, candidate_id)
 
-    #todo encode
     ## job use first register job of account:
     job_id = request.json.get('jobID', "")
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
@@ -251,10 +260,11 @@ def candidate_chat_api():
 @source_web.route("/recruit/candidate/result", methods=['POST'])
 @web_exception_handler
 def candidate_result_api():
-    
     account_id = request.form['accountID']
     candidate_id = request.form['candidateID']
-    #todo decode?
+    #encode
+    candidate_id = process_independent_encode(account_id, candidate_id)
+
     ## job use first register job of account:
     job_id = request.form.get('jobID', None)
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":

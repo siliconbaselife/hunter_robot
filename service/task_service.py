@@ -6,6 +6,16 @@ from utils.utils import format_time
 import copy
 from datetime import datetime
 
+def process_independent_encode_multi(account_id, candidate_ids):
+    independent = get_independent_by_account_id(account_id)
+    ret = []
+    for c in candidate_ids:
+        if independent == 1:
+            ret.append(account_id + "_" + c)
+        else:
+            ret.append(c)
+    return ret
+
 def process_independent_encode(account_id, candidate_id):
     independent = get_independent_by_account_id(account_id)
     if independent == 1:
@@ -13,8 +23,8 @@ def process_independent_encode(account_id, candidate_id):
     else:
         return candidate_id
 
-def process_independent_decode(candidate_id):
-    return candidate_id.split('_')[-1]
+# def process_independent_decode(candidate_id):
+#     return
 
 def filter_time(time_percent, retain_sum):
     sum = 0
