@@ -11,7 +11,7 @@ from utils.decorator import web_exception_handler
 from utils.utils import deal_json_invaild, str_is_none
 from dao.task_dao import *
 from service.chat_service import chat_service
-from service.task_service import generate_task, get_undo_task, update_touch_task, friend_report_service
+from service.task_service import *
 from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
 from service.recall_service import recall_msg, recall_result
 from service.db_service import append_chat_msg
@@ -126,7 +126,9 @@ def candidate_filter_api():
     candidate_id, candidate_name = "", ""
     # try:
     candidate_info = preprocess(account_id, raw_candidate_info)
-
+    ##todo encode
+    candidate_info['id'] = process_independent_encode(account_id, candidate_info['id'])
+    
     candidate_id, candidate_name, age, degree, location, position,active_time = candidate_info['id'], candidate_info['name'], candidate_info['age'],\
                                                                     candidate_info['degree'], candidate_info['exp_location'], candidate_info['exp_position'],candidate_info['active_time']
     logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_id}, {candidate_name}, {age}, {degree}, {location}, {active_time}')
@@ -155,6 +157,7 @@ def candidate_recall_api():
     # job_id = json.loads(get_account_jobs_db(account_id))[0]
     candidate_ids = request.json['candidateIDs']
     candidate_ids_read = request.json.get('candidateIDs_read', [])
+    ##todo encode
     logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}', {len(candidate_ids_read)})
     res_data = recall_msg(account_id, candidate_ids, candidate_ids_read)
     for item in res_data:
@@ -170,6 +173,7 @@ def candidate_recall_api():
 def candidate_recall_result_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
+    ##todo decode?
     logger.info(f'candidate recall request {account_id}, {candidate_id}')
     res_data = recall_result(account_id, candidate_id)
     logger.info(f'candidate recall response {account_id}, {res_data}')
@@ -180,6 +184,7 @@ def candidate_recall_result_api():
 def candidate_friend_report_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
+    #todo encode
     logger.info(f'friend_report_request {account_id}, {candidate_id}')
     friend_report_service(account_id, candidate_id)
     return Response(json.dumps(get_web_res_suc_with_data(), ensure_ascii=False))
@@ -190,6 +195,7 @@ def candidate_chat_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
 
+    #todo encode
     ## job use first register job of account:
     job_id = request.json.get('jobID', "")
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
@@ -248,6 +254,7 @@ def candidate_result_api():
     
     account_id = request.form['accountID']
     candidate_id = request.form['candidateID']
+    #todo decode?
     ## job use first register job of account:
     job_id = request.form.get('jobID', None)
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":

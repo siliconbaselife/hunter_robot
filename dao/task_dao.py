@@ -34,8 +34,12 @@ sql_dict = {
     "recall_exec":"update chat set recall_cnt = recall_cnt + 1 where account_id='{}' and candidate_id='{}'",
     "add_friend_report":"update chat set added_friend=1 where account_id='{}' and candidate_id='{}'",
     "get_job_id_in_chat":"select job_id from chat where account_id='{}' and candidate_id='{}'",
-    "get_robot_template_by_job_id":"select robot_template from job where job_id='{}'"
+    "get_robot_template_by_job_id":"select robot_template from job where job_id='{}'",
+    "get_independent_by_account_id":"select independent from account where account_id='{}'"
 }
+
+def get_independent_by_account_id(account_id):
+    return dbm.query(sql_dict['get_independent_by_account_id'].format(account_id))[0][0]
 
 def get_robot_template_by_job_id(job_id):
     return dbm.query(sql_dict['get_robot_template_by_job_id'].format(job_id))[0][0]

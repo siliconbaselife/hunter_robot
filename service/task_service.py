@@ -6,7 +6,15 @@ from utils.utils import format_time
 import copy
 from datetime import datetime
 
+def process_independent_encode(account_id, candidate_id):
+    independent = get_independent_by_account_id(account_id)
+    if independent == 1:
+        return account_id + "_" + candidate_id
+    else:
+        return candidate_id
 
+def process_independent_decode(candidate_id):
+    return candidate_id.split('_')[-1]
 
 def filter_time(time_percent, retain_sum):
     sum = 0
