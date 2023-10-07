@@ -652,6 +652,10 @@ def meta_config():
                     "type":"multi_choice",
                     "enum": [
                         {
+                            "value":"无限制",
+                            "label":"无限制"
+                        },
+                        {
                             "value":"北京",
                             "label":"北京"
                         },
