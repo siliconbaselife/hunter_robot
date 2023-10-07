@@ -55,10 +55,10 @@ def common_need_recall_filter(chat_info, flag):
     less_count = int(chat_info[6]) < count_threshold
 
     ##时间范围内的才进行召回
+    already_recall_count = int(chat_info[6])
     if flag:
         time_match = True
     else:
-        already_recall_count = int(chat_info[6])
         if already_recall_count < 2:
             time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 86400 and (int(time.time()) - int(chat_info[5].timestamp())) < 259200
         else:
