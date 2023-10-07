@@ -65,7 +65,7 @@ def common_need_recall_filter(chat_info, flag):
             time_match = (int(time.time()) - int(chat_info[5].timestamp())) > 172800 and (int(time.time()) - int(chat_info[5].timestamp())) < 604800
 
     filter_result = chat_info[4]
-    logger.info(f"candidate_recall,{candidate_id},contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
+    logger.info(f"candidate_recall,{job_id},{candidate_id},contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
     if contact_unget and time_match and less_count:
         recall_msg = get_msg(filter_result, already_recall_count, job_id)
         res = {
