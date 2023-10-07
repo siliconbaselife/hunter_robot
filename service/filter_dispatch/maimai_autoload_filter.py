@@ -54,6 +54,9 @@ def maimai_autoload_filter(candidate_info, job_res):
         for e_c in  candidate_info['exp_location_dict']["cities"]:
             if l in e_c:
                 location_ok = True  
+    for l in location:
+        if l == '无限制':
+            location_ok = True
 
     job_ok = True
     
