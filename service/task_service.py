@@ -106,3 +106,14 @@ def generate_task(jobs):
 def friend_report_service(account_id, candidate_id):
     add_friend_report(account_id, candidate_id)
 
+def get_one_time_task_service(account_id):
+    db_ret = get_one_time_task_by_account_id(account_id)
+    ret = []
+    for d in db_ret:
+        ret.append({
+            "task_id": d[0],
+            "task_config":json.load(d[1])
+        })
+
+def update_one_time_status_service(status, id):
+    return update_one_time_status_by_id(status, id)

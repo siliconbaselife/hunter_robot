@@ -153,5 +153,14 @@ CREATE TABLE IF NOT EXISTS `llm_template`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 
-
+CREATE TABLE IF NOT EXISTS `one_time_task`(
+   `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `manage_account_id` VARCHAR(100) NOT NULL COMMENT '账号',
+   `account_id` varchar(60) NOT NULL COMMENT '账户唯一id',
+   `task_config` LONGTEXT COMMENT '任务配置',
+   `status` int unsigned NOT NULL DEFAULT 0 COMMENT '当前状态',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 

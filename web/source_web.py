@@ -340,7 +340,22 @@ def candidate_result_api():
 
 
 
+@source_web.route("/recruit/candidate/getOneTimeTask", methods=['POST'])
+@web_exception_handler
+def get_one_time_task():
+    account_id = request.json['accountID']
+    ret = get_one_time_task_service(account_id)
+    logger.info(f'get_one_time_task: {account_id}, {ret}')
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
+@source_web.route("/recruit/candidate/oneTimeTaskReport", methods=['POST'])
+@web_exception_handler
+def get_one_time_task():
+    task_id = request.json['task_id'] 
+    status = request.json['status'] 
+    ret = update_one_time_status_service(status, task_id)
+    logger.info(f'update_one_time_task_report: {task_id}, {status}')
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 
 @source_web.route("/recruit/candidate/statistic", methods=['POST'])

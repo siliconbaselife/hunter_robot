@@ -35,8 +35,15 @@ sql_dict = {
     "add_friend_report":"update chat set added_friend=1 where account_id='{}' and candidate_id='{}'",
     "get_job_id_in_chat":"select job_id from chat where account_id='{}' and candidate_id='{}'",
     "get_robot_template_by_job_id":"select robot_template from job where job_id='{}'",
-    "get_independent_by_account_id":"select independent from account where account_id='{}'"
+    "get_independent_by_account_id":"select independent from account where account_id='{}'",
+    "get_one_time_task_by_account_id":"select id,task_config from one_time_task where account_id='{}' and status = 0",
+    "update_one_time_status_by_id":"update one_time_task set status={} where id={}"
 }
+def update_one_time_status_by_id(status, id):
+    return dbm.update(sql_dict['update_one_time_status_by_id'].format(status, id))
+
+def get_one_time_task_by_account_id(account_id):
+    return dbm.query(sql_dict['get_one_time_task_by_account_id'].format(account_id))
 
 def get_independent_by_account_id(account_id):
     return dbm.query(sql_dict['get_independent_by_account_id'].format(account_id))[0][0]
