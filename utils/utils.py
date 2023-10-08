@@ -150,6 +150,7 @@ manage_account_dict = {
     "jiajia.zhao2": list(np.array(api_config).take([5,7,8,11,12])),
     "manage_test": api_config,
     "manage_test2": api_config,
+    "jane": list(np.array(api_config).take([5,7,8,11,12])),
     "yao": list(np.array(api_config).take([0,2,4]))
 }
 
