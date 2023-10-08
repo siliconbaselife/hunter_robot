@@ -350,7 +350,7 @@ def get_one_time_task():
 
 @source_web.route("/recruit/candidate/oneTimeTaskReport", methods=['POST'])
 @web_exception_handler
-def get_one_time_task():
+def update_one_time_task():
     task_id = request.json['task_id'] 
     status = request.json['status'] 
     ret = update_one_time_status_service(status, task_id)
