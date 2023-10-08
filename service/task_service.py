@@ -112,7 +112,7 @@ def get_one_time_task_service(account_id):
     for d in db_ret:
         ret.append({
             "task_id": d[0],
-            "task_config":json.load(d[1])
+            "task_config":json.loads(d[1])
         })
 
 def update_one_time_status_service(status, id):
