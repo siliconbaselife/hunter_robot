@@ -114,6 +114,7 @@ def get_one_time_task_service(account_id):
             "task_id": d[0],
             "task_config":json.loads(d[1])
         })
+    return ret
 
 def update_one_time_status_service(status, id):
     return update_one_time_status_by_id(status, id)
