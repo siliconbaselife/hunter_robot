@@ -155,7 +155,10 @@ manage_account_dict = {
 }
 
 def get_api_conifg(manage_account_id):
-    return copy.deepcopy(manage_account_dict[manage_account_id])
+    if manage_account_id in manage_account_dict:
+        return copy.deepcopy(manage_account_dict[manage_account_id])
+    else:
+        return []
 
 def process_str(s):
     s = s.replace('\\n',',')
