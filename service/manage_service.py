@@ -158,10 +158,12 @@ def delete_task(manage_account_id, account_id, job_id):
     for i in range(0, len(jobs)):
         if job_id == jobs[i]:
             jobs.pop(i)
+            break
     task_config = json.loads(ret[1])
     for i in range(0, len(task_config)):
         if job_id == task_config[i]['jobID']:
             task_config.pop(i)
+            break
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_config, ensure_ascii=False), json.dumps(jobs))
     
 
