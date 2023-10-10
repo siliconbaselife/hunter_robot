@@ -46,7 +46,8 @@ degree_dict = {
     "大专": 0,
     "高中": -1,
     "中专": -2,
-    "初中及以下": -3
+    "初中及以下": -3,
+    "中技": -4
 }
 def get_degree_num(degree_str):
     return degree_dict[degree_str]
@@ -151,7 +152,17 @@ manage_account_dict = {
     "manage_test": api_config,
     "manage_test2": api_config,
     "jane": list(np.array(api_config).take([5,7,8,11,12])),
-    "yao": list(np.array(api_config).take([0,2,4]))
+    "yao": list(np.array(api_config).take([0,2,4])),
+    "zjj.test1":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test2":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test3":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test4":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test5":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test6":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test7":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test8":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test9":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test10":list(np.array(api_config).take([5,7,8,11,12]))
 }
 
 def get_api_conifg(manage_account_id):
