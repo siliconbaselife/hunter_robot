@@ -8,7 +8,7 @@ from utils.utils import format_time,get_api_conifg
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import encrypt, decrypt, generate_random_digits,str_is_none
+from utils.utils import encrypt, decrypt, generate_random_digits,str_is_none, get_stat_id_dict
 from dao.task_dao import *
 from service.task_service import generate_task
 from service.manage_service import *
@@ -884,7 +884,13 @@ def meta_config():
 
 
 
-@manage_web.route("/backend/manage/getip", methods=['POST'])
+
+@manage_web.route("/backend/manage/statistic", methods=['GET'])
 @web_exception_handler
 def get_ip():
-    return Response("111.193.189.140")
+    manage_id = request.args.get('manage_id')
+    if manage_id not in get_stat_id_dict():
+        return Response(json.dumps(get_web_res_fail("统计账户错误"), ensure_ascii=False))
+    manage_account_list = get_stat_id_dict()[manage_id]
+    ret = get_stat_service(manage_account_list)
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))

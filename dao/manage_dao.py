@@ -18,14 +18,21 @@ sql_dict = {
     "get_llm_template_by_manage_id":"select template_name, template_id, template_config from llm_template where manage_account_id='{}'",
     "get_llm_config_by_id":"select template_config from llm_template where template_id='{}'",
     "update_llm_template":"update llm_template set template_name='{}',template_config='{}' where template_id='{}'",
-    "insert_llm_template":"insert into llm_template(manage_account_id, template_id, template_name, template_config) values ('{}', '{}', '{}', '{}')"
+    "insert_llm_template":"insert into llm_template(manage_account_id, template_id, template_name, template_config) values ('{}', '{}', '{}', '{}')",
+    "get_chat_count_by_job": "select date_format(`create_time`, '%Y-%m-%d'),count(1),sum(case contact when '' then 0 else 1 end) from chat where create_time > date_sub(curdate(), interval 7 day) and job_id='{}' group by date_format(`create_time`, '%Y-%m-%d')",
+    "get_job_name_by_id":"select job_name from job where job_id='{}'"
 }
+def get_job_name_by_id(job_id):
+    return dbm.query(sql_dict['get_job_name_by_id'].format(job_id))[0][0]
+
+def get_chat_count_by_job(job_id):
+    return dbm.query(sql_dict['get_chat_count_by_job'].format(job_id))[0]
 
 def update_llm_template(template_name, template_config, template_id):
-     return dbm.update(sql_dict['update_llm_template'].format(template_name, template_config, template_id))
+    return dbm.update(sql_dict['update_llm_template'].format(template_name, template_config, template_id))
 
 def insert_llm_template(manage_account_id, template_id, template_name, template_config):
-     return dbm.insert(sql_dict['insert_llm_template'].format(manage_account_id, template_id, template_name, template_config))
+    return dbm.insert(sql_dict['insert_llm_template'].format(manage_account_id, template_id, template_name, template_config))
 
 def get_llm_config_by_id_db(template_id):
     return  dbm.query(sql_dict['get_llm_config_by_id'].format(template_id))[0][0]

@@ -218,4 +218,33 @@ def template_list_service(manage_account_id):
             "template_config":dr[2]
         })
     return ret
-    
+
+
+def get_stat_service(manage_account_list):
+    final_ret = []
+    for ma in manage_account_list:
+        account_list = my_account_list_db(ma)
+        account_ret = []
+        for a_l in account_list:
+            job_ret = []
+            jobs = json.loads(a_l[3])
+            for j in jobs:
+                j_r = get_chat_count_by_job(j)
+                job_name = get_job_name_by_id(j)
+                job_ret.append({
+                    "岗位id": j,
+                    "岗位名称":job_name,
+                    "日期":j_r[0],
+                    "打招呼总数":j_r[1],
+                    "拿到联系方式总数":j_r[2]
+                })
+            account_ret.append({
+                "账号id": a_l[0],
+                "账号名称": a_l[2],
+                "账号平台": a_l[1],
+                "账号结果": job_ret
+            })        
+        final_ret.append({
+            "管理账户":ma,
+            "账号运行状态":account_ret
+        })

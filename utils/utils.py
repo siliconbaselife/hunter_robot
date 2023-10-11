@@ -165,6 +165,13 @@ manage_account_dict = {
     "zjj.test10":list(np.array(api_config).take([5,7,8,11,12]))
 }
 
+statistic_id_dict = {
+    "zjj0101": ["jane", "jiajia.zhao", "jiajia.zhao2", "zjj.test1", "zjj.test2", "zjj.test3", "zjj.test4", "zjj.test5", "zjj.test6", "zjj.test7", "zjj.test8", "zjj.test9", "zjj.test10"]
+}
+
+def get_stat_id_dict():
+    return statistic_id_dict
+
 def get_api_conifg(manage_account_id):
     if manage_account_id in manage_account_dict:
         return copy.deepcopy(manage_account_dict[manage_account_id])
