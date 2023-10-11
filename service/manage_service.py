@@ -235,7 +235,7 @@ def get_stat_service(manage_account_list):
                 date_ret = []
                 for _j_r in j_r:
                     date_ret.append({
-                        "日期":_j_r[0],
+                        "日期":str(_j_r[0]),
                         "打招呼总数":_j_r[1],
                         "拿到联系方式总数":_j_r[2]
                     })
