@@ -19,7 +19,7 @@ sql_dict = {
     "get_llm_config_by_id":"select template_config from llm_template where template_id='{}'",
     "update_llm_template":"update llm_template set template_name='{}',template_config='{}' where template_id='{}'",
     "insert_llm_template":"insert into llm_template(manage_account_id, template_id, template_name, template_config) values ('{}', '{}', '{}', '{}')",
-    "get_chat_count_by_job": "select date_format(`create_time`, '%Y-%m-%d'),count(1),sum(case contact when '' then 0 else 1 end) from chat where create_time > date_sub(curdate(), interval 7 day) and job_id='{}' group by date_format(`create_time`, '%Y-%m-%d')",
+    "get_chat_count_by_job": "select date_format(`create_time`, '%Y-%m-%d'),count(1),sum(case when contact!='' then 1 else 0 end) from chat where create_time > date_sub(curdate(), interval 7 day) and job_id='{}' group by date_format(`create_time`, '%Y-%m-%d')",
     "get_job_name_by_id":"select job_name from job where job_id='{}'"
 }
 def get_job_name_by_id(job_id):
