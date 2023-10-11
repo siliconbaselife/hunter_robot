@@ -30,7 +30,7 @@ def get_chat_count_by_job(job_id):
     if len(chat_count) == 0:
         return []
     else:
-        return chat_count[0]
+        return chat_count
 
 def update_llm_template(template_name, template_config, template_id):
     return dbm.update(sql_dict['update_llm_template'].format(template_name, template_config, template_id))
