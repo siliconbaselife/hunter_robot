@@ -232,12 +232,17 @@ def get_stat_service(manage_account_list):
             for j in jobs:
                 j_r = get_chat_count_by_job(j)
                 job_name = get_job_name_by_id(j)
+                date_ret = []
+                for _j_r in j_r:
+                    date_ret.append({
+                        "日期":_j_r[0],
+                        "打招呼总数":_j_r[1],
+                        "拿到联系方式总数":_j_r[2]
+                    })
                 job_ret.append({
                     "岗位id": j,
                     "岗位名称":job_name,
-                    "日期":j_r[0],
-                    "打招呼总数":j_r[1],
-                    "拿到联系方式总数":j_r[2]
+                    "招呼明细": date_ret
                 })
             account_ret.append({
                 "账号id": a_l[0],
