@@ -254,3 +254,4 @@ def get_stat_service(manage_account_list):
             "管理账户":ma,
             "账号运行状态":account_ret
         })
+    return final_ret
