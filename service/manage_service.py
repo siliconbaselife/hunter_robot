@@ -228,6 +228,7 @@ def get_stat_service(manage_account_list):
         for a_l in account_list:
             job_ret = []
             jobs = json.loads(a_l[3])
+            logger.info(f"test_test:{jobs}")
             for j in jobs:
                 j_r = get_chat_count_by_job(j)
                 job_name = get_job_name_by_id(j)

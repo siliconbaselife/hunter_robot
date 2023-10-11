@@ -26,7 +26,11 @@ def get_job_name_by_id(job_id):
     return dbm.query(sql_dict['get_job_name_by_id'].format(job_id))[0][0]
 
 def get_chat_count_by_job(job_id):
-    return dbm.query(sql_dict['get_chat_count_by_job'].format(job_id))[0]
+    chat_count = dbm.query(sql_dict['get_chat_count_by_job'].format(job_id))
+    if len(chat_count) == 0:
+        return []
+    else:
+        return chat_count[0]
 
 def update_llm_template(template_name, template_config, template_id):
     return dbm.update(sql_dict['update_llm_template'].format(template_name, template_config, template_id))
