@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import deal_json_invaild, str_is_none
+from utils.utils import deal_json_invaild, str_is_none,get_default_job
 from dao.task_dao import *
 from service.chat_service import chat_service
 from service.task_service import *
@@ -211,7 +211,9 @@ def candidate_chat_api():
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         job_id_info = get_job_id_in_chat(account_id, candidate_id)
         if len(job_id_info) == 0:
-            job_id = json.loads(get_account_jobs_db(account_id))[0]
+            # job_id = json.loads(get_account_jobs_db(account_id))[0]
+            ##默认给一个job
+            job_id = get_default_job(query_account_type_db(account_id))
         else:
             job_id = job_id_info[0][0]
     # history_msg = request.json['historyMsg']

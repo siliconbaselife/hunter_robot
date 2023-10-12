@@ -29,7 +29,9 @@ class OpenChatRobot(BaseChatRobot):
             contact_res = self._chat_request()
             model_response, model_judge_intent = contact_res
             self._next_msg = model_response
-
+        ##增加换行，前端分多次发出
+        self._next_msg = self._next_msg.replace('。','。\n')
+        self._next_msg = self._next_msg.replace('.','.\n')
         logger.info(f'open chat log {self._sess_id}: info: robot_api: {self._robot_api}, chat round: {chat_round}, \
             model response: {model_response}, model_judge_intent: {model_judge_intent},\
               finally: {self._status}, {self._next_msg}')

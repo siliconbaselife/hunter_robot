@@ -169,6 +169,15 @@ statistic_id_dict = {
     "zjj0101": ["jane", "jiajia.zhao", "jiajia.zhao2", "zjj.test1", "zjj.test2", "zjj.test3", "zjj.test4", "zjj.test5", "zjj.test6", "zjj.test7", "zjj.test8", "zjj.test9", "zjj.test10"]
 }
 
+default_job_map = {
+    "maimai":"job_maimai_default-manual-id",
+    "Boss":"job_boss_default-manual-id",
+    "Linkedin":"job_linkedin_default-manual-id"
+}
+
+def get_default_job(platform_type):
+    return default_job_map[platform_type]
+
 def get_stat_id_dict():
     return statistic_id_dict
 
