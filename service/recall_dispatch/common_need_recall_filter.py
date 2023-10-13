@@ -19,7 +19,7 @@ def get_msg(filter_result, job_already_recall_count, job_id):
             else:
                 return "哈喽 哈喽 不知道看到消息了么？最近是在忙？方便看到消息回复一下么？我们做这个领域挺多年了，相信可以给你更好的帮助"
         elif job_already_recall_count == 1:
-            return "hi 亲，您对我们感兴趣的话，方便交换个联系方式或者简历吗？咱们约个时间详细沟通一下，我可以给你分享客户详细的信息内容"
+            return "hi 亲，方便交换个联系方式或者简历吗? 咱们约个时间详细沟通一下，我可以给你分享客户详细的信息内容"
         elif job_already_recall_count == 2:
             return "哈喽 亲 看给你发消息一直没有回复，是不感兴趣？其实除了这个客户，我们还有其他Top公司的机会，我也可以给你分享行业信息，大家交个朋友，认识交流一下，多个朋友多条路，你觉得呢？"
     elif recall_type == 'bd':

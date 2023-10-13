@@ -388,6 +388,34 @@ def meta_config():
                         {
                             "value":"成都",
                             "label":"成都"
+                        },
+                        {
+                            "value":"杭州",
+                            "label":"杭州"
+                        },
+                        {
+                            "value":"武汉",
+                            "label":"武汉"
+                        },
+                        {
+                            "value":"广州",
+                            "label":"广州"
+                        },
+                        {
+                            "value":"苏州",
+                            "label":"苏州"
+                        },
+                        {
+                            "value":"珠海",
+                            "label":"珠海"
+                        },
+                        {
+                            "value":"宁波",
+                            "label":"宁波"
+                        },
+                        {
+                            "value":"东莞",
+                            "label":"东莞"
                         }
                     ]
                 }
@@ -555,6 +583,34 @@ def meta_config():
                         {
                             "value":"成都",
                             "label":"成都"
+                        },
+                        {
+                            "value":"杭州",
+                            "label":"杭州"
+                        },
+                        {
+                            "value":"武汉",
+                            "label":"武汉"
+                        },
+                        {
+                            "value":"广州",
+                            "label":"广州"
+                        },
+                        {
+                            "value":"苏州",
+                            "label":"苏州"
+                        },
+                        {
+                            "value":"珠海",
+                            "label":"珠海"
+                        },
+                        {
+                            "value":"宁波",
+                            "label":"宁波"
+                        },
+                        {
+                            "value":"东莞",
+                            "label":"东莞"
                         }
                     ]
                 },{
@@ -678,6 +734,34 @@ def meta_config():
                         {
                             "value":"成都",
                             "label":"成都"
+                        },
+                        {
+                            "value":"杭州",
+                            "label":"杭州"
+                        },
+                        {
+                            "value":"武汉",
+                            "label":"武汉"
+                        },
+                        {
+                            "value":"广州",
+                            "label":"广州"
+                        },
+                        {
+                            "value":"苏州",
+                            "label":"苏州"
+                        },
+                        {
+                            "value":"珠海",
+                            "label":"珠海"
+                        },
+                        {
+                            "value":"宁波",
+                            "label":"宁波"
+                        },
+                        {
+                            "value":"东莞",
+                            "label":"东莞"
                         }
                     ]
                 }
@@ -760,6 +844,34 @@ def meta_config():
                         {
                             "value":"成都",
                             "label":"成都"
+                        },
+                        {
+                            "value":"杭州",
+                            "label":"杭州"
+                        },
+                        {
+                            "value":"武汉",
+                            "label":"武汉"
+                        },
+                        {
+                            "value":"广州",
+                            "label":"广州"
+                        },
+                        {
+                            "value":"苏州",
+                            "label":"苏州"
+                        },
+                        {
+                            "value":"珠海",
+                            "label":"珠海"
+                        },
+                        {
+                            "value":"宁波",
+                            "label":"宁波"
+                        },
+                        {
+                            "value":"东莞",
+                            "label":"东莞"
                         }
                     ]
                 },{
