@@ -162,11 +162,22 @@ manage_account_dict = {
     "zjj.test7":list(np.array(api_config).take([5,7,8,11,12])),
     "zjj.test8":list(np.array(api_config).take([5,7,8,11,12])),
     "zjj.test9":list(np.array(api_config).take([5,7,8,11,12])),
-    "zjj.test10":list(np.array(api_config).take([5,7,8,11,12]))
+    "zjj.test10":list(np.array(api_config).take([5,7,8,11,12])),
+    "zjj.test11":list(np.array(api_config).take([5])),
+    "zjj.test12":list(np.array(api_config).take([5])),
+    "zjj.test13":list(np.array(api_config).take([5])),
+    "zjj.test14":list(np.array(api_config).take([5])),
+    "zjj.test15":list(np.array(api_config).take([5])),
+    "zjj.test16":list(np.array(api_config).take([5])),
+    "zjj.test17":list(np.array(api_config).take([5])),
+    "zjj.test18":list(np.array(api_config).take([5])),
+    "zjj.test19":list(np.array(api_config).take([5])),
+    "zjj.test20":list(np.array(api_config).take([5]))
 }
 
 statistic_id_dict = {
-    "zjj0101": ["jane", "jiajia.zhao", "jiajia.zhao2", "zjj.test1", "zjj.test2", "zjj.test3", "zjj.test4", "zjj.test5", "zjj.test6", "zjj.test7", "zjj.test8", "zjj.test9", "zjj.test10"]
+    "zjj0101": ["jane", "jiajia.zhao", "jiajia.zhao2", "zjj.test1", "zjj.test2", "zjj.test3", "zjj.test4", "zjj.test5", "zjj.test6", "zjj.test7", "zjj.test8", "zjj.test9", "zjj.test10",
+                "zjj.test11", "zjj.test12", "zjj.test13", "zjj.test14", "zjj.test15", "zjj.test16", "zjj.test17", "zjj.test18", "zjj.test19", "zjj.test20"]
 }
 
 default_job_map = {
