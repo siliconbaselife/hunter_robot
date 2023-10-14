@@ -875,6 +875,15 @@ def meta_config():
                         }
                     ]
                 },{
+                    "config_name":"曾任职公司（务必用英文逗号分隔）",
+                    "config_value":"ex_company",
+                    "type":"multi_input"
+                },{
+                    "config_name":"现任职公司（务必用英文逗号分隔）",
+                    "config_value":"cur_company",
+                    "type":"multi_input"
+                },
+                {
                     "config_name":"关键词",
                     "config_value":"job_tags",
                     "type":"multi_input"
