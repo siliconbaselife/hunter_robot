@@ -150,6 +150,8 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_t
     job_config['filter_args'] = filter_args
     job_config['filter_args']['job_tags'] = process_list(job_config['filter_args']['job_tags'])
     job_config['filter_args']['neg_words'] = process_list(job_config['filter_args']['neg_words'])
+    job_config['filter_args']['ex_company'] = process_list(job_config['filter_args']['ex_company'])
+    job_config['filter_args']['cur_company'] = process_list(job_config['filter_args']['cur_company'])
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_id)
 
 def delete_task(manage_account_id, account_id, job_id):

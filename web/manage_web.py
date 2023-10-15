@@ -227,6 +227,11 @@ def job_update_api():
     robot_template_id = request.json.get('robot_template', "")
     if 'neg_words' in filter_args and str_is_none(filter_args['neg_words']):
         filter_args['neg_words'] = []
+    if 'ex_company' in filter_args and str_is_none(filter_args['ex_company']):
+        filter_args['ex_company'] = []
+    if 'cur_company' in filter_args and str_is_none(filter_args['cur_company']):
+        filter_args['cur_company'] = []
+    
     logger.info(f'job_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api},{robot_template_id}')
     ret = update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template_id)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
@@ -875,11 +880,11 @@ def meta_config():
                         }
                     ]
                 },{
-                    "config_name":"曾任职公司（务必用英文逗号分隔）",
+                    "config_name":"曾任职公司（务必用英文逗号分隔,或关系）",
                     "config_value":"ex_company",
                     "type":"multi_input"
                 },{
-                    "config_name":"现任职公司（务必用英文逗号分隔）",
+                    "config_name":"现任职公司（务必用英文逗号分隔,或关系）",
                     "config_value":"cur_company",
                     "type":"multi_input"
                 },
