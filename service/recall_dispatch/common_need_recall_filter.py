@@ -6,11 +6,8 @@ from service.task_service import get_job_by_id_service
 
 logger = get_logger(config['log']['log_file'])
 
-def get_msg(filter_result, job_already_recall_count, job_id):
-    recall_type = 'zp'
-    job_config = json.loads(get_job_by_id_service(job_id)[0][6])
-    if 'recall_config' in job_config:
-        recall_type = job_config['recall_config']
+def get_msg(filter_result, job_already_recall_count, job_id, recall_type):
+    
 
     if recall_type == 'zp':
         if job_already_recall_count == 0:
@@ -66,8 +63,18 @@ def common_need_recall_filter(chat_info, flag):
 
     filter_result = chat_info[4]
     logger.info(f"candidate_recall,{job_id},{candidate_id},contact_unget: {contact_unget}, reject_intent:{reject_intent},time_match: {time_match}, less_count:{less_count}, filter_result:{filter_result}")
-    if contact_unget and time_match and less_count:
-        recall_msg = get_msg(filter_result, already_recall_count, job_id)
+
+    bd_flag = True
+    recall_type = 'zp'
+    job_config = json.loads(get_job_by_id_service(job_id)[0][6])
+    if 'recall_config' in job_config:
+        recall_type = job_config['recall_config']
+    if already_recall_count > 0 and recall_type == 'bd':
+        bd_flag = False
+
+
+    if contact_unget and time_match and less_count and bd_flag:
+        recall_msg = get_msg(filter_result, already_recall_count, job_id, recall_type)
         res = {
             "candidate_id": candidate_id,
             "candidate_name": candidate_name,
