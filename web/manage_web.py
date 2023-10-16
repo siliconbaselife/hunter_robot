@@ -225,11 +225,11 @@ def job_update_api():
     touch_msg = request.json['touch_msg']
     filter_args = request.json['filter_args']
     robot_template_id = request.json.get('robot_template', "")
-    if 'neg_words' in filter_args and str_is_none(filter_args['neg_words']):
+    if 'neg_words' not in filter_args or ('neg_words' in filter_args and str_is_none(filter_args['neg_words'])):
         filter_args['neg_words'] = []
-    if 'ex_company' in filter_args and str_is_none(filter_args['ex_company']):
+    if 'ex_company' not in filter_args or ('ex_company' in filter_args and str_is_none(filter_args['ex_company'])):
         filter_args['ex_company'] = []
-    if 'cur_company' in filter_args and str_is_none(filter_args['cur_company']):
+    if 'cur_company' not in filter_args or ('cur_company' in filter_args and str_is_none(filter_args['cur_company'])):
         filter_args['cur_company'] = []
     
     logger.info(f'job_update_request:{job_id}, {touch_msg}, {filter_args},{robot_api},{robot_template_id}')
