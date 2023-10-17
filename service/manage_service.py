@@ -108,11 +108,12 @@ def candidate_list_service(job_id, start, limit):
     res_chat_list = []
     for chat in chat_list:
         candidate_info = query_candidate_by_id(chat[2])
+        logger.info(f'test: {chat}, {candidate_info}')
+
         if len(candidate_info) == 0:
             candidate_info_detail = {}
         else:
             candidate_info_detail = candidate_info[0][7]
-
         if chat[4] == None or chat[4] == 'NULL' or chat[4] == 'None':
             source = 'search'
         else:
