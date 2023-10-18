@@ -257,7 +257,7 @@ class BaseChatRobot(object):
                     contact['wechat'] = parse_dict['contact']
                 update_chat_contact_db(self._account_id, self._job_id, self._candidate_id, json.dumps(contact, ensure_ascii=False))
                 update_candidate_contact_db(self._candidate_id, json.dumps(contact,ensure_ascii=False))
-                candidate_name = query_candidate_by_id(self._candidate_id)
+                candidate_name = query_candidate_by_id(self._candidate_id)[0][1]
                 send_candidate_info(self._job_id, candidate_name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
 
         if last_user_time is None:
