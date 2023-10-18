@@ -235,7 +235,7 @@ def candidate_chat_api():
     else:
         source, db_history_msg, _ = candidate_info[0]
         # logger.info(f'show candidate: {source} {db_history_msg}: {db_history_msg is not None}')
-        if db_history_msg is None or db_history_msg =='None':
+        if db_history_msg is None or db_history_msg =='None' or db_history_msg == "":
             source=None
             db_history_msg=None
         else:

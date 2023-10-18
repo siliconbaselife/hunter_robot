@@ -241,7 +241,7 @@ class BaseChatRobot(object):
             if 'contact' in parse_dict:
                 candidate_info = query_chat_db(self._account_id, self._job_id, self._candidate_id)
                 contact = candidate_info[0][2]
-                db_history_msg = candidate_info[0][1]
+                db_msg = candidate_info[0][1]
                 if contact is None or contact == 'None':
                     contact = {
                         'phone': None,
@@ -258,7 +258,7 @@ class BaseChatRobot(object):
                 update_chat_contact_db(self._account_id, self._job_id, self._candidate_id, json.dumps(contact, ensure_ascii=False))
                 update_candidate_contact_db(self._candidate_id, json.dumps(contact,ensure_ascii=False))
                 # candidate_name = query_candidate_by_id(self._candidate_id)[0][1]
-                send_candidate_info(self._job_id, self._candidate_id, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
+                send_candidate_info(self._job_id, self._candidate_id, contact['cv'], contact['wechat'], contact['phone'], db_msg)
 
         if last_user_time is None:
             last_user_time = format_time(datetime.now())
