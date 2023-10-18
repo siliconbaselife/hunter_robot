@@ -6,9 +6,6 @@ from utils.config import config
 import time
 logger = get_logger(config['log']['log_file'])
 
-def process_none(s):
-    if s == None:
-        return ""
 
 
 
@@ -27,7 +24,7 @@ def maimai_preprocess(raw_candidate_info):
         active = tmp['active_state']
         
     
-        cur_location = process_none(tmp['province']) + '-' + process_none(tmp['city'])
+        cur_location = tmp.get('province', "") + '-' + tmp.get('city', "")
         exp_location = {
             "region": tmp['job_preferences']['regions'],
             "cities": tmp['job_preferences']['province_cities']
@@ -36,13 +33,13 @@ def maimai_preprocess(raw_candidate_info):
         exp_salary = tmp['job_preferences']['salary']
         
         #类似运营/编辑
-        major = process_none(tmp['major'])
+        major = tmp.get('major', "")
         #类似直播电商风控
-        position_name = process_none(tmp['position'])
+        position_name = tmp.get('position', "")
         exp_positon_name = tmp['job_preferences']['positions']
         
         #工作年头
-        work_time = 0 if '年' not in process_none(tmp['work_time']) else int(process_none(tmp['work_time']).split('年')[0])
+        work_time = 0 if '年' not in tmp.get('work_time', "") else int(tmp.get('work_time',"0").split('年')[0])
 
          #     [
             #   {
@@ -60,7 +57,7 @@ def maimai_preprocess(raw_candidate_info):
             #     "school_url": "https://i9.taou.com/maimai/p/school/small_20088e8e9e4c1f275c8e9024bbbc29fc.jpg"
             #   }
         # ]
-        education = process_none(tmp['edu'])        
+        education = tmp.get('edu', "")        
 
         
         #  "companies": [
@@ -68,7 +65,7 @@ def maimai_preprocess(raw_candidate_info):
         #     "美的集团",
         #     "同程旅行"
         #     ]
-        companies = process_none(tmp['companies'])
+        companies = tmp.get('companies', "")
         # [
         #     {
         #         "cid": 874305,
