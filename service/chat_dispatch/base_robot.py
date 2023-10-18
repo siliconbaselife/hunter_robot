@@ -6,8 +6,11 @@ import requests
 from datetime import datetime
 from enum import Enum
 import copy
+from utils.group_msg import send_candidate_info
 from dao.task_dao import get_robot_template_by_job_id
 from dao.manage_dao import get_llm_config_by_id_db
+from dao.task_dao import update_chat_contact_db,update_candidate_contact_db,query_chat_db,query_candidate_by_id
+
 logger = get_logger(config['log']['log_file'])
 
 class ChatStatus(Enum):
@@ -42,6 +45,8 @@ class BaseChatRobot(object):
         self._source = source
         self._robot_api = robot_api
         self._job_id = job_id
+        self._account_id = account_id
+        self._candidate_id = candidate_id
         self._trivial_intent = config['chat']['trivial_intent']
         self._refuse_intent = config['chat']['refuse_intent']
         self._useless_msgs = [
@@ -193,6 +198,12 @@ class BaseChatRobot(object):
         user_ask = self._source=='user_ask'
 
         has_contact = False
+
+        for parse_dict in self._last_parse_list:
+            if 'contact' in parse_dict:
+                has_contact = True
+                break
+
         chat_round = self._calc_chat_round()
         for cur in self._msg_list:
             if cur['speaker']=='system':
@@ -224,6 +235,31 @@ class BaseChatRobot(object):
             filter_msg, parse_dict = self._msg_filter(cur_item.get('msg', ''))
             parse_dict_list.append(parse_dict)
             merge_user_msg = filter_msg +'。'+ merge_user_msg
+
+        ## 处理对话中的联系方式
+        for parse_dict in parse_dict_list:
+            if 'contact' in parse_dict:
+                candidate_info = query_chat_db(self._account_id, self._job_id, self._candidate_id)
+                contact = candidate_info[0][2]
+                db_history_msg = candidate_info[0][1]
+                if contact is None or contact == 'None':
+                    contact = {
+                        'phone': None,
+                        'wechat': None,
+                        'cv': None
+                    }
+                else:
+                    contact = json.loads(contact)
+                logger.info(f"get_contact_in_chat,{self._account_id},{self._job_id},{self._candidate_id}, {parse_dict['contact']}",{contact})
+                if len(parse_dict['contact']) == 11 and (contact['phone'] is None or contact['phone'] == "") and (contact['wechat'] is not None and contact['wechat'] != ""):
+                    contact['phone'] = parse_dict['contact']
+                else:
+                    contact['wechat'] = parse_dict['contact']
+                update_chat_contact_db(self._account_id, self._job_id, self._candidate_id, json.dumps(contact, ensure_ascii=False))
+                update_candidate_contact_db(self._candidate_id, json.dumps(contact,ensure_ascii=False))
+                candidate_name = query_candidate_by_id(self._candidate_id)
+                send_candidate_info(self._job_id, candidate_name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
+
         if last_user_time is None:
             last_user_time = format_time(datetime.now())
         self._last_user_msg = merge_user_msg
@@ -284,14 +320,46 @@ class BaseChatRobot(object):
         rand_idx = random.randint(0,len(cur_list)-1)
         return cur_list[rand_idx]
 
-    def _msg_filter(self, msg):
-        dummy_parse_dict = {}
+    def _parse_contact(self, msg):
+        filter_msg = msg
+        parse_dict = {}
+        wx_start = -1
+        find = False
+        for idx, c in enumerate(msg):
+            istarget =  (c >='a' and c<='z') or (c>='A' and c<='Z') or (c>='0' and c<='9') or c=='-' or c=='_'
+            # print(f'id {idx}-----{c}------{istarget}')
+            if istarget:
+                if wx_start<0:
+                    wx_start = idx
+            else:
+                if wx_start>-1:
+                    range_len = idx - wx_start
+                    if range_len>=6 and range_len<=20:
+                        find = True
+                        parse_dict['contact'] = msg[wx_start:idx]
+                        filter_msg = ''
+                        break
+                wx_start = -1
+        if not find and wx_start >-1:
+            range_len = len(msg)- wx_start
+            if range_len>=6 and range_len<=20:
+                parse_dict['contact'] = msg[wx_start:idx]
+                filter_msg = ''
+        # logger.info(f'maimai chat log: msg filter input {msg} out {filter_msg}')
+        return filter_msg, parse_dict
+
+    def _parse_face(self, msg):
         for item in self._useless_msgs:
             if item in msg:
-                return '', dummy_parse_dict
+                return ''
         if msg.find('[')<0 or msg.find(']')<0:
-            return msg, dummy_parse_dict
-        return msg[:msg.find('[')]+msg[msg.find(']')+1:], dummy_parse_dict
+            return msg
+        return msg[:msg.find('[')]+msg[msg.find(']')+1:]
+
+    def _msg_filter(self, msg):
+        msg = self._parse_face(msg)
+        filter_msg, parse_dict = self._parse_contact(self, msg)
+        return filter_msg, parse_dict
 
     def _chat_request(self):
         data = {

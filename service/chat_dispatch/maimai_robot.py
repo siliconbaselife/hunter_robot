@@ -113,31 +113,3 @@ class MaimaiRobot(BaseChatRobot):
                     if next_item['speaker']=='robot':
                         has_manual_touch = True
         return is_first_msg, has_system_msg, user_msg_useless, user_ask, chat_round, cur_has_contact, has_manual_touch
-
-    def _msg_filter(self, msg):
-        filter_msg = msg
-        parse_dict = {}
-        wx_start = -1
-        find = False
-        for idx, c in enumerate(msg):
-            istarget =  (c >='a' and c<='z') or (c>='A' and c<='Z') or (c>='0' and c<='9') or c=='-' or c=='_'
-            # print(f'id {idx}-----{c}------{istarget}')
-            if istarget:
-                if wx_start<0:
-                    wx_start = idx
-            else:
-                if wx_start>-1:
-                    range_len = idx - wx_start
-                    if range_len>=6 and range_len<=20:
-                        find = True
-                        parse_dict['contact'] = msg[wx_start:idx]
-                        filter_msg = ''
-                        break
-                wx_start = -1
-        if not find and wx_start >-1:
-            range_len = len(msg)- wx_start
-            if range_len>=6 and range_len<=20:
-                parse_dict['contact'] = msg[wx_start:idx]
-                filter_msg = ''
-        # logger.info(f'maimai chat log: msg filter input {msg} out {filter_msg}')
-        return filter_msg, parse_dict
