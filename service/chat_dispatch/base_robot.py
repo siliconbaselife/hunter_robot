@@ -250,7 +250,7 @@ class BaseChatRobot(object):
                     }
                 else:
                     contact = json.loads(contact)
-                logger.info(f"get_contact_in_chat,{self._account_id},{self._job_id},{self._candidate_id}, {parse_dict['contact']}",{contact})
+                logger.info(f"get_contact_in_chat,{self._account_id},{self._job_id},{self._candidate_id}, {parse_dict['contact']},{contact}")
                 if len(parse_dict['contact']) == 11 and (contact['phone'] is None or contact['phone'] == "") and (contact['wechat'] is not None and contact['wechat'] != ""):
                     contact['phone'] = parse_dict['contact']
                 else:
