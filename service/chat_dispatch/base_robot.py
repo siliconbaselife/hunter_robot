@@ -358,7 +358,7 @@ class BaseChatRobot(object):
 
     def _msg_filter(self, msg):
         msg = self._parse_face(msg)
-        filter_msg, parse_dict = self._parse_contact(self, msg)
+        filter_msg, parse_dict = self._parse_contact( msg)
         return filter_msg, parse_dict
 
     def _chat_request(self):
