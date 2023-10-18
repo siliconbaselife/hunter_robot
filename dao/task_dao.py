@@ -33,7 +33,7 @@ sql_dict = {
     "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt, job_id from chat where account_id='{}' and candidate_id in {} order by update_time desc",
     "recall_exec":"update chat set recall_cnt = recall_cnt + 1 where account_id='{}' and candidate_id='{}'",
     "add_friend_report":"update chat set added_friend=1 where account_id='{}' and candidate_id='{}'",
-    "get_job_id_in_chat":"select job_id from chat where account_id='{}' and candidate_id='{}'",
+    "get_job_id_in_chat":"select job_id from chat where account_id='{}' and candidate_id='{}' order by create_time desc limit 1",
     "get_robot_template_by_job_id":"select robot_template from job where job_id='{}'",
     "get_independent_by_account_id":"select independent from account where account_id='{}'",
     "get_one_time_task_by_account_id":"select id,task_config from one_time_task where account_id='{}' and status = 0",
