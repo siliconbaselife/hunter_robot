@@ -5,7 +5,7 @@ from utils.utils import format_time
 
 from datetime import datetime
 import json
-from dao.task_dao import get_job_by_id
+from dao.task_dao import get_job_by_id,query_chat_db
 
 logger = get_logger(config['log']['log_file'])
 
@@ -43,7 +43,11 @@ class MaimaiRobot(BaseChatRobot):
         to_cover_response = user_msg_useless or need_hello or is_trivial_intent or is_refuse_intent or is_no_prompt
 
         strategy_response = None
-        if need_hello:
+        chat_info = query_chat_db(self._account_id, self._job_id, self._candidate_id)
+            
+        if len(chat_info) == 0:
+            strategy_response = self._manual_response('hello')
+        elif need_hello and chat_info[0][0] == 'user_ask':
             strategy_response = self._manual_response('hello')
         elif need_contact:
             self._status= ChatStatus.NeedContact
