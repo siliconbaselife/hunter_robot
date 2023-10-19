@@ -11,8 +11,10 @@ def linkedin_autoload_filter(candidate_info, job_res):
 
     job_tags =  filter_args['job_tags']
 
-    job_ok = True
-    if 'job_tags' in filter_args:
+    
+    if len(job_tags) == 0:
+        job_ok = True
+    else:
         job_ok = False
         for jt in job_tags:
             if jt in exp_position or exp_position in jt:
