@@ -6,7 +6,7 @@ from utils.config import config
 from utils.utils import format_time,process_list,process_str
 import copy
 from datetime import datetime
-
+from pymysql .converters import escape_string
 
 def manage_process_api_config(manage_account_id, api_config):
     template_list = get_llm_template_by_manage_id_db(manage_account_id)
@@ -187,8 +187,8 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
         task_config_dict['filter']['ex_company'] = process_list(task_config_dict['filter']['ex_company'])
     if 'cur_company' in task_config_dict['filter']:
         task_config_dict['filter']['cur_company'] = process_list(task_config_dict['filter']['cur_company'])
-    task_config_dict['filter']['searchText'] = task_config_dict['filter']['searchText'].replace("\'", "'")
-    task_config_dict['filter']['searchText'] = task_config_dict['filter']['searchText'].replace('\"', '"')
+    task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])
+    task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])
 
 
 
