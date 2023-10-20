@@ -74,7 +74,7 @@ def common_need_recall_filter(chat_info, flag):
 
 
 
-    force_flag = False
+    force_flag = True
     if contact_unget and time_match and less_count and bd_flag and force_flag:
         recall_msg = get_msg(filter_result, already_recall_count, job_id, recall_type)
         res = {
