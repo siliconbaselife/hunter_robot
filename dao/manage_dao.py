@@ -68,7 +68,9 @@ def my_account_list_db(manage_account_id):
     return dbm.query(sql_dict['my_account_list_db'].format(manage_account_id))
 
 def account_config_update_db(manage_account_id, account_id, task_config_json, job_list_json):
-    return dbm.update(sql_dict['account_config_update_db'].format(task_config_json, job_list_json, manage_account_id, account_id))
+    # sql = sql_dict['account_config_update_db'].format(task_config_json, job_list_json, manage_account_id, account_id)
+    sql = "update account set task_config='" + task_config_json + "',jobs='" + job_list_json + "' where manage_account_id='" + manage_account_id + "' and account_id='" + account_id + "'"
+    return dbm.update(sql)
 
 def update_job_config(job_id,robot_api, job_config, robot_template_str):
     return dbm.update(sql_dict['update_job_config'].format(robot_api, job_config, robot_template_str, job_id))
