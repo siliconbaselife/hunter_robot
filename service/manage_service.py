@@ -187,8 +187,8 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
         task_config_dict['filter']['ex_company'] = process_list(task_config_dict['filter']['ex_company'])
     if 'cur_company' in task_config_dict['filter']:
         task_config_dict['filter']['cur_company'] = process_list(task_config_dict['filter']['cur_company'])
-    task_config_dict['filter']['searchText'].replace("'", "\'")
-    task_config_dict['filter']['searchText'].replace('"', '\"')
+    task_config_dict['filter']['searchText'].replace("'", "\\'")
+    task_config_dict['filter']['searchText'].replace('"', '\\"')
 
 
 
