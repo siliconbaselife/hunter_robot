@@ -83,7 +83,8 @@ def query_account_type_db(account_id):
 def new_candidate_db(candidate_id, candidate_name, age, degree, location, position, details):
     details = deal_json_invaild(details)
     try:
-        dbm.insert(sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details))
+        s = sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details)
+        dbm.insert(s)
     except BaseException as e:
         logger.info(f'new_candidate_error, (msg: {details})')
 def query_candidate_exist(candidate_id):

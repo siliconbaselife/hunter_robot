@@ -22,11 +22,10 @@ def deal_json_invaild(data):
         .replace('"}', "**testPassword**")
     # print(data)
 
-    data = data.replace('"', r'\"')\
-        .replace('&&testPassword1&&', '":"').replace('&&testPassword2&&','":').replace('$$testPassword$$', '","').replace('@@testPassword@@', '{"').replace('**testPassword**', '"}')
+    data = data.replace('&&testPassword1&&', '":"').replace('&&testPassword2&&','":').replace('$$testPassword$$', '","').replace('@@testPassword@@', '{"').replace('**testPassword**', '"}')
     # print(data)
-    data = data.replace("\'", "\"")
-    data = data.replace("\\'", "\"")
+    data = data.replace("\'", "\\'")
+    data = data.replace('\"', '\\"')
     return data
 
 

@@ -23,8 +23,18 @@ def maimai_preprocess(raw_candidate_info):
         #文字描述感觉意义不大
         active = tmp['active_state']
         
-    
-        cur_location = tmp.get('province', "") + '-' + tmp.get('city', "")
+        if 'province' not in tmp or tmp['province'] is None:
+            tmp['province'] = ""
+        if 'city' not in tmp or tmp['city'] is None:
+            tmp['city'] = ""
+        if 'major' not in tmp or tmp['major'] is None:
+            tmp['major'] = ""
+        if 'position' not in tmp or tmp['position'] is None:
+            tmp['position'] = ""
+        
+
+        cur_location = tmp['province'] + '-' + tmp['city']
+        
         exp_location = {
             "region": tmp['job_preferences']['regions'],
             "cities": tmp['job_preferences']['province_cities']
