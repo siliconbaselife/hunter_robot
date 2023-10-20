@@ -187,11 +187,10 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
         task_config_dict['filter']['ex_company'] = process_list(task_config_dict['filter']['ex_company'])
     if 'cur_company' in task_config_dict['filter']:
         task_config_dict['filter']['cur_company'] = process_list(task_config_dict['filter']['cur_company'])
-    task_config_dict['filter']['searchText'] = task_config_dict['filter']['searchText'].replace("\'", "'")
-    task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])
-    task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])
-
-
+    # task_config_dict['filter']['searchText'] = task_config_dict['filter']['searchText'].replace("\'", "")
+    # task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])
+    # task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])
+    logger.info(f"test:{task_config_dict['filter']['searchText']}")
 
     task_configs = json.loads(get_account_task_db(account_id))
     flag = True
@@ -208,6 +207,8 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
     # logger.info(f"test:{task_str}")
     task_str = task_str.replace('\\n',',')
     # logger.info(f"test:{task_str}")
+
+    # return
     return account_config_update_db(manage_account_id, account_id, task_str, json.dumps(job_list, ensure_ascii=False))
 
 def get_manage_config_service(manage_account_id):
