@@ -981,8 +981,23 @@ def meta_config():
                 },
                 {
                     "config_name":"地域",
-                    "config_value":"locations",
+                    "config_value":"location",
                     "type":"input"
+                },
+                {
+                    "config_name":"行业（务必用英文逗号分隔,或关系）",
+                    "config_value":"industry",
+                    "type":"multi_input"
+                },
+                {
+                    "config_name":"曾任职公司（务必用英文逗号分隔,或关系）",
+                    "config_value":"ex_company",
+                    "type":"multi_input"
+                },
+                {
+                    "config_name":"现任职公司（务必用英文逗号分隔,或关系）",
+                    "config_value":"cur_company",
+                    "type":"multi_input"
                 }
             ],
             "job_meta_config":[

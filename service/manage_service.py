@@ -181,6 +181,16 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
             'mount': int(helloSum * t['mount'] / 100)
         })
     task_config_dict['timeMount'] = time_mount_new
+    if 'industry' in task_config_dict['filter']:
+        task_config_dict['filter']['industry'] = process_list(task_config_dict['filter']['industry'])
+    if 'ex_company' in task_config_dict['filter']:
+        task_config_dict['filter']['ex_company'] = process_list(task_config_dict['filter']['ex_company'])
+    if 'cur_company' in task_config_dict['filter']:
+        task_config_dict['filter']['cur_company'] = process_list(task_config_dict['filter']['cur_company'])
+    task_config_dict['filter']['searchText'].replace("'", "\\'")
+    task_config_dict['filter']['searchText'].replace('"', '\\"')
+
+
 
     task_configs = json.loads(get_account_task_db(account_id))
     flag = True

@@ -201,11 +201,13 @@ def get_api_conifg(manage_account_id):
 def process_str(s):
     s = s.replace('\\n',',')
     s = s.replace('\n',',') 
+    s = s.replace('，',',')
     return s
 
 def process_list(str_list):
     ret = []
     for s in str_list:
+        s = s.replace('，',',')
         s = s.replace('\\n',',')
         s = s.replace('\n',',')
         ret.extend(s.split(','))
