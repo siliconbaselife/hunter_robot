@@ -37,9 +37,13 @@ sql_dict = {
     "get_robot_template_by_job_id":"select robot_template from job where job_id='{}'",
     "get_independent_by_account_id":"select independent from account where account_id='{}'",
     "get_one_time_task_by_account_id":"select id,task_config from one_time_task where account_id='{}' and status = 0",
+    "get_one_time_task_list":"select id,task_config,status from one_time_task where account_id='{}'",
     "update_one_time_status_by_id":"update one_time_task set status={} where id={}",
     "new_one_time_task":"insert into one_time_task(account_id, task_config) values ('{}', '{}')"
 }
+def get_one_time_task_list_db(account_id):
+    return dbm.query(sql_dict['get_one_time_task_list'].format(account_id))
+
 def new_one_time_task_db(account_id, one_time_task_config):
     return dbm.insert(sql_dict["new_one_time_task"].format(account_id, one_time_task_config))
 

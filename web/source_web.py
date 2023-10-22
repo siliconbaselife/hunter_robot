@@ -354,6 +354,14 @@ def new_one_time_task():
     logger.info(f'new_one_time_task: {account_id}, {ret}')
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
+@source_web.route("/recruit/candidate/oneTimeTaskList", methods=['POST'])
+@web_exception_handler
+def get_one_time_task():
+    account_id = request.json['accountID']
+    ret = get_one_time_task_list_service(account_id)
+    logger.info(f'one_time_task_list: {account_id}, {ret}')
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
 
 @source_web.route("/recruit/candidate/getOneTimeTask", methods=['POST'])
 @web_exception_handler
@@ -362,6 +370,7 @@ def get_one_time_task():
     ret = get_one_time_task_service(account_id)
     logger.info(f'get_one_time_task: {account_id}, {ret}')
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
 
 @source_web.route("/recruit/candidate/oneTimeTaskReport", methods=['POST'])
 @web_exception_handler
