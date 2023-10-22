@@ -122,7 +122,7 @@ def update_one_time_status_service(status, id):
 def new_one_time_task_service(account_id, one_time_task_config):
     return new_one_time_task_db(account_id, one_time_task_config)
 
-def get_one_time_task_list(account_id):
+def get_one_time_task_list_service(account_id):
     db_ret = get_one_time_task_list_db(account_id)
     ret = []
     for dr in db_ret:
