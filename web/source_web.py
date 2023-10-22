@@ -356,7 +356,7 @@ def new_one_time_task():
 
 @source_web.route("/recruit/candidate/oneTimeTaskList", methods=['POST'])
 @web_exception_handler
-def get_one_time_task():
+def get_one_time_task_list():
     account_id = request.json['accountID']
     ret = get_one_time_task_list_service(account_id)
     logger.info(f'one_time_task_list: {account_id}, {ret}')
