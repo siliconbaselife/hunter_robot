@@ -345,6 +345,14 @@ def candidate_result_api():
     logger.info(f'candidate result update: {job_id}, {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
+@source_web.route("/recruit/candidate/newOneTimeTask", methods=['POST'])
+@web_exception_handler
+def new_one_time_task():
+    account_id = request.json['accountID']
+    one_time_task_config = request.json['one_time_task_config']
+    ret = new_one_time_task_service(account_id, one_time_task_config)
+    logger.info(f'new_one_time_task: {account_id}, {ret}')
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 
 @source_web.route("/recruit/candidate/getOneTimeTask", methods=['POST'])

@@ -118,3 +118,6 @@ def get_one_time_task_service(account_id):
 
 def update_one_time_status_service(status, id):
     return update_one_time_status_by_id(status, id)
+
+def new_one_time_task_service(account_id, one_time_task_config):
+    return new_one_time_task_db(account_id, one_time_task_config)
