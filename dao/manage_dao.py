@@ -37,6 +37,7 @@ def update_llm_template(template_name, template_config, template_id):
 
 def insert_llm_template(manage_account_id, template_id, template_name, template_config):
     template_config = template_config.replace("\'", "\\'")
+    template_config = template_config.replace('\"', '\\"')
     return dbm.insert(sql_dict['insert_llm_template'].format(manage_account_id, template_id, template_name, template_config))
 
 def get_llm_config_by_id_db(template_id):
