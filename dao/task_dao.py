@@ -2,6 +2,7 @@ from utils.db_manager import dbm
 from utils.config import config
 from utils.log import get_logger
 from utils.utils import deal_json_invaild
+import json
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
@@ -45,7 +46,9 @@ def get_one_time_task_list_db(account_id):
     return dbm.query(sql_dict['get_one_time_task_list'].format(account_id))
 
 def new_one_time_task_db(account_id, one_time_task_config):
-    return dbm.insert(sql_dict["new_one_time_task"].format(account_id, one_time_task_config))
+    one_time_task_config_j = json.dumps(one_time_task_config, ensure_ascii=False)
+    one_time_task_config_j = deal_json_invaild(one_time_task_config_j)
+    return dbm.insert(sql_dict["new_one_time_task"].format(account_id, one_time_task_config_j))
 
 def update_one_time_status_by_id(status, id):
     return dbm.update(sql_dict['update_one_time_status_by_id'].format(status, id))

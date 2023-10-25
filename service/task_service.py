@@ -128,7 +128,7 @@ def get_one_time_task_list_service(account_id):
     for dr in db_ret:
         ret.append({
             "id":dr[0],
-            "task_config":dr[1],
+            "task_config":json.loads(dr[1]),
             "status":dr[2]
         })
     return ret
