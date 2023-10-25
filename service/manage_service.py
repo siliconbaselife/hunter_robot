@@ -3,7 +3,7 @@ from dao.manage_dao import *
 import json
 import time
 from utils.config import config
-from utils.utils import format_time,process_list,process_str
+from utils.utils import format_time,process_list,process_str,process_str_to_list
 import copy
 from datetime import datetime
 from pymysql .converters import escape_string
@@ -150,9 +150,9 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_t
     job_config['touch_msg'] = process_str(touch_msg)
     job_config['filter_args'] = filter_args
     job_config['filter_args']['job_tags'] = process_list(job_config['filter_args']['job_tags'])
-    job_config['filter_args']['neg_words'] = process_list(job_config['filter_args']['neg_words'])
-    job_config['filter_args']['ex_company'] = process_list(job_config['filter_args']['ex_company'])
-    job_config['filter_args']['cur_company'] = process_list(job_config['filter_args']['cur_company'])
+    job_config['filter_args']['neg_words'] = process_str_to_list(job_config['filter_args']['neg_words'])
+    job_config['filter_args']['ex_company'] = process_str_to_list(job_config['filter_args']['ex_company'])
+    job_config['filter_args']['cur_company'] = process_str_to_list(job_config['filter_args']['cur_company'])
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_id)
 
 def delete_task(manage_account_id, account_id, job_id):
@@ -182,11 +182,11 @@ def update_task_config_service(manage_account_id, account_id, task_config_dict):
         })
     task_config_dict['timeMount'] = time_mount_new
     if 'industry' in task_config_dict['filter']:
-        task_config_dict['filter']['industry'] = process_list(task_config_dict['filter']['industry'])
+        task_config_dict['filter']['industry'] = process_str_to_list(task_config_dict['filter']['industry'])
     if 'ex_company' in task_config_dict['filter']:
-        task_config_dict['filter']['ex_company'] = process_list(task_config_dict['filter']['ex_company'])
+        task_config_dict['filter']['ex_company'] = process_str_to_list(task_config_dict['filter']['ex_company'])
     if 'cur_company' in task_config_dict['filter']:
-        task_config_dict['filter']['cur_company'] = process_list(task_config_dict['filter']['cur_company'])
+        task_config_dict['filter']['cur_company'] = process_str_to_list(task_config_dict['filter']['cur_company'])
     # task_config_dict['filter']['searchText'] = task_config_dict['filter']['searchText'].replace("\'", "")
     # task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])
     # task_config_dict['filter']['searchText'] = escape_string(task_config_dict['filter']['searchText'])

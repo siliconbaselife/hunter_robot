@@ -211,3 +211,13 @@ def process_list(str_list):
         s = s.replace('\n',',')
         ret.extend(s.split(','))
     return ret
+
+def process_str_to_list(str):
+    s = s.replace(':',',')
+    s = s.replace('.',',')
+    s = s.replace('。',',')
+    s = s.replace('、',',')
+    s = s.replace('，',',')
+    s = s.replace('\\n',',')
+    s = s.replace('\n',',')
+    return s.split(',')
