@@ -89,7 +89,10 @@ def query_account_type_db(account_id):
     return dbm.query(sql_dict['query_account_type'].format(account_id))[0][0]
 
 def new_candidate_db(candidate_id, candidate_name, age, degree, location, position, details):
+    location = deal_json_invaild(location)
     details = deal_json_invaild(details)
+    position = deal_json_invaild(position)
+    degree = deal_json_invaild(degree)
     try:
         s = sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details)
         dbm.insert(s)
@@ -108,15 +111,19 @@ def update_candidate_contact_db(candidate_id, contact):
     dbm.update(sql_dict['update_candidate_contact'].format(contact, candidate_id))
 
 def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, status='init', details=None, filter_result=None):
+    if details is not None:
+        details = deal_json_invaild(details)
     dbm.insert(sql_dict['new_chat'].format(account_id, job_id, candidate_id, candidate_name, source, status, details, filter_result))
 
 def query_chat_db(account_id, job_id, candidate_id):
     return dbm.query(sql_dict['query_chat_details'].format(account_id, job_id, candidate_id))
 
 def update_chat_db(account_id, job_id, candidate_id, source, status, details):
+    details = deal_json_invaild(details)
     dbm.update(sql_dict['update_chat'].format(source, status, details, account_id, job_id, candidate_id))
 
 def update_chat_only_details_db(account_id, job_id, candidate_id, details):
+    details = deal_json_invaild(details)
     dbm.update(sql_dict['update_chat_only_details'].format(details, account_id, job_id, candidate_id))
 
 def update_chat_contact_db(account_id, job_id, candidate_id, contact):
