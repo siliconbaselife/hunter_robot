@@ -5,7 +5,7 @@ from utils.utils import format_time
 
 from datetime import datetime
 import json
-from dao.task_dao import get_job_by_id,query_chat_db
+from dao.task_dao import get_job_by_id,query_chat_db,has_contact_db
 
 logger = get_logger(config['log']['log_file'])
 
@@ -21,7 +21,8 @@ class MaimaiRobot(BaseChatRobot):
         is_first_msg, has_system_msg, user_msg_useless, user_ask, chat_round, cur_has_contact, has_manual_touch = \
                 self._preprocess(page_history_msg, db_history_msg)
         need_hello = chat_round==0 ##没有用户消息，发生于用户同意好友申请但并未回复消息
-        need_contact = need_hello or (chat_round==1 and not has_manual_touch)
+
+        need_contact = (not cur_has_contact) and (not has_contact_db(self._candidate_id, self._account_id)) and (need_hello or (chat_round==1 and not has_manual_touch))
         need_use_model = (not user_msg_useless) and (not need_hello)
         self._status = ChatStatus.NormalChat
 

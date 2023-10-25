@@ -40,8 +40,21 @@ sql_dict = {
     "get_one_time_task_by_account_id":"select id,task_config from one_time_task where account_id='{}' and status = 0",
     "get_one_time_task_list":"select id,task_config,status from one_time_task where account_id='{}'",
     "update_one_time_status_by_id":"update one_time_task set status={} where id={}",
-    "new_one_time_task":"insert into one_time_task(account_id, task_config) values ('{}', '{}')"
+    "new_one_time_task":"insert into one_time_task(account_id, task_config) values ('{}', '{}')",
+    "has_contact":"select contact from chat where candidate_id='{}' and account_id='{}'"
 }
+def has_contact_db(candidate_id, account_id):
+    ret = dbm.query(sql_dict['has_contact'].format(candidate_id, account_id))
+    if len(ret) == 0:
+        logger.info(f"chat_error_{account_id}, {candidate_id}")
+        return True
+    flag = False
+    for r in ret:
+        if ret[0] != None and ret[0] !='NULL' and ret[0]!='':
+            flag = True
+    return flag
+
+
 def get_one_time_task_list_db(account_id):
     return dbm.query(sql_dict['get_one_time_task_list'].format(account_id))
 

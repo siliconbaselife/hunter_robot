@@ -9,7 +9,7 @@ import copy
 from utils.group_msg import send_candidate_info
 from dao.task_dao import get_robot_template_by_job_id
 from dao.manage_dao import get_llm_config_by_id_db
-from dao.task_dao import update_chat_contact_db,update_candidate_contact_db,query_chat_db,query_candidate_by_id
+from dao.task_dao import update_chat_contact_db,update_candidate_contact_db,query_chat_db,query_candidate_by_id,has_contact_db
 
 logger = get_logger(config['log']['log_file'])
 
@@ -121,7 +121,7 @@ class BaseChatRobot(object):
         ### if user send useless msg(expression)
         ### calc chat round
         is_first_msg, has_system_msg, user_msg_useless, user_ask, chat_round, has_contact = self._preprocess(page_history_msg, db_history_msg)
-        need_contact = (not has_contact) and (is_first_msg if user_ask else chat_round==1)
+        need_contact = (not has_contact) and (not has_contact_db(self._candidate_id, self._account_id)) (is_first_msg if user_ask else chat_round==1)
         need_use_model = not user_msg_useless
         self._status = ChatStatus.NormalChat
 
