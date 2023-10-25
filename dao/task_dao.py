@@ -47,7 +47,7 @@ def has_contact_db(candidate_id, account_id):
     ret = dbm.query(sql_dict['has_contact'].format(candidate_id, account_id))
     if len(ret) == 0:
         logger.info(f"chat_error_{account_id}, {candidate_id}")
-        return True
+        return False
     flag = False
     for r in ret:
         if ret[0] != None and ret[0] !='NULL' and ret[0]!='':
