@@ -94,14 +94,15 @@ def task_report_api():
             touch_list+= item['details']['candidateList']
     update_touch_task(account_id, job_id, len(touch_list))
     for candidate_id in touch_list:
-        candidate_name, filter_result = query_candidate_name_and_filter_result(candidate_id)
+        candidate_id_p = process_independent_encode(account_id, candidate_id)
+        candidate_name, filter_result = query_candidate_name_and_filter_result(candidate_id_p)
         init_msg = {
             'speaker': 'robot',
             'msg': job_touch_msg,
             'time': format_time(datetime.now())
         }
         details = json.dumps([init_msg], ensure_ascii=False)
-        new_chat_db(account_id, job_id, candidate_id, candidate_name, filter_result=filter_result, details=details, source='search')
+        new_chat_db(account_id, job_id, candidate_id_p, candidate_name, filter_result=filter_result, details=details, source='search')
 
     ret_data = {
         'status': 'ok'
