@@ -60,7 +60,8 @@ def get_one_time_task_list_db(account_id):
 
 def new_one_time_task_db(account_id, one_time_task_config):
     one_time_task_config_j = json.dumps(one_time_task_config, ensure_ascii=False)
-    one_time_task_config_j = deal_json_invaild(one_time_task_config_j)
+    one_time_task_config_j = one_time_task_config_j.replace("\'", "\\'")
+    one_time_task_config_j = one_time_task_config_j.replace('\"', '\\"')
     return dbm.insert(sql_dict["new_one_time_task"].format(account_id, one_time_task_config_j))
 
 def update_one_time_status_by_id(status, id):
@@ -105,10 +106,14 @@ def query_account_type_db(account_id):
     return dbm.query(sql_dict['query_account_type'].format(account_id))[0][0]
 
 def new_candidate_db(candidate_id, candidate_name, age, degree, location, position, details):
-    location = deal_json_invaild(location)
-    details = deal_json_invaild(details)
-    position = deal_json_invaild(position)
-    degree = deal_json_invaild(degree)
+    location = location.replace("\'", "\\'")
+    location = location.replace('\"', '\\"')
+    details = details.replace("\'", "\\'")
+    details = details.replace('\"', '\\"')
+    position = position.replace("\'", "\\'")
+    position = position.replace('\"', '\\"')
+    degree = degree.replace("\'", "\\'")
+    degree = degree.replace('\"', '\\"')
     try:
         s = sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details)
         dbm.insert(s)
@@ -128,18 +133,21 @@ def update_candidate_contact_db(candidate_id, contact):
 
 def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, status='init', details=None, filter_result=None):
     if details is not None:
-        details = deal_json_invaild(details)
+        details = details.replace("\'", "\\'")
+        details = details.replace('\"', '\\"')
     dbm.insert(sql_dict['new_chat'].format(account_id, job_id, candidate_id, candidate_name, source, status, details, filter_result))
 
 def query_chat_db(account_id, job_id, candidate_id):
     return dbm.query(sql_dict['query_chat_details'].format(account_id, job_id, candidate_id))
 
 def update_chat_db(account_id, job_id, candidate_id, source, status, details):
-    details = deal_json_invaild(details)
+    details = details.replace("\'", "\\'")
+    details = details.replace('\"', '\\"')
     dbm.update(sql_dict['update_chat'].format(source, status, details, account_id, job_id, candidate_id))
 
 def update_chat_only_details_db(account_id, job_id, candidate_id, details):
-    details = deal_json_invaild(details)
+    details = details.replace("\'", "\\'")
+    details = details.replace('\"', '\\"')
     dbm.update(sql_dict['update_chat_only_details'].format(details, account_id, job_id, candidate_id))
 
 def update_chat_contact_db(account_id, job_id, candidate_id, contact):
