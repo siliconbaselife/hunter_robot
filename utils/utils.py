@@ -212,7 +212,7 @@ def process_list(str_list):
         ret.extend(s.split(','))
     return ret
 
-def process_str_to_list(str):
+def process_str_to_list(s):
     s = s.replace(':',',')
     s = s.replace('.',',')
     s = s.replace('。',',')
