@@ -82,7 +82,9 @@ def task_report_api():
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         # job_id = json.loads(get_account_jobs_db(account_id))[0]
         ##默认给一个job
-        job_id = get_default_job(account_id)
+        platform_type = query_account_type_db(account_id)
+        jobs = json.loads(get_account_jobs_db(account_id))
+        job_id = get_default_job(account_id, jobs, platform_type)
     job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
     job_touch_msg = job_config['touch_msg']
 
@@ -119,7 +121,9 @@ def candidate_filter_api():
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         # job_id = json.loads(get_account_jobs_db(account_id))[0]
         ##默认给一个job
-        job_id = get_default_job(account_id)
+        platform_type = query_account_type_db(account_id)
+        jobs = json.loads(get_account_jobs_db(account_id))
+        job_id = get_default_job(account_id, jobs, platform_type)
     raw_candidate_info = request.json['candidateInfo']
     #应该从下面取， 不应该在这取吧？@润和 如果是怕异常得换个地方,我换到实现类里面
     # candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
@@ -217,7 +221,9 @@ def candidate_chat_api():
         if len(job_id_info) == 0:
             # job_id = json.loads(get_account_jobs_db(account_id))[0]
             ##默认给一个job
-            job_id = get_default_job(account_id)
+            platform_type = query_account_type_db(account_id)
+            jobs = json.loads(get_account_jobs_db(account_id))
+            job_id = get_default_job(account_id, jobs, platform_type)
         else:
             job_id = job_id_info[0][0]
     # history_msg = request.json['historyMsg']
@@ -279,7 +285,9 @@ def candidate_result_api():
         if len(job_id_info) == 0:
             # job_id = json.loads(get_account_jobs_db(account_id))[0]
             ##默认给一个job
-            job_id = get_default_job(account_id)
+            platform_type = query_account_type_db(account_id)
+            jobs = json.loads(get_account_jobs_db(account_id))
+            job_id = get_default_job(account_id, jobs, platform_type)
         else:
             job_id = job_id_info[0][0]
 

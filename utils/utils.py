@@ -2,7 +2,7 @@ import random
 import numpy as np
 import copy
 import json
-from dao.task_dao import get_account_jobs_db
+from dao.task_dao import query_account_type_db,get_account_jobs_db
 from service.task_service import get_job_by_id_service
 
 def str_is_none(str):
@@ -200,13 +200,11 @@ default_job_map = {
     }
 }
 
-def get_default_job(account_id):
-    jobs = json.loads(get_account_jobs_db(account_id))
+def get_default_job(account_id, jobs, platform_type):
     if len(jobs) == 0:
-        return default_job_map['maimai']["zp"]
+        return default_job_map[platform_type]["zp"]
     else:
         job_ret = get_job_by_id_service(jobs[0])[0]
-        platform_type = job_ret[1]
         job_config = json.loads(job_ret[6])
         if 'recall_config' in job_config:
             recall_type = job_config['recall_config']
