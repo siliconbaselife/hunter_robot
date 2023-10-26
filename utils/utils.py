@@ -1,6 +1,9 @@
 import random
 import numpy as np
 import copy
+import json
+from dao.task_dao import query_account_type_db,get_account_jobs_db
+from service.task_service import get_job_by_id_service
 
 def str_is_none(str):
     return str == None or str == "" or str == "None" or str == "NULL" or  str == "NONE" or str == "Null"
@@ -180,13 +183,36 @@ statistic_id_dict = {
 }
 
 default_job_map = {
-    "maimai":"job_maimai_default-manual-id",
-    "Boss":"job_boss_default-manual-id",
-    "Linkedin":"job_linkedin_default-manual-id"
+    "maimai": {
+        "zp":"job_maimai_default-manual-id",
+        "bd":"job_maimai_overseas-bd-manual-id",
+        "wm":"job_maimai_overseas-bd-manual-id"
+    },
+    "Boss": {
+        "zp":"job_boss_default-manual-id",
+        "bd":"job_boss_default-manual-id",
+        "wm":"job_boss_default-manual-id"
+    },
+    "Linkedin":{
+        "zp":"job_linkedin_default-manual-id",
+        "bd":"job_maimai_overseas-bd-manual-id",
+        "wm":"job_maimai_overseas-bd-manual-id"
+    }
 }
 
-def get_default_job(platform_type):
-    return default_job_map[platform_type]
+def get_default_job(account_id):
+    platform_type = query_account_type_db(account_id)
+    jobs = json.loads(get_account_jobs_db(account_id))
+    if len(jobs) == 0:
+        return default_job_map[platform_type]["zp"]
+    else:
+        job_ret = get_job_by_id_service(jobs[0])[0]
+        job_config = json.loads(job_ret[6])
+        if 'recall_config' in job_config:
+            recall_type = job_config['recall_config']
+        else:
+            recall_type = 'zp'
+        return default_job_map[platform_type][recall_type]
 
 def get_stat_id_dict():
     return statistic_id_dict

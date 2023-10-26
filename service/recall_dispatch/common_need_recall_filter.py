@@ -6,9 +6,7 @@ from service.task_service import get_job_by_id_service
 
 logger = get_logger(config['log']['log_file'])
 
-def get_msg(filter_result, job_already_recall_count, job_id, recall_type):
-    
-
+def get_msg(filter_result, job_already_recall_count, job_id, recall_type, platform_type):
     if recall_type == 'zp':
         if job_already_recall_count == 0:
             if filter_result == 'NULL' or filter_result == None or filter_result == 'None':
@@ -20,12 +18,19 @@ def get_msg(filter_result, job_already_recall_count, job_id, recall_type):
         elif job_already_recall_count == 2:
             return "哈喽 亲 看给你发消息一直没有回复，是不感兴趣？其实除了这个客户，我们还有其他Top公司的机会，我也可以给你分享行业信息，大家交个朋友，认识交流一下，多个朋友多条路，你觉得呢？"
     elif recall_type == 'bd':
+        if platform_type == 'Linkedin':
+            if job_already_recall_count == 0:
+                return "I run a company that offers overseas workforce solutions, including EOR, recruitment, and payroll services. If you need any assistance, please feel free to contact me anytime."
+        else:
+            if job_already_recall_count == 0:
+                return "Hi,亲. 最近还很忙吗？我这边是提供海外人力解决方案的公司，如果您需要帮忙，欢迎随时与我联系哦~"
+            elif job_already_recall_count == 1:
+                return "Hi,亲. 您对我的提议感兴趣吗？很期待跟您的进一步合作。"
+            elif job_already_recall_count == 2:
+                return "Hi,亲. 最近你们有需求吗，有需求的话我们聊一聊呢。"
+    elif recall_type == 'wm':
         if job_already_recall_count == 0:
-            return "Hi,亲. 最近还很忙吗？我这边是提供海外人力解决方案的公司，如果您需要帮忙，欢迎随时与我联系哦~"
-        elif job_already_recall_count == 1:
-            return "Hi,亲. 您对我的提议感兴趣吗？很期待跟您的进一步合作。"
-        elif job_already_recall_count == 2:
-            return "Hi,亲. 最近你们有需求吗，有需求的话我们聊一聊呢。"
+            return "Hi,亲. "
     
     return "亲，方便交换个联系方式，咱们后续保持联系吗？"
 
@@ -66,17 +71,18 @@ def common_need_recall_filter(chat_info, flag):
 
     bd_flag = True
     recall_type = 'zp'
-    job_config = json.loads(get_job_by_id_service(job_id)[0][6])
+    job_ret = get_job_by_id_service(job_id)[0]
+    platform_type = job_ret[1]
+    job_config = json.loads(job_ret[6])
+
     if 'recall_config' in job_config:
         recall_type = job_config['recall_config']
-    if already_recall_count > 0 and recall_type == 'bd':
+    if already_recall_count > 0 and (recall_type == 'bd' or recall_type == 'wm'):
         bd_flag = False
-
-
 
     force_flag = True
     if contact_unget and time_match and less_count and bd_flag and force_flag:
-        recall_msg = get_msg(filter_result, already_recall_count, job_id, recall_type)
+        recall_msg = get_msg(filter_result, already_recall_count, job_id, recall_type, platform_type)
         res = {
             "candidate_id": candidate_id,
             "candidate_name": candidate_name,
