@@ -35,7 +35,10 @@ def filter_time(time_percent, retain_sum):
             filter_time_res.append(t)
             sum += t["mount"]
     for t in filter_time_res:
-        t["mount"] = round(t["mount"] / sum * retain_sum) 
+        if sum == 0:
+            t["mount"] = 0
+        else:
+            t["mount"] = round(t["mount"] / sum * retain_sum) 
     return filter_time_res
 
 
