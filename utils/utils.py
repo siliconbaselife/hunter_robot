@@ -2,7 +2,6 @@ import random
 import numpy as np
 import copy
 import json
-from service.task_service import get_job_by_id_service
 
 def str_is_none(str):
     return str == None or str == "" or str == "None" or str == "NULL" or  str == "NONE" or str == "Null"
