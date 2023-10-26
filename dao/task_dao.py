@@ -112,8 +112,8 @@ def new_candidate_db(candidate_id, candidate_name, age, degree, location, positi
     details = details.replace('\"', '\\"')
     position = position.replace("\'", "\\'")
     position = position.replace('\"', '\\"')
-    degree = degree.replace("\'", "\\'")
-    degree = degree.replace('\"', '\\"')
+    # degree = degree.replace("\'", "\\'")
+    # degree = degree.replace('\"', '\\"')
     try:
         s = sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details)
         dbm.insert(s)
