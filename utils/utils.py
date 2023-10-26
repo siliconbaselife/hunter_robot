@@ -199,11 +199,7 @@ default_job_map = {
     }
 }
 
-def get_default_job(account_id, jobs, platform_type):
-    if len(jobs) == 0:
-        return default_job_map[platform_type]["zp"]
-    else:
-        job_ret = get_job_by_id_service(jobs[0])[0]
+def get_default_job(job_ret, platform_type):
         job_config = json.loads(job_ret[6])
         if 'recall_config' in job_config:
             recall_type = job_config['recall_config']

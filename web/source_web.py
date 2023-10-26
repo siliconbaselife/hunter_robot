@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import deal_json_invaild, str_is_none,get_default_job
+from utils.utils import deal_json_invaild, str_is_none,get_default_job,default_job_map
 from dao.task_dao import *
 from service.chat_service import chat_service
 from service.task_service import *
@@ -19,6 +19,7 @@ import json
 import math
 import traceback
 from datetime import datetime
+
 
 source_web = Blueprint('source_web', __name__, template_folder='templates')
 
@@ -84,7 +85,11 @@ def task_report_api():
         ##默认给一个job
         platform_type = query_account_type_db(account_id)
         jobs = json.loads(get_account_jobs_db(account_id))
-        job_id = get_default_job(account_id, jobs, platform_type)
+        if len(jobs) == 0:
+            job_id = default_job_map[platform_type]["zp"]
+        else:
+            j_ret = get_job_by_id_service(jobs[0])[0]
+            job_id = get_default_job(j_ret, platform_type)
     job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
     job_touch_msg = job_config['touch_msg']
 
@@ -123,7 +128,11 @@ def candidate_filter_api():
         ##默认给一个job
         platform_type = query_account_type_db(account_id)
         jobs = json.loads(get_account_jobs_db(account_id))
-        job_id = get_default_job(account_id, jobs, platform_type)
+        if len(jobs) == 0:
+            job_id = default_job_map[platform_type]["zp"]
+        else:
+            j_ret = get_job_by_id_service(jobs[0])[0]
+            job_id = get_default_job(j_ret, platform_type)
     raw_candidate_info = request.json['candidateInfo']
     #应该从下面取， 不应该在这取吧？@润和 如果是怕异常得换个地方,我换到实现类里面
     # candidate_id, candidate_name = raw_candidate_info['geekCard']['geekId'], raw_candidate_info['geekCard']['geekName']
@@ -223,7 +232,11 @@ def candidate_chat_api():
             ##默认给一个job
             platform_type = query_account_type_db(account_id)
             jobs = json.loads(get_account_jobs_db(account_id))
-            job_id = get_default_job(account_id, jobs, platform_type)
+            if len(jobs) == 0:
+                job_id = default_job_map[platform_type]["zp"]
+            else:
+                j_ret = get_job_by_id_service(jobs[0])[0]
+                job_id = get_default_job(j_ret, platform_type)
         else:
             job_id = job_id_info[0][0]
     # history_msg = request.json['historyMsg']
@@ -287,7 +300,11 @@ def candidate_result_api():
             ##默认给一个job
             platform_type = query_account_type_db(account_id)
             jobs = json.loads(get_account_jobs_db(account_id))
-            job_id = get_default_job(account_id, jobs, platform_type)
+            if len(jobs) == 0:
+                job_id = default_job_map[platform_type]["zp"]
+            else:
+                j_ret = get_job_by_id_service(jobs[0])[0]
+                job_id = get_default_job(j_ret, platform_type)
         else:
             job_id = job_id_info[0][0]
 
