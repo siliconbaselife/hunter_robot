@@ -123,7 +123,10 @@ def query_candidate_exist(candidate_id):
     return len(dbm.query(sql_dict['query_candidate'].format(candidate_id)))>0
 
 def query_candidate_name_and_filter_result(candidate_id):
-    item = dbm.query(sql_dict['query_candidate'].format(candidate_id))[0]
+    ret = dbm.query(sql_dict['query_candidate'].format(candidate_id))
+    if len(ret) == 0:
+        logger.info(f'report_without_filter, {candidate_id}')
+    item = ret[0]
     return item[1], item[8]
 def query_candidate_by_id(candidate_id):
     return dbm.query(sql_dict['query_candidate'].format(candidate_id))
