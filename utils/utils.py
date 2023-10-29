@@ -200,6 +200,8 @@ default_job_map = {
 
 def get_default_job(job_ret, platform_type):
         job_config = json.loads(job_ret[6])
+        if 'default_job' in job_config:
+            return job_config['default_job']
         if 'recall_config' in job_config:
             recall_type = job_config['recall_config']
         else:
