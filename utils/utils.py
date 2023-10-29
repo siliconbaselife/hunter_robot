@@ -193,8 +193,8 @@ default_job_map = {
     },
     "Linkedin":{
         "zp":"job_linkedin_default-manual-id",
-        "bd":"job_maimai_overseas-bd-manual-id",
-        "wm":"job_maimai_overseas-bd-manual-id"
+        "bd":"job_Linkedin_remoly-oversea-bd",
+        "wm":"job_Linkedin_remoly-oversea-bd"
     }
 }
 
