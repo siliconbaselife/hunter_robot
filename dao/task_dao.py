@@ -62,6 +62,8 @@ def new_one_time_task_db(account_id, one_time_task_config):
     one_time_task_config_j = json.dumps(one_time_task_config, ensure_ascii=False)
     one_time_task_config_j = one_time_task_config_j.replace("\'", "\\'")
     one_time_task_config_j = one_time_task_config_j.replace('\"', '\\"')
+    one_time_task_config_j = one_time_task_config_j.replace('\\n',';')
+    one_time_task_config_j = one_time_task_config_j.replace('\n',';')
     return dbm.insert(sql_dict["new_one_time_task"].format(account_id, one_time_task_config_j))
 
 def update_one_time_status_by_id(status, id):
