@@ -50,7 +50,7 @@ def has_contact_db(candidate_id, account_id):
         return False
     flag = False
     for r in ret:
-        if ret[0] != None and ret[0] !='NULL' and ret[0]!='':
+        if r[0] != None and r[0] !='NULL' and r[0]!='':
             flag = True
     return flag
 

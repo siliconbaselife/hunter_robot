@@ -22,7 +22,9 @@ class MaimaiRobot(BaseChatRobot):
                 self._preprocess(page_history_msg, db_history_msg)
         need_hello = chat_round==0 ##没有用户消息，发生于用户同意好友申请但并未回复消息
 
-        need_contact = (not cur_has_contact) and (not has_contact_db(self._candidate_id, self._account_id)) and (need_hello or (chat_round==1 and not has_manual_touch))
+        db_has_contact = has_contact_db(self._candidate_id, self._account_id)
+
+        need_contact = (not cur_has_contact) and (not db_has_contact) and (need_hello or (chat_round==1 and not has_manual_touch))
         need_use_model = (not user_msg_useless) and (not need_hello)
         self._status = ChatStatus.NormalChat
 
@@ -79,7 +81,7 @@ class MaimaiRobot(BaseChatRobot):
         self._next_msg = self._next_msg.replace('.','.\n')
         logger.info(f'maimai chat log {self._sess_id}: info: robot_api: {self._robot_api}, source: {self._source}; \
             tmp: system_msgs: {self._last_system_msgs}, user msgs: {self._last_user_msg}, user msg useless: {user_msg_useless}, \
-            is_first: {is_first_msg}, user ask: {user_ask}, chat round: {chat_round}, cur has contact: {cur_has_contact}, has manual touch: {has_manual_touch} \
+            is_first: {is_first_msg}, user ask: {user_ask}, chat round: {chat_round}, cur has contact: {cur_has_contact},db_has_contact:{db_has_contact},need_hello: {need_hello}, has manual touch: {has_manual_touch} \
                 need contact: {need_contact}, need user algo: {need_use_model}, algo intent: {model_judge_intent},  \
                     is no prompt: {is_no_prompt}, is trivial: {is_trivial_intent}, is refuse: {is_refuse_intent}, to cover: {to_cover_response}, \
                         model response: {model_response}, strategy response: {strategy_response}; \
