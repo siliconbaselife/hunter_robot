@@ -2,7 +2,6 @@ from flask import Flask, Response, request
 from flask import Blueprint
 from utils.decorator import web_exception_handler
 from utils.log import get_logger
-from utils.oss import generate_thumbnail
 from utils.group_msg import send_candidate_info
 from utils.utils import format_time,get_api_conifg
 from utils.config import config
