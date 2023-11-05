@@ -194,7 +194,7 @@ default_job_map = {
     "Linkedin":{
         "zp":"job_linkedin_default-manual-id",
         "bd":"job_Linkedin_remoly-oversea-bd",
-        "wm":"job_Linkedin_remoly-oversea-bd"
+        "wm":"job_Linkedin_art-bd"
     }
 }
 
