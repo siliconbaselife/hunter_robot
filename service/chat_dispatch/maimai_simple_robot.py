@@ -25,7 +25,7 @@ class MaimaiSimpleRobot(BaseChatRobot):
         self._next_msg = self._manual_response('hello') if need_hello else ''
         ##增加换行，前端分多次发出
         self._next_msg = self._next_msg.replace('。','。\n')
-        self._next_msg = self._next_msg.replace('.','.\n')
+        # self._next_msg = self._next_msg.replace('.','.\n')
         logger.info(f'maimai simple chat log {self._sess_id}: info: robot_api: {self._robot_api}, source: {self._source}; \
             tmp: system_msgs: {self._last_system_msgs}, user msgs: {self._last_user_msg}, user msg useless: {user_msg_useless}, \
             is_first: {is_first_msg}, user ask: {user_ask}, chat round: {chat_round}, cur has contact: {cur_has_contact}, has manual touch: {has_manual_touch} \
