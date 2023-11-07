@@ -50,6 +50,3 @@ class OpenChatRobot(BaseChatRobot):
 
         chat_round = self._calc_chat_round()
         return chat_round
-
-    def _msg_filter(self, msg):
-        return msg, {}

@@ -64,6 +64,3 @@ class MaimaiSimpleRobot(BaseChatRobot):
                     if next_item['speaker']=='robot':
                         has_manual_touch = True
         return is_first_msg, has_system_msg, user_msg_useless, user_ask, chat_round, cur_has_contact, has_manual_touch
-
-    def _msg_filter(self, msg):
-        return msg, {}

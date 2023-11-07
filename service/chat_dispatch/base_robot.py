@@ -382,3 +382,4 @@ class BaseChatRobot(object):
         
         logger.info(f"session {self._sess_id} request {self._last_user_msg} got response: {response.json()['data']}")
         return response.json()['data']['message'], response.json()['data']['last_message_intent']
+    
