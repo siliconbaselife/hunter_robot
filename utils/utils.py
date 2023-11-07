@@ -224,13 +224,17 @@ def process_str(s):
     return s
 
 def process_list(str_list):
-    ret = []
-    for s in str_list:
-        s = s.replace('，',',')
-        s = s.replace('\\n',',')
-        s = s.replace('\n',',')
-        ret.extend(s.split(','))
-    return ret
+    if isinstance(str_list,list):
+        ret = []
+        for s in str_list:
+            s = s.replace('，',',')
+            s = s.replace('\\n',',')
+            s = s.replace('\n',',')
+            ret.extend(s.split(','))
+        return ret
+    else:
+        s = process_str(str_list)
+        return s.split(',')
 
 def process_str_to_list(s):
     s = s.replace(':',',')
