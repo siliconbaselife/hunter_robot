@@ -148,7 +148,7 @@ def candidate_filter_api():
     
     candidate_id, candidate_name, age, degree, location, position,active_time = candidate_info['id'], candidate_info['name'], candidate_info['age'],\
                                                                     candidate_info['degree'], candidate_info['exp_location'], candidate_info['exp_position'],candidate_info['active_time']
-    logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_id}, {candidate_name}, {age}, {degree}, {location}, {active_time}')
+    logger.info(f'candidate filter request {account_id}, {job_id}, {candidate_id}, {candidate_name}, {age}, {degree}, {location}, {active_time}, {candidate_info["work"]}')
 
     if not query_candidate_exist(candidate_id):
         candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)

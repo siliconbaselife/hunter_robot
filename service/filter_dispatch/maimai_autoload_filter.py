@@ -76,6 +76,29 @@ def maimai_autoload_filter(candidate_info, job_res):
     #             if jt in ep:
     #                 job_ok = True
 
+    cur_company_ok = True
+    if 'cur_company' in filter_args and filter_args['cur_company'] != "" and len(filter_args['cur_company']) > 0:
+        cur_company_ok = False
+        cur_company = filter_args['cur_company']
+        if len(candidate_info['work']) > 0:
+            for c in cur_company:
+                m_c = candidate_info['work'][0]['company']
+                if c in m_c or m_c in c:
+                    cur_company_ok = True
+            
+    
+    ex_company_ok = True
+    if 'ex_company' in filter_args and filter_args['ex_company'] != "" and len(filter_args['ex_company']) > 0:
+        ex_company_ok = False
+        ex_company = filter_args['ex_company']
+        for c in ex_company:
+            if str_is_none(c):
+                continue
+            for w in candidate_info['work']:
+                if c in w['company'] or w['company'] in c:
+                    ex_company_ok = True
+
+
     neg_filter_ok = True
     if 'neg_words' in filter_args and filter_args['neg_words'] != "":
         neg_words = filter_args['neg_words']
@@ -89,7 +112,7 @@ def maimai_autoload_filter(candidate_info, job_res):
     
 
     judge_result = {
-        'judge': is_active and age_ok and degree_ok and location_ok and job_ok and school_ok and neg_filter_ok,
+        'judge': is_active and age_ok and degree_ok and location_ok and job_ok and school_ok and neg_filter_ok and cur_company_ok and ex_company_ok,
         'details': {
             'is_active': is_active,
             'age': age_ok,
@@ -97,7 +120,8 @@ def maimai_autoload_filter(candidate_info, job_res):
             'location': location_ok,
             'job_position': job_ok,
             'school': school_ok,
-            'neg_filter_ok':neg_filter_ok
+            'neg_filter_ok':neg_filter_ok,
+            'ex_company_ok':ex_company_ok
         }
     }
     return judge_result
