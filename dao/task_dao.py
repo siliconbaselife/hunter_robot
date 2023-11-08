@@ -29,7 +29,7 @@ sql_dict = {
     "get_account_task_log":"select id, account_id, job_id, exec_date, hello_sum_need,hello_sum_exec,create_time, update_time from account_exec_log where account_id='{}' and exec_date='{}'",
     "get_job_task_log": "select id, account_id, job_id, exec_date, hello_sum_need,hello_sum_exec,create_time, update_time from account_exec_log where account_id='{}' and exec_date='{}'",
     "get_job_by_id":"select job_id,platform_type,platform_id,job_name,job_jd,robot_api,job_config,create_time,update_time,share,robot_api from job where job_id='{}'",
-    "get_chats_by_job_id":"select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' and contact!='NULL' order by update_time desc limit {},{}",
+    "get_chats_by_job_id":"select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' order by update_time desc limit {},{}",
     "get_chats_num_by_job_id":"select count(1) from chat where job_id='{}' and contact!='NULL'",
     "get_chats_by_ids":"select candidate_id, candidate_name, contact, details, filter_result, update_time, recall_cnt, job_id from chat where account_id='{}' and candidate_id in {} order by update_time desc",
     "recall_exec":"update chat set recall_cnt = recall_cnt + 1 where account_id='{}' and candidate_id='{}'",
