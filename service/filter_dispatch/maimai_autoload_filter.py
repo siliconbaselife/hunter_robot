@@ -83,8 +83,10 @@ def maimai_autoload_filter(candidate_info, job_res):
         if len(candidate_info['work']) > 0:
             for c in cur_company:
                 m_c = candidate_info['work'][0]['company']
-                if c in m_c or m_c in c:
+                c_0 = candidate_info['companies'][0]
+                if c in m_c or m_c in c or c_0 in c or c in c_0:
                     cur_company_ok = True
+        
             
     
     ex_company_ok = True
@@ -97,16 +99,22 @@ def maimai_autoload_filter(candidate_info, job_res):
             for w in candidate_info['work']:
                 if c in w['company'] or w['company'] in c:
                     ex_company_ok = True
+            for c_s in candidate_info['companies']:
+                if c_s in c or c in c_s:
+                    ex_company_ok = True
 
 
     neg_filter_ok = True
-    if 'neg_words' in filter_args and filter_args['neg_words'] != "":
+    if 'neg_words' in filter_args and filter_args['neg_words'] != "" and len(filter_args['neg_words']) > 0:
         neg_words = filter_args['neg_words']
         for n in neg_words:
             if str_is_none(n):
                 continue
             for w in candidate_info['work']:
                 if n in w['company'] or w['company'] in n:
+                    neg_filter_ok = False
+            for c_s in candidate_info['companies']:
+                if c_s in n or n in c_s:
                     neg_filter_ok = False
            
     
