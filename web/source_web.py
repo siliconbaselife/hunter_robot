@@ -64,7 +64,7 @@ def task_fetch_api():
     account_id = request.json['accountID']
     job_id = request.json.get('jobID', "")
     logger.info(f'account task fetch request {account_id}, {job_id}')
-    task_list = get_undo_task(account_id)
+    task_list = get_undo_task(account_id, job_id)
 
     logger.info(f'account task fetch {account_id}: {task_list}')
     ret_data = {

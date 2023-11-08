@@ -93,7 +93,7 @@ def get_undo_task(account_id, job_id):
             init_task_log_db(account_id, j["jobID"], today_date, j["helloSum"])
     today_sub_task_log = get_account_task_log_db(account_id, today_date)
     res = re_org_task(config_data, today_sub_task_log, job_id)
-    logger.info(f'get_undo_task for {account_id} {today_date}, will return {res}')
+    logger.info(f'get_undo_task for {account_id}, {job_id}, {today_date}, will return {res}')
     return res
 
 def update_touch_task(account_id, job_id, hello_cnt=1):
