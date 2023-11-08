@@ -30,7 +30,7 @@ def get_msg(filter_result, job_already_recall_count, job_id, recall_type, platfo
                 return "Hi,亲. 最近你们有需求吗，有需求的话我们聊一聊呢。"
     elif recall_type == 'wm':
         if job_already_recall_count == 0:
-            return "Hi,亲. "
+            return "Hello, do your company require outsourcing art services?"
     
     return "亲，方便交换个联系方式，咱们后续保持联系吗？"
 
