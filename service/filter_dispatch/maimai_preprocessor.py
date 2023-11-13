@@ -69,9 +69,15 @@ def maimai_preprocess(raw_candidate_info):
             #     "school_url": "https://i9.taou.com/maimai/p/school/small_20088e8e9e4c1f275c8e9024bbbc29fc.jpg"
             #   }
         # ]
-        education = tmp.get('edu', [])        
-
-        
+        education = []
+        for e in tmp.get('edu', []):
+            education.append({
+                'school': e.get('school', ''),
+                'sdegree': e.get('sdegree', ''),
+                'start_date_ym': e.get('start_date_ym', ''),
+                'end_date_ym': e.get('end_date_ym', ''),
+                'department': e.get('department', '')
+            })
         #  "companies": [
         #     "宝时得科技（中国）有限公司",
         #     "美的集团",
@@ -98,7 +104,15 @@ def maimai_preprocess(raw_candidate_info):
         #         "share_url": "https://maimai.cn/company?webcid=xkvLzdC8"
         #         }
         # }]
-        work = tmp['exp']
+        work = []
+        for w in tmp.get('exp'):
+            work.append({
+                'company': w.get('company', ''),
+                'timeinfo': w.get('v', ''),
+                'locationInfo': '',
+                'position': w.get('position', ''),
+                'description': w.get('description', ''),
+            })
         
         #不知道怎么来的，反正算一些tag
         tag_list = tmp['tag_list']

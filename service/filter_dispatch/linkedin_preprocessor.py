@@ -80,8 +80,6 @@ def linkedin_preprocess(raw_candidate_info):
                 for w in e['works']:
                     workPosition = workPosition + w['workPosition'] + ','
                     workDescription = workDescription + w['workDescription'] + ','
-
-
                 work.append({
                     'company': e.get('companyName', ''),
                     'timeinfo': e.get('timeInfo', ''),
@@ -107,7 +105,8 @@ def linkedin_preprocess(raw_candidate_info):
             'personal_summary': personal_summary,
             'personal_url': personal_url,
             'languages': languages,
-            'education': education
+            'education': education,
+            'work': work
 
         } 
 
