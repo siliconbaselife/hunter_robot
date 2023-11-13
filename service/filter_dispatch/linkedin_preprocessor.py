@@ -10,7 +10,7 @@ def linkedin_preprocess(raw_candidate_info):
     try:
         tmp = raw_candidate_info
         cid = tmp['trackingUrn'].split(':')[-1]
-        cname = tmp['title']['text']
+        cname = tmp['profile']['name']
         logger.info(f"test_name: {cname}")
         age = 0
         degree = ""
@@ -21,8 +21,9 @@ def linkedin_preprocess(raw_candidate_info):
             exp_location = ""
         exp_salary = ""
         position_name = tmp['primarySubtitle']['text']
-        education = ""
-        
+        active_time = ""
+
+
         work = []
         ## parse work
         if tmp['primarySubtitle'] != None:
@@ -37,7 +38,59 @@ def linkedin_preprocess(raw_candidate_info):
                     'end': ""
                 })
 
-        active_time = ""
+        personal_desc = ''
+        personal_desc = ''
+        personal_url = ''
+        languages = []
+        education = []
+        work = []
+
+        if 'profile' in tmp and tmp['profile'] is not None:
+            personal_desc = tmp['profile'].get('short_description', '')
+            personal_summary = tmp['profile'].get('summary', '')
+            personal_url = tmp['profile']['contactInfo'].get('url', '')
+            languages = tmp['profile']['languages']
+            education = []
+            work = []
+            for e in tmp['profile']['educations']:
+                if e.get('majorInfo', '') == '':
+                    sdegree = ''
+                    department = ''
+                else:
+                    sdegree = e['majorInfo'].split(',')[0]
+                    department = e['majorInfo'].split(',')[1]
+
+                if e.get('timeInfo', '') == '':
+                    start_date_ym = ''
+                    end_date_ym = ''
+                else:
+                    start_date_ym = e['timeInfo'].split('-')[0].strip()
+                    end_date_ym = e['timeInfo'].split('-')[1].strip()
+
+                education.append({
+                    'school' : e.get('schoolName', ''),
+                    'sdegree': sdegree,
+                    'department': department,
+                    'start_date_ym': start_date_ym,
+                    'end_date_ym': end_date_ym
+                })
+            for e in tmp['profile']['experiences']:
+                workPosition = ''
+                workDescription = ''
+                for w in e['works']:
+                    workPosition = workPosition + w['workPosition'] + ','
+                    workDescription = workDescription + w['workDescription'] + ','
+
+
+                work.append({
+                    'company': e.get('companyName', ''),
+                    'timeinfo': e.get('timeInfo', ''),
+                    'locationInfo': e.get('locationInfo', ''),
+                    'position':workPosition,
+                    'description': workDescription
+                })
+
+
 
         return {
             'id': cid,
@@ -48,9 +101,14 @@ def linkedin_preprocess(raw_candidate_info):
             'exp_location': exp_location,
             'exp_salary': exp_salary,
             'exp_position': position_name,
-            'education': education,
             'work': work,
-            "active_time": active_time
+            'active_time': active_time,
+            'personal_desc': personal_desc,
+            'personal_summary': personal_summary,
+            'personal_url': personal_url,
+            'languages': languages,
+            'education': education
+
         } 
 
     except BaseException as e:

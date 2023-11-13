@@ -31,7 +31,9 @@ def maimai_preprocess(raw_candidate_info):
             tmp['major'] = ""
         if 'position' not in tmp or tmp['position'] is None:
             tmp['position'] = ""
-        
+        if 'job_preferences' not in tmp or tmp['job_preferences'] is None:
+            tmp['job_preferences'] = []
+
 
         cur_location = tmp['province'] + '-' + tmp['city']
         
@@ -67,7 +69,7 @@ def maimai_preprocess(raw_candidate_info):
             #     "school_url": "https://i9.taou.com/maimai/p/school/small_20088e8e9e4c1f275c8e9024bbbc29fc.jpg"
             #   }
         # ]
-        education = tmp.get('edu', "")        
+        education = tmp.get('edu', [])        
 
         
         #  "companies": [
@@ -75,7 +77,7 @@ def maimai_preprocess(raw_candidate_info):
         #     "美的集团",
         #     "同程旅行"
         #     ]
-        companies = tmp.get('companies', "")
+        companies = tmp.get('companies', [])
         # [
         #     {
         #         "cid": 874305,
@@ -112,6 +114,23 @@ def maimai_preprocess(raw_candidate_info):
         
         active_time = int(time.time()) - int(tmp['second'])
 
+        # {
+        #     "positions": [
+        #         "游戏主策划",
+        #         "主数值"
+        #     ],
+        #     "regions": [
+        #         "上海"
+        #     ],
+        #     "province_cities": [
+        #         "上海"
+        #     ],
+        #     "salary": "50k-70k/月",
+        #     "prefessions": []
+        #     }
+        
+        job_preferences = tmp['job_preferences']
+
         return {
             'id': cid,
             'name': cname,
@@ -130,7 +149,8 @@ def maimai_preprocess(raw_candidate_info):
             'work': work,
             'companies': companies,
             'tag_list': tag_list,
-            "active_time": active_time
+            "active_time": active_time,
+            "job_preferences":job_preferences
         } 
 
     except BaseException as e:
@@ -155,7 +175,8 @@ def maimai_preprocess(raw_candidate_info):
             'work': work,
             'companies': companies,
             'tag_list': tag_list,
-            "active_time": active_time
+            "active_time": active_time,
+            "job_preferences":job_preferences
         } 
 
 
