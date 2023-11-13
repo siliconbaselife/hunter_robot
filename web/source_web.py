@@ -114,7 +114,6 @@ def task_report_api():
             new_chat_db(account_id, job_id, candidate_id_p, candidate_name, filter_result=filter_result, details=details, source='search')
         except BaseException as e:
             logger.info(f'report_before_filter:{account_id}, {candidate_id}')
-
     ret_data = {
         'status': 'ok'
     }
