@@ -1,5 +1,5 @@
 from utils.config import config
-from utils.log import  get_logger
+from utils.log import get_logger
 from dao.task_dao import query_account_type_db
 from .chat_dispatch import *
 from dao.task_dao import *
@@ -17,7 +17,7 @@ def chat_service(account_id, job_id, candidate_id, robot_api, page_history_msg, 
     job_res = get_job_by_id(job_id)
     if len(job_res) == 0:
         logger.info(f"chat_service: job config wrong, not exist: {job_id}, {candidate_id}")
-    chat_key = json.loads(job_res[0][6],strict=False)["chat_config"]
+    chat_key = json.loads(job_res[0][6], strict=False)["chat_config"]
     assert chat_key in __chat_dispatcher, f"chat_service: unsupport job chat key {chat_key} from account {account_id}"
     Robot = __chat_dispatcher[chat_key]
     robot = Robot(robot_api, account_id, job_id, candidate_id, source=source)
