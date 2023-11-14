@@ -289,7 +289,7 @@ class BaseChatRobot(object):
                     'msg': merge_user_msg,
                     'time': last_user_time
                 })
-            self._msg_list+= self._last_system_msgs
+            self._msg_list += self._last_system_msgs
 
     def _calc_chat_round(self):
         chat_round = 0
