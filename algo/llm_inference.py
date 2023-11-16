@@ -20,7 +20,7 @@ class ChatGPT:
     @exception_retry(retry_time=3, delay=0.5, failed_return=None)
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
-            model="gpt-4-1106-preview",
+            model="gpt-3.5-turbo",
             messages=prompt.get_messages(),
             temperature=0.2
         )
