@@ -6,7 +6,6 @@ from web.wechat_web import wechat_web
 from web.manage_web import manage_web
 from utils.config import config
 
-
 logger = get_logger(config['log']['log_file'])
 app = Flask("robot_backend")
 app.register_blueprint(source_web)
@@ -19,6 +18,8 @@ CORS(app, resources=r'/*')
 @app.route("/test")
 def test():
     return "Hello, World!"
+
+
 
 
 

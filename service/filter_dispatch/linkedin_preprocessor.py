@@ -39,7 +39,7 @@ def linkedin_preprocess(raw_candidate_info):
                 })
 
         personal_desc = ''
-        personal_desc = ''
+        personal_summary = ''
         personal_url = ''
         languages = []
         education = []

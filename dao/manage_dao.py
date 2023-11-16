@@ -76,4 +76,5 @@ def account_config_update_db(manage_account_id, account_id, task_config_json, jo
     return dbm.update(sql)
 
 def update_job_config(job_id,robot_api, job_config, robot_template_str):
+    job_config = job_config.replace("\n", "\\n")
     return dbm.update(sql_dict['update_job_config'].format(robot_api, job_config, robot_template_str, job_id))

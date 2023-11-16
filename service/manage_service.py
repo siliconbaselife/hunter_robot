@@ -141,7 +141,7 @@ def candidate_list_service(job_id, start, limit):
 
 
 
-def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template_id):
+def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_template_id, custom_filter_content):
     job_config_json = get_job_by_id(job_id)[0][6]
     if job_config_json == None or job_config_json == 'None' or job_config_json == 'NULL' or job_config_json == "":
         job_config = {}
@@ -153,6 +153,7 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_t
     job_config['filter_args']['neg_words'] = process_list(job_config['filter_args']['neg_words'])
     job_config['filter_args']['ex_company'] = process_list(job_config['filter_args']['ex_company'])
     job_config['filter_args']['cur_company'] = process_list(job_config['filter_args']['cur_company'])
+    job_config['custom_filter_content'] = custom_filter_content
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_id)
 
 def delete_task(manage_account_id, account_id, job_id):

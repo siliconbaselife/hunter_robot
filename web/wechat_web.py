@@ -57,3 +57,5 @@ def user_msg():
     logger.info(f'wechat_user_msg_received:{wechat_account_id}, {wechat_alias_id}, {msg_receive}')
     user_msg_report(wechat_account_id, wechat_alias_id, msg_receive)
     return Response(json.dumps(get_web_res_suc_with_data()))
+
+

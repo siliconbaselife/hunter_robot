@@ -108,7 +108,7 @@ def maimai_preprocess(raw_candidate_info):
         for w in tmp.get('exp'):
             work.append({
                 'company': w.get('company', ''),
-                'timeinfo': w.get('v', ''),
+                'timeinfo': w.get('start_date_ym', '') + '至' + w.get('end_date_ym', ''),
                 'locationInfo': '',
                 'position': w.get('position', ''),
                 'description': w.get('description', ''),

@@ -92,11 +92,13 @@ config['job_register'] = {
     },
     "Linkedin":{
         "filter_config":"linkedin_autoload_filter",
+        "custom_filter_config":"linkedin_custom_filter",
         "chat_config":"base_common_chat",
         "recall_config":"zp"
     },
     "maimai":{
         "filter_config":"maimai_autoload_filter",
+        "custom_filter_config":"maimai_custom_filter",
         "chat_config":"maimai_common_chat",
         "recall_config":"zp"
     }

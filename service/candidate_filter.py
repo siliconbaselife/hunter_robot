@@ -21,7 +21,9 @@ __filter_dispatcher = {
     'no_condition_common_filter': no_condition_common_filter,
     'maimai_autoload_filter': maimai_autoload_filter,
     'boss_autoload_filter': boss_autoload_filter,
-    'linkedin_autoload_filter': linkedin_autoload_filter
+    'linkedin_autoload_filter': linkedin_autoload_filter,
+    'maimai_custom_filter': maimai_custom_filter,
+    'linkedin_custom_filter':linkedin_custom_filter
 }
 
 _account_force_context = {}

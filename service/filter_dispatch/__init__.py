@@ -10,3 +10,5 @@ from .no_condition_common_filter import no_condition_common_filter
 from .boss_autoload_filter import boss_autoload_filter
 from .maimai_autoload_filter import maimai_autoload_filter
 from .linkedin_autoload_filter import linkedin_autoload_filter
+from .maimai_custom_filter import maimai_custom_filter
+from .linkedin_custom_filter import linkedin_custom_filter
