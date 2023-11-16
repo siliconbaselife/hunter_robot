@@ -65,7 +65,7 @@ def register_job_api():
     robot_api = request.json.get('robotApi',"")
     job_config = request.json.get('jobConfig', None)
     robot_template = request.json.get('robotTemplate', "")
-    custom_filter = request.json.get('customFilter', 0)
+    custom_filter = int(request.json.get('customFilter', 0))
     # share = request.json['share']
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
