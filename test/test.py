@@ -7,5 +7,5 @@ data = {
     'historyMsg': [{"speaker": "robot", "msg": "hi"}, {"speaker": "user", "msg": "hi"}]
 }
 
-requests.post('https://127.0.0.1:2040/recruit/candidate/chat', json=data)
+requests.post('http://127.0.0.1:2040/recruit/candidate/chat', json=data)
 
