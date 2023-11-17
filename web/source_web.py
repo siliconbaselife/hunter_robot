@@ -225,6 +225,7 @@ def candidate_chat_api():
     candidate_id = request.json['candidateID']
     #encode
     candidate_id = process_independent_encode(account_id, candidate_id)
+    logger.info(f"process_independent_encode candidate_id: {candidate_id}")
 
     ## job use first register job of account:
     job_id = request.json.get('jobID', "")
