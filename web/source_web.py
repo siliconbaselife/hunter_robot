@@ -278,12 +278,15 @@ def candidate_chat_api():
 
     chat_context = chat_service(account_id, job_id, candidate_id, robot_api, \
         page_history_msg, db_history_msg, source)
+    logger.info(f"chat_context {chat_context}")
 
     ret_data = {
         'nextStep': chat_context['next_step'],
         'nextStepContent': chat_context['next_msg'] 
     }
     details = json.dumps(chat_context['msg_list'], ensure_ascii=False)
+    logger.info(f"details: {details}")
+
     update_chat_db(account_id, job_id, candidate_id, chat_context['source'], chat_context['status'], details)
     logger.info(f'candidate chat: {account_id} {job_id} {candidate_id} {candidate_name}: {ret_data}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
