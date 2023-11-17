@@ -270,6 +270,7 @@ def candidate_chat_api():
                 db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
 
     robot_api = query_robotapi_db(job_id)
+    logger.info(f"robot_api: {robot_api}")
     if not robot_api:
         reason = f'job id {job_id} 未注册，没有对应的算法uri'
         return Response(json.dumps(get_web_res_fail(reason)))

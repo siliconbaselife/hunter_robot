@@ -8,5 +8,5 @@ data = {
 }
 
 r = requests.post('http://127.0.0.1:2040/recruit/candidate/chat', json=data)
-print(r)
+print(r.text)
 
