@@ -252,6 +252,7 @@ def candidate_chat_api():
     db_history_msg = None
 
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
+    logger.info(f"candidate_info: {candidate_info}")
     if len(candidate_info) == 0:
         details = json.dumps(page_history_msg, ensure_ascii=False)
         logger.info(f'candidate chat not in db, new candidate will supply: {account_id} {job_id} {candidate_id} {candidate_name} {details}')
