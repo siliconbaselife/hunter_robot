@@ -24,21 +24,24 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
         logger.info(f"maimai robot init job_id: {job_id}")
 
     def contact(self, page_history_msg, db_history_msg):
-        history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
+        try:
+            history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
 
-        status_infos = self.fetch_now_status()
-        logger.info(f"当前客户 {self._candidate_id} 的状态信息是 {status_infos}")
+            status_infos = self.fetch_now_status()
+            logger.info(f"当前客户 {self._candidate_id} 的状态信息是 {status_infos}")
 
-        self.deal_contact(history_msgs, status_infos)
-        self.deal_intention(history_msgs, status_infos)
-        self.deal_introduction(history_msgs, status_infos)
+            self.deal_contact(history_msgs, status_infos)
+            self.deal_intention(history_msgs, status_infos)
+            self.deal_introduction(history_msgs, status_infos)
 
-        logger.info(f"当前客户 {self._candidate_id} 的 status_infos: {status_infos}")
+            logger.info(f"当前客户 {self._candidate_id} 的 status_infos: {status_infos}")
 
-        r_msg, action = self.chat_to_ai(history_msgs, status_infos)
-        self.deal_r_msg(r_msg, action)
+            r_msg, action = self.chat_to_ai(history_msgs, status_infos)
+            self.deal_r_msg(r_msg, action)
 
-        logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
+            logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
+        except BaseException as e:
+            logger.error(e)
 
     def fetch_now_status(self):
         res = query_status_infos(self._account_id, self._candidate_id)
