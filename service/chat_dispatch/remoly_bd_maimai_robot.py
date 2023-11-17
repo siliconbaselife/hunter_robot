@@ -7,6 +7,8 @@ from utils.config import config
 from utils.utils import format_time
 from datetime import datetime
 
+import traceback
+
 import time
 
 import requests
@@ -42,6 +44,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
             logger.error(e)
+            logger.error(str(traceback.format_exc()))
 
     def fetch_now_status(self):
         res = query_status_infos(self._account_id, self._candidate_id)
