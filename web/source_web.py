@@ -278,7 +278,6 @@ def candidate_chat_api():
 
     chat_context = chat_service(account_id, job_id, candidate_id, robot_api, \
         page_history_msg, db_history_msg, source)
-    logger.info(f"chat_context {chat_context}")
 
     ret_data = {
         'nextStep': chat_context['next_step'],

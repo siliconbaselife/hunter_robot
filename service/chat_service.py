@@ -16,6 +16,7 @@ __chat_dispatcher = {
 
 def chat_service(account_id, job_id, candidate_id, robot_api, page_history_msg, db_history_msg, source):
     job_res = get_job_by_id(job_id)
+    logger.info(f"job_res: {job_res}")
     if len(job_res) == 0:
         logger.info(f"chat_service: job config wrong, not exist: {job_id}, {candidate_id}")
     chat_key = json.loads(job_res[0][6], strict=False)["chat_config"]
