@@ -65,7 +65,12 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
 
         msg_prompt = f'''
 {msg_str}
-问: 萃取出客户的电话号码和微信号，排除掉我的信息，结果用json格式表示，电话的key是phone，微信的key是wechat，没有获取到的信息为null
+问: 
+帮我萃取出客户的电话号码和微信号，排除掉我的信息。
+结果用json格式表示，电话的key是phone，微信的key是wechat，获取不到的信息为null。
+如果对话中没有客户的联系方式，就说没有联系方式。
+我不需要你帮我写程序
+回答限制在50个字以内
 '''
 
         return msg_prompt
@@ -74,7 +79,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
         if '{' not in msg or '}' not in msg:
             return {}
 
-        json_str = msg[msg.index_of('{'): msg.index_of('}') + 1]
+        json_str = msg[msg.index('{'): msg.index('}') + 1]
 
         return json.loads(json_str)
 
