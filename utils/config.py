@@ -54,8 +54,6 @@ config['chat']['chat_url'] = 'http://127.0.0.1:12222'
 
 
 
-
-
 #=========================
 # msg config
 config['group_msg'] = dict()
