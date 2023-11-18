@@ -311,5 +311,5 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                 f"request chat algo {self._robot_api} failed, data: {data}, return {response.status_code} {response.text}")
             return None
 
-        logger.info(f"session {self._sess_id} request {self._last_user_msg} got response: {response.json()['data']}")
+        logger.info(f"session {self._sess_id} got response: {response.json()['data']}")
         return response.json()['data']['message']
