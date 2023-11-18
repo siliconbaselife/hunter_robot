@@ -64,7 +64,9 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             msg_str += msg["msg"] + "\n"
 
         msg_prompt = f'''
+@@@
 {msg_str}
+@@@
 问: 
 帮我萃取出客户的电话号码和微信号，排除掉我的信息。
 结果用json格式表示，电话的key是phone，微信的key是wechat，获取不到的信息为null。
@@ -142,7 +144,9 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             msg_str += msg["msg"] + "\n"
 
         prompt = f'''
+@@@
 {msg_str}
+@@@
 问题:
 假设你是一个销售人员，判断上面对话，客户最终对业务产品是什么意图，一共4个选项。
 A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
@@ -270,9 +274,9 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         num = 0
         for i in range(len(page_history_msg)):
             num += 1
-            if page_history_msg[len(page_history_msg) - i]["speaker"] == "system":
+            if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "system":
                 continue
-            if page_history_msg[len(page_history_msg) - i]["speaker"] == "robot":
+            if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "robot":
                 break
             user_msg_list.append(page_history_msg[len(page_history_msg) - i]["msg"])
         user_msg_list.reverse()
