@@ -278,7 +278,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                 continue
             if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "robot":
                 break
-            user_msg_list.append(page_history_msg[len(page_history_msg) - i]["msg"])
+            user_msg_list.append(page_history_msg[len(page_history_msg) - i - 1]["msg"])
         user_msg_list.reverse()
         user_msg = "\n".join(user_msg_list)
 
