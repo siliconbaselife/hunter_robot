@@ -27,6 +27,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
 
     def contact(self, page_history_msg, db_history_msg):
         logger.info(f"page_history_msg: {page_history_msg}")
+        logger.info(f"db_history_msg: {db_history_msg}")
         try:
             history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
 
@@ -198,7 +199,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                 new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
 
             new_msgs.reverse()
-            history_msg.extends(new_msgs)
+            history_msg.extend(new_msgs)
         else:
             history_msg = page_history_msg
 
