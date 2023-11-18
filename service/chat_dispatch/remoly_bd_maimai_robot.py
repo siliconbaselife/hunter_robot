@@ -193,7 +193,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
 
             new_msgs = []
             for i in range(len(page_history_msg)):
-                if page_history_msg[len(page_history_msg) - i - 1].speaker == "user":
+                if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "user":
                     break
                 new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
 
@@ -203,6 +203,9 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             history_msg = page_history_msg
 
         self._msg_list = history_msg
+        logger.info(f"msg_list: {self._msg_list}")
+        logger.info(f"history_msg: {history_msg}")
+
         return history_msg
 
     def transfer_r_msg(self, msg):
