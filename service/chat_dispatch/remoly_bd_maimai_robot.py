@@ -82,8 +82,15 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             return {}
 
         json_str = msg[msg.index('{'): msg.index('}') + 1]
+        contacts_raw = json.loads(json_str)
 
-        return json.loads(json_str)
+        r_contacts = {}
+        for key, value in contacts_raw.items():
+            if value is None:
+                continue
+            r_contacts[key] = value
+
+        return r_contacts
 
     def deal_contact(self, history_msgs, status_infos):
         if "contact_flag" in status_infos and status_infos["contact_flag"]:
