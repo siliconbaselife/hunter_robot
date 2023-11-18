@@ -302,6 +302,9 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                                'time': format_time(datetime.now())})
 
     def chat_gpt_request(self, data):
+        url = config['chat']['chat_url']
+        url += self._robot_api
+
         response = requests.post(url=self._robot_api, json=data, timeout=30)
         if response.status_code != 200 or response.json()['status'] != 1:
             logger.info(
