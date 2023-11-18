@@ -193,9 +193,9 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
 
             new_msgs = []
             for i in range(len(page_history_msg)):
-                if page_history_msg[len(page_history_msg) - i].speaker == "user":
+                if page_history_msg[len(page_history_msg) - i - 1].speaker == "user":
                     break
-                new_msgs.append(page_history_msg[len(page_history_msg) - i])
+                new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
 
             new_msgs.reverse()
             history_msg.extends(new_msgs)
