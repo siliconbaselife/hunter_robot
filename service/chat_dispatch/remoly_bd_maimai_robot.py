@@ -305,7 +305,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         url = config['chat']['chat_url']
         url += self._robot_api
 
-        logger.info(f"url: url")
+        logger.info(f"url: {url}")
         response = requests.post(url=url, json=data, timeout=30)
         if response.status_code != 200 or response.json()['status'] != 1:
             logger.info(
