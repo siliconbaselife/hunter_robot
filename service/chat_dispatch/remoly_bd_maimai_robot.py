@@ -200,20 +200,20 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
     def prepare_msgs(self, page_history_msg, db_history_msg):
         if db_history_msg is not None and len(db_history_msg) > 0:
             history_msg = db_history_msg
-
-            new_msgs = []
-            for i in range(len(page_history_msg)):
-                if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "user":
-                    break
-                new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
-
-            new_msgs.reverse()
-            history_msg.extend(new_msgs)
         else:
             history_msg = page_history_msg
 
+        new_msgs = []
+        for i in range(len(page_history_msg)):
+            if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "user":
+                break
+            new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
+        logger.info(f"new_msgs: {new_msgs}")
+
+        new_msgs.reverse()
+        history_msg.extend(new_msgs)
+
         self._msg_list = history_msg
-        logger.info(f"msg_list: {self._msg_list}")
         logger.info(f"history_msg: {history_msg}")
 
         return history_msg
