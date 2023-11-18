@@ -276,8 +276,7 @@ def candidate_chat_api():
         reason = f'job id {job_id} 未注册，没有对应的算法uri'
         return Response(json.dumps(get_web_res_fail(reason)))
 
-    chat_context = chat_service(account_id, job_id, candidate_id, robot_api, \
-        page_history_msg, db_history_msg, source)
+    chat_context = chat_service(account_id, job_id, candidate_id, robot_api, page_history_msg, db_history_msg, source)
 
     ret_data = {
         'nextStep': chat_context['next_step'],

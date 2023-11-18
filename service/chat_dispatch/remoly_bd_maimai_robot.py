@@ -26,6 +26,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
         logger.info(f"maimai robot init job_id: {job_id}")
 
     def contact(self, page_history_msg, db_history_msg):
+        logger.info(f"page_history_msg: {page_history_msg}")
         try:
             history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
 
