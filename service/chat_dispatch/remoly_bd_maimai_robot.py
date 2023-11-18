@@ -290,7 +290,10 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             if msg["speaker"] == "system":
                 continue
 
-            r_msgs.append(msg)
+            r_msgs.append({
+                "role": msg["speaker"],
+                "msg": msg["msg"]
+            })
 
         return r_msgs, user_msg
 
