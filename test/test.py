@@ -7,6 +7,6 @@ data = {
     'historyMsg': [{"speaker": "robot", "msg": "hi"}, {"speaker": "user", "msg": "hi"}]
 }
 
-r = requests.post('http://127.0.0.1:2041/recruit/candidate/chat', json=data)
+r = requests.post('http://127.0.0.1:20400/recruit/candidate/chat', json=data)
 print(r.text)
 

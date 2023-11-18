@@ -8,7 +8,7 @@ import gevent.monkey
 gevent.monkey.patch_all()
 
 # 启动的进程数
-bind = '0.0.0.0:2041'  # 绑定的ip已经端口号
+bind = '0.0.0.0:20400'  # 绑定的ip已经端口号
 workers = 2  # 进程数
 threads = 4  # 指定每个进程开启的线程数，官方推荐设置为核心数的两至四倍
 backlog = 2048  # 允许挂起的连接数的最大值，官方推荐这个值设在64-2048
