@@ -232,7 +232,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         else:
             m3 = "我们微信上面细聊吧"
 
-        if "introduction_flag" not in flag_infos["introduction_flag"]:
+        if "introduction_flag" not in flag_infos:
             m4 = '用户打招呼(你好，hi)。回答"我是remoly的bd，我们做全球的EOR、招聘以及payroll，你们公司有相关需求吗"。'
         else:
             m4 = "用户打招呼(你好，hi)。询问对方公司最近是否有新的海外人力方面的需求。"
