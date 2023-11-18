@@ -45,9 +45,9 @@ def my_job_list_service(manage_account_id):
     ret_list = []
     
     for j_d in jobs_db:
-        j_d[3] = str(j_d[3]).replace('\n', '\\n')
-        logger.info(f"error: {j_d[3]}")
-        job_config = {} if j_d[3] == None or j_d[3] == "None" else json.loads(j_d[3])
+        job_config_json = j_d[3].replace('\n', '\\n')
+        logger.info(f"error: {job_config_json}")
+        job_config = {} if j_d[3] == None or j_d[3] == "None" else json.loads(job_config_json)
         job = {
             "job_id": j_d[0],
             "job_name": j_d[1],
