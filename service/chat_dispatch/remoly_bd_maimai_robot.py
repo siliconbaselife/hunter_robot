@@ -1,7 +1,7 @@
 from .base_robot import BaseChatRobot, ChatStatus
 import json
 
-from dao.task_dao import get_job_by_id, query_status_infos, has_contact_db, update_candidate_contact_db
+from dao.task_dao import get_job_by_id, query_status_infos, has_contact_db, update_candidate_contact_db, update_status_infos
 from utils.log import get_logger
 from utils.config import config
 from utils.utils import format_time
@@ -43,6 +43,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             r_msg, action = self.chat_to_ai(history_msgs, status_infos)
             self.deal_r_msg(r_msg, action)
 
+            update_status_infos(self._candidate_id, self._account_id, status_infos)
             logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
             logger.error(e)
@@ -212,7 +213,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
 
         new_msgs = []
         for i in range(len(page_history_msg)):
-            if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "user":
+            if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "robot":
                 break
             new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
         logger.info(f"new_msgs: {new_msgs}")

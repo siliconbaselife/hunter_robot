@@ -287,6 +287,7 @@ def candidate_chat_api():
 
     update_chat_db(account_id, job_id, candidate_id, chat_context['source'], chat_context['status'], details)
     logger.info(f'candidate chat: {account_id} {job_id} {candidate_id} {candidate_name}: {ret_data}')
+
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
