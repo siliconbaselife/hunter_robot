@@ -1,8 +1,8 @@
 import requests
 data = {
-    'accountID': 'linkedin1',
-    'candidateID': 'candidate1',
-    'jobID': 'test1',
+    'accountID': 'account_test',
+    'candidateID': 'candidate_test',
+    'jobID': 'job_test',
     'candidateName': 'candidate test',
     'historyMsg': [{"speaker": "robot", "msg": "hi"}, {"speaker": "user", "msg": "hi"}]
 }
