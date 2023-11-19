@@ -84,6 +84,7 @@ class Prompt:
                 result.append({'role': 'user', 'content': msg.content})
             elif msg.type == 'ai':
                 result.append({'role': 'assistant', 'content': msg.content})
+        print(result)
         return result
 
     def get_token_size(self):
