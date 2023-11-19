@@ -108,11 +108,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             return True
 
         msg_prompt = self.deal_contact_prompts(history_msgs)
-        result_msg = self.chat_gpt_request({
-            "history_chat": [],
-            "system_prompt": msg_prompt,
-            "user_message": ""
-        })
+        result_msg = self.chat_to_gpt([], msg_prompt, "")
 
         contact_infos = self.parse_contact_msg_results(result_msg)
         if len(contact_infos.keys()) == 0:
@@ -129,11 +125,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
 
         msg_prompt = self.deal_intention_prompts(history_msgs)
 
-        result_msg = self.chat_gpt_request({
-            "history_chat": [],
-            "system_prompt": msg_prompt,
-            "user_message": ""
-        })
+        result_msg = self.chat_to_gpt([], msg_prompt, "")
 
         now_time = time.time()
         if "A.有需求" in result_msg:
@@ -206,7 +198,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
     def chat_to_ai(self, history_msgs, flag_infos):
         prompt = self.generate_prompt(flag_infos)
         msgs, user_msg = self.transfer_msgs(history_msgs)
-        r_msg = self.chat_to_gpt(prompt, msgs, user_msg)
+        r_msg = self.chat_to_gpt(msgs, prompt, user_msg)
         say_msg, action = self.transfer_r_msg(r_msg)
         return say_msg, action
 
@@ -310,7 +302,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
 
         return r_msgs, user_msg
 
-    def chat_to_gpt(self, prompt, msgs, user_msg):
+    def chat_to_gpt(self, msgs, prompt, user_msg):
         result_msg = gpt_chat.generic_chat({
             "history_chat": msgs,
             "system_prompt": prompt,
