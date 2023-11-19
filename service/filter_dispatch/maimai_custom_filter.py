@@ -43,6 +43,9 @@ def maimai_custom_filter(candidate_info, job_res):
     filter_cache = get_filter_cache(candidate_info['id'], job_res[0])
     if len(filter_cache) > 0:
         if filter_cache[0][2] == prompt_msg:
+            logger.info(f"shot_filter_cache:{candidate_info['id']}, {job_res['id']}")
+            return json.loads(filter_cache[0][3])
+        else:
             need_update = True
     else:
         need_insert = True
@@ -63,6 +66,8 @@ def maimai_custom_filter(candidate_info, job_res):
     }
     if need_insert:
         insert_filter_cache(candidate_info['id'], job_res['id'], prompt, json.dumps(judge_result, ensure_ascii=False))
+        logger.info(f"insert_filter_cache:{candidate_info['id']}, {job_res['id']}")
     if need_update:
         update_filter_cache(prompt, json.dumps(judge_result, ensure_ascii=False), candidate_info['id'], job_res['id'])
+        logger.info(f"update_filter_cache:{candidate_info['id']}, {job_res['id']},old_prompt:{filter_cache[0][2]};new_prompt:{prompt}")
     return judge_result
