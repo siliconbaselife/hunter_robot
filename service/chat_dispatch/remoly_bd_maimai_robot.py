@@ -59,7 +59,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
         if len(res) == 0:
             return {}
 
-        return json.loads(res[0])
+        return json.loads(res[0], strict=False)
 
     def deal_contact_prompts(self, page_history_msg):
         msg_str = ""
@@ -88,7 +88,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             return {}
 
         json_str = msg[msg.index('{'): msg.index('}') + 1]
-        contacts_raw = json.loads(json_str)
+        contacts_raw = json.loads(json_str, strict=False)
 
         r_contacts = {}
         for key, value in contacts_raw.items():
