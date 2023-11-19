@@ -212,3 +212,13 @@ def add_recall_count(account_id, candidate_id):
 def add_friend_report(account_id, candidate_id):
     dbm.update(sql_dict['add_friend_report'].format(account_id, candidate_id))
 
+if __name__ == "__main__":
+    judge_result = {
+        'judge': True,
+        'details': '12312321\n213213'
+    }
+    filter_result = json.dumps(judge_result, ensure_ascii=False)
+    candidate_id = '111'
+    job_id = 'jjj'
+    prompt = 'sdfsdf'
+    insert_filter_cache(candidate_id, job_id, prompt, filter_result)
