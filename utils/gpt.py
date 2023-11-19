@@ -90,8 +90,15 @@ class Prompt:
         return len(self.to_string())
 
 
-OPENAI_API_KEY = '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'
+from cryptography.fernet import Fernet
+
+cipher = Fernet("43p2bt81ty1lI9xBHaO8DBoEH5hgNzccsFOEgWu4XUE=")
+
+secret_token = "gAAAAABlWa6m-_vDjpidihlrGiCIipUW_2vcwM6-f6ZazHPNU61E_uXokUa0chhljMyyq7DHLGX3fzlzyjAoxWhvDQ7tO5YVphBBUZqXnCZBsGLGCBFtT0b6IkLad57xYDn_yx5wCnFshU_QeECu5FNQbAa8KxBY-g=="
+OPENAI_API_KEY = cipher.decrypt(encrypted).decode()
+
 OPENAI_PROXY = 'http://127.0.0.1:7890'
+
 
 class ChatGPT:
     def __init__(self) -> None:
@@ -139,6 +146,7 @@ class GptChat:
         response = self.chat_gpt.chat(prompt)
         logger.info(f"generic chatgpt response: {response}")
         return response
+
 
 if __name__ == "__main__":
     gpt = ChatGPT()
