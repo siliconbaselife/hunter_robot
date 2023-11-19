@@ -1,11 +1,14 @@
 from .base_robot import BaseChatRobot, ChatStatus
 import json
 
-from dao.task_dao import get_job_by_id, query_status_infos, has_contact_db, update_candidate_contact_db, update_status_infos
+from dao.task_dao import get_job_by_id, query_status_infos, has_contact_db, update_candidate_contact_db, \
+    update_status_infos
 from utils.log import get_logger
 from utils.config import config
 from utils.utils import format_time
 from datetime import datetime
+
+from utils.gpt import GptChat
 
 import traceback
 
@@ -14,6 +17,8 @@ import time
 import requests
 
 logger = get_logger(config['log']['log_file'])
+
+gpt_chat = GptChat()
 
 
 class RemolyBDMaimaiRobot(BaseChatRobot):
@@ -193,7 +198,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                 continue
 
             if "我是remoly" in msg["msg"]:
-                status_infos["introduction_flag"] = {"introduction_flag": True, "time": now_time}
+                status_infos["introduction_flag"] = {"introduction_flag": True, "time": now_xtime}
                 return True
 
         return False
@@ -306,7 +311,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         return r_msgs, user_msg
 
     def chat_to_gpt(self, prompt, msgs, user_msg):
-        result_msg = self.chat_gpt_request({
+        result_msg = gpt_chat.generic_chat({
             "history_chat": msgs,
             "system_prompt": prompt,
             "user_message": user_msg
