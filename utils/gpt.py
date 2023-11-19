@@ -90,7 +90,7 @@ class Prompt:
         return len(self.to_string())
 
 
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = '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'
 OPENAI_PROXY = 'http://127.0.0.1:7890'
 
 class ChatGPT:
