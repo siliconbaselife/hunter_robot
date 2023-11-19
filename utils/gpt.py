@@ -89,19 +89,15 @@ class Prompt:
     def get_token_size(self):
         return len(self.to_string())
 
-#
-# OPENAI_API_KEY = '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'
-#
-# OPENAI_PROXY = 'http://127.0.0.1:7890'
+
+OPENAI_API_KEY = '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'
+OPENAI_PROXY = 'http://127.0.0.1:7890'
 
 class ChatGPT:
     def __init__(self) -> None:
-        # openai.api_key = OPENAI_API_KEY
-        # if OPENAI_PROXY and len(OPENAI_PROXY) > 0:
-        #     openai.proxy = OPENAI_PROXY
-        openai.api_key = os.getenv("OPENAI_API_KEY")
-        if os.getenv("OPENAI_PROXY"):
-            openai.proxy = os.getenv("OPENAI_PROXY")
+        openai.api_key = OPENAI_API_KEY
+        if OPENAI_PROXY and len(OPENAI_PROXY) > 0:
+            openai.proxy = OPENAI_PROXY
 
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
