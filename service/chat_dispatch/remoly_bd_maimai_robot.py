@@ -55,7 +55,7 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             logger.error(str(traceback.format_exc()))
 
     def fetch_now_status(self):
-        res = query_status_infos(self._account_id, self._candidate_id)
+        res = query_status_infos(self._candidate_id, self._account_id)
         if len(res) == 0:
             return {}
 
