@@ -84,6 +84,7 @@ class Prompt:
                 result.append({'role': 'user', 'content': msg.content})
             elif msg.type == 'ai':
                 result.append({'role': 'assistant', 'content': msg.content})
+        print(result)
         return result
 
     def get_token_size(self):
@@ -147,12 +148,3 @@ class GptChat:
         logger.info(f"generic chatgpt response: {response}")
         return response
 
-
-if __name__ == "__main__":
-    gpt = ChatGPT()
-
-    prompt = Prompt()
-    prompt.add_system_message('随便说点儿')
-    prompt.add_user_message("hi")
-    r = gpt.chat()
-    print(r.text)
