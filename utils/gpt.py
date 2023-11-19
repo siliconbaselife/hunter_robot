@@ -146,13 +146,3 @@ class GptChat:
         response = self.chat_gpt.chat(prompt)
         logger.info(f"generic chatgpt response: {response}")
         return response
-
-
-if __name__ == "__main__":
-    gpt = ChatGPT()
-
-    prompt = Prompt()
-    prompt.add_system_message('随便说点儿')
-    prompt.add_user_message("hi")
-    r = gpt.chat()
-    print(r.text)
