@@ -168,7 +168,7 @@ def query_candidate_by_id(candidate_id):
 
 
 def update_candidate_contact_db(candidate_id, contact):
-    dbm.update(sql_dict['update_candidate_contact'].format(contact, candidate_id))
+    dbm.update(sql_dict['update_candidate_contact'].format(json.dumps(contact, ensure_ascii=False), candidate_id))
 
 
 def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, status='init', details=None,
