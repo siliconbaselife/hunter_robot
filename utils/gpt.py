@@ -95,7 +95,7 @@ from cryptography.fernet import Fernet
 cipher = Fernet("43p2bt81ty1lI9xBHaO8DBoEH5hgNzccsFOEgWu4XUE=")
 
 secret_token = "gAAAAABlWa6m-_vDjpidihlrGiCIipUW_2vcwM6-f6ZazHPNU61E_uXokUa0chhljMyyq7DHLGX3fzlzyjAoxWhvDQ7tO5YVphBBUZqXnCZBsGLGCBFtT0b6IkLad57xYDn_yx5wCnFshU_QeECu5FNQbAa8KxBY-g=="
-OPENAI_API_KEY = cipher.decrypt(encrypted).decode()
+OPENAI_API_KEY = cipher.decrypt(secret_token).decode()
 
 OPENAI_PROXY = 'http://127.0.0.1:7890'
 
