@@ -172,6 +172,8 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         intention_time = status_infos["intention_flag"]["time"]
         now_time = time.time()
 
+        logger.info(f"intention intention_time: {intention_time} now_time: {now_time}")
+
         if now_time - intention_time > 3600 * 24 * 7:
             return True
 
