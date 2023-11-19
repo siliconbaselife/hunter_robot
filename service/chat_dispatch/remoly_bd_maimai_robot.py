@@ -166,8 +166,8 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             return True
 
         intention = status_infos["intention_flag"]["intention"]
-        if intention == "需要":
-            return False
+        if intention == "无法判断":
+            return True
 
         intention_time = status_infos["intention_flag"]["time"]
         now_time = time.time()
