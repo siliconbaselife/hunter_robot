@@ -37,6 +37,8 @@ def maimai_custom_filter(candidate_info, job_res):
 
     prompt_msg = prefix + candidate_msg + '\n招聘要求:\n' + custom_filter_content + '\n'
 
+    
+
 
     chatgpt = ChatGPT()
     prompt = Prompt(prompt_msg)

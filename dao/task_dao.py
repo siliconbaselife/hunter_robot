@@ -41,8 +41,18 @@ sql_dict = {
     "get_one_time_task_list":"select id,task_config,status from one_time_task where account_id='{}'",
     "update_one_time_status_by_id":"update one_time_task set status={} where id={}",
     "new_one_time_task":"insert into one_time_task(account_id, task_config) values ('{}', '{}')",
-    "has_contact":"select contact from chat where candidate_id='{}' and account_id='{}'"
+    "has_contact":"select contact from chat where candidate_id='{}' and account_id='{}'",
+    "insert_filter_cache":"insert into candidate_filter_cache(candidate_id, job_id, prompt,filter_result) values ('{}','{}','{}','{}')",
+    "get_filter_cache":"select candidate_id, job_id, prompt, filter_result from candidate_filter_cache where candidate_id='{}' and job_id='{}'",
+    "update_filter_cache":"update candidate_filter_cache set prompt='{}',filter_result='{}' where candidate_id='{}' and job_id='{}'"
 }
+def insert_filter_cache(candidate_id, job_id, prompt, filter_result):
+    return dbm.insert(sql_dict['insert_filter_cache'].format(candidate_id, job_id, prompt, filter_result))
+def get_filter_cache(candidate_id, job_id):
+    return dbm.query(sql_dict['get_filter_cache'].format(candidate_id, job_id))
+def update_filter_cache(prompt, filter_result, candidate_id, job_id):
+    return dbm.update(sql_dict['update_filter_cache'].format(prompt, filter_result, candidate_id, job_id))
+
 def has_contact_db(candidate_id, account_id):
     ret = dbm.query(sql_dict['has_contact'].format(candidate_id, account_id))
     if len(ret) == 0:

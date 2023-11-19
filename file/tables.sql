@@ -50,6 +50,7 @@ alter table job add robot_template LONGTEXT NOT NULL comment "对话模板";
 
 alter table job add job_config varchar(512) NOT NULL DEFAULT "" COMMENT '岗位配置' after robot_api;
 {"group_msg":"beijing","filter_config":"common_custom_service_filter"}
+ALTER TABLE job modify job_config LONGTEXT COMMENT '岗位配置';
 
 
 -- =====requirement_config===========
@@ -164,3 +165,14 @@ CREATE TABLE IF NOT EXISTS `one_time_task`(
    PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table one_time_task modify `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '当前状态';
+
+
+CREATE TABLE IF NOT EXISTS `candidate_filter_cache`(
+   `candidate_id` VARCHAR(100) NOT NULL COMMENT '候选人ID',
+   `job_id` VARCHAR(100) NOT NULL COMMENT 'jobID',
+   `prompt` LONGTEXT COMMENT '提示词',
+   `filter_result` LONGTEXT COMMENT '候选人详细信息',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `candidate_id`, `job_id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
