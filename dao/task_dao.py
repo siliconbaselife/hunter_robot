@@ -47,10 +47,12 @@ sql_dict = {
     "update_filter_cache":"update candidate_filter_cache set prompt='{}',filter_result='{}' where candidate_id='{}' and job_id='{}'"
 }
 def insert_filter_cache(candidate_id, job_id, prompt, filter_result):
+    filter_result = filter_result.replace("\n", "\\n")
     return dbm.insert(sql_dict['insert_filter_cache'].format(candidate_id, job_id, prompt, filter_result))
 def get_filter_cache(candidate_id, job_id):
     return dbm.query(sql_dict['get_filter_cache'].format(candidate_id, job_id))
 def update_filter_cache(prompt, filter_result, candidate_id, job_id):
+    filter_result = filter_result.replace("\n", "\\n")
     return dbm.update(sql_dict['update_filter_cache'].format(prompt, filter_result, candidate_id, job_id))
 
 def has_contact_db(candidate_id, account_id):
