@@ -46,7 +46,7 @@ sql_dict = {
 
 
 def update_status_infos(candidate_id, account_id, status_infos):
-    sql = f"update chat set status_infos = '{json.dumps(status_infos, ensure_ascii=False)}' where candidate_id = '{candidate_id}' and account_id = '{account_id}'"
+    sql = f"update chat set status_infos = '{status_infos}' where candidate_id = '{candidate_id}' and account_id = '{account_id}'"
     dbm.update(sql)
 
 def query_status_infos(candidate_id, account_id):
@@ -168,7 +168,7 @@ def query_candidate_by_id(candidate_id):
 
 
 def update_candidate_contact_db(candidate_id, contact):
-    dbm.update(sql_dict['update_candidate_contact'].format(json.dumps(contact, ensure_ascii=False), candidate_id))
+    dbm.update(sql_dict['update_candidate_contact'].format(contact, candidate_id))
 
 
 def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, status='init', details=None,
