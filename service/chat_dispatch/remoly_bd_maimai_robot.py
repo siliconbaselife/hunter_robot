@@ -190,7 +190,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                 continue
 
             if "我是remoly" in msg["msg"]:
-                status_infos["introduction_flag"] = {"introduction_flag": True, "time": now_xtime}
+                status_infos["introduction_flag"] = {"introduction_flag": True, "time": now_time}
                 return True
 
         return False
