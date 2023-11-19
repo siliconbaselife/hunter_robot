@@ -96,8 +96,8 @@ OPENAI_PROXY = 'http://127.0.0.1:7890'
 class ChatGPT:
     def __init__(self) -> None:
         openai.api_key = OPENAI_API_KEY
-        # if OPENAI_PROXY and len(OPENAI_PROXY) > 0:
-        #     openai.proxy = OPENAI_PROXY
+        if OPENAI_PROXY and len(OPENAI_PROXY) > 0:
+            openai.proxy = OPENAI_PROXY
 
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
