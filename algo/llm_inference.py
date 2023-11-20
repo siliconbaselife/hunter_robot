@@ -10,12 +10,21 @@ from utils.decorator import exception_retry
 
 load_dotenv('./algo/.llm.env')
 
+from cryptography.fernet import Fernet
+
+cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
+
+secret_token = "gAAAAABlWsO9M5MHWyTjwMrJTxqj1yfzfuvJXNAxVFCZT4AoyklbVX3_EpmIVv59HhTjg4bYIZugs2sXBHDDpfvuJaThWXZr_lRomw5YYMNVdq9atyo7gcQUs8u8iDbsO3qOVDBKH_BXkGoiFJWXdAJSnJqT3xCKcg=="
+OPENAI_API_KEY = cipher.decrypt(secret_token).decode()
+
+OPENAI_PROXY = 'http://127.0.0.1:7890'
+
 
 class ChatGPT:
     def __init__(self) -> None:
-        openai.api_key = os.getenv("OPENAI_API_KEY")
-        if os.getenv("OPENAI_PROXY"):
-            openai.proxy = os.getenv("OPENAI_PROXY")
+        openai.api_key = OPENAI_API_KEY
+        if OPENAI_PROXY:
+            openai.proxy = OPENAI_PROXY
 
     @exception_retry(retry_time=3, delay=0.5, failed_return=None)
     def chat(self, prompt: Prompt):

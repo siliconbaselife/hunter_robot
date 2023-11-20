@@ -6,6 +6,7 @@ from typing import Optional, List, Mapping, Any, Dict
 import os
 from pydantic import BaseModel
 from abc import abstractmethod
+from algo.llm_inference import ChatGPT
 
 logger = get_logger(config['log']['log_file'])
 
@@ -91,30 +92,20 @@ class Prompt:
         return len(self.to_string())
 
 
-from cryptography.fernet import Fernet
-
-cipher = Fernet("43p2bt81ty1lI9xBHaO8DBoEH5hgNzccsFOEgWu4XUE=")
-
-secret_token = "gAAAAABlWa6m-_vDjpidihlrGiCIipUW_2vcwM6-f6ZazHPNU61E_uXokUa0chhljMyyq7DHLGX3fzlzyjAoxWhvDQ7tO5YVphBBUZqXnCZBsGLGCBFtT0b6IkLad57xYDn_yx5wCnFshU_QeECu5FNQbAa8KxBY-g=="
-OPENAI_API_KEY = cipher.decrypt(secret_token).decode()
-
-OPENAI_PROXY = 'http://127.0.0.1:7890'
-
-
-class ChatGPT:
-    def __init__(self) -> None:
-        openai.api_key = OPENAI_API_KEY
-        if OPENAI_PROXY and len(OPENAI_PROXY) > 0:
-            openai.proxy = OPENAI_PROXY
-
-    def chat(self, prompt: Prompt):
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=prompt.get_messages(),
-            temperature=0.2
-        )
-        logger.info(f"Total token: {response.usage.total_tokens}, cost ${response.usage.total_tokens / 1000 * 0.002}")
-        return response.choices[0].message.content
+# class ChatGPT:
+#     def __init__(self) -> None:
+#         openai.api_key = OPENAI_API_KEY
+#         if OPENAI_PROXY and len(OPENAI_PROXY) > 0:
+#             openai.proxy = OPENAI_PROXY
+#
+#     def chat(self, prompt: Prompt):
+#         response = openai.ChatCompletion.create(
+#             model="gpt-3.5-turbo",
+#             messages=prompt.get_messages(),
+#             temperature=0.2
+#         )
+#         logger.info(f"Total token: {response.usage.total_tokens}, cost ${response.usage.total_tokens / 1000 * 0.002}")
+#         return response.choices[0].message.content
 
 
 class GptChat:
