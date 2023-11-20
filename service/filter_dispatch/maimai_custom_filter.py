@@ -34,7 +34,7 @@ def maimai_custom_filter(candidate_info, job_res):
 
     candidate_msg= f'候选人个人信息如下：\n姓名:{candidate_info["name"]}\n性别:{gender} \n期望职位:{candidate_info["exp_positon_name"]}\n年龄：{candidate_info["age"]}\n最高学历:{sdegree}\n学校经历:\n{edu}工作经历:\n{work}'
 
-    prefix = '你是一个猎头，请判断候选人是否符合招聘要求，答案必须在最后一行，并且单独一行，A.合适，B.不合适\n 请给出具体原因，不要超过30个字。不要超过30个字。\n'
+    prefix = '你是一个猎头，请判断候选人是否符合招聘要求，答案必须在最后一行，并且单独一行，A.合适，B.不合适\n 请给出具体原因，答案不要超过30个字。答案不要超过30个字。\n'
 
     prompt_msg = prefix + candidate_msg + '\n招聘要求:\n' + custom_filter_content + '\n'
 
@@ -55,7 +55,7 @@ def maimai_custom_filter(candidate_info, job_res):
     prompt = Prompt()
     prompt.add_user_message(prompt_msg)
     result = chatgpt.chat(prompt)
-
+    result.replace('\n',';')
     if 'A.合适' in result:
         judge_ok = True
     else:
