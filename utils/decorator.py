@@ -58,6 +58,7 @@ def check_login_handler(func):
         return func(*args, **kargs)
 
     return wrapper
+
 def exception_retry(retry_time=3, delay=0.1, failed_return=''):
     def deco_retry(func):
         @wraps(func)
