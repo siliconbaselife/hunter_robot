@@ -7,8 +7,6 @@ import curlify
 from algo.llm_base_model import Prompt
 from utils.decorator import exception_retry
 
-load_dotenv('./algo/.llm.env')
-
 from cryptography.fernet import Fernet
 
 cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
