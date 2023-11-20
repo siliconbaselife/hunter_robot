@@ -23,7 +23,7 @@ class ChatGPT:
         if OPENAI_PROXY:
             openai.proxy = OPENAI_PROXY
 
-    @exception_retry(retry_time=3, delay=0.5, failed_return=None)
+    @exception_retry(retry_time=3, delay=2, failed_return=None)
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",

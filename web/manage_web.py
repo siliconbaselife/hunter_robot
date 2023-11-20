@@ -709,6 +709,29 @@ def meta_config():
                     ]
                 },
                 {
+                    "config_name":"学历",
+                    "config_value":"education",
+                    "type":"single_choice",
+                    "enum": [
+                        {
+                            "value":"专科及以上",
+                            "label":"专科及以上"
+                        },
+                        {
+                            "value":"本科及以上",
+                            "label":"本科及以上"
+                        },
+                        {
+                            "value":"硕士及以上",
+                            "label":"硕士及以上"
+                        },
+                        {
+                            "value":"博士",
+                            "label":"博士"
+                        }
+                    ]
+                },
+                {
                     "config_name":"工作年限",
                     "config_value":"worktime",
                     "type":"single_choice",
