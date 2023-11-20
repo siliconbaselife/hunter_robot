@@ -34,7 +34,7 @@ def maimai_custom_filter(candidate_info, job_res):
 
     candidate_msg= f'候选人个人信息如下：\n姓名:{candidate_info["name"]}\n性别:{gender} \n期望职位:{candidate_info["exp_positon_name"]}\n年龄：{candidate_info["age"]}\n最高学历:{sdegree}\n学校经历:\n{edu}工作经历:\n{work}'
 
-    prefix = '你是一个猎头，请判断候选人是否符合招聘要求，答案必须在以下两个选项中 A.合适，B.不合适\n 给出答案选项后，请同时给出具体原因和推理过程，总共不要超过30个字。\n'
+    prefix = '你是一个猎头，请判断候选人是否符合招聘要求，答案必须答案必须在最后一行，并且单独一行 A.合适，B.不合适。并同时给出具体原因和推理过程，不要超过50个字。\n'
 
     prompt_msg = prefix + candidate_msg + '\n招聘要求:\n' + custom_filter_content + '\n'
 
