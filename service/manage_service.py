@@ -86,13 +86,13 @@ def my_account_list_service(manage_account_id):
         jobs_ret = []
         for job_id in jobs:
             job_db = get_job_by_id(job_id)[0]
-            job_config_json = job_db[6].replace('\n', '\\n')
+            # job_config_json = job_db[6].replace('\n', '\\n')
             job = {
                 "job_id": job_db[0],
                 "job_name": job_db[3],
                 "share": job_db[9],
                 "robot_api": job_db[10],
-                "job_config": {} if job_db[6] is None or job_db[6] == "None" else json.loads(job_config_json)
+                "job_config": {} if job_db[6] is None or job_db[6] == "None" else json.loads(job_db[6])
             }
             jobs_ret.append(job)
         account = {
@@ -148,7 +148,7 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_t
     if job_config_json == None or job_config_json == 'None' or job_config_json == 'NULL' or job_config_json == "":
         job_config = {}
     else:
-        job_config_json = job_config_json.replace('\n', '\\n')
+        # job_config_json = job_config_json.replace('\n', '\\n')
         job_config = json.loads(job_config_json)
     job_config['touch_msg'] = process_str(touch_msg)
     job_config['filter_args'] = filter_args

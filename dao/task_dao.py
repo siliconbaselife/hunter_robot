@@ -250,7 +250,12 @@ def hello_exec_db(account_id, job_id, exec_date, hello_cnt=1):
 
 
 def get_job_by_id(job_id):
-    return dbm.query(sql_dict["get_job_by_id"].format(job_id))
+    ret = dbm.query(sql_dict["get_job_by_id"].format(job_id))
+    new_ret = []
+    for r in ret:
+        s = r[6].replace('\n', '\\n')
+        new_ret.append([r[0],r[1],r[2],r[3],r[4],r[5],s,r[7],r[8],r[9],r[10]])
+    return new_ret
 
 
 def get_chats_by_job_id(job_id, start, limit):
