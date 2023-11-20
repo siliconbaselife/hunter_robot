@@ -9,7 +9,7 @@ import copy
 from utils.group_msg import send_candidate_info
 from dao.task_dao import get_robot_template_by_job_id
 from dao.manage_dao import get_llm_config_by_id_db
-from dao.task_dao import update_chat_contact_db,update_candidate_contact_db,query_chat_db,has_contact_db
+from dao.task_dao import update_chat_contact_db,update_candidate_contact_db,query_chat_db,query_candidate_by_id,has_contact_db
 
 logger = get_logger(config['log']['log_file'])
 
@@ -288,7 +288,7 @@ class BaseChatRobot(object):
                     'msg': merge_user_msg,
                     'time': last_user_time
                 })
-            self._msg_list+= self._last_system_msgs
+            self._msg_list += self._last_system_msgs
 
     def _calc_chat_round(self):
         chat_round = 0
