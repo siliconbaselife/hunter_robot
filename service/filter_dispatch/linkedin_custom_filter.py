@@ -33,7 +33,7 @@ def linkedin_custom_filter(candidate_info, job_res):
 
     candidate_msg= f'候选人个人信息如下：\n姓名:{candidate_info["name"]}\n性别:{gender} \n期望职位:{candidate_info["exp_positon_name"]}\n年龄：{candidate_info["age"]}\n最高学历:{sdegree}\n学校经历:\n{edu}工作经历:\n{work}'
 
-    prefix = '你是一个猎头，请判断候选人是否符合招聘要求，答案必须在最后一行，并且单独一行，A.合适，B.不合适\n请给出具体原因和推理过程，结果以json形式表示\n'
+    prefix = '你是一个猎头，请判断候选人是否符合招聘要求，答案必须在最后一行，并且单独一行，A.合适，B.不合适\n 请给出具体原因，不要超过30个字。不要超过30个字。\n'
  
     prompt_msg = prefix + candidate_msg + '\n招聘要求如下:\n' + custom_filter_content + '\n'
 
@@ -54,10 +54,10 @@ def linkedin_custom_filter(candidate_info, job_res):
     prompt.add_user_message(prompt_msg)
     result = chatgpt.chat(prompt)
 
-    if 'B.不合适' in result:
-        judge_ok = False
-    else:
+    if 'A.合适' in result:
         judge_ok = True
+    else:
+        judge_ok = False
 
     judge_result = {
         'judge': judge_ok,
@@ -65,7 +65,7 @@ def linkedin_custom_filter(candidate_info, job_res):
     }
     if need_insert:
         insert_filter_cache(candidate_info['id'], job_res[0], prompt_msg, json.dumps(judge_result, ensure_ascii=False))
-        logger.info(f"insert_filter_cache:{candidate_info['id']}, {job_res[0]}, {prompt_msg}")
+        logger.info(f"insert_filter_cache:{candidate_info['id']}, {job_res[0]}, {json.dumps(judge_result, ensure_ascii=False)}")
     if need_update:
         update_filter_cache(prompt_msg, json.dumps(judge_result, ensure_ascii=False), candidate_info['id'], job_res[0])
         logger.info(f"update_filter_cache:{candidate_info['id']}, {job_res[0]},old_prompt:{filter_cache[0][2]};new_prompt:{prompt_msg}")
