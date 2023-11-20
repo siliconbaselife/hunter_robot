@@ -52,7 +52,8 @@ def maimai_custom_filter(candidate_info, job_res):
 
 
     chatgpt = ChatGPT()
-    prompt = Prompt(prompt_msg)
+    prompt = Prompt()
+    prompt.add_user_message(prompt_msg)
     result = chatgpt.chat(prompt)
 
     if 'B.不合适' in result:
