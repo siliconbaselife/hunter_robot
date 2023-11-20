@@ -263,7 +263,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             不要说重复的话。
             你是一个很稳重又很有礼貌的人。
             用户问的问题:
-               用户表现出拒绝的意图，说"暂时不需要"，"不需要"，"现在不需要"等话术，你需要回复"{m2}"
+               用户表现出拒绝的意图，说"暂时不需要"，"不需要"，"现在不需要"或者"我已通过了好友请求"等话术，你需要回复"{m2}"
                用户表现出需要的意图，你需要回复"{m3}"
                用户问签证可不可以办理。回答"可以办理"。
                用户问在有没有实体公司。回答"有实体公司"。
@@ -284,6 +284,8 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         for i in range(len(page_history_msg)):
             num += 1
             if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "system":
+                if page_history_msg[len(page_history_msg) - i - 1]["msg"] == "我已通过了好友请求，以后多交流～":
+                    user_msg_list.append(page_history_msg[len(page_history_msg) - i - 1]["msg"])
                 continue
             if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "robot":
                 break
