@@ -4,7 +4,7 @@ from utils.log import get_logger
 from algo.llm_inference import ChatGPT
 from algo.llm_base_model import Prompt
 logger = get_logger(config['log']['log_file'])
-
+from dao.task_dao import insert_filter_cache, get_filter_cache, update_filter_cache
 
 def linkedin_custom_filter(candidate_info, job_res):
     custom_filter_content = json.loads(job_res[6])['custom_filter_content']
@@ -37,6 +37,17 @@ def linkedin_custom_filter(candidate_info, job_res):
  
     prompt_msg = prefix + candidate_msg + '\n招聘要求:\n' + custom_filter_content + '\n'
 
+    need_update = False
+    need_insert = False
+    filter_cache = get_filter_cache(candidate_info['id'], job_res[0])
+    if len(filter_cache) > 0:
+        if filter_cache[0][2] == prompt_msg:
+            logger.info(f"shot_filter_cache:{candidate_info['id']}, {job_res['id']}")
+            return json.loads(filter_cache[0][3])
+        else:
+            need_update = True
+    else:
+        need_insert = True
 
     chatgpt = ChatGPT()
     prompt = Prompt(prompt_msg)
@@ -51,4 +62,10 @@ def linkedin_custom_filter(candidate_info, job_res):
         'judge': judge_ok,
         'details': result
     }
+    if need_insert:
+        insert_filter_cache(candidate_info['id'], job_res['id'], prompt, json.dumps(judge_result, ensure_ascii=False))
+        logger.info(f"insert_filter_cache:{candidate_info['id']}, {job_res['id']}")
+    if need_update:
+        update_filter_cache(prompt, json.dumps(judge_result, ensure_ascii=False), candidate_info['id'], job_res['id'])
+        logger.info(f"update_filter_cache:{candidate_info['id']}, {job_res['id']},old_prompt:{filter_cache[0][2]};new_prompt:{prompt}")
     return judge_result
