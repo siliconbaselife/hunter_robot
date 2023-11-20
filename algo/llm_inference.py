@@ -5,7 +5,6 @@ import os
 import curlify
 
 from algo.llm_base_model import Prompt
-from dotenv import load_dotenv
 from utils.decorator import exception_retry
 
 load_dotenv('./algo/.llm.env')
