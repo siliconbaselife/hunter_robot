@@ -59,7 +59,10 @@ def query_status_infos(candidate_id, account_id):
 
 
 def insert_filter_cache(candidate_id, job_id, prompt, filter_result):
-    filter_result = filter_result.replace("\n", "\\n")
+    prompt = prompt.replace("\n", "\\n")
+    prompt = prompt.replace('\"', '\\"')
+    prompt = prompt.replace("\'", "\\'")
+    filter_result = filter_result.replace("\n", ";")
     return dbm.insert(sql_dict['insert_filter_cache'].format(candidate_id, job_id, prompt, filter_result))
 
 
@@ -68,7 +71,10 @@ def get_filter_cache(candidate_id, job_id):
 
 
 def update_filter_cache(prompt, filter_result, candidate_id, job_id):
-    filter_result = filter_result.replace("\n", "\\n")
+    prompt = prompt.replace("\n", "\\n")
+    prompt = prompt.replace('\"', '\\"')
+    prompt = prompt.replace("\'", "\\'")
+    filter_result = filter_result.replace("\n", ";")
     return dbm.update(sql_dict['update_filter_cache'].format(prompt, filter_result, candidate_id, job_id))
 
 
