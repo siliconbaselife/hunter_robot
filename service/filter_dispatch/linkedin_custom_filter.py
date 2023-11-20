@@ -35,7 +35,7 @@ def linkedin_custom_filter(candidate_info, job_res):
 
     prefix = '你是一个猎头，请判断候选人是否符合招聘要求，答案必须在最后一行，并且单独一行，A.合适，B.不合适\n请给出具体原因和推理过程，结果以json形式表示\n'
  
-    prompt_msg = prefix + candidate_msg + '\n招聘要求:\n' + custom_filter_content + '\n'
+    prompt_msg = prefix + candidate_msg + '\n招聘要求如下:\n' + custom_filter_content + '\n'
 
     need_update = False
     need_insert = False
@@ -65,8 +65,8 @@ def linkedin_custom_filter(candidate_info, job_res):
     }
     if need_insert:
         insert_filter_cache(candidate_info['id'], job_res[0], prompt_msg, json.dumps(judge_result, ensure_ascii=False))
-        logger.info(f"insert_filter_cache:{candidate_info['id']}, {job_res[0]}")
+        logger.info(f"insert_filter_cache:{candidate_info['id']}, {job_res[0]}, {prompt_msg}")
     if need_update:
         update_filter_cache(prompt_msg, json.dumps(judge_result, ensure_ascii=False), candidate_info['id'], job_res[0])
-        logger.info(f"update_filter_cache:{candidate_info['id']}, {job_res[0]},old_prompt:{filter_cache[0][2]};new_prompt:{prompt}")
+        logger.info(f"update_filter_cache:{candidate_info['id']}, {job_res[0]},old_prompt:{filter_cache[0][2]};new_prompt:{prompt_msg}")
     return judge_result
