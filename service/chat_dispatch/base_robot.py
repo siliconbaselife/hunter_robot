@@ -374,7 +374,7 @@ class BaseChatRobot(object):
             td = json.loads(get_llm_config_by_id_db(t_id))
             data["template_data"] = td
 
-        response = requests.post(url=url, json=data, timeout=30)
+        response = requests.post(url=url, json=data, timeout=60)
         if response.status_code!=200 or response.json()['status']!=1:
             logger.info(f"request chat algo {url} failed, data: {data}, return {response.status_code} {response.text}")
             return None

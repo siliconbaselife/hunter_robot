@@ -8,8 +8,6 @@ logger = get_logger(config['log']['log_file'])
 from dao.task_dao import insert_filter_cache, get_filter_cache, update_filter_cache
 def maimai_custom_filter(candidate_info, job_res):
     custom_filter_content = json.loads(job_res[6])['custom_filter_content']
-    
-
 
     if candidate_info['gender'] == 0:
         gender = '男'
