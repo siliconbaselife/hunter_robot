@@ -257,7 +257,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         if "introduction_flag" not in flag_infos:
             m5 = "我是remoly的bd，我们做全球的EOR、招聘以及payroll，你们公司有相关需求吗"
         else:
-            m5 = "询问对方公司最近是否有新的海外人力方面的需求。"
+            m5 = "请问贵公司最近有海外EOR、招聘以及payroll方便的需求吗?"
 
         prompt = f'''
             你是remoly公司的销售，别人会问你一些公司业务相关的信息。remoly公司可以做全球的EOR(跨境员工挂靠)，全球的招聘，全球的工作签证，全球payroll(跨境转账)。在全球大部分国家都有实体公司。
