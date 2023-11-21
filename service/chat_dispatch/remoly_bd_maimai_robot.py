@@ -284,9 +284,9 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         for i in range(len(history_msgs)):
             logger.info(f"{i} msg: {history_msgs[len(history_msgs) - i - 1]}")
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "system":
-                if history_msgs[len(history_msgs) - i - 1]["msg"] == "我已通过了好友请求，以后多交流～":
+                if "好友请求" in history_msgs[len(history_msgs) - i - 1]["msg"]:
                     num += 1
-                    user_msg_list.append(history_msgs[len(history_msgs) - i - 1]["msg"])
+                    user_msg_list.append("我通过了你的好友请求")
                 continue
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "robot":
                 break
