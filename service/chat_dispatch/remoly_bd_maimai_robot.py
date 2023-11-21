@@ -254,6 +254,11 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
         else:
             m4 = "用户打招呼(你好，hi)。询问对方公司最近是否有新的海外人力方面的需求。"
 
+        if "introduction_flag" not in flag_infos:
+            m5 = "我是remoly的bd，我们做全球的EOR、招聘以及payroll，你们公司有相关需求吗"
+        else:
+            m5 = "请问贵公司最近有海外EOR、招聘以及payroll方便的需求吗?"
+
         prompt = f'''
             你是remoly公司的销售，别人会问你一些公司业务相关的信息。remoly公司可以做全球的EOR(跨境员工挂靠)，全球的招聘，全球的工作签证，全球payroll(跨境转账)。在全球大部分国家都有实体公司。
             {m1}
@@ -263,7 +268,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             不要说重复的话。
             你是一个很稳重又很有礼貌的人。
             用户问的问题:
-               用户表现出拒绝的意图，说"暂时不需要"，"不需要"，"现在不需要"或者"我已通过了好友请求"等话术，你需要回复"{m2}"
+               用户表现出拒绝的意图，说"暂时不需要"，"不需要"，"现在不需要"等话术，你需要回复"{m2}"
                用户表现出需要的意图，你需要回复"{m3}"
                用户问签证可不可以办理。回答"可以办理"。
                用户问在有没有实体公司。回答"有实体公司"。
@@ -274,30 +279,34 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                用户问联系方式。回答"我电话和微信是18611747979"。
                问任何跟国家相关的。都回答"可以"。
                用户说给联系方式或者微信号。你回答"谢谢，我一会儿加您，我们空了聊"。
+               用户说"我已通过好友请求"。不要提任何跟好友相关的事情，你回答"{m5}。"
         '''
 
         return prompt
 
-    def transfer_msgs(self, page_history_msg):
+    def transfer_msgs(self, history_msgs):
         user_msg_list = []
-        num = 0
-        for i in range(len(page_history_msg)):
-            num += 1
-            if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "system":
-                if page_history_msg[len(page_history_msg) - i - 1]["msg"] == "我已通过了好友请求，以后多交流～":
-                    user_msg_list.append(page_history_msg[len(page_history_msg) - i - 1]["msg"])
+        num = 1
+        for i in range(len(history_msgs)):
+            logger.info(f"{i} msg: {history_msgs[len(history_msgs) - i - 1]}")
+            if history_msgs[len(history_msgs) - i - 1]["speaker"] == "system":
+                if "好友请求" in history_msgs[len(history_msgs) - i - 1]["msg"]:
+                    num += 1
+                    user_msg_list.append("我已通过了好友请求")
                 continue
-            if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "robot":
+            if history_msgs[len(history_msgs) - i - 1]["speaker"] == "robot":
                 break
-            user_msg_list.append(page_history_msg[len(page_history_msg) - i - 1]["msg"])
+            num += 1
+            user_msg_list.append(history_msgs[len(history_msgs) - i - 1]["msg"])
         user_msg_list.reverse()
         user_msg = "\n".join(user_msg_list)
+        logger.info(f"user_msg: {user_msg}")
 
         if num == 1:
             num += 1
 
         r_msgs = []
-        for msg in page_history_msg[: -(num - 1)]:
+        for msg in history_msgs[: -(num - 1)]:
             if msg["speaker"] == "system":
                 continue
 
