@@ -5,7 +5,7 @@ import os
 import curlify
 
 from algo.llm_base_model import Prompt
-from utils.decorator import exception_retry
+from utils.decorator import exception_retry,cost_time
 
 from cryptography.fernet import Fernet
 
@@ -22,8 +22,9 @@ class ChatGPT:
         openai.api_key = OPENAI_API_KEY
         if OPENAI_PROXY:
             openai.proxy = OPENAI_PROXY
-
+    
     @exception_retry(retry_time=3, delay=2, failed_return=None)
+    @cost_time
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
