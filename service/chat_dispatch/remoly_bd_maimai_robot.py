@@ -191,7 +191,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             if msg["speaker"] == "user":
                 continue
 
-            if "我是remoly" in msg["msg"]:
+            if "我是remoly" in msg["msg"] or "Remoly's BD" in msg["msg"]:
                 status_infos["introduction_flag"] = {"introduction_flag": True, "time": now_time}
                 return True
 
@@ -250,7 +250,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             m3 = "我们微信上面细聊吧"
 
         if "introduction_flag" not in flag_infos:
-            m4 = '用户打招呼(你好，hi)。回答"我是remoly的bd，我们做全球的EOR、招聘以及payroll，你们公司有相关需求吗"。'
+            m4 = '用户打招呼(你好，hi)。回答"我是remoly的BD，我们做全球的EOR、招聘以及payroll，你们公司有相关需求吗"。'
         else:
             m4 = "用户打招呼(你好，hi)。询问对方公司最近是否有新的海外人力方面的需求。"
 
@@ -279,7 +279,6 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                用户问联系方式。回答"我电话和微信是18611747979"。
                问任何跟国家相关的。都回答"可以"。
                用户说给联系方式或者微信号。你回答"谢谢，我一会儿加您，我们空了聊"。
-               用户说"我已通过好友请求"。不要提任何跟好友相关的事情，你回答"{m5}。"
         '''
 
         return prompt
@@ -292,7 +291,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "system":
                 if "好友请求" in history_msgs[len(history_msgs) - i - 1]["msg"]:
                     num += 1
-                    user_msg_list.append("我已通过了好友请求")
+                    user_msg_list.append("hi")
                 continue
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "robot":
                 break
