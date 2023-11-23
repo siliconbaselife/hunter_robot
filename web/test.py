@@ -142,5 +142,38 @@ if __name__ == "__main__":
     prompt = f'候选人个人信息如下：\n姓名:{detail["name"]}\n性别:{gender} \n期望职位:{detail["exp_positon_name"]}\n年龄：{detail["age"]}\n最高学历:{sdegree}\n学校经历:\n{edu}工作经历:\n{work}'
     
 
+    edu_dict = []
+    for e in detail['education']:
+        edu_dict.append({
+            "学校": e['school'],
+            "学位": e['sdegree'],
+            "开始时间":e['start_date_ym'],
+            "结束时间":e['end_date_ym'],
+            "专业":e['department']
+        }) 
+    work_dict = []
+    for w in detail['work']:
+        work_dict.append({
+            "公司":w['company'],
+            "在职时间":w['timeinfo'],
+            "工作地点":w['locationInfo'],
+            "工作岗位":w['position'],
+            "工作描述":w['description']
+        })
+
+
+    p_json = {
+        "姓名":detail["name"],
+        "性别":gender,
+        "期望职位":detail["exp_positon_name"],
+        "年龄":detail["age"],
+        "最高学历":sdegree,
+        "工作经历":work_dict,
+        "学校经历":edu_dict
+    }
+
+    prompt = f'$$$\n候选人个人信息如下：{p_json}\n$$$\n'
+
+
 
     print(prompt)

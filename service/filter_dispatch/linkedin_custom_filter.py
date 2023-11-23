@@ -23,15 +23,46 @@ def linkedin_custom_filter(candidate_info, job_res):
     else:
         sdegree = '未知'
 
-    edu = ''
+    # edu = ''
+    # for e in candidate_info['education']:
+    #     edu = edu + '学校:' + e['school'] + ',学位:' + e['sdegree'] + ',' + e['start_date_ym'] + '至' + e['end_date_ym'] + ',专业:' + e['department'] + '\n'
+
+    # work = ''
+    # for w in candidate_info['work']:
+    #     work = work + '公司:' + w['company'] + ',在职时间:' + w['timeinfo'] + ',工作地点相关:' + w['locationInfo'] + ',工作岗位:' + w['position'] + ',工作描述:' + w['description'] + '\n'
+
+    edu_dict = []
     for e in candidate_info['education']:
-        edu = edu + '学校:' + e['school'] + ',学位:' + e['sdegree'] + ',' + e['start_date_ym'] + '至' + e['end_date_ym'] + ',专业:' + e['department'] + '\n'
-
-    work = ''
+        edu_dict.append({
+            "学校": e['school'],
+            "学位": e['sdegree'],
+            "开始时间":e['start_date_ym'],
+            "结束时间":e['end_date_ym'],
+            "专业":e['department']
+        }) 
+    work_dict = []
     for w in candidate_info['work']:
-        work = work + '公司:' + w['company'] + ',在职时间:' + w['timeinfo'] + ',工作地点相关:' + w['locationInfo'] + ',工作岗位:' + w['position'] + ',工作描述:' + w['description'] + '\n'
+        work_dict.append({
+            "公司":w['company'],
+            "在职时间":w['timeinfo'],
+            "工作地点":w['locationInfo'],
+            "工作岗位":w['position'],
+            "工作描述":w['description']
+        })
+    p_json = {
+        "姓名":candidate_info["name"],
+        "性别":gender,
+        "期望职位":candidate_info["exp_positon_name"],
+        "年龄":candidate_info["age"],
+        "最高学历":sdegree,
+        "工作经历":work_dict,
+        "学校经历":edu_dict
+    }
 
-    candidate_msg= f'$$$\n候选人个人信息如下：\n姓名:{candidate_info["name"]}\n性别:{gender} \n期望职位:{candidate_info["exp_positon_name"]}\n年龄：{candidate_info["age"]}\n最高学历:{sdegree}\n学校经历:\n{edu}工作经历:\n{work}\n$$$'
+
+    # candidate_msg= f'$$$\n候选人个人信息如下：\n姓名:{candidate_info["name"]}\n性别:{gender} \n期望职位:{candidate_info["exp_positon_name"]}\n年龄：{candidate_info["age"]}\n最高学历:{sdegree}\n学校经历:\n{edu}工作经历:\n{work}\n$$$'
+
+    candidate_msg = f'$$$\n候选人个人信息如下：{json.dumps(p_json, ensure_ascii=False)}\n$$$\n'
 
     prefix = '你是一个猎头，请判断候选人是否符合招聘要求\n答案必须在最后一行，并且单独一行 A.合适，B.不合适。\n并同时给出具体原因和推理过程\n'
 
