@@ -9,7 +9,8 @@ from .recall_dispatch import *
 
 __recall_filter = {
     'common_need_recall_filter': common_need_recall_filter,
-    'common_enhance_recall_filter': common_enhance_recall_filter
+    'common_enhance_recall_filter': common_enhance_recall_filter,
+    'remoly_bd_recall_filter': remoly_bd_recall_filter
 }
 
 
