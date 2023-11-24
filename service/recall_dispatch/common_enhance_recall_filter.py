@@ -52,6 +52,6 @@ def fetch_config(job_id):
 
 def fetch_candidate_infos(job_id, account_id, candidate_id):
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
-    source, details, contact = candidate_info
+    source, details, contact = candidate_info[0]
 
     return details
