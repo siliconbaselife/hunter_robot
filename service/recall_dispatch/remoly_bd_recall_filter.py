@@ -10,7 +10,7 @@ def remoly_bd_recall_filter(chat_info, flag):
     recall_cnt = chat_info[6]
     candidate_name = chat_info[1]
 
-    if recall_cnt > 1:
+    if recall_cnt >= 1:
         return False, ""
 
     recall_strategy_config = fetch_config(job_id)
