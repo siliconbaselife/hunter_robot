@@ -8,6 +8,7 @@ def common_enhance_recall_filter(chat_info, flag):
     candidate_id = chat_info[0]
     account_id = chat_info[8]
     recall_cnt = chat_info[6]
+    candidate_name = chat_info[1]
 
     recall_strategy_config = fetch_config(job_id)
     msgs = fetch_candidate_infos(job_id, account_id, candidate_id)
@@ -16,7 +17,13 @@ def common_enhance_recall_filter(chat_info, flag):
 
     msg = fetch_msg(msgs, recall_cnt, recall_strategy_config)
 
-    return True if len(msg) > 0 else False, msg
+    return True if len(msg) > 0 else False, {
+            "candidate_id": candidate_id,
+            "candidate_name": candidate_name,
+            "job_id": job_id,
+            "need_recall": True,
+            "recall_msg": msg
+        }
 
 
 def has_user_reply(msgs):

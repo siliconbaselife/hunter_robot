@@ -8,6 +8,7 @@ def remoly_bd_recall_filter(chat_info, flag):
     candidate_id = chat_info[0]
     account_id = chat_info[8]
     recall_cnt = chat_info[6]
+    candidate_name = chat_info[1]
 
     if recall_cnt > 1:
         return False, ""
@@ -19,7 +20,13 @@ def remoly_bd_recall_filter(chat_info, flag):
 
     res = fetch_msg(msgs, status_infos, recall_strategy_config)
 
-    return True if len(res) > 0 else False, res
+    return True if len(res) > 0 else False, {
+            "candidate_id": candidate_id,
+            "candidate_name": candidate_name,
+            "job_id": job_id,
+            "need_recall": True,
+            "recall_msg": res
+        }
 
 
 def fetch_config(job_id):
