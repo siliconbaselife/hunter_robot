@@ -38,7 +38,7 @@ def fetch_msg(msgs, recall_cnt, config):
     if has_user_reply(msgs) and config["reply_filter_flag"]:
         return ""
 
-    index = recall_cnt + 1
+    index = recall_cnt
     recall_msg_info_list = config["recall_msg_info_list"]
 
     if index >= len(recall_msg_info_list):
