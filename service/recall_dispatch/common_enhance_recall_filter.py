@@ -50,6 +50,8 @@ def fetch_msg(msgs, recall_cnt, config):
     if now_time - msg_time > recall_msg_info_list[index]["threshold"]:
         return recall_msg_info_list[index]["msg"]
 
+    return ""
+
 
 def fetch_config(job_id):
     task_config = json.loads(get_job_by_id(job_id)[0][6])
