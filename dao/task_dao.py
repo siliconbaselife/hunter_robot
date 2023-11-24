@@ -57,7 +57,6 @@ def query_status_infos(candidate_id, account_id):
     sql = f"select status_infos from chat where candidate_id = '{candidate_id}' and account_id = '{account_id}'"
     return dbm.query(sql)
 
-
 def insert_filter_cache(candidate_id, job_id, prompt, filter_result):
     prompt = prompt.replace("\n", "\\n")
     prompt = prompt.replace('\"', '\\"')
