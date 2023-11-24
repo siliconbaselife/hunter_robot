@@ -34,14 +34,16 @@ def recall_msg(account_id, candidate_ids, candidate_ids_read):
     chat_res = []
 
     for chat_info in chat_infos_read:
-        chat_info.append(account_id)
-        flag, res = need_recall(chat_info, True)
+        r_chat_info = list(chat_info)
+        r_chat_info.append(account_id)
+        flag, res = need_recall(r_chat_info, True)
         if flag:
             chat_res.append(res)
 
     for chat_info in chat_infos:
-        chat_info.append(account_id)
-        flag, res = need_recall(chat_info, False)
+        r_chat_info = list(chat_info)
+        r_chat_info.append(account_id)
+        flag, res = need_recall(r_chat_info, False)
         if flag:
             chat_res.append(res)
     return chat_res
