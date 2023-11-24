@@ -42,7 +42,7 @@ def fetch_msg(msgs, recall_cnt, config):
     recall_msg_info_list = config["recall_msg_info_list"]
 
     if index >= len(recall_msg_info_list):
-        return
+        return ""
 
     date = datetime.strptime(msgs[-1]["time"], "%Y-%m-%d %H:%M:%S")
     msg_time = int(date.timestamp())
