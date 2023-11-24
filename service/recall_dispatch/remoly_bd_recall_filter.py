@@ -41,7 +41,7 @@ def fetch_candidate_infos(job_id, account_id, candidate_id):
     if len(res) > 0:
         status_infos = json.loads(res[0][0])
 
-    return details, status_infos
+    return json.loads(details), status_infos
 
 
 def has_user_reply(msgs):

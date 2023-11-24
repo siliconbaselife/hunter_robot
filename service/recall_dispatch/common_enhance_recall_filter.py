@@ -57,4 +57,4 @@ def fetch_candidate_infos(job_id, account_id, candidate_id):
 
     source, details, contact = candidate_info[0]
 
-    return details
+    return json.loads(details)
