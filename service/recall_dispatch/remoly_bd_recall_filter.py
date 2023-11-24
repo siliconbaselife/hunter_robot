@@ -22,17 +22,6 @@ def remoly_bd_recall_filter(chat_info, flag):
     return True if len(res) > 0 else False, res
 
 
-def fetch_candidate_infos(job_id, account_id, candidate_id):
-    candidate_info = query_chat_db(account_id, job_id, candidate_id)
-    source, details, contact = candidate_info
-
-    res = query_status_infos(candidate_id, account_id)
-    status_infos = None
-    if len(res) > 0:
-        status_infos = json.loads(res[0][0])
-    return details, status_infos
-
-
 def fetch_config(job_id):
     task_config = json.loads(get_job_by_id(job_id)[0][6])
     recall_strategy_config = task_config["recall_strategy_config"] if "recall_strategy_config" in task_config else None
@@ -47,7 +36,12 @@ def fetch_candidate_infos(job_id, account_id, candidate_id):
 
     source, details, contact = candidate_info[0]
 
-    return details
+    res = query_status_infos(candidate_id, account_id)
+    status_infos = None
+    if len(res) > 0:
+        status_infos = json.loads(res[0][0])
+
+    return details, status_infos
 
 
 def has_user_reply(msgs):
