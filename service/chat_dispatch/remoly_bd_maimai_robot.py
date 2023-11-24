@@ -219,7 +219,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             new_msgs.reverse()
             r_new_msgs = []
             for msg in new_msgs:
-                temp_time = msg['time']
+                temp_time = msg['time'] if "time" in msg else None
                 if temp_time is None:
                     temp_time = format_time(datetime.now())
                 else:
