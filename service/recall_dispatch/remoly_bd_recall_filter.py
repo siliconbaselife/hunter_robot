@@ -73,7 +73,7 @@ def user_not_reply_strategy(msgs, recall_strategy_config):
 
     now_time = int(time.time())
     if now_time - msg_time > 86400:
-        return "您好，想请问一下，最近贵公司的出海业务，有需要海外人力资源方面的服务吗?\n" \
+        return "您好，想请问一下，最近贵公司的出海业务，有需要海外人力资源方面的服务吗?" \
                "我们是专注于中国企业出海的global人力资源公司，可以为你提供全世界大部分国家的EOR、payroll和recruitment的服务。"
 
     return ""
