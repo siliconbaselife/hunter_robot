@@ -35,7 +35,7 @@ def fetch_candidate_infos(job_id, account_id, candidate_id):
 
 def fetch_config(job_id):
     task_config = json.loads(get_job_by_id(job_id)[0][6])
-    recall_strategy_config = task_config["recall_strategy_config"]
+    recall_strategy_config = task_config["recall_strategy_config"] if "recall_strategy_config" in task_config else None
     return recall_strategy_config
 
 
