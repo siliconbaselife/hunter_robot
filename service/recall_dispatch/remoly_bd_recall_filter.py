@@ -23,7 +23,7 @@ def remoly_bd_recall_filter(chat_info, flag):
 
 
 def fetch_candidate_infos(job_id, account_id, candidate_id):
-    candidate_info = query_chat_db(candidate_id, job_id, account_id)
+    candidate_info = query_chat_db(account_id, job_id, candidate_id)
     source, details, contact = candidate_info
 
     res = query_status_infos(candidate_id, account_id)
