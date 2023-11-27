@@ -226,7 +226,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                     temp_time = format_time(datetime.fromtimestamp(msg['time']))
 
                 r_new_msgs.append({
-                    'speaker': 'user',
+                    'speaker': msg["speaker"],
                     'msg': msg["msg"],
                     'time': temp_time
                 })
@@ -308,8 +308,10 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                     num += 1
                     user_msg_list.append("hi")
                 continue
+
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "robot":
                 break
+
             num += 1
             user_msg_list.append(history_msgs[len(history_msgs) - i - 1]["msg"])
         user_msg_list.reverse()
