@@ -48,6 +48,11 @@ def fetch_candidate_infos(job_id, account_id, candidate_id):
     if len(res) > 0:
         status_infos = json.loads(res[0][0])
 
+    try:
+        json.loads(details)
+    except BaseException as e:
+        logger.error(f"json.loads(details) 异常 candidate_id: {candidate_id} details: {details}")
+
     return json.loads(details), status_infos
 
 
