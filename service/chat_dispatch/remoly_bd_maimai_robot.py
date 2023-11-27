@@ -223,7 +223,7 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                 if temp_time is None:
                     temp_time = format_time(datetime.now())
                 else:
-                    temp_time = datetime.fromtimestamp(msg['time'])
+                    temp_time = format_time(datetime.fromtimestamp(msg['time']))
 
                 r_new_msgs.append({
                     'speaker': 'user',
