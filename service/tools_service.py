@@ -96,7 +96,7 @@ def content_extract_and_filter(file_raw_data, jd):
     ext_prompt = Prompt()
     ext_prompt.add_user_message(ext_prompt_msg)
     file_key_data = chatgpt.chat(ext_prompt)
-
+    logger.info(f"filter_task_content_extract_and_filter_file_key_data: {file_key_data}")
     prefix = '你是一个猎头，请判断候选人是否符合招聘要求\n答案必须在最后一行，并且单独一行 A.合适，B.不合适。\n并同时给出具体原因和推理过程\n'
     candidate_msg = f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
     filter_prompt_msg = prefix + candidate_msg + '\n招聘要求:\n' + jd + '\n'
@@ -117,6 +117,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
                 "res": file_raw_data,
                 "remark":""
             })
+            continue
 
         single_filter_result = content_extract_and_filter(file_raw_data, jd)
         logger.info(f"filter_task_content_extract_and_filter:{f_path}, {single_filter_result}")
