@@ -105,6 +105,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
     filter_result = []
     for f_path in file_list:
         flag, file_raw_data = content_transfer(f_path)
+        logger.info(f"filter_task_content_transfer:{flag}, {len(file_raw_data)}")
         if not flag:
             logger.info(f'file_ext_not_support, {manage_account_id}, {f_path}')
             filter_result.append({
@@ -114,6 +115,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
             })
 
         single_filter_result = content_extract_and_filter(file_raw_data, jd)
+        logger.info(f"filter_task_content_extract_and_filter:{single_filter_result}")
         res = 'QUALIFIED' if 'A.合适' in single_filter_result else 'UNQUALIFIED'
         filter_result.append({
             "f_path": f_path,

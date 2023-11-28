@@ -16,10 +16,11 @@ def schedule_filter_task_exec():
             continue
         f = zipfile.ZipFile(file_path ,'r')
         file_list = []
-        for file in f.namelist():
-            f.extract(file, file_path_prefix)
-            file_list.append(file_path_prefix + file)
-
+        for f_name in f.namelist():
+            if f_name.endswith('jpg') or f_name.endswith('jpeg') or f_name.endswith('png') or f_name.endswith('doc') or f_name.endswith('docx') or f_name.endswith('pdf'):
+                f.extract(f_name, file_path_prefix)
+                file_list.append(file_path_prefix + f_name)
+        logger.info(f"exec_filter_task_f_name_list: {file_list}")
         exec_filter_task(t[1], file_list, t[2])
         update_filter_task_status(2, int(t[0]))
         for f in file_list:
