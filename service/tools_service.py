@@ -78,11 +78,14 @@ def content_transfer(f_path):
             if p.text.strip() != '':
                 result_str += ';' + p.text
         tables = f.tables
+        last_cell = ''
         for t in tables:
            for r in  t.rows:
                for c in r.cells:
-                   if c.text.strip() != '':
-                        result_str += ';' + c.text
+                   s = c.text.strip()
+                   if s != '' and s != last_cell:
+                        result_str += ';' + s
+                        last_cell = s
         return True, result_str
     elif f_path.endswith('doc'):
         return False, "EXT_NOT_SUPPORT"
@@ -91,8 +94,8 @@ def content_transfer(f_path):
 
 def content_extract_and_filter(file_raw_data, jd):
     chatgpt = ChatGPT()
-
-    ext_prompt_msg = '以下是候选人信息，请提取关键信息并结构化输出\n$$$\n' + file_raw_data + "\n$$$"
+    #先做个人为截断，如果有问题再说
+    ext_prompt_msg = '以下是候选人信息，请提取关键信息并结构化输出\n$$$\n' + file_raw_data[0:3000] + "\n$$$"
     ext_prompt = Prompt()
     ext_prompt.add_user_message(ext_prompt_msg)
     file_key_data = chatgpt.chat(ext_prompt)
@@ -109,7 +112,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
     filter_result = []
     for f_path in file_list:
         flag, file_raw_data = content_transfer(f_path)
-        logger.info(f"filter_task_content_transfer:{f_path}, {flag}, {len(file_raw_data)}, {file_raw_data}")
+        logger.info(f"filter_task_content_transfer:{f_path}, {flag}, {len(file_raw_data)}, {file_raw_data[0:3000]}")
         if not flag:
             logger.info(f'file_ext_not_support, {manage_account_id}, {f_path}')
             filter_result.append({
