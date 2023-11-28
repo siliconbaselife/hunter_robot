@@ -11,7 +11,6 @@ from datetime import datetime
 from dao.tool_dao import *
 import os
 from utils.utils import str_is_none
-# from werkzeug import secure_filename
 from utils.oss import generate_thumbnail
 from service.tools_service import *
 from service.schedule_service import *
@@ -29,13 +28,13 @@ def create_task():
         return Response(json.dumps(get_web_res_fail("jd为空")))
 
     if len(request.files.keys()) == 0:
-        return Response(json.dumps(get_web_res_fail("上传文件为空")))
+        return Response(json.dumps(get_web_res_fail("上传文件为空"), ensure_ascii=False))
     if int(request.headers.get('Content-Length', 0)) > 10000000:
-        return Response(json.dumps(get_web_res_fail("单任务不能超过10M")))
+        return Response(json.dumps(get_web_res_fail("单任务不能超过10M"), ensure_ascii=False))
     
     filename = request.form.get('filename', None)
     if str_is_none(filename):
-        return Response(json.dumps(get_web_res_fail("filename is none")))
+        return Response(json.dumps(get_web_res_fail("filename is为空"), ensure_ascii=False))
     
     zip_file = request.files['zip_file'].read()
     file_url = generate_thumbnail(filename, zip_file)
@@ -43,7 +42,7 @@ def create_task():
     logger.info(f"new_resume_filter_task:{manage_account_id}, {file_url}, {int(request.headers.get('Content-Length', 0))}")
     create_new_filter_task(manage_account_id, jd, file_url)
 
-    return Response(json.dumps(get_web_res_suc_with_data("任务创建成功")))
+    return Response(json.dumps(get_web_res_suc_with_data("任务创建成功"), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/filterTaskList", methods=['POST'])
 @web_exception_handler
@@ -59,7 +58,7 @@ def filter_task_list():
             "create_time":t[4].strftime("%Y-%m-%d %H:%M:%S")
         })
     logger.info(f"filter_task_list:{manage_account_id}, {res}")
-    return Response(json.dumps(get_web_res_suc_with_data(res)))
+    return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/filterTaskResult", methods=['POST'])
 @web_exception_handler
