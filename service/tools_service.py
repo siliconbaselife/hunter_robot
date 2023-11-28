@@ -33,11 +33,15 @@ def generate_csv(res):
 def imglist_to_text(img_url_list):
     res = ''
     for img in img_url_list:
-        res += '\n' + reader.readtext(img)
+        res = res + img_to_text(img)
     return res
 
 def img_to_text(f_path):
-    return reader.readtext(f_path)
+    res = reader.readtext(f_path)
+    s = ''
+    for r in res:
+        s = s + r[1] + '\n'
+    return s
 
 def downloadFile(url):
     file_name = os.path.basename(url)
