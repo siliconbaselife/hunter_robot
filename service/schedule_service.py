@@ -12,7 +12,7 @@ def schedule_filter_task_exec():
         flag, file_path = downloadFile(zip_url)
         if not flag:
             update_filter_task_status(-1, int(t[0]))
-            update_filter_result()
+            update_filter_result('[]', int(t[0]))
             continue
         f = zipfile.ZipFile(file_path ,'r')
         file_list = []
