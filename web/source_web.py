@@ -25,9 +25,6 @@ source_web = Blueprint('source_web', __name__, template_folder='templates')
 
 logger = get_logger(config['log']['log_file'])
 
-
-
-
 @source_web.route("/recruit/job/query", methods=['POST'])
 @web_exception_handler
 def query_job_api():

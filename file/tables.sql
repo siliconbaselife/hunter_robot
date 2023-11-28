@@ -176,3 +176,17 @@ CREATE TABLE IF NOT EXISTS `candidate_filter_cache`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `candidate_id`, `job_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+
+
+CREATE TABLE IF NOT EXISTS `resume_filter_task`(
+   `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `manage_account_id` VARCHAR(100) NOT NULL COMMENT '管理账户ID',
+   `jd` VARCHAR(500) NOT NULL COMMENT '岗位要求',
+   `resume_url` VARCHAR(100) NOT NULL COMMENT '简历zip包',
+   `status` int NOT NULL DEFAULT 0 COMMENT '当前状态0待处理，1处理中，2处理完成, -1处理失败',
+   `filter_result` LONGTEXT COMMENT '候选人筛选结果',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
