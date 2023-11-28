@@ -11,7 +11,7 @@ from datetime import datetime
 from dao.tool_dao import *
 import os
 from utils.utils import str_is_none
-from werkzeug import secure_filename
+# from werkzeug import secure_filename
 from utils.oss import generate_thumbnail
 from service.tools_service import *
 from service.schedule_service import *
