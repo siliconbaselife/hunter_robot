@@ -217,11 +217,26 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
             logger.info(f"new_msgs: {new_msgs}")
 
             new_msgs.reverse()
-            history_msg.extend(new_msgs)
+            r_new_msgs = []
+            for msg in new_msgs:
+                temp_time = msg['time'] if "time" in msg else None
+                if temp_time is None:
+                    temp_time = format_time(datetime.now())
+                else:
+                    temp_time = format_time(datetime.fromtimestamp(msg['time']))
+
+                r_new_msgs.append({
+                    'speaker': msg["speaker"],
+                    'msg': msg["msg"],
+                    'time': temp_time
+                })
+
+            history_msg.extend(r_new_msgs)
         else:
             history_msg = page_history_msg
 
         self._msg_list = history_msg
+
         logger.info(f"history_msg: {history_msg}")
 
         return history_msg
@@ -293,8 +308,10 @@ A.有需求 B.没有需求 C.暂时没有需求 D.无法判断
                     num += 1
                     user_msg_list.append("hi")
                 continue
+
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "robot":
                 break
+
             num += 1
             user_msg_list.append(history_msgs[len(history_msgs) - i - 1]["msg"])
         user_msg_list.reverse()

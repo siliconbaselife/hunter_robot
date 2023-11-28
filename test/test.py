@@ -8,9 +8,10 @@ data = {
     'candidateName': 'candidate test',
     'historyMsg': [
         {"speaker": "robot", "msg": "hi"},
+        {"speaker": "robot", "msg": "hello,1"},
         {"speaker": "user", "msg": "hi"}
     ]
 }
 
-r = requests.post('http://127.0.0.1:20400/recruit/candidate/chat', json=data)
+r = requests.post('http://127.0.0.1:2040/recruit/candidate/chat', json=data)
 print(json.loads(r.text, strict=False))
