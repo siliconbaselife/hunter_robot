@@ -9,7 +9,8 @@ logger = get_logger(config['log']['log_file'])
 def linkedin_preprocess(raw_candidate_info):
     try:
         tmp = raw_candidate_info
-        cid = tmp['trackingUrn'].split(':')[-1]
+        # cid = tmp['trackingUrn'].split(':')[-1]
+        cid = tmp['id']
         cname = tmp['profile']['name']
         logger.info(f"test_name: {cname}")
         age = 0
