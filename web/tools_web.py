@@ -15,7 +15,8 @@ from utils.oss import generate_thumbnail
 from service.tools_service import *
 from service.schedule_service import *
 from service.manage_service import cookie_check_service
-from utils.utils import decrypt
+from utils.utils import decrypt, user_code_cache
+from service.user_service import user_register, user_verify_email
 logger = get_logger(config['log']['log_file'])
 
 tools_web = Blueprint('tools_web', __name__, template_folder='templates')
@@ -113,3 +114,42 @@ def filter_task_result():
 def exec_schedule_task():
     schedule_filter_task_exec()
     return
+
+
+
+
+@tools_web.route('/backend/user/register', methods=['POST'])
+@web_exception_handler
+def register():
+    passwd = request.json.get('passwd', '')
+    email = request.json.get('email', '')
+    code = request.json.get('code', '')
+    if str_is_none(email) or str_is_none(passwd) or str_is_none(code):
+        return Response(json.dumps(get_web_res_fail('信息为空'), ensure_ascii=False))
+    if code != user_code_cache[email]:
+        return Response(json.dumps(get_web_res_fail('验证码不正确'), ensure_ascii=False))
+
+    status, msg = user_register(passwd, email)
+    if status == 0:
+        return Response(json.dumps(get_web_res_suc_with_data("注册成功"), ensure_ascii=False))
+    else:
+        return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
+
+    
+
+
+@tools_web.route('/backend/user/verifyEmailCode', methods=['POST'])
+@web_exception_handler
+def verify_email_code():
+    email = request.json.get('email', '')
+    if str_is_none(email):
+        return Response(json.dumps(get_web_res_fail('信息为空'), ensure_ascii=False))
+    logger.info(f'verify_email_code:{email}')
+    status, msg, code = user_verify_email(email)
+    if str_is_none(code):
+        return Response(json.dumps(get_web_res_fail('验证码发送失败'), ensure_ascii=False))
+    if status == 0:
+        user_code_cache[email] = code
+        return Response(json.dumps(get_web_res_suc_with_data("code已发送"), ensure_ascii=False))
+    else:
+        return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
