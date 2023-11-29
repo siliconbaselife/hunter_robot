@@ -15,7 +15,7 @@ import csv
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
 
-file_path_prefix = './tmp/'
+file_path_prefix = '/home/human/workspace/hunter_robot.v2.0/tmp/'
 
 def generate_csv(res):
     s = res[0][6].replace('\n', '\\n')
@@ -50,9 +50,9 @@ def downloadFile(url):
     if responsepdf.status_code == 200:
         with open(file_path_prefix + file_name , "wb") as code:
             code.write(responsepdf.content)
-        return True, file_path_prefix + file_name
+        return True, file_path_prefix + file_name, file_name
     else:
-        return False, ""
+        return False, "", file_name
 
 def content_transfer(f_path):
     file_name = os.path.basename(f_path)
