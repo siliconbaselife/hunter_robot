@@ -23,6 +23,7 @@ class ChatStatus(Enum):
     FinishFail = 'finish_fail',
     Dangerous = 'dangerous',
     AlgoAbnormal = 'algo_abnormal',
+    NoTalk = 'noTalk'
     Unknown = 100
 
     @staticmethod
