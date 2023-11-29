@@ -25,7 +25,7 @@ def schedule_filter_task_exec():
         logger.info(f"exec_filter_task_f_name_list: {file_list}")
         filter_result = exec_filter_task(t[1], file_list, t[2])
         update_filter_task_status(2, int(t[0]))
-        update_filter_result(filter_result, int(t[0]))
+        update_filter_result(json.dumps(filter_result, ensure_ascii=False), int(t[0]))
         for f in file_list:
             os.remove(f)
         os.remove(zip_file_path)

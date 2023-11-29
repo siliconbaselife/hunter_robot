@@ -16,6 +16,7 @@ sql_dict = {
 }
 def get_filter_task_by_id(task_id):
     return dbm.query(sql_dict['get_filter_task_by_id'].format(task_id))
+
 def get_filter_task_by_manage_id(manage_account_id):
     return dbm.query(sql_dict['get_filter_task_by_manage_id'].format(manage_account_id))
 
@@ -29,4 +30,7 @@ def create_new_filter_task(manage_account_id, jd, resume_url):
     return dbm.insert(sql_dict['create_new_filter_task'].format(manage_account_id, jd, resume_url))
 
 def update_filter_result(filter_result, id):
+    filter_result = filter_result.replace("\n", "\\n")
+    filter_result = filter_result.replace("\'", "\\'")
+    filter_result = filter_result.replace('\"', '\\"')
     return dbm.update(sql_dict['update_filter_result'].format(filter_result, id))
