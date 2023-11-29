@@ -21,7 +21,10 @@ def schedule_filter_task_exec():
                 if '/' in f_name:
                     continue
                 f.extract(f_name, file_path_prefix)
-                file_name_process = f_name.encode('cp437').decode('gbk')
+                try:
+                    file_name_process = f_name.encode('cp437').decode('gbk')
+                except:
+                    file_name_process = f_name.encode('utf-8').decode('utf-8')
                 os.rename(file_path_prefix + f_name, file_path_prefix + file_name_process)
                 file_list.append(file_path_prefix + file_name_process)
         logger.info(f"exec_filter_task_f_name_list:{len(file_list)} {file_list}")
