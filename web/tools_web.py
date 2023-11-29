@@ -144,11 +144,12 @@ def verify_email_code():
     email = request.json.get('email', '')
     if str_is_none(email):
         return Response(json.dumps(get_web_res_fail('信息为空'), ensure_ascii=False))
-    logger.info(f'verify_email_code:{email}')
+    
     status, msg, code = user_verify_email(email)
     if str_is_none(code):
         return Response(json.dumps(get_web_res_fail('验证码发送失败'), ensure_ascii=False))
     if status == 0:
+        logger.info(f'verify_email_code:{email}, {code}')
         user_code_cache[email] = code
         return Response(json.dumps(get_web_res_suc_with_data("code已发送"), ensure_ascii=False))
     else:
