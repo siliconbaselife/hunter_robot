@@ -124,6 +124,8 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
             return
 
         msg_prompt = self.deal_intention_prompts(history_msgs)
+        if len(msg_prompt) == 0:
+            return
 
         result_msg = gpt_chat.generic_chat({"user_message": msg_prompt})
 
@@ -147,6 +149,8 @@ class RemolyBDMaimaiRobot(BaseChatRobot):
                 continue
             msg_str += "我: " if msg["speaker"] == "robot" else "客户: "
             msg_str += msg["msg"] + "\n"
+        if len(msg_str) == 0:
+            return ""
 
         prompt = f'''
 @@@
