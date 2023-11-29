@@ -150,7 +150,7 @@ def verify_email_code():
         return Response(json.dumps(get_web_res_fail('验证码发送失败'), ensure_ascii=False))
     if status == 0:
         user_code_cache[email] = code
-        logger.info(f'verify_email_code:{email}, {code}, {user_code_cache}')
+        logger.info(f'verify_email_code:{email}, {code}, {user_code_cache},{user_code_cache[email]}')
         return Response(json.dumps(get_web_res_suc_with_data("code已发送"), ensure_ascii=False))
     else:
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
