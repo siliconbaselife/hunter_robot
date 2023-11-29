@@ -33,6 +33,8 @@ def schedule_filter_task_exec():
             else:
                 if os.path.isdir(file_path_prefix + f_name):
                     os.system(f'rm -rf {file_path_prefix + f_name}')
+                else:
+                    os.remove(file_path_prefix + f_name)
         logger.info(f"exec_filter_task_f_name_list:{len(file_list)} {file_list}")
         filter_task_exec_cache[zip_url] = float(len(file_list) * 40) / 60
         filter_result = exec_filter_task(t[1], file_list, t[2])
