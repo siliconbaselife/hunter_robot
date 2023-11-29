@@ -21,7 +21,9 @@ def schedule_filter_task_exec():
                 if '/' in f_name:
                     continue
                 f.extract(f_name, file_path_prefix)
-                file_list.append(file_path_prefix + f_name)
+                file_name_process = f_name.encode('cp437').decode('gbk')
+                os.rename(file_path_prefix + f_name, file_path_prefix + file_name_process)
+                file_list.append(file_path_prefix + file_name_process)
         logger.info(f"exec_filter_task_f_name_list:{len(file_list)} {file_list}")
         filter_task_exec_cache[zip_url] = float(len(file_list) * 40) / 60
         filter_result = exec_filter_task(t[1], file_list, t[2])
