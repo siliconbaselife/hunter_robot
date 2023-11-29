@@ -64,15 +64,14 @@ def filter_task_list():
 @web_exception_handler
 def filter_task_result():
     manage_account_id = 'manage_test2'
-    task_id = request.json.get('task_id', "")
+    task_id = request.json.get('task_id', 0)
     res = get_filter_task_by_id(task_id)
     if len(res) == 0:
         return Response(json.dumps(get_web_res_fail("task_id is wrong")))
     if res[0][1] != manage_account_id:
         return Response(json.dumps(get_web_res_fail("task_id and manage_id not match")))
-    response = Response(stream_with_context(generate_csv(list(res[0]))), mimetype='text/csv')
-    file_name = os.path.basename(res[0][2])
-    response.headers.set("Content-Disposition", "attachment", filename=file_name)
+    response = Response(stream_with_context(generate_csv(res)), mimetype='text/csv')
+    response.headers.set("Content-Disposition", "attachment", filename='result.csv')
     logger.info(f"filter_task_result_download, {manage_account_id}")
     return response
 
