@@ -7,9 +7,8 @@ data = {
     'jobID': 'job_test',
     'candidateName': 'candidate test',
     'historyMsg': [
-        {"speaker": "robot", "msg": "hi"},
-        {"speaker": "robot", "msg": "hello,1"},
-        {"speaker": "user", "msg": "hi"}
+        {"speaker": "robot", "msg": "我这里有个国电通的岗位，考虑下不呢?"},
+        {"speaker": "user", "msg": "你好"}
     ]
 }
 
