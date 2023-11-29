@@ -126,7 +126,7 @@ def register():
     code = request.json.get('code', '')
     if str_is_none(email) or str_is_none(passwd) or str_is_none(code):
         return Response(json.dumps(get_web_res_fail('信息为空'), ensure_ascii=False))
-    if code != user_code_cache[email]:
+    if email not in user_code_cache or code != user_code_cache[email]:
         return Response(json.dumps(get_web_res_fail('验证码不正确'), ensure_ascii=False))
 
     status, msg = user_register(passwd, email)
