@@ -245,3 +245,7 @@ def process_str_to_list(s):
     s = s.replace('\\n',',')
     s = s.replace('\n',',')
     return s.split(',')
+
+
+filter_task_exec_cache = {}
+user_code_cache = {}
