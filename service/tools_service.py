@@ -18,8 +18,8 @@ reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load t
 file_path_prefix = './tmp/'
 
 def generate_csv(res):
-    logger.info(f'csv_log:{res[0][6]}')
-    res_l = json.loads(res[0][6])
+    s = res[0][6].replace('\n', '\\n')
+    res_l = json.loads(s)
     io = StringIO()
     w = csv.writer(io)
     for r in res_l:
