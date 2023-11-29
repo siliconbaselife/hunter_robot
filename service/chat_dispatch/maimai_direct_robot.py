@@ -33,7 +33,7 @@ class MaimaiDirectRobot(BaseChatRobot):
         logger.info(f"db_history_msg: {db_history_msg}")
         try:
             history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
-            if not self.isFirstTask(history_msgs):
+            if self.isFirstTask(history_msgs):
                 intent_flag = self.has_intent(history_msgs)
                 if intent_flag:
                     r_msg = self.send_positive_word()

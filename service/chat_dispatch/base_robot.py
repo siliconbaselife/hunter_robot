@@ -38,6 +38,9 @@ class ChatStatus(Enum):
             return 'normal_chat'
         elif status==ChatStatus.FinishSuc or status==ChatStatus.FinishFail or status==ChatStatus.Dangerous:
             return 'finish'
+        elif status ==ChatStatus.NoTalk:
+            return 'noTalk'
+
         return status.value[0]
 
 class BaseChatRobot(object):
