@@ -14,15 +14,29 @@ from utils.utils import str_is_none
 from utils.oss import generate_thumbnail
 from service.tools_service import *
 from service.schedule_service import *
+from service.manage_service import cookie_check_service
+from utils.utils import decrypt
 logger = get_logger(config['log']['log_file'])
 
 tools_web = Blueprint('tools_web', __name__, template_folder='templates')
+
+key = 11
+
+
 
 
 @tools_web.route("/backend/tools/createTask", methods=['POST'])
 @web_exception_handler
 def create_task():
-    manage_account_id = "manage_test2"
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    # manage_account_id = "manage_test2"
     jd = request.form.get('jd', None)
     if jd == '' or jd is None:
         return Response(json.dumps(get_web_res_fail("jd为空")))
@@ -47,7 +61,16 @@ def create_task():
 @tools_web.route("/backend/tools/filterTaskList", methods=['POST'])
 @web_exception_handler
 def filter_task_list():
-    manage_account_id = 'manage_test2'
+
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    # manage_account_id = 'manage_test2'
     task_list = get_filter_task_by_manage_id(manage_account_id)
     res = []
     for t in task_list:
@@ -55,7 +78,8 @@ def filter_task_list():
             "task_id":t[0],
             "zip_name": os.path.basename(t[2]),
             "status":t[3],
-            "create_time":t[4].strftime("%Y-%m-%d %H:%M:%S")
+            "create_time":t[4].strftime("%Y-%m-%d %H:%M:%S"),
+            "expect_exec_time": filter_task_exec_cache.get(t[2],0)
         })
     logger.info(f"filter_task_list:{manage_account_id}, {res}")
     return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
@@ -63,7 +87,15 @@ def filter_task_list():
 @tools_web.route("/backend/tools/filterTaskResult", methods=['POST'])
 @web_exception_handler
 def filter_task_result():
-    manage_account_id = 'manage_test2'
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    # manage_account_id = 'manage_test2'
     task_id = request.json.get('task_id', 0)
     res = get_filter_task_by_id(task_id)
     if len(res) == 0:
