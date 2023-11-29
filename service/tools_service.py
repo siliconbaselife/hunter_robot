@@ -1,6 +1,6 @@
 import easyocr
 import os
-import fitz
+# import fitz
 from utils.log import get_logger
 from utils.config import config
 from algo.llm_inference import ChatGPT
