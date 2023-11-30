@@ -67,7 +67,7 @@ class MaimaiDirectRobot(BaseChatRobot):
             if msg["speaker"] == "user":
                 flag = 1
 
-            if msg["speaker"] == "system" and msg["msg"] == "我已通过了好友请求，以后多交流":
+            if msg["speaker"] == "system" and msg["msg"] == "我已通过了好友请求，以后多交流~":
                 flag = 1
 
             if msg["speaker"] == "robot" and flag == 1:
