@@ -7,7 +7,7 @@ from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 import json
 import math
 import traceback
-from datetime import datetime
+import time
 from dao.tool_dao import *
 import os
 from utils.utils import str_is_none
@@ -49,6 +49,7 @@ def create_task():
         return Response(json.dumps(get_web_res_fail("filename is为空"), ensure_ascii=False))
     
     zip_file = request.files['zip_file'].read()
+    filename = filename + "_" + str(int(time.time()))
     file_url = generate_thumbnail(filename, zip_file)
 
     logger.info(f"new_resume_filter_task:{manage_account_id}, {file_url}, {int(request.headers.get('Content-Length', 0))}")
