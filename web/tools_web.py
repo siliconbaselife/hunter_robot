@@ -104,6 +104,8 @@ def filter_task_result():
         return Response(json.dumps(get_web_res_fail("task_id is wrong")))
     if res[0][1] != manage_account_id:
         return Response(json.dumps(get_web_res_fail("task_id and manage_id not match")))
+    if int(res[0][3]) != 2:
+        return Response(json.dumps(get_web_res_fail(f"task_status_{res[0][3]}")))
     response = Response(stream_with_context(generate_csv(res)), mimetype='text/csv')
     response.headers.set("Content-Disposition", "attachment", filename='result.csv')
     logger.info(f"filter_task_result_download, {manage_account_id}")
