@@ -3,7 +3,7 @@ import os
 import fitz
 from utils.log import get_logger
 from utils.config import config
-from algo.llm_inference import ChatGPT
+from algo.llm_inference import gpt_manager
 from algo.llm_base_model import Prompt
 import time
 import requests
@@ -94,19 +94,21 @@ def content_transfer(f_path):
         return False, "EXT_NOT_SUPPORT"
 
 def content_extract_and_filter(file_raw_data, jd):
-    chatgpt = ChatGPT()
+    # chatgpt = ChatGPT()
     #先做个人为截断，如果有问题再说
     ext_prompt_msg = '以下是候选人信息，请提取关键信息并结构化输出\n$$$\n' + file_raw_data[0:3500] + "\n$$$"
     ext_prompt = Prompt()
     ext_prompt.add_user_message(ext_prompt_msg)
-    file_key_data = chatgpt.chat(ext_prompt)
+    file_key_data = gpt_manager.chat_task(ext_prompt)
+    # file_key_data = chatgpt.chat(ext_prompt)
     logger.info(f"filter_task_content_extract_and_filter_file_key_data: {file_key_data}")
     prefix = '你是一个猎头，请判断候选人是否符合招聘要求\n给出具体原因和推理过程\n答案必须在最后一行，并且单独一行 A.合适，B.不合适'
     candidate_msg = f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
     filter_prompt_msg = prefix + candidate_msg + '\n招聘要求:\n' + jd + '\n'
     filter_prompt = Prompt()
     filter_prompt.add_user_message(filter_prompt_msg)
-    res = chatgpt.chat(filter_prompt)
+    res = gpt_manager.chat_task(filter_prompt)
+    # res = chatgpt.chat(filter_prompt)
     return res
 
 def exec_filter_task(manage_account_id, file_list, jd):
