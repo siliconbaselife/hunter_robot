@@ -52,7 +52,7 @@ def create_task():
         return Response(json.dumps(get_web_res_fail("filename is为空"), ensure_ascii=False))
     
     zip_file = request.files['zip_file'].read()
-    filename = filename + "_" + str(int(time.time()))
+    filename = str(int(time.time())) + "_" + filename
     file_url = generate_thumbnail(filename, zip_file)
 
     logger.info(f"new_resume_filter_task:{manage_account_id}, {file_url}, {int(request.headers.get('Content-Length', 0))}")
