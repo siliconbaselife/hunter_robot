@@ -6,7 +6,7 @@ from typing import Optional, List, Mapping, Any, Dict
 import os
 from pydantic import BaseModel
 from abc import abstractmethod
-from algo.llm_inference import ChatGPT
+from algo.llm_inference import gpt_manager
 
 logger = get_logger(config['log']['log_file'])
 
@@ -109,8 +109,8 @@ class Prompt:
 
 
 class GptChat:
-    def __init__(self):
-        self.chat_gpt = ChatGPT()
+    # def __init__(self):
+    #     # self.chat_gpt = ChatGPT()
 
     @exception_retry()
     def generic_chat(self, message):
@@ -135,6 +135,6 @@ class GptChat:
 
         prompt.add_user_message(message['user_message'])
         logger.info(f"generic chatgpt prompt: {prompt.get_messages()}")
-        response = self.chat_gpt.chat(prompt)
+        response = gpt_manager.chat_task(prompt)
         logger.info(f"generic chatgpt response: {response}")
         return response

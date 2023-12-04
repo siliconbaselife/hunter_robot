@@ -1,7 +1,7 @@
 import json
 from utils.config import config
 from utils.log import get_logger
-from algo.llm_inference import ChatGPT
+from algo.llm_inference import ChatGPT,gpt_manager
 from algo.llm_base_model import Prompt
 logger = get_logger(config['log']['log_file'])
 from dao.task_dao import insert_filter_cache, get_filter_cache, update_filter_cache
@@ -80,10 +80,11 @@ def linkedin_custom_filter(candidate_info, job_res):
     else:
         need_insert = True
 
-    chatgpt = ChatGPT()
+    # chatgpt = ChatGPT()
     prompt = Prompt()
     prompt.add_user_message(prompt_msg)
-    result = chatgpt.chat(prompt)
+    # result = chatgpt.chat(prompt)
+    result = gpt_manager.chat_task(prompt)
     result.replace('\n',';')
     if 'A.合适' in result:
         judge_ok = True

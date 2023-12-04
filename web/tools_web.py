@@ -23,9 +23,6 @@ tools_web = Blueprint('tools_web', __name__, template_folder='templates')
 
 key = 11
 
-
-
-
 @tools_web.route("/backend/tools/createTask", methods=['POST'])
 @web_exception_handler
 def create_task():
