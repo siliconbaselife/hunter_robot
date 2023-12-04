@@ -31,25 +31,7 @@ OPENAI_PROXY = 'http://127.0.0.1:7890'
 logger = get_logger(config['log']['log_file'])
 
 
-class GPTManager:
-    def __init__(self):
-        logger.info(f"GPTManager init")
-        self.pool = ThreadPoolExecutor(2)
-        self.gpt_map = {
-            "ThreadPoolExecutor-0_0": ChatGPT(OPENAI_API_KEY_0),
-            "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_1)
-        }
-    def exec_task(self, prompt):
-        logger.info(f'chatgpt_exec {threading.current_thread().name}')
-        chatgpt = self.gpt_map[threading.current_thread().name]
-        return chatgpt.chat(prompt)
-    def chat_task(self, prompt):
-        f = self.pool.submit(self.exec_task, prompt)
-        while not f.done():
-            time.sleep(1)
-        return f.result()
 
-gpt_manager = GPTManager()
 
 
 class ChatGPT:
@@ -90,3 +72,24 @@ class Vicuna:
             print(
                 f"没有返回正确的推理结果. \npayload = {payload} \ntoken_size = {prompt.get_token_size()} \nres.status = {res.status_code} \nres.context = {res.content} \n{curlify.to_curl(res.request)}")
             raise e
+
+
+class GPTManager:
+    def __init__(self):
+        logger.info(f"GPTManager init")
+        self.pool = ThreadPoolExecutor(2)
+        self.gpt_map = {
+            "ThreadPoolExecutor-0_0": ChatGPT(OPENAI_API_KEY_0),
+            "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_1)
+        }
+    def exec_task(self, prompt):
+        logger.info(f'chatgpt_exec {threading.current_thread().name}')
+        chatgpt = self.gpt_map[threading.current_thread().name]
+        return chatgpt.chat(prompt)
+    def chat_task(self, prompt):
+        f = self.pool.submit(self.exec_task, prompt)
+        while not f.done():
+            time.sleep(1)
+        return f.result()
+
+gpt_manager = GPTManager()
