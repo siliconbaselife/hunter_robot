@@ -40,6 +40,7 @@ class GPTManager:
             "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_1)
         }
     def exec_task(self, prompt):
+        logger.info(f'chatgpt_exec {threading.current_thread().name}')
         chatgpt = self.gpt_map[threading.current_thread().name]
         return chatgpt.chat(prompt)
     def chat_task(self, prompt):
