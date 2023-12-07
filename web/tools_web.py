@@ -168,10 +168,11 @@ def upload_online_resume():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    manage_account_id = 'manage_test2'
+    # manage_account_id = 'manage_test2'
 
     platform = request.json.get('platform', '')
     profile = request.json.get('profile', {})
+    logger.info(f'upload_online_resume:{manage_account_id},{platform}, {profile}')
     if len(profile.keys()) == 0 or platform == '':
         return Response(json.dumps(get_web_res_fail("参数为空"), ensure_ascii=False))
     res = upload_online_profile(manage_account_id, platform, json.dumps(profile, ensure_ascii=False))
