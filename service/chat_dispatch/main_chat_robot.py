@@ -319,7 +319,6 @@ class MainChatRobot(BaseChatRobot):
 
         result_msg = gpt_chat.generic_chat({"user_message": msg_prompt})
 
-        now_time = time.time()
         if "A.拒绝" in result_msg:
             return INTENTION.NEGTIVE
 
@@ -348,7 +347,7 @@ class MainChatRobot(BaseChatRobot):
                 break
 
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "user":
-                new_msgs.append("候选人: " + history_msgs[len(history_msgs) - i - 1].msg)
+                new_msgs.append("候选人: " + history_msgs[len(history_msgs) - i - 1]["msg"])
         new_msgs.reverse()
         new_str = "\n".join(new_msgs)
 
