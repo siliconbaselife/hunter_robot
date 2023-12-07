@@ -36,7 +36,7 @@ class MainChatRobot(BaseChatRobot):
         self._job_id = job_id
         new_ret = get_job_by_id(job_id)
         self.job_config = json.loads(new_ret[0][6], strict=False)
-        self.template_id = new_ret[0][11]
+        self.template_id = new_ret[0][10]
 
         self._msg_list = []
         logger.info(f"maimai robot init job_id: {job_id}")
