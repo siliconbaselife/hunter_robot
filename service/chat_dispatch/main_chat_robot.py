@@ -340,15 +340,15 @@ class MainChatRobot(BaseChatRobot):
         new_msgs = []
         end_num = 0
         for i in range(len(history_msgs)):
-            if history_msgs[len(history_msgs) - i]["speaker"] == "system":
+            if history_msgs[len(history_msgs) - i - 1]["speaker"] == "system":
                 continue
 
-            if history_msgs[len(history_msgs) - i]["speaker"] == "robot":
-                end_num = len(history_msgs) - i
+            if history_msgs[len(history_msgs) - i - 1]["speaker"] == "robot":
+                end_num = len(history_msgs) - i - 1
                 break
 
-            if history_msgs[len(history_msgs) - i]["speaker"] == "user":
-                new_msgs.append("候选人: " + history_msgs[len(history_msgs) - i].msg)
+            if history_msgs[len(history_msgs) - i - 1]["speaker"] == "user":
+                new_msgs.append("候选人: " + history_msgs[len(history_msgs) - i - 1].msg)
         new_msgs.reverse()
         new_str = "\n".join(new_msgs)
 
