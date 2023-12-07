@@ -117,7 +117,7 @@ class BaseChatRobot(object):
     def source(self):
         return self._source
 
-    def contact(self, page_history_msg, db_history_msg, job_id):
+    def contact(self, page_history_msg, db_history_msg):
         ## merge db history with page history. fetch latest msg. and judge:
         ### if user ask
         ### if first user say hello

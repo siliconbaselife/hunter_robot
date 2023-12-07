@@ -75,7 +75,7 @@ class MainChatRobot(BaseChatRobot):
 
         return history_msg
 
-    def contact(self, page_history_msg, db_history_msg, job_id):
+    def contact(self, page_history_msg, db_history_msg):
         logger.info(f"page_history_msg: {page_history_msg}")
         logger.info(f"db_history_msg: {db_history_msg}")
         try:
