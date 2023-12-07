@@ -84,6 +84,7 @@ class MainChatRobot(BaseChatRobot):
             status_infos = self.fetch_now_status()
             reply_infos = self.fetch_reply_infos()
             job_info = self.fetch_job_info()
+            logger.info("job_info: ", job_info)
 
             logger.info(f"当前客户 {self._candidate_id} 的状态信息是 {status_infos}")
 
