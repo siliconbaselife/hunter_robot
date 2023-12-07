@@ -89,6 +89,7 @@ class MainChatRobot(BaseChatRobot):
 
             self.deal_contact(history_msgs, status_infos)
             intention = self.deal_intention(history_msgs, status_infos)
+
             r_msg, action = self.generate_reply(intention, status_infos, history_msgs, reply_infos, job_info)
             self.deal_r_msg(r_msg, action)
 
@@ -116,6 +117,11 @@ class MainChatRobot(BaseChatRobot):
                                'time': format_time(datetime.now())})
 
     def generate_reply(self, intention, status_infos, history_msgs, reply_infos, job_info):
+        if "say_flag" not in status_infos:
+            intention = INTENTION.NEGTIVE if intention == INTENTION.NEGTIVE else INTENTION.POSITIVE
+
+        status_infos["say_flag"] = True
+
         if intention == INTENTION.NEGTIVE:
             return self.negtive_reply(status_infos, reply_infos)
 
@@ -127,6 +133,7 @@ class MainChatRobot(BaseChatRobot):
 
         if intention == INTENTION.QUESTIOM:
             return self.deal_question_reply(status_infos, history_msgs, job_info)
+
         return "", ChatStatus.NoTalk
 
     def deal_question_reply(self, status_infos, history_msgs, job_info):
