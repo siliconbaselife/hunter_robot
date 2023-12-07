@@ -34,8 +34,9 @@ class MainChatRobot(BaseChatRobot):
     def __init__(self, robot_api, account_id, job_id, candidate_id, source=None):
         super(MainChatRobot, self).__init__(robot_api, account_id, job_id, candidate_id, source)
         self._job_id = job_id
-        self.job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
-        self.template_id = get_job_by_id(job_id)[0][5]
+        new_ret = get_job_by_id(job_id)
+        self.job_config = json.loads(new_ret[0][6], strict=False)
+        self.template_id = new_ret[0][11]
 
         self._msg_list = []
         logger.info(f"maimai robot init job_id: {job_id}")
