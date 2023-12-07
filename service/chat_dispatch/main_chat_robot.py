@@ -132,11 +132,17 @@ class MainChatRobot(BaseChatRobot):
             return self.no_intention_reply(status_infos, reply_infos, history_msgs, job_info)
 
         if intention == INTENTION.QUESTIOM:
-            return self.deal_question_reply(status_infos, history_msgs, job_info)
+            return self.deal_question_reply(status_infos, history_msgs, reply_infos, job_info)
 
         return "", ChatStatus.NoTalk
 
-    def deal_question_reply(self, status_infos, history_msgs, job_info):
+    def deal_question_reply(self, status_infos, history_msgs, reply_infos, job_info):
+        say_num = status_infos["say_num"] if "say_num" in status_infos else 0
+        default_msg = ""
+        if "reply_msgs" in reply_infos and say_num < len(reply_infos["reply_msgs"]):
+            status_infos["say_num"] = say_num + 1
+            default_msg = reply_infos["reply_msgs"][say_num]
+
         prompt = f'''
 你是一个猎头，你正在跟候选人聊这个岗位，回答候选人的问题。
 不能说重复的话。
@@ -151,13 +157,17 @@ class MainChatRobot(BaseChatRobot):
 
         msgs, user_msg = self.transfer_msgs(history_msgs)
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
+        if len(default_msg) > 0:
+            r_msg += "\n" + default_msg
+
         return r_msg, ChatStatus.NormalChat
 
     def no_intention_reply(self, status_infos, reply_infos, history_msgs, job_info):
         say_num = status_infos["say_num"] if "say_num" in status_infos else 0
+        default_msg = ""
         if "reply_msgs" in reply_infos and say_num < len(reply_infos["reply_msgs"]):
             status_infos["say_num"] = say_num + 1
-            return reply_infos["reply_msgs"][say_num], ChatStatus.NormalChat
+            default_msg = reply_infos["reply_msgs"][say_num]
 
         m = ""
         if "contact_flag" in status_infos and status_infos["contact_flag"]:
@@ -178,6 +188,8 @@ class MainChatRobot(BaseChatRobot):
         msgs, user_msg = self.transfer_msgs(history_msgs)
 
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
+        if len(default_msg) > 0:
+            r_msg += "\n" + default_msg
         if "$PHONE$" in r_msg:
             status_infos["contact_flag"] = True
             return r_msg.replace("$PHONE$", ""), ChatStatus.NeedContact
