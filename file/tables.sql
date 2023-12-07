@@ -190,3 +190,15 @@ CREATE TABLE IF NOT EXISTS `resume_filter_task`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+
+
+CREATE TABLE IF NOT EXISTS `online_resume`(
+   `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `manage_account_id` VARCHAR(100) NOT NULL COMMENT '管理账户ID',
+   `platform` VARCHAR(50) NOT NULL COMMENT '平台',
+   `raw_profile` LONGTEXT COMMENT '原始在线简历信息',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;

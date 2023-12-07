@@ -37,7 +37,7 @@ def create_task():
     # manage_account_id = "manage_test2"
     jd = request.form.get('jd', None)
     if jd == '' or jd is None:
-        return Response(json.dumps(get_web_res_fail("jd为空")))
+        return Response(json.dumps(get_web_res_fail("jd为空"), ensure_ascii=False))
 
     if len(request.files.keys()) == 0:
         return Response(json.dumps(get_web_res_fail("上传文件为空"), ensure_ascii=False))
@@ -155,3 +155,24 @@ def verify_email_code():
         return Response(json.dumps(get_web_res_suc_with_data("code已发送"), ensure_ascii=False))
     else:
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
+
+
+
+@tools_web.route("/backend/tools/uploadOnlineResume", methods=['POST'])
+@web_exception_handler
+def upload_online_resume():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    manage_account_id = 'manage_test2'
+
+    platform = request.json.get('platform', '')
+    profile = request.json.get('profile', {})
+    if len(profile.keys()) == 0 or platform == '':
+        return Response(json.dumps(get_web_res_fail("参数为空"), ensure_ascii=False))
+    res = upload_online_profile(manage_account_id, platform, json.dumps(profile, ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
