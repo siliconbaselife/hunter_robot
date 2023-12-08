@@ -2,7 +2,7 @@ from .base_robot import BaseChatRobot, ChatStatus
 import json
 
 from dao.task_dao import get_job_by_id, query_status_infos, has_contact_db, update_candidate_contact_db, \
-    update_status_infos, update_chat_contact_db, query_template_config
+    update_status_infos, update_chat_contact_db, query_template_config, get_template_id
 from utils.log import get_logger
 from utils.config import config
 from utils.utils import format_time
@@ -34,10 +34,8 @@ class MainChatRobot(BaseChatRobot):
     def __init__(self, robot_api, account_id, job_id, candidate_id, source=None):
         super(MainChatRobot, self).__init__(robot_api, account_id, job_id, candidate_id, source)
         self._job_id = job_id
-        new_ret = get_job_by_id(job_id)
-        logger.info("new_ret: ", new_ret)
-        self.job_config = json.loads(new_ret[0][6], strict=False)
-        self.template_id = new_ret[0][11]
+        self.job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
+        self.template_id = get_job_by_id(job_id)[0][0]
         logger.info("template_id: ", self.template_id)
 
         self._msg_list = []
