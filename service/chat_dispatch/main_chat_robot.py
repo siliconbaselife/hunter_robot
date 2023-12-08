@@ -160,7 +160,7 @@ class MainChatRobot(BaseChatRobot):
         msgs, user_msg = self.transfer_msgs(history_msgs)
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
         if len(default_msg) > 0:
-            r_msg += "\n" + default_msg
+            r_msg += default_msg
 
         return r_msg, ChatStatus.NormalChat
 
