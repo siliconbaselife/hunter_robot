@@ -35,7 +35,7 @@ class MainChatRobot(BaseChatRobot):
         super(MainChatRobot, self).__init__(robot_api, account_id, job_id, candidate_id, source)
         self._job_id = job_id
         self.job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
-        self.template_id = get_job_by_id(job_id)[0][0]
+        self.template_id = get_template_id(job_id)[0][0]
         logger.info("template_id: ", self.template_id)
 
         self._msg_list = []
