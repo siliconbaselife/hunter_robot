@@ -157,6 +157,7 @@ class MainBDRobot(BaseChatRobot):
             return INTENTION.NOTHING
 
         result_msg = gpt_chat.generic_chat({"user_message": msg_prompt})
+        logger.info("result_msg: ", result_msg)
 
         if "A.有需求" in result_msg:
             return INTENTION.NEGTIVE
@@ -283,7 +284,7 @@ class MainBDRobot(BaseChatRobot):
                 break
 
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "user":
-                new_msgs.append("候选人: " + history_msgs[len(history_msgs) - i - 1]["msg"])
+                new_msgs.append("客户: " + history_msgs[len(history_msgs) - i - 1]["msg"])
         new_msgs.reverse()
         new_str = "\n".join(new_msgs)
 
@@ -294,7 +295,7 @@ class MainBDRobot(BaseChatRobot):
             msg = history_msgs[i]
             if msg["speaker"] == "system":
                 continue
-            msg_str += "我: " if msg["speaker"] == "robot" else "候选人: "
+            msg_str += "我: " if msg["speaker"] == "robot" else "客户: "
             msg_str += msg["msg"] + "\n"
 
         if len(msg_str) == 0:
