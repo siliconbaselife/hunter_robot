@@ -160,10 +160,10 @@ class MainBDRobot(BaseChatRobot):
         logger.info("result_msg: ", result_msg)
 
         if "A.有需求" in result_msg:
-            return INTENTION.NEGTIVE
+            return INTENTION.POSITIVE
 
         if "B.没有需求" in result_msg:
-            return INTENTION.POSITIVE
+            return INTENTION.NEGTIVE
 
         if "C.无法判断" in result_msg:
             return INTENTION.NOTHING
