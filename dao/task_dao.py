@@ -48,6 +48,11 @@ sql_dict = {
 }
 
 
+def get_template_id(job_id):
+    sql = f"select robot_template from job where job_id='{job_id}'"
+    return dbm.query(sql)
+
+
 def update_status_infos(candidate_id, account_id, status_infos):
     sql = f"update chat set status_infos = '{status_infos}' where candidate_id = '{candidate_id}' and account_id = '{account_id}'"
     dbm.update(sql)
