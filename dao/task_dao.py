@@ -49,7 +49,7 @@ sql_dict = {
 
 
 def get_template_id(job_id):
-    sql = f"select template_id from job where job_id='{job_id}'"
+    sql = f"select robot_template from job where job_id='{job_id}'"
     return dbm.query(sql)
 
 
