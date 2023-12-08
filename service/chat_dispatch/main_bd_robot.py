@@ -29,9 +29,9 @@ class INTENTION(Enum):
     NOTHING = 3
 
 
-class RemolyBDMaimaiRobot(BaseChatRobot):
+class MainBDRobot(BaseChatRobot):
     def __init__(self, robot_api, account_id, job_id, candidate_id, source=None):
-        super(RemolyBDMaimaiRobot, self).__init__(robot_api, account_id, job_id, candidate_id, source)
+        super(MainBDRobot, self).__init__(robot_api, account_id, job_id, candidate_id, source)
         self._job_id = job_id
         self.job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
 
