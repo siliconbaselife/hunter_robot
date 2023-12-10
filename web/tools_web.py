@@ -173,7 +173,7 @@ def upload_online_resume():
     platform = request.json.get('platform', '')
     profile = request.json.get('profile', [])
     logger.info(f'upload_online_resume:{manage_account_id},{platform}, {profile}')
-    if len(len(profile)) == 0 or platform == '':
+    if len(profile) == 0 or platform == '':
         return Response(json.dumps(get_web_res_fail("参数为空"), ensure_ascii=False))
     for p in profile:
         upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False))
