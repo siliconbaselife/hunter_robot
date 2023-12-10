@@ -177,4 +177,4 @@ def upload_online_resume():
         return Response(json.dumps(get_web_res_fail("参数为空"), ensure_ascii=False))
     for p in profile:
         upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False))
-    return Response(json.dumps(get_web_res_suc_with_data(), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
