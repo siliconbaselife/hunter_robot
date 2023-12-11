@@ -161,7 +161,9 @@ def verify_email_code():
 @tools_web.route("/backend/tools/uploadOnlineResume", methods=['POST'])
 @web_exception_handler
 def upload_online_resume():
-    cookie_user_name = request.cookies.get('user_name', None)
+    # cookie_user_name = request.cookies.get('user_name', None)
+    #插件没有domain，无法直接携带cookie
+    cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
