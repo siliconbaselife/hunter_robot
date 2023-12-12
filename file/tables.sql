@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `resume_filter_task`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
-
+alter table resume_filter_task add `taskname` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '任务名称'  after `id`;
 
 
 CREATE TABLE IF NOT EXISTS `online_resume`(

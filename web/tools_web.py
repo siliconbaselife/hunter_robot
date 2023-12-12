@@ -44,16 +44,19 @@ def create_task():
     if int(request.headers.get('Content-Length', 0)) > 10000000:
         return Response(json.dumps(get_web_res_fail("单任务不能超过10M"), ensure_ascii=False))
     
+    taskname = request.form.get('taskname', None)
     filename = request.form.get('filename', None)
     if str_is_none(filename):
         return Response(json.dumps(get_web_res_fail("filename is为空"), ensure_ascii=False))
-    
+    if str_is_none(taskname):
+        return Response(json.dumps(get_web_res_fail("taskname is为空"), ensure_ascii=False))
+
     zip_file = request.files['zip_file'].read()
     filename = str(int(time.time())) + "_" + filename
     file_url = generate_thumbnail(filename, zip_file)
 
     logger.info(f"new_resume_filter_task:{manage_account_id}, {file_url}, {int(request.headers.get('Content-Length', 0))}")
-    create_new_filter_task(manage_account_id, jd, file_url)
+    create_new_filter_task(manage_account_id, jd, file_url, taskname)
 
     return Response(json.dumps(get_web_res_suc_with_data("任务创建成功"), ensure_ascii=False))
 
@@ -75,6 +78,7 @@ def filter_task_list():
     for t in task_list:
         res.append({
             "task_id":t[0],
+            "taskname":t[7],
             "zip_name": os.path.basename(t[2]),
             "status":t[3],
             "create_time":t[4].strftime("%Y-%m-%d %H:%M:%S"),
