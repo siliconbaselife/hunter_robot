@@ -201,7 +201,7 @@ def resume_exist():
 
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
-    logger.info(f'upload_online_resume:{manage_account_id},{platform}, {profile}')
+    logger.info(f'resume_exist:{manage_account_id},{platform}, {candidate_id}')
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform)) > 0:
