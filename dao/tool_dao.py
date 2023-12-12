@@ -14,8 +14,11 @@ sql_dict = {
     "update_filter_result":"update resume_filter_task set filter_result='{}' where id={}",
     "get_filter_task_by_id":"select id, manage_account_id, resume_url, status, create_time,jd,filter_result,taskname from resume_filter_task where id={}",
     "upload_online_profile":"insert into online_resume(manage_account_id, platform, raw_profile, candidate_id) values ('{}', '{}', '{}', '{}')",
-    "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume"
+    "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'"
 }
+def get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id):
+    return dbm.query(sql_dict['get_resume_by_candidate_id_and_platform'].format(candidate_id, platform, manage_account_id))
+
 def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id):
     raw_profile = raw_profile.replace("\n", "\\n")
     raw_profile = raw_profile.replace("\'", "\\'")

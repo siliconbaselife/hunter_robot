@@ -174,16 +174,20 @@ def upload_online_resume():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    # manage_account_id = 'manage_test2'
 
     platform = request.json.get('platform', '')
     profile = request.json.get('profile', [])
-    logger.info(f'upload_online_resume:{manage_account_id},{platform}, {profile}')
+    logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}')
     if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    count = 0
     for p in profile:
-        upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), get_candidate_id(p, platform))
-    return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
+        candidate_id = get_candidate_id(p, platform)
+        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
+            upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
+            count = count + 1
+    logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
+    return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/resumeExist", methods=['POST'])
 @web_exception_handler
@@ -204,7 +208,7 @@ def resume_exist():
     logger.info(f'resume_exist:{manage_account_id},{platform}, {candidate_id}')
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    if len(get_resume_by_candidate_id_and_platform(candidate_id, platform)) > 0:
+    if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         return Response(json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False))
     else:
         return Response(json.dumps(get_web_res_suc_with_data(False), ensure_ascii=False))
