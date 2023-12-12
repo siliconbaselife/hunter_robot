@@ -5,6 +5,12 @@ from email.mime.text import MIMEText
 from email.header import Header
 from dao.manage_dao import login_check_db, manage_account_register
 import json
+from utils.log import get_logger
+from utils.config import config
+
+logger = get_logger(config['log']['log_file'])
+
+
 def generate_email_code():
     code = ""
     for i in range(4):
@@ -32,19 +38,26 @@ def send_verify_email(email, code):
 
 def user_register(passwd, email):
     res = login_check_db(email)
-    if len(res) > 0 :
+    if len(res) > 0:
         return 1, "user_name already used"
-    config = {"group_msg":"beijing"}
+    config = {"group_msg": "beijing"}
     c_j = json.dumps(config)
     desc = '线上注册'
     manage_account_register(passwd, email, desc, c_j)
     return 0, ""
 
+
 def user_verify_email(email):
+    logger.info(f"user_verify_email: {email}")
     res = login_check_db(email)
-    if len(res) > 0 :
+    logger.info(f"login_check_db res: {res}")
+    if len(res) > 0:
         return 1, "user_name already used", ""
 
     code = generate_email_code()
+    logger.info(f"generate_email_code: {code}")
+
     send_verify_email(email, code)
+    logger.info(f"send_verify_email end")
+
     return 0, "", code
