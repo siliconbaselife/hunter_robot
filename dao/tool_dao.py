@@ -13,13 +13,13 @@ sql_dict = {
     "create_new_filter_task": "insert into resume_filter_task(manage_account_id, jd, resume_url,taskname) values ('{}', '{}', '{}','{}')",
     "update_filter_result":"update resume_filter_task set filter_result='{}' where id={}",
     "get_filter_task_by_id":"select id, manage_account_id, resume_url, status, create_time,jd,filter_result,taskname from resume_filter_task where id={}",
-    "upload_online_profile":"insert into online_resume(manage_account_id, platform, raw_profile) values ('{}', '{}', '{}')"
+    "upload_online_profile":"insert into online_resume(manage_account_id, platform, raw_profile, candidate_id) values ('{}', '{}', '{}', '{}')"
 }
-def upload_online_profile(manage_account_id, platform, raw_profile):
+def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id):
     raw_profile = raw_profile.replace("\n", "\\n")
     raw_profile = raw_profile.replace("\'", "\\'")
     raw_profile = raw_profile.replace('\"', '\\"')
-    return dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile))
+    return dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id))
 
 def get_filter_task_by_id(task_id):
     return dbm.query(sql_dict['get_filter_task_by_id'].format(task_id))

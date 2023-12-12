@@ -17,6 +17,15 @@ reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load t
 
 file_path_prefix = '/home/human/workspace/hunter_robot.v2.0/tmp/'
 
+def get_candidate_id(profile, platform):
+    if platform == 'maimai':
+        return profile['id']
+    if platform == 'Linkedin':
+        return profile['id']
+    if platform == 'Boss':
+        return profile['geekCard']['geekId']
+
+
 def generate_csv(res):
     s = res[0][6].replace('\n', '\\n')
     res_l = json.loads(s)
