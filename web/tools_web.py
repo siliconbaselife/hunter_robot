@@ -184,3 +184,27 @@ def upload_online_resume():
     for p in profile:
         upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), get_candidate_id(p, platform))
     return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/resumeExist", methods=['POST'])
+@web_exception_handler
+def resume_exist():
+    # cookie_user_name = request.cookies.get('user_name', None)
+    #插件没有domain，无法直接携带cookie
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    # manage_account_id = 'manage_test2'
+
+    platform = request.json.get('platform', '')
+    candidate_id = request.json.get('candidate_id', '')
+    logger.info(f'upload_online_resume:{manage_account_id},{platform}, {profile}')
+    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    if len(get_resume_by_candidate_id_and_platform(candidate_id, platform)) > 0:
+        return Response(json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False))
+    else:
+        return Response(json.dumps(get_web_res_suc_with_data(False), ensure_ascii=False))
