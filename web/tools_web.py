@@ -183,6 +183,8 @@ def upload_online_resume():
     count = 0
     for p in profile:
         candidate_id = get_candidate_id(p, platform)
+        if candidate_id == None or candidate_id == '':
+            continue
         if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
