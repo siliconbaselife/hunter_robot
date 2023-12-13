@@ -148,7 +148,7 @@ def manage_account_login_api():
     ), ensure_ascii=False))
     if flag:
         encode_user_name = encrypt(user_name, key)
-        resp.set_cookie('user_name', encode_user_name, max_age='None', samesite='None')
+        resp.set_cookie('user_name', encode_user_name, max_age=None, samesite='None')
     return resp
 
 # @manage_web.route("/backend/manage/jobMapping", methods=['POST'])
