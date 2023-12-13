@@ -40,7 +40,12 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
         platform = r[3]
         create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
         profile_json = r[5].replace('\n', '\\n')
-        profile = json.loads(profile_json)
+        profile_json = profile_json.replace('/', ',')
+        try:
+            profile = json.loads(profile_json)
+        except Exception as e:
+            logger.info(f'download_resume_error, {candidate_id}')
+            continue
         candidate_name = profile.get('name', '')
         region = profile.get('province', '') + '-' + profile.get('city', '')
         gender = profile.get('gender', '')
