@@ -61,10 +61,10 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
         for e in profile.get('exp', []):
             work_detail = work_detail + e['company'] + ',' + e['position'] + ',' + e['worktime'] + ',' + e['v'] + ',' + e['description'] + '\n'
         
-        exp_positon = ','.join(profile['job_preferences'].get('positons'))
-        exp_location = ','.join(profile['job_preferences'].get('province_cities'))
-        exp_salary = profile['job_preferences'].get('salary')
-        exp_prefer = ','.join(profile['job_preferences'].get('prefessions'))
+        exp_positon = ','.join(profile['job_preferences'].get('positons', []))
+        exp_location = ','.join(profile['job_preferences'].get('province_cities', []))
+        exp_salary = profile['job_preferences'].get('salary', '')
+        exp_prefer = ','.join(profile['job_preferences'].get('prefessions', []))
         tags = ','.join(profile.get('tag_list', []))
         l = [candidate_id, platform, create_time, candidate_name, region,gender,work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
         w.writerow(l)
