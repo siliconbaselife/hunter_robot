@@ -140,14 +140,15 @@ def manage_account_login_api():
     password = request.json['password']
     logger.info(f'manage_account_login: {user_name}, {password}')
     flag, msg = login_check_service(user_name, password)
+    encode_user_name = encrypt(user_name, key)
     resp =  Response(json.dumps(get_web_res_suc_with_data(
         {
             "login_ret": flag,
-            "errMsg": msg
+            "errMsg": msg,
+            "user_name":encode_user_name
         }
     ), ensure_ascii=False))
     if flag:
-        encode_user_name = encrypt(user_name, key)
         resp.set_cookie('user_name', encode_user_name, max_age=None, samesite='None', secure = 'false')
     return resp
 
