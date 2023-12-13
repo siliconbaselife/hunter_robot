@@ -25,6 +25,54 @@ def get_candidate_id(profile, platform):
     if platform == 'Boss':
         return profile['geekCard']['geekId']
 
+def generate_resume_csv(manage_account_id, platform, start_date, end_date):
+    res = get_resume_by_filter(manage_account_id, platform, start_date, end_date)
+    io = StringIO()
+    w = csv.writer(io)
+
+    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区','性别','工作总时长', '在职公司', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向', '简历标签']
+    w.writerow(l)
+    yield io.getvalue()
+    io.seek(0)
+    io.truncate(0)
+    for r in res:
+        candidate_id = r[1]
+        platform = r[3]
+        create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
+        profile_json = r[5].replace('\n', '\\n')
+        profile = json.loads(profile_json)
+        candidate_name = profile.get('name', '')
+        region = profile.get('province', '') + '-' + profile.get('city', '')
+        gender = profile.get('gender', '')
+        work_time = profile.get('work_time', '')
+        company = profile.get('company', '')
+        position = profile.get('position', '')
+        sdegree = profile.get('sdegree', '')
+        major = profile.get('major', '')
+        large_comps = profile.get('large_comps', '')
+        school = profile.get('school', '')
+        schools = ''
+        for s in profile.get('edu', []):
+            schools = schools + s['school'] + ',' + s['department'] + ',' + s['sdegree'] + ',' + s['v'] + '\n'
+        if 'current_company' in profile:
+            work_detail = profile['current_company'].get('company', '') + ',' + profile['current_company'].get('position', '') + ',' + profile['current_company'].get('worktime', '') + '\n'
+        else:
+            work_detail = ''
+        for e in profile.get('exp', []):
+            work_detail = work_detail + e['company'] + ',' + e['position'] + ',' + e['worktime'] + ',' + e['v'] + ',' + e['description'] + '\n'
+        
+        exp_positon = ','.join(profile['job_preferences'].get('positons'))
+        exp_location = ','.join(profile['job_preferences'].get('province_cities'))
+        exp_salary = profile['job_preferences'].get('salary')
+        exp_prefer = ','.join(profile['job_preferences'].get('prefessions'))
+        tags = ','.join(profile.get('tag_list', []))
+        l = [candidate_id, platform, create_time, candidate_name, region,gender,work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
+        w.writerow(l)
+        yield io.getvalue()
+        io.seek(0)
+        io.truncate(0)
+
+
 
 def generate_csv(res):
     s = res[0][6].replace('\n', '\\n')

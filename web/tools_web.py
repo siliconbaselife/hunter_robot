@@ -161,6 +161,32 @@ def verify_email_code():
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tools/downloadOnlineResume", methods=['POST'])
+@web_exception_handler
+def download_online_resume():
+    # cookie_user_name = request.cookies.get('user_name', None)
+    #插件没有domain，无法直接携带cookie
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    manage_account_id = request.json.get('manage_account_id', '')
+    platform = request.json.get('platform', '')
+    start_date = request.json.get('start_date', '')
+    end_date = request.json.get('end_date', '')
+    if manage_account_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin') or start_date == '' or end_date == '':
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    
+    response = Response(stream_with_context(generate_resume_csv(manage_account_id, platform, start_date, end_date)), mimetype='text/csv')
+    response.headers.set("Content-Disposition", "attachment", filename='result.csv')
+    logger.info(f"filter_task_result_download, {manage_account_id}")
+    return response
+    
+    
+
 
 @tools_web.route("/backend/tools/uploadOnlineResume", methods=['POST'])
 @web_exception_handler
@@ -190,6 +216,9 @@ def upload_online_resume():
             count = count + 1
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
+
+
+
 
 @tools_web.route("/backend/tools/resumeExist", methods=['POST'])
 @web_exception_handler
