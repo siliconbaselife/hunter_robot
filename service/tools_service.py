@@ -42,6 +42,7 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
             profile_json = r[5].replace('\n', '\\n')
             profile_json = profile_json.replace('/', ',')
+            profile_json = profile_json.replace('/', '//')
             profile = json.loads(profile_json)    
             candidate_name = profile.get('name', '')
             region = profile.get('city', '')
