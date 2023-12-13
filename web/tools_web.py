@@ -161,7 +161,7 @@ def verify_email_code():
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
 
 
-@tools_web.route("/backend/tools/downloadOnlineResume", methods=['POST'])
+@tools_web.route("/backend/tools/downloadOnlineResume", methods=['GET'])
 @web_exception_handler
 def download_online_resume():
     # cookie_user_name = request.cookies.get('user_name', None)
@@ -173,10 +173,10 @@ def download_online_resume():
     #     manage_account_id = decrypt(cookie_user_name, key)
     # if not cookie_check_service(manage_account_id):
     #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    manage_account_id = request.json.get('manage_account_id', '')
-    platform = request.json.get('platform', '')
-    start_date = request.json.get('start_date', '')
-    end_date = request.json.get('end_date', '')
+    manage_account_id = request.args.get('manage_account_id', '')
+    platform = request.args.get('platform', '')
+    start_date = request.args.get('start_date', '')
+    end_date = request.args.get('end_date', '')
     if manage_account_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin') or start_date == '' or end_date == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     
