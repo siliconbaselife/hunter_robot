@@ -149,7 +149,7 @@ def manage_account_login_api():
         }
     ), ensure_ascii=False))
     if flag:
-        resp.set_cookie('user_name', encode_user_name, max_age=None, samesite='None', secure = 'false')
+        resp.set_cookie('user_name', encode_user_name, max_age=None)
     return resp
 
 # @manage_web.route("/backend/manage/jobMapping", methods=['POST'])
