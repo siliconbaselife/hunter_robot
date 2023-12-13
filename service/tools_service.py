@@ -36,46 +36,45 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
     io.seek(0)
     io.truncate(0)
     for r in res:
-        candidate_id = r[1]
-        platform = r[3]
-        create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
-        profile_json = r[5].replace('\n', '\\n')
-        profile_json = profile_json.replace('/', ',')
         try:
-            profile = json.loads(profile_json)
+            candidate_id = r[1]
+            platform = r[3]
+            create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
+            profile_json = r[5].replace('\n', '\\n')
+            profile_json = profile_json.replace('/', ',')
+            profile = json.loads(profile_json)    
+            candidate_name = profile.get('name', '')
+            region = profile.get('city', '')
+            gender = profile.get('gender', '')
+            work_time = profile.get('work_time', '')
+            company = profile.get('company', '')
+            position = profile.get('position', '')
+            sdegree = profile.get('sdegree', '')
+            major = profile.get('major', '')
+            large_comps = profile.get('large_comps', '')
+            school = profile.get('school', '')
+            schools = ''
+            for s in profile.get('edu', []):
+                schools = schools + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree', '') + ',' + s.get('v', '') + '\n'
+            if 'current_company' in profile:
+                work_detail = profile['current_company'].get('company', '') + ',' + profile['current_company'].get('position', '') + ',' + profile['current_company'].get('worktime', '') + '\n'
+            else:
+                work_detail = ''
+            for e in profile.get('exp', []):
+                work_detail = work_detail + e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + e.get('description', '') + '\n'
+            
+            exp_positon = ','.join(profile['job_preferences'].get('positons', []))
+            exp_location = ','.join(profile['job_preferences'].get('province_cities', []))
+            exp_salary = profile['job_preferences'].get('salary', '')
+            exp_prefer = ','.join(profile['job_preferences'].get('prefessions', []))
+            tags = ','.join(profile.get('tag_list', []))
+            l = [candidate_id, platform, create_time, candidate_name, region,gender,work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
+            w.writerow(l)
+            yield io.getvalue()
+            io.seek(0)
+            io.truncate(0)
         except Exception as e:
-            logger.info(f'download_resume_error, {candidate_id}')
-            continue
-        candidate_name = profile.get('name', '')
-        region = profile.get('city', '')
-        gender = profile.get('gender', '')
-        work_time = profile.get('work_time', '')
-        company = profile.get('company', '')
-        position = profile.get('position', '')
-        sdegree = profile.get('sdegree', '')
-        major = profile.get('major', '')
-        large_comps = profile.get('large_comps', '')
-        school = profile.get('school', '')
-        schools = ''
-        for s in profile.get('edu', []):
-            schools = schools + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree', '') + ',' + s.get('v', '') + '\n'
-        if 'current_company' in profile:
-            work_detail = profile['current_company'].get('company', '') + ',' + profile['current_company'].get('position', '') + ',' + profile['current_company'].get('worktime', '') + '\n'
-        else:
-            work_detail = ''
-        for e in profile.get('exp', []):
-            work_detail = work_detail + e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + e.get('description', '') + '\n'
-        
-        exp_positon = ','.join(profile['job_preferences'].get('positons', []))
-        exp_location = ','.join(profile['job_preferences'].get('province_cities', []))
-        exp_salary = profile['job_preferences'].get('salary', '')
-        exp_prefer = ','.join(profile['job_preferences'].get('prefessions', []))
-        tags = ','.join(profile.get('tag_list', []))
-        l = [candidate_id, platform, create_time, candidate_name, region,gender,work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
-        w.writerow(l)
-        yield io.getvalue()
-        io.seek(0)
-        io.truncate(0)
+            logger.info(f'download_resume_error, {candidate_id}, {e}')
 
 
 
