@@ -81,8 +81,8 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             io.seek(0)
             io.truncate(0)
         except Exception as e:
-            logger.info(f'download_resume_error3,{profile_json}')
-            logger.info(f'download_resume_error3,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+            logger.info(f'download_resume_error4,{profile_json}')
+            logger.info(f'download_resume_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
 
 
