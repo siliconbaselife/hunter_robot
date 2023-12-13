@@ -212,6 +212,17 @@ def upload_online_resume():
         if candidate_id == None or candidate_id == '':
             continue
         if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
+            exp = []
+            for e in p.get('exp', []):
+                des = e["description"].replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                exp.append({
+                    "company":e["company"],
+                    "v":e["v"],
+                    "position":e["position"],
+                    "worktime":e["worktime"],
+                    "description":des
+                })
+            p['exp'] = exp
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
