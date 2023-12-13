@@ -9,6 +9,7 @@ import time
 import requests
 import sys
 import docx
+import traceback
 from dao.tool_dao import *
 from io import StringIO
 import csv
@@ -43,7 +44,8 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             profile_json = r[5].replace('\n', '\\n')
             profile_json = profile_json.replace('/', ',')
             profile_json = profile_json.replace('/', '//')
-            profile = json.loads(profile_json)    
+            profile = json.loads(profile_json)
+                # logger.info(f'download_resume_error_json, {candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
             candidate_name = profile.get('name', '')
             region = profile.get('city', '')
             gender = profile.get('gender', '')
@@ -75,7 +77,7 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             io.seek(0)
             io.truncate(0)
         except Exception as e:
-            logger.info(f'download_resume_error, {candidate_id}, {e}')
+            logger.info(f'download_resume_error,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
 
 
