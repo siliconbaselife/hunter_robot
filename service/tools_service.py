@@ -58,13 +58,13 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
         school = profile.get('school', '')
         schools = ''
         for s in profile.get('edu', []):
-            schools = schools + s['school'] + ',' + s['department'] + ',' + s['sdegree'] + ',' + s['v'] + '\n'
+            schools = schools + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree', '') + ',' + s.get('v', '') + '\n'
         if 'current_company' in profile:
             work_detail = profile['current_company'].get('company', '') + ',' + profile['current_company'].get('position', '') + ',' + profile['current_company'].get('worktime', '') + '\n'
         else:
             work_detail = ''
         for e in profile.get('exp', []):
-            work_detail = work_detail + e['company'] + ',' + e['position'] + ',' + e['worktime'] + ',' + e['v'] + ',' + e['description'] + '\n'
+            work_detail = work_detail + e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + e.get('description', '') + '\n'
         
         exp_positon = ','.join(profile['job_preferences'].get('positons', []))
         exp_location = ','.join(profile['job_preferences'].get('province_cities', []))
