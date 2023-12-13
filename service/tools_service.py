@@ -66,7 +66,8 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             else:
                 work_detail = ''
             for e in profile.get('exp', []):
-                work_detail = work_detail + e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + e.get('description', '') + '\n'
+                des = e.get('description', '') or ''
+                work_detail = work_detail +','+ e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + des + '\n'
             
             exp_positon = ','.join(profile['job_preferences'].get('positons', []))
             exp_location = ','.join(profile['job_preferences'].get('province_cities', []))
