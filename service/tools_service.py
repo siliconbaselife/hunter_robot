@@ -47,7 +47,7 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             logger.info(f'download_resume_error, {candidate_id}')
             continue
         candidate_name = profile.get('name', '')
-        region = profile.get('province', '') + '-' + profile.get('city', '')
+        region = profile.get('city', '')
         gender = profile.get('gender', '')
         work_time = profile.get('work_time', '')
         company = profile.get('company', '')
