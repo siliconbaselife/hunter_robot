@@ -53,7 +53,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
             candidate_name = c[3]
             if c[4] == 'user_ask':
                 source = '候选人主动'
-            elif c[4] == 'source':
+            elif c[4] == 'search':
                 source= '机器人打招呼'
             else:
                 source = '未知'
