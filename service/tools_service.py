@@ -129,13 +129,12 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 exp_salary = candidate_json.get('exp_salary', '')
                 tag_list = ','.join(candidate_json.get('tag_list', []))
 
-                l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','地区','性别','年龄', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期地点', '预期薪水', '简历标签']
-                l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region, gender, age, position, degree, major, large_comps, school, edu, work, exp_location, exp_salary, tag_list]
-                l_encode = [csv_encode(_l) for _l in l]
-                w.writerow(l_encode)
-                yield io.getvalue()
-                io.seek(0)
-                io.truncate(0)
+            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region, gender, age, position, degree, major, large_comps, school, edu, work, exp_location, exp_salary, tag_list]
+            l_encode = [csv_encode(_l) for _l in l]
+            w.writerow(l_encode)
+            yield io.getvalue()
+            io.seek(0)
+            io.truncate(0)
         except Exception as e:
             logger.info(f'test_download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
