@@ -122,9 +122,9 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 for s in candidate_json.get('education', []):
                     edu = edu + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree', '') + ',' + s.get('v', '') + '\n'
                 work = ''
-                for w in candidate_json.get('work', []):
-                    des = w.get('description', '') or ''
-                    work = work +','+ w.get('company', '') + ',' + w.get('position', '') + ',' + w.get('worktime', '') + ',' + w.get('v', '') + ',' + des + '\n'
+                for e in candidate_json.get('work', []):
+                    des = e.get('description', '') or ''
+                    work = work +','+ e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + des + '\n'
                 exp_location = candidate_json.get('exp_location', '')
                 exp_salary = candidate_json.get('exp_salary', '')
                 tag_list = ','.join(candidate_json.get('tag_list', []))
