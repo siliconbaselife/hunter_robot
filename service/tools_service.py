@@ -15,6 +15,8 @@ from io import StringIO
 import csv
 import codecs
 from flask_admin._compat import csv_encode
+from dao.task_dao import get_chats_by_job_id_with_date,query_candidate_by_id
+from dao.manage_dao import get_job_name_by_id
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
 
@@ -28,12 +30,122 @@ def get_candidate_id(profile, platform):
     if platform == 'Boss':
         return profile['geekCard']['geekId']
 
+def generate_candidate_csv_by_job(job_id, start_date, end_date):
+    chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
+    job_name = get_job_name_by_id(job_id)
+    io = StringIO()
+    w = csv.writer(io)
+
+    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','地区','性别','年龄', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期地点', '预期薪水', '简历标签']
+    l_encode = [csv_encode(_l) for _l in l]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    w.writerow(l_encode)
+    yield io.getvalue()
+    io.seek(0)
+    io.truncate(0)
+    for c in chat_list:
+        try:
+            candidate_info = query_candidate_by_id(c[2])
+            job_name = job_name
+            candidate_id = c[2]
+            create_time = c[9].strftime("%Y-%m-%d %H:%M:%S")
+            candidate_name = c[3]
+            if c[4] == 'user_ask':
+                source = '候选人主动'
+            elif c[4] == 'source':
+                source= '机器人打招呼'
+            else:
+                source = '未知'
+            try:
+                contact = json.loads(c[6])
+                wechat = contact['wechat'] or ''
+                phone = contact['phone'] or ''
+                resume = contact['resume'] or ''
+            except Exception as e:
+                wechat = ''
+                phone = ''
+                resume = ''
+
+            try:
+                conversation = json.loads(c[7])
+                con_str = ''
+                for c in conversation:
+                    con_str = con_str + c['speaker'] + ':' + c['msg'] + '\n'
+            except Exception as e:
+                con_str = ''
+
+            if len(candidate_info) == 0:
+                logger.info(f"chat_candidate_not_match, {candidate_id}")
+                region = ''
+                gender = ''
+                age = 0
+                position = ''
+                degree = ''
+                major = ''
+                large_comps = ''
+                school = ''
+                edu = ''
+                work = ''
+                exp_location = ''
+                exp_salary = ''
+                tag_list = ''
+            else:
+                candidate_json = json.loads(candidate_info[0][7])
+                region = candidate_info[0][4]
+                if candidate_json.get('gender', 0) == 0:
+                    gender = '未知'
+                elif candidate_json.get('gender', 0) == 1:
+                    gender = '男'
+                elif candidate_json.get('gender', 0) == 2:
+                    gender = '女'
+                else:
+                    gender = '未知'
+                age = candidate_json['age']
+                position = candidate_info[0][5]
+                if candidate_json.get('degree', -1) == 0:
+                    degree = '大专'
+                elif candidate_json.get('degree', -1) == 1:
+                    degree = '本科'
+                elif candidate_json.get('degree', -1) == 2:
+                    degree = '硕士'
+                elif candidate_json.get('degree', -1) == 3:
+                    degree = '博士'
+                else:
+                    degree = '未知'
+                major = candidate_json.get('major', '')
+                large_comps = ','.join(candidate_json.get('companies', []))
+                school = ''
+                if len(candidate_json.get('education', [])) > 0:
+                    school = candidate_json['education'][0].get('school', '')
+                edu = ''
+                for s in candidate_json.get('education', []):
+                    edu = edu + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree', '') + ',' + s.get('v', '') + '\n'
+                work = ''
+                for w in candidate_json.get('work', []):
+                    des = w.get('description', '') or ''
+                    work = work +','+ w.get('company', '') + ',' + w.get('position', '') + ',' + w.get('worktime', '') + ',' + w.get('v', '') + ',' + des + '\n'
+                exp_location = candidate_json.get('exp_location', '')
+                exp_salary = candidate_json.get('exp_salary', '')
+                tag_list = ','.join(candidate_json.get('tag_list', []))
+
+                l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','地区','性别','年龄', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期地点', '预期薪水', '简历标签']
+                l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region, gender, age, position, degree, major, large_comps, school, edu, work, exp_location, exp_salary, tag_list]
+                l_encode = [csv_encode(_l) for _l in l]
+                w.writerow(l_encode)
+                yield io.getvalue()
+                io.seek(0)
+                io.truncate(0)
+        except Exception as e:
+            logger.info(f'download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+
+    return
+
 def generate_resume_csv(manage_account_id, platform, start_date, end_date):
     res = get_resume_by_filter(manage_account_id, platform, start_date, end_date)
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区','性别','工作总时长', '在职公司', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向', '简历标签']
+    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区','性别', '年龄','工作总时长', '在职公司', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向', '简历标签']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -55,7 +167,8 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             # logger.info(f'download_resume_error_json, {candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
             candidate_name = profile.get('name', '')
             region = profile.get('city', '')
-            gender = profile.get('gender', '')
+            gender = profile.get('gender_str', '')
+            age = profile.get('age', 0)
             work_time = profile.get('work_time', '')
             company = profile.get('company', '')
             position = profile.get('position', '')
@@ -79,7 +192,7 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             exp_salary = profile['job_preferences'].get('salary', '')
             exp_prefer = ','.join(profile['job_preferences'].get('prefessions', []))
             tags = ','.join(profile.get('tag_list', []))
-            l = [candidate_id, platform, create_time, candidate_name, region,gender,work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
+            l = [candidate_id, platform, create_time, candidate_name, region,gender, age, work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()

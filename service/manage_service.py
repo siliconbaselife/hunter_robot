@@ -106,11 +106,11 @@ def my_account_list_service(manage_account_id):
     return ret_list
 
 def candidate_list_service(job_id, start, limit):
-    chat_list = get_chats_by_job_id(job_id, start, limit)
+    chat_list = get_chats_by_job_id_with_start(job_id, start, limit)
     res_chat_list = []
     for chat in chat_list:
         candidate_info = query_candidate_by_id(chat[2])
-        logger.info(f'test: {chat}, {candidate_info}')
+        # logger.info(f'test: {chat}, {candidate_info}')
 
         if len(candidate_info) == 0:
             candidate_info_detail = {}

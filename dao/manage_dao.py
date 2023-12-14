@@ -23,6 +23,7 @@ sql_dict = {
     "get_job_name_by_id":"select job_name from job where job_id='{}'",
     "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config) values ('{}', '{}', '{}', '{}')"
 } 
+
 def manage_account_register(passwd, email, desc, c_j):
     c_j = c_j.replace("\'", "\\'")
     c_j = c_j.replace('\"', '\\"')

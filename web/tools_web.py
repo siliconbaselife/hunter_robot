@@ -23,6 +23,24 @@ tools_web = Blueprint('tools_web', __name__, template_folder='templates')
 
 key = 11
 
+@tools_web.route("/backend/tools/candidateCsvByJob", methods=['POST'])
+@web_exception_handler
+def candidate_csv_by_job():
+    job_id = request.args.get('job_id')
+    manage_account_id = request.args.get('manage_account_id', '')
+    start_date = request.args.get('start_date', '')
+    end_date = request.args.get('end_date', '')
+    if job_id == None or manage_account_id == '' or start_date == '' or end_date == '':
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    
+    response = Response(stream_with_context(generate_candidate_csv_by_job(job_id, start_date, end_date)), mimetype='text/csv')
+    response.headers.set("Content-Disposition", "attachment", filename='result.csv')
+    logger.info(f"filter_task_result_download, {manage_account_id}")
+    return response
+
+
+
+
 @tools_web.route("/backend/tools/createTask", methods=['POST'])
 @web_exception_handler
 def create_task():
@@ -182,7 +200,7 @@ def download_online_resume():
     
     response = Response(stream_with_context(generate_resume_csv(manage_account_id, platform, start_date, end_date)), mimetype='text/csv')
     response.headers.set("Content-Disposition", "attachment", filename='result.csv')
-    logger.info(f"filter_task_result_download, {manage_account_id}")
+    logger.info(f"online_resume_download, {manage_account_id}, {platform}, {start_date}, {end_date}")
     return response
     
     
