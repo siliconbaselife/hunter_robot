@@ -180,7 +180,7 @@ def download_online_resume():
     if manage_account_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin') or start_date == '' or end_date == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     
-    response = Response(stream_with_context(generate_resume_csv(manage_account_id, platform, start_date, end_date)), mimetype='text/utf-8')
+    response = Response(stream_with_context(generate_resume_csv(manage_account_id, platform, start_date, end_date)), mimetype='text/csv')
     response.headers.set("Content-Disposition", "attachment", filename='result.csv')
     logger.info(f"filter_task_result_download, {manage_account_id}")
     return response

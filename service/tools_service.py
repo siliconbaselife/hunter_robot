@@ -13,6 +13,8 @@ import traceback
 from dao.tool_dao import *
 from io import StringIO
 import csv
+import codecs
+from flask_admin._compat import csv_encode
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
 
@@ -32,7 +34,9 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
     w = csv.writer(io)
 
     l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区','性别','工作总时长', '在职公司', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向', '简历标签']
-    w.writerow(l)
+    l_encode = [csv_encode(_l) for _l in l]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    w.writerow(l_encode)
     yield io.getvalue()
     io.seek(0)
     io.truncate(0)
@@ -76,7 +80,8 @@ def generate_resume_csv(manage_account_id, platform, start_date, end_date):
             exp_prefer = ','.join(profile['job_preferences'].get('prefessions', []))
             tags = ','.join(profile.get('tag_list', []))
             l = [candidate_id, platform, create_time, candidate_name, region,gender,work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
-            w.writerow(l)
+            l_encode = [csv_encode(_l) for _l in l]
+            w.writerow(l_encode)
             yield io.getvalue()
             io.seek(0)
             io.truncate(0)
