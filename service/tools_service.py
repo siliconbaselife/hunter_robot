@@ -139,7 +139,6 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
         except Exception as e:
             logger.info(f'test_download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
-    return
 
 def generate_resume_csv(manage_account_id, platform, start_date, end_date):
     res = get_resume_by_filter(manage_account_id, platform, start_date, end_date)
