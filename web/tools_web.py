@@ -24,7 +24,7 @@ tools_web = Blueprint('tools_web', __name__, template_folder='templates')
 
 key = 11
 
-@tools_web.route("/backend/tools/candidateCsvByJob", methods=['POST'])
+@tools_web.route("/backend/tools/candidateCsvByJob", methods=['GET'])
 @web_exception_handler
 def candidate_csv_by_job():
     job_id = request.args.get('job_id')
