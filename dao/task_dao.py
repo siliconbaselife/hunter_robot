@@ -28,7 +28,7 @@ sql_dict = {
     "insert_sub_task_log": "insert into account_exec_log(account_id, job_id, exec_date, hello_sum_need) values ('{}','{}','{}','{}')",
     "get_account_task_log": "select id, account_id, job_id, exec_date, hello_sum_need,hello_sum_exec,create_time, update_time from account_exec_log where account_id='{}' and exec_date='{}'",
     "get_job_task_log": "select id, account_id, job_id, exec_date, hello_sum_need,hello_sum_exec,create_time, update_time from account_exec_log where account_id='{}' and exec_date='{}'",
-    "get_job_by_id": "select job_id,platform_type,platform_id,job_name,job_jd,robot_api,job_config,create_time,update_time,share,robot_api from job where job_id='{}'",
+    "get_job_by_id": "select job_id,platform_type,platform_id,job_name,job_jd,robot_api,job_config,create_time,update_time,share,robot_api,manage_account_id from job where job_id='{}'",
     "get_chats_by_job_id_with_start": "select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' order by update_time desc limit {},{}",
     "get_chats_by_job_id_with_date": "select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' and create_time>'{}' and create_time<'{}' order by create_time desc",
     "get_chats_num_by_job_id": "select count(1) from chat where job_id='{}' and contact!='NULL'",
@@ -271,7 +271,7 @@ def get_job_by_id(job_id):
     new_ret = []
     for r in ret:
         s = r[6].replace('\n', '\\n')
-        new_ret.append([r[0], r[1], r[2], r[3], r[4], r[5], s, r[7], r[8], r[9], r[10]])
+        new_ret.append([r[0], r[1], r[2], r[3], r[4], r[5], s, r[7], r[8], r[9], r[10],r[11]])
     return new_ret
 
 

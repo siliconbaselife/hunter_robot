@@ -17,6 +17,7 @@ from service.schedule_service import *
 from service.manage_service import cookie_check_service
 from utils.utils import decrypt, user_code_cache
 from service.user_service import user_register, user_verify_email
+from dao.task_dao import get_job_by_id
 logger = get_logger(config['log']['log_file'])
 
 tools_web = Blueprint('tools_web', __name__, template_folder='templates')
@@ -30,8 +31,11 @@ def candidate_csv_by_job():
     manage_account_id = request.args.get('manage_account_id', '')
     start_date = request.args.get('start_date', '')
     end_date = request.args.get('end_date', '')
-    if job_id == None or manage_account_id == '' or start_date == '' or end_date == '':
+    ret = get_job_by_id(job_id)
+    if job_id == None or manage_account_id == '' or start_date == '' or end_date == '' or len(ret) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    if ret[0][11] != manage_account_id:
+        return Response(json.dumps(get_web_res_fail("岗位和账户不符"), ensure_ascii=False))
     
     response = Response(stream_with_context(generate_candidate_csv_by_job(job_id, start_date, end_date)), mimetype='text/csv')
     response.headers.set("Content-Disposition", "attachment", filename='result.csv')
