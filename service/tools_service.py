@@ -137,7 +137,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 io.seek(0)
                 io.truncate(0)
         except Exception as e:
-            logger.info(f'download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+            logger.info(f'test_download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
     return
 
