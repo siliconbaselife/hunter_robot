@@ -32,6 +32,7 @@ def get_candidate_id(profile, platform):
 
 def generate_candidate_csv_by_job(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
+    logger.info(f'test:{len(chat_list)}')
     job_name = get_job_name_by_id(job_id)
     io = StringIO()
     w = csv.writer(io)
