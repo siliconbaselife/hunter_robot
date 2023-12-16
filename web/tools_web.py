@@ -256,15 +256,14 @@ def upload_online_resume():
 @tools_web.route("/backend/tools/uploadOnlineResumePDF", methods=['POST'])
 @web_exception_handler
 def upload_online_resume_pdf():
-    # cookie_user_name = request.cookies.get('user_name', None)
     #插件没有domain，无法直接携带cookie
-    cookie_user_name = request.form.get('user_name', None)
-    if cookie_user_name is None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
-    if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    # cookie_user_name = request.form.get('user_name', None)
+    # if cookie_user_name is None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     manage_account_id = 'manage_test'
     # candidate_id = request.form.get('candidate_id', '')
     candidate_id = manage_account_id + '_' + str(int(time.time()))
