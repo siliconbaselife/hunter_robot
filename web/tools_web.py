@@ -265,7 +265,7 @@ def upload_online_resume_pdf():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-
+    manage_account_id = 'manage_test'
     # candidate_id = request.form.get('candidate_id', '')
     candidate_id = manage_account_id + '_' + str(int(time.time()))
     platform = request.form.get('platform', '')
