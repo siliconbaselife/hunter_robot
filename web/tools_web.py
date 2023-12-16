@@ -236,7 +236,8 @@ def upload_online_resume():
         if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
             exp = []
             for e in p.get('exp', []):
-                des = e["description"].replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                des = e["description"] or ''
+                des = des.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                 exp.append({
                     "company":e["company"],
                     "v":e["v"],
@@ -251,6 +252,31 @@ def upload_online_resume():
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
 
+
+@tools_web.route("/backend/tools/uploadOnlineResumePDF", methods=['POST'])
+@web_exception_handler
+def upload_online_resume_pdf():
+    #插件没有domain，无法直接携带cookie
+    cookie_user_name = request.form.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    # manage_account_id = 'manage_test'
+    # candidate_id = request.form.get('candidate_id', '')
+    candidate_id = manage_account_id + '_' + str(int(time.time()))
+    platform = request.form.get('platform', '')
+    filename = request.form.get('filename', '')
+    if filename == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cv_filename = f'cv_{platform}_{filename}'
+    cv_file = request.files['cv'].read()
+    cv_addr = generate_thumbnail(cv_filename, cv_file)
+    logger.info(f'upload_online_resume_pdf:{manage_account_id},{platform}, {filename}, {cv_addr}')
+    ret = upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr)
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 
 @tools_web.route("/backend/tools/resumeExist", methods=['POST'])

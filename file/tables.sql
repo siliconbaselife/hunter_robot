@@ -203,3 +203,5 @@ CREATE TABLE IF NOT EXISTS `online_resume`(
    PRIMARY KEY ( `id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table online_resume add `candidate_id` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '候选人id'  after `id`;
+alter table online_resume add `cv_url` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '简历链接'  after `raw_profile`;
+
