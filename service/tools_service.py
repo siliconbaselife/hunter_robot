@@ -67,7 +67,10 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                         w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                     if 'workDescription' in w:
                         workDescription = w['workDescription'] or ''
-                        w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")    
+                        w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "") 
+            for edu in p.get('profile', {}).get('educations', []):
+                summary = edu['summary'] or ''
+                edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
     return count
@@ -182,8 +185,72 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
         except Exception as e:
             logger.info(f'test_download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
+def pNull(str):
+    return '' or str
 
-def generate_resume_csv(manage_account_id, platform, start_date, end_date):
+def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date):
+    res = get_resume_by_filter(manage_account_id, platform, start_date, end_date)
+    io = StringIO()
+    w = csv.writer(io)
+
+    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力']
+    l_encode = [csv_encode(_l) for _l in l]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    w.writerow(l_encode)
+    yield io.getvalue()
+    io.seek(0)
+    io.truncate(0)
+    for r in res:
+        try:
+            candidate_id = r[1]
+            platform = r[3]
+            create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
+            profile_json = r[5].replace('\n', ',')
+            profile_json = profile_json.replace('/', '_')
+            profile_json = profile_json.replace('，', ',')
+            profile_json = profile_json.replace('u0000', ',')
+            profile_json = profile_json.replace('\\', ',')
+            profile = json.loads(profile_json, strict=False).get('profile', {})
+            candidate_name = profile.get('name', '')
+            region = profile.get('location', '')
+            position = profile.get('role', '')
+            sdegree = ''
+            if len(profile.get('educations', [])) > 0:
+                sdegree = profile.get('educations', [])[0].get('degreeInfo', '')
+            major = ''
+            if len(profile.get('educations', [])) > 0:
+                major = profile.get('educations', [])[0].get('majorInfo', '')
+            school = ''
+            if len(profile.get('educations', [])) > 0:
+                school = profile.get('educations', [])[0].get('schoolName', '')
+
+            edu = ''
+            for e in profile.get('educations', []):
+                edu = edu + pNull(e.get('schoolName', '')) + ',' + pNull(s.get('majorInfo', '')) + ',' + pNull(s.get('degreeInfo', ''))  + ',' + pNull(s.get('timeInfo', '')) + ',' + pNull(s.get('summary', '')) + '\n'
+            work = ''
+            for e in profile.get('experiences', []):
+                work = work + pNull(e.get('companyName', '')) + ',' + pNull(e.get('timeInfo', '')) + '\n'
+                for w in e.get(work, []):
+                    work = work + pNull(w.get('workTimeInfo', '')) + ',' + pNull(w.get('worklocation', '')) + ',' + pNull(e.get('workPosition', '')) + ',' + pNull(e.get('workDescription', '')) + '\n'
+                
+            languages = ''
+            for lan in profile.get('languages', []):
+                languages = languages + pNull(lan.get('language', '')) + ',' + pNull(lan.get('des', ''))
+
+            
+            l = [candidate_id, platform, create_time, candidate_name, region, position, sdegree, major, school, edu, work, languages]
+            l_encode = [csv_encode(_l) for _l in l]
+            w.writerow(l_encode)
+            yield io.getvalue()
+            io.seek(0)
+            io.truncate(0)
+        except Exception as e:
+            logger.info(f'download_resume_error4,{profile_json}')
+            logger.info(f'download_resume_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+    return
+
+
+def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date):
     res = get_resume_by_filter(manage_account_id, platform, start_date, end_date)
     io = StringIO()
     w = csv.writer(io)

@@ -199,11 +199,15 @@ def download_online_resume():
     platform = request.args.get('platform', '')
     start_date = request.args.get('start_date', '')
     end_date = request.args.get('end_date', '')
-    if manage_account_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin') or start_date == '' or end_date == '':
+    if manage_account_id == '' or platform == '' or platform not in ('maimai', 'Linkedin') or start_date == '' or end_date == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     
-    response = Response(stream_with_context(generate_resume_csv(manage_account_id, platform, start_date, end_date)), mimetype='text/csv')
-    response.headers.set("Content-Disposition", "attachment", filename='result.csv')
+    if platform == 'maimai':
+        response = Response(stream_with_context(generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date)), mimetype='text/csv')
+        response.headers.set("Content-Disposition", "attachment", filename='maimai_result.csv')
+    elif platform == 'Linkedin':
+        response = Response(stream_with_context(generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date)), mimetype='text/csv')
+        response.headers.set("Content-Disposition", "attachment", filename='Linkedin_result.csv')
     logger.info(f"online_resume_download, {manage_account_id}, {platform}, {start_date}, {end_date}")
     return response
     
@@ -226,16 +230,13 @@ def upload_online_resume():
     platform = request.json.get('platform', '')
     profile = request.json.get('profile', [])
     logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}')
-    if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
+    if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     
-
     if platform == 'maimai':
         count = maimai_online_resume_upload_processor(manage_account_id, profile, platform)
     elif platform == 'Linkedin':
         count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform)
-    else:
-        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
 
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
