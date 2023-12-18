@@ -63,14 +63,16 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             for e in p.get('profile', {}).get('experiences', []):
                 for w in e.get('work', []):
                     if 'workPosition' in w:
-                        workPosition = w['workPosition'] or ''
+                        workPosition = w.get('workPosition', '') or ''
                         w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                     if 'workDescription' in w:
                         workDescription = w['workDescription'] or ''
                         w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "") 
             for edu in p.get('profile', {}).get('educations', []):
-                summary = edu['summary'] or ''
+                summary = edu.get('summary', '') or ''
                 edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            summary = p.get('profile', {}).get('summary') or ''
+            p[profile][summary] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
     return count
@@ -193,7 +195,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力']
+    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力', '工作总结']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -236,9 +238,9 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             languages = ''
             for lan in profile.get('languages', []):
                 languages = languages + pNull(lan.get('language', '')) + ',' + pNull(lan.get('des', ''))
-
+            summary = profile.get('summary', '')
             
-            l = [candidate_id, platform, create_time, candidate_name, region, position, sdegree, major, school, edu, work, languages]
+            l = [candidate_id, platform, create_time, candidate_name, region, position, sdegree, major, school, edu, work, languages, summary]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
