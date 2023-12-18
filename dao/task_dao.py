@@ -10,7 +10,7 @@ sql_dict = {
     "query_job_id": "select job_id from job where platform_type = '{}' and platform_id= '{}'",
     # "query_job_requirement": "select requirement_config from job where job_id = {}",
     "query_job_robotapi": "select robot_api from job where job_id='{}'",
-    "register_account": "insert into account(account_id, platform_type, platform_id, jobs, task_config, description, manage_account_id) values ('{}','{}','{}','{}','{}','{}','{}')",
+    "register_account": "insert into account(account_id, platform_type, platform_id, jobs, task_config, description, manage_account_id,ver) values ('{}','{}','{}','{}','{}','{}','{}','{}')",
     "query_account_id": "select account_id from account where platform_type='{}' and platform_id='{}'",
     "query_account_type": "select platform_type from account where account_id='{}'",
     "get_jobs": "select jobs from account where account_id='{}'",
@@ -28,7 +28,7 @@ sql_dict = {
     "insert_sub_task_log": "insert into account_exec_log(account_id, job_id, exec_date, hello_sum_need) values ('{}','{}','{}','{}')",
     "get_account_task_log": "select id, account_id, job_id, exec_date, hello_sum_need,hello_sum_exec,create_time, update_time from account_exec_log where account_id='{}' and exec_date='{}'",
     "get_job_task_log": "select id, account_id, job_id, exec_date, hello_sum_need,hello_sum_exec,create_time, update_time from account_exec_log where account_id='{}' and exec_date='{}'",
-    "get_job_by_id": "select job_id,platform_type,platform_id,job_name,job_jd,robot_api,job_config,create_time,update_time,share,robot_api,manage_account_id from job where job_id='{}'",
+    "get_job_by_id": "select job_id,platform_type,platform_id,job_name,job_jd,robot_api,job_config,create_time,update_time,share,robot_api,manage_account_id,robot_template from job where job_id='{}'",
     "get_chats_by_job_id_with_start": "select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' order by update_time desc limit {},{}",
     "get_chats_by_job_id_with_date": "select account_id, job_id, candidate_id, candidate_name, source, status, contact, details, filter_result, create_time, update_time from chat where job_id='{}' and create_time>'{}' and create_time<'{}' order by create_time desc",
     "get_chats_num_by_job_id": "select count(1) from chat where job_id='{}' and contact!='NULL'",
@@ -45,7 +45,8 @@ sql_dict = {
     "has_contact": "select contact from chat where candidate_id='{}' and account_id='{}'",
     "insert_filter_cache": "insert into candidate_filter_cache(candidate_id, job_id, prompt,filter_result) values ('{}','{}','{}','{}')",
     "get_filter_cache": "select candidate_id, job_id, prompt, filter_result from candidate_filter_cache where candidate_id='{}' and job_id='{}'",
-    "update_filter_cache": "update candidate_filter_cache set prompt='{}',filter_result='{}' where candidate_id='{}' and job_id='{}'"
+    "update_filter_cache": "update candidate_filter_cache set prompt='{}',filter_result='{}' where candidate_id='{}' and job_id='{}'",
+    "delete_account_by_id":"delete from account where account_id='{}'"
 }
 
 
@@ -156,11 +157,15 @@ def query_robotapi_db(job_id):
 
 
 def register_account_db(account_id, platform_type, platform_id, jobs, task_config, desc, manage_account_id):
-    # d = [[account_id, platform_type, platform_id, jobs, task_config]]
-    dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc,
-                                                   manage_account_id))
-    return account_id
+    return dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc,
+                                                   manage_account_id, 'v1'))
 
+def delete_account_by_id(account_id):
+    return dbm.delete(sql_dict['delete_account_by_id'].format(account_id))
+
+def register_account_db_v2(account_id, platform_type, platform_id, jobs, task_config, desc, manage_account_id, ver):
+    return dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc,
+                                                   manage_account_id, ver))
 
 def query_account_id_db(platform_type, platform_id):
     return dbm.query(sql_dict['query_account_id'].format(platform_type, platform_id))[0][0]
@@ -271,7 +276,7 @@ def get_job_by_id(job_id):
     new_ret = []
     for r in ret:
         s = r[6].replace('\n', '\\n')
-        new_ret.append([r[0], r[1], r[2], r[3], r[4], r[5], s, r[7], r[8], r[9], r[10],r[11]])
+        new_ret.append([r[0], r[1], r[2], r[3], r[4], r[5], s, r[7], r[8], r[9], r[10],r[11], r[12]])
     return new_ret
 
 

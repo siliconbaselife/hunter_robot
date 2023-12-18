@@ -18,11 +18,11 @@ from service.manage_service import cookie_check_service
 from utils.utils import decrypt, user_code_cache
 from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
+from utils.utils import key
 logger = get_logger(config['log']['log_file'])
 
 tools_web = Blueprint('tools_web', __name__, template_folder='templates')
 
-key = 11
 
 @tools_web.route("/backend/tools/candidateCsvByJob", methods=['GET'])
 @web_exception_handler

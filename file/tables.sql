@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `account`(
    PRIMARY KEY ( `account_id` ),
    CONSTRAINT `account_info` UNIQUE(`platform_type`, `platform_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+alter table account add ver varchar(20) NOT NULL DEFAULT "v1" COMMENT '账户版本' after platform_id;
 alter table account add description varchar(100) NOT NULL DEFAULT "" COMMENT '账户描述' after task_config;
 alter table account add manage_account_id varchar(100) NOT NULL DEFAULT "" COMMENT '管理账户' after account_id;
 alter table account add independent tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否为独立账户，用于对candidate_id赋予前缀，不和其他账户去重';

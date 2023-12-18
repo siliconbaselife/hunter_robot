@@ -3,6 +3,8 @@ import numpy as np
 import copy
 import json
 
+key = 11
+
 def str_is_none(str):
     return str == None or str == "" or str == "None" or str == "NULL" or  str == "NONE" or str == "Null"
 

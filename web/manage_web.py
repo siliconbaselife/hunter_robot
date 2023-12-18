@@ -11,7 +11,7 @@ from utils.utils import encrypt, decrypt, generate_random_digits,str_is_none, ge
 from dao.task_dao import *
 from service.task_service import generate_task
 from service.manage_service import *
-
+from utils.utils import key
 import json
 import math
 import traceback
@@ -20,9 +20,6 @@ from datetime import datetime
 manage_web = Blueprint('manage_web', __name__, template_folder='templates')
 
 logger = get_logger(config['log']['log_file'])
-
-key = 11
-
 
 @manage_web.route("/recruit/candidate/list", methods=['GET'])
 @web_exception_handler
@@ -126,7 +123,7 @@ def register_account_api():
 
     if task_config is None:
         task_config = generate_task(jobs)
-    account_id = register_account_db(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), desc, manage_account_id)
+    register_account_db(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), desc, manage_account_id)
     logger.info(f'new account register: {platform_type} {platform_id} {jobs} {desc}: {account_id} {task_config}, {manage_account_id}')
     ret_data = {
         'accountID': account_id

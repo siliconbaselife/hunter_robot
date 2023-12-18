@@ -5,6 +5,7 @@ from web.source_web import source_web
 from web.wechat_web import wechat_web
 from web.manage_web import manage_web
 from web.tools_web import tools_web
+from web.manage_web_v2 import manage_web_v2
 from utils.config import config
 from dao.task_dao import *
 logger = get_logger(config['log']['log_file'])
@@ -13,6 +14,7 @@ app.register_blueprint(source_web)
 app.register_blueprint(wechat_web)
 app.register_blueprint(manage_web)
 app.register_blueprint(tools_web)
+app.register_blueprint(manage_web_v2)
 
 
 CORS(app, supports_credentials=True)

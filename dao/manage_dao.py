@@ -10,7 +10,7 @@ sql_dict = {
     "jobs_query":"select jobs from account where account_id='{}'",
     "jobs_update":"update account set jobs='{}' where account_id='{}'",
     "my_job_list_db": "select job_id, job_name, share, job_config, platform_type,robot_api, robot_template from job where manage_account_id='{}'",
-    "my_account_list_db": "select account_id, platform_type, description, jobs, task_config from account where manage_account_id='{}'",
+    "my_account_list_db": "select account_id, platform_type, description, jobs, task_config from account where manage_account_id='{}' and ver='{}'",
     "account_config_update_db": "update account set task_config='{}',jobs='{}' where manage_account_id='{}' and account_id='{}'",
     "update_job_config": "update job set robot_api='{}',job_config='{}',robot_template='{}' where job_id='{}'",
     "manage_config":"select config from manage_account where manage_account_id='{}'",
@@ -74,7 +74,10 @@ def my_job_list_db(manage_account_id):
     return dbm.query(sql_dict['my_job_list_db'].format(manage_account_id))
 
 def my_account_list_db(manage_account_id):
-    return dbm.query(sql_dict['my_account_list_db'].format(manage_account_id))
+    return dbm.query(sql_dict['my_account_list_db'].format(manage_account_id, 'v1'))
+
+def my_account_list_db_v2(manage_account_id, ver):
+    return dbm.query(sql_dict['my_account_list_db'].format(manage_account_id, ver))
 
 def account_config_update_db(manage_account_id, account_id, task_config_json, job_list_json):
     task_config_json = task_config_json.replace("\'", "\\'")

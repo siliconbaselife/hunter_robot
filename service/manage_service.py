@@ -105,6 +105,37 @@ def my_account_list_service(manage_account_id):
         ret_list.append(account)
     return ret_list
 
+def my_account_list_service_v2(manage_account_id):
+    accounts_db = my_account_list_db_v2(manage_account_id, 'v2')
+    ret_list = []
+    for a_d in accounts_db:
+        jobs = json.loads(a_d[3])
+        jobs_ret = {}
+        for job_id in jobs:
+            job_db = get_job_by_id(job_id)[0]
+            # job_config_json = job_db[6].replace('\n', '\\n')
+            llm_config = json.loads(get_llm_config_by_id_db(job_db[12]))
+            job = {
+                "job_id": job_db[0],
+                "job_name": job_db[3],
+                "share": job_db[9],
+                "robot_api": job_db[10],
+                "job_config": {} if job_db[6] is None or job_db[6] == "None" else json.loads(job_db[6]),
+                "llm_config": llm_config
+            }
+            jobs_ret[job_db[0]] = job
+        task_config = [] if a_d[4] is None or a_d[4] == "None" else json.loads(a_d[4])
+        for t in task_config:
+            t['job_config'] = jobs_ret[t['jobID']]
+        account = {
+            "account_id": a_d[0],
+            "platform_type": a_d[1],
+            "description": a_d[2],
+            "task_config": task_config
+        }
+        ret_list.append(account)
+    return ret_list
+
 def candidate_list_service(job_id, start, limit):
     chat_list = get_chats_by_job_id_with_start(job_id, start, limit)
     res_chat_list = []
@@ -174,7 +205,14 @@ def delete_task(manage_account_id, account_id, job_id):
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_config, ensure_ascii=False), json.dumps(jobs))
     
 
-
+def update_task_active(account_id, job_id, active):
+    task_configs = json.loads(get_account_task_db(account_id))
+    flag = False
+    for i in range(0, len(task_configs)):
+        if task_configs[i]["jobID"] == job_id:
+            task_configs[i]["active"] = active
+            flag = True
+    return flag
 
 def update_task_config_service(manage_account_id, account_id, task_config_dict):
     time_mount_new = []
