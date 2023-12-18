@@ -228,26 +228,15 @@ def upload_online_resume():
     logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}')
     if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    count = 0
-    for p in profile:
-        candidate_id = get_candidate_id(p, platform)
-        if candidate_id == None or candidate_id == '':
-            continue
-        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
-            exp = []
-            for e in p.get('exp', []):
-                des = e["description"] or ''
-                des = des.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-                exp.append({
-                    "company":e["company"],
-                    "v":e["v"],
-                    "position":e["position"],
-                    "worktime":e["worktime"],
-                    "description":des
-                })
-            p['exp'] = exp
-            upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
-            count = count + 1
+    
+
+    if platform == 'maimai':
+        count = maimai_online_resume_upload_processor(manage_account_id, profile, platform)
+    elif platform == 'Linkedin':
+        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform)
+    else:
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 

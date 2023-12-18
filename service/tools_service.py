@@ -30,6 +30,50 @@ def get_candidate_id(profile, platform):
     if platform == 'Boss':
         return profile['geekCard']['geekId']
 
+def maimai_online_resume_upload_processor(manage_account_id, profile, platform):
+    count = 0
+    for p in profile:
+        candidate_id = get_candidate_id(p, platform)
+        if candidate_id == None or candidate_id == '':
+            continue
+        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
+            exp = []
+            for e in p.get('exp', []):
+                des = e["description"] or ''
+                des = des.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                exp.append({
+                    "company":e["company"],
+                    "v":e["v"],
+                    "position":e["position"],
+                    "worktime":e["worktime"],
+                    "description":des
+                })
+            p['exp'] = exp
+            upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
+            count = count + 1
+    return count
+
+def linkedin_online_resume_upload_processor(manage_account_id, profile, platform):
+    count = 0
+    for p in profile:
+        candidate_id = get_candidate_id(p, platform)
+        if candidate_id == None or candidate_id == '':
+            continue
+        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
+            for e in p.get('profile', {}).get('experiences', []):
+                for w in e.get('work', []):
+                    if 'workPosition' in w:
+                        workPosition = w['workPosition'] or ''
+                        w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                    if 'workDescription' in w:
+                        workDescription = w['workDescription'] or ''
+                        w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")    
+            upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
+            count = count + 1
+    return count
+
+
+
 def generate_candidate_csv_by_job(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
     logger.info(f'test:{len(chat_list)}')
