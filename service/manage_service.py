@@ -222,10 +222,11 @@ def update_task_config_service_v2(manage_account_id, account_id, platform, param
         "job_name":params["tu_job_name"],
         "work_location":params["tu_location"],
         "job_requirements": params["job_requirements"],
-        "job_description":params["job_description"]
+        "job_description":params["job_description"],
+        "other_information":params["other_information"]
     }
     template_update_service(manage_account_id, template_id, template_name, template_config)
-
+    
 
 
     return job
