@@ -412,7 +412,8 @@ class BaseChatRobot(object):
         if self._robot_api == "/vision/chat/receive/message/chat/v1":
             t_id = get_robot_template_by_job_id(self._job_id)
             td = json.loads(get_llm_config_by_id_db(t_id))
-            return self._chat_local(td)
+            data["template_data"] = td
+            # return self._chat_local(td)
 
         response = requests.post(url=url, json=data, timeout=60)
         if response.status_code!=200 or response.json()['status']!=1:
