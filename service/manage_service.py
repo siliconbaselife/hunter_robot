@@ -261,6 +261,7 @@ def update_config_service_v2(manage_account_id, account_id, platform, params):
     template_config = params['template_config']
     job_config = params['job_config']
     task_config = params['task_config']
+    template_config['work_location'] = ",".join(task_config['location'])
 
     if str_is_none(template_config.get('template_id', '')):
         template_name = job_config['job_name']
