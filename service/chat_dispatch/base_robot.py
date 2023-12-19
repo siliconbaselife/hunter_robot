@@ -391,11 +391,12 @@ class BaseChatRobot(object):
         logger.info(f"system prompt: {system_prompt}")
         prompt = Prompt()
         prompt.add_system_message(system_prompt)
+        message = self._last_user_msg
         message = message.replace('jd', '岗位描述').replace('JD', '岗位描述').replace('Jd', '岗位描述').replace('jD', '岗位描述')
         logger.info(f"user message: {message}")
         prompt.add_user_message(message)
         gpt_msg = gpt_manager.chat_task(prompt)
-        logger.info(f"session {self._sess_id} request {self._last_user_msg} got response: {gpt_msg}")
+        logger.info(f"locat_chat, session {self._sess_id} request {message} got response: {gpt_msg}")
         return gpt_msg, ''
 
 
@@ -411,8 +412,7 @@ class BaseChatRobot(object):
         if self._robot_api == "/vision/chat/receive/message/chat/v1":
             t_id = get_robot_template_by_job_id(self._job_id)
             td = json.loads(get_llm_config_by_id_db(t_id))
-            data["template_data"] = td
-            return self._chat_local(self._last_user_msg, td)
+            return self._chat_local(td)
 
         response = requests.post(url=url, json=data, timeout=60)
         if response.status_code!=200 or response.json()['status']!=1:
