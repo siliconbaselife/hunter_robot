@@ -221,7 +221,7 @@ def process_str(s):
     s = s.replace('\\n',',')
     s = s.replace('\n',',') 
     s = s.replace('，',',')
-    return process_null(s)
+    return s
 
 def process_list(str_list):
     if isinstance(str_list,list):
