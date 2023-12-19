@@ -234,8 +234,8 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             work = ''
             for e in profile.get('experiences', []):
                 work = work + pNull(e.get('companyName', '')) + ',' + pNull(e.get('timeInfo', '')) + '\n'
-                for w in e.get('work', []):
-                    work = work + pNull(w.get('workTimeInfo', '')) + ',' + pNull(w.get('worklocation', '')) + ',' + pNull(w.get('workPosition', '')) + ',' + pNull(w.get('workDescription', '')) + '\n'
+                for wo in e.get('work', []):
+                    work = work + pNull(wo.get('workTimeInfo', '')) + ',' + pNull(wo.get('worklocation', '')) + ',' + pNull(wo.get('workPosition', '')) + ',' + pNull(wo.get('workDescription', '')) + '\n'
                 
             languages = ''
             for lan in profile.get('languages', []):

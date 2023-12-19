@@ -49,17 +49,22 @@ def linkedin_preprocess(raw_candidate_info):
         if 'profile' in tmp and tmp['profile'] is not None:
             personal_desc = tmp['profile'].get('short_description', '')
             personal_summary = tmp['profile'].get('summary', '')
-            personal_url = tmp['profile']['contactInfo'].get('url', '')
-            languages = tmp['profile']['languages']
+            personal_url = tmp['profile'].get('contactInfo', '').get('url', '')
+            languages = tmp['profile'].get('languages', '')
             education = []
             work = []
-            for e in tmp['profile']['educations']:
+            for e in tmp['profile'].get('educations', []):
                 if e.get('majorInfo', '') == '':
                     sdegree = ''
                     department = ''
                 else:
-                    sdegree = e['majorInfo'].split(',')[0]
-                    department = e['majorInfo'].split(',')[1]
+                    s_d = e.get('majorInfo', '').split(',')
+                    if len(s_d) < 2:
+                        sdegree = ''
+                        department = ''
+                    else:
+                        sdegree = e.get('majorInfo', '').split(',')[0]
+                        department = e.get('majorInfo', '').split(',')[1]
 
                 if e.get('timeInfo', '') == '':
                     start_date_ym = ''
@@ -75,12 +80,12 @@ def linkedin_preprocess(raw_candidate_info):
                     'start_date_ym': start_date_ym,
                     'end_date_ym': end_date_ym
                 })
-            for e in tmp['profile']['experiences']:
+            for e in tmp['profile'].get('experiences', []):
                 workPosition = ''
                 workDescription = ''
                 for w in e['works']:
-                    workPosition = workPosition + w['workPosition'] + ','
-                    workDescription = workDescription + w['workDescription'] + ','
+                    workPosition = workPosition + w.get('workPosition', '') + ','
+                    workDescription = workDescription + w.get('workDescription', '') + ','
                 work.append({
                     'company': e.get('companyName', ''),
                     'timeinfo': e.get('timeInfo', ''),
