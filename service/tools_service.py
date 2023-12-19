@@ -239,7 +239,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
                 
             languages = ''
             for lan in profile.get('languages', []):
-                languages = languages + pNull(lan.get('language', '')) + ',' + pNull(lan.get('des', ''))
+                languages = languages + pNull(lan.get('language', '')) + ',' + pNull(lan.get('des', '')) + '\n'
             summary = profile.get('summary', '')
             
             l = [candidate_id, platform, create_time, candidate_name,phone, email, region, position, sdegree, major, school, edu, work, languages, summary]
