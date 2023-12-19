@@ -214,6 +214,22 @@ def update_task_active(account_id, job_id, active):
             flag = True
     return flag
 
+def update_task_config_service_v2(manage_account_id, account_id, platform, params):
+    template_name = params['system_job_name']
+    template_id = template_name + "_" + str(int(time.time()))
+    template_config = {
+        "company_name":params["tu_company_name"],
+        "job_name":params["tu_job_name"],
+        "work_location":params["tu_location"],
+        "job_requirements": params["job_requirements"],
+        "job_description":params["job_description"]
+    }
+    template_update_service(manage_account_id, template_id, template_name, template_config)
+
+
+
+    return job
+
 def update_task_config_service(manage_account_id, account_id, task_config_dict):
     time_mount_new = []
     helloSum = task_config_dict['helloSum']
