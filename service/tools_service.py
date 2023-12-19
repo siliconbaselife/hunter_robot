@@ -195,7 +195,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力', '工作总结']
+    l = ['候选人ID', '平台', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力', '工作总结']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -214,6 +214,8 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             profile_json = profile_json.replace('\\', ',')
             profile = json.loads(profile_json, strict=False).get('profile', {})
             candidate_name = profile.get('name', '')
+            phone = ','.join(profile.get('phones', []))
+            email = ','.join(profile.get('emails', []))
             region = profile.get('location', '')
             position = profile.get('role', '')
             sdegree = ''
@@ -240,7 +242,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
                 languages = languages + pNull(lan.get('language', '')) + ',' + pNull(lan.get('des', ''))
             summary = profile.get('summary', '')
             
-            l = [candidate_id, platform, create_time, candidate_name, region, position, sdegree, major, school, edu, work, languages, summary]
+            l = [candidate_id, platform, create_time, candidate_name,phone, email, region, position, sdegree, major, school, edu, work, languages, summary]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
