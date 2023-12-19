@@ -221,7 +221,7 @@ def process_str(s):
     s = s.replace('\\n',',')
     s = s.replace('\n',',') 
     s = s.replace('，',',')
-    return s
+    return process_null(s)
 
 def process_list(str_list):
     if isinstance(str_list,list):
@@ -231,11 +231,11 @@ def process_list(str_list):
             s = s.replace('\\n',',')
             s = s.replace('\n',',')
             ret.extend(s.split(','))
-        return ret
+        return process_null(ret)
     else:
         s = process_str(str_list)
-        return s.split(',')
-
+        return process_null(s.split(','))
+    
 def process_str_to_list(s):
     s = s.replace(':',',')
     s = s.replace('.',',')
@@ -244,8 +244,10 @@ def process_str_to_list(s):
     s = s.replace('，',',')
     s = s.replace('\\n',',')
     s = s.replace('\n',',')
-    return s.split(',')
+    return process_null(s.split(','))
 
+def process_null(l):
+    return [_l for _l in l if not str_is_none(_l)]
 
 filter_task_exec_cache = {}
 user_code_cache = {}
