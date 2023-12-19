@@ -10,7 +10,7 @@ from utils.group_msg import send_candidate_info
 from dao.task_dao import get_robot_template_by_job_id
 from dao.manage_dao import get_llm_config_by_id_db
 from dao.task_dao import update_chat_contact_db,update_candidate_contact_db,query_chat_db,query_candidate_by_id,has_contact_db
-from algo.llm_inference import Prompt,GPTManager
+from algo.llm_inference import Prompt,gpt_manager
 
 
 logger = get_logger(config['log']['log_file'])
@@ -393,6 +393,7 @@ class BaseChatRobot(object):
         message = message.replace('jd', '岗位描述').replace('JD', '岗位描述').replace('Jd', '岗位描述').replace('jD', '岗位描述')
         logger.info(f"user message: {message}")
         prompt.add_user_message(message)
+        gpt_manager.chat_task(prompt)
 
 
     def _chat_request(self):
@@ -408,7 +409,7 @@ class BaseChatRobot(object):
             t_id = get_robot_template_by_job_id(self._job_id)
             td = json.loads(get_llm_config_by_id_db(t_id))
             data["template_data"] = td
-            self._chat(td)
+            self._chat(self._last_user_msg, td)
 
         response = requests.post(url=url, json=data, timeout=60)
         if response.status_code!=200 or response.json()['status']!=1:
