@@ -59,7 +59,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
         candidate_id = get_candidate_id(p, platform)
         if candidate_id == None or candidate_id == '':
             continue
-        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0:
+        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0 and 'profile' in p:
             for e in p.get('profile', {}).get('experiences', []):
                 for w in e.get('work', []):
                     if 'workPosition' in w:
@@ -71,8 +71,8 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             for edu in p.get('profile', {}).get('educations', []):
                 summary = edu.get('summary', '') or ''
                 edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-            summary = p.get('profile', {}).get('summary') or ''
-            p[profile][summary] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            summary = p.get('profile', {}).get('summary', '') or ''
+            p['profile']['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
     return count
