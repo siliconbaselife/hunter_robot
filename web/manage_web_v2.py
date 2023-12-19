@@ -14,7 +14,7 @@ from service.manage_service import *
 
 
 
-manage_web_v2 = Blueprint('manage_web', __name__, template_folder='templates')
+manage_web_v2 = Blueprint('manage_web_v2', __name__, template_folder='templates')
 
 logger = get_logger(config['log']['log_file'])
 
