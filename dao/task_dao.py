@@ -163,8 +163,8 @@ def register_account_db(account_id, platform_type, platform_id, jobs, task_confi
 def delete_account_by_id(account_id):
     return dbm.delete(sql_dict['delete_account_by_id'].format(account_id))
 
-def register_account_db_v2(account_id, platform_type, platform_id, jobs, task_config, desc, manage_account_id, ver):
-    return dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc,
+def register_account_db_v2(account_id, platform_type, platform_id, jobs, task_config, account_name, manage_account_id, ver):
+    return dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, account_name,
                                                    manage_account_id, ver))
 
 def query_account_id_db(platform_type, platform_id):

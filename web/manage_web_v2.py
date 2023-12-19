@@ -32,15 +32,16 @@ def register_account_api():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     # manage_account_id = request.json['manage_account_id']
-    jobs = request.json.get('jobs', [])
-    task_config = request.json.get('taskConfig', [])
-    desc = request.json.get('desc', '')
-    logger.info(f'new_account_request_v2: {manage_account_id}, {platform_type} {platform_id} {jobs} {desc} {task_config}, ')
+    jobs = []
+    task_config = []
+    ver = 'v2'
+    account_name = request.json.get('account_name', '')
+    logger.info(f'new_account_request_v2: {manage_account_id}, {platform_type} {platform_id} {account_name}')
     account_id = f'account_{platform_type}_{platform_id}'
 
     delete_account_by_id(account_id)
-    register_account_db_v2(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), desc, manage_account_id, 'v2')
-    logger.info(f'new_account_register_v2: {manage_account_id}, {platform_type}, {platform_id}, {jobs}, {desc},{account_id}, {task_config}')
+    register_account_db_v2(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), account_name, manage_account_id, ver)
+    logger.info(f'new_account_register_v2: {manage_account_id}, {platform_type}, {platform_id}, {jobs}, {account_name},{account_id}, {task_config}')
     ret_data = {
         'accountID': account_id
     }
@@ -78,12 +79,10 @@ def task_update_api():
     platform = request.json['platform']
     params = request.json['params']
 
-
     logger.info(f'task_update_request_v2:{manage_account_id}, {account_id},{platform}, {params}')
+    update_config_service_v2(manage_account_id, account_id, platform, params)
 
-    ret = update_task_config_service_v2(manage_account_id, account_id, platform, params)
-
-    return
+    return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
 
 
 @manage_web_v2.route("/backend/manage/taskActive/v2", methods=['POST'])
@@ -101,7 +100,6 @@ def task_active_update_api():
     active = request.json.get('active', -1)
     if account_id == '' or job_id == '' or active not in [0, 1]:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-
-    flag = update_task_active(account_id, job_id, active)
     logger.info(f'task_active_update_api:{manage_account_id}, {account_id}, {job_id}, {active}')
+    flag = update_task_active(account_id, job_id, active)
     return Response(json.dumps(get_web_res_suc_with_data(flag), ensure_ascii=False))

@@ -13,6 +13,7 @@ sql_dict = {
     "my_account_list_db": "select account_id, platform_type, description, jobs, task_config from account where manage_account_id='{}' and ver='{}'",
     "account_config_update_db": "update account set task_config='{}',jobs='{}' where manage_account_id='{}' and account_id='{}'",
     "update_job_config": "update job set robot_api='{}',job_config='{}',robot_template='{}' where job_id='{}'",
+    "only_update_job_config":"update job set job_config='{}' where job_id='{}'",
     "manage_config":"select config from manage_account where manage_account_id='{}'",
     "get_jobs_task_by_id":"select jobs, task_config from account where account_id='{}'",
     "get_llm_template_by_manage_id":"select template_name, template_id, template_config from llm_template where manage_account_id='{}'",
@@ -80,6 +81,7 @@ def my_account_list_db_v2(manage_account_id, ver):
     return dbm.query(sql_dict['my_account_list_db'].format(manage_account_id, ver))
 
 def account_config_update_db(manage_account_id, account_id, task_config_json, job_list_json):
+    task_config_json = task_config_json.replace('\\n',',')
     task_config_json = task_config_json.replace("\'", "\\'")
     sql = sql_dict['account_config_update_db'].format(task_config_json, job_list_json, manage_account_id, account_id)
     # sql = "update account set task_config='" + task_config_json + "',jobs='" + job_list_json + "' where manage_account_id='" + manage_account_id + "' and account_id='" + account_id + "'"
@@ -90,3 +92,10 @@ def update_job_config(job_id,robot_api, job_config, robot_template_str):
     job_config = job_config.replace("\'", "\\'")
     job_config = job_config.replace('\"', '\\"')
     return dbm.update(sql_dict['update_job_config'].format(robot_api, job_config, robot_template_str, job_id))
+
+
+def only_update_job_conifg_db(job_id, job_config):
+    job_config = job_config.replace("\n", "\\n")
+    job_config = job_config.replace("\'", "\\'")
+    job_config = job_config.replace('\"', '\\"')
+    return dbm.update(sql_dict['only_update_job_config'].format(job_config, job_id))

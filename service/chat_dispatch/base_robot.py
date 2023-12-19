@@ -367,16 +367,15 @@ class BaseChatRobot(object):
         return filter_msg, parse_dict
 
     def _generate_system_prompt(self, param: dict):
-
-        prompt += f"""
+        prompt = f"""
         你是一名招聘顾问，你的任务是帮助候选人完成面试前咨询工作及基础信息解答，回答问题需要满足以下条件：
         1.根据招聘要求和聊天记录合理回答候选人的问题，必须在“招聘要求”的范围内回答。
         2.如果”招聘要求”没有相关信息，坚决不能杜撰，回答“这个面试的时候hr和您沟通NB”。
         3.直接回答问题，要简洁，不超过30个字。
         4.用户问”你是谁“、”你是机器人吗“，回答”别逗，搞笑呢“。
         5.用户问”公司是哪家“，”什么公司“，回答”{param['company_name']}“。
+        6.候选人提供他的微信号时，请回复"那我们微信详聊"
         """
-
         prompt += f"""
         招聘要求如下：
         岗位名称：{param['job_name']}
@@ -385,7 +384,9 @@ class BaseChatRobot(object):
         工作地点：{param['work_location']}
         其他信息：{param.get('other_information', '')}
         """
-    def _chat(self, param):
+        return prompt
+    
+    def _chat_local(self, param):
         system_prompt = self._generate_system_prompt(param)
         logger.info(f"system prompt: {system_prompt}")
         prompt = Prompt()
@@ -393,7 +394,9 @@ class BaseChatRobot(object):
         message = message.replace('jd', '岗位描述').replace('JD', '岗位描述').replace('Jd', '岗位描述').replace('jD', '岗位描述')
         logger.info(f"user message: {message}")
         prompt.add_user_message(message)
-        gpt_manager.chat_task(prompt)
+        gpt_msg = gpt_manager.chat_task(prompt)
+        logger.info(f"session {self._sess_id} request {self._last_user_msg} got response: {gpt_msg}")
+        return gpt_msg, ''
 
 
     def _chat_request(self):
@@ -409,7 +412,7 @@ class BaseChatRobot(object):
             t_id = get_robot_template_by_job_id(self._job_id)
             td = json.loads(get_llm_config_by_id_db(t_id))
             data["template_data"] = td
-            self._chat(self._last_user_msg, td)
+            return self._chat_local(self._last_user_msg, td)
 
         response = requests.post(url=url, json=data, timeout=60)
         if response.status_code!=200 or response.json()['status']!=1:
