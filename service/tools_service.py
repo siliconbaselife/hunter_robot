@@ -230,7 +230,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
 
             edu = ''
             for e in profile.get('educations', []):
-                edu = edu + pNull(e.get('schoolName', '')) + ',' + pNull(s.get('majorInfo', '')) + ',' + pNull(s.get('degreeInfo', ''))  + ',' + pNull(s.get('timeInfo', '')) + ',' + pNull(s.get('summary', '')) + '\n'
+                edu = edu + pNull(e.get('schoolName', '')) + ',' + pNull(e.get('majorInfo', '')) + ',' + pNull(e.get('degreeInfo', ''))  + ',' + pNull(e.get('timeInfo', '')) + ',' + pNull(e.get('summary', '')) + '\n'
             work = ''
             for e in profile.get('experiences', []):
                 work = work + pNull(e.get('companyName', '')) + ',' + pNull(e.get('timeInfo', '')) + '\n'
