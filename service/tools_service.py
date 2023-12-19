@@ -251,7 +251,6 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
         except Exception as e:
             logger.info(f'download_resume_error4,{profile_json}')
             logger.info(f'download_resume_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
-    return
 
 
 def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date):
