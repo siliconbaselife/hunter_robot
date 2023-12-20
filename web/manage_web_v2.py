@@ -22,16 +22,18 @@ logger = get_logger(config['log']['log_file'])
 @manage_web_v2.route("/backend/manage/account/register/v2", methods=['POST'])
 @web_exception_handler
 def register_account_api():
+    # cookie_user_name = request.cookies.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    
+    manage_account_id = 'xt.test'
+
     platform_type = request.json['platformType']
     platform_id = request.json['platformID']
-    cookie_user_name = request.cookies.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
-    if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    # manage_account_id = request.json['manage_account_id']
     jobs = []
     task_config = []
     ver = 'v2'
@@ -51,14 +53,14 @@ def register_account_api():
 @manage_web_v2.route("/backend/manage/myAccountList/v2", methods=['POST'])
 @web_exception_handler
 def my_account_list_api():
-    cookie_user_name = request.cookies.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
-    if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    # manage_account_id = request.json['manage_account_id']
+    # cookie_user_name = request.cookies.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    manage_account_id = 'xt.test'
     account_ret = my_account_list_service_v2(manage_account_id)
     logger.info(f'account_list_query_result_v2:{manage_account_id}, {account_ret}')
     return Response(json.dumps(get_web_res_suc_with_data(account_ret), ensure_ascii=False))
@@ -67,14 +69,14 @@ def my_account_list_api():
 @manage_web_v2.route("/backend/manage/taskUpdate/v2", methods=['POST'])
 @web_exception_handler
 def task_update_api():
-    cookie_user_name = request.cookies.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
-    if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    
+    # cookie_user_name = request.cookies.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    manage_account_id = 'xt.test'
     account_id = request.json['account_id']
     platform = request.json['platform']
     params = request.json['params']
@@ -88,13 +90,14 @@ def task_update_api():
 @manage_web_v2.route("/backend/manage/taskActive/v2", methods=['POST'])
 @web_exception_handler
 def task_active_update_api():
-    cookie_user_name = request.cookies.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
-    if not cookie_check_service(manage_account_id):
-        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    # cookie_user_name = request.cookies.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    manage_account_id = 'xt.test'
     account_id = request.json.get('account_id', '')
     job_id = request.json.get('job_id', '')
     active = request.json.get('active', -1)
