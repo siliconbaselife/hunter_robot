@@ -125,7 +125,8 @@ def my_account_list_service_v2(manage_account_id):
             param_ret.append({
                 "template_config":llm_ret[t['jobID']],
                 "job_config": jobs_ret[t['jobID']],
-                "task_config": t['filter']
+                "task_config": t['filter'],
+                "active":t['filter']['active']
             })
         account = {
             "account_id": a_d[0],
