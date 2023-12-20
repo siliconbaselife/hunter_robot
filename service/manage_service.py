@@ -270,7 +270,7 @@ def update_config_service_v2(manage_account_id, account_id, platform, params):
         template_config['template_name'] = template_name
         template_insert_service(manage_account_id, template_id, template_name, template_config)
     else:
-        template_update_service(manage_account_id, template_id, template_name, template_config)
+        template_update_service(manage_account_id, template_config['template_id'], template_config['template_name'], template_config)
 
     if str_is_none(job_config.get('job_id', '')):
         platform_id = str(generate_random_digits(10))
