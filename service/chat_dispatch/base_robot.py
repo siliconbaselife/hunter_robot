@@ -396,8 +396,13 @@ class BaseChatRobot(object):
         logger.info(f"user message: {message}")
         prompt.add_user_message(message)
         gpt_msg = gpt_manager.chat_task(prompt)
-        logger.info(f"locat_chat, session {self._sess_id} request {message} got response: {gpt_msg}")
-        return gpt_msg, ''
+
+        url = "http://127.0.0.1:14444/model/parse"
+        r = requests.post(url, json={'text': message}).json()
+        intent = r['intent']['name']
+        confidence = r['intent']['confidence']
+        logger.info(f"locat_chat, session {self._sess_id} request {message} got response: {gpt_msg}, {intent}, {confidence}")
+        return gpt_msg, intent
 
 
     def _chat_request(self):
@@ -412,8 +417,8 @@ class BaseChatRobot(object):
         if self._robot_api == "/vision/chat/receive/message/chat/v1":
             t_id = get_robot_template_by_job_id(self._job_id)
             td = json.loads(get_llm_config_by_id_db(t_id))
-            data["template_data"] = td
-            # return self._chat_local(td)
+            # data["template_data"] = td
+            return self._chat_local(td)
 
         response = requests.post(url=url, json=data, timeout=60)
         if response.status_code!=200 or response.json()['status']!=1:
