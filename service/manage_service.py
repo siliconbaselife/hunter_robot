@@ -217,11 +217,8 @@ def update_task_active(account_id, job_id, active):
 
 
 def update_dynamic_job_conifg(dynamic_job_config):
-    job_config_json = get_job_by_id(job_id)[0][6]
-    if job_config_json == None or job_config_json == 'None' or job_config_json == 'NULL' or job_config_json == "":
-        job_config = {}
-    else:
-        job_config = json.loads(job_config_json)
+    job_config_json = get_job_by_id(dynamic_job_config['job_id'])[0][6]
+    job_config = json.loads(job_config_json)
     dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
     job_config['dynamic_job_config'] = dynamic_job_config
     only_update_job_conifg_db(job_id, json.dumps(job_config, ensure_ascii=False))
