@@ -127,3 +127,6 @@ def delete_task_api():
     ret = delete_config_v2(manage_account_id, account_id, job_id, template_id)
 
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
+
+
+
