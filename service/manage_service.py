@@ -294,6 +294,7 @@ def update_task_config_service_v2(manage_account_id, account_id, filter_task_con
     }
 
     task_configs = json.loads(get_account_task_db(account_id))
+    flag = True
     for i in range(0, len(task_configs)):
         if task_configs[i]["taskType"] == "batchTouch" and task_configs[i]["jobID"] == task_config["jobID"]:
             task_configs[i] = task_config
