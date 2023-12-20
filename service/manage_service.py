@@ -240,7 +240,6 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
     job_config['recall_config'] = config['job_register'][platform_type]["recall_config"]
     manage_config = json.loads(get_manage_config_service(manage_account_id))
     job_config['group_msg'] = manage_config['group_msg']    
-    job_config = json.dumps(job_config, ensure_ascii=False)
     
     dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
     job_config['dynamic_job_config'] = dynamic_job_config
@@ -250,8 +249,10 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
     robot_api = '/vision/chat/receive/message/chat/v1'
     #废字段
     jd=''
-    logger.info(f'new_job_service: {platform_type} {platform_id} {job_name} {robot_api} {job_config}, {share}, {manage_account_id},{robot_template}')
-    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config, share, manage_account_id,robot_template)
+
+    job_config_json = json.dumps(job_config, ensure_ascii=False)
+    logger.info(f'new_job_service: {platform_type} {platform_id} {job_name} {robot_api} {job_config_json}, {share}, {manage_account_id},{robot_template}')
+    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config_json, share, manage_account_id,robot_template)
 
 
 def update_config_service_v2(manage_account_id, account_id, platform, params):
