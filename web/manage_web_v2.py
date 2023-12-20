@@ -106,3 +106,24 @@ def task_active_update_api():
     logger.info(f'task_active_update_api:{manage_account_id}, {account_id}, {job_id}, {active}')
     flag = update_task_active(manage_account_id, account_id, job_id, active)
     return Response(json.dumps(get_web_res_suc_with_data(flag), ensure_ascii=False))
+
+
+@manage_web_v2.route("/backend/manage/deleteTask/v2", methods=['POST'])
+@web_exception_handler
+def delete_task_api():
+    # cookie_user_name = request.cookies.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    # if not cookie_check_service(manage_account_id):
+    #     return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    manage_account_id = 'xt.test'
+    account_id = request.json['account_id']
+    job_id = request.json['job_id']
+    template_id = request.json['template_id']
+    logger.info(f'task_update_request:{manage_account_id}, {account_id}, {job_id}, {template_id}')
+
+    ret = delete_config_v2(manage_account_id, account_id, job_id, template_id)
+
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))

@@ -204,6 +204,13 @@ def delete_task(manage_account_id, account_id, job_id):
             task_config.pop(i)
             break
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_config, ensure_ascii=False), json.dumps(jobs))
+
+
+
+def delete_config_v2(manage_account_id, account_id, job_id, template_id):
+    delete_task(manage_account_id, account_id, job_id)
+    delete_job_db(job_id)
+    delete_template_db(template_id)
     
 
 def update_task_active(manage_account_id, account_id, job_id, active):
