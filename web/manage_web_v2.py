@@ -37,7 +37,7 @@ def register_account_api():
     jobs = []
     task_config = []
     ver = 'v2'
-    account_name = request.json.get('account_name', '')
+    account_name = request.json['account_name']
     logger.info(f'new_account_request_v2: {manage_account_id}, {platform_type} {platform_id} {account_name}')
     account_id = f'account_{platform_type}_{platform_id}'
 

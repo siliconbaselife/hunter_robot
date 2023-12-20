@@ -131,7 +131,7 @@ def my_account_list_service_v2(manage_account_id):
             "account_id": a_d[0],
             "platform": a_d[1],
             "account_name": a_d[2],
-            "task_config": param_ret
+            "config": param_ret
         }
         ret_list.append(account)
     return ret_list
@@ -221,7 +221,7 @@ def update_dynamic_job_conifg(dynamic_job_config):
     job_config = json.loads(job_config_json)
     dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
     job_config['dynamic_job_config'] = dynamic_job_config
-    only_update_job_conifg_db(job_id, json.dumps(job_config, ensure_ascii=False))
+    return only_update_job_conifg_db(job_id, json.dumps(job_config, ensure_ascii=False))
 
 
 def new_job_service(manage_account_id, platform_type, dynamic_job_config,template_config, job_id, platform_id):
@@ -252,7 +252,7 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
 
     job_config_json = json.dumps(job_config, ensure_ascii=False)
     logger.info(f'new_job_service: {platform_type} {platform_id} {job_name} {robot_api} {job_config_json}, {share}, {manage_account_id},{robot_template}')
-    register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config_json, share, manage_account_id,robot_template)
+    return register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config_json, share, manage_account_id,robot_template)
 
 
 def update_config_service_v2(manage_account_id, account_id, platform, params):
@@ -266,19 +266,20 @@ def update_config_service_v2(manage_account_id, account_id, platform, params):
         template_id = template_name + "_" + str(int(time.time()))
         template_config['template_id'] = template_id
         template_config['template_name'] = template_name
-        template_insert_service(manage_account_id, template_id, template_name, template_config)
+        ret_temp = template_insert_service(manage_account_id, template_id, template_name, template_config)
     else:
-        template_update_service(manage_account_id, template_config['template_id'], template_config['template_name'], template_config)
+        ret_temp = template_update_service(manage_account_id, template_config['template_id'], template_config['template_name'], template_config)
 
     if str_is_none(job_config.get('job_id', '')):
         platform_id = str(generate_random_digits(10))
         job_id = f'job_{platform}_{platform_id}'
         job_config['job_id'] = job_id
-        new_job_service(manage_account_id, platform, job_config,template_config, job_id, platform_id)
+        ret_job = new_job_service(manage_account_id, platform, job_config,template_config, job_id, platform_id)
     else:
-        update_dynamic_job_conifg(job_config)
+        ret_job = update_dynamic_job_conifg(job_config)
     
-    update_task_config_service_v2(manage_account_id, account_id, task_config, job_config)
+    ret_task = update_task_config_service_v2(manage_account_id, account_id, task_config, job_config)
+    logger.info(f"update_config_service_v2: ret_temp {ret_temp}, ret_job {ret_job}, ret_task {ret_task}")
 
 def update_task_config_service_v2(manage_account_id, account_id, filter_task_config, job_config):
     task_config = {
