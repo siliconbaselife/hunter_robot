@@ -205,15 +205,14 @@ def delete_task(manage_account_id, account_id, job_id):
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_config, ensure_ascii=False), json.dumps(jobs))
     
 
-def update_task_active(account_id, job_id, active):
+def update_task_active(manage_account_id, account_id, job_id, active):
     task_configs = json.loads(get_account_task_db(account_id))
-    flag = False
+    jobs = get_account_jobs_db(account_id)
     for i in range(0, len(task_configs)):
         if task_configs[i]["jobID"] == job_id:
             task_configs[i]["active"] = active
-            flag = True
             break
-    return flag
+    return account_config_update_db(manage_account_id, account_id, json.dumps(task_configs, ensure_ascii=False), jobs)
 
 
 def update_dynamic_job_conifg(dynamic_job_config):
