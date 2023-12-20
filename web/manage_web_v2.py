@@ -104,5 +104,5 @@ def task_active_update_api():
     if account_id == '' or job_id == '' or active not in [0, 1]:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     logger.info(f'task_active_update_api:{manage_account_id}, {account_id}, {job_id}, {active}')
-    flag = update_task_active(account_id, job_id, active)
+    flag = update_task_active(manage_account_id, account_id, job_id, active)
     return Response(json.dumps(get_web_res_suc_with_data(flag), ensure_ascii=False))
