@@ -195,7 +195,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '平台', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力', '工作总结']
+    l = ['候选人ID', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力', '工作总结']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -205,7 +205,6 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
     for r in res:
         try:
             candidate_id = r[1]
-            platform = r[3]
             create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
             profile_json = r[5].replace('\n', ',')
             profile_json = profile_json.replace('/', '_')
@@ -242,7 +241,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
                 languages = languages + pNull(lan.get('language', '')) + ',' + pNull(lan.get('des', '')) + '\n'
             summary = profile.get('summary', '')
             
-            l = [candidate_id, platform, create_time, candidate_name,phone, email, region, position, sdegree, major, school, edu, work, languages, summary]
+            l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, edu, work, languages, summary]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
@@ -258,7 +257,7 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '平台', '创建时间', '候选人姓名','地区','性别', '年龄','工作总时长', '在职公司', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向', '简历标签']
+    l = ['候选人ID', '创建时间', '候选人姓名','地区','性别', '年龄','工作总时长', '在职公司', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向', '简历标签']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -268,7 +267,6 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
     for r in res:
         try:
             candidate_id = r[1]
-            platform = r[3]
             create_time = r[4].strftime("%Y-%m-%d %H:%M:%S")
             profile_json = r[5].replace('\n', ',')
             profile_json = profile_json.replace('/', '_')
@@ -305,7 +303,7 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
             exp_salary = profile['job_preferences'].get('salary', '')
             exp_prefer = ','.join(profile['job_preferences'].get('prefessions', []))
             tags = ','.join(profile.get('tag_list', []))
-            l = [candidate_id, platform, create_time, candidate_name, region,gender, age, work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
+            l = [candidate_id, create_time, candidate_name, region,gender, age, work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
