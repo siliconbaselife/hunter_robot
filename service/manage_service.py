@@ -227,7 +227,17 @@ def update_dynamic_job_conifg(dynamic_job_config):
     job_config_json = get_job_by_id(dynamic_job_config['job_id'])[0][6]
     job_config = json.loads(job_config_json)
     dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
+    dynamic_job_config['recall_msg'] = process_str(dynamic_job_config['recall_msg'])
     job_config['dynamic_job_config'] = dynamic_job_config
+    job_config['recall_strategy_config'] = {
+         "recall_msg_info_list": [
+            {
+                "threshold": 86400,
+                "msg": dynamic_job_config['recall_msg']
+            }
+        ],
+        "reply_filter_flag": True
+    }
     return only_update_job_conifg_db(job_id, json.dumps(job_config, ensure_ascii=False))
 
 
@@ -236,6 +246,8 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
     custom_filter = 0
     #账号共享
     share = 0
+    dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
+    dynamic_job_config['recall_msg'] = process_str(dynamic_job_config['recall_msg'])
     job_config = {}
     job_config['custom_filter'] = custom_filter
     job_config['custom_filter_content'] = ""
@@ -244,11 +256,19 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
     else:
         job_config['filter_config'] = config['job_register'][platform_type]["custom_filter_config"]
     job_config['chat_config'] = config['job_register'][platform_type]["chat_config"]
-    job_config['recall_config'] = config['job_register'][platform_type]["recall_config"]
+    job_config['recall_config_filter'] = "common_enhance_recall_filter"
+    job_config['recall_strategy_config'] = {
+         "recall_msg_info_list": [
+            {
+                "threshold": 86400,
+                "msg": dynamic_job_config['recall_msg']
+            }
+        ],
+        "reply_filter_flag": True
+    }
+
     manage_config = json.loads(get_manage_config_service(manage_account_id))
     job_config['group_msg'] = manage_config['group_msg']    
-    
-    dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
     job_config['dynamic_job_config'] = dynamic_job_config
 
     robot_template = template_config["template_id"]
@@ -364,6 +384,8 @@ def template_update_service(manage_account_id, template_id, template_name, templ
     template_config['job_description'] = template_config['job_description'].replace("'", '‘')
     template_config['other_information'] = template_config.get('other_information', '').replace('"', '“')
     template_config['other_information'] = template_config['other_information'].replace("'", '‘')
+    template_config['recall_msg'] = template_config.get('recall_msg', '').replace('"', '“')
+    template_config['recall_msg'] = template_config['recall_msg'].replace("'", '‘')
     template_config_p = process_str(json.dumps(template_config, ensure_ascii=False))
     return update_llm_template(template_name, template_config_p, template_id)
 
@@ -374,6 +396,8 @@ def template_insert_service(manage_account_id, template_id, template_name, templ
     template_config['job_description'] = template_config['job_description'].replace("'", '‘')
     template_config['other_information'] = template_config.get('other_information', '').replace('"', '“')
     template_config['other_information'] = template_config['other_information'].replace("'", '‘')
+    template_config['recall_msg'] = template_config.get('recall_msg', '').replace('"', '“')
+    template_config['recall_msg'] = template_config['recall_msg'].replace("'", '‘')
     template_config_p = process_str(json.dumps(template_config, ensure_ascii=False))
     return insert_llm_template(manage_account_id, template_id, template_name, template_config_p)
 
