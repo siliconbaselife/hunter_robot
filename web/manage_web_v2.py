@@ -10,8 +10,8 @@ from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.utils import encrypt, decrypt, generate_random_digits,str_is_none, get_stat_id_dict
 from utils.utils import key
 
-from service.manage_service import *
-
+from service.manage_service_v2 import *
+from service.manage_service import cookie_check_service
 
 
 manage_web_v2 = Blueprint('manage_web_v2', __name__, template_folder='templates')
