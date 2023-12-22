@@ -178,10 +178,13 @@ def query_account_type_db(account_id):
 def new_candidate_db(candidate_id, candidate_name, age, degree, location, position, details):
     location = location.replace("\'", "\\'")
     location = location.replace('\"', '\\"')
+    location = location.replace('\n', '.')
     details = details.replace("\'", "\\'")
     details = details.replace('\"', '\\"')
+    details = details.replace('\n', '.')
     position = position.replace("\'", "\\'")
     position = position.replace('\"', '\\"')
+    position = position.replace('\n', '.')
     # degree = degree.replace("\'", "\\'")
     # degree = degree.replace('\"', '\\"')
     try:
