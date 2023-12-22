@@ -1,0 +1,141 @@
+import json
+import time
+from utils.config import config
+from utils.utils import is_211, is_985, get_degree_num, str_is_none
+from utils.log import get_logger
+
+logger = get_logger(config['log']['log_file'])
+
+
+def maimai_autoload_filter_v2(candidate_info, job_res):
+    filter_args = json.loads(job_res[6])['dynamic_job_config']
+
+    # ###
+    # {
+        #     "job_id": "job_maimai_3428957948",
+        #     "job_name": "1212",
+        #     "recall_msg": "adfdf",
+        #     "touch_msg": "dfdfa",
+        #     "system_job_name": "xxx",
+        #     "min_age": 26,
+        #     "max_age": 30,
+        #     "min_degree": "xxxxx",
+        #     "school": 0,
+        #     "ex_company": [
+        #         "xxx",
+        #         "sss"
+        #     ],
+        #     "cur_company": [
+        #         "xxx",
+        #         "yyy"
+        #     ],
+        #     "job_tags": [
+        #         "aa"
+        #     ],
+        #     "neg_words": [
+        #         "bbbb"
+        #     ]
+        # }
+    ###
+    age_range = (filter_args['min_age'], filter_args['max_age'])
+    min_degree = filter_args['min_degree']
+    school_threshold = filter_args['school']
+
+
+    #工作年头
+    work_time = 0 if '年' not in candidate_info.get('work_time', "") else int(candidate_info.get('work_time',"0").split('年')[0])
+    age = 0
+    ##parse age
+    if candidate_info['degree'] == 1:
+        age = work_time + 23
+    elif candidate_info['degree'] == 2:
+        age = work_time + 25
+    elif candidate_info['degree'] == 3:
+        age = work_time + 28
+    
+    age_ok = age >= age_range[0] and age <= age_range[1]
+    
+    degree_ok = int(candidate_info['degree']) >= get_degree_num(min_degree)
+
+    school_ok = False
+    for edu in candidate_info['education']:
+        if school_threshold == 2:
+            if is_985(edu['school']):
+                school_ok = True
+        elif school_threshold == 1:
+            if is_211(edu['school']):
+                school_ok = True
+        else:
+            school_ok = True
+
+    c_json = json.dumps(candidate_info, ensure_ascii=False)
+
+    tag_ok = True
+    if 'job_tags' in filter_args and filter_args['job_tags'] != "":
+        job_tags = []
+        for j in filter_args['job_tags']:
+            if str_is_none(j):
+                job_tags.append(j)
+        if len(job_tags) > 0:
+            tag_ok = False
+            for jt in job_tags:
+                if c_json in jt or jt in c_json:
+                    tag_ok = True    
+    
+    ex_company_ok = True
+    if 'ex_company' in filter_args and filter_args['ex_company'] != "":
+        ex_company = []
+        for e in filter_args['ex_company']:
+            if str_is_none(e):
+                ex_company.append(e)
+        if len(ex_company) > 0:
+            ex_company_ok = False
+            for c in ex_company:
+                for w in candidate_info.get('exp', []):
+                    if c in w['company'] or w['company'] in c:
+                        ex_company_ok = True
+                for c_s in candidate_info['companies']:
+                    if c_s in c or c in c_s:
+                        ex_company_ok = True
+
+    neg_filter_ok = True
+    if 'neg_words' in filter_args and filter_args['neg_words'] != "":
+        neg_words = []
+        for j in filter_args['neg_words']:
+            if str_is_none(j):
+                neg_words.append(j)
+        if len(neg_words) > 0:
+            for n in neg_words:
+                if c_json in n or n in c_json:
+                    neg_filter_ok = False
+    
+
+    neg_company_ok = True
+    if 'neg_company' in filter_args and filter_args['neg_company'] != "":
+        neg_company = []
+        for e in filter_args['neg_company']:
+            if str_is_none(e):
+                neg_company.append(e)
+        if len(neg_company) > 0:
+            for c in neg_company:
+                for w in candidate_info.get('exp', []):
+                    if c in w['company'] or w['company'] in c:
+                        neg_company_ok = False
+                for c_s in candidate_info['companies']:
+                    if c_s in c or c in c_s:
+                        neg_company_ok = False
+    
+
+    judge_result = {
+        'judge': age_ok and degree_ok and school_ok and neg_company_ok and neg_filter_ok and ex_company_ok and tag_ok,
+        'details': {
+            'age_ok': age_ok,
+            'degree_ok': degree_ok,
+            'school_ok': school_ok,
+            'neg_company_ok': neg_company_ok,
+            'neg_filter_ok': neg_filter_ok,
+            'ex_company_ok': ex_company_ok,
+            'tag_ok':tag_ok
+        }
+    }
+    return judge_result
