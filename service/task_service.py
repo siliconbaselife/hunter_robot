@@ -70,10 +70,34 @@ def re_org_task(config_data, today_sub_task_log, job_id):
             res.append(r_job)
     return res
 
+def re_org_task_v2(config_data, today_sub_task_log, job_id):
+    sub_task_dict = {}
+    for t in today_sub_task_log:
+        sub_task_dict[t[2]] = t
+    res = []
+    for i in range(0, config_data):
+        if job_id != '' and config_data[i]["jobID"] != job_id:
+            continue
+        if config_data[i]['taskType']=='batchTouch':
+            retain_sum = config_data[i]["helloSum"] - sub_task_dict[config_data[i]["jobID"]][5]
+
+            touch_msg = json.loads(get_job_by_id(config_data[i]["jobID"])[0][6])["dynamic_job_config"]["touch_msg"]
+
+            r_job = {
+                "jobID":config_data[i]["jobID"],
+                "taskType":config_data[i]['taskType'],
+                "helloSum": retain_sum,
+                # "timeMount":time_percent_filtered,
+                "filter": config_data[i]["filter"],
+                "touch_msg": touch_msg
+            }
+            res.append(r_job)
+    return res
+
 def get_job_by_id_service(job_id):
     return get_job_by_id(job_id)
 
-def get_undo_task(account_id, job_id):
+def get_undo_task(account_id, job_id, ver):
     #取当天任务
     #根据当前时间点计算返回config的适配
     #向log表插入每个小task的记录
@@ -92,7 +116,10 @@ def get_undo_task(account_id, job_id):
             logger.info(f'get_undo_task init job {account_id}, {j["jobID"]}, {today_date}, no task log, will init')
             init_task_log_db(account_id, j["jobID"], today_date, j["helloSum"])
     today_sub_task_log = get_account_task_log_db(account_id, today_date)
-    res = re_org_task(config_data, today_sub_task_log, job_id)
+    if ver == 'v1':
+        res = re_org_task(config_data, today_sub_task_log, job_id)
+    else:
+        res = re_org_task_v2(config_data, today_sub_task_log, job_id)
     logger.info(f'get_undo_task for {account_id}, {job_id}, {today_date}, will return {res}')
     return res
 

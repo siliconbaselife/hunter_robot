@@ -75,6 +75,7 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
     dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
     dynamic_job_config['recall_msg'] = process_str(dynamic_job_config['recall_msg'])
     job_config = {}
+    job_config['jobID'] = job_id
     job_config['custom_filter'] = custom_filter
     job_config['custom_filter_content'] = ""
     if custom_filter == 0:

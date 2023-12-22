@@ -12,11 +12,27 @@ from utils.utils import key
 
 from service.manage_service_v2 import *
 from service.manage_service import cookie_check_service
+from service.task_service import get_undo_task
 
 
 manage_web_v2 = Blueprint('manage_web_v2', __name__, template_folder='templates')
 
 logger = get_logger(config['log']['log_file'])
+
+@manage_web_v2.route("/recruit/account/task/fetch/v2", methods=['POST'])
+@web_exception_handler
+def task_fetch_api():
+    account_id = request.json['accountID']
+    job_id = request.json.get('jobID', "")
+    logger.info(f'account_task_fetch_request_v2, {account_id}, {job_id}')
+    task_list = get_undo_task(account_id, job_id, 'v2')
+
+    logger.info(f'account_task_fetch_v2,{account_id}: {task_list}')
+    ret_data = {
+        'task': task_list
+    }
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+
 
 
 @manage_web_v2.route("/backend/manage/account/register/v2", methods=['POST'])
