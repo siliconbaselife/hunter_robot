@@ -108,6 +108,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 source = '未知'
             try:
                 contact = json.loads(c[6].replace('None', '\"\"').replace("\'", '\"'))
+
                 wechat = contact['wechat'] or ''
                 phone = contact['phone'] or ''
                 resume = contact['resume'] or ''
@@ -115,7 +116,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 wechat = ''
                 phone = ''
                 resume = ''
-                logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {contact}')
+                logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}')
             try:
                 conversation = json.loads(c[7])
                 con_str = ''
