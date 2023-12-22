@@ -21,6 +21,7 @@ def linkedin_preprocessor_v2(raw_candidate_info):
             edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
         summary = raw_candidate_info.get('profile', {}).get('summary', '') or ''
         raw_candidate_info['profile']['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+        return raw_candidate_info
     except BaseException as e:
         logger.info(f'candidate filter preprocess fail  {raw_candidate_info} failed for {e}, {traceback.format_exc()}')
         return raw_candidate_info
