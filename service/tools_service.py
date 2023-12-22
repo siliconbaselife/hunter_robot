@@ -148,6 +148,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 tag_list = ''
             else:
                 c_j = candidate_info[0][7].replace('\n','.')
+                c_j = c_j.replace("'",'"')
                 candidate_json = json.loads(c_j)
                 region = candidate_info[0][4]
                 if candidate_json.get('gender', 0) == 0:
