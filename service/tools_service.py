@@ -115,7 +115,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 wechat = ''
                 phone = ''
                 resume = ''
-                logger.info(f'filter:{candidate_id}, {candidate_name}, {contact}')
+                logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {contact}')
             try:
                 conversation = json.loads(c[7])
                 con_str = ''
