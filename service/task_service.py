@@ -78,6 +78,8 @@ def re_org_task_v2(config_data, today_sub_task_log, job_id):
     for i in range(0, config_data):
         if job_id != '' and config_data[i]["jobID"] != job_id:
             continue
+        if config_data[i]["active"] != 1:
+            continue
         if config_data[i]['taskType']=='batchTouch':
             retain_sum = config_data[i]["helloSum"] - sub_task_dict[config_data[i]["jobID"]][5]
 
