@@ -51,10 +51,17 @@ degree_dict = {
     "初中及以下": -3,
     "中技": -4
 }
+degree_eng_dict = {
+    "本科": "Bachelor",
+    "硕士": "Mastor",
+    "博士": "Doctor"
+}
+
 def get_degree_num(degree_str):
     return degree_dict[degree_str]
 
-
+def get_degree_eng_dict(degree_str):
+    return degree_eng_dict[degree_str]
 
 def encrypt(text, key):
     encrypted_text = ""

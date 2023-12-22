@@ -87,19 +87,23 @@ config['group_msg']['beijing'] = {
 config['job_register'] = {
     "Boss":{
         "filter_config":"boss_autoload_filter",
+        "filter_config_v2":"boss_autoload_filter_v2",
         "chat_config":"base_common_chat",
         "recall_config":"zp"
     },
     "Linkedin":{
         "filter_config":"linkedin_autoload_filter",
+        "filter_config_v2":"linkedin_autoload_filter_v2",
         "custom_filter_config":"linkedin_custom_filter",
         "chat_config":"base_common_chat",
         "recall_config":"zp"
     },
     "maimai":{
         "filter_config":"maimai_autoload_filter",
+        "filter_config_v2":"maimai_autoload_filter_v2",
         "custom_filter_config":"maimai_custom_filter",
         "chat_config":"maimai_common_chat",
         "recall_config":"zp"
     }
 }
+

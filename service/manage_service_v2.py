@@ -79,7 +79,7 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
     job_config['custom_filter'] = custom_filter
     job_config['custom_filter_content'] = ""
     if custom_filter == 0:
-        job_config['filter_config'] = config['job_register'][platform_type]["filter_config"]
+        job_config['filter_config'] = config['job_register'][platform_type]["filter_config_v2"]
     else:
         job_config['filter_config'] = config['job_register'][platform_type]["custom_filter_config"]
     job_config['chat_config'] = config['job_register'][platform_type]["chat_config"]

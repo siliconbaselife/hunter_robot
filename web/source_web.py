@@ -12,7 +12,7 @@ from utils.utils import deal_json_invaild, str_is_none,get_default_job,default_j
 from dao.task_dao import *
 from service.chat_service import chat_service
 from service.task_service import *
-from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force
+from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force,preprocess_v2
 from service.recall_service import recall_msg, recall_result
 from service.db_service import append_chat_msg
 import json
@@ -164,6 +164,51 @@ def candidate_filter_api():
     #     logger.info(f'candidate filter request {account_id} {job_id} {candidate_id}, {candidate_name} failed for {e}, {traceback.format_exc()}')
     #     with open(f'test/fail/{candidate_id}_{candidate_name}.json', 'w') as f:
     #         f.write(json.dumps(raw_candidate_info, indent=2, ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+
+def get_id_name(candidate_info, platform_type):
+    if platform_type == 'maimai':
+        return candidate_info['id'], candidate_info['name']
+    elif platform_type == 'Linkedin':
+        return candidate_info['id'], candidate_info['profile']['name']
+    return '', ''
+
+@source_web.route("/recruit/candidate/filter/v2", methods=['POST'])
+@web_exception_handler
+def candidate_filter_api_v2():
+    account_id = request.json['accountID']
+    ## job use first register job of account:
+    job_id = request.json.get('jobID', "")
+    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
+        # job_id = json.loads(get_account_jobs_db(account_id))[0]
+        ##默认给一个job
+        platform_type = query_account_type_db(account_id)
+        jobs = json.loads(get_account_jobs_db(account_id))
+        if len(jobs) == 0:
+            job_id = default_job_map[platform_type]["zp"]
+        else:
+            j_ret = get_job_by_id_service(jobs[0])[0]
+            job_id = get_default_job(j_ret, platform_type)
+    raw_candidate_info = request.json['candidateInfo']
+    candidate_info = None
+    ret_data = {
+        'touch': False
+    }
+    platform_type = query_account_type_db(account_id)
+    candidate_info = preprocess_v2(account_id, raw_candidate_info, platform_type)
+    candidate_id, candidate_name = get_id_name(candidate_info, platform_type)
+    candidate_info['id'] = process_independent_encode(account_id, candidate_id)
+
+    if not query_candidate_exist(candidate_id):
+        candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)    
+        logger.info(f"new_candidate_v2 {candidate_info['id']}, {candidate_name}")
+        new_candidate_db(candidate_id, candidate_name, '', '', '', '', candidate_info_json)
+    filter_result = candidate_filter(job_id, candidate_info)
+    to_touch = filter_result['judge']
+    ret_data = {
+        'touch': to_touch
+    }
+    logger.info(f'candidate_filter_v2 {account_id}, {job_id}, {candidate_info}: {filter_result}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 

@@ -23,8 +23,17 @@ __filter_dispatcher = {
     'boss_autoload_filter': boss_autoload_filter,
     'linkedin_autoload_filter': linkedin_autoload_filter,
     'maimai_custom_filter': maimai_custom_filter,
-    'linkedin_custom_filter':linkedin_custom_filter
+    'linkedin_custom_filter':linkedin_custom_filter,
+    'maimai_autoload_filter_v2':maimai_autoload_filter_v2,
+    'linkedin_autoload_filter_v2':linkedin_autoload_filter_v2
 }
+
+__preprocess_dispatcher_v2 = {
+    # 'Boss': boss_preprocess_v2,
+    'Linkedin': linkedin_preprocessor_v2,
+    'maimai': maimai_preprocessor_v2
+}
+
 
 _account_force_context = {}
 _account_force_lock = Lock()
@@ -54,6 +63,9 @@ def judge_and_update_force(account_id, filter_result):
     filter_result['details']['force'] = force_touch
     return filter_result
 
+def preprocess_v2(account_id, raw_candidate_info, platform_type):
+    assert platform_type in __preprocess_dispatcher_v2, f"unsupport platform type {platform_type} from account {account_id}"
+    return __preprocess_dispatcher_v2[platform_type](raw_candidate_info)
 
 def preprocess(account_id, raw_candidate_info):
     platform_type = query_account_type_db(account_id)
@@ -65,8 +77,7 @@ def candidate_filter(job_id, candidate_info):
     #多账号去重
     if is_chatting_db(job_id, candidate_info['id']):
         return {'judge': False}
-    ##todo要用job_id去取数据库配置
-    ##这里用job_id取
+    
     job_res = get_job_by_id(job_id)
     if len(job_res) == 0:
         logger.info(f"candidate_filter: job config wrong, not exist: {job_id}, {candidate_info['id']}")

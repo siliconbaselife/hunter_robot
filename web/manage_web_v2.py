@@ -145,6 +145,10 @@ def delete_task_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 
+
+
+
+
 @manage_web_v2.route("/backend/manage/metaConfig/v2", methods=['POST'])
 @web_exception_handler
 def meta_config():
@@ -238,10 +242,10 @@ def meta_config():
                         }
                     ]
                 },
-                "ex_company":{
+                "neg_company":{
                     "config_type":"multi_input"
                 },
-                "cur_company":{
+                "ex_company":{
                     "config_type":"multi_input"
                 },
                 "job_tags":{
@@ -288,7 +292,7 @@ def meta_config():
                 "ex_company":{
                     "config_type":"multi_input"
                 },
-                "cur_company":{
+                "neg_company":{
                     "config_type":"multi_input"
                 },
                 "job_tags":{
@@ -468,7 +472,7 @@ def meta_config():
                 "ex_company":{
                     "config_type":"multi_input"
                 },
-                "cur_company":{
+                "neg_company":{
                     "config_type":"multi_input"
                 },
                 "job_tags":{

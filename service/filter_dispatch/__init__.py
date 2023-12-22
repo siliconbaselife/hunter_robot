@@ -12,3 +12,9 @@ from .maimai_autoload_filter import maimai_autoload_filter
 from .linkedin_autoload_filter import linkedin_autoload_filter
 from .maimai_custom_filter import maimai_custom_filter
 from .linkedin_custom_filter import linkedin_custom_filter
+
+from .maimai_preprocessor_v2 import maimai_preprocessor_v2
+from .linkedin_preprocessor_v2 import linkedin_preprocessor_v2
+from .maimai_autoload_filter_v2 import maimai_autoload_filter_v2
+from .linkedin_autoload_filter_v2 import linkedin_autoload_filter_v2
+
