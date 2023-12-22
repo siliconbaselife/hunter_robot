@@ -75,7 +75,7 @@ def re_org_task_v2(config_data, today_sub_task_log, job_id):
     for t in today_sub_task_log:
         sub_task_dict[t[2]] = t
     res = []
-    for i in range(0, config_data):
+    for i in range(0, len(config_data)):
         if job_id != '' and config_data[i]["jobID"] != job_id:
             continue
         if config_data[i]["active"] != 1:
