@@ -58,7 +58,7 @@ degree_eng_dict = {
 }
 
 def get_degree_num(degree_str):
-    return degree_dict[degree_str]
+    return degree_dict.get(degree_str, -5)
 
 def get_degree_eng_dict(degree_str):
     return degree_eng_dict[degree_str]
