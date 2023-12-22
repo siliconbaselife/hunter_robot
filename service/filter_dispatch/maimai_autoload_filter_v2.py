@@ -58,7 +58,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
     degree_ok = int(candidate_info['degree']) >= get_degree_num(min_degree)
 
     school_ok = False
-    for edu in candidate_info['education']:
+    for edu in candidate_info['edu']:
         if school_threshold == 2:
             if is_985(edu['school']):
                 school_ok = True
