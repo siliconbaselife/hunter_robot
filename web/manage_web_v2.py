@@ -129,4 +129,107 @@ def delete_task_api():
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 
+@manage_web_v2.route("/backend/manage/metaConfig/v2", methods=['POST'])
+@web_exception_handler
+def meta_config():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    
+    a = {
+        "maimai":{
+            "task_config":{
+                "industry":{
+                    "config_type":"multi_input"
+                },
+                "location":{
+                    "config_type":"multi_type"
+                },
+                "education":{
+                    "config_type":"single_choice",
+                    "choice_enum":[
+                            {
+                                "value":"专科及以上",
+                                "label":"专科及以上"
+                            },
+                            {
+                                "value":"本科及以上",
+                                "label":"本科及以上"
+                            },
+                            {
+                                "value":"硕士及以上",
+                                "label":"硕士及以上"
+                            },
+                            {
+                                "value":"博士",
+                                "label":"博士"
+                            }
+                        ]
+                }
+            },
+            "job_config":{
+                "min_degree":{
+                    "config_type":"single_choice",
+                     "choice_enum":[
+                        {
+                            "value":"初中及以下",
+                            "label":"初中及以下"
+                        },
+                        {
+                            "value":"中专",
+                            "label":"中专"
+                        },
+                        {
+                            "value":"高中",
+                            "label":"高中"
+                        },
+                        {
+                            "value":"大专",
+                            "label":"大专"
+                        },
+                        {
+                            "value":"本科",
+                            "label":"本科"
+                        },
+                        {
+                            "value":"硕士",
+                            "label":"硕士"
+                        },
+                        {
+                            "value":"博士",
+                            "label":"博士"
+                        }
+                    ]
+                },
+                "school":{
+                    "config_type":"single_choice",
+                    "choice_enum":[
+                        {
+                            "value":"0",
+                            "label":"无要求"
+                        },
+                        {
+                            "value":"1",
+                            "label":"211学校"
+                        },
+                        {
+                            "value":"2",
+                            "label":"985学校"
+                        }
+                    ]
+                }
+        
+            }
+
+        }
+        
+    }
+
+
+    return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
+
 
