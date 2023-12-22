@@ -61,7 +61,7 @@ def get_degree_num(degree_str):
     return degree_dict.get(degree_str, -5)
 
 def get_degree_eng_dict(degree_str):
-    return degree_eng_dict[degree_str]
+    return degree_eng_dict.get(degree_str, 'xxx')
 
 def encrypt(text, key):
     encrypted_text = ""
