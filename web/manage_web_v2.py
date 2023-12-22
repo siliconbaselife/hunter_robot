@@ -23,7 +23,7 @@ logger = get_logger(config['log']['log_file'])
 @web_exception_handler
 def task_fetch_api():
     account_id = request.json['accountID']
-    # job_id = request.json.get('jobID', "")
+    job_id = request.json.get('jobID', "")
     logger.info(f'account_task_fetch_request_v2, {account_id}, {job_id}')
     task_list = get_undo_task(account_id, job_id, 'v2')
 
