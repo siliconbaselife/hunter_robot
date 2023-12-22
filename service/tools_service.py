@@ -147,7 +147,8 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                 exp_salary = ''
                 tag_list = ''
             else:
-                candidate_json = json.loads(candidate_info[0][7])
+                c_j = candidate_info[0][7].replace('\n',',')
+                candidate_json = json.loads(c_j)
                 region = candidate_info[0][4]
                 if candidate_json.get('gender', 0) == 0:
                     gender = '未知'
@@ -192,6 +193,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
             io.seek(0)
             io.truncate(0)
         except Exception as e:
+            logger.info(f'test_download_candidate_error4, {candidate_json}')
             logger.info(f'test_download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
 def pNull(str):
