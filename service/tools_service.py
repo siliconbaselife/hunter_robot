@@ -72,7 +72,13 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 summary = edu.get('summary', '') or ''
                 edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             summary = p.get('profile', {}).get('summary', '') or ''
+            role = p.get('profile', {}).get('role', '') or ''
+            location = p.get('profile', {}).get('location', '') or ''
+            name = p.get('profile', {}).get('name', '') or ''
             p['profile']['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            p['profile']['role'] = role.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            p['profile']['location'] = location.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            p['profile']['name'] = name.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
     return count
