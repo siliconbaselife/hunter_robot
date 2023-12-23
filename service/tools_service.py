@@ -197,8 +197,10 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
             logger.info(f'test_download_candidate_error4, {c_j}')
             logger.info(f'test_download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
-def pNull(str):
-    return '' or str
+def pNull(s):
+    if s is None or s == None or s =='null':
+        return ''
+    return s or ''
 
 def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date):
     res = get_resume_by_filter(manage_account_id, platform, start_date, end_date)
@@ -239,16 +241,16 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
 
             edu = ''
             for e in profile.get('educations', []):
-                edu = edu + pNull(e.get('schoolName', '')) + ',' + pNull(e.get('majorInfo', '')) + ',' + pNull(e.get('degreeInfo', ''))  + ',' + pNull(e.get('timeInfo', '')) + ',' + pNull(e.get('summary', '')) + '\n'
+                edu = f"{edu}{pNull(e.get('schoolName', ''))},{pNull(e.get('majorInfo', ''))},{pNull(e.get('degreeInfo', ''))},{pNull(e.get('timeInfo', ''))},{pNull(e.get('summary', ''))}\n"
             work = ''
             for e in profile.get('experiences', []):
-                work = work + pNull(e.get('companyName', '')) + ',' + pNull(e.get('timeInfo', '')) + '\n'
+                work = f"{work}{pNull(e.get('companyName', ''))},{pNull(e.get('timeInfo', ''))}\n"
                 for wo in e.get('work', []):
-                    work = work + pNull(wo.get('workTimeInfo', '')) + ',' + pNull(wo.get('worklocation', '')) + ',' + pNull(wo.get('workPosition', '')) + ',' + pNull(wo.get('workDescription', '')) + '\n'
+                    work = f"{work}{pNull(wo.get('workTimeInfo', ''))},{pNull(wo.get('worklocation', ''))},{pNull(wo.get('workPosition', ''))},{pNull(wo.get('workDescription', ''))}\n"
                 
             languages = ''
             for lan in profile.get('languages', []):
-                languages = languages + pNull(lan.get('language', '')) + ',' + pNull(lan.get('des', '')) + '\n'
+                languages = f"{languages}{pNull(lan.get('language', ''))},{pNull(lan.get('des', ''))}\n"
             summary = profile.get('summary', '')
             
             l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, edu, work, languages, summary]
