@@ -73,7 +73,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                     w['workLocationInfo'] = workLocationInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                     workPosition = w.get('workPosition', '') or ''
                     w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-                    workDescription = w['workDescription'] or ''
+                    workDescription = w.get('workDescription', '') or ''
                     w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")  
             for edu in p.get('profile', {}).get('educations', []):
                 summary = edu.get('summary', '') or ''
