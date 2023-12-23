@@ -61,13 +61,15 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             continue
         if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0 and 'profile' in p:
             for e in p.get('profile', {}).get('experiences', []):
-                for w in e.get('work', []):
-                    if 'workPosition' in w:
-                        workPosition = w.get('workPosition', '') or ''
-                        w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-                    if 'workDescription' in w:
-                        workDescription = w['workDescription'] or ''
-                        w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "") 
+                for w in e.get('works', []):
+                    workTimeInfo = w.get('workTimeInfo', '') or ''
+                    w['workTimeInfo'] = workTimeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                    workLocationInfo = w.get('workLocationInfo', '') or ''
+                    w['workLocationInfo'] = workLocationInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                    workPosition = w.get('workPosition', '') or ''
+                    w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                    workDescription = w['workDescription'] or ''
+                    w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")  
             for edu in p.get('profile', {}).get('educations', []):
                 summary = edu.get('summary', '') or ''
                 edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
@@ -251,8 +253,8 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             work = ''
             for e in profile.get('experiences', []):
                 work = f"{work}{pNull(e.get('companyName', ''))},{pNull(e.get('timeInfo', ''))}\n"
-                for wo in e.get('work', []):
-                    work = f"{work}{pNull(wo.get('workTimeInfo', ''))},{pNull(wo.get('worklocation', ''))},{pNull(wo.get('workPosition', ''))},{pNull(wo.get('workDescription', ''))}\n"
+                for wo in e.get('works', []):
+                    work = f"{work}{pNull(wo.get('workTimeInfo', ''))},{pNull(wo.get('worklocationInfo', ''))},{pNull(wo.get('workPosition', ''))},{pNull(wo.get('workDescription', ''))}\n"
                 
             languages = ''
             for lan in profile.get('languages', []):
