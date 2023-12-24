@@ -24,8 +24,20 @@ sql_dict = {
     "get_job_name_by_id":"select job_name from job where job_id='{}'",
     "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config) values ('{}', '{}', '{}', '{}')",
     "delete_job_db":"delete from job where job_id='{}'",
-    "delete_template_db":"delete from llm_template where template_id='{}'"
+    "delete_template_db":"delete from llm_template where template_id='{}'",
+    "get_hello_ids":"select candidate_id, raw_profile from online_resume where manage_account_id = '{}' and need_hello = 1 and platform='{}' and candidate_id in {}",
+    "update_hello_ids_1":"update online_resume set need_hello = 0 where manage_account_id='{}'",
+    "update_hello_ids":"update online_resume set need_hello=1 where manage_account_id='{}' and candidate_id in {}"
 } 
+
+def get_hello_ids(manage_account_id, platform, candidate_ids):
+    s = "('" + "','".join(candidate_ids) + "')"
+    return dbm.query(sql_dict['get_hello_ids'].format(manage_account_id, platform, s))
+
+def update_hello_ids(manage_account_id, candidate_ids):
+    dbm.update(sql_dict['update_hello_ids_1'].format(manage_account_id))
+    s = "('" + "','".join(candidate_ids) + "')"
+    return dbm.update(sql_dict['update_hello_ids'].format(manage_account_id, s))
 
 def delete_job_db(job_id):
     return dbm.delete(sql_dict['delete_job_db'].format(job_id))

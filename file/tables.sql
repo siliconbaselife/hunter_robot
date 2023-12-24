@@ -198,6 +198,7 @@ CREATE TABLE IF NOT EXISTS `online_resume`(
    `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
    `manage_account_id` VARCHAR(100) NOT NULL COMMENT '管理账户ID',
    `platform` VARCHAR(50) NOT NULL COMMENT '平台',
+   `candidate_id` VARCHAR(100) NOT NULL COMMENT '候选人ID',
    `raw_profile` LONGTEXT COMMENT '原始在线简历信息',
    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -205,4 +206,5 @@ CREATE TABLE IF NOT EXISTS `online_resume`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table online_resume add `candidate_id` VARCHAR(200) NOT NULL DEFAULT '' COMMENT '候选人id'  after `id`;
 alter table online_resume add `cv_url` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '简历链接'  after `raw_profile`;
+alter table online_resume add `need_hello` int NOT NULL DEFAULT 0 COMMENT '需要被打招呼'  after `platform`;
 
