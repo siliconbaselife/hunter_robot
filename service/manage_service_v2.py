@@ -64,7 +64,7 @@ def update_dynamic_job_conifg(dynamic_job_config):
         ],
         "reply_filter_flag": True
     }
-    return only_update_job_conifg_db(job_id, json.dumps(job_config, ensure_ascii=False))
+    return only_update_job_conifg_db(dynamic_job_config['job_id'], json.dumps(job_config, ensure_ascii=False))
 
 
 def new_job_service(manage_account_id, platform_type, dynamic_job_config,template_config, job_id, platform_id):

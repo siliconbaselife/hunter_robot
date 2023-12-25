@@ -116,6 +116,52 @@ def task_report_api():
     }
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
+@source_web.route("/recruit/account/task/report/v2", methods=['POST'])
+@web_exception_handler
+def task_report_api_v2():
+    account_id = request.json['accountID']
+    ## job use first register job of account:
+    # job_id = json.loads(get_account_jobs_db(account_id))[0]
+    job_id = request.json.get('jobID', "")
+    logger.info(f'job_test:{job_id}')
+    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
+        # job_id = json.loads(get_account_jobs_db(account_id))[0]
+        ##默认给一个job
+        platform_type = query_account_type_db(account_id)
+        jobs = json.loads(get_account_jobs_db(account_id))
+        if len(jobs) == 0:
+            job_id = default_job_map[platform_type]["zp"]
+        else:
+            j_ret = get_job_by_id_service(jobs[0])[0]
+            job_id = get_default_job(j_ret, platform_type)
+    job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
+    job_touch_msg = job_config['dynamic_job_config']['touch_msg']
+
+    task_status = request.json['taskStatus']
+    logger.info(f'account task report {account_id},{job_id} {task_status}')
+    touch_list = []
+    for item in task_status:
+        if item['taskType']=='batchTouch':
+            touch_list+= item['details']['candidateList']
+    update_touch_task(account_id, job_id, len(touch_list))
+    for candidate_id in touch_list:
+        try:
+            candidate_id_p = process_independent_encode(account_id, candidate_id)
+            candidate_name, filter_result = query_candidate_name_and_filter_result(candidate_id_p)
+            init_msg = {
+                'speaker': 'robot',
+                'msg': job_touch_msg,
+                'time': format_time(datetime.now())
+            }
+            details = json.dumps([init_msg], ensure_ascii=False)
+            new_chat_db(account_id, job_id, candidate_id_p, candidate_name, filter_result=filter_result, details=details, source='search')
+        except BaseException as e:
+            logger.info(f'report_before_filter:{account_id}, {candidate_id}')
+    ret_data = {
+        'status': 'ok'
+    }
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+
 
 @source_web.route("/recruit/candidate/filter", methods=['POST'])
 @web_exception_handler
