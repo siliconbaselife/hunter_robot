@@ -36,8 +36,9 @@ def get_hello_ids(manage_account_id, platform, candidate_ids):
 
 def update_hello_ids(manage_account_id, candidate_ids):
     dbm.update(sql_dict['update_hello_ids_1'].format(manage_account_id))
-    s = "('" + "','".join(candidate_ids) + "')"
-    return dbm.update(sql_dict['update_hello_ids'].format(manage_account_id, s))
+    if len(candidate_ids) > 0:
+        s = "('" + "','".join(candidate_ids) + "')"
+        return dbm.update(sql_dict['update_hello_ids'].format(manage_account_id, s))
 
 def delete_job_db(job_id):
     return dbm.delete(sql_dict['delete_job_db'].format(job_id))

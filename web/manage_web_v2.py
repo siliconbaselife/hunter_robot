@@ -13,7 +13,7 @@ from utils.utils import key
 from service.manage_service_v2 import *
 from service.manage_service import cookie_check_service
 from service.task_service import get_undo_task
-
+from dao.manage_dao import update_hello_ids, get_hello_ids
 
 manage_web_v2 = Blueprint('manage_web_v2', __name__, template_folder='templates')
 
@@ -22,8 +22,21 @@ logger = get_logger(config['log']['log_file'])
 @manage_web_v2.route("/backend/manage/plugin/updateIds", methods=['POST'])
 @web_exception_handler
 def plugin_update_ids():
-
-    return
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    
+    candidate_ids = request.json.get('candidate_ids', {})
+    merge_ids = []
+    merge_ids.extend(candidate_ids.get('maimai', []))
+    merge_ids.extend(candidate_ids.get('Boss', []))
+    merge_ids.extend(candidate_ids.get('Linkedin', []))
+    ret = update_hello_ids(manage_account_id, merge_ids)
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 @manage_web_v2.route("/backend/manage/plugin/getHelloIds", methods=['POST'])
 @web_exception_handler
@@ -35,9 +48,19 @@ def plugin_get_hello_ids():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    platform = request.json.get('platform', "")
     
-    return
+    platform = request.json.get('platform', "")
+
+    if platform not in ['Linkedin', 'Boss', 'maimai'] or platform == '':
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+
+    candidate_ids = request.json.get('candidate_ids', [])
+    if len(candidate_ids) == 0:
+        return Response(json.dumps(get_web_res_fail("无待打招呼人员"), ensure_ascii=False))
+
+    ret = get_hello_ids(manage_account_id, platform, candidate_ids)
+
+    return Response(json.dumps(get_web_res_suc_with_data(ret)))
 
 
 
