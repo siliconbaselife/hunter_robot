@@ -60,7 +60,7 @@ def plugin_get_hello_ids():
 
     ret = get_hello_ids(manage_account_id, platform, candidate_ids)
 
-    return Response(json.dumps(get_web_res_suc_with_data(ret)))
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 
 
