@@ -27,8 +27,17 @@ sql_dict = {
     "delete_template_db":"delete from llm_template where template_id='{}'",
     "get_hello_ids":"select candidate_id, raw_profile from online_resume where manage_account_id = '{}' and need_hello = 1 and platform='{}' and candidate_id in {}",
     "update_hello_ids_1":"update online_resume set need_hello = 0 where manage_account_id='{}'",
-    "update_hello_ids":"update online_resume set need_hello=1 where manage_account_id='{}' and candidate_id in {}"
+    "update_hello_ids":"update online_resume set need_hello=1 where manage_account_id='{}' and candidate_id in {}",
+    "hello_sent":"update online_resume set need_hello=0 where manage_account_id='{}' and candidate_id in {}"
 } 
+
+def hello_sent(manage_account_id, candidate_ids):
+    if len(candidate_ids) > 0:
+        candidate_ids_p = [c for c in candidate_ids if c != '']
+        s = "('" + "','".join(candidate_ids_p) + "')"
+        return dbm.update(sql_dict['hello_sent'].format(manage_account_id, s))
+    return ''
+
 
 def get_hello_ids(manage_account_id, platform, candidate_ids):
     s = "('" + "','".join(candidate_ids) + "')"
@@ -37,8 +46,10 @@ def get_hello_ids(manage_account_id, platform, candidate_ids):
 def update_hello_ids(manage_account_id, candidate_ids):
     dbm.update(sql_dict['update_hello_ids_1'].format(manage_account_id))
     if len(candidate_ids) > 0:
-        s = "('" + "','".join(candidate_ids) + "')"
+        candidate_ids_p = [c for c in candidate_ids if c != '']
+        s = "('" + "','".join(candidate_ids_p) + "')"
         return dbm.update(sql_dict['update_hello_ids'].format(manage_account_id, s))
+    return ''
 
 def delete_job_db(job_id):
     return dbm.delete(sql_dict['delete_job_db'].format(job_id))
