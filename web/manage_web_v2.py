@@ -74,7 +74,7 @@ def plugin_get_hello_ids():
     if len(candidate_ids) == 0:
         return Response(json.dumps(get_web_res_fail("无待打招呼人员"), ensure_ascii=False))
 
-    ret = get_hello_ids(manage_account_id, platform, candidate_ids)
+    ret = get_hello_ids(manage_account_id, platform)
 
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
