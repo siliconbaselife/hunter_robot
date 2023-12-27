@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import deal_json_invaild, str_is_none,get_default_job,default_job_map
+from utils.utils import deal_json_invaild, str_is_none,get_default_job,default_job_map,get_default_job_v2
 from dao.task_dao import *
 from service.chat_service import chat_service
 from service.task_service import *
@@ -116,51 +116,7 @@ def task_report_api():
     }
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
-@source_web.route("/recruit/account/task/report/v2", methods=['POST'])
-@web_exception_handler
-def task_report_api_v2():
-    account_id = request.json['accountID']
-    ## job use first register job of account:
-    # job_id = json.loads(get_account_jobs_db(account_id))[0]
-    job_id = request.json.get('jobID', "")
-    logger.info(f'job_test:{job_id}')
-    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
-        # job_id = json.loads(get_account_jobs_db(account_id))[0]
-        ##默认给一个job
-        platform_type = query_account_type_db(account_id)
-        jobs = json.loads(get_account_jobs_db(account_id))
-        if len(jobs) == 0:
-            job_id = default_job_map[platform_type]["zp"]
-        else:
-            j_ret = get_job_by_id_service(jobs[0])[0]
-            job_id = get_default_job(j_ret, platform_type)
-    job_config = json.loads(get_job_by_id(job_id)[0][6],strict=False)
-    job_touch_msg = job_config['dynamic_job_config']['touch_msg']
 
-    task_status = request.json['taskStatus']
-    logger.info(f'account task report {account_id},{job_id} {task_status}')
-    touch_list = []
-    for item in task_status:
-        if item['taskType']=='batchTouch':
-            touch_list+= item['details']['candidateList']
-    update_touch_task(account_id, job_id, len(touch_list))
-    for candidate_id in touch_list:
-        try:
-            candidate_id_p = process_independent_encode(account_id, candidate_id)
-            candidate_name, filter_result = query_candidate_name_and_filter_result(candidate_id_p)
-            init_msg = {
-                'speaker': 'robot',
-                'msg': job_touch_msg,
-                'time': format_time(datetime.now())
-            }
-            details = json.dumps([init_msg], ensure_ascii=False)
-            new_chat_db(account_id, job_id, candidate_id_p, candidate_name, filter_result=filter_result, details=details, source='search')
-        except BaseException as e:
-            logger.info(f'report_before_filter:{account_id}, {candidate_id}')
-    ret_data = {
-        'status': 'ok'
-    }
-    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
 @source_web.route("/recruit/candidate/filter", methods=['POST'])
@@ -212,85 +168,8 @@ def candidate_filter_api():
     #         f.write(json.dumps(raw_candidate_info, indent=2, ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
-def get_id_name(candidate_info, platform_type):
-    if platform_type == 'maimai':
-        return candidate_info['id'], candidate_info['name']
-    elif platform_type == 'Linkedin':
-        return candidate_info['id'], candidate_info['profile']['name']
-    return '', ''
 
-@source_web.route("/recruit/candidate/filter/v2", methods=['POST'])
-@web_exception_handler
-def candidate_filter_api_v2():
-    account_id = request.json['accountID']
-    ## job use first register job of account:
-    job_id = request.json.get('jobID', "")
-    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
-        # job_id = json.loads(get_account_jobs_db(account_id))[0]
-        ##默认给一个job
-        platform_type = query_account_type_db(account_id)
-        jobs = json.loads(get_account_jobs_db(account_id))
-        if len(jobs) == 0:
-            job_id = default_job_map[platform_type]["zp"]
-        else:
-            j_ret = get_job_by_id_service(jobs[0])[0]
-            job_id = get_default_job(j_ret, platform_type)
-    raw_candidate_info = request.json['candidateInfo']
-    candidate_info = None
-    ret_data = {
-        'touch': False
-    }
-    platform_type = query_account_type_db(account_id)
-    candidate_info = preprocess_v2(account_id, raw_candidate_info, platform_type)
-    candidate_id, candidate_name = get_id_name(candidate_info, platform_type)
-    candidate_info['id'] = process_independent_encode(account_id, candidate_id)
 
-    if not query_candidate_exist(candidate_id):
-        candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)    
-        logger.info(f"new_candidate_v2 {candidate_info['id']}, {candidate_name}")
-        new_candidate_db(candidate_id, candidate_name, '', '', '', '', candidate_info_json)
-
-    
-    filter_result = candidate_filter(job_id, candidate_info)
-    to_touch = filter_result['judge']
-    ret_data = {
-        'touch': to_touch
-    }
-    logger.info(f'candidate_filter_v2 {account_id}, {job_id}, {candidate_info}: {filter_result}')
-    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
-
-@source_web.route("/recruit/candidate/preFilter/v2", methods=['POST'])
-@web_exception_handler
-def candidate_pre_filter_api_v2():
-    account_id = request.json['accountID']
-    ## job use first register job of account:
-    job_id = request.json.get('jobID', "")
-    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
-        # job_id = json.loads(get_account_jobs_db(account_id))[0]
-        ##默认给一个job
-        platform_type = query_account_type_db(account_id)
-        jobs = json.loads(get_account_jobs_db(account_id))
-        if len(jobs) == 0:
-            job_id = default_job_map[platform_type]["zp"]
-        else:
-            j_ret = get_job_by_id_service(jobs[0])[0]
-            job_id = get_default_job(j_ret, platform_type)
-
-    candidate_id = request.json.get['candidate_id']
-    flag,candidate_info = query_candidate_detail(candidate_id)
-    if flag:
-        filter_result = candidate_filter(job_id, candidate_info)
-        to_touch = filter_result['judge']
-        ret_data = {
-            'touch': to_touch
-        }
-        logger.info(f'candidate_filter_v2 {account_id}, {job_id}, {candidate_info}: {filter_result}')
-        return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
-    else:
-        logger.info(f'candidate_preFilter_v2 {account_id}, {job_id}, {candidate_id}')
-        return Response(json.dumps(get_web_res_suc_with_data({
-            "candidate_in_db":False
-        })))
 
 
 

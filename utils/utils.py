@@ -207,6 +207,29 @@ default_job_map = {
     }
 }
 
+default_job_map = {
+    "maimai": {
+        "zp":"job_maimai_default-manual-id",
+        "bd":"job_maimai_overseas-bd-manual-id",
+        "wm":"job_maimai_overseas-bd-manual-id"
+    },
+    "Boss": {
+        "zp":"job_boss_default-manual-id",
+        "bd":"job_boss_default-manual-id",
+        "wm":"job_boss_default-manual-id"
+    },
+    "Linkedin":{
+        "zp":"job_linkedin_default-manual-id",
+        "bd":"job_Linkedin_remoly-oversea-bd",
+        "wm":"job_Linkedin_art-bd"
+    }
+}
+default_job_map_v2 = {
+    "maimai": "job_maimai_default-manual-id",
+    "Boss": "",
+    "Linkedin": ""
+}
+
 def get_default_job(job_ret, platform_type):
         job_config = json.loads(job_ret[6])
         if 'default_job' in job_config:
@@ -216,6 +239,10 @@ def get_default_job(job_ret, platform_type):
         else:
             recall_type = 'zp'
         return default_job_map[platform_type][recall_type]
+
+def get_default_job_v2(platform_type):
+    return default_job_map_v2[platform_type]
+
 
 def get_stat_id_dict():
     return statistic_id_dict

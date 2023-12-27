@@ -6,6 +6,13 @@ from utils.utils import format_time
 import copy
 from datetime import datetime
 
+def get_id_name(candidate_info, platform_type):
+    if platform_type == 'maimai':
+        return candidate_info['id'], candidate_info['name']
+    elif platform_type == 'Linkedin':
+        return candidate_info['id'], candidate_info['profile']['name']
+    return '', ''
+
 def process_independent_encode_multi(account_id, candidate_ids):
     independent = get_independent_by_account_id(account_id)
     ret = []
