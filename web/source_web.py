@@ -249,6 +249,8 @@ def candidate_filter_api_v2():
         candidate_info_json = json.dumps(candidate_info, ensure_ascii=False)    
         logger.info(f"new_candidate_v2 {candidate_info['id']}, {candidate_name}")
         new_candidate_db(candidate_id, candidate_name, '', '', '', '', candidate_info_json)
+
+    
     filter_result = candidate_filter(job_id, candidate_info)
     to_touch = filter_result['judge']
     ret_data = {
@@ -256,6 +258,40 @@ def candidate_filter_api_v2():
     }
     logger.info(f'candidate_filter_v2 {account_id}, {job_id}, {candidate_info}: {filter_result}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+
+@source_web.route("/recruit/candidate/preFilter/v2", methods=['POST'])
+@web_exception_handler
+def candidate_pre_filter_api_v2():
+    account_id = request.json['accountID']
+    ## job use first register job of account:
+    job_id = request.json.get('jobID', "")
+    if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
+        # job_id = json.loads(get_account_jobs_db(account_id))[0]
+        ##默认给一个job
+        platform_type = query_account_type_db(account_id)
+        jobs = json.loads(get_account_jobs_db(account_id))
+        if len(jobs) == 0:
+            job_id = default_job_map[platform_type]["zp"]
+        else:
+            j_ret = get_job_by_id_service(jobs[0])[0]
+            job_id = get_default_job(j_ret, platform_type)
+
+    candidate_id = request.json.get['candidate_id']
+    flag,candidate_info = query_candidate_detail(candidate_id)
+    if flag:
+        filter_result = candidate_filter(job_id, candidate_info)
+        to_touch = filter_result['judge']
+        ret_data = {
+            'touch': to_touch
+        }
+        logger.info(f'candidate_filter_v2 {account_id}, {job_id}, {candidate_info}: {filter_result}')
+        return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+    else:
+        logger.info(f'candidate_preFilter_v2 {account_id}, {job_id}, {candidate_id}')
+        return Response(json.dumps(get_web_res_suc_with_data({
+            "candidate_in_db":False
+        })))
+
 
 
 @source_web.route("/recruit/candidate/recallList", methods=['POST'])

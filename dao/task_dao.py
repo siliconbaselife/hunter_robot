@@ -209,6 +209,15 @@ def query_candidate_name_and_filter_result(candidate_id):
 def query_candidate_by_id(candidate_id):
     return dbm.query(sql_dict['query_candidate'].format(candidate_id))
 
+def query_candidate_detail(candidate_id):
+    candidate_info = dbm.query(sql_dict['query_candidate'].format(candidate_id))
+    if len(candidate_info) == 0:
+        return False, None
+    
+    c_j = candidate_info[0][7].replace('\n','.')
+    c_j = c_j.replace("\'", '\"')
+    candidate_json = json.loads(c_j, strict=False)
+    return True, candidate_json
 
 def update_candidate_contact_db(candidate_id, contact):
     dbm.update(sql_dict['update_candidate_contact'].format(contact, candidate_id))
