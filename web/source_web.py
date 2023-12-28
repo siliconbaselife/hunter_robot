@@ -116,9 +116,6 @@ def task_report_api():
     }
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
-
-
-
 @source_web.route("/recruit/candidate/filter", methods=['POST'])
 @web_exception_handler
 def candidate_filter_api():
@@ -167,10 +164,6 @@ def candidate_filter_api():
     #     with open(f'test/fail/{candidate_id}_{candidate_name}.json', 'w') as f:
     #         f.write(json.dumps(raw_candidate_info, indent=2, ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
-
-
-
-
 
 
 @source_web.route("/recruit/candidate/recallList", methods=['POST'])
