@@ -66,6 +66,8 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 des = l.get('des', '') or ''
                 l['des'] = des.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             for e in p.get('profile', {}).get('experiences', []):
+                companyName = e.get('companyName', '') or ''
+                e['companyName'] = companyName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                 for w in e.get('works', []):
                     workTimeInfo = w.get('workTimeInfo', '') or ''
                     w['workTimeInfo'] = workTimeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")

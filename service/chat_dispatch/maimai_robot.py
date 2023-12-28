@@ -14,7 +14,11 @@ class MaimaiRobot(BaseChatRobot):
         super(MaimaiRobot, self).__init__(robot_api, account_id, job_id, candidate_id, source)
         self._job_id = job_id
         job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
-        self._preset_reply_dict['hello'] = [job_config['touch_msg']]
+        if 'touch_msg' in job_config:
+            self._preset_reply_dict['hello'] = [job_config['touch_msg']]
+        else:
+            self._preset_reply_dict['hello'] = [job_config['dynamic_job_config']['touch_msg']]
+
         logger.info(f"maimai robot init, preset touch msg: {self._manual_response('hello')}")
 
     def contact(self, page_history_msg, db_history_msg):
