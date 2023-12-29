@@ -67,7 +67,7 @@ def query_template_config(template_id):
 
 
 def query_status_infos(candidate_id, account_id):
-    return dbm.query(sql_dict['query_template_config'].format(candidate_id, account_id))
+    return dbm.query(sql_dict['query_status_infos'].format(candidate_id, account_id))
 
 
 def insert_filter_cache(candidate_id, job_id, prompt, filter_result):
