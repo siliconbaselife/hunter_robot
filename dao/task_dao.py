@@ -46,28 +46,28 @@ sql_dict = {
     "insert_filter_cache": "insert into candidate_filter_cache(candidate_id, job_id, prompt,filter_result) values ('{}','{}','{}','{}')",
     "get_filter_cache": "select candidate_id, job_id, prompt, filter_result from candidate_filter_cache where candidate_id='{}' and job_id='{}'",
     "update_filter_cache": "update candidate_filter_cache set prompt='{}',filter_result='{}' where candidate_id='{}' and job_id='{}'",
-    "delete_account_by_id":"delete from account where account_id='{}'"
+    "delete_account_by_id":"delete from account where account_id='{}'",
+    "get_template_id":"select robot_template from job where job_id='{}'",
+    "update_status_infos":"update chat set status_infos = '{}' where candidate_id = '{}' and account_id = '{}'",
+    "query_template_config":"select template_config from llm_template where template_id = '{}'",
+    "query_status_infos":"select status_infos from chat where candidate_id = '{}' and account_id = '{}'"
 }
 
 
 def get_template_id(job_id):
-    sql = f"select robot_template from job where job_id='{job_id}'"
-    return dbm.query(sql)
+    return dbm.query(sql_dict['insert_filter_cache'].format(job_id))
 
 
 def update_status_infos(candidate_id, account_id, status_infos):
-    sql = f"update chat set status_infos = '{status_infos}' where candidate_id = '{candidate_id}' and account_id = '{account_id}'"
-    dbm.update(sql)
+    dbm.update(sql_dict['update_status_infos'].format(status_infos, candidate_id, account_id))
 
 
 def query_template_config(template_id):
-    sql = f"select template_config from llm_template where template_id = '{template_id}'"
-    return dbm.query(sql)
+    return dbm.query(sql_dict['query_template_config'].format(template_id))
 
 
 def query_status_infos(candidate_id, account_id):
-    sql = f"select status_infos from chat where candidate_id = '{candidate_id}' and account_id = '{account_id}'"
-    return dbm.query(sql)
+    return dbm.query(sql_dict['query_template_config'].format(candidate_id, account_id))
 
 
 def insert_filter_cache(candidate_id, job_id, prompt, filter_result):

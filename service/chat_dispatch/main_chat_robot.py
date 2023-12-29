@@ -36,10 +36,7 @@ class MainChatRobot(BaseChatRobot):
         self._job_id = job_id
         self.job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
         self.template_id = get_template_id(job_id)[0][0]
-        logger.info("template_id: ", self.template_id)
-
         self._msg_list = []
-        logger.info(f"maimai robot init job_id: {job_id}")
 
     def prepare_msgs(self, page_history_msg, db_history_msg):
         if db_history_msg is not None and len(db_history_msg) > 0:
