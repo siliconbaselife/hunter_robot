@@ -232,7 +232,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力', '工作总结']
+    l = ['候选人ID', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校','年龄', '教育经历', '工作经历', '语言能力', '工作总结']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -263,7 +263,11 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             school = ''
             if len(profile.get('educations', [])) > 0:
                 school = profile.get('educations', [])[0].get('schoolName', '')
-
+            age = -1
+            if len(profile.get('educations', [])) > 0:
+                time_info = profile.get('educations', [])[-1].get('timeInfo', '')
+                if time_info != '':
+                    age = int(time_info.split('-')[0].strip()) + 18
             edu = ''
             for e in profile.get('educations', []):
                 edu = f"{edu}{pNull(e.get('schoolName', ''))},{pNull(e.get('majorInfo', ''))},{pNull(e.get('degreeInfo', ''))},{pNull(e.get('timeInfo', ''))},{pNull(e.get('summary', ''))}\n"
@@ -278,7 +282,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
                 languages = f"{languages}{pNull(lan.get('language', ''))},{pNull(lan.get('des', ''))}\n"
             summary = profile.get('summary', '')
             
-            l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, edu, work, languages, summary]
+            l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, age, edu, work, languages, summary]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
