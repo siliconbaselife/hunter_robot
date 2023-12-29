@@ -265,7 +265,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             if len(profile.get('educations', [])) > 0:
                 school = profile.get('educations', [])[0].get('schoolName', '')
             age = -1
-            for i in range(len(profile.get('educations', []))-1, -1):
+            for i in range(len(profile.get('educations', []))-1, -1, -1):
                 time_info = profile.get('educations', [])[i].get('timeInfo', '')
                 if time_info != '':
                     age = int(datetime.datetime.today().year) - int(time_info[0:4]) + 18
