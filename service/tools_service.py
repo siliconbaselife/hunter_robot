@@ -6,6 +6,7 @@ from utils.config import config
 from algo.llm_inference import gpt_manager
 from algo.llm_base_model import Prompt
 import time
+import datetime
 import requests
 import sys
 import docx
@@ -267,7 +268,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             if len(profile.get('educations', [])) > 0:
                 time_info = profile.get('educations', [])[-1].get('timeInfo', '')
                 if time_info != '':
-                    age = int(time_info.split('-')[0].strip()) + 18
+                    age = int(datetime.datetime.today().year) - int(time_info[0:4]) + 18
             edu = ''
             for e in profile.get('educations', []):
                 edu = f"{edu}{pNull(e.get('schoolName', ''))},{pNull(e.get('majorInfo', ''))},{pNull(e.get('degreeInfo', ''))},{pNull(e.get('timeInfo', ''))},{pNull(e.get('summary', ''))}\n"
