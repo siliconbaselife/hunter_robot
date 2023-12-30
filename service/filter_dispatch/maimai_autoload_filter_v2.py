@@ -53,7 +53,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
     elif candidate_info['degree'] == 3:
         age = work_time + 28
     
-    age_ok = age >= age_range[0] and age <= age_range[1]
+    age_ok = int(age) >= int(age_range[0]) and int(age) <= int(age_range[1])
     
     degree_ok = int(candidate_info['degree']) >= get_degree_num(min_degree)
 
