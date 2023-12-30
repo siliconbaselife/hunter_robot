@@ -3,6 +3,7 @@ from utils.config import config
 from utils.log import get_logger
 from utils.utils import deal_json_invaild
 import json
+import traceback
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
@@ -191,6 +192,7 @@ def new_candidate_db(candidate_id, candidate_name, age, degree, location, positi
         s = sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details)
         dbm.insert(s)
     except BaseException as e:
+        logger.info(f'new_candidate_error,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
         logger.info(f'new_candidate_error, (msg: {details})')
 
 
