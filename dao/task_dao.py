@@ -100,6 +100,16 @@ def has_contact_db(candidate_id, account_id):
         if r[0] != None and r[0] != 'NULL' and r[0] != '':
             flag = True
     return flag
+def get_contact_db(candidate_id, account_id):
+    ret = dbm.query(sql_dict['has_contact'].format(candidate_id, account_id))
+    if len(ret) == 0:
+        logger.info(f"chat_error_{account_id}, {candidate_id}")
+        return False, None
+    flag = False
+    for r in ret:
+        if r[0] != None and r[0] != 'NULL' and r[0] != '':
+            flag = True, r[0]
+    return flag
 
 
 def get_one_time_task_list_db(account_id):
