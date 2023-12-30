@@ -10,33 +10,6 @@ logger = get_logger(config['log']['log_file'])
 def maimai_autoload_filter_v2(candidate_info, job_res):
     filter_args = json.loads(job_res[6])['dynamic_job_config']
 
-    # ###
-    # {
-        #     "job_id": "job_maimai_3428957948",
-        #     "job_name": "1212",
-        #     "recall_msg": "adfdf",
-        #     "touch_msg": "dfdfa",
-        #     "system_job_name": "xxx",
-        #     "min_age": 26,
-        #     "max_age": 30,
-        #     "min_degree": "xxxxx",
-        #     "school": 0,
-        #     "ex_company": [
-        #         "xxx",
-        #         "sss"
-        #     ],
-        #     "cur_company": [
-        #         "xxx",
-        #         "yyy"
-        #     ],
-        #     "job_tags": [
-        #         "aa"
-        #     ],
-        #     "neg_words": [
-        #         "bbbb"
-        #     ]
-        # }
-    ###
     age_range = (filter_args['min_age'], filter_args['max_age'])
     min_degree = filter_args['min_degree']
     school_threshold = filter_args['school']
@@ -90,6 +63,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
                 ex_company.append(e)
         if len(ex_company) > 0:
             ex_company_ok = False
+            logger.info('test1111111')
             for c in ex_company:
                 for w in candidate_info.get('exp', []):
                     if c in w['company'] or w['company'] in c:
