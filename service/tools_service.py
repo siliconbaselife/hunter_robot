@@ -6,6 +6,7 @@ from utils.config import config
 from algo.llm_inference import gpt_manager
 from algo.llm_base_model import Prompt
 import time
+import datetime
 import requests
 import sys
 import docx
@@ -232,7 +233,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校', '教育经历', '工作经历', '语言能力', '工作总结']
+    l = ['候选人ID', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校','年龄', '教育经历', '工作经历', '语言能力', '工作总结']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -263,6 +264,12 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             school = ''
             if len(profile.get('educations', [])) > 0:
                 school = profile.get('educations', [])[0].get('schoolName', '')
+            age = -1
+            for i in range(len(profile.get('educations', []))-1, -1, -1):
+                time_info = profile.get('educations', [])[i].get('timeInfo', '')
+                if time_info != '':
+                    age = int(datetime.datetime.today().year) - int(time_info[0:4]) + 18
+                    break
 
             edu = ''
             for e in profile.get('educations', []):
@@ -278,7 +285,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
                 languages = f"{languages}{pNull(lan.get('language', ''))},{pNull(lan.get('des', ''))}\n"
             summary = profile.get('summary', '')
             
-            l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, edu, work, languages, summary]
+            l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, age, edu, work, languages, summary]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
