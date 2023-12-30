@@ -59,7 +59,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
     if 'ex_company' in filter_args and filter_args['ex_company'] != "":
         ex_company = []
         for e in filter_args['ex_company']:
-            if str_is_none(e):
+            if not str_is_none(e):
                 ex_company.append(e)
         if len(ex_company) > 0:
             ex_company_ok = False
