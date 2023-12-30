@@ -63,7 +63,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
                 ex_company.append(e)
         if len(ex_company) > 0:
             ex_company_ok = False
-            logger.info('test1111111')
+            logger.info(f'{candidate_info["id"]}， test1111111')
             for c in ex_company:
                 for w in candidate_info.get('exp', []):
                     if c in w['company'] or w['company'] in c:
