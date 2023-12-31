@@ -199,6 +199,7 @@ def new_candidate_db(candidate_id, candidate_name, age, degree, location, positi
     # degree = degree.replace("\'", "\\'")
     # degree = degree.replace('\"', '\\"')
     try:
+        age = 0 if age == '' or age == None else int(age)
         s = sql_dict['new_candidate'].format(candidate_id, candidate_name, age, degree, location, position, details)
         dbm.insert(s)
     except BaseException as e:
