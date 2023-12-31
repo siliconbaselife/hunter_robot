@@ -10,33 +10,6 @@ logger = get_logger(config['log']['log_file'])
 def maimai_autoload_filter_v2(candidate_info, job_res):
     filter_args = json.loads(job_res[6])['dynamic_job_config']
 
-    # ###
-    # {
-        #     "job_id": "job_maimai_3428957948",
-        #     "job_name": "1212",
-        #     "recall_msg": "adfdf",
-        #     "touch_msg": "dfdfa",
-        #     "system_job_name": "xxx",
-        #     "min_age": 26,
-        #     "max_age": 30,
-        #     "min_degree": "xxxxx",
-        #     "school": 0,
-        #     "ex_company": [
-        #         "xxx",
-        #         "sss"
-        #     ],
-        #     "cur_company": [
-        #         "xxx",
-        #         "yyy"
-        #     ],
-        #     "job_tags": [
-        #         "aa"
-        #     ],
-        #     "neg_words": [
-        #         "bbbb"
-        #     ]
-        # }
-    ###
     age_range = (filter_args['min_age'], filter_args['max_age'])
     min_degree = filter_args['min_degree']
     school_threshold = filter_args['school']
@@ -74,7 +47,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
     if 'job_tags' in filter_args and filter_args['job_tags'] != "":
         job_tags = []
         for j in filter_args['job_tags']:
-            if str_is_none(j):
+            if not str_is_none(j):
                 job_tags.append(j)
         if len(job_tags) > 0:
             tag_ok = False
@@ -86,10 +59,11 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
     if 'ex_company' in filter_args and filter_args['ex_company'] != "":
         ex_company = []
         for e in filter_args['ex_company']:
-            if str_is_none(e):
+            if not str_is_none(e):
                 ex_company.append(e)
         if len(ex_company) > 0:
             ex_company_ok = False
+            logger.info(f'{candidate_info["id"]}， test1111111')
             for c in ex_company:
                 for w in candidate_info.get('exp', []):
                     if c in w['company'] or w['company'] in c:
@@ -102,7 +76,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
     if 'neg_words' in filter_args and filter_args['neg_words'] != "":
         neg_words = []
         for j in filter_args['neg_words']:
-            if str_is_none(j):
+            if not str_is_none(j):
                 neg_words.append(j)
         if len(neg_words) > 0:
             for n in neg_words:
@@ -114,7 +88,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
     if 'neg_company' in filter_args and filter_args['neg_company'] != "":
         neg_company = []
         for e in filter_args['neg_company']:
-            if str_is_none(e):
+            if not str_is_none(e):
                 neg_company.append(e)
         if len(neg_company) > 0:
             for c in neg_company:
