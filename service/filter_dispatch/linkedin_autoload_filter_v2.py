@@ -8,33 +8,6 @@ from utils.log import get_logger
 def linkedin_autoload_filter_v2(candidate_info, job_res):
     filter_args = json.loads(job_res[6])['dynamic_job_config']
 
-    # ###
-    # {
-        #     "job_id": "job_maimai_3428957948",
-        #     "job_name": "1212",
-        #     "recall_msg": "adfdf",
-        #     "touch_msg": "dfdfa",
-        #     "system_job_name": "xxx",
-        #     "min_age": 26,
-        #     "max_age": 30,
-        #     "min_degree": "xxxxx",
-        #     "school": 0,
-        #     "ex_company": [
-        #         "xxx",
-        #         "sss"
-        #     ],
-        #     "cur_company": [
-        #         "xxx",
-        #         "yyy"
-        #     ],
-        #     "job_tags": [
-        #         "aa"
-        #     ],
-        #     "neg_words": [
-        #         "bbbb"
-        #     ]
-        # }
-    ###
     min_degree = filter_args['min_degree']
     
     c_json = json.dumps(candidate_info, ensure_ascii=False)
