@@ -35,7 +35,11 @@ class MainChatRobotV2(BaseChatRobot):
         super(MainChatRobotV2, self).__init__(robot_api, account_id, job_id, candidate_id, source)
         self._job_id = job_id
         self.job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
+        self.platform = get_job_by_id(job_id)[0][1]
         self.template_id = get_template_id(job_id)[0][0]
+        self._status_infos = self.fetch_now_status()
+        self._reply_infos = self.fetch_reply_infos()
+        self._template_info = self.fetch_template_info()
         self._msg_list = []
 
     def _parse_face(self, msg):
@@ -49,7 +53,6 @@ class MainChatRobotV2(BaseChatRobot):
     def prepare_msgs(self, page_history_msg, db_history_msg):
         if db_history_msg is not None and len(db_history_msg) > 0:
             history_msg = db_history_msg
-
             new_msgs = []
             #这里其实做的不完善，有一致性问题，可以后面看是否真有这类case，先不改
             for i in range(len(page_history_msg)):
@@ -57,7 +60,6 @@ class MainChatRobotV2(BaseChatRobot):
                     break
                 new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
             # logger.info(f"MainChatRobotV2_new_msgs: {new_msgs}")
-
             new_msgs.reverse()
             r_new_msgs = []
             for msg in new_msgs:
@@ -85,19 +87,17 @@ class MainChatRobotV2(BaseChatRobot):
         logger.info(f"MainChatRobotV2_page_history_msg: {self._candidate_id}, {self._job_id}, {page_history_msg}")
         logger.info(f"MainChatRobotV2_db_history_msg:{self._candidate_id}, {self._job_id}, {db_history_msg}")
         try:
-            history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
-            status_infos = self.fetch_now_status()
-            reply_infos = self.fetch_reply_infos()
-            job_info = self.fetch_template_info()
-            logger.info(f"处理前 {self._candidate_id} 的状态信息是 {status_infos}")
-            self.deal_contact(history_msgs, status_infos)
+            processed_history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
+            logger.info(f"处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            self.deal_contact(processed_history_msgs)
             #到这里
-            intention = self.deal_intention(history_msgs, status_infos)
-
-            r_msg, action = self.generate_reply(intention, status_infos, history_msgs, reply_infos, job_info)
+            intention = self.deal_intention(processed_history_msgs)
+            if has_contact_db(self._candidate_id, self._account_id):
+                self._status_infos['has_contact'] = True
+            r_msg, action = self.generate_reply(intention, processed_history_msgs)
             self.deal_r_msg(r_msg, action)
-            logger.info(f"处理后 {self._candidate_id} 的状态信息是 {status_infos}")
-            update_status_infos(self._candidate_id, self._account_id, json.dumps(status_infos, ensure_ascii=False))
+            logger.info(f"处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            update_status_infos(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False))
             logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
             logger.error(e)
@@ -107,11 +107,27 @@ class MainChatRobotV2(BaseChatRobot):
         rs = query_template_config(self.template_id)
         if len(rs) == 0:
             return {}
-
         return json.loads(rs[0][0])
 
     def fetch_reply_infos(self):
-        return self.job_config["reply_infos"]
+        return self.job_config.get("reply_infos", {})
+
+    def fetch_now_status(self):
+        res = query_status_infos(self._candidate_id, self._account_id)
+        if len(res) == 0:
+            status_info = {}
+        status_info = json.loads(res[0][0], strict=False)
+        #init
+        if 'has_contact' not in status_info:
+            status_info['has_contact'] = False
+        if 'ask_contact' not in status_info:
+            status_info['ask_contact'] = False
+        if 'sent_first_msg' not in status_info:
+            status_info['sent_first_msg'] = False
+        if 'neg_intention' not in status_info:
+            status_info['neg_intention'] = False
+        if 'ask_rount' not in status_info:
+            status_info['ask_rount'] = 0
 
     def deal_r_msg(self, r_msg, action):
         self._status = action
@@ -120,120 +136,97 @@ class MainChatRobotV2(BaseChatRobot):
         self._msg_list.append({'speaker': 'robot', 'msg': self._next_msg, 'algo_judge_intent': 'chat',
                                'time': format_time(datetime.now())})
 
-    def generate_reply(self, intention, status_infos, history_msgs, reply_infos, job_info):
-        if "say_flag" not in status_infos:
-            intention = INTENTION.NEGTIVE if intention == INTENTION.NEGTIVE else INTENTION.POSITIVE
-
-        status_infos["say_flag"] = True
-
+    def generate_reply(self, intention, history_msgs):
+        if not self._status_infos["sent_first_msg"]:
+            self._status_infos["sent_first_msg"] = True
+            return self.first_reply(intention)
         if intention == INTENTION.NEGTIVE:
-            return self.negtive_reply(status_infos, reply_infos)
-
+            return self.negtive_reply()
         if intention == INTENTION.POSITIVE:
-            return self.positive_reply(status_infos, reply_infos)
-
+            return self.positive_reply()
         if intention == INTENTION.NOINTENTION:
-            return self.no_intention_reply(status_infos, reply_infos, history_msgs, job_info)
-
+            return self.no_intention_reply(history_msgs)
         if intention == INTENTION.QUESTIOM:
-            return self.deal_question_reply(status_infos, history_msgs, reply_infos, job_info)
-
+            return self.deal_question_reply(history_msgs)
         return "", ChatStatus.NoTalk
 
-    def deal_question_reply(self, status_infos, history_msgs, reply_infos, job_info):
-        say_num = status_infos["say_num"] if "say_num" in status_infos else 0
-        default_msg = ""
-        if "reply_msgs" in reply_infos and say_num < len(reply_infos["reply_msgs"]):
-            status_infos["say_num"] = say_num + 1
-            default_msg = reply_infos["reply_msgs"][say_num]
+    def first_reply(self, intention):
+        self._status_infos['ask_contact'] = True
+        if self._status_infos['has_contact']:
+            return '', ChatStatus.FinishSuc
+        if intention == INTENTION.NEGTIVE:
+            return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact
+        else:
+            return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact
 
+    def deal_question_reply(self, history_msgs):
         prompt = f'''
-你是一个猎头，你正在跟候选人聊这个岗位，回答候选人的问题。
-不能说重复的话。
-回复在50个字以内。
+你是一个猎头，你正在跟候选人推荐一个岗位，简洁回答候选人的问题。
+不要说之前重复的话
+不要用敬语
+不要问用户问题
+不要说类似“有什么可以帮您”的话术
+回复在50个字以内。回复在50个字以内。
 ##
 岗位要求:
-{job_info["job_requirements"]}
+{self._template_info["job_requirements"]}
 岗位信息:
-{job_info["job_description"]}
+{self._template_info["job_description"]}
 ###
 '''
-
         msgs, user_msg = self.transfer_msgs(history_msgs)
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
-        if len(default_msg) > 0:
-            r_msg += default_msg
 
+        if not self._status_infos['has_contact']:
+            r_msg += '\n您看要不加个微信，我给您详细介绍下'
         return r_msg, ChatStatus.NormalChat
 
-    def no_intention_reply(self, status_infos, reply_infos, history_msgs, job_info):
-        say_num = status_infos["say_num"] if "say_num" in status_infos else 0
-        default_msg = ""
-        if "reply_msgs" in reply_infos and say_num < len(reply_infos["reply_msgs"]):
-            status_infos["say_num"] = say_num + 1
-            default_msg = reply_infos["reply_msgs"][say_num]
-
-        m = ""
-        if "contact_flag" in status_infos and status_infos["contact_flag"]:
-            m = "找机会找候选人要联系方式, 要联系方式的话术是 我们加个微信细聊一下呗$PHONE$"
+    def no_intention_reply(self, history_msgs):
+        if self._status_infos['has_contact']:
+            return '', ChatStatus.FinishSuc
+        m = "找机会找候选人要联系方式, 要联系方式的话术是 加个微信细聊一下呗$PHONE$"
         prompt = f'''
-你是一个猎头，你正在跟候选人聊这个岗位。
-不能说重复的话术。
-回答在30个字以内。
+你是一个猎头，你正在跟候选人推荐一个岗位，简洁回答候选人的问题
+不要说之前重复的话
+不要用敬语
+不要问用户问题
+不要说类似“有什么可以帮您”的话术
+回答在30个字以内。回答在30个字以内。
 {m}
 ###
 岗位要求:
-{job_info["job_requirements"]}
+{self._template_info["job_requirements"]}
 岗位信息:
-{job_info["job_description"]}
+{self._template_info["job_description"]}
 ###
         '''
-
         msgs, user_msg = self.transfer_msgs(history_msgs)
-
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
-        if len(default_msg) > 0:
-            r_msg += "\n" + default_msg
-        if "$PHONE$" in r_msg:
-            status_infos["contact_flag"] = True
-            return r_msg.replace("$PHONE$", ""), ChatStatus.NeedContact
+        return r_msg.replace("$PHONE$", ""), ChatStatus.NeedContact
+
+    def negtive_reply(self):
+        if self._status_infos['has_contact']:
+            return "", ChatStatus.FinishSuc
         else:
-            return r_msg, ChatStatus.NormalChat
+            if not self._status_infos["neg_intention"]:
+                self._status_infos["neg_intention"] = True
+                return "咱也可以加个微信呗，我手里有挺多岗位的，要是合适的随时推荐给您。", ChatStatus.NeedContact
+            else:
+                return "", ChatStatus.FinishFail
 
-    def negtive_reply(self, status_infos, reply_infos):
-        if "intention" in status_infos:
-            status_infos["intention"] = False
-            return "", ChatStatus.NoTalk
-
-        if "intention" not in status_infos and "negtive_msg" in reply_infos:
-            status_infos["intention"] = False
-            status_infos["contact_flag"] = True
-            return reply_infos["negtive_msg"], ChatStatus.NeedContact
-
-        if "intention" not in status_infos and "negtive_msg" not in reply_infos:
-            status_infos["intention"] = False
-            status_infos["contact_flag"] = True
-            negtive_msg = "我们加个微信呗，我手里有挺多岗位的，要是合适的推荐给您。", ChatStatus.NeedContact
-            return negtive_msg, ChatStatus.NeedContact
-
-    def positive_reply(self, status_infos, reply_infos):
-        say_num = status_infos["say_num"] if "say_num" in status_infos else 0
-        if "intention" in status_infos:
-            status_infos["intention"] = True
-            if "reply_msgs" in reply_infos and "reply_msgs" in reply_infos and say_num < len(reply_infos["reply_msgs"]):
-                status_infos["say_num"] = say_num + 1
-                return reply_infos["reply_msgs"][say_num], ChatStatus.NormalChat
-
-        if "intention" not in status_infos and "positive_msg" in reply_infos:
-            status_infos["intention"] = True
-            status_infos["contact_flag"] = True
-            return reply_infos["positive_msg"], ChatStatus.NeedContact
-
-        if "intention" not in status_infos and "positive_msg" not in reply_infos:
-            status_infos["intention"] = True
-            status_infos["contact_flag"] = True
-            positive_msg = "那我们加个微信细聊一下呗"
-            return positive_msg, ChatStatus.NeedContact
+    def positive_reply(self):
+        if self._status_infos['has_contact']:
+            return "", ChatStatus.FinishSuc
+        else:
+            msgs = [
+                "那我们加个微信细聊一下呗",
+                "您看方便的话咱可以微信上说，还方便"
+            ]
+            ask_round = self._status_infos['ask_round']
+            if ask_round >= len(msgs):
+                return "", ChatStatus.NeedContact
+            self._status_infos['ask_round'] = ask_round + 1
+            return msgs[ask_round], ChatStatus.NeedContact
 
     def _parse_msgs_contact(self, history_msgs):
         contact = ''
@@ -245,20 +238,20 @@ class MainChatRobotV2(BaseChatRobot):
                     return parse_dict['contact']
         return contact
 
-    def deal_contact(self, history_msgs, status_infos):
-        if "contact_flag" in status_infos and status_infos["contact_flag"]:
+    def deal_contact_chi(self, history_msgs):
+        if "contact_flag" in self._status_infos and self._status_infos["contact_flag"]:
             logger.info(f'already_have_contact, {self._candidate_id}')
             return True
 
         db_has_contact = has_contact_db(self._candidate_id, self._account_id)
         if db_has_contact:
             logger.info(f'already_have_contact, {self._candidate_id}')
-            status_infos["contact_flag"] = True
+            self._status_infos["contact_flag"] = True
             return True
         #这里等于有了一种联系方式就没再进行萃取了，直接return了
         contact = self._parse_msgs_contact(history_msgs)
         if contact == '':
-            status_infos["contact_flag"] = False
+            self._status_infos["contact_flag"] = False
             return False
         contact_info = {
             "wechat":contact,
@@ -266,8 +259,35 @@ class MainChatRobotV2(BaseChatRobot):
             "cv":""
         }
         update_chat_contact_db(self._account_id, self._job_id, self._candidate_id, json.dumps(contact_info))
-        status_infos["contact_flag"] = True
+        self._status_infos["contact_flag"] = True
         return True
+    
+    def deal_contact_eng(self, history_msgs):
+        if "contact_flag" in self._status_infos and self._status_infos["contact_flag"]:
+            return True
+
+        db_has_contact = has_contact_db(self._candidate_id, self._account_id)
+        if db_has_contact:
+            self._status_infos["contact_flag"] = True
+            return True
+
+        msg_prompt = self.deal_contact_prompts(history_msgs)
+        result_msg = gpt_chat.generic_chat({"user_message": msg_prompt})
+
+        contact_infos = self.parse_contact_msg_results(result_msg)
+        if len(contact_infos.keys()) == 0:
+            self._status_infos["contact_flag"] = False
+            return False
+
+        update_chat_contact_db(self._account_id, self._job_id, self._candidate_id, json.dumps(contact_infos))
+        self._status_infos["contact_flag"] = True
+        return True
+
+    def deal_contact(self, history_msgs):
+        if self.platform == 'Linkedin':
+            return self.deal_contact_eng(history_msgs)
+        else:
+            return self.deal_contact_chi(history_msgs)
 
     def parse_contact_msg_results(self, msg):
         if '{' not in msg or '}' not in msg:
@@ -320,13 +340,8 @@ class MainChatRobotV2(BaseChatRobot):
 
         return r_msgs, user_msg
 
-    def fetch_now_status(self):
-        res = query_status_infos(self._candidate_id, self._account_id)
-        if len(res) == 0:
-            return {}
-        return json.loads(res[0][0], strict=False)
-
-    def deal_intention(self, history_msgs, status_infos):
+    
+    def deal_intention(self, history_msgs):
         msg_prompt = self.deal_intention_prompts(history_msgs)
         if len(msg_prompt) == 0:
             return INTENTION.NOINTENTION
@@ -339,7 +354,7 @@ class MainChatRobotV2(BaseChatRobot):
         if "B.肯定" in result_msg:
             return INTENTION.POSITIVE
 
-        if "C.问岗位相关信息" in result_msg:
+        if "C.问岗位信息的相关问题" in result_msg:
             return INTENTION.QUESTIOM
 
         if "D.没有任何意图" in result_msg:
@@ -382,9 +397,10 @@ class MainChatRobotV2(BaseChatRobot):
             return ""
 
         prompt = f'''
-你是一个猎头，判断一下，下面的对话，用户最后一段对话的意图。
-你和用户的历史对话在分隔符###中，用户最后一段对话在分隔符@@@中
-A.拒绝 B.肯定 C.问岗位相关信息 D.没有任何意图
+你是一个猎头，判断一下，下面的对话中，用户最后一段对话的意图。
+你和用户的历史对话在分隔符###中
+用户最后一段对话在分隔符@@@中
+答案选项 A.拒绝 B.肯定 C.问岗位信息的相关问题 D.没有任何意图
 ###
 {msg_str}
 ###
@@ -393,3 +409,25 @@ A.拒绝 B.肯定 C.问岗位相关信息 D.没有任何意图
 @@@
 '''
         return prompt
+
+
+    def deal_contact_prompts(self, page_history_msg):
+        msg_str = ""
+        for msg in page_history_msg:
+            if msg["speaker"] == "system":
+                continue
+            msg_str += "我: " if msg["speaker"] == "robot" else "客户: "
+            msg_str += msg["msg"] + "\n"
+
+        msg_prompt = f'''
+@@@
+{msg_str}
+@@@
+问: 
+帮我萃取出客户的电话号码和微信号，排除掉我的信息。
+结果用json格式表示，电话的key是phone，微信的key是wechat，获取不到的信息为null。
+如果对话中没有客户的联系方式，就说没有联系方式。
+我不需要你帮我写程序
+回答限制在50个字以内
+    '''
+        return msg_prompt
