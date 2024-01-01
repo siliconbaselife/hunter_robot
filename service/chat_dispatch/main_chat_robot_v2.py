@@ -117,7 +117,6 @@ class MainChatRobotV2(BaseChatRobot):
         if len(res) == 0:
             status_info = {}
         status_info = json.loads(res[0][0], strict=False)
-        #init
         if 'has_contact' not in status_info:
             status_info['has_contact'] = False
         if 'ask_contact' not in status_info:
@@ -153,7 +152,7 @@ class MainChatRobotV2(BaseChatRobot):
     def first_reply(self, intention):
         self._status_infos['ask_contact'] = True
         if self._status_infos['has_contact']:
-            return '', ChatStatus.FinishSuc
+            return '', ChatStatus.NoTalk
         if intention == INTENTION.NEGTIVE:
             return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact
         else:
@@ -183,7 +182,7 @@ class MainChatRobotV2(BaseChatRobot):
 
     def no_intention_reply(self, history_msgs):
         if self._status_infos['has_contact']:
-            return '', ChatStatus.FinishSuc
+            return '', ChatStatus.NoTalk
         m = "找机会找候选人要联系方式, 要联系方式的话术是 加个微信细聊一下呗$PHONE$"
         prompt = f'''
 你是一个猎头，你正在跟候选人推荐一个岗位，简洁回答候选人的问题
@@ -202,21 +201,21 @@ class MainChatRobotV2(BaseChatRobot):
         '''
         msgs, user_msg = self.transfer_msgs(history_msgs)
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
-        return r_msg.replace("$PHONE$", ""), ChatStatus.NeedContact
+        return r_msg.replace("$PHONE$", ""), ChatStatus.NormalChat
 
     def negtive_reply(self):
         if self._status_infos['has_contact']:
-            return "", ChatStatus.FinishSuc
+            return "", ChatStatus.NoTalk
         else:
             if not self._status_infos["neg_intention"]:
                 self._status_infos["neg_intention"] = True
-                return "咱也可以加个微信呗，我手里有挺多岗位的，要是合适的随时推荐给您。", ChatStatus.NeedContact
+                return "咱也可以加个微信呗，我手里有挺多岗位的，要是合适的随时推荐给您。", ChatStatus.NormalChat
             else:
-                return "", ChatStatus.FinishFail
+                return "", ChatStatus.NoTalk
 
     def positive_reply(self):
         if self._status_infos['has_contact']:
-            return "", ChatStatus.FinishSuc
+            return "", ChatStatus.NoTalk
         else:
             msgs = [
                 "那我们加个微信细聊一下呗",
@@ -224,9 +223,9 @@ class MainChatRobotV2(BaseChatRobot):
             ]
             ask_round = self._status_infos['ask_round']
             if ask_round >= len(msgs):
-                return "", ChatStatus.NeedContact
+                return "", ChatStatus.NormalChat
             self._status_infos['ask_round'] = ask_round + 1
-            return msgs[ask_round], ChatStatus.NeedContact
+            return msgs[ask_round], ChatStatus.NormalChat
 
     def _parse_msgs_contact(self, history_msgs):
         contact = ''

@@ -89,6 +89,7 @@ config['job_register'] = {
         "filter_config":"boss_autoload_filter",
         "filter_config_v2":"boss_autoload_filter_v2",
         "chat_config":"base_common_chat",
+        "chat_config_v2":"main_chat_robot_v2",
         "recall_config":"zp"
     },
     "Linkedin":{
@@ -96,6 +97,7 @@ config['job_register'] = {
         "filter_config_v2":"linkedin_autoload_filter_v2",
         "custom_filter_config":"linkedin_custom_filter",
         "chat_config":"base_common_chat",
+        "chat_config_v2":"main_chat_robot_v2",
         "recall_config":"zp"
     },
     "maimai":{
@@ -103,6 +105,7 @@ config['job_register'] = {
         "filter_config_v2":"maimai_autoload_filter_v2",
         "custom_filter_config":"maimai_custom_filter",
         "chat_config":"maimai_common_chat",
+        "chat_config_v2":"main_chat_robot_v2",
         "recall_config":"zp"
     }
 }

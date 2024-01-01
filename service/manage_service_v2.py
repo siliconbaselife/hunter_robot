@@ -82,7 +82,7 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
         job_config['filter_config'] = config['job_register'][platform_type]["filter_config_v2"]
     else:
         job_config['filter_config'] = config['job_register'][platform_type]["custom_filter_config"]
-    job_config['chat_config'] = config['job_register'][platform_type]["chat_config"]
+    job_config['chat_config'] = config['job_register'][platform_type]["chat_config_v2"]
     job_config['recall_config_filter'] = "common_enhance_recall_filter"
     job_config['recall_strategy_config'] = {
          "recall_msg_info_list": [
