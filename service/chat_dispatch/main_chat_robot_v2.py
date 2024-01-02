@@ -132,6 +132,7 @@ class MainChatRobotV2(BaseChatRobot):
             status_info['neg_intention'] = False
         if 'ask_rount' not in status_info:
             status_info['ask_rount'] = 0
+        return status_info
 
     def deal_r_msg(self, r_msg, action):
         self._status = action
