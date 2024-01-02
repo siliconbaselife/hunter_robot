@@ -92,7 +92,6 @@ class MainChatRobotV2(BaseChatRobot):
             processed_history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
             logger.info(f"处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
             self.deal_contact(processed_history_msgs)
-            #到这里
             intention = self.deal_intention(processed_history_msgs)
             if has_contact_db(self._candidate_id, self._account_id):
                 self._status_infos['has_contact'] = True
