@@ -17,4 +17,6 @@ from .maimai_preprocessor_v2 import maimai_preprocessor_v2
 from .linkedin_preprocessor_v2 import linkedin_preprocessor_v2
 from .maimai_autoload_filter_v2 import maimai_autoload_filter_v2
 from .linkedin_autoload_filter_v2 import linkedin_autoload_filter_v2
+from .boss_preprocessor_v2 import boss_preprocess_v2
+from .boss_autoload_filter_v2 import boss_autoload_filter_v2
 

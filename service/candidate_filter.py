@@ -29,7 +29,7 @@ __filter_dispatcher = {
 }
 
 __preprocess_dispatcher_v2 = {
-    # 'Boss': boss_preprocess_v2,
+    'Boss': boss_preprocess_v2,
     'Linkedin': linkedin_preprocessor_v2,
     'maimai': maimai_preprocessor_v2
 }
