@@ -90,16 +90,16 @@ class MainChatRobotV2(BaseChatRobot):
         logger.info(f"MainChatRobotV2_db_history_msg:{self._candidate_id}, {self._job_id}, {db_history_msg}")
         try:
             processed_history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
-            logger.info(f"处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            logger.info(f"MainChatRobotV2处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
             self.deal_contact(processed_history_msgs)
             intention = self.deal_intention(processed_history_msgs)
             if has_contact_db(self._candidate_id, self._account_id):
                 self._status_infos['has_contact'] = True
             r_msg, action = self.generate_reply(intention, processed_history_msgs)
             self.deal_r_msg(r_msg, action)
-            logger.info(f"处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            logger.info(f"MainChatRobotV2处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
             update_status_infos_v2(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False), self._job_id)
-            logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
+            logger.info(f"MainChatRobotV2需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
             logger.info(f'MainChatRobotV2,{self._candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
@@ -244,12 +244,12 @@ class MainChatRobotV2(BaseChatRobot):
 
     def deal_contact_chi(self, history_msgs):
         if "contact_flag" in self._status_infos and self._status_infos["contact_flag"]:
-            logger.info(f'already_have_contact, {self._candidate_id}')
+            logger.info(f'MainChatRobotV2 already_have_contact, {self._candidate_id}')
             return True
 
         db_has_contact = has_contact_db(self._candidate_id, self._account_id)
         if db_has_contact:
-            logger.info(f'already_have_contact, {self._candidate_id}')
+            logger.info(f'MainChatRobotV2 already_have_contact, {self._candidate_id}')
             self._status_infos["contact_flag"] = True
             return True
         #这里等于有了一种联系方式就没再进行萃取了，直接return了
@@ -313,7 +313,7 @@ class MainChatRobotV2(BaseChatRobot):
         user_msg_list = []
         num = 1
         for i in range(len(history_msgs)):
-            logger.info(f"{i} msg: {history_msgs[len(history_msgs) - i - 1]}")
+            logger.info(f"MainChatRobotV2  {i} msg: {history_msgs[len(history_msgs) - i - 1]}")
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "system":
                 if "好友请求" in history_msgs[len(history_msgs) - i - 1]["msg"]:
                     num += 1
