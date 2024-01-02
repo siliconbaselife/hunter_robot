@@ -249,6 +249,7 @@ def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, s
     if details is not None:
         details = details.replace("\'", "\\'")
         details = details.replace('\"', '\\"')
+        details = details.replace('\n', '.')
     dbm.insert(sql_dict['new_chat'].format(account_id, job_id, candidate_id, candidate_name, source, status, details,
                                            filter_result))
 
@@ -260,12 +261,14 @@ def query_chat_db(account_id, job_id, candidate_id):
 def update_chat_db(account_id, job_id, candidate_id, source, status, details):
     details = details.replace("\'", "\\'")
     details = details.replace('\"', '\\"')
+    details = details.replace('\n', '.')
     dbm.update(sql_dict['update_chat'].format(source, status, details, account_id, job_id, candidate_id))
 
 
 def update_chat_only_details_db(account_id, job_id, candidate_id, details):
     details = details.replace("\'", "\\'")
     details = details.replace('\"', '\\"')
+    details = details.replace('\n', '.')
     dbm.update(sql_dict['update_chat_only_details'].format(details, account_id, job_id, candidate_id))
 
 
