@@ -56,7 +56,7 @@ sql_dict = {
 
 
 def get_template_id(job_id):
-    return dbm.query(sql_dict['insert_filter_cache'].format(job_id))
+    return dbm.query(sql_dict['get_template_id'].format(job_id))
 
 
 def update_status_infos(candidate_id, account_id, status_infos):
