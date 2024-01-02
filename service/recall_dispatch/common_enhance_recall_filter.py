@@ -11,7 +11,12 @@ def common_enhance_recall_filter(chat_info, flag):
     candidate_name = chat_info[1]
 
     recall_strategy_config = fetch_config(job_id)
-    msgs = fetch_candidate_infos(job_id, account_id, candidate_id)
+    try:
+        msgs = fetch_candidate_infos(job_id, account_id, candidate_id)
+    except BaseException as e:
+        logger.info(f'common_enhance_recall_filter_msg,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+        logger.info(f'common_enhance_recall_filter_msg,{msgs}')
+        return False, ""
     if msgs is None:
         return False, ""
 
@@ -64,6 +69,6 @@ def fetch_candidate_infos(job_id, account_id, candidate_id):
     if len(candidate_info) == 0:
         return None
 
-    source, details, contact = candidate_info[0]
+    details = candidate_info[0][1]
 
     return json.loads(details)
