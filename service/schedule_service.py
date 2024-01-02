@@ -2,6 +2,7 @@ from dao.tool_dao import *
 from service.tools_service import *
 import zipfile
 from utils.utils import filter_task_exec_cache
+import urllib
 def schedule_filter_task_exec():
     task_res = get_undo_filter_task()
     logger.info(f"exec_filter_task, task_sum:{len(task_res)}")
