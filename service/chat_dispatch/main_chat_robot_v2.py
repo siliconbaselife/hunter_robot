@@ -327,7 +327,7 @@ class MainChatRobotV2(BaseChatRobot):
             user_msg_list.append(history_msgs[len(history_msgs) - i - 1]["msg"])
         user_msg_list.reverse()
         user_msg = "\n".join(user_msg_list)
-        logger.info(f"user_msg: {user_msg}")
+        logger.info(f"MainChatRobotV2 user_msg: {user_msg}")
 
         if num == 1:
             num += 1
