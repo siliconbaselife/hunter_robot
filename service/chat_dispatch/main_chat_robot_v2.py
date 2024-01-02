@@ -1,8 +1,8 @@
 from .base_robot import BaseChatRobot, ChatStatus
 import json
 
-from dao.task_dao import get_job_by_id, query_status_infos, has_contact_db, update_candidate_contact_db, \
-    update_status_infos, update_chat_contact_db, query_template_config, get_template_id, query_chat_db
+from dao.task_dao import get_job_by_id, query_status_infos_v2, has_contact_db, update_candidate_contact_db, \
+    update_status_infos_v2, update_chat_contact_db, query_template_config, get_template_id, query_chat_db
 from utils.log import get_logger
 from utils.config import config
 from utils.utils import format_time
@@ -98,7 +98,7 @@ class MainChatRobotV2(BaseChatRobot):
             r_msg, action = self.generate_reply(intention, processed_history_msgs)
             self.deal_r_msg(r_msg, action)
             logger.info(f"处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
-            update_status_infos(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False))
+            update_status_infos_v2(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False), self._job_id)
             logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
             logger.info(f'MainChatRobotV2,{self._candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
@@ -113,7 +113,7 @@ class MainChatRobotV2(BaseChatRobot):
         return self.job_config.get("reply_infos", {})
 
     def fetch_now_status(self):
-        res = query_status_infos(self._candidate_id, self._account_id)
+        res = query_status_infos_v2(self._candidate_id, self._account_id, self._job_id)
         if len(res) == 0:
             status_info = {}
         if res[0][0] is None or res[0][0] == 'NULL' or res[0][0] == 'Null':

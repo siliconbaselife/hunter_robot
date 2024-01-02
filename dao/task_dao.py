@@ -51,7 +51,10 @@ sql_dict = {
     "get_template_id":"select robot_template from job where job_id='{}'",
     "update_status_infos":"update chat set status_infos = '{}' where candidate_id = '{}' and account_id = '{}'",
     "query_template_config":"select template_config from llm_template where template_id = '{}'",
-    "query_status_infos":"select status_infos from chat where candidate_id = '{}' and account_id = '{}'"
+    "query_status_infos":"select status_infos from chat where candidate_id = '{}' and account_id = '{}'",
+    "query_status_infos_v2":"select status_infos from chat where candidate_id = '{}' and account_id = '{}' and job_id = '{}'",
+    "update_status_infos_v2":"update chat set status_infos = '{}' where candidate_id = '{}' and account_id = '{}' and job_id='{}'"
+
 }
 
 
@@ -65,6 +68,11 @@ def update_status_infos(candidate_id, account_id, status_infos):
 
 def query_template_config(template_id):
     return dbm.query(sql_dict['query_template_config'].format(template_id))
+
+def query_status_infos_v2(candidate_id, account_id, job_id):
+    return dbm.query(sql_dict['query_status_infos_v2'].format(candidate_id, account_id, job_id))
+def update_status_infos_v2(candidate_id, account_id, status_infos, job_id):
+    dbm.update(sql_dict['update_status_infos_v2'].format(status_infos, candidate_id, account_id,job_id))
 
 
 def query_status_infos(candidate_id, account_id):
