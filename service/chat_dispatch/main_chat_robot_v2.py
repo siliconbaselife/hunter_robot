@@ -42,6 +42,8 @@ class MainChatRobotV2(BaseChatRobot):
         self._template_info = self.fetch_template_info()
         self._msg_list = []
 
+        logger.info(f'MainChatRobotV2, {candidate_id}, {job_id}, {self._status_infos}, {self.template_id}, {self._reply_infos}, {self.job_config}')
+
     def _parse_face(self, msg):
         for item in self._useless_msgs:
             if item in msg:
@@ -100,8 +102,7 @@ class MainChatRobotV2(BaseChatRobot):
             update_status_infos(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False))
             logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
-            logger.error(e)
-            logger.error(str(traceback.format_exc()))
+            logger.info(f'MainChatRobotV2,{self._candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
     def fetch_template_info(self):
         rs = query_template_config(self.template_id)
@@ -116,7 +117,12 @@ class MainChatRobotV2(BaseChatRobot):
         res = query_status_infos(self._candidate_id, self._account_id)
         if len(res) == 0:
             status_info = {}
-        status_info = json.loads(res[0][0], strict=False)
+        if res[0][0] is None or res[0][0] == 'NULL' or res[0][0] == 'Null':
+            status_info = {}
+        else:
+            status_info = json.loads(res[0][0], strict=False)
+        if status_info is None:
+            status_info = {}
         if 'has_contact' not in status_info:
             status_info['has_contact'] = False
         if 'ask_contact' not in status_info:
