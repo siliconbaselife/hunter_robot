@@ -207,25 +207,8 @@ default_job_map = {
     }
 }
 
-default_job_map = {
-    "maimai": {
-        "zp":"job_maimai_default-manual-id",
-        "bd":"job_maimai_overseas-bd-manual-id",
-        "wm":"job_maimai_overseas-bd-manual-id"
-    },
-    "Boss": {
-        "zp":"job_boss_default-manual-id",
-        "bd":"job_boss_default-manual-id",
-        "wm":"job_boss_default-manual-id"
-    },
-    "Linkedin":{
-        "zp":"job_linkedin_default-manual-id",
-        "bd":"job_Linkedin_remoly-oversea-bd",
-        "wm":"job_Linkedin_art-bd"
-    }
-}
 default_job_map_v2 = {
-    "maimai": "job_maimai_default-manual-id",
+    "maimai": "job_maimai_default_id_v2",
     "Boss": "job_boss_default-manual-id",
     "Linkedin": "job_linkedin_default-manual-id"
 }

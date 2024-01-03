@@ -8,11 +8,11 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import deal_json_invaild, str_is_none,get_default_job,default_job_map,get_default_job_v2
+from utils.utils import deal_json_invaild, str_is_none,get_default_job,default_job_map
 from dao.task_dao import *
 from service.chat_service import chat_service
 from service.task_service import *
-from service.candidate_filter import candidate_filter, preprocess, judge_and_update_force,preprocess_v2
+from service.candidate_filter import candidate_filter, preprocess
 from service.recall_service import recall_msg, recall_result
 from service.db_service import append_chat_msg
 import json
