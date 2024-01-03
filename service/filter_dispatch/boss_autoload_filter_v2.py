@@ -106,3 +106,4 @@ def boss_autoload_filter_v2(candidate_info, job_res):
         }
     }
     return judge_result
+

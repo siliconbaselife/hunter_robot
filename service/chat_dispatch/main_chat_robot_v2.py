@@ -1,8 +1,8 @@
 from .base_robot import BaseChatRobot, ChatStatus
 import json
 
-from dao.task_dao import get_job_by_id, query_status_infos, has_contact_db, update_candidate_contact_db, \
-    update_status_infos, update_chat_contact_db, query_template_config, get_template_id, query_chat_db
+from dao.task_dao import get_job_by_id, query_status_infos_v2, has_contact_db, update_candidate_contact_db, \
+    update_status_infos_v2, update_chat_contact_db, query_template_config, get_template_id, query_chat_db
 from utils.log import get_logger
 from utils.config import config
 from utils.utils import format_time
@@ -41,6 +41,8 @@ class MainChatRobotV2(BaseChatRobot):
         self._reply_infos = self.fetch_reply_infos()
         self._template_info = self.fetch_template_info()
         self._msg_list = []
+
+        logger.info(f'MainChatRobotV2, {candidate_id}, {job_id}, {self._status_infos}, {self.template_id}, {self._reply_infos}, {self.job_config}')
 
     def _parse_face(self, msg):
         for item in self._useless_msgs:
@@ -88,20 +90,18 @@ class MainChatRobotV2(BaseChatRobot):
         logger.info(f"MainChatRobotV2_db_history_msg:{self._candidate_id}, {self._job_id}, {db_history_msg}")
         try:
             processed_history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
-            logger.info(f"处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            logger.info(f"MainChatRobotV2处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
             self.deal_contact(processed_history_msgs)
-            #到这里
             intention = self.deal_intention(processed_history_msgs)
             if has_contact_db(self._candidate_id, self._account_id):
                 self._status_infos['has_contact'] = True
             r_msg, action = self.generate_reply(intention, processed_history_msgs)
             self.deal_r_msg(r_msg, action)
-            logger.info(f"处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
-            update_status_infos(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False))
-            logger.info(f"需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
+            logger.info(f"MainChatRobotV2处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            update_status_infos_v2(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False), self._job_id)
+            logger.info(f"MainChatRobotV2需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
-            logger.error(e)
-            logger.error(str(traceback.format_exc()))
+            logger.info(f'MainChatRobotV2,{self._candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
     def fetch_template_info(self):
         rs = query_template_config(self.template_id)
@@ -113,10 +113,15 @@ class MainChatRobotV2(BaseChatRobot):
         return self.job_config.get("reply_infos", {})
 
     def fetch_now_status(self):
-        res = query_status_infos(self._candidate_id, self._account_id)
+        res = query_status_infos_v2(self._candidate_id, self._account_id, self._job_id)
         if len(res) == 0:
             status_info = {}
-        status_info = json.loads(res[0][0], strict=False)
+        if res[0][0] is None or res[0][0] == 'NULL' or res[0][0] == 'Null':
+            status_info = {}
+        else:
+            status_info = json.loads(res[0][0], strict=False)
+        if status_info is None:
+            status_info = {}
         if 'has_contact' not in status_info:
             status_info['has_contact'] = False
         if 'ask_contact' not in status_info:
@@ -127,6 +132,7 @@ class MainChatRobotV2(BaseChatRobot):
             status_info['neg_intention'] = False
         if 'ask_rount' not in status_info:
             status_info['ask_rount'] = 0
+        return status_info
 
     def deal_r_msg(self, r_msg, action):
         self._status = action
@@ -239,12 +245,12 @@ class MainChatRobotV2(BaseChatRobot):
 
     def deal_contact_chi(self, history_msgs):
         if "contact_flag" in self._status_infos and self._status_infos["contact_flag"]:
-            logger.info(f'already_have_contact, {self._candidate_id}')
+            logger.info(f'MainChatRobotV2 already_have_contact, {self._candidate_id}')
             return True
 
         db_has_contact = has_contact_db(self._candidate_id, self._account_id)
         if db_has_contact:
-            logger.info(f'already_have_contact, {self._candidate_id}')
+            logger.info(f'MainChatRobotV2 already_have_contact, {self._candidate_id}')
             self._status_infos["contact_flag"] = True
             return True
         #这里等于有了一种联系方式就没再进行萃取了，直接return了
@@ -308,7 +314,7 @@ class MainChatRobotV2(BaseChatRobot):
         user_msg_list = []
         num = 1
         for i in range(len(history_msgs)):
-            logger.info(f"{i} msg: {history_msgs[len(history_msgs) - i - 1]}")
+            logger.info(f"MainChatRobotV2  {i} msg: {history_msgs[len(history_msgs) - i - 1]}")
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "system":
                 if "好友请求" in history_msgs[len(history_msgs) - i - 1]["msg"]:
                     num += 1
@@ -322,7 +328,7 @@ class MainChatRobotV2(BaseChatRobot):
             user_msg_list.append(history_msgs[len(history_msgs) - i - 1]["msg"])
         user_msg_list.reverse()
         user_msg = "\n".join(user_msg_list)
-        logger.info(f"user_msg: {user_msg}")
+        logger.info(f"MainChatRobotV2 user_msg: {user_msg}")
 
         if num == 1:
             num += 1

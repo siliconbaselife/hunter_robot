@@ -104,7 +104,7 @@ def filter_task_list():
             "zip_name": os.path.basename(t[2]),
             "status":t[3],
             "create_time":t[4].strftime("%Y-%m-%d %H:%M:%S"),
-            "expect_exec_time": filter_task_exec_cache.get(int(t[2]),0)
+            "expect_exec_time": filter_task_exec_cache.get(t[2],0)
         })
     logger.info(f"filter_task_list:{manage_account_id}, {res}")
     return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
