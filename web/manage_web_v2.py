@@ -79,8 +79,6 @@ def plugin_get_hello_ids():
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 
-
-
 @manage_web_v2.route("/recruit/account/task/fetch/v2", methods=['POST'])
 @web_exception_handler
 def task_fetch_api():
@@ -94,8 +92,6 @@ def task_fetch_api():
         'task': task_list
     }
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
-
-
 
 @manage_web_v2.route("/backend/manage/account/register/v2", methods=['POST'])
 @web_exception_handler

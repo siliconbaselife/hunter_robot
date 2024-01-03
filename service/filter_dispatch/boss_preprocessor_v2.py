@@ -9,9 +9,9 @@ logger = get_logger(config['log']['log_file'])
 def boss_preprocess_v2(raw_candidate_info):
     try:
         desc_content = raw_candidate_info['geekCard'].get('geekDesc', {}).get('content', '') or ''
-        raw_candidate_info['geekCard']['geekDesc']['content'] = desc_content
+        raw_candidate_info['geekCard']['geekDesc']['content'] = desc_content.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
         resp = raw_candidate_info.get('geekLaskWork', {}).get('responsibility', '') or ''
-        raw_candidate_info['geekLaskWork']['responsibility'] = resp
+        raw_candidate_info['geekLaskWork']['responsibility'] = resp.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
         for edu in raw_candidate_info('showEdus',[]):
             desc = edu.get('eduDescription', '') or ''
             edu['eduDescription'] = desc.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
