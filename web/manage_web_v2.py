@@ -13,7 +13,7 @@ from utils.utils import key
 from service.manage_service_v2 import *
 from service.manage_service import cookie_check_service
 from service.task_service import get_undo_task
-from dao.manage_dao import update_hello_ids, get_hello_ids, hello_sent
+from dao.manage_dao import update_hello_ids, get_hello_ids, hello_sent_db
 
 manage_web_v2 = Blueprint('manage_web_v2', __name__, template_folder='templates')
 
