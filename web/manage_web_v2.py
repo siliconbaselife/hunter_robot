@@ -33,7 +33,7 @@ def hello_sent():
     candidate_ids = request.json.get('candidate_ids', [])
     if len(candidate_ids) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    ret = hello_sent(manage_account_id, candidate_ids)
+    ret = hello_sent_db(manage_account_id, candidate_ids)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 @manage_web_v2.route("/backend/manage/plugin/getAllHelloIds", methods=['POST'])
