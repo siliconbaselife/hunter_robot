@@ -32,7 +32,7 @@ sql_dict = {
     "get_all_hello_ids":"select candidate_id,platform from online_resume where manage_account_id = '{}' and need_hello = 1"
 } 
 
-def hello_sent(manage_account_id, candidate_ids):
+def hello_sent_db(manage_account_id, candidate_ids):
     if len(candidate_ids) > 0:
         candidate_ids_p = [c for c in candidate_ids if c != '']
         s = "('" + "','".join(candidate_ids_p) + "')"
