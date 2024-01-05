@@ -47,11 +47,6 @@ def get_all_hello_ids():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
 
-
-    candidate_ids = request.json.get('candidate_ids', [])
-    if len(candidate_ids) == 0:
-        return Response(json.dumps(get_web_res_fail("无待打招呼人员"), ensure_ascii=False))
-
     ret = get_all_hello_ids_db(manage_account_id)
 
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
