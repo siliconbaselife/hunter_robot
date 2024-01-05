@@ -22,7 +22,8 @@ logger = get_logger(config['log']['log_file'])
 @manage_web_v2.route("/backend/manage/plugin/helloSent", methods=['POST'])
 @web_exception_handler
 def hello_sent():
-    cookie_user_name = request.cookies.get('user_name', None)
+    cookie_user_name = request.json.get('user_name', None)
+    # cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
@@ -57,7 +58,8 @@ def plugin_update_ids():
 @manage_web_v2.route("/backend/manage/plugin/getHelloIds", methods=['POST'])
 @web_exception_handler
 def plugin_get_hello_ids():
-    cookie_user_name = request.cookies.get('user_name', None)
+    cookie_user_name = request.json.get('user_name', None)
+    # cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
