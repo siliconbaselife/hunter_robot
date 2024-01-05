@@ -47,8 +47,15 @@ def get_all_hello_ids():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
 
-    ret = get_all_hello_ids_db(manage_account_id)
+    db_ret = get_all_hello_ids_db(manage_account_id)
 
+    ret = {
+        "maimai":[],
+        "Linkedin":[],
+        "Boss":[]
+    }
+    for r in db_ret:
+        ret[r[1]].append(r[0])
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 
