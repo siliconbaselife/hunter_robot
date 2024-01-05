@@ -28,7 +28,8 @@ sql_dict = {
     "get_hello_ids":"select candidate_id, raw_profile from online_resume where manage_account_id = '{}' and need_hello = 1 and platform='{}'",
     "update_hello_ids_1":"update online_resume set need_hello = 0 where manage_account_id='{}'",
     "update_hello_ids":"update online_resume set need_hello=1 where manage_account_id='{}' and candidate_id in {}",
-    "hello_sent":"update online_resume set need_hello=0 where manage_account_id='{}' and candidate_id in {}"
+    "hello_sent":"update online_resume set need_hello=0 where manage_account_id='{}' and candidate_id in {}",
+    "get_all_hello_ids":"select candidate_id,platform from online_resume where manage_account_id = '{}' and need_hello = 1"
 } 
 
 def hello_sent(manage_account_id, candidate_ids):
@@ -38,6 +39,8 @@ def hello_sent(manage_account_id, candidate_ids):
         return dbm.update(sql_dict['hello_sent'].format(manage_account_id, s))
     return ''
 
+def get_all_hello_ids_db(manage_account_id):
+    return dbm.query(sql_dict['get_all_hello_ids'].format(manage_account_id))
 
 def get_hello_ids(manage_account_id, platform):
     return dbm.query(sql_dict['get_hello_ids'].format(manage_account_id, platform))

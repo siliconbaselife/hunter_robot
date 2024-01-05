@@ -36,6 +36,27 @@ def hello_sent():
     ret = hello_sent(manage_account_id, candidate_ids)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
+@manage_web_v2.route("/backend/manage/plugin/getAllHelloIds", methods=['POST'])
+@web_exception_handler
+def get_all_hello_ids():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+
+    candidate_ids = request.json.get('candidate_ids', [])
+    if len(candidate_ids) == 0:
+        return Response(json.dumps(get_web_res_fail("无待打招呼人员"), ensure_ascii=False))
+
+    ret = get_all_hello_ids_db(manage_account_id)
+
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
+
 @manage_web_v2.route("/backend/manage/plugin/updateIds", methods=['POST'])
 @web_exception_handler
 def plugin_update_ids():
@@ -71,10 +92,6 @@ def plugin_get_hello_ids():
 
     if platform not in ['Linkedin', 'Boss', 'maimai'] or platform == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-
-    candidate_ids = request.json.get('candidate_ids', [])
-    if len(candidate_ids) == 0:
-        return Response(json.dumps(get_web_res_fail("无待打招呼人员"), ensure_ascii=False))
 
     ret = get_hello_ids(manage_account_id, platform)
 
