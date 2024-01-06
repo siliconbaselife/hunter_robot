@@ -12,7 +12,7 @@ logger = get_logger(config['log']['log_file'])
 def boss_autoload_filter_v2(candidate_info, job_res):
     filter_args = json.loads(job_res[6])['dynamic_job_config']
 
-    age_range = (filter_args['min_age'], filter_args['max_age'])
+    age_range = (int(filter_args['min_age']), int(filter_args['max_age']))
     min_degree = filter_args['min_degree']
     school_threshold = filter_args['school']
 
