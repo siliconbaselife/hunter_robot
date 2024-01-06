@@ -208,3 +208,15 @@ alter table online_resume add `candidate_id` VARCHAR(200) NOT NULL DEFAULT '' CO
 alter table online_resume add `cv_url` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '简历链接'  after `raw_profile`;
 alter table online_resume add `need_hello` int NOT NULL DEFAULT 0 COMMENT '需要被打招呼'  after `platform`;
 
+
+
+CREATE TABLE IF NOT EXISTS `hello_record`(
+   `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `manage_account_id` VARCHAR(100) NOT NULL COMMENT '管理账户ID',
+   `platform` VARCHAR(50) NOT NULL COMMENT '平台',
+   `candidate_id` VARCHAR(100) NOT NULL COMMENT '候选人ID',
+   `status` int NOT NULL COMMENT '1要打招呼， 2已打',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;

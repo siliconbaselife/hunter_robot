@@ -71,12 +71,10 @@ def plugin_update_ids():
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     
     candidate_ids = request.json.get('candidate_ids', {})
-    merge_ids = []
-    merge_ids.extend(candidate_ids.get('maimai', []))
-    merge_ids.extend(candidate_ids.get('Boss', []))
-    merge_ids.extend(candidate_ids.get('Linkedin', []))
-    ret = update_hello_ids(manage_account_id, merge_ids)
-    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+    update_hello_ids(manage_account_id, candidate_ids.get('maimai', []), 'maimai')
+    update_hello_ids(manage_account_id, candidate_ids.get('Boss', []), 'Boss')
+    update_hello_ids(manage_account_id, candidate_ids.get('Linkedin', []), 'Linkedin')
+    return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
 
 @manage_web_v2.route("/backend/manage/plugin/getHelloIds", methods=['POST'])
 @web_exception_handler
@@ -95,7 +93,12 @@ def plugin_get_hello_ids():
     if platform not in ['Linkedin', 'Boss', 'maimai'] or platform == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
 
-    ret = get_hello_ids(manage_account_id, platform)
+    ids = get_hello_ids(manage_account_id, platform)
+    ret = []
+    for id in ids:
+        ret.append(
+            [id, get_profile_by_id(id)]    
+        )
 
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 

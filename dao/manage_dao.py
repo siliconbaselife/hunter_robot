@@ -25,12 +25,17 @@ sql_dict = {
     "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config) values ('{}', '{}', '{}', '{}')",
     "delete_job_db":"delete from job where job_id='{}'",
     "delete_template_db":"delete from llm_template where template_id='{}'",
-    "get_hello_ids":"select candidate_id, raw_profile from online_resume where manage_account_id = '{}' and need_hello = 1 and platform='{}'",
-    "update_hello_ids_1":"update online_resume set need_hello = 0 where manage_account_id='{}'",
-    "update_hello_ids":"update online_resume set need_hello=1 where manage_account_id='{}' and candidate_id in {}",
-    "hello_sent":"update online_resume set need_hello=0 where manage_account_id='{}' and candidate_id in {}",
-    "get_all_hello_ids":"select candidate_id,platform from online_resume where manage_account_id = '{}' and need_hello = 1"
+    "get_hello_ids":"select candidate_id from hello_record where manage_account_id = '{}' and need_hello = 1 and platform='{}'",
+    "delete_hello_ids":"delete from hello_record where manage_account_id='{}' and status = 1",
+    "insert_hello_id":"insert into hello_record(manage_account_id, candidate_id, platform, status) values ('{}', '{}','{}', 1)",
+    "hello_sent":"update hello_record set status=2 where manage_account_id='{}' and candidate_id in {}",
+    "get_all_hello_ids":"select candidate_id,platform from hello_record where manage_account_id = '{}' and status = 1",
+    "get_profile_by_id":"select raw_profile from online_resume where candidate_id='{}' order by id desc limit 1"
 } 
+
+def get_profile_by_id(candidate_id):
+    return dbm.query(sql_dict['get_profile_by_id'].format(candidate_id))
+
 
 def hello_sent_db(manage_account_id, candidate_ids):
     if len(candidate_ids) > 0:
@@ -45,13 +50,10 @@ def get_all_hello_ids_db(manage_account_id):
 def get_hello_ids(manage_account_id, platform):
     return dbm.query(sql_dict['get_hello_ids'].format(manage_account_id, platform))
 
-def update_hello_ids(manage_account_id, candidate_ids):
-    dbm.update(sql_dict['update_hello_ids_1'].format(manage_account_id))
-    if len(candidate_ids) > 0:
-        candidate_ids_p = [c for c in candidate_ids if c != '']
-        s = "('" + "','".join(candidate_ids_p) + "')"
-        return dbm.update(sql_dict['update_hello_ids'].format(manage_account_id, s))
-    return ''
+def update_hello_ids(manage_account_id, candidate_ids, platform):
+    dbm.delete(sql_dict['delete_hello_ids'].format(manage_account_id))
+    for c in candidate_ids:
+        dbm.insert(sql_dict['insert_hello_id'].format(manage_account_id, c, platform))
 
 def delete_job_db(job_id):
     return dbm.delete(sql_dict['delete_job_db'].format(job_id))
