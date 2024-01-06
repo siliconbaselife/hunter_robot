@@ -12,7 +12,7 @@ def maimai_autoload_filter_v2(candidate_info, job_res):
 
     age_range = (filter_args['min_age'], filter_args['max_age'])
     min_degree = filter_args['min_degree']
-    school_threshold = filter_args['school']
+    school_threshold = int(filter_args['school'])
 
 
     #工作年头

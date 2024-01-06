@@ -24,7 +24,7 @@ def boss_autoload_filter_v2(candidate_info, job_res):
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
 
 
-    school_threshold = filter_args['school']
+    school_threshold = int(filter_args['school'])
     school_ok = False
     for edu in candidate_info['geekCard'].get('geekEdus', []):
         if school_threshold == 2:
