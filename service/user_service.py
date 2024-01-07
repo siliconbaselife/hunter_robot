@@ -20,19 +20,19 @@ def generate_email_code():
 
 
 def send_verify_email(email, code):
-    con = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    con = smtplib.SMTP_SSL('smtp.163.com', 465)
 
-    con.login('aistormy2049@gmail.com', 'spnjosyxgljlrthi')
+    con.login('shadowhiring@163.com', 'YVNDIJOBSTVKLHQN')
 
     msg = MIMEMultipart()
-    subject = Header('AIStormy verify code', 'utf-8').encode()
+    subject = Header('ShadowHiring verify code', 'utf-8').encode()
     msg['Subject'] = subject
-    msg['From'] = 'aistormy2049@gmail.com <aistormy2049@gmail.com>'
+    msg['From'] = 'shadowhiring@163.com <shadowhiring@163.com>'
     msg['To'] = email
     text = MIMEText('verify code: {}'.format(code), 'plain', 'utf-8')
     msg.attach(text)
 
-    con.sendmail('aistormy2049@gmail.com', email, msg.as_string())
+    con.sendmail('shadowhiring@163.com', email, msg.as_string())
     con.quit()
 
 
@@ -61,3 +61,8 @@ def user_verify_email(email):
     logger.info(f"send_verify_email end")
 
     return 0, "", code
+
+
+
+if __name__ == "__main__":
+    send_verify_email('328564964@qq.com', '1111')
