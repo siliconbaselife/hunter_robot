@@ -25,7 +25,7 @@ sql_dict = {
     "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config) values ('{}', '{}', '{}', '{}')",
     "delete_job_db":"delete from job where job_id='{}'",
     "delete_template_db":"delete from llm_template where template_id='{}'",
-    "get_hello_ids":"select candidate_id from hello_record where manage_account_id = '{}' and need_hello = 1 and platform='{}'",
+    "get_hello_ids":"select candidate_id from hello_record where manage_account_id = '{}' and status = 1 and platform='{}'",
     "delete_hello_ids":"delete from hello_record where manage_account_id='{}' and status = 1",
     "insert_hello_id":"insert into hello_record(manage_account_id, candidate_id, platform, status) values ('{}', '{}','{}', 1)",
     "hello_sent":"update hello_record set status=2 where manage_account_id='{}' and candidate_id in {}",
