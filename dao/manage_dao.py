@@ -30,7 +30,7 @@ sql_dict = {
     "insert_hello_id":"insert into hello_record(manage_account_id, candidate_id, platform, status) values ('{}', '{}','{}', 1)",
     "hello_sent":"update hello_record set status=2 where manage_account_id='{}' and candidate_id in {}",
     "get_all_hello_ids":"select candidate_id,platform from hello_record where manage_account_id = '{}' and status = 1",
-    "get_profile_by_id":"select raw_profile from online_resume where candidate_id='{}' order by id desc limit 1"
+    "get_profile_by_id":"select raw_profile from onli_resume where candidate_id='{}' order by id desc limit 1"
 } 
 
 def get_profile_by_id(candidate_id):

@@ -97,7 +97,7 @@ def plugin_get_hello_ids():
     ret = []
     for id in ids:
         ret.append(
-            [id, get_profile_by_id(id)]    
+            [id[0], get_profile_by_id(id[0])]    
         )
 
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
