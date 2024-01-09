@@ -45,7 +45,7 @@ def fetch_msg(msgs, recall_cnt, config):
     if index >= len(recall_msg_info_list):
         return ""
 
-    date = datetime.strptime(msgs[-1]["time"], "%Y-%m-%d %H:%M:%S")
+    date = datetime.strptime(str(msgs[-1]["time"]), "%Y-%m-%d %H:%M:%S")
     msg_time = int(date.timestamp())
     now_time = int(time.time())
     if now_time - msg_time > recall_msg_info_list[index]["threshold"]:
