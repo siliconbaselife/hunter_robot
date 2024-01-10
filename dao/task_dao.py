@@ -330,7 +330,14 @@ def get_chats_num_by_job_id(job_id):
 def get_chats_by_ids(account_id, candidate_ids):
     if candidate_ids is None or len(candidate_ids) == 0:
         return []
-    s = "('" + "','".join(candidate_ids) + "')"
+    candidate_ids_p = []
+    for id in candidate_ids:
+        if id is None or id == '':
+            continue
+        candidate_ids_p.append(id)
+    if len(candidate_ids_p) == 0:
+        return []
+    s = "('" + "','".join(candidate_ids_p) + "')"
     # logger.info(f"test_sql, {s}")
     return dbm.query(sql_dict["get_chats_by_ids"].format(account_id, s))
 
