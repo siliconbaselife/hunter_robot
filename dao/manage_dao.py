@@ -26,7 +26,7 @@ sql_dict = {
     "delete_job_db":"delete from job where job_id='{}'",
     "delete_template_db":"delete from llm_template where template_id='{}'",
     "get_hello_ids":"select candidate_id from hello_record where manage_account_id = '{}' and status = 1 and platform='{}'",
-    "delete_hello_ids":"delete from hello_record where manage_account_id='{}' and status = 1",
+    "delete_hello_ids":"delete from hello_record where manage_account_id='{}' and platform='{}' and status = 1",
     "insert_hello_id":"insert into hello_record(manage_account_id, candidate_id, platform, status) values ('{}', '{}','{}', 1)",
     "hello_sent":"update hello_record set status=2 where manage_account_id='{}' and candidate_id in {}",
     "get_all_hello_ids":"select candidate_id,platform from hello_record where manage_account_id = '{}' and status = 1",
@@ -51,7 +51,7 @@ def get_hello_ids(manage_account_id, platform):
     return dbm.query(sql_dict['get_hello_ids'].format(manage_account_id, platform))
 
 def update_hello_ids(manage_account_id, candidate_ids, platform):
-    dbm.delete(sql_dict['delete_hello_ids'].format(manage_account_id))
+    dbm.delete(sql_dict['delete_hello_ids'].format(manage_account_id, platform))
     for c in candidate_ids:
         dbm.insert(sql_dict['insert_hello_id'].format(manage_account_id, c, platform))
 
