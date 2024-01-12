@@ -215,26 +215,18 @@ def get_manage_config_service(manage_account_id):
 
 
 def template_update_service(manage_account_id, template_id, template_name, template_config):
-    template_config['job_requirements'] = template_config.get('job_requirements', '').replace('"', '“')
-    template_config['job_requirements'] = template_config['job_requirements'].replace("'", '‘')
-    template_config['job_description'] = template_config.get('job_description', '').replace('"', '“')
-    template_config['job_description'] = template_config['job_description'].replace("'", '‘')
-    template_config['other_information'] = template_config.get('other_information', '').replace('"', '“')
-    template_config['other_information'] = template_config['other_information'].replace("'", '‘')
-    template_config['recall_msg'] = template_config.get('recall_msg', '').replace('"', '“')
-    template_config['recall_msg'] = template_config['recall_msg'].replace("'", '‘')
+    template_config['job_requirements'] = template_config.get('job_requirements', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+    template_config['job_description'] = template_config.get('job_description', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+    template_config['other_information'] = template_config.get('other_information', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+    template_config['recall_msg'] = template_config.get('recall_msg', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
     template_config_p = process_str(json.dumps(template_config, ensure_ascii=False))
     return update_llm_template(template_name, template_config_p, template_id)
 
 def template_insert_service(manage_account_id, template_id, template_name, template_config):
-    template_config['job_requirements'] = template_config.get('job_requirements', '').replace('"', '“')
-    template_config['job_requirements'] = template_config['job_requirements'].replace("'", '‘')
-    template_config['job_description'] = template_config.get('job_description', '').replace('"', '“')
-    template_config['job_description'] = template_config['job_description'].replace("'", '‘')
-    template_config['other_information'] = template_config.get('other_information', '').replace('"', '“')
-    template_config['other_information'] = template_config['other_information'].replace("'", '‘')
-    template_config['recall_msg'] = template_config.get('recall_msg', '').replace('"', '“')
-    template_config['recall_msg'] = template_config['recall_msg'].replace("'", '‘')
+    template_config['job_requirements'] = template_config.get('job_requirements', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+    template_config['job_description'] = template_config.get('job_description', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+    template_config['other_information'] = template_config.get('other_information', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+    template_config['recall_msg'] = template_config.get('recall_msg', '').replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
     template_config_p = process_str(json.dumps(template_config, ensure_ascii=False))
     return insert_llm_template(manage_account_id, template_id, template_name, template_config_p)
 

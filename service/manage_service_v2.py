@@ -72,8 +72,8 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
     custom_filter = 0
     #账号共享
     share = 0
-    dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
-    dynamic_job_config['recall_msg'] = process_str(dynamic_job_config['recall_msg'])
+    dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg']).replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+    dynamic_job_config['recall_msg'] = process_str(dynamic_job_config['recall_msg']).replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
     job_config = {}
     job_config['jobID'] = job_id
     job_config['custom_filter'] = custom_filter
@@ -88,7 +88,7 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config,templat
          "recall_msg_info_list": [
             {
                 "threshold": 86400,
-                "msg": dynamic_job_config['recall_msg']
+                "msg": dynamic_job_config['recall_msg'].replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             }
         ],
         "reply_filter_flag": True
