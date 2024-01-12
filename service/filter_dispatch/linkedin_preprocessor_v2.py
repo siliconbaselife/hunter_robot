@@ -9,7 +9,7 @@ logger = get_logger(config['log']['log_file'])
 def linkedin_preprocessor_v2(raw_candidate_info):
     try:
         for e in raw_candidate_info.get('profile', {}).get('experiences', []):
-            for w in e.get('work', []):
+            for w in e.get('works', []):
                 if 'workPosition' in w:
                     workPosition = w.get('workPosition', '') or ''
                     w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
