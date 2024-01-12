@@ -268,8 +268,14 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             for i in range(len(profile.get('educations', []))-1, -1, -1):
                 time_info = profile.get('educations', [])[i].get('timeInfo', '')
                 if time_info != '':
-                    age = int(datetime.datetime.today().year) - int(time_info[0:4]) + 18
-                    break
+                    index = -1
+                    for idx, ch in enumerate(time_info):
+                        if ch.isdigit():
+                            index = idx
+                            break
+                    if index != -1:
+                        age = int(datetime.datetime.today().year) - int(time_info[index: index + 4]) + 18
+                        break
 
             edu = ''
             for e in profile.get('educations', []):
