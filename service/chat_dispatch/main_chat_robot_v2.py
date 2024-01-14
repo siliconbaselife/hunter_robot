@@ -137,7 +137,7 @@ class MainChatRobotV2(BaseChatRobot):
     def deal_r_msg(self, r_msg, action):
         self._status = action
         self._next_msg = r_msg
-        self._next_msg = self._next_msg.replace('。', '。\n')
+        # self._next_msg = self._next_msg.replace('。', '。\n')
         self._msg_list.append({'speaker': 'robot', 'msg': self._next_msg, 'algo_judge_intent': 'chat',
                                'time': format_time(datetime.now())})
 
