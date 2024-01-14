@@ -137,10 +137,10 @@ class MainChatRobotV2(BaseChatRobot):
     def deal_r_msg(self, r_msg, action):
         self._status = action
         self._next_msg = r_msg
-        # self._next_msg = self._next_msg.replace('。', '。\n')
         self._msg_list.append({'speaker': 'robot', 'msg': self._next_msg, 'algo_judge_intent': 'chat',
                                'time': format_time(datetime.now())})
-
+        # self._next_msg = self._next_msg.replace('。', '。\n')
+        
     def generate_reply(self, intention, history_msgs):
         if not self._status_infos["sent_first_msg"]:
             self._status_infos["sent_first_msg"] = True
