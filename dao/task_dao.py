@@ -255,7 +255,12 @@ def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, s
 
 
 def query_chat_db(account_id, job_id, candidate_id):
-    return dbm.query(sql_dict['query_chat_details'].format(account_id, job_id, candidate_id))
+    dbret = dbm.query(sql_dict['query_chat_details'].format(account_id, job_id, candidate_id))
+    ret = []
+    for dr in  dbret:
+        details = dr[1].replace('\n', '。').replace('\\n', '。')
+        ret.append([dr[0], details, dr[2]])
+    return ret
 
 
 def update_chat_db(account_id, job_id, candidate_id, source, status, details):
