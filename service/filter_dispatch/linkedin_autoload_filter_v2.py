@@ -5,8 +5,10 @@ from utils.utils import is_211, is_985, get_degree_num, str_is_none,get_degree_e
 from utils.log import get_logger
 
 
-def linkedin_autoload_filter_v2(candidate_info, job_res):
+def linkedin_autoload_filter_v2(raw_candidate_info, job_res):
     filter_args = json.loads(job_res[6])['dynamic_job_config']
+    
+    candidate_info = raw_candidate_info['profile']
 
     min_degree = filter_args['min_degree']
     
