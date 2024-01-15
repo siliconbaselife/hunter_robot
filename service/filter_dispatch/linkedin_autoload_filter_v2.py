@@ -13,7 +13,12 @@ def linkedin_autoload_filter_v2(candidate_info, job_res):
     c_json = json.dumps(candidate_info, ensure_ascii=False)
     edu_json = json.dumps(candidate_info.get('educations', []), ensure_ascii=False)
 
-    degree_ok = min_degree in edu_json or get_degree_eng_dict(min_degree) in edu_json
+    degree_list = get_degree_eng_dict(min_degree)
+
+    degree_ok = False
+    for d in degree_list:
+        if d in edu_json:
+            degree_ok = True
 
     tag_ok = True
     if 'job_tags' in filter_args and filter_args['job_tags'] != "":
