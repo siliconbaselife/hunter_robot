@@ -28,7 +28,7 @@ tools_web = Blueprint('tools_web', __name__, template_folder='templates')
 @web_exception_handler
 def candidate_csv_by_job():
     job_id = request.args.get('job_id')
-    manage_account_id = request.args.get('manage_account_id', '')
+    manage_account_id = decrypt(request.args.get('manage_account_id', ''), key)
     start_date = request.args.get('start_date', '')
     end_date = request.args.get('end_date', '')
     ret = get_job_by_id(job_id)
