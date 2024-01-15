@@ -103,7 +103,7 @@ def candidate_pre_filter_api_v2():
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         return Response(json.dumps(get_web_res_fail('job_id为空'), ensure_ascii=False))
 
-    candidate_id = request.json.get['candidate_id']
+    candidate_id = request.json.get('candidate_id', '')
     flag,candidate_info = query_candidate_detail(candidate_id)
     if flag:
         filter_result = candidate_filter(job_id, candidate_info)
