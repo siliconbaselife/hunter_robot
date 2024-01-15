@@ -160,12 +160,23 @@ class MainChatRobotV2(BaseChatRobot):
         if self._status_infos['has_contact']:
             return '', ChatStatus.NoTalk
         if intention == INTENTION.NEGTIVE:
-            return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact
+            if self.platform == 'Linkedin':
+                return "Would you mind leaving your email? When there's a new job opening on my end, I can share it with you right away.", ChatStatus.NeedContact
+            else:
+                return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact
         else:
-            return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact
+            if self.platform == 'Linkedin':
+                return "Hello, would it be convenient to leave a contact information for us to discuss further?", ChatStatus.NeedContact
+            else:
+                return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact
 
     def deal_question_reply(self, history_msgs):
+        if self.platform == 'Linkedin':
+            prefix = '请用英文做出回答。'
+        else:
+            prefix = ''
         prompt = f'''
+{prefix}
 你是一个猎头，你正在跟候选人推荐一个岗位，简洁回答候选人的问题。
 不要说之前重复的话
 不要用敬语
@@ -183,14 +194,22 @@ class MainChatRobotV2(BaseChatRobot):
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
 
         if not self._status_infos['has_contact']:
-            r_msg += '\n您看要不加个微信，我给您详细介绍下'
+            if self.platform == 'Linkedin':
+                r_msg += '\nHow about leaving an email? I can provide you with a detailed introduction.'
+            else:
+                r_msg += '\n您看要不加个微信，我给您详细介绍下'
         return r_msg, ChatStatus.NormalChat
 
     def no_intention_reply(self, history_msgs):
         if self._status_infos['has_contact']:
             return '', ChatStatus.NoTalk
         m = "找机会找候选人要联系方式, 要联系方式的话术是 加个微信细聊一下呗$PHONE$"
+        if self.platform == 'Linkedin':
+            prefix = '请用英文做出回答。'
+        else:
+            prefix = ''
         prompt = f'''
+{prefix}
 你是一个猎头，你正在跟候选人推荐一个岗位，简洁回答候选人的问题
 不要说之前重复的话
 不要用敬语
@@ -215,7 +234,10 @@ class MainChatRobotV2(BaseChatRobot):
         else:
             if not self._status_infos["neg_intention"]:
                 self._status_infos["neg_intention"] = True
-                return "咱也可以加个微信呗，我手里有挺多岗位的，要是合适的随时推荐给您。", ChatStatus.NormalChat
+                if self.platform == 'Linkedin':
+                    return "I have a variety of job opportunities, and if there's a good fit, I can recommend them to you at any time.", ChatStatus.NormalChat
+                else:
+                    return "咱也可以加个微信呗，我手里有挺多岗位的，要是合适的随时推荐给您。", ChatStatus.NormalChat
             else:
                 return "", ChatStatus.NoTalk
 
@@ -223,10 +245,13 @@ class MainChatRobotV2(BaseChatRobot):
         if self._status_infos['has_contact']:
             return "", ChatStatus.NoTalk
         else:
-            msgs = [
-                "那我们加个微信细聊一下呗",
-                "您看方便的话咱可以微信上说，还方便"
-            ]
+            if self.platform == 'Linkedin':
+                msgs = ["Could we correspond via email?"]
+            else:
+                msgs = [
+                    "那我们加个微信细聊一下呗",
+                    "您看方便的话咱可以微信上说，还方便"
+                ]
             ask_round = self._status_infos['ask_round']
             if ask_round >= len(msgs):
                 return "", ChatStatus.NormalChat
