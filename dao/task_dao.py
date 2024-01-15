@@ -236,7 +236,7 @@ def query_candidate_detail(candidate_id):
         return False, None
     
     c_j = candidate_info[0][7].replace('\n','.')
-    c_j = c_j.replace("\'", '\"')
+    # c_j = c_j.replace("\'", '\"')
     candidate_json = json.loads(c_j, strict=False)
     return True, candidate_json
 
