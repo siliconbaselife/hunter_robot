@@ -18,7 +18,7 @@ def boss_autoload_filter_v2(candidate_info, job_res):
 
     age = 0
     if candidate_info['geekCard']['ageDesc'] is not None and candidate_info['geekCard']['ageDesc'] != '':
-        age = int(candidate_info['geekCard']['ageDesc'].split('岁'))
+        age = int(candidate_info['geekCard']['ageDesc'].split('岁')[0])
 
     age_ok = int(age) >= int(age_range[0]) and int(age) <= int(age_range[1])
     degree_ok = degree_compare(candidate_info['degree'], min_degree)
