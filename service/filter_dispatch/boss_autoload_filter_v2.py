@@ -1,5 +1,5 @@
 import json
-from .utils import degree_compare
+from .utils import degree_compare_v2
 import time
 from utils.utils import is_211, is_985, get_degree_num,str_is_none
 from utils.log import get_logger
@@ -21,7 +21,7 @@ def boss_autoload_filter_v2(candidate_info, job_res):
         age = int(candidate_info['geekCard']['ageDesc'].split('岁')[0])
 
     age_ok = int(age) >= int(age_range[0]) and int(age) <= int(age_range[1])
-    degree_ok = degree_compare(candidate_info['degree'], min_degree)
+    degree_ok = degree_compare_v2(candidate_info['geekCard']['geekDegree'], min_degree)
 
 
     school_threshold = int(filter_args['school'])
