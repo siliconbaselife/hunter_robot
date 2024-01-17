@@ -243,330 +243,488 @@ def meta_config():
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     
     a = {
-        "maimai":{
-            "task_config":{
-                "industry":{
-                    "config_type":"multi_input"
-                },
-                "location":{
-                    "config_type":"multi_input"
-                },
-                "education":{
-                    "config_type":"single_choice",
-                    "choice_enum":[
-                            {
-                                "value":"专科及以上",
-                                "label":"专科及以上"
-                            },
-                            {
-                                "value":"本科及以上",
-                                "label":"本科及以上"
-                            },
-                            {
-                                "value":"硕士及以上",
-                                "label":"硕士及以上"
-                            },
-                            {
-                                "value":"博士",
-                                "label":"博士"
-                            }
-                        ]
-                }
+    "maimai": {
+        "task_config": {
+            "industry": {
+                "config_type": "multi_input"
             },
-            "job_config":{
-                "min_degree":{
-                    "config_type":"single_choice",
-                     "choice_enum":[
-                        {
-                            "value":"初中及以下",
-                            "label":"初中及以下"
-                        },
-                        {
-                            "value":"中专",
-                            "label":"中专"
-                        },
-                        {
-                            "value":"高中",
-                            "label":"高中"
-                        },
-                        {
-                            "value":"大专",
-                            "label":"大专"
-                        },
-                        {
-                            "value":"本科",
-                            "label":"本科"
-                        },
-                        {
-                            "value":"硕士",
-                            "label":"硕士"
-                        },
-                        {
-                            "value":"博士",
-                            "label":"博士"
-                        }
-                    ]
-                },
-                "school":{
-                    "config_type":"single_choice",
-                    "choice_enum":[
-                        {
-                            "value":"0",
-                            "label":"无要求"
-                        },
-                        {
-                            "value":"1",
-                            "label":"211学校"
-                        },
-                        {
-                            "value":"2",
-                            "label":"985学校"
-                        }
-                    ]
-                },
-                "neg_company":{
-                    "config_type":"multi_input"
-                },
-                "ex_company":{
-                    "config_type":"multi_input"
-                },
-                "job_tags":{
-                    "config_type":"multi_input"
-                },
-                "neg_words":{
-                    "config_type":"multi_input"
-                }
+            "location": {
+                "config_type": "multi_input"
+            },
+            "education": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "专科及以上",
+                        "label": "专科及以上"
+                    },
+                    {
+                        "value": "本科及以上",
+                        "label": "本科及以上"
+                    },
+                    {
+                        "value": "硕士及以上",
+                        "label": "硕士及以上"
+                    },
+                    {
+                        "value": "博士",
+                        "label": "博士"
+                    }
+                ]
             }
         },
-        "Linkedin":{
-            "task_config":{
-                "industry":{
-                    "config_type":"multi_input"
-                },
-                "location":{
-                    "config_type":"multi_input"
-                },
-                "ex_company":{
-                    "config_type":"multi_input"
-                },
-                "cur_company":{
-                    "config_type":"multi_input"
-                }
+        "job_config": {
+            "min_degree": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "初中及以下",
+                        "label": "初中及以下"
+                    },
+                    {
+                        "value": "中专",
+                        "label": "中专"
+                    },
+                    {
+                        "value": "高中",
+                        "label": "高中"
+                    },
+                    {
+                        "value": "大专",
+                        "label": "大专"
+                    },
+                    {
+                        "value": "本科",
+                        "label": "本科"
+                    },
+                    {
+                        "value": "硕士",
+                        "label": "硕士"
+                    },
+                    {
+                        "value": "博士",
+                        "label": "博士"
+                    }
+                ]
             },
-            "job_config":{
-                "min_degree":{
-                    "config_type":"single_choice",
-                    "choice_enum":[
-                        {
-                            "value":"本科",
-                            "label":"本科"
-                        },
-                        {
-                            "value":"硕士",
-                            "label":"硕士"
-                        },
-                        {
-                            "value":"博士",
-                            "label":"博士"
-                        }
-                    ]
-                },
-                "ex_company":{
-                    "config_type":"multi_input"
-                },
-                "neg_company":{
-                    "config_type":"multi_input"
-                },
-                "job_tags":{
-                    "config_type":"multi_input"
-                },
-                "neg_words":{
-                    "config_type":"multi_input"
-                },
-                "languages":{
-                    "config_type":"multi_input"
-                }
-            }
-        },
-        "Boss":{
-            "task_config":{
-                "location":{
-                    "config_type":"multi_input"
-                },
-                "education":{
-                    "config_type":"multi_choice",
-                    "choice_enum":[
-                        {
-                            "value":"初中及以下",
-                            "label":"初中及以下"
-                        },
-                        {
-                            "value":"中专/中技",
-                            "label":"中专/中技"
-                        },
-                        {
-                            "value":"高中",
-                            "label":"高中"
-                        },
-                        {
-                            "value":"大专",
-                            "label":"大专"
-                        },
-                        {
-                            "value":"本科",
-                            "label":"本科"
-                        },
-                        {
-                            "value":"硕士",
-                            "label":"硕士"
-                        },
-                        {
-                            "value":"博士",
-                            "label":"博士"
-                        }
-                    ]       
-                },
-                "pay":{
-                    "config_type":"single_choice",
-                    "choice_enum":[
-                        {
-                            "value":"3K以下",
-                            "label":"3K以下"
-                        },
-                        {
-                            "value":"3-5K",
-                            "label":"3-5K"
-                        },
-                        {
-                            "value":"5-10K",
-                            "label":"5-10K"
-                        },
-                        {
-                            "value":"10-20K",
-                            "label":"10-20K"
-                        },
-                        {
-                            "value":"20-50K",
-                            "label":"20-50K"
-                        },
-                        {
-                            "value":"50K以上",
-                            "label":"50K以上"
-                        }
-                    ]
-                },
-                "status":{
-                    "config_type":"multi_choice",
-                    "choice_enum":[
-                        {
-                            "value":"离职-随时到岗",
-                            "label":"离职-随时到岗"
-                        },
-                        {
-                            "value":"在职-暂不考虑",
-                            "label":"在职-暂不考虑"
-                        },
-                        {
-                            "value":"在职-考虑机会",
-                            "label":"在职-考虑机会"
-                        },
-                        {
-                            "value":"在职-月内到岗",
-                            "label":"在职-月内到岗"
-                        }
-                    ]
-                },
-                "work_time":{
-                    "config_type":"multi_choice",
-                    "choice_enum":[
-                        {
-                            "value":"1年以内",
-                            "label":"1年以内"
-                        },
-                        {
-                            "value":"1-3年",
-                            "label":"1-3年"
-                        },
-                        {
-                            "value":"3-5年",
-                            "label":"3-5年"
-                        },
-                        {
-                            "value":"5-10年",
-                            "label":"5-10年"
-                        },
-                        {
-                            "value":"10年以上",
-                            "label":"10年以上"
-                        }
-                    ]
-                }
+            "school": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "0",
+                        "label": "无要求"
+                    },
+                    {
+                        "value": "1",
+                        "label": "211学校"
+                    },
+                    {
+                        "value": "2",
+                        "label": "985学校"
+                    }
+                ]
             },
-            "job_config":{
-                "min_degree":{
-                    "min_degree":"single_choice",
-                    "choice_enum":[{
-                            "value":"初中及以下",
-                            "label":"初中及以下"
-                        },
-                        {
-                            "value":"中专",
-                            "label":"中专"
-                        },
-                        {
-                            "value":"高中",
-                            "label":"高中"
-                        },
-                        {
-                            "value":"大专",
-                            "label":"大专"
-                        },
-                        {
-                            "value":"本科",
-                            "label":"本科"
-                        },
-                        {
-                            "value":"硕士",
-                            "label":"硕士"
-                        },
-                        {
-                            "value":"博士",
-                            "label":"博士"
-                    }]
-                },
-                "school":{
-                    "config_type":"single_choice",
-                    "choice_enum":[
-                        {
-                            "value":"0",
-                            "label":"无要求"
-                        },
-                        {
-                            "value":"1",
-                            "label":"211学校"
-                        },
-                        {
-                            "value":"2",
-                            "label":"985学校"
-                        }
-                    ]
-                },
-                "ex_company":{
-                    "config_type":"multi_input"
-                },
-                "neg_company":{
-                    "config_type":"multi_input"
-                },
-                "job_tags":{
-                    "config_type":"multi_input"
-                },
-                "neg_words":{
-                    "config_type":"multi_input"
-                }
+            "neg_company": {
+                "config_type": "multi_input"
+            },
+            "ex_company": {
+                "config_type": "multi_input"
+            },
+            "job_tags": {
+                "config_type": "multi_input"
+            },
+            "neg_words": {
+                "config_type": "multi_input"
             }
         }
-        
+    },
+    "Linkedin": {
+        "task_config": {
+            "industry": {
+                "config_type": "multi_input"
+            },
+            "location": {
+                "config_type": "multi_input"
+            },
+            "ex_company": {
+                "config_type": "multi_input"
+            },
+            "cur_company": {
+                "config_type": "multi_input"
+            }
+        },
+        "job_config": {
+            "min_degree": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "本科",
+                        "label": "本科"
+                    },
+                    {
+                        "value": "硕士",
+                        "label": "硕士"
+                    },
+                    {
+                        "value": "博士",
+                        "label": "博士"
+                    }
+                ]
+            },
+            "ex_company": {
+                "config_type": "multi_input"
+            },
+            "neg_company": {
+                "config_type": "multi_input"
+            },
+            "job_tags": {
+                "config_type": "multi_input"
+            },
+            "neg_words": {
+                "config_type": "multi_input"
+            },
+            "languages": {
+                "config_type": "multi_input"
+            }
+        }
+    },
+    "Boss": {
+        "task_config": {
+            "location": {
+                "config_type": "multi_input"
+            },
+            "education": {
+                "config_type": "multi_choice",
+                "choice_enum": [
+                    {
+                        "value": "初中及以下",
+                        "label": "初中及以下"
+                    },
+                    {
+                        "value": "中专/中技",
+                        "label": "中专/中技"
+                    },
+                    {
+                        "value": "高中",
+                        "label": "高中"
+                    },
+                    {
+                        "value": "大专",
+                        "label": "大专"
+                    },
+                    {
+                        "value": "本科",
+                        "label": "本科"
+                    },
+                    {
+                        "value": "硕士",
+                        "label": "硕士"
+                    },
+                    {
+                        "value": "博士",
+                        "label": "博士"
+                    }
+                ]
+            },
+            "pay": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "3K以下",
+                        "label": "3K以下"
+                    },
+                    {
+                        "value": "3-5K",
+                        "label": "3-5K"
+                    },
+                    {
+                        "value": "5-10K",
+                        "label": "5-10K"
+                    },
+                    {
+                        "value": "10-20K",
+                        "label": "10-20K"
+                    },
+                    {
+                        "value": "20-50K",
+                        "label": "20-50K"
+                    },
+                    {
+                        "value": "50K以上",
+                        "label": "50K以上"
+                    }
+                ]
+            },
+            "status": {
+                "config_type": "multi_choice",
+                "choice_enum": [
+                    {
+                        "value": "离职-随时到岗",
+                        "label": "离职-随时到岗"
+                    },
+                    {
+                        "value": "在职-暂不考虑",
+                        "label": "在职-暂不考虑"
+                    },
+                    {
+                        "value": "在职-考虑机会",
+                        "label": "在职-考虑机会"
+                    },
+                    {
+                        "value": "在职-月内到岗",
+                        "label": "在职-月内到岗"
+                    }
+                ]
+            },
+            "work_time": {
+                "config_type": "multi_choice",
+                "choice_enum": [
+                    {
+                        "value": "1年以内",
+                        "label": "1年以内"
+                    },
+                    {
+                        "value": "1-3年",
+                        "label": "1-3年"
+                    },
+                    {
+                        "value": "3-5年",
+                        "label": "3-5年"
+                    },
+                    {
+                        "value": "5-10年",
+                        "label": "5-10年"
+                    },
+                    {
+                        "value": "10年以上",
+                        "label": "10年以上"
+                    }
+                ]
+            }
+        },
+        "job_config": {
+            "min_degree": {
+                "min_degree": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "初中及以下",
+                        "label": "初中及以下"
+                    },
+                    {
+                        "value": "中专",
+                        "label": "中专"
+                    },
+                    {
+                        "value": "高中",
+                        "label": "高中"
+                    },
+                    {
+                        "value": "大专",
+                        "label": "大专"
+                    },
+                    {
+                        "value": "本科",
+                        "label": "本科"
+                    },
+                    {
+                        "value": "硕士",
+                        "label": "硕士"
+                    },
+                    {
+                        "value": "博士",
+                        "label": "博士"
+                    }
+                ]
+            },
+            "school": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "0",
+                        "label": "无要求"
+                    },
+                    {
+                        "value": "1",
+                        "label": "211学校"
+                    },
+                    {
+                        "value": "2",
+                        "label": "985学校"
+                    }
+                ]
+            },
+            "ex_company": {
+                "config_type": "multi_input"
+            },
+            "neg_company": {
+                "config_type": "multi_input"
+            },
+            "job_tags": {
+                "config_type": "multi_input"
+            },
+            "neg_words": {
+                "config_type": "multi_input"
+            }
+        }
+    },
+    "liepin": {
+        "task_config": {
+            "location": {
+                "config_type": "multi_input"
+            },
+            "industry": {
+                "config_type": "multi_input"
+            },
+            "sex": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "不限",
+                        "label": "不限"
+                    },
+                    {
+                        "value": "男",
+                        "label": "男"
+                    },
+                    {
+                        "value": "女",
+                        "label": "女"
+                    }
+                ]
+            },
+            "education": {
+                "config_type": "multi_choice",
+                "choice_enum": [
+                    {
+                        "value": "不限",
+                        "label": "不限"
+                    },
+                    {
+                        "value": "高中及以下",
+                        "label": "高中及以下"
+                    },
+                    {
+                        "value": "中专/中技",
+                        "label": "中专/中技"
+                    },
+                    {
+                        "value": "高中",
+                        "label": "高中"
+                    },
+                    {
+                        "value": "大专",
+                        "label": "大专"
+                    },
+                    {
+                        "value": "本科",
+                        "label": "本科"
+                    },
+                    {
+                        "value": "硕士",
+                        "label": "硕士"
+                    },
+                    {
+                        "value": "博士/博士后",
+                        "label": "博士/博士后"
+                    }
+                ]
+            },
+            "work_year": {
+                "config_type": "multi_choice",
+                "choice_enum": [
+                    {
+                        "value": "不限",
+                        "label": "不限"
+                    },
+                    {
+                        "value": "应届生",
+                        "label": "应届生"
+                    },
+                    {
+                        "value": "1-3年",
+                        "label": "1-3年"
+                    },
+                    {
+                        "value": "3-5年",
+                        "label": "3-5年"
+                    },
+                    {
+                        "value": "5-10年",
+                        "label": "5-10年"
+                    },
+                    {
+                        "value": "10年以上",
+                        "label": "10年以上"
+                    }
+                ]
+            }
+        },
+        "job_config": {
+            "min_degree": {
+                "min_degree": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "初中及以下",
+                        "label": "初中及以下"
+                    },
+                    {
+                        "value": "中专",
+                        "label": "中专"
+                    },
+                    {
+                        "value": "高中",
+                        "label": "高中"
+                    },
+                    {
+                        "value": "大专",
+                        "label": "大专"
+                    },
+                    {
+                        "value": "本科",
+                        "label": "本科"
+                    },
+                    {
+                        "value": "硕士",
+                        "label": "硕士"
+                    },
+                    {
+                        "value": "博士",
+                        "label": "博士"
+                    }
+                ]
+            },
+            "school": {
+                "config_type": "single_choice",
+                "choice_enum": [
+                    {
+                        "value": "0",
+                        "label": "无要求"
+                    },
+                    {
+                        "value": "1",
+                        "label": "211学校"
+                    },
+                    {
+                        "value": "2",
+                        "label": "985学校"
+                    }
+                ]
+            },
+            "ex_company": {
+                "config_type": "multi_input"
+            },
+            "neg_company": {
+                "config_type": "multi_input"
+            },
+            "job_tags": {
+                "config_type": "multi_input"
+            },
+            "neg_words": {
+                "config_type": "multi_input"
+            }
+        }
     }
+}
 
 
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
