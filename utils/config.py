@@ -107,6 +107,12 @@ config['job_register'] = {
         "chat_config":"maimai_common_chat",
         "chat_config_v2":"main_chat_robot_v2",
         "recall_config":"zp"
+    },
+    "liepin":{
+        "filter_config_v2":"liepin_autoload_filter_v2",
+        "custom_filter_config":"liepin_custom_filter",
+        "chat_config_v2":"main_chat_robot_v2",
+        "recall_config":"zp"
     }
 }
 
