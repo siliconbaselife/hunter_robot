@@ -628,35 +628,6 @@ def meta_config():
                         "label": "博士/博士后"
                     }
                 ]
-            },
-            "work_year": {
-                "config_type": "multi_choice",
-                "choice_enum": [
-                    {
-                        "value": "不限",
-                        "label": "不限"
-                    },
-                    {
-                        "value": "应届生",
-                        "label": "应届生"
-                    },
-                    {
-                        "value": "1-3年",
-                        "label": "1-3年"
-                    },
-                    {
-                        "value": "3-5年",
-                        "label": "3-5年"
-                    },
-                    {
-                        "value": "5-10年",
-                        "label": "5-10年"
-                    },
-                    {
-                        "value": "10年以上",
-                        "label": "10年以上"
-                    }
-                ]
             }
         },
         "job_config": {
