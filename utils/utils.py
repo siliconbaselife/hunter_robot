@@ -226,6 +226,9 @@ def get_default_job(job_ret, platform_type):
 def get_default_job_v2(platform_type):
     return default_job_map_v2[platform_type]
 
+# def process_linkedin_id(candidate_id):
+#     if candidate_id == 
+#     return 
 
 def get_stat_id_dict():
     return statistic_id_dict
