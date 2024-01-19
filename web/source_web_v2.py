@@ -8,7 +8,7 @@ from utils.utils import format_time
 from utils.config import config
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
-from utils.utils import deal_json_invaild, str_is_none,get_default_job,get_default_job_v2
+from utils.utils import deal_json_invaild, str_is_none,get_default_job,get_default_job_v2, process_linkedin_id
 from dao.task_dao import *
 from service.chat_service import chat_service
 from service.task_service import *
@@ -45,7 +45,8 @@ def task_report_api_v2():
     update_touch_task(account_id, job_id, len(touch_list))
     for candidate_id in touch_list:
         try:
-            candidate_id_p = process_independent_encode(account_id, candidate_id)
+            _candidate_id_p = process_independent_encode(account_id, candidate_id)
+            candidate_id_p = process_linkedin_id(_candidate_id_p)
             candidate_name, filter_result = query_candidate_name_and_filter_result(candidate_id_p)
             init_msg = {
                 'speaker': 'robot',
@@ -79,6 +80,8 @@ def candidate_filter_api_v2():
     platform_type = query_account_type_db(account_id)
     candidate_info = preprocess_v2(account_id, raw_candidate_info, platform_type)
     candidate_id, candidate_name = get_id_name(candidate_info, platform_type)
+    if platform_type == 'Linkedin':
+        candidate_id = process_linkedin_id(candidate_id)
     candidate_info['id'] = process_independent_encode(account_id, candidate_id)
 
     if not query_candidate_exist(candidate_id):
@@ -104,6 +107,9 @@ def candidate_pre_filter_api_v2():
         return Response(json.dumps(get_web_res_fail('job_id为空'), ensure_ascii=False))
 
     candidate_id = request.json.get('candidate_id', '')
+    platform_type = query_account_type_db(account_id)
+    if platform_type == 'Linkedin':
+        candidate_id = process_linkedin_id(candidate_id)
     flag,candidate_info = query_candidate_detail(candidate_id)
     if flag:
         filter_result = candidate_filter(job_id, candidate_info)
@@ -125,6 +131,9 @@ def candidate_pre_filter_api_v2():
 def candidate_result_api():
     account_id = request.form['accountID']
     candidate_id = request.form['candidateID']
+    platform_type = query_account_type_db(account_id)
+    if platform_type == 'Linkedin':
+        candidate_id = process_linkedin_id(candidate_id)
     #encode
     candidate_id = process_independent_encode(account_id, candidate_id)
 
@@ -208,6 +217,9 @@ def candidate_result_api():
 def candidate_chat_api():
     account_id = request.json['accountID']
     candidate_id = request.json['candidateID']
+    platform_type = query_account_type_db(account_id)
+    if platform_type == 'Linkedin':
+        candidate_id = process_linkedin_id(candidate_id)
     #encode
     candidate_id = process_independent_encode(account_id, candidate_id)
 
