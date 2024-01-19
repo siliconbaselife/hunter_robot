@@ -26,13 +26,15 @@ __filter_dispatcher = {
     'linkedin_custom_filter':linkedin_custom_filter,
     'maimai_autoload_filter_v2':maimai_autoload_filter_v2,
     'linkedin_autoload_filter_v2':linkedin_autoload_filter_v2,
-    'boss_autoload_filter_v2':boss_autoload_filter_v2
+    'boss_autoload_filter_v2':boss_autoload_filter_v2,
+    'liepin_autoload_filter_v2':liepin_autoload_filter_v2
 }
 
 __preprocess_dispatcher_v2 = {
     'Boss': boss_preprocess_v2,
     'Linkedin': linkedin_preprocessor_v2,
-    'maimai': maimai_preprocessor_v2
+    'maimai': maimai_preprocessor_v2,
+    'liepin_preprocessor_v2':liepin_preprocessor_v2
 }
 
 

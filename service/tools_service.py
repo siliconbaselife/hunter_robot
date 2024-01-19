@@ -30,6 +30,8 @@ def get_candidate_id(profile, platform):
         return profile['id']
     if platform == 'Boss':
         return profile['geekCard']['geekId']
+    if platform == 'liepin':
+        return profile['usercIdEncode']
 
 def maimai_online_resume_upload_processor(manage_account_id, profile, platform):
     count = 0

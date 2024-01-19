@@ -20,3 +20,6 @@ from .linkedin_autoload_filter_v2 import linkedin_autoload_filter_v2
 from .boss_preprocessor_v2 import boss_preprocess_v2
 from .boss_autoload_filter_v2 import boss_autoload_filter_v2
 
+from .liepin_autoload_filter_v2 import liepin_autoload_filter_v2
+from .liepin_preprocessor_v2 import liepin_preprocessor_v2
+
