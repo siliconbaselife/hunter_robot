@@ -210,7 +210,8 @@ default_job_map = {
 default_job_map_v2 = {
     "maimai": "job_maimai_default_id_v2",
     "Boss": "job_boss_default-manual-id",
-    "Linkedin": "job_Linkedin_default_id_v2"
+    "Linkedin": "job_Linkedin_default_id_v2",
+    "liepin":""
 }
 
 def get_default_job(job_ret, platform_type):

@@ -13,6 +13,8 @@ def get_id_name(candidate_info, platform_type):
         return candidate_info['id'], candidate_info['profile']['name']
     elif platform_type == 'Boss':
         return candidate_info['geekCard']['geekId'], candidate_info['geekCard']['geekName']
+    elif platform_type == 'liepin':
+        return candidate_info['usercIdEncode'], candidate_info['showName']
     return '', ''
 
 def process_independent_encode_multi(account_id, candidate_ids):

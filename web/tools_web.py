@@ -259,7 +259,7 @@ def upload_online_resume_pdf():
     candidate_id = manage_account_id + '_' + str(int(time.time()))
     platform = request.form.get('platform', '')
     filename = request.form.get('filename', '')
-    if filename == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
+    if filename == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cv_filename = f'cv_{platform}_{filename}'
     cv_file = request.files['cv'].read()
@@ -286,7 +286,7 @@ def resume_exist():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
     logger.info(f'resume_exist:{manage_account_id},{platform}, {candidate_id}')
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin'):
+    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         return Response(json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False))
