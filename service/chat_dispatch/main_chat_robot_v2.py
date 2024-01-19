@@ -172,7 +172,7 @@ class MainChatRobotV2(BaseChatRobot):
 
     def deal_question_reply(self, history_msgs):
         if self.platform == 'Linkedin':
-            prefix = '请用英文做出回答。'
+            prefix = '请用英语回答问题。一定要用英语回答。一定要用英语回答。一定要用英语回答。'
         else:
             prefix = ''
         prompt = f'''
@@ -203,9 +203,9 @@ class MainChatRobotV2(BaseChatRobot):
     def no_intention_reply(self, history_msgs):
         if self._status_infos['has_contact']:
             return '', ChatStatus.NoTalk
-        m = "找机会找候选人要联系方式, 要联系方式的话术是 加个微信细聊一下呗$PHONE$"
+        m = "找机会找候选人要联系方式, $PHONE$"
         if self.platform == 'Linkedin':
-            prefix = '请用英文做出回答。'
+            prefix = '请用英语回答问题。一定要用英语回答。一定要用英语回答。一定要用英语回答。'
         else:
             prefix = ''
         prompt = f'''
