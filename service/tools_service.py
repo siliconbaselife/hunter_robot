@@ -187,7 +187,7 @@ def generate_candidate_csv_by_job(job_id, start_date, end_date):
                     gender = '女'
                 else:
                     gender = '未知'
-                age = candidate_json['age']
+                age = candidate_json.get('age', -1)
                 position = candidate_info[0][5]
                 if candidate_json.get('degree', -1) == 0:
                     degree = '大专'
