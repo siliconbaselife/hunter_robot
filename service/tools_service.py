@@ -18,6 +18,8 @@ import codecs
 from flask_admin._compat import csv_encode
 from dao.task_dao import get_chats_by_job_id_with_date,query_candidate_by_id
 from dao.manage_dao import get_job_name_by_id
+import json5
+
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
 
@@ -280,9 +282,9 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
             logger.info(f'test_download_candidate_linkedin_error4, {c_j}')
             logger.info(f'test_download_candidate_linkedin_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
-
 def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
+    logger.info(f'test:{len(chat_list)}')
     job_name = get_job_name_by_id(job_id)
     io = StringIO()
     w = csv.writer(io)
@@ -330,7 +332,6 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
             except Exception as e:
                 con_str = ''
 
-            
 
             if len(candidate_info) == 0:
                 logger.info(f"chat_candidate_not_match, {candidate_id}")
@@ -539,15 +540,31 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
             logger.info(f'download_resume_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
 
+def fetch_json_str(body, key, default_v = ''):
+    return json.dumps(body[key], ensure_ascii=False) if key in body else default_v
 
 def generate_csv(res):
     s = res[0][6].replace('\n', '\\n')
     res_l = json.loads(s)
+    format_resume_json = json.loads(res[0][8].replace('\n', '\\n'))
     io = StringIO()
     w = csv.writer(io)
-    for r in res_l:
+    for idx, r in enumerate(res_l):
+        if idx == 0:
+            l = ['简历', '结果', '匹配结果', '姓名', '性别', '年龄'/'出生', '期望职位', '期望薪资', '最高学历', '专业', '教育经历', '工作经历', '工作城市', '电话', '邮箱', '技能', '项目经历']
+            w.writerow(l)
+            yield io.getvalue()
+            io.seek(0)
+            io.truncate(0)
         file_name = os.path.basename(r['f_path'])
-        l = [file_name, r['res'], r['remark']]
+        l = [file_name, r['res'], r['remark'],
+            fetch_json_str(format_resume_json[idx], '姓名'), fetch_json_str(format_resume_json[idx], '性别'),
+            fetch_json_str(format_resume_json[idx], '年龄/出生'), fetch_json_str(format_resume_json[idx], '期望职位'),
+            fetch_json_str(format_resume_json[idx], '期望薪资'), fetch_json_str(format_resume_json[idx], '最高学历'),
+            fetch_json_str(format_resume_json[idx], '专业'), fetch_json_str(format_resume_json[idx], '工作经历'),
+            fetch_json_str(format_resume_json[idx], '教育经历'), fetch_json_str(format_resume_json[idx], '工作城市'),
+            fetch_json_str(format_resume_json[idx], '电话'), fetch_json_str(format_resume_json[idx], '邮箱'),
+            fetch_json_str(format_resume_json[idx], '技能'), fetch_json_str(format_resume_json[idx], '项目经历')]
         w.writerow(l)
         yield io.getvalue()
         io.seek(0)
@@ -624,6 +641,21 @@ def content_extract_and_filter(file_raw_data, jd):
     ext_prompt.add_user_message(ext_prompt_msg)
     file_key_data = gpt_manager.chat_task(ext_prompt)
     # file_key_data = chatgpt.chat(ext_prompt)
+    extract_prompt_msg = '你是一个猎头, 请从候选人信息提取: 姓名, 性别, 年龄/出生, 期望职位, 期望薪资, 最高学历, 专业, 教育经历, 工作经历, 工作城市, 电话, 邮箱, 技能, 项目经历.\n如果候选人信息不包含该字段, 标记为空, 请用中文回答, 以json格式输出'
+    extract_prompt_msg += f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
+    extract_prompt = Prompt()
+    extract_prompt.add_user_message(extract_prompt_msg)
+    extract_info = gpt_manager.chat_task(extract_prompt)
+    format_info = {}
+    try:
+        if '```json' in extract_info:
+            extract_info = extract_info.replace('```json', '')
+        if '```' in extract_info:
+            extract_info = extract_info.replace('```', '')
+        format_info = json5.loads(extract_info)
+    except BaseException:
+        pass
+
     logger.info(f"filter_task_content_extract_and_filter_file_key_data: {file_key_data}")
     prefix = '你是一个猎头，请判断候选人是否符合招聘要求\n给出具体原因和推理过程\n答案必须在最后一行，并且单独一行 A.合适，B.不合适'
     candidate_msg = f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
@@ -632,10 +664,11 @@ def content_extract_and_filter(file_raw_data, jd):
     filter_prompt.add_user_message(filter_prompt_msg)
     res = gpt_manager.chat_task(filter_prompt)
     # res = chatgpt.chat(filter_prompt)
-    return res
+    return res, format_info
 
 def exec_filter_task(manage_account_id, file_list, jd):
     filter_result = []
+    format_resume_infos = []
     for f_path in file_list:
         flag, file_raw_data = content_transfer(f_path)
         logger.info(f"filter_task_content_transfer:{f_path}, {flag}, {len(file_raw_data)}, {file_raw_data[0:3500]}")
@@ -648,7 +681,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
             })
             continue
 
-        single_filter_result = content_extract_and_filter(file_raw_data, jd)
+        single_filter_result, format_resume_info = content_extract_and_filter(file_raw_data, jd)
         logger.info(f"filter_task_content_extract_and_filter:{f_path}, {single_filter_result}")
         res = 'QUALIFIED' if 'A.合适' in single_filter_result else 'UNQUALIFIED'
         filter_result.append({
@@ -656,6 +689,6 @@ def exec_filter_task(manage_account_id, file_list, jd):
             "res": res,
             "remark": single_filter_result
         })
-    
-    return filter_result
+        format_resume_infos.append(format_resume_info)
+    return filter_result, format_resume_infos
 
