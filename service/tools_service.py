@@ -549,12 +549,12 @@ def generate_csv(res):
     io = StringIO()
     w = csv.writer(io)
     for idx, r in enumerate(res_l):
-        if idx == 0:
-            l = ['简历', '结果', '匹配结果', '姓名', '性别', '年龄'/'出生', '期望职位', '期望薪资', '最高学历', '专业', '教育经历', '工作经历', '工作城市', '电话', '邮箱', '技能', '项目经历']
-            w.writerow(l)
-            yield io.getvalue()
-            io.seek(0)
-            io.truncate(0)
+        # if idx == 0:
+        #     l = ['简历', '结果', '匹配结果', '姓名', '性别', '年龄'/'出生', '期望职位', '期望薪资', '最高学历', '专业', '教育经历', '工作经历', '工作城市', '电话', '邮箱', '技能', '项目经历']
+        #     w.writerow(l)
+        #     yield io.getvalue()
+        #     io.seek(0)
+        #     io.truncate(0)
         file_name = os.path.basename(r['f_path'])
         l = [file_name, r['res'], r['remark'],
             fetch_json_str(format_resume_json[idx], '姓名'), fetch_json_str(format_resume_json[idx], '性别'),
