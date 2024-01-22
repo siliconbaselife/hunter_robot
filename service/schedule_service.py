@@ -13,7 +13,7 @@ def schedule_filter_task_exec():
         flag, zip_file_path, zip_file_name = downloadFile(zip_url)
         if not flag:
             update_filter_task_status(-1, int(t[0]))
-            update_filter_result('[]', int(t[0]))
+            update_filter_result('[]', '[]', int(t[0]))
             continue
         os.chdir(file_path_prefix)
         os.system(f'unzip {zip_file_name}')
@@ -38,9 +38,9 @@ def schedule_filter_task_exec():
                     os.remove(file_path_prefix + f_name)
         logger.info(f"exec_filter_task_f_name_list:{len(file_list)} {file_list}")
         filter_task_exec_cache[zip_url] = float(len(file_list) * 40) / 60
-        filter_result = exec_filter_task(t[1], file_list, t[2])
+        filter_result, format_resume_info = exec_filter_task(t[1], file_list, t[2])
         update_filter_task_status(2, int(t[0]))
-        update_filter_result(json.dumps(filter_result, ensure_ascii=False), int(t[0]))
+        update_filter_result(json.dumps(filter_result, ensure_ascii=False), json.dumps(format_resume_info, ensure_ascii=False), int(t[0]))
         for f in file_list:
             os.remove(f)
         os.remove(zip_file_path)

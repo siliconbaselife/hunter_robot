@@ -18,6 +18,8 @@ import codecs
 from flask_admin._compat import csv_encode
 from dao.task_dao import get_chats_by_job_id_with_date,query_candidate_by_id
 from dao.manage_dao import get_job_name_by_id
+import json5
+
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
 
@@ -105,184 +107,11 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             count = count + 1
     return count
 
-def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
+
+
+def generate_candidate_csv_by_job(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
-    job_name = get_job_name_by_id(job_id)
-    io = StringIO()
-    w = csv.writer(io)
-
-    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','薪资范围', '年龄', '最高学历', '性别', '状态', '学校', '教育经历', '工作经历']
-    l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
-    w.writerow(l_encode)
-    yield io.getvalue()
-    io.seek(0)
-    io.truncate(0)
-    for c in chat_list:
-        try:
-            candidate_info = query_candidate_by_id(c[2])
-            job_name = job_name
-            candidate_id = c[2]
-            create_time = c[9].strftime("%Y-%m-%d %H:%M:%S")
-            candidate_name = c[3]
-            if c[4] == 'user_ask':
-                source = '候选人主动'
-            elif c[4] == 'search':
-                source= '机器人打招呼'
-            else:
-                source = '未知'
-            if c[6] is None :
-                wechat = ''
-                phone = ''
-                resume = ''
-            else:
-                try:
-                    contact = json.loads(c[6])
-                    wechat = contact['wechat'] or ''
-                    phone = contact['phone'] or ''
-                    resume = contact['cv'] or ''
-                except Exception as e:
-                    wechat = ''
-                    phone = ''
-                    resume = ''
-                    logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
-            try:
-                conversation = json.loads(c[7])
-                con_str = ''
-                for c in conversation:
-                    con_str = con_str + c['speaker'] + ':' + c['msg'] + '\n'
-            except Exception as e:
-                con_str = ''
-
-            if len(candidate_info) == 0:
-                logger.info(f"chat_candidate_not_match, {candidate_id}")
-                salary = ''
-                age = ''
-                degree = ''
-                gender = ''
-                status = ''
-                school = ''
-                edu = ''
-                work = ''
-            else:
-                c_j = candidate_info[0][7].replace('\n','.')
-                c_j = c_j.replace("\'", '\"')
-                candidate_json = json.loads(c_j, strict=False)
-                salary = candidate_json.get('geekCard', {}).get('salary', '')
-                age = candidate_json.get('geekCard', {}).get('ageDesc', '')
-                degree = candidate_json.get('geekCard', {}).get('geekDegree', '')
-                gender = candidate_json.get('geekCard', {}).get('geekGender', '')
-                status = candidate_json.get('geekCard', {}).get('applyStatusDesc', '')
-                school = candidate_json.get('geekCard', {}).get('geekEdu', {}).get('school', '')
-                edu = ''
-                for s in candidate_json.get('geekCard', {}).get('geekEdus', []):
-                    edu = edu + s.get('school', '') or '' + ',' + s.get('major', '') or '' + ',' + s.get('degreeName', '') or '' + '\n' + s.get('startDate', '') or '' + '-' + s.get('endDate', '') or '' + '\n\n'
-                work = ''
-                for e in candidate_json.get('geekCard', {}).get('geekWorks', []):
-                    work = work + e.get('company', '') or '' + ',' + e.get('workTime', '') or '' + ',' + e.get('positionName', '') or ''  + '\n'
-                    work = work + e.get('startDate', '') or '' + '-' + e.get('endDate', '') or '' + '\n'
-                    work = work + e.get('responsibility', '') or '' + '\n\n'
-                    
-            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, salary, age, degree, gender, status, school, edu, work]
-            l_encode = [csv_encode(_l) for _l in l]
-            w.writerow(l_encode)
-            yield io.getvalue()
-            io.seek(0)
-            io.truncate(0)
-        except Exception as e:
-            logger.info(f'test_download_candidate_boss_error4, {c_j}')
-            logger.info(f'test_download_candidate_boss_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
-
-def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
-    chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
-    job_name = get_job_name_by_id(job_id)
-    io = StringIO()
-    w = csv.writer(io)
-
-    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','地区','岗位', '学校经历', '公司经历', '语言能力']
-    l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
-    w.writerow(l_encode)
-    yield io.getvalue()
-    io.seek(0)
-    io.truncate(0)
-    for c in chat_list:
-        try:
-            candidate_info = query_candidate_by_id(c[2])
-            job_name = job_name
-            candidate_id = c[2]
-            create_time = c[9].strftime("%Y-%m-%d %H:%M:%S")
-            candidate_name = c[3]
-            if c[4] == 'user_ask':
-                source = '候选人主动'
-            elif c[4] == 'search':
-                source= '机器人打招呼'
-            else:
-                source = '未知'
-            if c[6] is None :
-                wechat = ''
-                phone = ''
-                resume = ''
-            else:
-                try:
-                    contact = json.loads(c[6])
-                    wechat = contact['wechat'] or ''
-                    phone = contact['phone'] or ''
-                    resume = contact['cv'] or ''
-                except Exception as e:
-                    wechat = ''
-                    phone = ''
-                    resume = ''
-                    logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
-            try:
-                conversation = json.loads(c[7])
-                con_str = ''
-                for c in conversation:
-                    con_str = con_str + c['speaker'] + ':' + c['msg'] + '\n'
-            except Exception as e:
-                con_str = ''
-
-            if len(candidate_info) == 0:
-                logger.info(f"chat_candidate_not_match, {candidate_id}")
-                region = ''
-                position = ''
-                edu = ''
-                work = ''
-                language = ''
-            else:
-                c_j = candidate_info[0][7].replace('\n','.')
-                c_j = c_j.replace("\'", '\"')
-                candidate_json = json.loads(c_j, strict=False)
-                region = candidate_json.get('profile', {}).get('location', '')
-                position = candidate_json.get('profile', {}).get('role', '')
-                edu = ''
-                for s in candidate_json.get('profile', {}).get('educations', []):
-                    edu = edu + s.get('schoolName', '') + ',' + s.get('majorInfo', '') + ',' + s.get('degreeInfo', '') + '\n' + s.get('timeInfo', '') + '\n' + s.get('summary', '') + '\n\n'
-                work = ''
-                for e in candidate_json.get('profile', {}).get('experiences', []):
-                    work = work + e.get('companyName', '') + ',' + e.get('timeInfo', '') + '\n'
-                    for wo in e.get('works', []):
-                        work = work + "positon:" + wo.get('workPosition', '') + '\n'
-                        work = work + "time:" + wo.get('workTimeInfo', '') + '\n'
-                        work = work + "location:" + wo.get('workLocationInfo', '') + '\n'
-                        work = work + "description:" + wo.get('workDescription', '') + '\n\n'
-                language = ''
-                for lan in candidate_json.get('profile', {}).get('languages', []):
-                    language = language + lan.get('language', '') + '\n' + lan.get('des', '') + '\n\n'
-
-            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region, position, edu, work, language]
-            l_encode = [csv_encode(_l) for _l in l]
-            w.writerow(l_encode)
-            yield io.getvalue()
-            io.seek(0)
-            io.truncate(0)
-        except Exception as e:
-            logger.info(f'test_download_candidate_linkedin_error4, {c_j}')
-            logger.info(f'test_download_candidate_linkedin_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
-
-
-def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
-    chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
+    logger.info(f'test:{len(chat_list)}')
     job_name = get_job_name_by_id(job_id)
     io = StringIO()
     w = csv.writer(io)
@@ -395,8 +224,8 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
             io.seek(0)
             io.truncate(0)
         except Exception as e:
-            logger.info(f'test_download_candidate_maimai_error4, {c_j}')
-            logger.info(f'test_download_candidate_maimai_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+            logger.info(f'test_download_candidate_error4, {c_j}')
+            logger.info(f'test_download_candidate_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
 def pNull(s):
     if s is None or s == None or s =='null':
@@ -539,15 +368,31 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
             logger.info(f'download_resume_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
 
+def fetch_json_str(body, key, default_v = ''):
+    return json.dumps(body[key], ensure_ascii=False) if key in body else default_v
 
 def generate_csv(res):
     s = res[0][6].replace('\n', '\\n')
     res_l = json.loads(s)
+    format_resume_json = json.loads(res[0][8].replace('\n', '\\n'))
     io = StringIO()
     w = csv.writer(io)
-    for r in res_l:
+    for idx, r in enumerate(res_l):
+        if idx == 0:
+            l = ['简历', '结果', '匹配结果', '姓名', '性别', '年龄'/'出生', '期望职位', '期望薪资', '最高学历', '专业', '教育经历', '工作经历', '工作城市', '电话', '邮箱', '技能', '项目经历']
+            w.writerow(l)
+            yield io.getvalue()
+            io.seek(0)
+            io.truncate(0)
         file_name = os.path.basename(r['f_path'])
-        l = [file_name, r['res'], r['remark']]
+        l = [file_name, r['res'], r['remark'],
+            fetch_json_str(format_resume_json[idx], '姓名'), fetch_json_str(format_resume_json[idx], '性别'),
+            fetch_json_str(format_resume_json[idx], '年龄/出生'), fetch_json_str(format_resume_json[idx], '期望职位'),
+            fetch_json_str(format_resume_json[idx], '期望薪资'), fetch_json_str(format_resume_json[idx], '最高学历'),
+            fetch_json_str(format_resume_json[idx], '专业'), fetch_json_str(format_resume_json[idx], '工作经历'),
+            fetch_json_str(format_resume_json[idx], '教育经历'), fetch_json_str(format_resume_json[idx], '工作城市'),
+            fetch_json_str(format_resume_json[idx], '电话'), fetch_json_str(format_resume_json[idx], '邮箱'),
+            fetch_json_str(format_resume_json[idx], '技能'), fetch_json_str(format_resume_json[idx], '项目经历')]
         w.writerow(l)
         yield io.getvalue()
         io.seek(0)
@@ -624,6 +469,21 @@ def content_extract_and_filter(file_raw_data, jd):
     ext_prompt.add_user_message(ext_prompt_msg)
     file_key_data = gpt_manager.chat_task(ext_prompt)
     # file_key_data = chatgpt.chat(ext_prompt)
+    extract_prompt_msg = '你是一个猎头, 请从候选人信息提取: 姓名, 性别, 年龄/出生, 期望职位, 期望薪资, 最高学历, 专业, 教育经历, 工作经历, 工作城市, 电话, 邮箱, 技能, 项目经历.\n如果候选人信息不包含该字段, 标记为空, 请用中文回答, 以json格式输出'
+    extract_prompt_msg += f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
+    extract_prompt = Prompt()
+    extract_prompt.add_user_message(extract_prompt_msg)
+    extract_info = gpt_manager.chat_task(extract_prompt)
+    format_info = {}
+    try:
+        if '```json' in extract_info:
+            extract_info = extract_info.replace('```json', '')
+        if '```' in extract_info:
+            extract_info = extract_info.replace('```', '')
+        format_info = json5.loads(extract_info)
+    except BaseException:
+        pass
+
     logger.info(f"filter_task_content_extract_and_filter_file_key_data: {file_key_data}")
     prefix = '你是一个猎头，请判断候选人是否符合招聘要求\n给出具体原因和推理过程\n答案必须在最后一行，并且单独一行 A.合适，B.不合适'
     candidate_msg = f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
@@ -632,10 +492,11 @@ def content_extract_and_filter(file_raw_data, jd):
     filter_prompt.add_user_message(filter_prompt_msg)
     res = gpt_manager.chat_task(filter_prompt)
     # res = chatgpt.chat(filter_prompt)
-    return res
+    return res, format_info
 
 def exec_filter_task(manage_account_id, file_list, jd):
     filter_result = []
+    format_resume_infos = []
     for f_path in file_list:
         flag, file_raw_data = content_transfer(f_path)
         logger.info(f"filter_task_content_transfer:{f_path}, {flag}, {len(file_raw_data)}, {file_raw_data[0:3500]}")
@@ -648,7 +509,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
             })
             continue
 
-        single_filter_result = content_extract_and_filter(file_raw_data, jd)
+        single_filter_result, format_resume_info = content_extract_and_filter(file_raw_data, jd)
         logger.info(f"filter_task_content_extract_and_filter:{f_path}, {single_filter_result}")
         res = 'QUALIFIED' if 'A.合适' in single_filter_result else 'UNQUALIFIED'
         filter_result.append({
@@ -656,6 +517,6 @@ def exec_filter_task(manage_account_id, file_list, jd):
             "res": res,
             "remark": single_filter_result
         })
-    
-    return filter_result
+        format_resume_infos.append(format_resume_info)
+    return filter_result, format_resume_infos
 
