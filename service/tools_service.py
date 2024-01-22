@@ -256,10 +256,10 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                 region = candidate_json.get('profile', {}).get('location', '')
                 position = candidate_json.get('profile', {}).get('role', '')
                 edu = ''
-                for s in candidate_json.get('educations', []):
+                for s in candidate_json.get('profile', {}).get('educations', []):
                     edu = edu + s.get('schoolName', '') + ',' + s.get('majorInfo', '') + ',' + s.get('degreeInfo', '') + '\n' + s.get('timeInfo', '') + '\n' + s.get('summary', '') + '\n\n'
                 work = ''
-                for e in candidate_json.get('experiences', []):
+                for e in candidate_json.get('profile', {}).get('experiences', []):
                     work = work + e.get('companyName', '') + ',' + e.get('timeInfo', '') + '\n'
                     for wo in e.get('works', []):
                         work = work + "positon:" + wo.get('workPosition', '') + '\n'
@@ -267,7 +267,7 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                         work = work + "location:" + wo.get('workLocationInfo', '') + '\n'
                         work = work + "description:" + wo.get('workDescription', '') + '\n\n'
                 language = ''
-                for lan in candidate_json.get('languages', []):
+                for lan in candidate_json.get('profile', {}).get('languages', []):
                     language = language + lan.get('language', '') + '\n' + lan.get('des', '') + '\n\n'
 
             l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region, position, edu, work, language]
