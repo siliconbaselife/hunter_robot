@@ -36,8 +36,15 @@ def candidate_csv_by_job():
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     if ret[0][11] != manage_account_id:
         return Response(json.dumps(get_web_res_fail("岗位和账户不符"), ensure_ascii=False))
-    
-    response = Response(stream_with_context(generate_candidate_csv_by_job(job_id, start_date, end_date)), mimetype='text/csv')
+    platform = ret[0][1]
+    if platform == 'maimai':
+        response = Response(stream_with_context(generate_candidate_csv_by_job_maimai(job_id, start_date, end_date)), mimetype='text/csv')
+    elif platform == 'Linkedin':
+        response = Response(stream_with_context(generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date)), mimetype='text/csv')
+    elif platform == 'Boss':
+        response = Response(stream_with_context(generate_candidate_csv_by_job_Boss(job_id, start_date, end_date)), mimetype='text/csv')
+    else:
+        return Response(json.dumps(get_web_res_fail("平台不支持"), ensure_ascii=False))
     response.headers.set("Content-Disposition", "attachment", filename='result.csv')
     logger.info(f"filter_task_result_download, {manage_account_id}")
     return response
