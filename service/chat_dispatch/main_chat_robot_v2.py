@@ -69,7 +69,11 @@ class MainChatRobotV2(BaseChatRobot):
                 if temp_time is None:
                     temp_time = format_time(datetime.now())
                 else:
-                    temp_time = format_time(datetime.fromtimestamp(msg['time']))
+                    try:
+                        temp_time = format_time(datetime.fromtimestamp(msg['time']))
+                    except BaseException as e:
+                        logger.info(f'MainChatRobotV2,{self._candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+                        temp_time = format_time(datetime.now())
 
                 r_new_msgs.append({
                     'speaker': msg["speaker"],
