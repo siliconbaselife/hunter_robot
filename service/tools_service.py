@@ -681,7 +681,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
             continue
 
         single_filter_result, format_resume_info = content_extract_and_filter(file_raw_data, jd)
-        logger.info(f"filter_task_content_extract_and_filter:{f_path}, {single_filter_result}")
+        logger.info(f"filter_task_content_extract_and_filter:{f_path}, {single_filter_result}, {format_resume_info}")
         res = 'QUALIFIED' if 'A.合适' in single_filter_result else 'UNQUALIFIED'
         filter_result.append({
             "f_path": f_path,
