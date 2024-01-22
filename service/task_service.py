@@ -94,8 +94,10 @@ def re_org_task_v2(config_data, today_sub_task_log, job_id):
         if config_data[i]['taskType']=='batchTouch':
             retain_sum = config_data[i]["helloSum"] - sub_task_dict[config_data[i]["jobID"]][5]
             touch_msg = json.loads(get_job_by_id(config_data[i]["jobID"])[0][6])["dynamic_job_config"]["touch_msg"]
+            job_name = json.loads(query_template_config(get_job_by_id(config_data[i]["jobID"])[0][12])[0][0])["job_name"]
             r_job = {
                 "jobID":config_data[i]["jobID"],
+                "job_name":job_name,
                 "taskType":config_data[i]['taskType'],
                 "helloSum": retain_sum,
                 # "timeMount":time_percent_filtered,
