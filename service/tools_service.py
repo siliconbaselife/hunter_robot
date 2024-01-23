@@ -552,7 +552,7 @@ def format_json_str(body):
             r += format_json_str(body[k])
             r += '\t'
     elif type(body) == str:
-        r = body[1:-1] if body[0] == "\"" and body[-1] == "\"" else body
+        r = body[1:-1] if len(body) > 0 and body[0] == "\"" and body[-1] == "\"" else body
     return r
 
 def fetch_json_str(body, key, default_v = ''):
