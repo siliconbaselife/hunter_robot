@@ -556,11 +556,7 @@ def format_json_str(body):
     return r
 
 def fetch_json_str(body, key, default_v = ''):
-    if key not in body:
-        return default_v
-    format_json_str(body[key])
-
-    return json.dumps(body[key], ensure_ascii=False) if key in body else default_v
+    return format_json_str(body[key ]) if key in body else default_v
 
 def generate_csv(res):
     s = res[0][6].replace('\n', '\\n')
