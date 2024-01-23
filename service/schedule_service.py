@@ -1,6 +1,5 @@
 from dao.tool_dao import *
 from service.tools_service import *
-import zipfile
 from utils.utils import filter_task_exec_cache, ensure_dir, recursive_find_files
 import urllib
 from os.path import join, basename, isdir
@@ -24,7 +23,8 @@ def schedule_filter_task_exec():
         # os.chdir(file_path_prefix)
         unzip_dir = join(file_path_prefix, task_id_str)
         ensure_dir(unzip_dir, clear_existing=True)
-        shutil.unpack_archive(zip_file_path, unzip_dir)
+        # shutil or zipfile lib chinese file name mess code
+        os.system(f'unzip {zip_file_path} -d {unzip_dir}')
         extract_files = recursive_find_files(unzip_dir, contains=support_extension)
         # os.system(f'unzip {zip_file_name}')
         # file_raw_list = os.listdir('./')
