@@ -19,7 +19,6 @@ def ensure_dir(dir_path, clear_existing=False):
 def recursive_find_files(dir_path, contains=None):
     r = []
     for file_dir in glob(join(dir_path, '*')):
-        file_dir = file_dir.encode('utf-8')
         if isdir(file_dir):
             r.extend(recursive_find_files(file_dir, contains=contains))
         elif contains is None:

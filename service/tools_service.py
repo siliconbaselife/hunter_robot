@@ -690,7 +690,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
     for f_path in file_list:
         flag, file_raw_data = content_transfer(f_path)
         logger.info(f"filter_task_content_transfer:{f_path}, {flag}, {len(file_raw_data)}, {file_raw_data[0:3500]}")
-        file_name = basename(f_path)
+        file_name = basename(f_path).encode('UTF-8')
         if not flag:
             logger.info(f'file_ext_not_support, {manage_account_id}, {f_path}')
             filter_result.append({
