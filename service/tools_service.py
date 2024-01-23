@@ -569,9 +569,6 @@ def generate_csv(res):
     io = StringIO()
     w = csv.writer(io)
     w.writerow(['简历', '结果', '匹配结果', '姓名', '性别', '年龄/出生', '期望职位', '期望薪资', '最高学历', '专业', '教育经历', '工作经历', '工作城市', '电话', '邮箱', '技能', '项目经历'])
-    yield io.getvalue()
-    io.seek(0)
-    io.truncate(0)
     for idx, r in enumerate(res_l):
         file_name = os.path.basename(r['f_path'])
         l = [file_name, r['res'], r['remark'],
