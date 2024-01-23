@@ -2,8 +2,30 @@ import random
 import numpy as np
 import copy
 import json
+from os.path import exists, join, isdir
+import shutil
+import os
+from glob import glob
 
 key = 11
+
+
+def ensure_dir(dir_path, clear_existing=False):
+    if exists(dir_path) and clear_existing:
+        shutil.rmtree(dir_path)
+    if not exists(dir_path):
+        os.mkdir(dir_path)
+
+def recursive_find_files(dir_path, contains=None):
+    r = []
+    for file_dir in glob(join(dir_path, '*')):
+        if isdir(file_dir):
+            r.extend(recursive_find_files(file_dir, contains=contains))
+        elif contains is None:
+            r.append(file_dir)
+        elif any([True for contain in contains if contain in file_dir]):
+            r.append(file_dir)
+    return r
 
 def str_is_none(str):
     return str == None or str == "" or str == "None" or str == "NULL" or  str == "NONE" or str == "Null"

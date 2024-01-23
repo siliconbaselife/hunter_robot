@@ -19,6 +19,7 @@ from flask_admin._compat import csv_encode
 from dao.task_dao import get_chats_by_job_id_with_date,query_candidate_by_id
 from dao.manage_dao import get_job_name_by_id
 import json5
+from os.path import basename
 
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
@@ -538,8 +539,27 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
             logger.info(f'download_resume_error4,{profile_json}')
             logger.info(f'download_resume_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
+def format_json_str(body):
+    r = ""
+    if type(body) == list:
+        for sub in body:
+            r += format_json_str(sub)
+            r += "\n"
+    elif type(body) == dict:
+        for k in body:
+            r += k
+            r += ":"
+            r += format_json_str(body[k])
+            r += '\t'
+    elif type(body) == str:
+        r = body[1:-1] if body[0] == "\"" and body[-1] == "\"" else body
+    return r
 
 def fetch_json_str(body, key, default_v = ''):
+    if key not in body:
+        return default_v
+    format_json_str(body[key])
+
     return json.dumps(body[key], ensure_ascii=False) if key in body else default_v
 
 def generate_csv(res):
@@ -548,13 +568,11 @@ def generate_csv(res):
     format_resume_json = json.loads(res[0][8].replace('\n', '\\n'))
     io = StringIO()
     w = csv.writer(io)
+    w.writerow(['简历', '结果', '匹配结果', '姓名', '性别', '年龄'/'出生', '期望职位', '期望薪资', '最高学历', '专业', '教育经历', '工作经历', '工作城市', '电话', '邮箱', '技能', '项目经历'])
+    yield io.getvalue()
+    io.seek(0)
+    io.truncate(0)
     for idx, r in enumerate(res_l):
-        # if idx == 0:
-        #     l = ['简历', '结果', '匹配结果', '姓名', '性别', '年龄'/'出生', '期望职位', '期望薪资', '最高学历', '专业', '教育经历', '工作经历', '工作城市', '电话', '邮箱', '技能', '项目经历']
-        #     w.writerow(l)
-        #     yield io.getvalue()
-        #     io.seek(0)
-        #     io.truncate(0)
         file_name = os.path.basename(r['f_path'])
         l = [file_name, r['res'], r['remark'],
             fetch_json_str(format_resume_json[idx], '姓名'), fetch_json_str(format_resume_json[idx], '性别'),
@@ -583,15 +601,16 @@ def img_to_text(f_path):
         s = s + r[1] + '\n'
     return s
 
-def downloadFile(url):
+def download_file(url):
     file_name = os.path.basename(url)
     responsepdf = requests.get(url)
     if responsepdf.status_code == 200:
-        with open(file_path_prefix + file_name , "wb") as code:
-            code.write(responsepdf.content)
-        return True, file_path_prefix + file_name, file_name
+        dst_path = os.path.join(file_path_prefix, file_name)
+        with open(dst_path, "wb") as f:
+            f.write(responsepdf.content)
+        return dst_path
     else:
-        return False, "", file_name
+        return None
 
 def content_transfer(f_path):
     file_name = os.path.basename(f_path)
@@ -671,10 +690,11 @@ def exec_filter_task(manage_account_id, file_list, jd):
     for f_path in file_list:
         flag, file_raw_data = content_transfer(f_path)
         logger.info(f"filter_task_content_transfer:{f_path}, {flag}, {len(file_raw_data)}, {file_raw_data[0:3500]}")
+        file_name = basename(f_path)
         if not flag:
             logger.info(f'file_ext_not_support, {manage_account_id}, {f_path}')
             filter_result.append({
-                "f_path": f_path,
+                "f_path": file_name,
                 "res": file_raw_data,
                 "remark":""
             })
@@ -684,7 +704,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
         logger.info(f"filter_task_content_extract_and_filter:{f_path}, {single_filter_result}, {format_resume_info}")
         res = 'QUALIFIED' if 'A.合适' in single_filter_result else 'UNQUALIFIED'
         filter_result.append({
-            "f_path": f_path,
+            "f_path": file_name,
             "res": res,
             "remark": single_filter_result
         })
