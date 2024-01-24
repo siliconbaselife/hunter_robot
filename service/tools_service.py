@@ -623,7 +623,7 @@ def content_transfer(f_path):
         end_pdf_time = datetime.datetime.now()
         res = imglist_to_text(final_url_list)
         end_txt_time = datetime.datetime.now()
-        logger.info("[tool_service] content transfer pdf -> jpg time consumption = {}, jpg -> text time consumption = {}", (end_pdf_time - start_time).total_seconds(), (end_txt_time - end_pdf_time).total_seconds())
+        logger.info(f'[tool_service] content transfer pdf -> jpg time consumption = {(end_pdf_time - start_time).total_seconds()}, jpg -> text time consumption = {(end_txt_time - end_pdf_time).total_seconds()}')
         for u in final_url_list:
             os.remove(u)
         return True, res
