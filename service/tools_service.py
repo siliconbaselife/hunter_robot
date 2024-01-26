@@ -651,10 +651,12 @@ def content_transfer(f_path):
 def content_extract_and_filter(file_raw_data, jd):
     # chatgpt = ChatGPT()
     #先做个人为截断，如果有问题再说
+    start_time = datetime.datetime.now()
     ext_prompt_msg = '以下是候选人信息，请提取关键信息并结构化输出\n$$$\n' + file_raw_data[0:3500] + "\n$$$"
     ext_prompt = Prompt()
     ext_prompt.add_user_message(ext_prompt_msg)
     file_key_data = gpt_manager.chat_task(ext_prompt)
+    end_format_time = datetime.datetime.now()
     # file_key_data = chatgpt.chat(ext_prompt)
     extract_prompt_msg = '你是一个猎头, 请从候选人信息提取: 姓名, 性别, 年龄/出生, 期望职位, 期望薪资, 最高学历, 专业, 教育经历, 工作经历, 工作城市, 电话, 邮箱, 技能, 项目经历.\n如果候选人信息不包含该字段, 标记为空, 请用中文回答, 以json格式输出'
     extract_prompt_msg += f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
@@ -670,7 +672,7 @@ def content_extract_and_filter(file_raw_data, jd):
         format_info = json5.loads(extract_info)
     except BaseException:
         pass
-
+    end_parse_time = datetime.datetime.now()
     logger.info(f"filter_task_content_extract_and_filter_file_key_data: {file_key_data}")
     prefix = '你是一个猎头，请判断候选人是否符合招聘要求\n给出具体原因和推理过程\n答案必须在最后一行，并且单独一行 A.合适，B.不合适'
     candidate_msg = f'$$$\n候选人个人信息如下：{file_key_data}\n$$$\n'
@@ -678,6 +680,9 @@ def content_extract_and_filter(file_raw_data, jd):
     filter_prompt = Prompt()
     filter_prompt.add_user_message(filter_prompt_msg)
     res = gpt_manager.chat_task(filter_prompt)
+    end_judge_time = datetime.datetime.now()
+
+    logger.info(f'[content_extract_and_filter] format resume time = {(end_format_time - start_time).total_seconds()}, parse result time = {(end_parse_time - end_format_time).total_seconds()}, judge time = {(end_judge_time - end_parse_time).total_seconds()}')
     # res = chatgpt.chat(filter_prompt)
     return res, format_info
 
