@@ -9,11 +9,17 @@ logger = get_logger(config['log']['log_file'])
 def boss_preprocess_v2(raw_candidate_info):
     try:
         desc_content = raw_candidate_info['geekCard'].get('geekDesc', {}).get('content', '') or ''
+        if 'geekDesc' not in raw_candidate_info['geekCard']:
+            raw_candidate_info['geekCard']['geekDesc'] = {}
         raw_candidate_info['geekCard']['geekDesc']['content'] = desc_content.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
         edu_desc = raw_candidate_info['geekCard'].get('geekEdu', {}).get('eduDescription', '') or ''
+        if 'geekEdu' not in raw_candidate_info['geekCard']:
+            raw_candidate_info['geekCard']['geekEdu'] = {}
         raw_candidate_info['geekCard']['geekEdu']['eduDescription'] = edu_desc.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
 
         resp = raw_candidate_info.get('geekLaskWork', {}).get('responsibility', '') or ''
+        if 'geekLaskWork' not in raw_candidate_info:
+            raw_candidate_info['geekLaskWork'] = {}
         raw_candidate_info['geekLaskWork']['responsibility'] = resp.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
 
         for edu in raw_candidate_info['geekCard'].get('geekEdus',[]):
