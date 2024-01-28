@@ -170,7 +170,7 @@ class MainChatRobotV2(BaseChatRobot):
                 return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact
         else:
             if self.platform == 'Linkedin':
-                return "Hello, would it be convenient to leave a contact information for us to discuss further?", ChatStatus.NeedContact
+                return "Hello, would it be convenient to leave an email or a resume  for us to discuss further?", ChatStatus.NeedContact
             else:
                 return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact
 
@@ -199,7 +199,7 @@ class MainChatRobotV2(BaseChatRobot):
 
         if not self._status_infos['has_contact']:
             if self.platform == 'Linkedin':
-                r_msg += '\nHow about leaving an email? I can provide you with a detailed introduction.'
+                r_msg += '\nHow about leaving an email or a resume? I can provide you with a detailed introduction.'
             else:
                 r_msg += '\n您看要不加个微信，我给您详细介绍下'
         return r_msg, ChatStatus.NormalChat
@@ -458,8 +458,8 @@ class MainChatRobotV2(BaseChatRobot):
 {msg_str}
 @@@
 问: 
-帮我萃取出客户的电话号码和微信号，排除掉我的信息。
-结果用json格式表示，电话的key是phone，微信的key是wechat，获取不到的信息为null。
+帮我萃取出客户的电话号码和whatsapp号或者邮箱email，排除掉我的信息。
+结果用json格式表示，邮箱的key是email，电话的key是phone，whatsapp的key是wechat，获取不到的信息为null。
 如果对话中没有客户的联系方式，就说没有联系方式。
 我不需要你帮我写程序
 回答限制在50个字以内
