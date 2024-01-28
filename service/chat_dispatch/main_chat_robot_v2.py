@@ -165,12 +165,12 @@ class MainChatRobotV2(BaseChatRobot):
             return '', ChatStatus.NoTalk
         if intention == INTENTION.NEGTIVE:
             if self.platform == 'Linkedin':
-                return "Would you mind leaving your email? When there's a new job opening on my end, I can share it with you right away.", ChatStatus.NeedContact
+                return "ok, when there's a new job opening on my end, I will share it with you right away.", ChatStatus.NeedContact
             else:
                 return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact
         else:
             if self.platform == 'Linkedin':
-                return "Hello, would it be convenient to leave an email or a resume  for us to discuss further?", ChatStatus.NeedContact
+                return "Hello, would it be convenient to leave a resume for us to discuss further?", ChatStatus.NeedContact
             else:
                 return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact
 
@@ -199,7 +199,7 @@ class MainChatRobotV2(BaseChatRobot):
 
         if not self._status_infos['has_contact']:
             if self.platform == 'Linkedin':
-                r_msg += '\nHow about leaving an email or a resume? I can provide you with a detailed introduction.'
+                r_msg += '\nCould you please share your resume? I would like to discuss it with the boss on our end.'
             else:
                 r_msg += '\n您看要不加个微信，我给您详细介绍下'
         return r_msg, ChatStatus.NormalChat
