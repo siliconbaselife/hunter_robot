@@ -146,7 +146,7 @@ def filter_task_result():
 @web_exception_handler
 def exec_schedule_task():
     schedule_filter_task_exec()
-    return
+    return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
 
 
 
