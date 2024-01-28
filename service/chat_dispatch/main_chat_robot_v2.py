@@ -290,7 +290,8 @@ class MainChatRobotV2(BaseChatRobot):
         contact_info = {
             "wechat":contact,
             "phone":"",
-            "cv":""
+            "cv":"",
+            "email":""
         }
         update_chat_contact_db(self._account_id, self._job_id, self._candidate_id, json.dumps(contact_info))
         self._status_infos["contact_flag"] = True

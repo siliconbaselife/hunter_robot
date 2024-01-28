@@ -202,7 +202,7 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','地区','岗位', '学校经历', '公司经历', '语言能力']
+    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','邮箱','简历','对话详情','地区','岗位', '学校经历', '公司经历', '语言能力']
     l_encode = [csv_encode(_l) for _l in l]
     l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
     w.writerow(l_encode)
@@ -232,10 +232,12 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                     wechat = contact['wechat'] or ''
                     phone = contact['phone'] or ''
                     resume = contact['cv'] or ''
+                    email = contact['email'] or ''
                 except Exception as e:
                     wechat = ''
                     phone = ''
                     resume = ''
+                    email = ''
                     logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
             try:
                 conversation = json.loads(c[7])
@@ -273,7 +275,7 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                 for lan in candidate_json.get('profile', {}).get('languages', []):
                     language = language + lan.get('language', '') + '\n' + lan.get('des', '') + '\n\n'
 
-            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region, position, edu, work, language]
+            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, email, resume, con_str, region, position, edu, work, language]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()

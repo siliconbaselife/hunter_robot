@@ -151,8 +151,9 @@ def candidate_result_api():
     name = request.form['candidateName']
     phone = request.form.get('phone', None)
     wechat = request.form.get('wechat', None)
+    email = request.form.get('email', None)
 
-    logger.info(f'candidate_result_v2, request form: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}; files: {request.files}, file keys:{request.files.keys()}')
+    logger.info(f'candidate_result_v2, request form: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {email}; files: {request.files}, file keys:{request.files.keys()}')
 
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
     if len(candidate_info) == 0:
@@ -165,7 +166,8 @@ def candidate_result_api():
         contact = {
             'phone': None,
             'wechat': None,
-            'cv': None
+            'cv': None,
+            'email':None
         }
     else:
         contact = json.loads(contact)
@@ -185,13 +187,15 @@ def candidate_result_api():
         cv_filename = f'cv_{account_id}_{job_id}_{candidate_id}_{name}.{ext_name}'
         cv_file = request.files['cv'].read()
         cv_addr = generate_thumbnail(cv_filename, cv_file)
+    if email:
+        contact['email'] = email
     if phone:
         contact['phone'] = phone
     if wechat:
         contact['wechat'] = wechat
     if cv_addr:
         contact['cv'] = cv_addr
-    logger.info(f'candidate_result_v2 request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
+    logger.info(f'candidate_result_v2 request: {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {email}, {cv_addr}')
 
     update_chat_contact_db(account_id, job_id, candidate_id, json.dumps(contact, ensure_ascii=False))
     update_candidate_contact_db(candidate_id, json.dumps(contact,ensure_ascii=False))
@@ -208,7 +212,7 @@ def candidate_result_api():
             logger.info(f'db msg json parse abnormal, proc instead (e: {e}), (msg: {db_history_msg})')
             db_history_msg = json.loads(deal_json_invaild(db_history_msg), strict=False)
     # send_candidate_info(job_id, name, contact['cv'], contact['wechat'], contact['phone'], db_history_msg)
-    logger.info(f'candidate_result_update_v2: {job_id}, {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {cv_addr}')
+    logger.info(f'candidate_result_update_v2: {job_id}, {account_id}, {job_id}, {candidate_id}, {name}, {phone}, {wechat}, {email}, {cv_addr}')
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
 
