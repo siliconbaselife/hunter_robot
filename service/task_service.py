@@ -97,7 +97,7 @@ def re_org_task_v2(config_data, today_sub_task_log, job_id):
             # job_name = json.loads(query_template_config(get_job_by_id(config_data[i]["jobID"])[0][12])[0][0])["job_name"]
             r_job = {
                 "jobID":config_data[i]["jobID"],
-                "job_name":config_data[i].get('job_name', ''),
+                # "job_name":config_data[i].get('job_name', ''),
                 "taskType":config_data[i]['taskType'],
                 "helloSum": retain_sum,
                 # "timeMount":time_percent_filtered,
