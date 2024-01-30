@@ -14,12 +14,13 @@ def liepin_autoload_filter_v2(candidate_info, job_res):
     age_range = (int(filter_args['min_age']), int(filter_args['max_age']))
     min_degree = filter_args['min_degree']
     school_threshold = int(filter_args['school'])
+    basic_info = candidate_info.get('basicInfoForm', {}) or {}
 
-    age = candidate_info.get('basicInfoForm', {}).get('birthYearAge', 0)
+    age = basic_info.get('birthYearAge', 0)
     
     age_ok = int(age) >= int(age_range[0]) and int(age) <= int(age_range[1])
     
-    degree = candidate_info.get('basicInfoForm', {}).get('eduLevelName', '')
+    degree = basic_info.get('eduLevelName', '')
     if degree == '':
         degree_ok = False
     else:
