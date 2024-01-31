@@ -65,8 +65,7 @@ def fetch_candidate_infos(job_id, account_id, candidate_id):
         candidate_info = query_chat_db(account_id, job_id, candidate_id)
         if len(candidate_info) == 0:
             return None
-
-        details = candidate_info[0][1]
+        details = candidate_info[0][1] or []
         return json.loads(details)
     except BaseException as e:
         logger.info(f'common_enhance_recall_filter_msg,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')

@@ -178,14 +178,14 @@ def candidate_recall_api():
     candidate_ids = process_independent_encode_multi(account_id, candidate_ids)
     candidate_ids_read = process_independent_encode_multi(account_id, candidate_ids_read)
 
-    logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}, {len(candidate_ids_read)}')
+    logger.info(f'candidate recall request {account_id}, {len(candidate_ids)}, {len(candidate_ids_read)}, {candidate_ids}, {candidate_ids_read}')
     res_data = recall_msg(account_id, candidate_ids, candidate_ids_read)
     for item in res_data:
         candidate_id = item['candidate_id']
         job_id = item['job_id']
         msg = item['recall_msg']
         append_chat_msg(account_id, job_id, candidate_id, msg)
-    logger.info(f'candidate recall response {account_id}, {len(res_data)}')
+    logger.info(f'candidate recall response {account_id}, {len(res_data)}, {res_data}')
     return Response(json.dumps(get_web_res_suc_with_data(res_data), ensure_ascii=False))
 
 @source_web.route("/recruit/candidate/recallResult", methods=['POST'])
