@@ -181,10 +181,10 @@ def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
                 salary = candidate_json.get('basicInfoForm', {}).get('salary', '')
                 edu = ''
                 for e in candidate_json.get('eduExpFormList', []):
-                    edu = edu + e.get('startYear', '') + '-' + e.get('endYear', '')  + ', ' +  e.get('redDegreeName', '') + ', ' +  e.get('redSchool', '') + ', ' + e.get('redSpecial', '') + '\n\n'
+                    edu = edu + str(e.get('startYear', '')) + '-' + str(e.get('endYear', ''))  + ', ' +  str(e.get('redDegreeName', '')) + ', ' +  str(e.get('redSchool', '')) + ', ' + str(e.get('redSpecial', '')) + '\n\n'
                 work = ''
                 for wo in candidate_json.get('workExps', []):
-                    work = work + wo.get('startYear', '') + '-' + wo.get('endYear', '') + ', ' + wo.get('rwCompname', '') + ', ' + wo.get('rwDqName', '') + '\n' + wo.get('rwDuty', '') + '\n\n'
+                    work = work + str(wo.get('startYear', '')) + '-' + str(wo.get('endYear', '')) + ', ' + str(wo.get('rwCompname', '')) + ', ' + str(wo.get('rwDqName', '')) + '\n' + str(wo.get('rwDuty', '')) + '\n\n'
 
             l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, gender, born_year, work_year, position, degree, location, salary, edu, work]
             l_encode = [csv_encode(_l) for _l in l]
