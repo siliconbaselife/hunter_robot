@@ -21,6 +21,9 @@ def linkedin_autoload_filter_v2(raw_candidate_info, job_res):
     for d in degree_list:
         if d in edu_json:
             degree_ok = True
+    if min_degree == '':
+        degree_ok = True
+
 
     tag_ok = True
     if 'job_tags' in filter_args and filter_args['job_tags'] != "":
