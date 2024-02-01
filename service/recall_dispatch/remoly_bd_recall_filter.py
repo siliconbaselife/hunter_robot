@@ -74,7 +74,7 @@ def fetch_msg(msgs, status_infos, recall_strategy_config):
 
 
 def user_not_reply_strategy(msgs, recall_strategy_config):
-    date = datetime.strptime(msgs[-1]["time"], "%Y-%m-%d %H:%M:%S")
+    date = datetime.strptime(str(msgs[-1]["time"]), "%Y-%m-%d %H:%M:%S")
     msg_time = int(date.timestamp())
 
     now_time = int(time.time())
