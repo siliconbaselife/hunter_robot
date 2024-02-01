@@ -87,7 +87,7 @@ def linkedin_autoload_filter_v2(raw_candidate_info, job_res):
         languages = []
         for e in filter_args['languages']:
             if not str_is_none(e):
-                languages.append(e)
+                languages.append(e.strip())
         if len(languages) > 0:
             for l in languages:
                 if l not in language_json:
