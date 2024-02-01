@@ -10,10 +10,12 @@ def linkedin_autoload_filter_v2(raw_candidate_info, job_res):
     
     candidate_info = raw_candidate_info['profile']
 
+
     min_degree = filter_args['min_degree']
     
     c_json = json.dumps(candidate_info, ensure_ascii=False)
     edu_json = json.dumps(candidate_info.get('educations', []), ensure_ascii=False)
+    language_json = json.dumps(candidate_info.get('languages', []), ensure_ascii=False)
 
     degree_list = get_degree_eng_dict(min_degree)
 
@@ -85,7 +87,7 @@ def linkedin_autoload_filter_v2(raw_candidate_info, job_res):
                 languages.append(e)
         if len(languages) > 0:
             for l in languages:
-                if l not in c_json:
+                if l not in language_json:
                     language_ok = False
                     break
             
