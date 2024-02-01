@@ -56,7 +56,7 @@ def task_report_api_v2():
             details = json.dumps([init_msg], ensure_ascii=False)
             new_chat_db(account_id, job_id, candidate_id_p, candidate_name, filter_result=filter_result, details=details, source='search')
         except BaseException as e:
-            logger.info(f'report_before_filter:{account_id}, {candidate_id}')
+            logger.info(f'report_before_filter:{account_id}, {candidate_id}, {e}, {traceback.format_exc()}')
     ret_data = {
         'status': 'ok'
     }

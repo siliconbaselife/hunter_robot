@@ -14,9 +14,10 @@ def common_enhance_recall_filter(chat_info, flag):
     msgs = fetch_candidate_infos(job_id, account_id, candidate_id)
     
     if msgs is None:
+        logger.info(f'no recall msg: {candidate_id}')
         return False, ""
 
-    msg = fetch_msg(msgs, recall_cnt, recall_strategy_config)
+    msg = fetch_msg(candidate_id, msgs, recall_cnt, recall_strategy_config)
 
     return True if len(msg) > 0 else False, {
             "candidate_id": candidate_id,
@@ -35,7 +36,7 @@ def has_user_reply(msgs):
     return False
 
 
-def fetch_msg(msgs, recall_cnt, config):
+def fetch_msg(candidate_id, msgs, recall_cnt, config):
     if has_user_reply(msgs) and config["reply_filter_flag"]:
         return ""
 

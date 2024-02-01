@@ -93,8 +93,6 @@ def linkedin_autoload_filter_v2(raw_candidate_info, job_res):
                 if l not in language_json:
                     language_ok = False
                     break
-            
-
 
     judge_result = {
         'judge':  degree_ok and neg_company_ok and neg_filter_ok and ex_company_ok and tag_ok and language_ok,
