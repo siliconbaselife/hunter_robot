@@ -141,6 +141,7 @@ CREATE TABLE IF NOT EXISTS `manage_account`(
    PRIMARY KEY ( `manage_account_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table manage_account add `config` varchar(512) NOT NULL DEFAULT "" COMMENT '账户配置' after `desc`;
+alter table manage_account add `account_num` int unsigned NOT NULL DEFAULT 5 COMMENT '账号数量', after `desc`;
 
 
 
