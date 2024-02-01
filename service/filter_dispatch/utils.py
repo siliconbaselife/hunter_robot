@@ -18,7 +18,15 @@ degree_transfer_map = {
     "master":"硕士",
     "Master":"硕士",
     "Doctor":"博士",
-    "doctor":"博士"
+    "doctor":"博士",
+    "Diploma":"大专",
+    "diploma":"大专",
+    "junior college":"大专",
+    "juniorCollege":"大专",
+    "highSchool":"高中",
+    "high school":"高中",
+    "cetificate":"中专",
+    "Cetificate":"中专"
 }
 
 def degree_compare_v2(degree, min_degree):
