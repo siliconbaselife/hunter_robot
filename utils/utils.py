@@ -250,6 +250,7 @@ def get_default_job_v2(platform_type):
     return default_job_map_v2[platform_type]
 
 def process_linkedin_id(candidate_id):
+    candidate_id = str(candidate_id)
     if candidate_id[-1] == '/':
         return candidate_id[0:-1]
     else:
