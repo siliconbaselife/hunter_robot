@@ -22,7 +22,7 @@ sql_dict = {
     "insert_llm_template":"insert into llm_template(manage_account_id, template_id, template_name, template_config) values ('{}', '{}', '{}', '{}')",
     "get_chat_count_by_job": "select date_format(`create_time`, '%Y-%m-%d'),count(1),sum(case when contact!='' then 1 else 0 end) from chat where create_time > date_sub(curdate(), interval 7 day) and job_id='{}' group by date_format(`create_time`, '%Y-%m-%d')",
     "get_job_name_by_id":"select job_name from job where job_id='{}'",
-    "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config) values ('{}', '{}', '{}', '{}')",
+    "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config, invite_account) values ('{}', '{}', '{}', '{}', '{}')",
     "delete_job_db":"delete from job where job_id='{}'",
     "delete_template_db":"delete from llm_template where template_id='{}'",
     "get_hello_ids":"select candidate_id from hello_record where manage_account_id = '{}' and status = 1 and platform='{}'",
@@ -61,10 +61,10 @@ def delete_job_db(job_id):
 def delete_template_db(template_id):
     return dbm.delete(sql_dict['delete_template_db'].format(template_id))
 
-def manage_account_register(passwd, email, desc, c_j):
+def manage_account_register(passwd, email, desc, c_j, invite_account):
     c_j = c_j.replace("\'", "\\'")
     c_j = c_j.replace('\"', '\\"')
-    return dbm.insert(sql_dict['manage_account_register'].format(email, passwd, desc, c_j))
+    return dbm.insert(sql_dict['manage_account_register'].format(email, passwd, desc, c_j, invite_account))
 
 def get_job_name_by_id(job_id):
     return dbm.query(sql_dict['get_job_name_by_id'].format(job_id))[0][0]

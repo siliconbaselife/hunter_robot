@@ -159,13 +159,14 @@ def register():
     passwd = request.json.get('passwd', '')
     email = request.json.get('email', '')
     code = request.json.get('code', '')
-    logger.info(f"user_register:{email}, {passwd}, {code}")
+    invite_account = request.json.get('invite_account', '')
+    logger.info(f"user_register:{email}, {passwd}, {code}, {invite_account}")
     if str_is_none(email) or str_is_none(passwd) or str_is_none(code):
         return Response(json.dumps(get_web_res_fail('信息为空'), ensure_ascii=False))
     if email not in user_code_cache or code != user_code_cache[email]:
         return Response(json.dumps(get_web_res_fail('验证码不正确'), ensure_ascii=False))
 
-    status, msg = user_register(passwd, email)
+    status, msg = user_register(passwd, email, invite_account)
     if status == 0:
         return Response(json.dumps(get_web_res_suc_with_data("注册成功"), ensure_ascii=False))
     else:

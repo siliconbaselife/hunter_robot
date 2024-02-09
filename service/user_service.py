@@ -36,14 +36,14 @@ def send_verify_email(email, code):
     con.quit()
 
 
-def user_register(passwd, email):
+def user_register(passwd, email, invite_account):
     res = login_check_db(email)
     if len(res) > 0:
         return 1, "user_name already used"
     config = {"group_msg": "beijing"}
     c_j = json.dumps(config)
     desc = '线上注册'
-    manage_account_register(passwd, email, desc, c_j)
+    manage_account_register(passwd, email, desc, c_j, invite_account)
     return 0, ""
 
 
