@@ -330,4 +330,4 @@ def conversation_report():
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or contact == '' or conversations == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     create_conversation_report(candidate_id, platform, contact, conversations)
-    json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False)
+    return Response(json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False))
