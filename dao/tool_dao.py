@@ -16,7 +16,8 @@ sql_dict = {
     "upload_online_profile":"insert into online_resume(manage_account_id, platform, raw_profile, candidate_id) values ('{}', '{}', '{}', '{}')",
     "upload_online_profile_pdf":"insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
-    "get_resume_by_filter":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}'"
+    "get_resume_by_filter":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}'",
+    "create_conversation_report" : "insert into conversation_report (candidate_id, platform, contact, conversation) values ('{}', '{}', '{}', '{}')"
 }
 
 def get_resume_by_filter(manage_account_id, platform, start_date, end_date):
@@ -58,3 +59,15 @@ def update_filter_result(filter_result, format_resumes, id):
     format_resumes = format_resumes.replace("\'", "\\'")
     format_resumes = format_resumes.replace('\"', '\\"')
     return dbm.update(sql_dict['update_filter_result'].format(filter_result, format_resumes, id))
+
+def create_conversation_report(candidate_id, platform, contact, conversations):
+    contact_str = json.dumps(contact, ensure_ascii=False)
+    contact_str = contact_str.replace("\n", "\\n")
+    contact_str = contact_str.replace("\'", "\\'")
+    contact_str = contact_str.replace('\"', '\\"')
+
+    conversations_str = json.dumps(conversations, ensure_ascii=False)
+    conversations_str = conversations_str.replace("\n", "\\n")
+    conversations_str = conversations_str.replace("\'", "\\'")
+    conversations_str = conversations_str.replace('\"', '\\"')
+    return dbm.insert(sql_dict['create_conversation_report'].format(candidate_id, platform, contact_str, conversations_str))

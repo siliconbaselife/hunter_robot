@@ -302,3 +302,32 @@ def resume_exist():
         return Response(json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False))
     else:
         return Response(json.dumps(get_web_res_suc_with_data(False), ensure_ascii=False))
+
+@tools_web.route("/backend/conversation/report", methods=['POST'])
+@web_exception_handler
+def conversation_report():
+# 参数格式
+#{
+#  "candidate_id": "aaaa",
+#  "platform": "maimai",
+#  "contact": {
+#    "phone": "",
+#    "email": "",
+#    "wechat": ""
+#  },
+#  "conversation": [
+#    {
+#      "speaker": "",
+#      "msg": ""
+#    }
+#  ]
+#}
+    platform = request.json.get('platform', '')
+    candidate_id = request.json.get('candidate_id', '')
+    contact = request.json.get('contact', '')
+    conversations = request.json.get('conversations', '')
+    logger.info(f'conversation report :platform = {platform}, candidate_id = {candidate_id}, contact = {contact}, conversations = {conversations}')
+    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or contact == '' or conversations == '':
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    create_conversation_report(candidate_id, platform, contact, conversations)
+    json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False)
