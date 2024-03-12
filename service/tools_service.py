@@ -314,6 +314,7 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                 wechat = ''
                 phone = ''
                 resume = ''
+                email = ''
             else:
                 try:
                     contact = json.loads(c[6])
