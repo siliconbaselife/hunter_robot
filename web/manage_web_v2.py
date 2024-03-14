@@ -238,7 +238,7 @@ def delete_account_api():
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     account_id = request.json['account_id']
     job_ids = request.json['job_ids']
-    template_ids = request.json['template_id']
+    template_ids = request.json['template_ids']
     logger.info(f'delete_account: {account_id}， {job_ids}, {template_ids}')
     ret = delete_account(manage_account_id, account_id, job_ids, template_ids)
     return Response(json.dumps(get_web_res_suc_with_data(ret)))
