@@ -26,6 +26,7 @@ OPENAI_API_KEY_1 = cipher.decrypt(secret_token_1).decode()
 
 #新加坡机器应该不用这个代理
 # OPENAI_PROXY = 'http://127.0.0.1:7890'
+OPENAI_PROXY = ''
 
 
 
@@ -38,7 +39,7 @@ logger = get_logger(config['log']['log_file'])
 class ChatGPT:
     def __init__(self,OPENAI_API_KEY) -> None:
         openai.api_key = OPENAI_API_KEY
-        if OPENAI_PROXY:
+        if OPENAI_PROXY != '':
             openai.proxy = OPENAI_PROXY
     
     @exception_retry(retry_time=3, delay=2, failed_return=None)
