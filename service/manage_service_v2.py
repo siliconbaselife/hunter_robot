@@ -12,7 +12,7 @@ from service.manage_service import delete_task, get_manage_config_service,templa
 def check_limit(manage_account_id):
     account_num = len(my_account_list_db_v2(manage_account_id, 'v2'))
     max_account_num = get_account_nums_db(manage_account_id)
-    return int(account_num) >= int(max_account_num):
+    return int(account_num) >= int(max_account_num)
         
 
 def delete_account(manage_account_id, account_id, job_ids, template_ids):
