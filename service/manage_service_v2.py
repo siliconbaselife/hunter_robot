@@ -9,6 +9,18 @@ from datetime import datetime
 from pymysql .converters import escape_string
 from service.manage_service import delete_task, get_manage_config_service,template_insert_service,template_update_service
 
+def check_limit(manage_account_id):
+    account_num = len(my_account_list_db_v2(manage_account_id, 'v2'))
+    max_account_num = get_account_nums_db(manage_account_id)
+    return int(account_num) >= int(max_account_num):
+        
+
+def delete_account(manage_account_id, account_id, job_ids, template_ids):
+    delete_account_db(account_id, manage_account_id)
+    for j in job_ids:
+        delete_job_db(j)
+    for t in template_ids:
+        delete_template_db(t)
 
 def delete_config_v2(manage_account_id, account_id, job_id, template_id):
     delete_task(manage_account_id, account_id, job_id)

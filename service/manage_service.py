@@ -159,6 +159,7 @@ def update_job_config_service(job_id, touch_msg, filter_args, robot_api, robot_t
     job_config['custom_filter_content'] = custom_filter_content
     return update_job_config(job_id,robot_api, json.dumps(job_config, ensure_ascii=False), robot_template_id)
 
+
 def delete_task(manage_account_id, account_id, job_id):
     ret = get_jobs_task_by_id(account_id)
     jobs = json.loads(ret[0])

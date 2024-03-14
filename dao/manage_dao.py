@@ -30,8 +30,17 @@ sql_dict = {
     "insert_hello_id":"insert into hello_record(manage_account_id, candidate_id, platform, status) values ('{}', '{}','{}', 1)",
     "hello_sent":"update hello_record set status=2 where manage_account_id='{}' and candidate_id in {}",
     "get_all_hello_ids":"select candidate_id,platform from hello_record where manage_account_id = '{}' and status = 1",
-    "get_profile_by_id":"select raw_profile from online_resume where candidate_id='{}' order by id desc limit 1"
+    "get_profile_by_id":"select raw_profile from online_resume where candidate_id='{}' order by id desc limit 1",
+    "delete_account":"delete from account where account_id='{}' and manage_account_id='{}'",
+    "get_account_num":"select account_num from manage_account where manage_account_id='{}'"
 } 
+
+def get_account_nums_db(manage_account_id):
+    return dbm.query(sql_dict['get_account_num'].format(manage_account_id))[0][0]
+
+
+def delete_account_db(account_id, manage_account_id):
+    return dbm.delete(sql_dict['delete_account'].format(account_id, manage_account_id))
 
 def get_profile_by_id(candidate_id):
     return dbm.query(sql_dict['get_profile_by_id'].format(candidate_id))

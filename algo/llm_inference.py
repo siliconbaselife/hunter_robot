@@ -24,7 +24,8 @@ OPENAI_API_KEY_0 = cipher.decrypt(secret_token_0).decode()
 secret_token_1 = "gAAAAABlaH0Znj77bm5n9luPszWTgtDYl74onM5l7zfswQESZqBKEexjJpSvpldN8HIY9ZbS_-p0ne8dlicFl8ckg_iI4kPI6E6pg-PMzCdF_thb1PfT4HCv5swyUzu9JZmEtXFVjyYJD4Bqu1EqAkSU9kzd802AQg=="
 OPENAI_API_KEY_1 = cipher.decrypt(secret_token_1).decode()
 
-OPENAI_PROXY = 'http://127.0.0.1:7890'
+#新加坡机器应该不用这个代理
+# OPENAI_PROXY = 'http://127.0.0.1:7890'
 
 
 
