@@ -22,7 +22,7 @@ sql_dict = {
     "insert_llm_template":"insert into llm_template(manage_account_id, template_id, template_name, template_config) values ('{}', '{}', '{}', '{}')",
     "get_chat_count_by_job": "select date_format(`create_time`, '%Y-%m-%d'),count(1),sum(case when contact!='' then 1 else 0 end) from chat where create_time > date_sub(curdate(), interval 7 day) and job_id='{}' group by date_format(`create_time`, '%Y-%m-%d')",
     "get_job_name_by_id":"select job_name from job where job_id='{}'",
-    "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config, invite_account) values ('{}', '{}', '{}', '{}', '{}')",
+    "manage_account_register":"insert into manage_account(manage_account_id, password, `desc`, config, invite_account, account_num) values ('{}', '{}', '{}', '{}', '{}', 1)",
     "delete_job_db":"delete from job where job_id='{}'",
     "delete_template_db":"delete from llm_template where template_id='{}'",
     "get_hello_ids":"select candidate_id from hello_record where manage_account_id = '{}' and status = 1 and platform='{}'",
