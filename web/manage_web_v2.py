@@ -140,7 +140,7 @@ def register_account_api():
     account_id = f'account_{platform_type}_{platform_id}'
 
     if check_limit(manage_account_id):
-        return Response(json.dumps(get_web_res_fail('绑定账号已达上限，请联系管理员')))
+        return Response(json.dumps(get_web_res_fail('绑定账号已达上限，请在shadowhiring.cn 主页添加管理员微信联系')))
 
     delete_account_by_id(account_id)
     register_account_db_v2(account_id, platform_type, platform_id, json.dumps(jobs, ensure_ascii=False), json.dumps(task_config, ensure_ascii=False), account_name, manage_account_id, ver)
