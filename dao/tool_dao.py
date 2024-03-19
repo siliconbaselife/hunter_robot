@@ -14,11 +14,23 @@ sql_dict = {
     "update_filter_result":"update resume_filter_task set filter_result='{}', format_resumes = '{}' where id={}",
     "get_filter_task_by_id":"select id, manage_account_id, resume_url, status, create_time,jd,filter_result,taskname, format_resumes from resume_filter_task where id={}",
     "upload_online_profile":"insert into online_resume(manage_account_id, platform, raw_profile, candidate_id) values ('{}', '{}', '{}', '{}')",
+    "update_raw_profile":"update online_resume set raw_profile='{}' where manage_account_id='{}' and platform = '{}' and candidate_id='{}'",
     "upload_online_profile_pdf":"insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
     "get_resume_by_filter":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}'",
-    "create_conversation_report" : "insert into conversation_report (candidate_id, platform, contact, conversation) values ('{}', '{}', '{}', '{}')"
+    "create_conversation_report" : "insert into conversation_report (candidate_id, platform, contact, conversation) values ('{}', '{}', '{}', '{}')",
+    "add_resume_list_db":"insert into resume_list(manage_account_id, platform, list_name) values ('{}', '{}', '{}')",
+    "get_resume_list_db":"select list_name from resume_list where manage_account_id='{}' and platform='{}'",
+    "add_list_relation":"insert into resume_list_relation(manage_account_id, list_name, candidate_id) values ('{}', '{}', '{}')"
 }
+def add_list_relation(manage_account_id, list_name, candidate_id):
+    return dbm.insert(sql_dict['add_list_relation'].format(manage_account_id, list_name, candidate_id))
+    
+def get_resume_list_db(manage_account_id, platform):
+    return dbm.query(sql_dict['get_resume_list_db'].format(manage_account_id, platform))
+
+def add_resume_list_db(manage_account_id, platform, list_name):
+    return dbm.insert(sql_dict['add_resume_list_db'].format(manage_account_id, platform, list_name))
 
 def get_resume_by_filter(manage_account_id, platform, start_date, end_date):
     return dbm.query(sql_dict['get_resume_by_filter'].format(manage_account_id, platform, start_date, end_date))
@@ -30,7 +42,10 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     raw_profile = raw_profile.replace("\n", "\\n")
     raw_profile = raw_profile.replace("\'", "\\'")
     raw_profile = raw_profile.replace('\"', '\\"')
-    return dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id))
+    if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
+        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, manage_account_id, platform, candidate_id))
+    else:
+        return dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id))
 def upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr):
     return dbm.insert(sql_dict['upload_online_profile_pdf'].format(manage_account_id, platform, cv_addr, candidate_id))
 

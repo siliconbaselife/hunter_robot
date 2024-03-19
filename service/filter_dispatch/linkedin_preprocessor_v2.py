@@ -40,8 +40,14 @@ def linkedin_preprocessor_v2(p):
         role = p.get('profile', {}).get('role', '') or ''
         location = p.get('profile', {}).get('location', '') or ''
         name = p.get('profile', {}).get('name', '') or ''
-        contact_info = json.dumps(p.get('profile', {}).get('contactInfo', {}), ensure_ascii=False)
-        p['profile']['contactInfo'] = contact_info.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+
+        url = p.get('profile', {}).get('contactInfo', {}).get("url", "") or ''
+        p['profile']['contactInfo']["url"] = url.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+        phone = p.get('profile', {}).get('contactInfo', {}).get("Phone", "") or ''
+        p['profile']['contactInfo']["Phone"] = phone.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+        email = p.get('profile', {}).get('contactInfo', {}).get("Email", "") or ''
+        p['profile']['contactInfo']["Email"] = email.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+
         p['profile']['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
         p['profile']['role'] = role.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
         p['profile']['location'] = location.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")

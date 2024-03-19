@@ -59,10 +59,12 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform):
             count = count + 1
     return count
 
-def linkedin_online_resume_upload_processor(manage_account_id, profile, platform):
+def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name):
     count = 0
     for p in profile:
         candidate_id = get_candidate_id(p, platform)
+        if list_name != '':
+            add_list_relation(manage_account_id, list_name, candidate_id)
         if candidate_id == None or candidate_id == '':
             continue
         if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0 and 'profile' in p:
@@ -98,8 +100,14 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             role = p.get('profile', {}).get('role', '') or ''
             location = p.get('profile', {}).get('location', '') or ''
             name = p.get('profile', {}).get('name', '') or ''
-            contact_info = json.dumps(p.get('profile', {}).get('contactInfo', {}), ensure_ascii=False)
-            p['profile']['contactInfo'] = contact_info.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+
+            url = p.get('profile', {}).get('contactInfo', {}).get("url", "") or ''
+            p['profile']['contactInfo']["url"] = url.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            phone = p.get('profile', {}).get('contactInfo', {}).get("Phone", "") or ''
+            p['profile']['contactInfo']["Phone"] = phone.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            email = p.get('profile', {}).get('contactInfo', {}).get("Email", "") or ''
+            p['profile']['contactInfo']["Email"] = email.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+
             p['profile']['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             p['profile']['role'] = role.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             p['profile']['location'] = location.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")

@@ -239,14 +239,18 @@ def upload_online_resume():
 
     platform = request.json.get('platform', '')
     profile = request.json.get('profile', [])
-    logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}')
+    list_name = request.json.get('list_name', '')
+
+    logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}, {list_name}')
     if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     
     if platform == 'maimai':
         count = maimai_online_resume_upload_processor(manage_account_id, profile, platform)
     elif platform == 'Linkedin':
-        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform)
+        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name)
+
+    
 
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
@@ -290,7 +294,34 @@ def add_resume_list():
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
 
     platform = request.json.get('platform', '')
-    platform = request.json.get('list_name', '')
+    list_name = request.json.get('list_name', '')
+
+    if platform == '' or list_name == '':
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    ret = add_resume_list_db(manage_account_id, platform, list_name)
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/getResumeList", methods=['POST'])
+@web_exception_handler
+def get_resume_list():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    platform = request.json.get('platform', '')
+
+    if platform == '':
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    ret = get_resume_list_db(manage_account_id, platform)
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
+
 
 
 @tools_web.route("/backend/tools/resumeExist", methods=['POST'])
