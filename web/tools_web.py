@@ -278,6 +278,20 @@ def upload_online_resume_pdf():
     ret = upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/addResumeList", methods=['POST'])
+@web_exception_handler
+def add_resume_list():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    platform = request.json.get('platform', '')
+    platform = request.json.get('list_name', '')
+
 
 @tools_web.route("/backend/tools/resumeExist", methods=['POST'])
 @web_exception_handler
