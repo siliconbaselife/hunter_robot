@@ -503,8 +503,8 @@ def pNull(s):
         return ''
     return s or ''
 
-def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date):
-    res = get_resume_by_filter(manage_account_id, platform, start_date, end_date)
+def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date, list_name):
+    res = get_resume_by_filter(manage_account_id, platform, start_date, end_date, list_name)
     io = StringIO()
     w = csv.writer(io)
 

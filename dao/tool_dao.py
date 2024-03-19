@@ -18,6 +18,7 @@ sql_dict = {
     "upload_online_profile_pdf":"insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
     "get_resume_by_filter":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}'",
+    "get_resume_by_list":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}' and list_name='{}'",
     "create_conversation_report" : "insert into conversation_report (candidate_id, platform, contact, conversation) values ('{}', '{}', '{}', '{}')",
     "add_resume_list_db":"insert into resume_list(manage_account_id, platform, list_name) values ('{}', '{}', '{}')",
     "get_resume_list_db":"select list_name from resume_list where manage_account_id='{}' and platform='{}'",
@@ -32,8 +33,11 @@ def get_resume_list_db(manage_account_id, platform):
 def add_resume_list_db(manage_account_id, platform, list_name):
     return dbm.insert(sql_dict['add_resume_list_db'].format(manage_account_id, platform, list_name))
 
-def get_resume_by_filter(manage_account_id, platform, start_date, end_date):
-    return dbm.query(sql_dict['get_resume_by_filter'].format(manage_account_id, platform, start_date, end_date))
+def get_resume_by_filter(manage_account_id, platform, start_date, end_date, list_name):
+    if list_name == '':
+        return dbm.query(sql_dict['get_resume_by_filter'].format(manage_account_id, platform, start_date, end_date))
+    else:
+        return dbm.query(sql_dict['get_resume_by_list'].format(manage_account_id, platform, start_date, end_date, list_name))
 
 def get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id):
     return dbm.query(sql_dict['get_resume_by_candidate_id_and_platform'].format(candidate_id, platform, manage_account_id))
