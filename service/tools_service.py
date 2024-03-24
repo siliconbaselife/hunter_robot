@@ -861,7 +861,7 @@ def apply_chat_scenario(candidate_id, platform):
     name = None
     if 'profile' in raw_profile and 'name' in raw_profile['profile']:
             name = raw_profile['profile']['name']
-    ret = []
+    ret = {}
     for scenario in scenario_options:
         msg = 'Hi ' + name + ' ,\n' if name else 'Hi, \n'
         if scenario == '要简历':
@@ -872,6 +872,6 @@ def apply_chat_scenario(candidate_id, platform):
             msg += 'Thanks for the reply, I understand you\'re not actively looking for a new job right now. However, I\'d greatly appreciate your insights. Do you happen to know someone in your network who might be interested in this role? Feel free to pass along the details, and if they have questions, they can reach out directly.\nThanks again for any help you can provide!'
         if scenario == '召回':
             msg += 'Thanks for connecting! I trust this message finds you in good spirits. I noticed your noteworthy background on LinkedIn!\nCurrently, FFALCON is on a global expansion drive. It\'s the sub-brand of TCL Electronics, an established global TV manufacturing brand. To strengthen TCL Corporation’s globalization strategy plans within the smart home sector, FFalcon has been developed into a leading brand with a business value of over 650 million USD.\nI believe your insights could significantly contribute to our strategy, and I would like to discuss more details about this opportunity with you! Would you mind sharing a concise update on your CV? Your expertise aligns with our objectives, and your input would be immensely valuable.'
-        ret.append(msg)
+        ret[scenario] = msg
     return ret, None
 
