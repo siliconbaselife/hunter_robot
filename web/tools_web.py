@@ -397,11 +397,10 @@ def get_leave_msg_web():
 def apply_chat_scenario_web():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
-    scenario = request.json.get('scenario', '')
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or scenario == '':
+    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(candidate_id, platform))
-    msg, error_msg = apply_chat_scenario(candidate_id, platform, scenario)
+    reply, error_msg = apply_chat_scenario(candidate_id, platform)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(reply), ensure_ascii=False))
