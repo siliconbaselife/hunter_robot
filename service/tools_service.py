@@ -829,8 +829,8 @@ def get_leave_msg(candidate_id, platform):
     if 'profile' in raw_profile and 'role' in raw_profile['profile']:
             role = raw_profile['profile']['role']
 
-    experience = None
-    if 'experiences' in raw_profile and raw_profile['experiences'] > 0 and 'companyName' in raw_profile['experiences'][0]:
+    company_name = None
+    if 'experiences' in raw_profile and len(raw_profile['experiences']) > 0 and 'companyName' in raw_profile['experiences'][0]:
         company_name = raw_profile['experiences'][0]['companyName']
 
     msg = 'Hi '+ name + ' , ' if name else'Hi ,'
