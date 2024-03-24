@@ -841,8 +841,8 @@ def get_leave_msg(candidate_id, platform):
             role = raw_profile['profile']['role']
 
     company_name = None
-    if 'experiences' in raw_profile and len(raw_profile['experiences']) > 0 and 'companyName' in raw_profile['experiences'][0]:
-        company_name = raw_profile['experiences'][0]['companyName']
+    if 'profile' in raw_profile and 'experiences' in raw_profile['profile'] and len(raw_profile['profile']['experiences']) > 0 and 'companyName' in raw_profile['profile']['experiences'][0]:
+        company_name = raw_profile['profile']['experiences'][0]
 
     msg = 'Hi '+ name + ' , ' if name else'Hi ,'
     msg += 'we are looking for an ' + role + ' base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China, '
