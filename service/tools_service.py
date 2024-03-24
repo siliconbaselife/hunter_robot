@@ -814,7 +814,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
 
 def get_leave_msg(candidate_id, platform):
     raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
-    print(raw_profile)
+    logger.info(raw_profile)
     if not raw_profile:
         logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
         return None, 'no candidate'
