@@ -812,9 +812,19 @@ def exec_filter_task(manage_account_id, file_list, jd):
         format_resume_infos.append(format_resume_info)
     return filter_result, format_resume_infos
 
+
+def deserialize_raw_profile(raw_profile):
+    if raw_profile is None:
+        return None
+    while (type(raw_profile) == tuple):
+        raw_profile = raw_profile[0]
+    if type(raw_profile) == str:
+        return json.loads(raw_profile)
+    return None
+
 def get_leave_msg(candidate_id, platform):
     raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
-    logger.info(raw_profile)
+    raw_profile = deserialize_raw_profile(raw_profile)
     if not raw_profile:
         logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
         return None, 'no candidate'
@@ -846,6 +856,7 @@ def apply_chat_scenario(candidate_id, platform, scenario):
     if scenario not in scenario:
         return None, 'scenario not legal, legal are ' + ','.join(scenario)
     raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
+    raw_profile = deserialize_raw_profile(raw_profile)
     if not raw_profile:
         logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
         return None, 'no candidate'
