@@ -397,7 +397,7 @@ def get_leave_msg_web():
 def apply_chat_scenario_web():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
-    scenario = requests.json.get('scenario', '')
+    scenario = request.json.get('scenario', '')
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or scenario == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(candidate_id, platform))
