@@ -812,3 +812,53 @@ def exec_filter_task(manage_account_id, file_list, jd):
         format_resume_infos.append(format_resume_info)
     return filter_result, format_resume_infos
 
+def get_leave_msg(candidate_id, platform):
+    raw_profile = get_raw_latest_profile_by_candidate_id_and(candidate_id, platform)
+    if not raw_profile:
+        logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
+        return None, 'no candidate'
+    name = None
+    if 'profile' in raw_profile and 'name' in raw_profile['profile']:
+            name = raw_profile['profile']['name']
+
+    location = None
+    if 'profile' in raw_profile and 'location' in raw_profile['profile']:
+            location = raw_profile['profile']['location']
+
+    role = 'candidate'
+    if 'profile' in raw_profile and 'role' in raw_profile['profile']:
+            role = raw_profile['profile']['role']
+
+    experience = None
+    if 'experiences' in raw_profile and raw_profile['experiences'] > 0 and 'companyName' in raw_profile['experiences'][0]:
+        company_name = raw_profile['experiences'][0]['companyName']
+
+    msg = 'Hi '+ name + ' , ' if name else'Hi ,'
+    msg += 'we are looking for an ' + role + ' base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China, '
+    if company_name:
+        msg += 'your Exp. in ' + company_name + ' seems a good match, '
+    msg += 'would you like to explore this opportunity? Thanks!'
+    return msg, None
+
+def apply_chat_scenario(candidate_id, platform, scenario):
+    scenario_options = ['要简历', '约电话', '转介绍', '召回']
+    if scenario not in scenario:
+        return None, 'scenario not legal, legal are ' + ','.join(scenario)
+    raw_profile = get_raw_latest_profile_by_candidate_id_and(candidate_id, platform)
+    if not raw_profile:
+        logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
+        return None, 'no candidate'
+    name = None
+    if 'profile' in raw_profile and 'name' in raw_profile['profile']:
+            name = raw_profile['profile']['name']
+    msg = 'Hi ' + name + ' ,\n' if name else 'Hi, \n'
+    if scenario == '要简历':
+        msg += 'Thanks for getting back to me! Could you please send me your updated resume so we can move forward to the next step? Also, can I have your availability for a short call to discuss this opportunity further.\nLooking forward to hearing from you soon. Thanks!'
+    if scenario == '约电话':
+        msg += 'Thanks for the updated resume and I\'ve well received! Meanwhile, can I have your availability for a short call to discuss this opportunity further.\nLooking forward to hearing from you soon. Thanks!'
+    if scenario == '转介绍':
+        msg += 'Thanks for the reply, I understand you\'re not actively looking for a new job right now. However, I\'d greatly appreciate your insights. Do you happen to know someone in your network who might be interested in this role? Feel free to pass along the details, and if they have questions, they can reach out directly.\nThanks again for any help you can provide!'
+    if scenario == '召回':
+        msg += 'Thanks for connecting! I trust this message finds you in good spirits. I noticed your noteworthy background on LinkedIn!\nCurrently, FFALCON is on a global expansion drive. It\'s the sub-brand of TCL Electronics, an established global TV manufacturing brand. To strengthen TCL Corporation’s globalization strategy plans within the smart home sector, FFalcon has been developed into a leading brand with a business value of over 650 million USD.\nI believe your insights could significantly contribute to our strategy, and I would like to discuss more details about this opportunity with you! Would you mind sharing a concise update on your CV? Your expertise aligns with our objectives, and your input would be immensely valuable.'
+    return msg, None
+
