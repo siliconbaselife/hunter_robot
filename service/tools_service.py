@@ -813,7 +813,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
     return filter_result, format_resume_infos
 
 def get_leave_msg(candidate_id, platform):
-    raw_profile = get_raw_latest_profile_by_candidate_id_and(candidate_id, platform)
+    raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
     if not raw_profile:
         logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
         return None, 'no candidate'
@@ -844,7 +844,7 @@ def apply_chat_scenario(candidate_id, platform, scenario):
     scenario_options = ['要简历', '约电话', '转介绍', '召回']
     if scenario not in scenario:
         return None, 'scenario not legal, legal are ' + ','.join(scenario)
-    raw_profile = get_raw_latest_profile_by_candidate_id_and(candidate_id, platform)
+    raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
     if not raw_profile:
         logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
         return None, 'no candidate'

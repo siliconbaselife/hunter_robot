@@ -17,7 +17,7 @@ sql_dict = {
     "update_raw_profile":"update online_resume set raw_profile='{}' where manage_account_id='{}' and platform = '{}' and candidate_id='{}'",
     "upload_online_profile_pdf":"insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
-    "get_raw_latest_profile_by_candidate_id_and platform": "select raw_profile from online_resume where candidate_id = '{}' and platform = '{}' order by id desc limit 1;",
+    "get_raw_latest_profile_by_candidate_id_and_platform": "select raw_profile from online_resume where candidate_id = '{}' and platform = '{}' order by id desc limit 1;",
     "get_resume_by_filter":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}'",
     "get_resume_by_list":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}' and list_name='{}'",
     "create_conversation_report" : "insert into conversation_report (candidate_id, platform, contact, conversation) values ('{}', '{}', '{}', '{}')",
@@ -43,8 +43,8 @@ def get_resume_by_filter(manage_account_id, platform, start_date, end_date, list
 def get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id):
     return dbm.query(sql_dict['get_resume_by_candidate_id_and_platform'].format(candidate_id, platform, manage_account_id))
 
-def get_raw_latest_profile_by_candidate_id_and(candidate_id, platform):
-    return dbm.query(sql_dict['get_raw_latest_profile_by_candidate_id_and'].format(candidate_id, platform))
+def get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform):
+    return dbm.query(sql_dict['get_raw_latest_profile_by_candidate_id_and_platform'].format(candidate_id, platform))
 
 def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id):
     raw_profile = raw_profile.replace("\n", "\\n")
