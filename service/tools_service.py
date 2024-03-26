@@ -854,12 +854,10 @@ def get_leave_msg(candidate_id, platform):
 def apply_chat_scenario(candidate_id, platform):
     scenario_options = ['要简历', '约电话', '转介绍', '召回']
     raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
+    logger.info('[apply_chat_scenario] raw_profile = {}'.format(raw_profile))
     raw_profile = deserialize_raw_profile(raw_profile)
-    if not raw_profile:
-        logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
-        return None, 'no candidate'
     name = None
-    if 'profile' in raw_profile and 'name' in raw_profile['profile']:
+    if raw_profile and 'profile' in raw_profile and 'name' in raw_profile['profile']:
             name = raw_profile['profile']['name']
     ret = {}
     for scenario in scenario_options:
