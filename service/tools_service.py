@@ -814,7 +814,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
 
 
 def deserialize_raw_profile(raw_profile):
-    if raw_profile is None:
+    if raw_profile is None or (type(raw_profile) == tuple and len(raw_profile) == 0):
         return None
     while (type(raw_profile) == tuple):
         raw_profile = raw_profile[0]
