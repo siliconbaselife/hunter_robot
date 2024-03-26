@@ -7,6 +7,9 @@ from web.manage_web import manage_web
 from web.tools_web import tools_web
 from web.manage_web_v2 import manage_web_v2
 from web.source_web_v2 import source_web_v2
+from web.business_web import business_web
+from web.translation_web import translation_web
+
 from utils.config import config
 from dao.task_dao import *
 logger = get_logger(config['log']['log_file'])
@@ -17,6 +20,8 @@ app.register_blueprint(manage_web)
 app.register_blueprint(tools_web)
 app.register_blueprint(manage_web_v2)
 app.register_blueprint(source_web_v2)
+app.register_blueprint(business_web)
+app.register_blueprint(translation_web)
 
 
 CORS(app, supports_credentials=True)

@@ -3,7 +3,8 @@ config = {
     'task':{},
     'chat':{},
     'db': {},
-    'group_msg':{}
+    'group_msg':{},
+    'llm': {}
 }
 
 config['db']['host'] = 'localhost'
@@ -13,6 +14,7 @@ config['db']['user'] = 'chat_user'
 config['db']['pwd'] = '1'
 
 config['log']['log_file'] = 'log/recurit_service.log'
+config['log']['chat_log_file'] = 'log/chat_log.log'
 
 config['task']['task_config_base'] = {
     "helloSum": 50,
@@ -114,5 +116,11 @@ config['job_register'] = {
         "chat_config_v2":"main_chat_robot_v2",
         "recall_config":"zp"
     }
+}
+
+
+config['llm']['gemini'] = {
+    'api_key': 'AIzaSyASOB4k_gyjPsUQZkgrm3_hw2PkyBgMI9o',
+    'model_type': 'gemini-pro',
 }
 
