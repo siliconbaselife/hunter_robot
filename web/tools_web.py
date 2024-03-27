@@ -253,8 +253,6 @@ def upload_online_resume():
     elif platform == 'Linkedin':
         count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age)
 
-    
-
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
@@ -319,12 +317,32 @@ def get_resume_list():
     platform = request.json.get('platform', '')
 
     if platform == '':
-        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+        return Response(json.dumps(get_web_res_fail("平台不存在"), ensure_ascii=False))
 
     ret = get_resume_list_db(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/pluginConfig", methods=['POST'])
+@web_exception_handler
+def get_resume_list():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
 
+    platform = request.json.get('platform', '')
+
+    if platform == '':
+        return Response(json.dumps(get_web_res_fail("平台不存在"), ensure_ascii=False))
+
+    config_json = ''
+
+    save_plugin_chat_config(manage_account_id, platform, config_json):
+
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 
 @tools_web.route("/backend/tools/resumeExist", methods=['POST'])

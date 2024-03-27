@@ -241,6 +241,14 @@ CREATE TABLE IF NOT EXISTS `online_resume`(
    PRIMARY KEY ( `id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+CREATE TABLE IF NOT EXISTS `plugin_chat_config`(
+   `manage_account_id` VARCHAR(100) NOT NULL COMMENT '管理账户ID',
+   `config_json` LONGTEXT COMMENT '对话配置',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+alter table plugin_chat_config add `platform` VARCHAR(50) NOT NULL COMMENT '平台'  after `manage_account_id`;
 
 
 CREATE TABLE IF NOT EXISTS `hello_record`(

@@ -27,6 +27,9 @@ reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load t
 
 file_path_prefix = '/home/human/workspace/hunter_robot.v2.0/tmp/'
 
+
+    
+
 def get_candidate_id(profile, platform):
     if platform == 'maimai':
         return profile['id']
@@ -111,7 +114,6 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 logger.info(f'profile_age_filter：{manage_account_id}, {candidate_id}')
                 continue
 
-            
             summary = p.get('profile', {}).get('summary', '') or ''
             role = p.get('profile', {}).get('role', '') or ''
             location = p.get('profile', {}).get('location', '') or ''

@@ -23,8 +23,12 @@ sql_dict = {
     "create_conversation_report" : "insert into conversation_report (candidate_id, platform, contact, conversation) values ('{}', '{}', '{}', '{}')",
     "add_resume_list_db":"insert into resume_list(manage_account_id, platform, list_name) values ('{}', '{}', '{}')",
     "get_resume_list_db":"select list_name from resume_list where manage_account_id='{}' and platform='{}'",
-    "add_list_relation":"insert into resume_list_relation(manage_account_id, list_name, candidate_id) values ('{}', '{}', '{}')"
+    "add_list_relation":"insert into resume_list_relation(manage_account_id, list_name, candidate_id) values ('{}', '{}', '{}')",
+    "save_config":"INSERT INTO plugin_chat_config (manage_account_id, platform, config_json) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE config_json = VALUES(config_json);"
 }
+def save_plugin_chat_config(manage_account_id, platform, config_json):
+    return dbm.insert(sql_dict['save_config'].format(manage_account_id, platform, config_json))
+
 def add_list_relation(manage_account_id, list_name, candidate_id):
     return dbm.insert(sql_dict['add_list_relation'].format(manage_account_id, list_name, candidate_id))
     
