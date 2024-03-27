@@ -241,6 +241,8 @@ def upload_online_resume():
     platform = request.json.get('platform', '')
     profile = request.json.get('profile', [])
     list_name = request.json.get('list_name', '')
+    min_age = request.json.get('min_age', 10)
+    max_age = request.json.get('max_age', 80)
 
     logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}, {list_name}')
     if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Linkedin'):
@@ -249,7 +251,7 @@ def upload_online_resume():
     if platform == 'maimai':
         count = maimai_online_resume_upload_processor(manage_account_id, profile, platform)
     elif platform == 'Linkedin':
-        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name)
+        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age)
 
     
 

@@ -51,12 +51,13 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     raw_profile = raw_profile.replace("\'", "\\'")
     raw_profile = raw_profile.replace('\"', '\\"')
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
-        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, manage_account_id, platform, candidate_id))
+        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, platform, candidate_id))
     else:
-        return dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id))
+        dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id))
+        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, platform, candidate_id))
+        
 def upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr):
     return dbm.insert(sql_dict['upload_online_profile_pdf'].format(manage_account_id, platform, cv_addr, candidate_id))
-
 
 def get_filter_task_by_id(task_id):
     return dbm.query(sql_dict['get_filter_task_by_id'].format(task_id))

@@ -19,6 +19,7 @@ from flask_admin._compat import csv_encode
 from dao.task_dao import get_chats_by_job_id_with_date,query_candidate_by_id
 from dao.manage_dao import get_job_name_by_id
 import json5
+import re
 from os.path import basename
 
 logger = get_logger(config['log']['log_file'])
@@ -59,7 +60,7 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform):
             count = count + 1
     return count
 
-def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name):
+def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age):
     count = 0
     for p in profile:
         candidate_id = get_candidate_id(p, platform)
@@ -67,6 +68,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             add_list_relation(manage_account_id, list_name, candidate_id)
         if candidate_id == None or candidate_id == '':
             continue
+        firt_work_year = 10000
         if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0 and 'profile' in p:
             for l in p.get('profile', {}).get('languages', []):
                 language = l.get('language', '') or ''
@@ -79,6 +81,10 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 for w in e.get('works', []):
                     workTimeInfo = w.get('workTimeInfo', '') or ''
                     w['workTimeInfo'] = workTimeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                    #截年龄
+                    min_year = int(min(re.findall(pattern, w['workTimeInfo'])))
+                    if min_year < firt_work_year:
+                        firt_work_year = min_year
                     workLocationInfo = w.get('workLocationInfo', '') or ''
                     w['workLocationInfo'] = workLocationInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                     workPosition = w.get('workPosition', '') or ''
@@ -94,8 +100,18 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 edu['majorInfo'] = majorInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                 timeInfo = edu.get('timeInfo', '') or ''
                 edu['timeInfo'] = timeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                #截年龄
+                max_year = int(max(re.findall(pattern, edu['timeInfo'])))
+                if max_year < firt_work_year:
+                    firt_work_year = max_year
                 schoolName = edu.get('schoolName', '') or ''
                 edu['schoolName'] = schoolName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+
+            if min_age > firt_work_year + 23 or max_age < firt_work_year + 23:
+                logger.info(f'profile_age_filter：{manage_account_id}, {candidate_id}')
+                continue
+
+            
             summary = p.get('profile', {}).get('summary', '') or ''
             role = p.get('profile', {}).get('role', '') or ''
             location = p.get('profile', {}).get('location', '') or ''
