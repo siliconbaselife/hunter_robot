@@ -340,7 +340,7 @@ def get_resume_list():
 
     config_json = ''
 
-    save_plugin_chat_config(manage_account_id, platform, config_json):
+    save_plugin_chat_config(manage_account_id, platform, config_json)
 
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
