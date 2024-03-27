@@ -324,7 +324,7 @@ def get_resume_list():
 
 @tools_web.route("/backend/tools/pluginConfig", methods=['POST'])
 @web_exception_handler
-def get_resume_list():
+def pluginConfig():
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
