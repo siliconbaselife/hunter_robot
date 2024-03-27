@@ -14,7 +14,7 @@ sql_dict = {
     "update_filter_result":"update resume_filter_task set filter_result='{}', format_resumes = '{}' where id={}",
     "get_filter_task_by_id":"select id, manage_account_id, resume_url, status, create_time,jd,filter_result,taskname, format_resumes from resume_filter_task where id={}",
     "upload_online_profile":"insert into online_resume(manage_account_id, platform, raw_profile, candidate_id) values ('{}', '{}', '{}', '{}')",
-    "update_raw_profile":"update online_resume set raw_profile='{}' where manage_account_id='{}' and platform = '{}' and candidate_id='{}'",
+    "update_raw_profile":"update online_resume set raw_profile='{}' where platform = '{}' and candidate_id='{}'",
     "upload_online_profile_pdf":"insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
     "get_raw_latest_profile_by_candidate_id_and_platform": "select raw_profile from online_resume where candidate_id = '{}' and platform = '{}' order by id desc limit 1;",
