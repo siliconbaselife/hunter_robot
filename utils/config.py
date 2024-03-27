@@ -4,7 +4,8 @@ config = {
     'chat':{},
     'db': {},
     'group_msg':{},
-    'llm': {}
+    'llm': {},
+    'business': {}
 }
 
 config['db']['host'] = 'localhost'
@@ -14,7 +15,7 @@ config['db']['user'] = 'chat_user'
 config['db']['pwd'] = '1'
 
 config['log']['log_file'] = 'log/recurit_service.log'
-config['log']['chat_log_file'] = 'log/chat_log.log'
+config['log']['business_log_file'] = 'log/business_log.log'
 
 config['task']['task_config_base'] = {
     "helloSum": 50,
@@ -124,3 +125,4 @@ config['llm']['gemini'] = {
     'model_type': 'gemini-pro',
 }
 
+config['business']['expired_time_s'] = 3600

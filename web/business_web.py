@@ -8,11 +8,11 @@ from utils.config import config
 import json
 import math
 
-from service.business_service import find_target_company, find_platform_keyword
+from service.business_service import get_consultant
 
 business_web = Blueprint('business_web', __name__, template_folder='templates')
 
-logger = get_logger(config['log']['log_file'])
+logger = get_logger(config['log']['business_log_file'])
 
 @business_web.route("/backend/business/target_company", methods=['POST'])
 @web_exception_handler
@@ -60,6 +60,7 @@ def find_keyword_api():
 @business_web.route("/backend/business/analysis", methods=['POST'])
 @web_exception_handler
 def business_analysis_api():
+    chat_id = request.json.get('chat_id', None)
     job = request.json.get('job', None)
     if job == None:
         return Response(json.dumps(get_web_res_fail("job 未指定"), ensure_ascii=False))
@@ -70,22 +71,9 @@ def business_analysis_api():
     if region == None:
         return Response(json.dumps(get_web_res_fail("region 未指定"), ensure_ascii=False))
     jd = request.json.get('jd', None)
-    if jd == None:
-        return Response(json.dumps(get_web_res_fail("jd 未指定"), ensure_ascii=False))
     platform = request.json.get('platform', '领英')
     if platform == None:
         return Response(json.dumps(get_web_res_fail("platform 未指定"), ensure_ascii=False))
-    
-    _, tgt_company_info = find_target_company(src_company=src_company, target_region=region, job=job, jd=jd)
-    _, keyword_info = find_platform_keyword(job=job, jd=jd, platform=platform)
-    try:
-        tgt_company_info = json.loads(tgt_company_info.replace("```json\n", "").replace("```",""))
-        keyword_info = json.loads(keyword_info.replace("```json\n", "").replace("```",""))
-        pass
-    except BaseException as e:
-        logger.info(f'parse from tgt_company_info({tgt_company_info}) and keyword_info({keyword_info}) err: {e}')
-    ret = {
-        'target_company': tgt_company_info,
-        'keyword': keyword_info
-    }
+
+    ret = get_consultant(consultant_id=chat_id)(src_company=src_company, target_region=region, job=job, question=jd, platform=platform)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
