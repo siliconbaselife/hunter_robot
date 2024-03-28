@@ -104,7 +104,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 timeInfo = edu.get('timeInfo', '') or ''
                 edu['timeInfo'] = timeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                 #截年龄
-                max_year = int(max(re.findall(pattern, edu['timeInfo'])))
+                max_year = int(max(re.findall(r'\b\d{4}\b', edu['timeInfo'])))
                 if max_year < firt_work_year:
                     firt_work_year = max_year
                 schoolName = edu.get('schoolName', '') or ''
