@@ -85,7 +85,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                     workTimeInfo = w.get('workTimeInfo', '') or ''
                     w['workTimeInfo'] = workTimeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                     #截年龄
-                    min_year = int(min(re.findall(pattern, w['workTimeInfo'])))
+                    min_year = int(min(re.findall(r'\b\d{4}\b', w['workTimeInfo'])))
                     if min_year < firt_work_year:
                         firt_work_year = min_year
                     workLocationInfo = w.get('workLocationInfo', '') or ''
