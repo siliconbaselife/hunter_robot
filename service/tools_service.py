@@ -113,7 +113,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 schoolName = edu.get('schoolName', '') or ''
                 edu['schoolName'] = schoolName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             age = current_year - firt_work_year + 23
-            if min_age >  or max_age < age:
+            if min_age > age or max_age < age:
                 logger.info(f'profile_age_filter：{manage_account_id}, {candidate_id}, {age}')
                 continue
 
