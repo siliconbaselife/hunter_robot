@@ -72,6 +72,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
         if candidate_id == None or candidate_id == '':
             continue
         firt_work_year = 10000
+        current_year = int(datetime.datetime.now().year)
         if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0 and 'profile' in p:
             for l in p.get('profile', {}).get('languages', []):
                 language = l.get('language', '') or ''
@@ -111,9 +112,9 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                     firt_work_year = max_year
                 schoolName = edu.get('schoolName', '') or ''
                 edu['schoolName'] = schoolName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-
-            if min_age > firt_work_year + 23 or max_age < firt_work_year + 23:
-                logger.info(f'profile_age_filter：{manage_account_id}, {candidate_id}')
+            age = current_year - firt_work_year + 23
+            if min_age >  or max_age < age:
+                logger.info(f'profile_age_filter：{manage_account_id}, {candidate_id}, {age}')
                 continue
 
             summary = p.get('profile', {}).get('summary', '') or ''
