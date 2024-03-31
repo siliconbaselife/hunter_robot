@@ -241,8 +241,8 @@ def upload_online_resume():
     platform = request.json.get('platform', '')
     profile = request.json.get('profile', [])
     list_name = request.json.get('list_name', '')
-    min_age = request.json.get('min_age', 10)
-    max_age = request.json.get('max_age', 80)
+    min_age = request.json.get('min_age', -10000)
+    max_age = request.json.get('max_age', 10000)
 
     logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}, {list_name}')
     if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Linkedin'):
