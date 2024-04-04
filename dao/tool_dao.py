@@ -29,7 +29,7 @@ sql_dict = {
     "save_config":"INSERT INTO plugin_chat_config (manage_account_id, platform, config_json) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE config_json = VALUES(config_json);",
     "create_profile_tag": "insert into user_profile_tag (manage_account_id, platform, tag) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), tag = VALUES(tag);",
     "query_profile_id_tag": "select id, tag from user_profile_tag where manage_account_id = '{}' and platform = '{}';",
-    "delete_profile_tags": "delete user_profile_tag where id in ('{}');",
+    "delete_profile_tags": "delete from user_profile_tag where id in ('{}');",
     "query_profile_tag_relation_by_user_and_candidate_db": "select tag_id, tag from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}';",
     "associate_profile_tag": "insert into user_profile_tag_relation (manage_account_id, candidate_id, platform, tag_id, tag) values ('{}', '{}', '{}', '{}', '{}');",
     "query_id_by_profile_tag_relation": "select id from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in ('{}');",
