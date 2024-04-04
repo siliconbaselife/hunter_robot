@@ -901,7 +901,7 @@ def ensure_cache(manage_account_id, platform):
     if manage_account_id not in _tag_id_cache:
         _tag_id_cache[manage_account_id] = {}
         _tag_name_id_cache[manage_account_id] = {}
-        id_tags = query_profile_tag_db(manage_account_id, platform)
+        id_tags = query_profile_id_tag(manage_account_id, platform)
         for id_tag in id_tags:
             _tag_id_cache[manage_account_id][id_tag[0]] = id_tag[1]
             _tag_name_id_cache[manage_account_id][id_tag[1]] = id_tag[0]

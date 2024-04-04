@@ -121,8 +121,8 @@ def create_conversation_report(candidate_id, platform, contact, conversations):
 def create_profile_tag_db(manage_account_id, platform, tag):
     return dbm.insert(sql_dict['create_profile_tag'].format(manage_account_id, platform, tag))
 
-def query_profile_tag_db(manage_account_id, platform):
-    return dbm.query(sql_dict['query_profile_tag'].format(manage_account_id, platform))
+def query_profile_id_tag(manage_account_id, platform):
+    return dbm.query(sql_dict['query_profile_id_tag'].format(manage_account_id, platform))
 
 def query_profile_tag_relation_by_user_and_candidate_db(manage_account_id, candidate_id, platform):
     return dbm.query(sql_dict['query_profile_tag_relation_by_user_and_candidate_db'].format(manage_account_id, candidate_id, platform))
