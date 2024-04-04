@@ -64,7 +64,7 @@ def get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candid
     return dbm.query(sql_dict['get_resume_by_candidate_ids_and_platform'].format(candidate_ids, platform, manage_account_id, page, limit))
 
 def get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids):
-    return dbm.query(sql_dict['get_resume_total_count_by_candidate_ids_and_platform'].format(candidate_ids, platform, manage_account_id))
+    return dbm.query(sql_dict['get_resume_total_count_by_candidate_ids_and_platform'].format(candidate_ids, platform, manage_account_id))[0][0]
 
 
 
@@ -134,7 +134,8 @@ def query_id_by_profile_tag_relation(manage_account_id, candidate_id, platform, 
     return dbm.query(sql_dict['query_id_by_profile_tag_relation'].format(manage_account_id, candidate_id, platform, ','.join(tags)))
 
 def query_candidate_id_by_tag_relation(manage_account_id, platform, tags):
-    return dbm.query(sql_dict['query_candidate_id_by_tag_relation'].format(manage_account_id, platform, ','.join(tags)))
+    rows = dbm.query(sql_dict['query_candidate_id_by_tag_relation'].format(manage_account_id, platform, ','.join(tags)))
+    return [row[0] for row in rows]
 
 def delete_profile_tag_relation(manage_account_id, candidate_id, platform, tags):
     return dbm.query(sql_dict['delete_profile_tag_relation'].format(manage_account_id, candidate_id, platform, ','.join(tags)))
