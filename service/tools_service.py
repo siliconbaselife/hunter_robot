@@ -1009,7 +1009,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
         if 'profile' in raw_profile and 'role' in raw_profile['profile']:
             detail['title'] = raw_profile['profile']['role']
 
-    return data
+    return data, None
 
 
 
