@@ -981,7 +981,7 @@ def transfer_profile():
     return None
 
 def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
-    tag_ids = get_check_tag_ids(manage_account_id, tags)
+    tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
         return None, "tags中存在无效tag"
     candidate_ids = query_candidate_id_by_tag_relation(manage_account_id, platform, tags)
