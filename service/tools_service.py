@@ -957,9 +957,8 @@ def deassociate_profile_tags(manage_account_id, candidate_id, platform, tags):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
         return None, "tags中存在无效tag"
-    for idx, tag_id in enumerate(tag_ids):
-        delete_profile_tag_relation(manage_account_id, candidate_id, platform, tag_id, tags[idx])
-        logger.info("[tool_service] delete_profile_tag_relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
+    delete_profile_tag_relation(manage_account_id, candidate_id, platform, tags)
+    logger.info("[tool_service] delete_profile_tag_relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_ids = {}, tags = {}", manage_account_id, candidate_id, platform, tag_ids, tags)
     return tags, None
 
 def delete_profile_tags(manage_account_id, candidate_id, platform, tags):
