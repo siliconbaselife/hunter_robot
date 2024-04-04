@@ -140,4 +140,5 @@ def delete_profile_tag_relation(manage_account_id, candidate_id, platform, tags)
     return dbm.query(sql_dict['delete_profile_tag_relation'].format(manage_account_id, candidate_id, platform, ','.join(tags)))
 
 def delete_profile_tags_db(ids):
-    return dbm.query(sql_dict['delete_profile_tags'].format(','.join(ids)))
+    str_ids = [str(iid) for iid in ids]
+    return dbm.query(sql_dict['delete_profile_tags'].format(','.join(str_ids)))
