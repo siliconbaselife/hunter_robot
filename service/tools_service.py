@@ -985,6 +985,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
     if not tag_ids:
         return None, "tags中存在无效tag"
     candidate_ids = query_candidate_id_by_tag_relation(manage_account_id, platform, tags)
+    logger.info("debug query candidate_ids = {}".format(candidate_ids))
     total_count = get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids)
     start = (page - 1)*limit
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids, start, limit)
