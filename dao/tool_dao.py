@@ -64,7 +64,7 @@ def get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candid
     return dbm.query(sql_dict['get_resume_by_candidate_ids_and_platform'].format(candidate_ids, platform, manage_account_id, page, limit))
 
 def get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids):
-    return dbm.query(sql_dict['get_resume_total_count_by_candidate_ids_and_platform'].format(candidate_ids, platform, manage_account_id))[0][0]
+    return dbm.query(sql_dict['get_resume_total_count_by_candidate_ids_and_platform'].format(','.join(candidate_ids), platform, manage_account_id))[0][0]
 
 
 
