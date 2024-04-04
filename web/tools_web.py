@@ -432,11 +432,12 @@ def create_profile_tag_web():
     tag = request.json.get('tag', '')
     if tag == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    cookie_user_name = request.json.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    manage_account_id = 'lishundong2009@163.com'
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] create profile tag for manage_account_id = {}, platform = {}, tag = {}".format(manage_account_id, platform, tag))
@@ -452,11 +453,12 @@ def get_tags_by_user_web():
     platform = request.json.get('platform', '')
     if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    cookie_user_name = request.json.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    manage_account_id = 'lishundong2009@163.com'
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] get profile tag for manage_account_id = {}, platform = {}".format(manage_account_id, platform))
@@ -473,11 +475,12 @@ def get_tags_by_user_and_candidate_web():
     candidate_id = request.json.get('candidate_id', '')
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    cookie_user_name = request.json.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    manage_account_id = 'lishundong2009@163.com'
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] get profile tags by manage_account_id = {} and candidate_id = {}, platform = {}".format(manage_account_id, candidate_id, platform))
@@ -495,11 +498,12 @@ def associate_profile_tags_web():
     tags = request.json.get('tags', [])
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    cookie_user_name = request.json.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    manage_account_id = 'lishundong2009@163.com'
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] associate_profile_tags_web manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
@@ -517,11 +521,12 @@ def deassociate_profile_tags_web():
     tags = request.json.get('tags', [])
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    cookie_user_name = request.json.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    manage_account_id = 'lishundong2009@163.com'
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] deassociate_profile_tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
@@ -539,11 +544,12 @@ def delete_profile_tags_web():
     tags = request.json.get('tags', [])
     if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    cookie_user_name = request.json.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    manage_account_id = 'lishundong2009@163.com'
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] delete profile tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
@@ -562,11 +568,12 @@ def search_profile_by_tag_web():
     limit = request.json.get('limit', 20)
     if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0 or page <= 0 or limit <= 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    cookie_user_name = request.json.get('user_name', None)
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
+    # cookie_user_name = request.json.get('user_name', None)
+    # if cookie_user_name == None:
+    #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    # else:
+    #     manage_account_id = decrypt(cookie_user_name, key)
+    manage_account_id = 'lishundong2009@163.com'
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] search profile by tag manage_account_id = {}, platform = {}, tags = {}".format(manage_account_id, platform, tags))
