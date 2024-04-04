@@ -950,7 +950,7 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
     logger.info("debug tags = {}, tag_ids = {}".format(tags, tag_ids))
     for idx, tag_id in enumerate(tag_ids):
         associate_profile_tag(manage_account_id, candidate_id, platform, tag_id, tags[idx])
-        logger.info("[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tag)
+        logger.info("[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
     return tags, None
 
 def deassociate_profile_tags(manage_account_id, candidate_id, platform, tags):
@@ -959,7 +959,7 @@ def deassociate_profile_tags(manage_account_id, candidate_id, platform, tags):
         return None, "tags中存在无效tag"
     for idx, tag_id in enumerate(tag_ids):
         delete_profile_tag_relation(manage_account_id, candidate_id, platform, tag_id, tags[idx])
-        logger.info("[tool_service] delete_profile_tag_relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tag)
+        logger.info("[tool_service] delete_profile_tag_relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
     return tags, None
 
 def delete_profile_tags(manage_account_id, candidate_id, platform, tags):
