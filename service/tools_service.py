@@ -905,7 +905,6 @@ def ensure_cache(manage_account_id, platform):
         for id_tag in id_tags:
             _tag_id_cache[manage_account_id][id_tag[0]] = id_tag[1]
             _tag_name_id_cache[manage_account_id][id_tag[1]] = id_tag[0]
-            logger.info("debug initialize tags {}, {}".format(_tag_id_cache[manage_account_id], _tag_name_id_cache[manage_account_id]))
     return _tag_id_cache[manage_account_id], _tag_name_id_cache[manage_account_id]
 
 def get_check_tag_ids(manage_account_id, tags, platform):
@@ -947,7 +946,6 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
         return None, "tags中存在无效tag"
-    logger.info("debug tags = {}, tag_ids = {}".format(tags, tag_ids))
     for idx, tag_id in enumerate(tag_ids):
         associate_profile_tag(manage_account_id, candidate_id, platform, tag_id, tags[idx])
         logger.info("[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
@@ -985,9 +983,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
     if not tag_ids:
         return None, "tags中存在无效tag"
     candidate_ids = query_candidate_id_by_tag_relation(manage_account_id, platform, tags)
-    logger.info("debug query candidate_ids = {}".format(candidate_ids))
     total_count = get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids)
-    logger.info("debug query candidate_ids = {}".format(candidate_ids))
     start = (page - 1)*limit
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids, start, limit)
     details = []
@@ -996,7 +992,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
     for row in rows:
         detail = {'candidateId' : row[0], 'department': None, 'title': None, 'name':None, 'location':None, 'contactInfo': None, 'cv':None, 'cvUrl': row[2]}
         details.append(detail)
-        profile = row[1]
+        raw_profile = row[1]
         raw_profile = deserialize_raw_profile(raw_profile)
         if not raw_profile:
             continue
