@@ -894,3 +894,122 @@ def apply_chat_scenario(candidate_id, platform):
         ret[scenario] = [msg]
     return ret, None
 
+_tag_id_cache = {}
+_tag_name_id_cache = {}
+
+def ensure_cache(manage_account_id, platform):
+    if manage_account_id not in _tag_id_cache:
+        _tag_id_cache[manage_account_id] = {}
+        _tag_name_id_cache[manage_account_id] = {}
+        id_tags = query_profile_id_tag(manage_account_id, platform)
+        for id_tag in id_tags:
+            _tag_id_cache[manage_account_id][id_tag[0]] = id_tag[1]
+            _tag_name_id_cache[manage_account_id][id_tag[1]] = id_tag[0]
+    return _tag_id_cache[manage_account_id], _tag_name_id_cache[manage_account_id]
+
+def get_check_tag_ids(manage_account_id, tags, platform):
+    user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
+    tag_ids = []
+    for tag in tags:
+        if tag not in user_tag_id_cache:
+            return None
+        else:
+            tag_ids.append(user_tag_id_cache[tag])
+    return tag_ids
+
+def create_profile_tag(manage_account_id, platform, tag):
+    try:
+        tag_id = create_profile_tag_db(manage_account_id, platform, tag)
+    except BaseException as e:
+        logger.error("[tool_service] create profile tag failed for {}, {}, {}".format(manage_account_id, platform, tag))
+        return None, "创建profile tag失败"
+    user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
+    user_id_tag_cache[tag_id] = tag
+    user_tag_id_cache[tag] = tag_id
+
+    return {'tag_id': tag_id, 'tag': tag, 'manage_account_id': manage_account_id, 'platform': platform, 'tag': tag}, None
+
+def query_profile_tag_by_user(manage_account_id, platform):
+    user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
+    tags = list(user_tag_id_cache.keys())
+    return tags, None
+
+def query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidate_id, platform):
+    id_tags = query_profile_tag_relation_by_user_and_candidate_db(manage_account_id, candidate_id, platform)
+    tags = []
+    for id_tag in id_tags:
+        tags.append(id_tag[1])
+
+    return tags, None
+
+def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
+    tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
+    if not tag_ids:
+        return None, "tags中存在无效tag"
+    for idx, tag_id in enumerate(tag_ids):
+        associate_profile_tag(manage_account_id, candidate_id, platform, tag_id, tags[idx])
+        logger.info("[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
+    return tags, None
+
+def deassociate_profile_tags(manage_account_id, candidate_id, platform, tags):
+    tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
+    if not tag_ids:
+        return None, "tags中存在无效tag"
+    delete_profile_tag_relation(manage_account_id, candidate_id, platform, tags)
+    logger.info("[tool_service] delete_profile_tag_relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_ids = {}, tags = {}", manage_account_id, candidate_id, platform, tag_ids, tags)
+    return tags, None
+
+def delete_profile_tags(manage_account_id, candidate_id, platform, tags):
+    user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
+    tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
+    if not tag_ids:
+        return None, "tags中存在无效tag"
+    relations = query_id_by_profile_tag_relation(manage_account_id, candidate_id, platform, tags)
+    if relations and len(relations) != 0:
+        return None, "存在标记的tag关系, 请先清除profile和tag关系"
+    delete_profile_tags_db(tag_ids)
+    for idx, tag in enumerate(tags):
+        user_id_tag_cache.pop(tag_ids[idx])
+        user_tag_id_cache.pop(tag)
+    logger.info("[tool_service] delete manage_account_id = {}, candidate_id = {}, platform = {}, tags = {}", manage_account_id, candidate_id, platform, tags)
+    return None, None
+
+def transfer_profile():
+    # to do refactor for download excel
+    return None
+
+def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
+    tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
+    if not tag_ids:
+        return None, "tags中存在无效tag"
+    candidate_ids = query_candidate_id_by_tag_relation(manage_account_id, platform, tags)
+    total_count = get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids)
+    start = (page - 1)*limit
+    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids, start, limit)
+    details = []
+    data = {'page': page, 'limit':limit, 'total': total_count, 'details': details}
+
+    for row in rows:
+        detail = {'candidateId' : row[0], 'department': None, 'title': None, 'name':None, 'location':None, 'contactInfo': None, 'cv':None, 'cvUrl': row[2]}
+        details.append(detail)
+        raw_profile = row[1]
+        raw_profile = deserialize_raw_profile(raw_profile)
+        if not raw_profile:
+            continue
+        if 'profile' in raw_profile and 'name' in raw_profile['profile']:
+            detail['name'] = raw_profile['profile']['name']
+
+        location = None
+        if 'profile' in raw_profile and 'location' in raw_profile['profile']:
+            detail['location'] = raw_profile['profile']['location']
+
+        if 'profile' in raw_profile and 'contactInfo' in raw_profile['profile']:
+            detail['contactInfo'] = raw_profile['profile']['contactInfo']
+
+        if 'profile' in raw_profile and 'role' in raw_profile['profile']:
+            detail['title'] = raw_profile['profile']['role']
+
+    return data, None
+
+
+
