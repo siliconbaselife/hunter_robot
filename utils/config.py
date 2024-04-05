@@ -5,7 +5,8 @@ config = {
     'db': {},
     'group_msg':{},
     'llm': {},
-    'business': {}
+    'business': {},
+    'extension': {}
 }
 
 config['db']['host'] = 'localhost'
@@ -16,6 +17,7 @@ config['db']['pwd'] = '1'
 
 config['log']['log_file'] = 'log/recurit_service.log'
 config['log']['business_log_file'] = 'log/business_log.log'
+config['log']['extension_log_file'] = 'log/extension_log.log'
 
 config['task']['task_config_base'] = {
     "helloSum": 50,
@@ -126,3 +128,12 @@ config['llm']['gemini'] = {
 }
 
 config['business']['expired_time_s'] = 3600
+
+config['extension']['contactout'] = {
+    'token': 'W3CA5nrUdUEn3N0ThFwqcjsC',
+}
+
+config['extension']['price'] = {
+    'email': 5,
+    'phone': 4,
+}

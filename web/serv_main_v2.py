@@ -9,6 +9,7 @@ from web.manage_web_v2 import manage_web_v2
 from web.source_web_v2 import source_web_v2
 from web.business_web import business_web
 from web.translation_web import translation_web
+from web.extension_web import extension_web
 
 from utils.config import config
 from dao.task_dao import *
@@ -22,6 +23,7 @@ app.register_blueprint(manage_web_v2)
 app.register_blueprint(source_web_v2)
 app.register_blueprint(business_web)
 app.register_blueprint(translation_web)
+app.register_blueprint(extension_web)
 
 
 CORS(app, supports_credentials=True)
