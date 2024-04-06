@@ -77,7 +77,9 @@ class DBManager:
         with self.lock:
             self.reconnect()
             self.cursor.execute(sql)
+            row_id = self.cursor.lastrowid
             self.connection.commit()
+            return row_id
 
     def drop_table(self, sql):
         logger.info(f'sql drop_table: {sql}')
