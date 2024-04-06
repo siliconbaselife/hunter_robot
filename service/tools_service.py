@@ -921,7 +921,7 @@ def create_profile_tag(manage_account_id, platform, tag):
     user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
     if tag in user_tag_id_cache:
         logger.info("[tool_service] tag = {} already exist, ignore create")
-        return {'tag_id': tag_id, 'tag': tag, 'manage_account_id': manage_account_id, 'platform': platform, 'tag': tag}, None
+        return {'tag_id': user_tag_id_cache[tag], 'tag': tag, 'manage_account_id': manage_account_id, 'platform': platform, 'tag': tag}, None
     try:
         tag_id = create_profile_tag_db(manage_account_id, platform, tag)
     except BaseException as e:
