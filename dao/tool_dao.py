@@ -17,8 +17,8 @@ sql_dict = {
     "update_raw_profile":"update online_resume set raw_profile='{}' where platform = '{}' and candidate_id='{}'",
     "upload_online_profile_pdf":"insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform":"select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
-    "get_resume_by_candidate_ids_and_platform":"select candidate_id, raw_profile, cv_url from online_resume where candidate_id in ('{}') and platform='{}' and manage_account_id='{}' order by id limit {}, {}",
-    "get_resume_total_count_by_candidate_ids_and_platform":"select count(1) from online_resume where candidate_id in ('{}') and platform='{}' and manage_account_id='{}'",
+    "get_resume_by_candidate_ids_and_platform":"select candidate_id, raw_profile, cv_url from online_resume where candidate_id in {} and platform='{}' and manage_account_id='{}' order by id limit {}, {}",
+    "get_resume_total_count_by_candidate_ids_and_platform":"select count(1) from online_resume where candidate_id in {} and platform='{}' and manage_account_id='{}'",
     "get_raw_latest_profile_by_candidate_id_and_platform": "select raw_profile from online_resume where candidate_id = '{}' and platform = '{}' order by id desc limit 1;",
     "get_resume_by_filter":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}'",
     "get_resume_by_list":"select id,candidate_id,manage_account_id,platform,create_time,raw_profile from online_resume where manage_account_id='{}' and platform='{}' and create_time > '{}' and create_time < '{}' and list_name='{}'",
@@ -29,13 +29,24 @@ sql_dict = {
     "save_config":"INSERT INTO plugin_chat_config (manage_account_id, platform, config_json) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE config_json = VALUES(config_json);",
     "create_profile_tag": "insert into user_profile_tag (manage_account_id, platform, tag) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), tag = VALUES(tag);",
     "query_profile_id_tag": "select id, tag from user_profile_tag where manage_account_id = '{}' and platform = '{}';",
-    "delete_profile_tags": "delete from user_profile_tag where id in ('{}');",
+    "delete_profile_tags": "delete from user_profile_tag where id in {};",
     "query_profile_tag_relation_by_user_and_candidate_db": "select tag_id, tag from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}';",
     "associate_profile_tag": "insert into user_profile_tag_relation (manage_account_id, candidate_id, platform, tag_id, tag) values ('{}', '{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), candidate_id = VALUES(candidate_id), platform = VALUES(platform), tag_id = VALUES(tag_id), tag = VALUES(tag);",
-    "query_id_by_profile_tag_relation": "select id from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in ('{}');",
-    "query_candidate_id_by_tag_relation": "select candidate_id from user_profile_tag_relation where manage_account_id = '{}' and platform = '{}' and tag in ('{}');",
-    "delete_profile_tag_relation": "delete from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in ('{}');"
+    "query_id_by_profile_tag_relation": "select id from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};",
+    "query_candidate_id_by_tag_relation": "select candidate_id from user_profile_tag_relation where manage_account_id = '{}' and platform = '{}' and tag in {};",
+    "delete_profile_tag_relation": "delete from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};"
 }
+def db_file_join(fields):
+    file_str = '('
+    for idx, field in enumerate(fields):
+        file_str += '\''
+        file_str += str(field)
+        file_str += '\''
+        if idx != len(fields) - 1:
+            file_str += ','
+    file_str += ')'
+    return file_str
+
 def save_plugin_chat_config(manage_account_id, platform, config_json):
     return dbm.insert(sql_dict['save_config'].format(manage_account_id, platform, config_json))
 
@@ -61,10 +72,10 @@ def get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform):
     return dbm.query(sql_dict['get_raw_latest_profile_by_candidate_id_and_platform'].format(candidate_id, platform))
 
 def get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids, page, limit):
-    return dbm.query(sql_dict['get_resume_by_candidate_ids_and_platform'].format(','.join(candidate_ids), platform, manage_account_id, page, limit))
+    return dbm.query(sql_dict['get_resume_by_candidate_ids_and_platform'].format(db_file_join(candidate_ids), platform, manage_account_id, page, limit))
 
 def get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids):
-    return dbm.query(sql_dict['get_resume_total_count_by_candidate_ids_and_platform'].format(','.join(candidate_ids), platform, manage_account_id))[0][0]
+    return dbm.query(sql_dict['get_resume_total_count_by_candidate_ids_and_platform'].format(db_file_join(candidate_ids), platform, manage_account_id))[0][0]
 
 
 
@@ -131,15 +142,14 @@ def associate_profile_tag(manage_account_id, candidate_id, platform, tag_id, tag
     return dbm.query(sql_dict['associate_profile_tag'].format(manage_account_id, candidate_id, platform, tag_id, tag))
 
 def query_id_by_profile_tag_relation(manage_account_id, candidate_id, platform, tags):
-    return dbm.query(sql_dict['query_id_by_profile_tag_relation'].format(manage_account_id, candidate_id, platform, ','.join(tags)))
+    return dbm.query(sql_dict['query_id_by_profile_tag_relation'].format(manage_account_id, candidate_id, platform, db_file_join(tags)))
 
 def query_candidate_id_by_tag_relation(manage_account_id, platform, tags):
-    rows = dbm.query(sql_dict['query_candidate_id_by_tag_relation'].format(manage_account_id, platform, ','.join(tags)))
+    rows = dbm.query(sql_dict['query_candidate_id_by_tag_relation'].format(manage_account_id, platform, db_file_join(tags)))
     return [row[0] for row in rows]
 
 def delete_profile_tag_relation(manage_account_id, candidate_id, platform, tags):
-    return dbm.query(sql_dict['delete_profile_tag_relation'].format(manage_account_id, candidate_id, platform, ','.join(tags)))
+    return dbm.query(sql_dict['delete_profile_tag_relation'].format(manage_account_id, candidate_id, platform, db_file_join(tags)))
 
 def delete_profile_tags_db(ids):
-    str_ids = [str(iid) for iid in ids]
-    return dbm.query(sql_dict['delete_profile_tags'].format(','.join(str_ids)))
+    return dbm.query(sql_dict['delete_profile_tags'].format(db_file_join(ids)))
