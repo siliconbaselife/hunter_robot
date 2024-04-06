@@ -918,12 +918,15 @@ def get_check_tag_ids(manage_account_id, tags, platform):
     return tag_ids
 
 def create_profile_tag(manage_account_id, platform, tag):
+    user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
+    if tag in user_tag_id_cache:
+        logger.info("[tool_service] tag = {} already exist, ignore create")
+        return {'tag_id': tag_id, 'tag': tag, 'manage_account_id': manage_account_id, 'platform': platform, 'tag': tag}, None
     try:
         tag_id = create_profile_tag_db(manage_account_id, platform, tag)
     except BaseException as e:
         logger.error("[tool_service] create profile tag failed for {}, {}, {}".format(manage_account_id, platform, tag))
         return None, "创建profile tag失败"
-    user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
     user_id_tag_cache[tag_id] = tag
     user_tag_id_cache[tag] = tag_id
 
