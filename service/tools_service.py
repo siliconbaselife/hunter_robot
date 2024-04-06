@@ -947,6 +947,10 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
     if not tag_ids:
         return None, "tags中存在无效tag"
     for idx, tag_id in enumerate(tag_ids):
+        relations = query_id_by_profile_tag_relation(manage_account_id, candidate_id, platform, [tags[idx]])
+        if relations and len(relations) > 0:
+            logger.info("[tool_service] associate_profile_tag existing relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
+            continue
         associate_profile_tag(manage_account_id, candidate_id, platform, tag_id, tags[idx])
         logger.info("[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
     return tags, None
