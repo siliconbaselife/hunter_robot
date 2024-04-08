@@ -1000,7 +1000,7 @@ def cv_str(cv, obj, dent):
     elif type(obj) == str or type(obj) == int or type(obj) == float:
         for _ in range(dent):
             cv += '\t'
-        cv += (str(obj[k]) + '\n')
+        cv += (str(obj) + '\n')
 
 def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
