@@ -837,10 +837,13 @@ def exec_filter_task(manage_account_id, file_list, jd):
 def deserialize_raw_profile(raw_profile):
     if raw_profile is None or (type(raw_profile) == tuple and len(raw_profile) == 0):
         return None
-    while (type(raw_profile) == tuple):
-        raw_profile = raw_profile[0]
-    if type(raw_profile) == str:
-        return json.loads(raw_profile)
+    try:
+        while (type(raw_profile) == tuple):
+            raw_profile = raw_profile[0]
+        if type(raw_profile) == str:
+            return json.loads(raw_profile)
+    except BaseException as e:
+        return None
     return None
 
 def get_leave_msg(candidate_id, platform):
@@ -989,10 +992,11 @@ def cv_str(obj, dent):
     cv = ""
     if type(obj) == dict:
         for k in obj:
-            for _ in range(dent):
-                cv += '\t'
-            cv += (k + ":")
-            cv += cv_str(obj[k], dent + 1)
+            if obj[k]:
+                for _ in range(dent):
+                    cv += '\t'
+                cv += (k + ":")
+                cv += cv_str(obj[k], dent + 1)
     elif type(obj) == list:
         for e in obj:
             cv += cv_str(e, dent + 1)
@@ -1000,7 +1004,7 @@ def cv_str(obj, dent):
         cv += (str(obj) + '\n')
     return cv
 
-def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
+def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contact2str):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
         return None, "tags中存在无效tag"
@@ -1026,7 +1030,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
             detail['location'] = raw_profile['profile']['location']
 
         if 'profile' in raw_profile and 'contactInfo' in raw_profile['profile']:
-            detail['contactInfo'] = raw_profile['profile']['contactInfo']
+            detail['contactInfo'] = cv_str(raw_profile['profile']['contactInfo'], 0) if contact2str else raw_profile['profile']['contactInfo']
 
         if 'profile' in raw_profile and 'role' in raw_profile['profile']:
             detail['title'] = raw_profile['profile']['role']

@@ -1,5 +1,6 @@
-from flask import Flask, Response, request, stream_with_context
+from flask import Flask, Response, request, stream_with_context,send_file
 from flask import Blueprint
+import pandas as pd
 from utils.decorator import web_exception_handler
 from utils.log import get_logger
 from utils.config import config
@@ -570,8 +571,42 @@ def search_profile_by_tag_web():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] search profile by tag manage_account_id = {}, platform = {}, tags = {}".format(manage_account_id, platform, tags))
-    data, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit)
+    data, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, False)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
     logger.info("[backend_tools] get profile tag done for manage_account_id = {}, platform = {}, tags = {} -> res = {}".format(manage_account_id, platform, tags, data))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/downloadProfileInfoByTag", methods=['POST'])
+@web_exception_handler
+def search_profile_by_tag_web():
+    platform = request.json.get('platform', '')
+    tags = request.json.get('tags', [])
+    page = request.json.get('page', 1)
+    limit = request.json.get('limit', 9999)
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0 or page <= 0 or limit <= 0:
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info("[backend_tools] search profile by tag manage_account_id = {}, platform = {}, tags = {}".format(manage_account_id, platform, tags))
+    search_datas, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, True)
+    if error_msg:
+        return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
+    pd_data = {}
+    if len(search_datas) > 0:
+        for k in search_data[0]:
+            pd_data[k] = []
+        for search_data in search_datas:
+            for k in search_data:
+                pd_data[k].append(search_data[k])
+    df = pd.DataFrame(pd_data)
+    excel_file = pd.ExcelWriter('data.xlsx', engine='xlsxwriter')
+    df.to_excel(excel_file, index=False)
+    excel_file.save()
+    return send_file('data.xlsx', as_attachment=True)
