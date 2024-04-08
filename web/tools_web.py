@@ -580,7 +580,7 @@ def search_profile_by_tag_web():
 
 @tools_web.route("/backend/tools/downloadProfileInfoByTag", methods=['POST'])
 @web_exception_handler
-def search_profile_by_tag_web():
+def download_profile_by_tag_web():
     platform = request.json.get('platform', '')
     tags = request.json.get('tags', [])
     page = request.json.get('page', 1)
