@@ -985,6 +985,21 @@ def delete_profile_tags(manage_account_id, candidate_id, platform, tags):
 def transfer_profile():
     # to do refactor for download excel
     return None
+def cv_str(cv, obj, dent):
+
+    if type(obj) == dict:
+        for k in obj:
+            for _ in range(dent):
+                cv += '\t'
+            cv += k
+            cv_str(cv, obj[k], dent + 1)
+    elif type(obj) == list:
+        for e in obj:
+            for _ in range(dent):
+                cv += '\t'
+            cv_str(cv, e, dent + 1)
+    elif type(obj) == str or type(obj) == int or type(obj) == float:
+        cv += (k + ':' + str(obj[k]) + '\n')
 
 def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
@@ -1016,6 +1031,15 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit):
 
         if 'profile' in raw_profile and 'role' in raw_profile['profile']:
             detail['title'] = raw_profile['profile']['role']
+
+        if 'profile' in raw_profile and 'experiences' in raw_profile['profile'] and \
+        type(raw_profile['profile']['experiences']) == list and len((raw_profile['profile']['experiences'])) > 0:
+            experience = raw_profile['profile']['experiences'][0]
+            if'companyName' in  experience:
+                detail['department'] = experience['companyName']
+            cv = ""
+            cv_str(cv, experience, 0)
+            detail['cv'] = cv
 
     return data, None
 
