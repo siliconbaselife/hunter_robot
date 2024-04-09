@@ -599,6 +599,7 @@ def download_profile_by_tag_web111():
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
     pd_data = {}
+    search_data = search_data['details']
     if len(search_datas) > 0:
         for k in search_datas[0]:
             pd_data[k] = []
