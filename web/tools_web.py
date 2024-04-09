@@ -607,7 +607,7 @@ def download_profile_by_tag_web111():
             for k in search_data:
                 pd_data[k].append(search_data[k])
     df = pd.DataFrame(pd_data)
-    excel_file = pd.ExcelWriter('data.xlsx', engine='xlsxwriter')
-    df.to_excel(excel_file, index=False)
-    excel_file.save()
+    writer = pd.ExcelWriter('data.xlsx', engine='xlsxwriter')
+    df.to_excel(writer, index=False)
+    writer.close()
     return send_file('data.xlsx', as_attachment=True)
