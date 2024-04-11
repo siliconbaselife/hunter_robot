@@ -20,12 +20,12 @@ def refill_credit_api():
     user_id = request.json.get('user_id', None)
     if user_id == None:
         return Response(json.dumps(get_web_res_fail("user_id 未指定"), ensure_ascii=False))
-    credit_2_add = request.json.get('refill_credit', None)
-    if credit_2_add == None or type(credit_2_add) is not int:
-        return Response(json.dumps(get_web_res_fail(f"credit_to_add invalid: {credit_2_add}"), ensure_ascii=False))
+    refill_credit = request.json.get('refill_credit', None)
+    if refill_credit == None or type(refill_credit) is not int:
+        return Response(json.dumps(get_web_res_fail(f"refill_credit invalid: {refill_credit}"), ensure_ascii=False))
 
     credit = fetch_user_credit(user_id=user_id)
-    credit+= credit_2_add
+    credit+= refill_credit
     update_user_credit(user_id=user_id, new_credit=credit)
     ret = {
         'updated_credit': credit
