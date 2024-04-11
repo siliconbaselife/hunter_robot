@@ -7,7 +7,7 @@ import json
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "new_extension_user": "insert into extension_user(user_id, user_credit, user_email, already_contacts) values ('{}', {}, '{}', '{}')",
+    "new_extension_user": "insert into extension_user(user_id, user_credit, already_contacts) values ('{}', {}, '{}')",
     "query_user_credit": "select user_credit from extension_user where user_id='{}'",
     "update_user_credit": "update extension_user set user_credit={} where user_id='{}'",
     "query_user_already_contacts": "select already_contacts from extension_user where user_id='{}'",
@@ -18,10 +18,8 @@ sql_dict = {
     "query_contact_by_profile": "select linkedin_id, name, personal_email, work_email, work_email_status, phone from contact_bank where linkedin_profile='{}'",
 }
 
-def new_extension_user(user_email, credit=0):
-    user_id = shortuuid.uuid()
-    dbm.insert(sql_dict['new_extension_user'].format(user_id, credit, user_email, []))
-    return user_id
+def new_extension_user(user_id, credit=0):
+    dbm.insert(sql_dict['new_extension_user'].format(user_id, credit, []))
 
 def update_user_credit(user_id, new_credit):
     dbm.update(sql_dict['update_user_credit'].format(new_credit, user_id))

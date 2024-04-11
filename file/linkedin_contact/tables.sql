@@ -8,6 +8,14 @@ CREATE TABLE IF NOT EXISTS `extension_user`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
 alter table extension_user add `already_contacts` LONGTEXT NOT NULL COMMENT '已购买联系人'  after `user_email`;
+
+# "use email as user_id, same as table manage_account"
+ALTER TABLE extension_user DROP COLUMN user_email; 
+# "refresh table use data from manage_account"
+insert into extension_user (user_id, user_credit, already_contacts) 
+select manage_account_id, 0, '[]' from manage_account 
+where manage_account_id like '%@%';
+
 =====already_contacts===========
 [
 	("https://www.linkedin.com/in/kaiming-he-90664838", "personal_email"),
