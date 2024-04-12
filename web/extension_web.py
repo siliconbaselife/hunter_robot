@@ -8,27 +8,31 @@ from utils.config import config
 import json
 import math
 
-from service.extension_service import new_extension_user, fetch_user_credit, user_fetch_personal_email
+from service.extension_service import new_extension_user, fetch_user_credit, update_user_credit, user_fetch_personal_email
 
 extension_web = Blueprint('extension_web', __name__, template_folder='templates')
 
 logger = get_logger(config['log']['extension_log_file'])
 
-@extension_web.route("/backend/extension/user/register", methods=['POST'])
+@extension_web.route("/backend/extension/user/credit/refill", methods=['POST'])
 @web_exception_handler
-def register_user_api():
-    user_email = request.json.get('user_email', None)
-    if user_email == None:
-        return Response(json.dumps(get_web_res_fail("user_email 未指定"), ensure_ascii=False))
-    credit = request.json.get('credit', 0)
-    user_id = new_extension_user(user_email, credit)
-    ret = {
-        'user_id': user_id
-    }
+def refill_credit_api():
+    user_id = request.json.get('user_id', None)
+    if user_id == None:
+        return Response(json.dumps(get_web_res_fail("user_id 未指定"), ensure_ascii=False))
+    refill_credit = request.json.get('refill_credit', None)
+    if refill_credit == None or type(refill_credit) is not int:
+        return Response(json.dumps(get_web_res_fail(f"refill_credit invalid: {refill_credit}"), ensure_ascii=False))
 
+    credit = fetch_user_credit(user_id=user_id)
+    credit+= refill_credit
+    update_user_credit(user_id=user_id, new_credit=credit)
+    ret = {
+        'updated_credit': credit
+    }
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
-@extension_web.route("/backend/extension/user/credit", methods=['POST'])
+@extension_web.route("/backend/extension/user/credit/query", methods=['POST'])
 @web_exception_handler
 def fetch_user_credit_api():
     user_id = request.json.get('user_id', None)

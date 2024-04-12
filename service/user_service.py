@@ -4,6 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
 from dao.manage_dao import login_check_db, manage_account_register
+from dao.contact_bank_dao import new_extension_user
 import json
 from utils.log import get_logger
 from utils.config import config
@@ -44,6 +45,7 @@ def user_register(passwd, email, invite_account):
     c_j = json.dumps(config)
     desc = '线上注册'
     manage_account_register(passwd, email, desc, c_j, invite_account)
+    new_extension_user(email)
     return 0, ""
 
 

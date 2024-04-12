@@ -629,9 +629,11 @@ def download_profile_by_tag_web111():
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
     titles = []
     excel_data = []
+    search_datas = search_datas['details']
     if len(search_datas) > 0:
         for k in search_data[0]:
             titles.append(k)
+
         for search_data in search_datas:
             row = []
             for k in search_data:
@@ -648,3 +650,4 @@ def download_profile_by_tag_web111():
             logger.error("[backend_tools] error remove file {}".format(file_path))
         return response
     return send_file(file_path, as_attachment=True)
+
