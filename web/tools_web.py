@@ -631,7 +631,7 @@ def download_profile_by_tag_web111():
     excel_data = []
     search_datas = search_datas['details']
     if len(search_datas) > 0:
-        for k in search_data[0]:
+        for k in search_datas[0]:
             titles.append(k)
         for search_data in search_datas:
             row = []
