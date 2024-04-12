@@ -9,11 +9,11 @@ from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 import json
 import math
 import traceback
+import datetime
 import time
 from dao.tool_dao import *
 import os
 from os.path import join
-from datetime import datetime
 from utils.utils import str_is_none
 from utils.oss import generate_thumbnail
 from service.tools_service import *
@@ -638,7 +638,7 @@ def download_profile_by_tag_web111():
             for k in search_data:
                 row.append(search_data[k])
             excel_data.append(row)
-    cur_time = datetime.now()
+    cur_time = datetime.datetime.now()
     file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
     data_to_excel_file(file_path, titles, excel_data)
     @after_this_request
