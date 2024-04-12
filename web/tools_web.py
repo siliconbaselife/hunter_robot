@@ -1,6 +1,7 @@
-from flask import Flask, Response, request, stream_with_context,send_file
+from flask import Flask, Response, request, stream_with_context,send_file,after_this_request
 from flask import Blueprint
 import pandas as pd
+import xlsxwriter
 from utils.decorator import web_exception_handler
 from utils.log import get_logger
 from utils.config import config
@@ -11,6 +12,8 @@ import traceback
 import time
 from dao.tool_dao import *
 import os
+from os.path import join
+from datetime import datetime
 from utils.utils import str_is_none
 from utils.oss import generate_thumbnail
 from service.tools_service import *
@@ -20,6 +23,8 @@ from utils.utils import decrypt, user_code_cache
 from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
+
+
 logger = get_logger(config['log']['log_file'])
 
 tools_web = Blueprint('tools_web', __name__, template_folder='templates')
@@ -577,6 +582,30 @@ def search_profile_by_tag_web():
     logger.info("[backend_tools] get profile tag done for manage_account_id = {}, platform = {}, tags = {} -> res = {}".format(manage_account_id, platform, tags, data))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
+def data_to_excel_file(file_path, titles, data):
+    try:
+        workbook = xlsxwriter.Workbook(file_path)
+        worksheet = workbook.add_worksheet()
+        title_formatter = workbook.add_format()
+        title_formatter.set_border(1)
+        title_formatter.set_bg_color('#cccccc')
+        title_formatter.set_align('center')
+        title_formatter.set_bold()
+
+        row_formatter = workbook.add_format()
+        row_formatter.set_border(1)
+
+        worksheet.write_row('A1', titles, title_formatter)
+        count = 2
+
+        for row in data:
+            worksheet.write_row('A{}'.format(count), row, row_formatter)
+            count += 1
+    except BaseException as e:
+        logger.error("[backend_tools] data to excel error {}", e)
+        logger.error(e)
+    finally:
+        workbook.close()
 
 @tools_web.route("/backend/tools/downloadProfileInfoByTag", methods=['POST'])
 @web_exception_handler
@@ -598,15 +627,24 @@ def download_profile_by_tag_web111():
     search_datas, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, True)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    pd_data = {}
+    titles = []
+    excel_data = []
     if len(search_datas) > 0:
         for k in search_data[0]:
-            pd_data[k] = []
+            titles.append(k)
         for search_data in search_datas:
+            row = []
             for k in search_data:
-                pd_data[k].append(search_data[k])
-    df = pd.DataFrame(pd_data)
-    excel_file = pd.ExcelWriter('data.xlsx', engine='xlsxwriter')
-    df.to_excel(excel_file, index=False)
-    excel_file.save()
-    return send_file('data.xlsx', as_attachment=True)
+                row.append(search_data[k])
+            excel_data.append(row)
+    cur_time = datetime.now()
+    file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
+    data_to_excel_file(file_path, titles, excel_data)
+    @after_this_request
+    def remove_file(response):
+        try:
+            os.remove(file_path)
+        except Exception as error:
+            logger.error("[backend_tools] error remove file {}".format(file_path))
+        return response
+    return send_file(file_path, as_attachment=True)
