@@ -633,7 +633,6 @@ def download_profile_by_tag_web111():
     if len(search_datas) > 0:
         for k in search_data[0]:
             titles.append(k)
-
         for search_data in search_datas:
             row = []
             for k in search_data:
