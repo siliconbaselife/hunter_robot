@@ -1,9 +1,11 @@
+import json
+
 from dao.chat_dao import query_conf, add_conf, update_conf, query_confs, query_chat, add_chat, update_chat
 from dao.tool_dao import query_profile_tag_relation_by_user_and_candidate_db
 
 from utils.log import get_logger
 from utils.config import config as config
-from algo.llm_inference import gpt_manager
+from algo.llm_inference import gpt_manager, Prompt
 
 import time
 
@@ -66,7 +68,7 @@ def is_positive_negtive(details, tag_conf):
         else:
             msgs += "candidate:" + detail["msg"] + "/n"
 
-    prompt = f'''
+    prompt_msg = f'''
 You're a headhunter, can you help me determine whether the candidate is interested in the opportunity or not based on the following conversation?
 +++
 {msgs}
@@ -74,6 +76,8 @@ You're a headhunter, can you help me determine whether the candidate is interest
 A. Interested in the opportunity B. Not interested in the opportunity C.Can't tell   
 '''
 
+    prompt = Prompt()
+    prompt.add_user_message(prompt_msg)
     result_msg = gpt_manager.chat_task(prompt)
 
     if "B.Not interested in the opportunity" in result_msg:
@@ -87,7 +91,7 @@ def chat_to_candidate(details, tag_conf):
     if not need_reply:
         return [{"action": "no_talk", "msg": ""}]
     f = is_positive_negtive(details, tag_conf)
-    return tag_conf["positive"] if f else tag_conf["negtive"]
+    return [tag_conf["positive"] if f else tag_conf["negtive"]]
 
 
 def recall_to_candidate(details, tag_conf):
@@ -104,31 +108,62 @@ def recall_to_candidate(details, tag_conf):
 
 def fetch_candidate_tag(user_id, candidate_id):
     data = query_profile_tag_relation_by_user_and_candidate_db(user_id, candidate_id, "Linkedin")
-    if len(data):
+    if len(data) == 0:
         return None
-    return data[0][5]
+    return data[0][1]
 
 
 def chat(user_id, account_id, candidate_id, details):
     tag = fetch_candidate_tag(user_id, candidate_id)
+    logger.info(f"user_id chat tag: {tag}")
     if tag is None:
         return [{"action": "no_talk", "msg": ""}]
     tag_conf = query_conf(user_id, tag)
+    if tag_conf is None:
+        return [{"action": "no_talk", "msg": ""}]
+    logger.info(f"user_id chat tag_conf: {tag_conf}")
 
     say_flag = has_say(details)
+    logger.info(f"user_id chat say_flag: {say_flag}")
     if say_flag:
         msg_infos = chat_to_candidate(details, tag_conf)
     else:
         msg_infos = recall_to_candidate(details, tag_conf)
+    logger.info(f"user_id chat msg_infos: {msg_infos}")
 
     if len(msg_infos) == 0:
         return msg_infos
 
-    details.extends(msg_infos)
+    msg_infos = transfer_msg_infos(msg_infos)
+
+    details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
+    logger.info(f"history_chat: {history_chat}")
+    details_str = transfer_details(details)
+    logger.info(f"details: {details}")
     if history_chat is not None:
-        update_chat(user_id, account_id, candidate_id, details)
+        update_chat(user_id, account_id, candidate_id, details_str)
     else:
-        add_chat(user_id, account_id, candidate_id, details)
+        add_chat(user_id, account_id, candidate_id, details_str)
 
     return msg_infos
+
+
+def transfer_msg_infos(msg_infos):
+    r_msg_infos = []
+    for msg_info in msg_infos:
+        r_msg_infos.append({
+            "speaker": "robot",
+            "msg": msg_info,
+            "time": int(time.time())
+        })
+
+    return r_msg_infos
+
+
+def transfer_details(details):
+    details_str = json.dumps(details)
+    details_str = details_str.replace("\'", "\\'")
+    details_str = details_str.replace('\"', '\\"')
+    details_str = details_str.replace('\n', '.')
+    return details_str

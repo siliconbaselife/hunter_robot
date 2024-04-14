@@ -10,9 +10,11 @@ from web.source_web_v2 import source_web_v2
 from web.business_web import business_web
 from web.translation_web import translation_web
 from web.extension_web import extension_web
+from web.chat_web import chat_web
 
 from utils.config import config
 from dao.task_dao import *
+
 logger = get_logger(config['log']['log_file'])
 app = Flask("robot_backend")
 app.register_blueprint(source_web)
@@ -24,10 +26,11 @@ app.register_blueprint(source_web_v2)
 app.register_blueprint(business_web)
 app.register_blueprint(translation_web)
 app.register_blueprint(extension_web)
-
+app.register_blueprint(chat_web)
 
 CORS(app, supports_credentials=True)
 CORS(app, resources=r'/*')
+
 
 @app.route("/test")
 def test():
@@ -43,8 +46,5 @@ def test():
     return "Hello, World!"
 
 
-
-
-
-if __name__=="__main__":
-    app.run(port=2040,host="0.0.0.0",debug=True)
+if __name__ == "__main__":
+    app.run(port=2040, host="0.0.0.0", debug=True)

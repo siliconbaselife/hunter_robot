@@ -13,17 +13,13 @@ def query_conf(user_id, tag):
     if len(data) == 0:
         return None
 
-    conf = {
-        'manage_account_id': data[0][1],
-        'tag': data[0][2],
-        'content': json.loads(data[0][3])
-    }
+    conf = json.loads(data[0][3])
 
     return conf
 
 
 def add_conf(user_id, tag, content):
-    sql = f"inset into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{json.dumps(content)}')"
+    sql = f"insert into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{json.dumps(content)}')"
     dbm.insert(sql)
 
 
@@ -33,7 +29,7 @@ def update_conf(user_id, tag, content):
 
 
 def query_confs(user_id):
-    sql = f"select * from user_chat_conf manage_account_id = '{user_id}'"
+    sql = f"select * from user_chat_conf where manage_account_id = '{user_id}'"
     data = dbm.query(sql)
     confs = []
     for i in range(len(data)):
@@ -47,20 +43,20 @@ def query_confs(user_id):
 
 
 def query_chat(user_id, account_id, candidate_id):
-    sql = f"select * from user_chat_history where user_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}'"
+    sql = f"select * from user_chat_history where manage_account_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}'"
     data = dbm.query(sql)
     if len(data) == 0:
         return None
 
-    details = json.loads(data[0]["details"])
+    details = data[0][4]
     return details
 
 
 def add_chat(user_id, account_id, candidate_id, details):
-    sql = f"insert into user_chat_history(manage_account_id, account_id, candidate_id, details) values('{user_id}', '{account_id}', '{candidate_id}', '{json.dumps(details)}')"
+    sql = f'insert into user_chat_history(manage_account_id, account_id, candidate_id, details) values("{user_id}", "{account_id}", "{candidate_id}", "{details}")'
     dbm.insert(sql)
 
 
 def update_chat(user_id, account_id, candidate_id, details):
-    sql = f"update user_chat_history set where manage_account_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}' and details = '{details}'"
+    sql = f'update user_chat_history set details = "{details}" where manage_account_id = "{user_id}" and account_id = "{account_id}" and candidate_id = "{candidate_id}"'
     dbm.update(sql)

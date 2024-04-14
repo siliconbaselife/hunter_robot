@@ -19,6 +19,13 @@ def conf():
     user_id = request.json.get('user_id')
     tag = request.json.get('tag')
     conf = request.json.get('content')
+    if user_id is None or len(user_id) == 0:
+        return Response(json.dumps(get_web_res_fail("no user_id")), ensure_ascii=False)
+    if tag is None:
+        return Response(json.dumps(get_web_res_fail("no tag")), ensure_ascii=False)
+    if user_id is None:
+        return Response(json.dumps(get_web_res_fail("no user_id")), ensure_ascii=False)
+
     logger.info(f"获取到 {user_id} {tag} 的配置: {conf}")
     service_conf(user_id, tag, conf)
 
