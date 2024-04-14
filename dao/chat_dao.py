@@ -53,16 +53,10 @@ def query_chat(user_id, account_id, candidate_id):
 
 
 def add_chat(user_id, account_id, candidate_id, details):
-    details = details.replace("\'", "\\'")
-    details = details.replace('\"', '\\"')
-    details = details.replace('\n', '.')
     sql = f"insert into user_chat_history(manage_account_id, account_id, candidate_id, details) values('{user_id}', '{account_id}', '{candidate_id}', '{json.dumps(details)}')"
     dbm.insert(sql)
 
 
 def update_chat(user_id, account_id, candidate_id, details):
-    details = details.replace("\'", "\\'")
-    details = details.replace('\"', '\\"')
-    details = details.replace('\n', '.')
     sql = f"update user_chat_history set where manage_account_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}' and details = '{details}'"
     dbm.update(sql)

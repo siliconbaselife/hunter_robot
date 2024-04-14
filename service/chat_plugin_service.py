@@ -134,9 +134,17 @@ def chat(user_id, account_id, candidate_id, details):
 
     details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
+    transfer_details(details)
     if history_chat is not None:
         update_chat(user_id, account_id, candidate_id, details)
     else:
         add_chat(user_id, account_id, candidate_id, details)
 
     return msg_infos
+
+
+def transfer_details(details):
+    for msg_info in details:
+        msg_info["msg"] = msg_info["msg"].replace("\'", "\\'")
+        msg_info["msg"] = msg_info["msg"].replace('\"', '\\"')
+        msg_info["msg"] = msg_info["msg"].replace('\n', '.')
