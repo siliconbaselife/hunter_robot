@@ -137,6 +137,7 @@ def chat(user_id, account_id, candidate_id, details):
     details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
     transfer_details(details)
+    logger.info(f"details: {details}")
     if history_chat is not None:
         update_chat(user_id, account_id, candidate_id, details)
     else:
