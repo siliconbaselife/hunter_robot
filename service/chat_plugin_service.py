@@ -3,7 +3,7 @@ from dao.tool_dao import query_profile_tag_relation_by_user_and_candidate_db
 
 from utils.log import get_logger
 from utils.config import config as config
-from algo.llm_inference import gpt_manager
+from algo.llm_inference import gpt_manager, Prompt
 
 import time
 
@@ -66,7 +66,7 @@ def is_positive_negtive(details, tag_conf):
         else:
             msgs += "candidate:" + detail["msg"] + "/n"
 
-    prompt = f'''
+    prompt_msg = f'''
 You're a headhunter, can you help me determine whether the candidate is interested in the opportunity or not based on the following conversation?
 +++
 {msgs}
@@ -74,6 +74,8 @@ You're a headhunter, can you help me determine whether the candidate is interest
 A. Interested in the opportunity B. Not interested in the opportunity C.Can't tell   
 '''
 
+    prompt = Prompt()
+    prompt.add_user_message(prompt_msg)
     result_msg = gpt_manager.chat_task(prompt)
 
     if "B.Not interested in the opportunity" in result_msg:
