@@ -10,7 +10,7 @@ def test_chat():
             {"speaker": "robot",
              "msg": "Hi, Louisa Keddad, I am recruiting for Anxin Web Shield, and we are currently hiring IT engineers in Algeria. Your background seems well-suited for this position. Would you be interested in discussing it further?,Location: Algiers",
              "time": 1711937400},
-            {"speaker": "user", "msg": "Hi yes please", "time": 1711957400}
+            {"speaker": "user", "msg": "thank you, I don't want a job", "time": 1711957400}
         ]
     }
 

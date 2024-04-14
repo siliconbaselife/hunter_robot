@@ -48,7 +48,7 @@ def query_chat(user_id, account_id, candidate_id):
     if len(data) == 0:
         return None
 
-    details = json.loads(data[0]["details"])
+    details = json.loads(data[0][4])
     return details
 
 
