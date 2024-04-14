@@ -58,5 +58,5 @@ def add_chat(user_id, account_id, candidate_id, details):
 
 
 def update_chat(user_id, account_id, candidate_id, details):
-    sql = f"update user_chat_history set where manage_account_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}' and details = '{details}'"
+    sql = f"update user_chat_history set details = '{details}' where manage_account_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}'"
     dbm.update(sql)
