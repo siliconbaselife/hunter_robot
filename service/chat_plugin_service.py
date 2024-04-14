@@ -89,7 +89,7 @@ def chat_to_candidate(details, tag_conf):
     if not need_reply:
         return [{"action": "no_talk", "msg": ""}]
     f = is_positive_negtive(details, tag_conf)
-    return tag_conf["positive"] if f else tag_conf["negtive"]
+    return [tag_conf["positive"] if f else tag_conf["negtive"]]
 
 
 def recall_to_candidate(details, tag_conf):
