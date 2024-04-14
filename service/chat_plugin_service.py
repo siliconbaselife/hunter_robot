@@ -115,6 +115,8 @@ def chat(user_id, account_id, candidate_id, details):
     if tag is None:
         return [{"action": "no_talk", "msg": ""}]
     tag_conf = query_conf(user_id, tag)
+    if tag_conf is None:
+        return [{"action": "no_talk", "msg": ""}]
     logger.info(f"user_id chat tag_conf: {tag_conf}")
 
     say_flag = has_say(details)
