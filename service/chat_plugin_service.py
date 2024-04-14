@@ -132,7 +132,7 @@ def chat(user_id, account_id, candidate_id, details):
     if len(msg_infos) == 0:
         return msg_infos
 
-    details.extends(msg_infos)
+    details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
     if history_chat is not None:
         update_chat(user_id, account_id, candidate_id, details)
