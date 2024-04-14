@@ -33,7 +33,7 @@ def update_conf(user_id, tag, content):
 
 
 def query_confs(user_id):
-    sql = f"select * from user_chat_conf manage_account_id = '{user_id}'"
+    sql = f"select * from user_chat_conf where manage_account_id = '{user_id}'"
     data = dbm.query(sql)
     confs = []
     for i in range(len(data)):
