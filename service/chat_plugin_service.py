@@ -144,6 +144,7 @@ def chat(user_id, account_id, candidate_id, details):
 
 
 def transfer_details(details):
+    logger.info(f"details: {details}")
     for msg_info in details:
         msg_info["msg"] = msg_info["msg"].replace("\'", "\\'")
         msg_info["msg"] = msg_info["msg"].replace('\"', '\\"')
