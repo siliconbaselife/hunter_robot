@@ -111,15 +111,19 @@ def fetch_candidate_tag(user_id, candidate_id):
 
 def chat(user_id, account_id, candidate_id, details):
     tag = fetch_candidate_tag(user_id, candidate_id)
+    logger.info(f"user_id chat tag: {tag}")
     if tag is None:
         return [{"action": "no_talk", "msg": ""}]
     tag_conf = query_conf(user_id, tag)
+    logger.info(f"user_id chat tag_conf: {tag_conf}")
 
     say_flag = has_say(details)
+    logger.info(f"user_id chat say_flag: {say_flag}")
     if say_flag:
         msg_infos = chat_to_candidate(details, tag_conf)
     else:
         msg_infos = recall_to_candidate(details, tag_conf)
+    logger.info(f"user_id chat msg_infos: {msg_infos}")
 
     if len(msg_infos) == 0:
         return msg_infos
