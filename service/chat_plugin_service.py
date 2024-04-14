@@ -132,6 +132,8 @@ def chat(user_id, account_id, candidate_id, details):
     if len(msg_infos) == 0:
         return msg_infos
 
+    msg_infos = transfer_msg_infos(msg_infos)
+
     details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
     transfer_details(details)
@@ -143,10 +145,20 @@ def chat(user_id, account_id, candidate_id, details):
     return msg_infos
 
 
+def transfer_msg_infos(msg_infos):
+    r_msg_infos = []
+    for msg_info in msg_infos:
+        r_msg_infos.append({
+            "speaker": "robot",
+            "msg": msg_info,
+            "time": time.time()
+        })
+
+    return r_msg_infos
+
+
 def transfer_details(details):
-    logger.info(f"details: {details}")
     for msg_info in details:
-        logger.info(f"msg_info: {msg_info}")
         msg_info["msg"] = msg_info["msg"].replace("\'", "\\'")
         msg_info["msg"] = msg_info["msg"].replace('\"', '\\"')
         msg_info["msg"] = msg_info["msg"].replace('\n', '.')
