@@ -43,7 +43,7 @@ def query_confs(user_id):
 
 
 def query_chat(user_id, account_id, candidate_id):
-    sql = f"select * from user_chat_history where user_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}'"
+    sql = f"select * from user_chat_history where manage_account_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}'"
     data = dbm.query(sql)
     if len(data) == 0:
         return None
