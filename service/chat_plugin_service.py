@@ -1,3 +1,5 @@
+import json
+
 from dao.chat_dao import query_conf, add_conf, update_conf, query_confs, query_chat, add_chat, update_chat
 from dao.tool_dao import query_profile_tag_relation_by_user_and_candidate_db
 
@@ -137,11 +139,11 @@ def chat(user_id, account_id, candidate_id, details):
     details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
     transfer_details(details)
-    logger.info(f"details: {details}")
+    details_str = logger.info(f"details: {details}")
     if history_chat is not None:
-        update_chat(user_id, account_id, candidate_id, details)
+        update_chat(user_id, account_id, candidate_id, details_str)
     else:
-        add_chat(user_id, account_id, candidate_id, details)
+        add_chat(user_id, account_id, candidate_id, details_str)
 
     return msg_infos
 
@@ -159,7 +161,8 @@ def transfer_msg_infos(msg_infos):
 
 
 def transfer_details(details):
-    for msg_info in details:
-        msg_info["msg"] = msg_info["msg"].replace("\'", "\\'")
-        msg_info["msg"] = msg_info["msg"].replace('\"', '\\"')
-        msg_info["msg"] = msg_info["msg"].replace('\n', '.')
+    details_str = json.dumps(details)
+    details_str = details_str.replace("\'", "\\'")
+    details_str = details_str.replace('\"', '\\"')
+    details_str = details_str.replace('\n', '.')
+    return details_str

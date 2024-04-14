@@ -53,10 +53,10 @@ def query_chat(user_id, account_id, candidate_id):
 
 
 def add_chat(user_id, account_id, candidate_id, details):
-    sql = f"insert into user_chat_history(manage_account_id, account_id, candidate_id, details) values('{user_id}', '{account_id}', '{candidate_id}', '{json.dumps(details)}')"
+    sql = f'insert into user_chat_history(manage_account_id, account_id, candidate_id, details) values("{user_id}", "{account_id}", "{candidate_id}", "{details}")'
     dbm.insert(sql)
 
 
 def update_chat(user_id, account_id, candidate_id, details):
-    sql = f"update user_chat_history set details = '{details}' where manage_account_id = '{user_id}' and account_id = '{account_id}' and candidate_id = '{candidate_id}'"
+    sql = f'update user_chat_history set details = "{details}" where manage_account_id = "{user_id}" and account_id = "{account_id}" and candidate_id = "{candidate_id}"'
     dbm.update(sql)
