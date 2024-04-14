@@ -5,7 +5,7 @@ def get_conf():
     params = {
         "user_id": "lishundong2009@163.com"
     }
-    r = requests.post('http://127.0.0.1:13333/backend/chat/get_conf', json=params)
+    r = requests.post('http://127.0.0.1:2040/backend/chat/get_conf', json=params)
     print(f"confs: {r.text}")
 
 
