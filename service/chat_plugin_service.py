@@ -115,21 +115,17 @@ def fetch_candidate_tag(user_id, candidate_id):
 
 def chat(user_id, account_id, candidate_id, details):
     tag = fetch_candidate_tag(user_id, candidate_id)
-    logger.info(f"user_id chat tag: {tag}")
     if tag is None:
         return [{"action": "no_talk", "msg": ""}]
     tag_conf = query_conf(user_id, tag)
     if tag_conf is None:
         return [{"action": "no_talk", "msg": ""}]
-    logger.info(f"user_id chat tag_conf: {tag_conf}")
 
     say_flag = has_say(details)
-    logger.info(f"user_id chat say_flag: {say_flag}")
     if say_flag:
         msg_infos = chat_to_candidate(details, tag_conf)
     else:
         msg_infos = recall_to_candidate(details, tag_conf)
-    logger.info(f"user_id chat msg_infos: {msg_infos}")
 
     if len(msg_infos) == 0:
         return msg_infos
@@ -138,13 +134,12 @@ def chat(user_id, account_id, candidate_id, details):
 
     details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
-    logger.info(f"history_chat: {history_chat}")
     details_str = transfer_details(details)
-    logger.info(f"details: {details}")
     if history_chat is not None:
         update_chat(user_id, account_id, candidate_id, details_str)
     else:
         add_chat(user_id, account_id, candidate_id, details_str)
+    logger.info(f"plugin chat user_id: {user_id} account_id: {account_id} candidate_id: {candidate_id} details: {details} msg_infos: {msg_infos}")
 
     return msg_infos
 
