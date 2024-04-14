@@ -104,7 +104,7 @@ def recall_to_candidate(details, tag_conf):
 
 def fetch_candidate_tag(user_id, candidate_id):
     data = query_profile_tag_relation_by_user_and_candidate_db(user_id, candidate_id, "Linkedin")
-    if len(data):
+    if len(data) == 0:
         return None
     return data[0][1]
 
