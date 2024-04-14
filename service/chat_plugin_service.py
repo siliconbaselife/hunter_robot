@@ -152,7 +152,7 @@ def transfer_msg_infos(msg_infos):
         r_msg_infos.append({
             "speaker": "robot",
             "msg": msg_info,
-            "time": time.time()
+            "time": int(time.time())
         })
 
     return r_msg_infos
