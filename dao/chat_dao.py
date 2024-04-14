@@ -13,11 +13,7 @@ def query_conf(user_id, tag):
     if len(data) == 0:
         return None
 
-    conf = {
-        'manage_account_id': data[0][1],
-        'tag': data[0][2],
-        'content': json.loads(data[0][3])
-    }
+    conf = json.loads(data[0][3])
 
     return conf
 
