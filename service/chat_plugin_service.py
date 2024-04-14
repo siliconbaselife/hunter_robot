@@ -106,7 +106,7 @@ def fetch_candidate_tag(user_id, candidate_id):
     data = query_profile_tag_relation_by_user_and_candidate_db(user_id, candidate_id, "Linkedin")
     if len(data):
         return None
-    return data[0][5]
+    return data[0][1]
 
 
 def chat(user_id, account_id, candidate_id, details):
