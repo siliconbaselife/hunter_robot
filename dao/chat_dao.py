@@ -19,12 +19,12 @@ def query_conf(user_id, tag):
 
 
 def add_conf(user_id, tag, content):
-    sql = f"insert into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{json.dumps(content)}')"
+    sql = f"insert into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{json.dumps(content, ensure_ascii=False)}')"
     dbm.insert(sql)
 
 
 def update_conf(user_id, tag, content):
-    sql = f"update user_chat_conf set content = '{json.dumps(content)}' where manage_account_id = '{user_id}' and tag = '{tag}'"
+    sql = f"update user_chat_conf set content = '{json.dumps(content, ensure_ascii=False)}' where manage_account_id = '{user_id}' and tag = '{tag}'"
     dbm.update(sql)
 
 
