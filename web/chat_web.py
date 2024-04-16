@@ -52,4 +52,4 @@ def chat():
 
     return_msgs = service_chat(user_id, account_id, candidate_id, details)
 
-    return Response(json.dumps(get_web_res_suc_with_data(return_msgs), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(return_msgs)))
