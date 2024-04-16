@@ -16,7 +16,8 @@ def conf(user_id, tag, conf):
     data_conf = query_conf(user_id, tag)
     if data_conf is not None:
         update_conf(user_id, tag, conf)
-    add_conf(user_id, tag, conf)
+    else:
+        add_conf(user_id, tag, conf)
 
 
 def get_conf(user_id):
