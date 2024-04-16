@@ -24,7 +24,7 @@ def add_conf(user_id, tag, content):
 
 
 def update_conf(user_id, tag, content):
-    sql = f"update user_chat_conf set content = '{json.dumps(content)}' where user_id = '{user_id}' and tag = '{tag}'"
+    sql = f"update user_chat_conf set content = '{json.dumps(content)}' where manage_account_id = '{user_id}' and tag = '{tag}'"
     dbm.update(sql)
 
 

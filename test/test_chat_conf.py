@@ -14,9 +14,9 @@ def add_conf():
         "user_id": "lishundong2009@163.com",
         "tag": "test",
         "content": {
-            "positive": "positive",
-            "negtive": "negtive",
-            "recall": "recall"
+            "positive": "好的",
+            "negtive": "不好",
+            "recall": "二次召回"
         }
     }
     r = requests.post('http://www.shadowhiring.cn/backend/chat/conf', json=params)
