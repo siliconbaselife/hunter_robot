@@ -835,7 +835,6 @@ def exec_filter_task(manage_account_id, file_list, jd):
 
 
 def deserialize_raw_profile(raw_profile):
-    logger.error(f"raw_profile: {raw_profile}")
     pattern = re.compile(r'•\s+')
     new_raw_profile = pattern.sub(' ', raw_profile)
     if new_raw_profile is None or (type(new_raw_profile) == tuple and len(new_raw_profile) == 0):
