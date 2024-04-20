@@ -88,6 +88,9 @@ A. Interested in the opportunity B. Not interested in the opportunity C.Can't te
 
 
 def chat_to_candidate(details, tag_conf):
+    if tag_conf["positive"] is None or len(tag_conf["positive"]) == 0:
+        return [{"action": "no_talk", "msg": ""}]
+
     need_reply = has_reply(details)
     if not need_reply:
         return [{"action": "no_talk", "msg": ""}]
@@ -96,7 +99,7 @@ def chat_to_candidate(details, tag_conf):
 
 
 def recall_to_candidate(details, tag_conf):
-    msg = tag_conf["msg"]
+    msg = tag_conf["recall"]
     if msg is None or len(msg) == 0:
         return [{"action": "no_talk", "msg": ""}]
 
