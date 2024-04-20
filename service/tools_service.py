@@ -843,7 +843,7 @@ def deserialize_raw_profile(raw_profile):
         if type(raw_profile) == str:
             return json.loads(raw_profile)
     except BaseException as e:
-        logger.error(f"deserialize_raw_profile error: {e}")
+        logger.error(f"deserialize_raw_profile error: {raw_profile}")
         logger.error(traceback.format_exc())
         return None
     return None
