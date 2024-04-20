@@ -835,15 +835,18 @@ def exec_filter_task(manage_account_id, file_list, jd):
 
 
 def deserialize_raw_profile(raw_profile):
-    if raw_profile is None or (type(raw_profile) == tuple and len(raw_profile) == 0):
+    logger.error(f"raw_profile: {raw_profile}")
+    pattern = re.compile(r'•\s+')
+    new_raw_profile = pattern.sub(' ', raw_profile)
+    if new_raw_profile is None or (type(new_raw_profile) == tuple and len(new_raw_profile) == 0):
         return None
     try:
-        while (type(raw_profile) == tuple):
-            raw_profile = raw_profile[0]
-        if type(raw_profile) == str:
-            return json.loads(raw_profile)
+        while (type(new_raw_profile) == tuple):
+            new_raw_profile = new_raw_profile[0]
+        if type(new_raw_profile) == str:
+            return json.loads(new_raw_profile)
     except BaseException as e:
-        logger.error(f"deserialize_raw_profile error: {raw_profile}")
+        logger.error(f"deserialize_raw_profile error: {new_raw_profile}")
         logger.error(traceback.format_exc())
         return None
     return None
