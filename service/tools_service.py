@@ -886,14 +886,14 @@ def get_default_chat_scenario():
     return r
 
 def get_leave_msg(manage_account_id, platform):
-    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)[0][0]
     if scenario_info == None or len(scenario_info) == 0:
         return get_default_greeting_scenario()
     else:
         return json.loads(scenario_info, strict=False)
 
 def get_chat_scenario(manage_account_id, platform):
-    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_CHAT)
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_CHAT)[0][0]
     if scenario_info == None or len(scenario_info) == 0:
         return get_default_greeting_scenario()
     else:
