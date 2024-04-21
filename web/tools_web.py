@@ -459,9 +459,7 @@ def apply_chat_scenario_web():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {},  platform = {}, scenario = {}".format(manage_account_id, platform, scenario))
-    msg, error_msg = get_chat_scenario(manage_account_id, platform)
-    if error_msg:
-        return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
+    msg = get_chat_scenario(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/customizedChatScenario", methods=['POST'])
