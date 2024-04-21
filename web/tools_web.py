@@ -420,7 +420,7 @@ def get_leave_msg_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(candidate_id, platform))
+    logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(manage_account_id, platform))
     msg = get_leave_msg(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
 
@@ -439,7 +439,7 @@ def customized_greeting_scenario_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {}, candidate_id = {}, platform = {}, scenario = {}".format(manage_account_id, candidate_id, platform, scenario))
+    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(manage_account_id, platform, scenario))
     customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
@@ -458,7 +458,7 @@ def apply_chat_scenario_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {}, candidate_id = {}, platform = {}, scenario = {}".format(manage_account_id, candidate_id, platform, scenario))
+    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {},  platform = {}, scenario = {}".format(manage_account_id, platform, scenario))
     msg, error_msg = get_chat_scenario(manage_account_id, platform)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
@@ -479,7 +479,7 @@ def customized_chat_scenario_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] customized_chat_scenario_web manage_account_id = {}, candidate_id = {}, platform = {}, scenario = {}".format(manage_account_id, candidate_id, platform, scenario))
+    logger.info("[backend_tools] customized_chat_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(manage_account_id, platform, scenario))
     customized_user_scenario(manage_account_id, SCENARIO_CHAT, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
