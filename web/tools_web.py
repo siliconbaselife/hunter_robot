@@ -249,15 +249,17 @@ def upload_online_resume():
     list_name = request.json.get('list_name', '')
     min_age = request.json.get('min_age', -20000)
     max_age = request.json.get('max_age', 20000)
+    tag = request.json.get('tag', '')
 
     logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}, {list_name}')
     if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     
     if platform == 'maimai':
-        count = maimai_online_resume_upload_processor(manage_account_id, profile, platform)
+        count = maimai_online_resume_upload_processor(manage_account_id, profile, platform, tag)
     elif platform == 'Linkedin':
-        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age)
+        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age, tag)
+
 
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
@@ -408,28 +410,78 @@ def conversation_report():
 @web_exception_handler
 def get_leave_msg_web():
     platform = request.json.get('platform', '')
-    candidate_id = request.json.get('candidate_id', '')
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+    # candidate_id = request.json.get('candidate_id', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(candidate_id, platform))
-    msg, error_msg = get_leave_msg(candidate_id, platform)
-    if error_msg:
-        return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
+    msg = get_leave_msg(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/customizedGreetingScenario", methods=['POST'])
+@web_exception_handler
+def customized_greeting_scenario_web():
+    platform = request.json.get('platform', '')
+    # candidate_id = request.json.get('candidate_id', '')
+    scenario = request.json.get('scenario')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {}, candidate_id = {}, platform = {}, scenario = {}".format(manage_account_id, candidate_id, platform, scenario))
+    customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
 
 @tools_web.route("/backend/tools/applyChatScenario", methods=['POST'])
 @web_exception_handler
 def apply_chat_scenario_web():
     platform = request.json.get('platform', '')
-    candidate_id = request.json.get('candidate_id', '')
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+    scenario = request.json.get('scenario')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(candidate_id, platform))
-    reply, error_msg = apply_chat_scenario(candidate_id, platform)
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {}, candidate_id = {}, platform = {}, scenario = {}".format(manage_account_id, candidate_id, platform, scenario))
+    msg, error_msg = get_chat_scenario(manage_account_id, platform)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    return Response(json.dumps(get_web_res_suc_with_data(reply), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/customizedChatScenario", methods=['POST'])
+@web_exception_handler
+def customized_chat_scenario_web():
+    platform = request.json.get('platform', '')
+    # candidate_id = request.json.get('candidate_id', '')
+    scenario = request.json.get('scenario')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info("[backend_tools] customized_chat_scenario_web manage_account_id = {}, candidate_id = {}, platform = {}, scenario = {}".format(manage_account_id, candidate_id, platform, scenario))
+    customized_user_scenario(manage_account_id, SCENARIO_CHAT, platform, scenario)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/createProfileTag", methods=['POST'])
 @web_exception_handler

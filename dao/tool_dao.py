@@ -34,7 +34,9 @@ sql_dict = {
     "associate_profile_tag": "insert into user_profile_tag_relation (manage_account_id, candidate_id, platform, tag_id, tag) values ('{}', '{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), candidate_id = VALUES(candidate_id), platform = VALUES(platform), tag_id = VALUES(tag_id), tag = VALUES(tag);",
     "query_id_by_profile_tag_relation": "select id from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};",
     "query_candidate_id_by_tag_relation": "select candidate_id from user_profile_tag_relation where manage_account_id = '{}' and platform = '{}' and tag in {};",
-    "delete_profile_tag_relation": "delete from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};"
+    "delete_profile_tag_relation": "delete from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};",
+    "create_customized_scenario_setting" : "insert into customized_scenario_setting(manage_account_id, platform, context, scenario_info) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), context = VALUES(context), scenario_info = VALUES(scenario_info)",
+    "query_customized_scenario_setting" : "select scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'"
 }
 def db_file_join(fields):
     file_str = '('
@@ -153,3 +155,13 @@ def delete_profile_tag_relation(manage_account_id, candidate_id, platform, tags)
 
 def delete_profile_tags_db(ids):
     return dbm.query(sql_dict['delete_profile_tags'].format(db_file_join(ids)))
+
+def create_customized_scenario_setting(manage_account_id, platform, context, scenario_info):
+    scenario_info = json.dumps(scenario_info, ensure_ascii=False)
+    scenario_info = scenario_info.replace("\n", "\\n")
+    scenario_info = scenario_info.replace("\'", "\\'")
+    scenario_info = scenario_info.replace('\"', '\\"')
+    return dbm.query(sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info))
+
+def query_customized_scenario_setting(manage_account_id, platform, context):
+    return dbm.query(sql_dict['query_customized_scenario_setting'].format(manage_account_id, platform, context))

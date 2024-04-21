@@ -28,7 +28,8 @@ reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load t
 file_path_prefix = '/home/human/workspace/hunter_robot.v2.0/tmp/'
 
 
-    
+SCENARIO_GREETING = 'greeting'
+SCENARIO_CHAT = 'chat'
 
 def get_candidate_id(profile, platform):
     if platform == 'maimai':
@@ -40,7 +41,9 @@ def get_candidate_id(profile, platform):
     if platform == 'liepin':
         return profile['usercIdEncode']
 
-def maimai_online_resume_upload_processor(manage_account_id, profile, platform):
+def maimai_online_resume_upload_processor(manage_account_id, profile, platform, tag):
+    if tag and len(tag) > 0:
+        create_profile_tag(manage_account_id, platform, tag)
     count = 0
     for p in profile:
         candidate_id = get_candidate_id(p, platform)
@@ -61,9 +64,13 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform):
             p['exp'] = exp
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
+        if tag and len(tag) > 0:
+            associate_profile_tags(manage_account_id, candidate_id, platform, tag)
     return count
 
-def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age):
+def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age, tag):
+    if tag and len(tag) > 0:
+        create_profile_tag(manage_account_id, platform, tag)
     count = 0
     for p in profile:
         candidate_id = get_candidate_id(p, platform)
@@ -135,6 +142,8 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             p['profile']['name'] = name.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
             count = count + 1
+        if tag and len(tag) > 0:
+            associate_profile_tags(manage_account_id, candidate_id, platform, tag)
     return count
 
 def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
@@ -850,46 +859,21 @@ def deserialize_raw_profile(raw_profile):
         return None
     return None
 
-def get_leave_msg(candidate_id, platform):
-    raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
-    raw_profile = deserialize_raw_profile(raw_profile)
-    if not raw_profile:
-        logger.info('[tools_service] without raw profile for candidate_id = {}, platform = {}'.format(candidate_id, platform))
-        return None, 'no candidate'
-    name = None
-    if 'profile' in raw_profile and 'name' in raw_profile['profile']:
-            name = raw_profile['profile']['name']
+def customized_user_scenario(manage_account_id, context, platform, scenario_info):
+    create_customized_scenario_setting(manage_account_id, platform, context, scenario_info)
 
-    location = None
-    if 'profile' in raw_profile and 'location' in raw_profile['profile']:
-            location = raw_profile['profile']['location']
-
-    role = 'candidate'
-    if 'profile' in raw_profile and 'role' in raw_profile['profile']:
-            role = raw_profile['profile']['role']
-
-    company_name = None
-    if 'profile' in raw_profile and 'experiences' in raw_profile['profile'] and len(raw_profile['profile']['experiences']) > 0 and 'companyName' in raw_profile['profile']['experiences'][0]:
-        company_name = raw_profile['profile']['experiences'][0]['companyName']
-
-    msg = 'Hi '+ name + ' , ' if name else'Hi ,'
-    msg += 'we are looking for an ' + role + ' base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China, '
-    if company_name:
-        msg += 'your Exp. in ' + company_name + ' seems a good match, '
+def get_default_greeting_scenario():
+    msg = 'Hi \n'
+    msg += 'we are looking for an candidate base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China\n'
+    msg += 'your Exp. seems a good match\n'
     msg += 'would you like to explore this opportunity? Thanks!'
-    return msg, None
+    return msg
 
-def apply_chat_scenario(candidate_id, platform):
+def get_default_chat_scenario():
     scenario_options = ['要简历', '约电话', '转介绍', '召回']
-    raw_profile = get_raw_latest_profile_by_candidate_id_and_platform(candidate_id, platform)
-    logger.info('[apply_chat_scenario] raw_profile = {}'.format(raw_profile))
-    raw_profile = deserialize_raw_profile(raw_profile)
-    name = None
-    if raw_profile and 'profile' in raw_profile and 'name' in raw_profile['profile']:
-            name = raw_profile['profile']['name']
-    ret = {}
+    r = {}
     for scenario in scenario_options:
-        msg = 'Hi ' + name + ' ,\n' if name else 'Hi, \n'
+        msg = 'Hi, \n'
         if scenario == '要简历':
             msg += 'Thanks for getting back to me! Could you please send me your updated resume so we can move forward to the next step? Also, can I have your availability for a short call to discuss this opportunity further.\nLooking forward to hearing from you soon. Thanks!'
         if scenario == '约电话':
@@ -898,8 +882,23 @@ def apply_chat_scenario(candidate_id, platform):
             msg += 'Thanks for the reply, I understand you\'re not actively looking for a new job right now. However, I\'d greatly appreciate your insights. Do you happen to know someone in your network who might be interested in this role? Feel free to pass along the details, and if they have questions, they can reach out directly.\nThanks again for any help you can provide!'
         if scenario == '召回':
             msg += 'Thanks for connecting! I trust this message finds you in good spirits. I noticed your noteworthy background on LinkedIn!\nCurrently, FFALCON is on a global expansion drive. It\'s the sub-brand of TCL Electronics, an established global TV manufacturing brand. To strengthen TCL Corporation’s globalization strategy plans within the smart home sector, FFalcon has been developed into a leading brand with a business value of over 650 million USD.\nI believe your insights could significantly contribute to our strategy, and I would like to discuss more details about this opportunity with you! Would you mind sharing a concise update on your CV? Your expertise aligns with our objectives, and your input would be immensely valuable.'
-        ret[scenario] = [msg]
-    return ret, None
+        r[scenario] = msg
+    return r
+
+def get_leave_msg(manage_account_id, platform):
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)
+    if scenario_info == None or len(scenario_info) == 0:
+        return get_default_greeting_scenario()
+    else:
+        return json.loads(scenario_info, strict=False)
+
+def get_chat_scenario(manage_account_id, platform):
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_CHAT)
+    if scenario_info == None or len(scenario_info) == 0:
+        return get_default_greeting_scenario()
+    else:
+        return json.loads(scenario_info, strict=False)
+
 
 _tag_id_cache = {}
 _tag_name_id_cache = {}
