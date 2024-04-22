@@ -134,6 +134,7 @@ config['extension']['contactout'] = {
 }
 
 config['extension']['price'] = {
-    'email': 5,
-    'phone': 4,
+    'personal_email': 20,
+    'work_email': 10,
+    'phone': 40,
 }

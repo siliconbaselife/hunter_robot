@@ -16,7 +16,7 @@ def fetch_user_credit(user_id):
 
 def user_fetch_personal_email(user_id, linkedin_profile):
     logger.info(f'extension user {user_id} need personal email {linkedin_profile}')
-    price = config['extension']['price']['email']
+    price = config['extension']['price']['personal_email']
     credit = fetch_user_credit(user_id=user_id)
     if credit < price:
         logger.info(f'extension user {user_id} credit {credit} insufficient for fetch personal email, which need {price}')
