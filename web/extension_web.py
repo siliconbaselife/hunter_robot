@@ -8,7 +8,7 @@ from utils.config import config
 import json
 import math
 
-from service.extension_service import new_extension_user, fetch_user_credit, update_user_credit, user_fetch_personal_email
+from service.extension_service import new_extension_user, fetch_user_credit, update_user_credit, user_fetch_personal_email, user_fetch_contact
 
 extension_web = Blueprint('extension_web', __name__, template_folder='templates')
 
@@ -54,10 +54,28 @@ def fetch_personal_email_api():
     linkedin_profile = request.json.get('linkedin_profile', None)
     if linkedin_profile == None:
         return Response(json.dumps(get_web_res_fail("linkedin_profile 未指定"), ensure_ascii=False))
-    res, msg = user_fetch_personal_email(user_id=user_id, linkedin_profile=linkedin_profile)
+    # res, msg = user_fetch_personal_email(user_id=user_id, linkedin_profile=linkedin_profile)
+    res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag='personal_email')
     ret = {
         'msg': msg
     }
     if res is not None:
         ret['personal_email'] = res
+    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
+@extension_web.route("/backend/extension/contact/phone", methods=['POST'])
+@web_exception_handler
+def fetch_phone_api():
+    user_id = request.json.get('user_id', None)
+    if user_id == None:
+        return Response(json.dumps(get_web_res_fail("user_id 未指定"), ensure_ascii=False))
+    linkedin_profile = request.json.get('linkedin_profile', None)
+    if linkedin_profile == None:
+        return Response(json.dumps(get_web_res_fail("linkedin_profile 未指定"), ensure_ascii=False))
+    res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag='phone')
+    ret = {
+        'msg': msg
+    }
+    if res is not None:
+        ret['phone'] = res
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))

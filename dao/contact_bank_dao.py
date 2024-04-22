@@ -15,6 +15,7 @@ sql_dict = {
 
     "new_contact": "insert into contact_bank(linkedin_profile, linkedin_id, name, personal_email, work_email, work_email_status, phone) values ('{}', '{}', '{}', '{}', '{}', '{}', '{}')",
     "update_contact_personal_email": "update contact_bank set personal_email = '{}' where linkedin_profile = '{}'",
+    "update_contact_phone": "update contact_bank set phone = '{}' where linkedin_profile = '{}'",
     "query_contact_by_profile": "select linkedin_id, name, personal_email, work_email, work_email_status, phone from contact_bank where linkedin_profile='{}'",
 }
 
@@ -35,6 +36,12 @@ def query_user_already_contacts(user_id):
 
 def new_contact(linked_profile, linkedin_id, name, personal_email=[], work_email=[], work_email_status=[], phone=[]):
     dbm.insert(sql_dict['new_contact'].format(linked_profile, linkedin_id, name, json.dumps(personal_email), json.dumps(work_email), json.dumps(work_email_status), json.dumps(phone)))
+
+def update_contact_personal_email(linked_profile, personal_email):
+    dbm.update(sql_dict['update_contact_personal_email'].format(json.dumps(personal_email), linked_profile))
+
+def update_contact_phone(linked_profile, phone):
+    dbm.update(sql_dict['update_contact_phone'].format(json.dumps(phone), linked_profile))
 
 def query_contact_by_profile(linkedin_profile):
     return dbm.query(sql_dict['query_contact_by_profile'].format(linkedin_profile))
