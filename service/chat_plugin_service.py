@@ -11,25 +11,25 @@ import time
 
 logger = get_logger(config['log']['log_file'])
 
-def transfer_conf(conf):
-    logger.info(conf)
-    conf_json = json.dumps(conf)
+def transfer_conf(chat_conf):
+    logger.info(chat_conf)
+    conf_json = json.dumps(chat_conf)
     logger.info(conf_json)
     conf_json = conf_json.replace("\n", "\\n")
     conf_json = conf_json.replace("\'", "\\'")
     conf_json = conf_json.replace('\"', '\\"')
     logger.info(conf_json)
-    conf = json.loads(conf_json)
-    return conf
+    chat_conf = json.loads(conf_json)
+    return chat_conf
 
 
-def conf(user_id, tag, conf):
-    conf = transfer_conf(conf)
+def conf(user_id, tag, chat_conf):
+    chat_conf = transfer_conf(chat_conf)
     data_conf = query_conf(user_id, tag)
     if data_conf is not None:
-        update_conf(user_id, tag, conf)
+        update_conf(user_id, tag, chat_conf)
     else:
-        add_conf(user_id, tag, conf)
+        add_conf(user_id, tag, chat_conf)
 
 
 def get_conf(user_id):
