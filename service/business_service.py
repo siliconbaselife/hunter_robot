@@ -23,17 +23,22 @@ class BusinessConsultant:
         self._expired = time.time()
         if not hasattr(self, '_llm'):
             self._llm = Gemini()
-            query_jd = self._judge_jd(question=question)
-            if query_jd:
-                tgt_company_info = self._find_tgt_company(src_company=src_company, target_region=target_region, job=job, jd=question)
-                keywords = self._platform_keyword(job=job, jd=question, platform=platform)
-                return {
-                    'id': self._id,
-                    'target_company': tgt_company_info,
-                    'keyword': keywords,
-                }
+            ## if no spec for this field, free chat
+            if src_company is None or target_region is None or job is None:
+                res = self._first_free_chat(question=question)
             else:
-                res = self._first_chat(src_company=src_company, target_region=target_region, job=job, question=question)
+                ## if is jd, analysis target company and fetch keyword for jd, if not, free consultent
+                query_jd = self._judge_jd(question=question)
+                if query_jd:
+                    tgt_company_info = self._find_tgt_company(src_company=src_company, target_region=target_region, job=job, jd=question)
+                    keywords = self._platform_keyword(job=job, jd=question, platform=platform)
+                    return {
+                        'id': self._id,
+                        'target_company': tgt_company_info,
+                        'keyword': keywords,
+                    }
+                else:
+                    res = self._first_chat(src_company=src_company, target_region=target_region, job=job, question=question)
         else:
             res = self._continue_chat(question=question)
         return {
@@ -54,15 +59,22 @@ class BusinessConsultant:
         res_msg = self._llm.send_message(prompt=question)
         logger.info(f'consultant [{self._id}] _continue_chat ({question}), got: {res_msg}')
         return res_msg
-        
+
+    def _first_free_chat(self, question):
+        prompt = f'你是一位针对中国公司海外业务的咨询顾问。请针对以下问题做出回答\n{question}'
+        res_msg = self._llm.send_message(prompt=prompt)
+        logger.info(f'consultant [{self._id}] _first_free_chat ({question}), got: {res_msg}')
+        return res_msg
+
+
     def _first_chat(self, src_company, target_region, job, question):
-        prompt = f'公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
+        prompt = f'你是一位针对中国公司海外业务的咨询顾问。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_chat ({question}), got: {res_msg}')
         return res_msg
 
     def _find_tgt_company(self, src_company, target_region, job, jd):
-        prompt = f'公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请给我合适的目标公司，需要以json的list返回目标公司中文名称的列表。以下是岗位介绍：\n{jd}'
+        prompt = f'你是一位针对中国公司海外业务的咨询顾问，公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请给我合适的目标公司，需要以json的list返回目标公司中文名称的列表。以下是岗位介绍：\n{jd}'
         res_msg = self._llm.send_message(prompt=prompt)
         tgt_company_info = res_msg
         try:
@@ -99,7 +111,7 @@ class ConsultingFirm:
                     if time.time() - self._consultants[consultant_id]._expired >= config['business']['expired_time_s']:
                         logger.info(f'ConsultingFirm clear expired ({consultant_id})')
                         self._consultants.pop(consultant_id)
-            time.sleep(10)
+            time.sleep(120)
 
     def _get_consultant(self, consultant_id=None):
         with self._lock:

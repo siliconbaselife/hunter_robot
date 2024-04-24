@@ -62,18 +62,12 @@ def find_keyword_api():
 def business_analysis_api():
     chat_id = request.json.get('chat_id', None)
     job = request.json.get('job', None)
-    if job == None:
-        return Response(json.dumps(get_web_res_fail("job 未指定"), ensure_ascii=False))
     src_company = request.json.get('src_company', None)
-    if src_company == None:
-        return Response(json.dumps(get_web_res_fail("src_company 未指定"), ensure_ascii=False))
     region = request.json.get('region', None)
-    if region == None:
-        return Response(json.dumps(get_web_res_fail("region 未指定"), ensure_ascii=False))
-    jd = request.json.get('jd', None)
     platform = request.json.get('platform', '领英')
-    if platform == None:
-        return Response(json.dumps(get_web_res_fail("platform 未指定"), ensure_ascii=False))
+    jd = request.json.get('jd', None)
+    if jd == None:
+        return Response(json.dumps(get_web_res_fail("jd 内容需要指定"), ensure_ascii=False))
 
     ret = get_consultant(consultant_id=chat_id)(src_company=src_company, target_region=region, job=job, question=jd, platform=platform)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
