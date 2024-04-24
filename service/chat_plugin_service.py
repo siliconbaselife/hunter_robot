@@ -11,16 +11,19 @@ import time
 
 logger = get_logger(config['log']['log_file'])
 
+
 def transfer_conf(chat_conf):
-    logger.info(chat_conf)
-    conf_json = json.dumps(chat_conf)
-    logger.info(conf_json)
-    conf_json = conf_json.replace("\n", "\\n")
-    conf_json = conf_json.replace("\'", "\\'")
-    conf_json = conf_json.replace('\"', '\\"')
-    logger.info(conf_json)
-    chat_conf = json.loads(conf_json)
+    for key in chat_conf.keys():
+        chat_conf[key] = transfer_msg(chat_conf[key])
+
     return chat_conf
+
+
+def transfer_msg(msg):
+    msg = msg.replace("\n", "\\n")
+    msg = msg.replace("\'", "\\'")
+    msg = msg.replace('\"', '\\"')
+    return msg
 
 
 def conf(user_id, tag, chat_conf):
@@ -155,7 +158,8 @@ def chat(user_id, account_id, candidate_id, details):
         update_chat(user_id, account_id, candidate_id, details_str)
     else:
         add_chat(user_id, account_id, candidate_id, details_str)
-    logger.info(f"plugin chat user_id: {user_id} account_id: {account_id} candidate_id: {candidate_id} details: {details} msg_infos: {msg_infos}")
+    logger.info(
+        f"plugin chat user_id: {user_id} account_id: {account_id} candidate_id: {candidate_id} details: {details} msg_infos: {msg_infos}")
 
     return msg_infos
 

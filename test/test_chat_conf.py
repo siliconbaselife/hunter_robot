@@ -39,8 +39,8 @@ def add_conf2():
 
 if __name__ == "__main__":
     print("开始测试conf api接口")
-    get_conf()
+    # get_conf()
     add_conf()
-    add_conf2()
-    get_conf()
+    # add_conf2()
+    # get_conf()
     print("测试完毕")
