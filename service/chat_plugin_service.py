@@ -27,8 +27,7 @@ def transfer_msg(msg):
 
 
 def conf(user_id, tag, chat_conf):
-    chat_conf = transfer_conf(chat_conf)
-    logger.info(chat_conf)
+    # chat_conf = transfer_conf(chat_conf)
     data_conf = query_conf(user_id, tag)
     if data_conf is not None:
         update_conf(user_id, tag, chat_conf)

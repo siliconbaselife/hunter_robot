@@ -23,8 +23,15 @@ def add_conf(user_id, tag, content):
     dbm.insert(sql)
 
 
+def transfer_msg(js):
+    js = js.replace("\n", "\\n")
+    js = js.replace("\'", "\\'")
+    js = js.replace('\"', '\\"')
+    return js
+
+
 def update_conf(user_id, tag, content):
-    sql = f"update user_chat_conf set content = '{json.dumps(content, ensure_ascii=False)}' where manage_account_id = '{user_id}' and tag = '{tag}'"
+    sql = f"update user_chat_conf set content = '{transfer_msg(json.dumps(content, ensure_ascii=False))}' where manage_account_id = '{user_id}' and tag = '{tag}'"
     dbm.update(sql)
 
 
