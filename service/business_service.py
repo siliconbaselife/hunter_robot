@@ -61,20 +61,20 @@ class BusinessConsultant:
         return res_msg
 
     def _first_free_chat(self, question):
-        prompt = f'你是一位针对中国公司海外业务的咨询顾问。请针对以下问题做出回答\n{question}'
+        prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
-        logger.info(f'consultant [{self._id}] _first_free_chat ({question}), got: {res_msg}')
+        logger.info(f'consultant [{self._id}] _first_free_chat ({prompt}), got: {res_msg}')
         return res_msg
 
 
     def _first_chat(self, src_company, target_region, job, question):
-        prompt = f'你是一位针对中国公司海外业务的咨询顾问。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
+        prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_chat ({question}), got: {res_msg}')
         return res_msg
 
     def _find_tgt_company(self, src_company, target_region, job, jd):
-        prompt = f'你是一位针对中国公司海外业务的咨询顾问，公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请给我合适的目标公司，需要以json的list返回目标公司中文名称的列表。以下是岗位介绍：\n{jd}'
+        prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请给我合适的目标公司，需要以json的list返回目标公司中文名称的列表。以下是岗位介绍：\n{jd}'
         res_msg = self._llm.send_message(prompt=prompt)
         tgt_company_info = res_msg
         try:
