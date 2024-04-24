@@ -19,7 +19,7 @@ def query_conf(user_id, tag):
 
 
 def add_conf(user_id, tag, content):
-    sql = f"insert into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{json.dumps(content, ensure_ascii=False)}')"
+    sql = f"insert into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{transfer_msg(json.dumps(content, ensure_ascii=False))}')"
     dbm.insert(sql)
 
 
@@ -38,6 +38,7 @@ def update_conf(user_id, tag, content):
 def query_confs(user_id):
     sql = f"select * from user_chat_conf where manage_account_id = '{user_id}'"
     data = dbm.query(sql)
+    logger.info(data)
     confs = []
     for i in range(len(data)):
         confs.append({
