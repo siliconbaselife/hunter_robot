@@ -11,8 +11,15 @@ import time
 
 logger = get_logger(config['log']['log_file'])
 
+def transfer_conf(conf):
+    conf = conf.replace("\n", "\\n")
+    conf = conf.replace("\'", "\\'")
+    conf = conf.replace('\"', '\\"')
+    return conf
+
 
 def conf(user_id, tag, conf):
+    conf = transfer_conf(conf)
     data_conf = query_conf(user_id, tag)
     if data_conf is not None:
         update_conf(user_id, tag, conf)
