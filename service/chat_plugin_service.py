@@ -12,9 +12,11 @@ import time
 logger = get_logger(config['log']['log_file'])
 
 def transfer_conf(conf):
-    conf = conf.replace("\n", "\\n")
-    conf = conf.replace("\'", "\\'")
-    conf = conf.replace('\"', '\\"')
+    conf_json = json.dumps(conf)
+    conf_json = conf_json.replace("\n", "\\n")
+    conf_json = conf_json.replace("\'", "\\'")
+    conf_json = conf_json.replace('\"', '\\"')
+    conf = json.loads(conf_json)
     return conf
 
 
