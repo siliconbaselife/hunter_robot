@@ -12,7 +12,7 @@ def get_conf():
 def add_conf():
     params = {
         "user_id": "lishundong2009@163.com",
-        "tag": "test",
+        "tag": "李顺东的测试",
         "content": {
             "positive": "Hi!{name}\nI am currently helping a client (Apri) to find an HRM talent in Seattle, USA. I will be responsible for SSC establishment and recruitment, employee relations and other modules in the USA. \nIf you are interested, I hope you can get a copy of your updated resume. Let’s discuss your career plans in detail!",
             "negative": "Thanks for getting back to me!\nIf you don't mind, I'd want to know why this opportunity isn't quite hitting the mark for you. I focus on recruiting for the North American market, and I see potential for us to work together in the future!\nAnd hey, if you happen to know anyone else who might be a good fit for this, I'd really appreciate it if you could pass the word along. Thanks a bunch!",
