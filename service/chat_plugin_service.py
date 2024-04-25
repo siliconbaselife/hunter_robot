@@ -170,7 +170,6 @@ def fetch_name(candidate_id):
     name = ""
     try:
         raw_profile = get_profile_by_id(candidate_id)
-        logger.info(raw_profile)
         profile = json.loads(raw_profile[0][0])
         name = profile["profile"]["name"]
     except BaseException as e:
