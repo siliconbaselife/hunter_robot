@@ -44,7 +44,7 @@ def query_confs(user_id):
         confs.append({
             'manage_account_id': data[i][1],
             'tag': data[i][2],
-            'content': json.loads(data[i][3])
+            'content': json.loads(data[i][3].replace("\n", "\\n"))
         })
 
     return confs
