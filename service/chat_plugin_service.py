@@ -193,7 +193,9 @@ def transfer_msg_infos(msg_infos, candidate_id):
 
 
 def transfer_profile_msg(msg_info, name):
+    logger.info(msg_info)
     msg_info.replace("{name}", name)
+    logger.info(msg_info)
     return msg_info
 
 
