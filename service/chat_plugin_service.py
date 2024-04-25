@@ -151,7 +151,7 @@ def chat(user_id, account_id, candidate_id, details):
     if len(msg_infos) == 0:
         return msg_infos
 
-    msg_infos = transfer_msg_infos(msg_infos)
+    msg_infos = transfer_msg_infos(msg_infos, candidate_id)
 
     details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
