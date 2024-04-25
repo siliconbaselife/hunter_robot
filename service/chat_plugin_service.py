@@ -185,14 +185,14 @@ def transfer_msg_infos(msg_infos, candidate_id):
     for msg_info in msg_infos:
         r_msg_infos.append({
             "speaker": "robot",
-            "msg": transfer_msg(msg_info, name),
+            "msg": transfer_profile_msg(msg_info, name),
             "time": int(time.time())
         })
 
     return r_msg_infos
 
 
-def transfer_msg(msg_info, name):
+def transfer_profile_msg(msg_info, name):
     msg_info.replace("{name}", name)
     return msg_info
 
