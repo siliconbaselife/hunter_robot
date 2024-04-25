@@ -13,7 +13,7 @@ def query_conf(user_id, tag):
     if len(data) == 0:
         return None
 
-    conf = json.loads(data[0][3])
+    conf = json.loads(data[0][3].replace("\n", "\\n"))
 
     return conf
 
