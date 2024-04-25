@@ -1,4 +1,5 @@
 import json
+import traceback
 
 from dao.chat_dao import query_conf, add_conf, update_conf, query_confs, query_chat, add_chat, update_chat
 from dao.tool_dao import query_profile_tag_relation_by_user_and_candidate_db
@@ -6,6 +7,7 @@ from dao.tool_dao import query_profile_tag_relation_by_user_and_candidate_db
 from utils.log import get_logger
 from utils.config import config as config
 from algo.llm_inference import gpt_manager, Prompt
+from dao.manage_dao import get_profile_by_id
 
 import time
 
@@ -164,16 +166,35 @@ def chat(user_id, account_id, candidate_id, details):
     return msg_infos
 
 
-def transfer_msg_infos(msg_infos):
+def fetch_name(candidate_id):
+    name = ""
+    try:
+        raw_profile = get_profile_by_id(candidate_id)
+        profile = json.loads(raw_profile)
+        name = profile["profile"]["name"]
+    except BaseException as e:
+        logger.error(traceback.format_exc())
+        logger.error(e)
+
+    return name
+
+
+def transfer_msg_infos(msg_infos, candidate_id):
     r_msg_infos = []
+    name = fetch_name(candidate_id)
     for msg_info in msg_infos:
         r_msg_infos.append({
             "speaker": "robot",
-            "msg": msg_info,
+            "msg": transfer_msg(msg_info, name),
             "time": int(time.time())
         })
 
     return r_msg_infos
+
+
+def transfer_msg(msg_info, name):
+    msg_info.replace("{name}", name)
+    return msg_info
 
 
 def transfer_details(details):
