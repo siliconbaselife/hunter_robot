@@ -4,7 +4,7 @@ import requests
 def test_chat():
     params = {
         'user_id': 'lishundong2009@163.com',
-        'account_id': 'test',
+        'account_id': 'linkedin.com/in/myoungkyou-ha-9ba40511a',
         'candidate_id': 'test',
         'details': [
             {"speaker": "robot",
