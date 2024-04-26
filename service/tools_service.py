@@ -854,7 +854,7 @@ def deserialize_raw_profile(raw_profile):
         new_raw_profile = new_raw_profile.replace('\n', '\\n')
         new_raw_profile = new_raw_profile.replace("\'", " ")
         if type(new_raw_profile) == str:
-            return json.loads(new_raw_profile)
+            return json.loads(new_raw_profile, strict=False)
     except BaseException as e:
         logger.error(f"deserialize_raw_profile error: {new_raw_profile}")
         logger.error(traceback.format_exc())
