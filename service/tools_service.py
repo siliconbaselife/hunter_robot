@@ -851,6 +851,7 @@ def deserialize_raw_profile(raw_profile):
     try:
         while (type(new_raw_profile) == tuple):
             new_raw_profile = new_raw_profile[0]
+        new_raw_profile = new_raw_profile.replace('\n', '\\n')
         if type(new_raw_profile) == str:
             return json.loads(new_raw_profile)
     except BaseException as e:
