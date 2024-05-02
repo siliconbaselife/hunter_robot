@@ -855,13 +855,11 @@ def deserialize_raw_profile(raw_profile):
         new_raw_profile = new_raw_profile.replace('\n', '\\n')
         if new_raw_profile.endswith('\\n'):
             new_raw_profile = new_raw_profile[:-2]
-        if type(new_raw_profile) == str:
-            return json.loads(new_raw_profile, strict=False)
+        return json.loads(new_raw_profile, strict=False)
     except BaseException as e:
         logger.error(f"deserialize_raw_profile error: {new_raw_profile}")
         logger.error(traceback.format_exc())
         return None
-    return None
 
 def customized_user_scenario(manage_account_id, context, platform, scenario_info):
     create_customized_scenario_setting(manage_account_id, platform, context, scenario_info)
