@@ -844,13 +844,14 @@ def exec_filter_task(manage_account_id, file_list, jd):
 
 
 def deserialize_raw_profile(raw_profile):
+    while type(raw_profile) == tuple:
+        raw_profile = raw_profile[0]
+    if raw_profile is None or type(raw_profile) != str:
+        logger.error("[deserialize_raw_profile] raw profile not str")
+        return None
     pattern = re.compile(r'•\s+')
     new_raw_profile = pattern.sub(' ', raw_profile)
-    if new_raw_profile is None or (type(new_raw_profile) == tuple and len(new_raw_profile) == 0):
-        return None
     try:
-        while (type(new_raw_profile) == tuple):
-            new_raw_profile = new_raw_profile[0]
         new_raw_profile = new_raw_profile.replace('\n', '\\n')
         if new_raw_profile.endswith('\\n'):
             new_raw_profile = new_raw_profile[:-2]
@@ -1030,6 +1031,8 @@ def get_min_time_info(time_info_str, default_time):
 
 def parse_profile(profile):
     profile = deserialize_raw_profile(profile)
+    if profile is None:
+        return None
     res = {'candidateId' : None,
                  'department': None,
                  'lastCompany': None,
@@ -1131,6 +1134,8 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
 
     for row in rows:
         profile = parse_profile(row[1])
+        if profile is None:
+            continue
         profile['candidateId'] = row[0]
         profile['cvUrl'] = row[2]
         details.append(profile)
