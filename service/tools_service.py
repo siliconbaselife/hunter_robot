@@ -590,12 +590,12 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
                 work = f"{work}{pNull(e.get('companyName', ''))},{pNull(e.get('timeInfo', ''))}\n"
                 for wo in e.get('works', []):
                     work = f"{work}{pNull(wo.get('workTimeInfo', ''))},{pNull(wo.get('worklocationInfo', ''))},{pNull(wo.get('workPosition', ''))},{pNull(wo.get('workDescription', ''))}\n"
-                
+
             languages = ''
             for lan in profile.get('languages', []):
                 languages = f"{languages}{pNull(lan.get('language', ''))},{pNull(lan.get('des', ''))}\n"
             summary = profile.get('summary', '')
-            
+
             l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, age, edu, work, languages, summary]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
@@ -854,7 +854,6 @@ def deserialize_raw_profile(raw_profile):
         new_raw_profile = new_raw_profile.replace('\n', '\\n')
         if new_raw_profile.endswith('\\n'):
             new_raw_profile = new_raw_profile[:-2]
-        print(new_raw_profile)
         if type(new_raw_profile) == str:
             return json.loads(new_raw_profile, strict=False)
     except BaseException as e:
@@ -1042,7 +1041,7 @@ def parse_profile(profile):
                  'contactInfo': None,
                  'cv':None,
                  'age': None,
-                 'chinese': None,
+                 'isChinese': None,
                  'languages': None}
     if 'id' in profile:
         res['candidateId'] = profile['id']
