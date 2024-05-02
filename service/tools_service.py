@@ -1106,7 +1106,7 @@ def parse_profile(profile):
         if graduated_year != 1000:
             res['age'] = start_age + datetime.datetime.now().year - graduated_year
     if 'languages' in profile and len(profile['languages']) > 0:
-        res['languages'] = profile['languages']
+        res['languages'] = cv_str(profile['languages'], 0)
 
     if 'experiences' in profile and len(profile['experiences']) > 0:
         experiences = profile['experiences']
