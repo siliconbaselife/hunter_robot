@@ -1137,7 +1137,6 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
         profile['candidateId'] = row[0]
         profile['cvUrl'] = row[2]
         details.append(profile)
-
     return data, None
 
 # if __name__ == '__main__':

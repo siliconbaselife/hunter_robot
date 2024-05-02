@@ -690,6 +690,7 @@ def download_profile_by_tag_web111():
             excel_data.append(row)
     cur_time = datetime.datetime.now()
     file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
+    logger.info('[download_profile_by_tag_web111] {} , {}', titles, excel_data)
     data_to_excel_file(file_path, titles, excel_data)
     @after_this_request
     def remove_file(response):
