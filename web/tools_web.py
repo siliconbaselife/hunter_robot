@@ -659,7 +659,7 @@ def data_to_excel_file(file_path, titles, data):
 
 @tools_web.route("/backend/tools/downloadProfileInfoByTag", methods=['POST'])
 @web_exception_handler
-def download_profile_by_tag_web111():
+def download_profile_by_tag_web():
     platform = request.json.get('platform', '')
     tags = request.json.get('tags', [])
     page = request.json.get('page', 1)
@@ -673,7 +673,7 @@ def download_profile_by_tag_web111():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] search profile by tag manage_account_id = {}, platform = {}, tags = {}".format(manage_account_id, platform, tags))
+    logger.info("[backend_tools] download_profile_by_tag_web manage_account_id = {}, platform = {}, tags = {}".format(manage_account_id, platform, tags))
     search_datas, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, True)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
@@ -688,7 +688,7 @@ def download_profile_by_tag_web111():
             for k in search_data:
                 row.append(search_data[k])
             excel_data.append(row)
-    logger.info('[download_profile_by_tag_web111] {} , {}', titles, excel_data)
+    logger.info('[download_profile_by_tag_web] {} , {}', titles, excel_data)
     cur_time = datetime.datetime.now()
     file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
     data_to_excel_file(file_path, titles, excel_data)
