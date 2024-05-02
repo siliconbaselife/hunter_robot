@@ -649,10 +649,8 @@ def data_to_excel_file(file_path, titles, data):
         count = 2
 
         for row in data:
-            logger.info(row)
             worksheet.write_row('A{}'.format(count), row, row_formatter)
             count += 1
-        logger.info('----------------')
     except BaseException as e:
         logger.error("[backend_tools] data to excel error {}", e)
         logger.error(traceback.format_exc())
