@@ -1069,7 +1069,7 @@ def parse_profile(profile):
         res['location'] = profile['location']
 
     if 'contactInfo' in profile:
-        res['contactInfo'] = cv_str(profile['contactInfo'])
+        res['contactInfo'] = cv_str(profile['contactInfo'], 0)
     if profile:
         res['cv'] = cv_str(profile, 0)
     if name:
