@@ -12,7 +12,6 @@ sql_dict = {
     "update_user_credit": "update extension_user set user_credit={} where user_id='{}'",
     "query_user_already_contacts": "select already_contacts from extension_user where user_id='{}'",
     "update_user_already_contacts": "update extension_user set already_contacts='{}' where user_id='{}'",
-
     "new_contact": "insert into contact_bank(linkedin_profile, linkedin_id, name, personal_email, work_email, work_email_status, phone) values ('{}', '{}', '{}', '{}', '{}', '{}', '{}')",
     "update_contact_personal_email": "update contact_bank set personal_email = '{}' where linkedin_profile = '{}'",
     "update_contact_phone": "update contact_bank set phone = '{}' where linkedin_profile = '{}'",

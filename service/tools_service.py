@@ -16,20 +16,22 @@ from io import StringIO
 import csv
 import codecs
 from flask_admin._compat import csv_encode
-from dao.task_dao import get_chats_by_job_id_with_date,query_candidate_by_id
+from dao.task_dao import get_chats_by_job_id_with_date, query_candidate_by_id
 from dao.manage_dao import get_job_name_by_id
+from dao.contact_bank_dao import *
 import json5
 import re
 from os.path import basename
+from service.extension_service import refresh_contact
 
 logger = get_logger(config['log']['log_file'])
-reader = easyocr.Reader(['ch_sim','en']) # this needs to run only once to load the model into memory
+reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
 
 file_path_prefix = '/home/human/workspace/hunter_robot.v2.0/tmp/'
 
-
 SCENARIO_GREETING = 'greeting'
 SCENARIO_CHAT = 'chat'
+
 
 def get_candidate_id(profile, platform):
     if platform == 'maimai':
@@ -40,6 +42,7 @@ def get_candidate_id(profile, platform):
         return profile['geekCard']['geekId']
     if platform == 'liepin':
         return profile['usercIdEncode']
+
 
 def maimai_online_resume_upload_processor(manage_account_id, profile, platform, tag):
     if tag and len(tag) > 0:
@@ -55,11 +58,11 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform, 
                 des = e["description"] or ''
                 des = des.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
                 exp.append({
-                    "company":e["company"],
-                    "v":e["v"],
-                    "position":e["position"],
-                    "worktime":e["worktime"],
-                    "description":des
+                    "company": e["company"],
+                    "v": e["v"],
+                    "position": e["position"],
+                    "worktime": e["worktime"],
+                    "description": des
                 })
             p['exp'] = exp
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
@@ -67,6 +70,7 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform, 
         if tag and len(tag) > 0:
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
     return count
+
 
 def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age, tag):
     if tag and len(tag) > 0:
@@ -80,49 +84,70 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             continue
         firt_work_year = 10000
         current_year = int(datetime.datetime.now().year)
-        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) == 0 and 'profile' in p:
+        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform,
+                                                       manage_account_id)) == 0 and 'profile' in p:
             for l in p.get('profile', {}).get('languages', []):
                 language = l.get('language', '') or ''
-                l['language'] = language.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                l['language'] = language.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace(
+                    "\'", "")
                 des = l.get('des', '') or ''
                 l['des'] = des.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             for e in p.get('profile', {}).get('experiences', []):
                 companyName = e.get('companyName', '') or ''
-                e['companyName'] = companyName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                e['companyName'] = companyName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                            "").replace(
+                    "\'", "")
                 for w in e.get('works', []):
                     workTimeInfo = w.get('workTimeInfo', '') or ''
-                    w['workTimeInfo'] = workTimeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-                    #截年龄
+                    w['workTimeInfo'] = workTimeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                                  "").replace(
+                        "\'", "")
+                    # 截年龄
                     years = re.findall(r'\b\d{4}\b', w['workTimeInfo'])
                     min_year = 10000 if len(years) == 0 else int(min(years))
                     if min_year < firt_work_year:
                         firt_work_year = min_year
                     workLocationInfo = w.get('workLocationInfo', '') or ''
-                    w['workLocationInfo'] = workLocationInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                    w['workLocationInfo'] = workLocationInfo.replace('"', "").replace("'", "").replace("\n",
+                                                                                                       ";").replace(
+                        '\"', "").replace("\'", "")
                     workPosition = w.get('workPosition', '') or ''
-                    w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                    w['workPosition'] = workPosition.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                                  "").replace(
+                        "\'", "")
                     workDescription = w.get('workDescription', '') or ''
-                    w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")  
+                    w['workDescription'] = workDescription.replace('"', "").replace("'", "").replace("\n", ";").replace(
+                        '\"', "").replace("\'", "")
             for edu in p.get('profile', {}).get('educations', []):
                 summary = edu.get('summary', '') or ''
-                edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                edu['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace(
+                    "\'", "")
                 degreeInfo = edu.get('degreeInfo', '') or ''
-                edu['degreeInfo'] = degreeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                edu['degreeInfo'] = degreeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                            "").replace(
+                    "\'", "")
                 majorInfo = edu.get('majorInfo', '') or ''
-                edu['majorInfo'] = majorInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                edu['majorInfo'] = majorInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                          "").replace(
+                    "\'", "")
                 timeInfo = edu.get('timeInfo', '') or ''
-                edu['timeInfo'] = timeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-                #截年龄
+                edu['timeInfo'] = timeInfo.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                        "").replace(
+                    "\'", "")
+                # 截年龄
                 years = re.findall(r'\b\d{4}\b', edu['timeInfo'])
                 max_year = 10000 if len(years) == 0 else int(max(years))
                 if max_year < firt_work_year:
                     firt_work_year = max_year
                 schoolName = edu.get('schoolName', '') or ''
-                edu['schoolName'] = schoolName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+                edu['schoolName'] = schoolName.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                            "").replace(
+                    "\'", "")
             age = current_year - firt_work_year + 23
             if min_age > age or max_age < age:
                 logger.info(f'profile_age_filter：{manage_account_id}, {candidate_id}, {age}')
-                continue
+            else:
+                count = count + 1
 
             summary = p.get('profile', {}).get('summary', '') or ''
             role = p.get('profile', {}).get('role', '') or ''
@@ -130,21 +155,36 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             name = p.get('profile', {}).get('name', '') or ''
 
             url = p.get('profile', {}).get('contactInfo', {}).get("url", "") or ''
-            p['profile']['contactInfo']["url"] = url.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            p['profile']['contactInfo']["url"] = url.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                                  "").replace(
+                "\'", "")
             phone = p.get('profile', {}).get('contactInfo', {}).get("Phone", "") or ''
-            p['profile']['contactInfo']["Phone"] = phone.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            p['profile']['contactInfo']["Phone"] = phone.replace('"', "").replace("'", "").replace("\n", ";").replace(
+                '\"', "").replace("\'", "")
             email = p.get('profile', {}).get('contactInfo', {}).get("Email", "") or ''
-            p['profile']['contactInfo']["Email"] = email.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            p['profile']['contactInfo']["Email"] = email.replace('"', "").replace("'", "").replace("\n", ";").replace(
+                '\"', "").replace("\'", "")
 
-            p['profile']['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-            p['profile']['role'] = role.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-            p['profile']['location'] = location.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
-            p['profile']['name'] = name.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
+            p['profile']['summary'] = summary.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                           "").replace(
+                "\'", "")
+            p['profile']['role'] = role.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace(
+                "\'", "")
+            p['profile']['location'] = location.replace('"', "").replace("'", "").replace("\n", ";").replace('\"',
+                                                                                                             "").replace(
+                "\'", "")
+            p['profile']['name'] = name.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace(
+                "\'", "")
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id)
-            count = count + 1
+
         if tag and len(tag) > 0:
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
+
+        # upload_profile_status(manage_account_id, candidate_id, platform, p)
+        # refresh_contact(manage_account_id, candidate_id, p)
     return count
+
+
 
 def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
@@ -152,9 +192,10 @@ def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','性别', '生日年份', '工作年限', '岗位', '学历', '地点', '薪资', '学校经历', '工作经历']
+    l = ['岗位名称', '候选人ID', '创建时间', '候选人姓名', '来源', '微信', '电话', '简历', '对话详情', '性别',
+         '生日年份', '工作年限', '岗位', '学历', '地点', '薪资', '学校经历', '工作经历']
     l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8") + codecs.BOM_UTF8.decode() + l_encode[0]
     w.writerow(l_encode)
     yield io.getvalue()
     io.seek(0)
@@ -169,10 +210,10 @@ def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
             if c[4] == 'user_ask':
                 source = '候选人主动'
             elif c[4] == 'search':
-                source= '机器人打招呼'
+                source = '机器人打招呼'
             else:
                 source = '未知'
-            if c[6] is None :
+            if c[6] is None:
                 wechat = ''
                 phone = ''
                 resume = ''
@@ -186,7 +227,8 @@ def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
                     wechat = ''
                     phone = ''
                     resume = ''
-                    logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
+                    logger.info(
+                        f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
             try:
                 conversation = json.loads(c[7])
                 con_str = ''
@@ -207,7 +249,7 @@ def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
                 edu = ''
                 work = ''
             else:
-                c_j = candidate_info[0][7].replace('\n','.')
+                c_j = candidate_info[0][7].replace('\n', '.')
                 c_j = c_j.replace("\'", '\"')
                 candidate_json = json.loads(c_j, strict=False)
                 gender = candidate_json.get('basicInfoForm', {}).get('sex', '')
@@ -219,12 +261,17 @@ def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
                 salary = candidate_json.get('basicInfoForm', {}).get('salary', '')
                 edu = ''
                 for e in candidate_json.get('eduExpFormList', []):
-                    edu = edu + str(e.get('startYear', '')) + '-' + str(e.get('endYear', ''))  + ', ' +  str(e.get('redDegreeName', '')) + ', ' +  str(e.get('redSchool', '')) + ', ' + str(e.get('redSpecial', '')) + '\n\n'
+                    edu = edu + str(e.get('startYear', '')) + '-' + str(e.get('endYear', '')) + ', ' + str(
+                        e.get('redDegreeName', '')) + ', ' + str(e.get('redSchool', '')) + ', ' + str(
+                        e.get('redSpecial', '')) + '\n\n'
                 work = ''
                 for wo in candidate_json.get('workExps', []):
-                    work = work + str(wo.get('startYear', '')) + '-' + str(wo.get('endYear', '')) + ', ' + str(wo.get('rwCompname', '')) + ', ' + str(wo.get('rwDqName', '')) + '\n' + str(wo.get('rwDuty', '')) + '\n\n'
+                    work = work + str(wo.get('startYear', '')) + '-' + str(wo.get('endYear', '')) + ', ' + str(
+                        wo.get('rwCompname', '')) + ', ' + str(wo.get('rwDqName', '')) + '\n' + str(
+                        wo.get('rwDuty', '')) + '\n\n'
 
-            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, gender, born_year, work_year, position, degree, location, salary, edu, work]
+            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, gender,
+                 born_year, work_year, position, degree, location, salary, edu, work]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
@@ -232,7 +279,9 @@ def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
             io.truncate(0)
         except Exception as e:
             logger.info(f'test_download_candidate_liepin_error4, {c_j}')
-            logger.info(f'test_download_candidate_liepin_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+            logger.info(
+                f'test_download_candidate_liepin_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+
 
 def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
@@ -240,9 +289,10 @@ def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','薪资范围', '年龄', '最高学历', '性别', '状态', '学校', '教育经历', '工作经历']
+    l = ['岗位名称', '候选人ID', '创建时间', '候选人姓名', '来源', '微信', '电话', '简历', '对话详情', '薪资范围',
+         '年龄', '最高学历', '性别', '状态', '学校', '教育经历', '工作经历']
     l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8") + codecs.BOM_UTF8.decode() + l_encode[0]
     w.writerow(l_encode)
     yield io.getvalue()
     io.seek(0)
@@ -257,10 +307,10 @@ def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
             if c[4] == 'user_ask':
                 source = '候选人主动'
             elif c[4] == 'search':
-                source= '机器人打招呼'
+                source = '机器人打招呼'
             else:
                 source = '未知'
-            if c[6] is None :
+            if c[6] is None:
                 wechat = ''
                 phone = ''
                 resume = ''
@@ -274,7 +324,8 @@ def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
                     wechat = ''
                     phone = ''
                     resume = ''
-                    logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
+                    logger.info(
+                        f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
             try:
                 conversation = json.loads(c[7])
                 con_str = ''
@@ -294,7 +345,7 @@ def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
                 edu = ''
                 work = ''
             else:
-                c_j = candidate_info[0][7].replace('\n','.')
+                c_j = candidate_info[0][7].replace('\n', '.')
                 c_j = c_j.replace("\'", '\"')
                 candidate_json = json.loads(c_j, strict=False)
                 salary = candidate_json.get('geekCard', {}).get('salary', '')
@@ -305,14 +356,18 @@ def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
                 school = candidate_json.get('geekCard', {}).get('geekEdu', {}).get('school', '')
                 edu = ''
                 for s in candidate_json.get('geekCard', {}).get('geekEdus', []):
-                    edu = edu + s.get('school', '') or '' + ',' + s.get('major', '') or '' + ',' + s.get('degreeName', '') or '' + '\n' + s.get('startDate', '') or '' + '-' + s.get('endDate', '') or '' + '\n\n'
+                    edu = edu + s.get('school', '') or '' + ',' + s.get('major', '') or '' + ',' + s.get('degreeName',
+                                                                                                         '') or '' + '\n' + s.get(
+                        'startDate', '') or '' + '-' + s.get('endDate', '') or '' + '\n\n'
                 work = ''
                 for e in candidate_json.get('geekCard', {}).get('geekWorks', []):
-                    work = work + e.get('company', '') or '' + ',' + e.get('workTime', '') or '' + ',' + e.get('positionName', '') or ''  + '\n'
+                    work = work + e.get('company', '') or '' + ',' + e.get('workTime', '') or '' + ',' + e.get(
+                        'positionName', '') or '' + '\n'
                     work = work + e.get('startDate', '') or '' + '-' + e.get('endDate', '') or '' + '\n'
                     work = work + e.get('responsibility', '') or '' + '\n\n'
-                    
-            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, salary, age, degree, gender, status, school, edu, work]
+
+            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, salary, age,
+                 degree, gender, status, school, edu, work]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
@@ -322,15 +377,17 @@ def generate_candidate_csv_by_job_Boss(job_id, start_date, end_date):
             logger.info(f'test_download_candidate_boss_error4, {c_j}')
             logger.info(f'test_download_candidate_boss_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
+
 def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
     job_name = get_job_name_by_id(job_id)
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','邮箱','简历','对话详情','地区','岗位', '学校经历', '公司经历', '语言能力']
+    l = ['岗位名称', '候选人ID', '创建时间', '候选人姓名', '来源', '微信', '电话', '邮箱', '简历', '对话详情', '地区',
+         '岗位', '学校经历', '公司经历', '语言能力']
     l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8") + codecs.BOM_UTF8.decode() + l_encode[0]
     w.writerow(l_encode)
     yield io.getvalue()
     io.seek(0)
@@ -345,10 +402,10 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
             if c[4] == 'user_ask':
                 source = '候选人主动'
             elif c[4] == 'search':
-                source= '机器人打招呼'
+                source = '机器人打招呼'
             else:
                 source = '未知'
-            if c[6] is None :
+            if c[6] is None:
                 wechat = ''
                 phone = ''
                 resume = ''
@@ -365,7 +422,8 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                     phone = ''
                     resume = ''
                     email = ''
-                    logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
+                    logger.info(
+                        f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
             try:
                 conversation = json.loads(c[7])
                 con_str = ''
@@ -382,14 +440,16 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                 work = ''
                 language = ''
             else:
-                c_j = candidate_info[0][7].replace('\n','.')
+                c_j = candidate_info[0][7].replace('\n', '.')
                 c_j = c_j.replace("\'", '\"')
                 candidate_json = json.loads(c_j, strict=False)
                 region = candidate_json.get('profile', {}).get('location', '')
                 position = candidate_json.get('profile', {}).get('role', '')
                 edu = ''
                 for s in candidate_json.get('profile', {}).get('educations', []):
-                    edu = edu + s.get('schoolName', '') + ',' + s.get('majorInfo', '') + ',' + s.get('degreeInfo', '') + '\n' + s.get('timeInfo', '') + '\n' + s.get('summary', '') + '\n\n'
+                    edu = edu + s.get('schoolName', '') + ',' + s.get('majorInfo', '') + ',' + s.get('degreeInfo',
+                                                                                                     '') + '\n' + s.get(
+                        'timeInfo', '') + '\n' + s.get('summary', '') + '\n\n'
                 work = ''
                 for e in candidate_json.get('profile', {}).get('experiences', []):
                     work = work + e.get('companyName', '') + ',' + e.get('timeInfo', '') + '\n'
@@ -402,7 +462,8 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
                 for lan in candidate_json.get('profile', {}).get('languages', []):
                     language = language + lan.get('language', '') + '\n' + lan.get('des', '') + '\n\n'
 
-            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, email, resume, con_str, region, position, edu, work, language]
+            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, email, resume, con_str,
+                 region, position, edu, work, language]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
@@ -410,7 +471,9 @@ def generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date):
             io.truncate(0)
         except Exception as e:
             logger.info(f'test_download_candidate_linkedin_error4, {c_j}')
-            logger.info(f'test_download_candidate_linkedin_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+            logger.info(
+                f'test_download_candidate_linkedin_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+
 
 def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
@@ -418,9 +481,11 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['岗位名称','候选人ID', '创建时间', '候选人姓名','来源','微信','电话','简历','对话详情','地区','性别','年龄', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期地点', '预期薪水', '简历标签']
+    l = ['岗位名称', '候选人ID', '创建时间', '候选人姓名', '来源', '微信', '电话', '简历', '对话详情', '地区', '性别',
+         '年龄', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期地点', '预期薪水',
+         '简历标签']
     l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8") + codecs.BOM_UTF8.decode() + l_encode[0]
     w.writerow(l_encode)
     yield io.getvalue()
     io.seek(0)
@@ -435,10 +500,10 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
             if c[4] == 'user_ask':
                 source = '候选人主动'
             elif c[4] == 'search':
-                source= '机器人打招呼'
+                source = '机器人打招呼'
             else:
                 source = '未知'
-            if c[6] is None :
+            if c[6] is None:
                 wechat = ''
                 phone = ''
                 resume = ''
@@ -452,7 +517,8 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
                     wechat = ''
                     phone = ''
                     resume = ''
-                    logger.info(f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
+                    logger.info(
+                        f'exception_filter:{candidate_id}, {candidate_name}, {c[6]}, {contact}, {e}, {e.args}, {traceback.format_exc()}')
             try:
                 conversation = json.loads(c[7])
                 con_str = ''
@@ -460,7 +526,6 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
                     con_str = con_str + c['speaker'] + ':' + c['msg'] + '\n'
             except Exception as e:
                 con_str = ''
-
 
             if len(candidate_info) == 0:
                 logger.info(f"chat_candidate_not_match, {candidate_id}")
@@ -478,7 +543,7 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
                 exp_salary = ''
                 tag_list = ''
             else:
-                c_j = candidate_info[0][7].replace('\n','.')
+                c_j = candidate_info[0][7].replace('\n', '.')
                 c_j = c_j.replace("\'", '\"')
                 candidate_json = json.loads(c_j, strict=False)
                 region = candidate_info[0][4]
@@ -509,16 +574,22 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
                     school = candidate_json['education'][0].get('school', '')
                 edu = ''
                 for s in candidate_json.get('education', []):
-                    edu = edu + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree', '') + ',' + s.get('v', '') + '\n'
+                    edu = edu + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree',
+                                                                                                  '') + ',' + s.get('v',
+                                                                                                                    '') + '\n'
                 work = ''
                 for e in candidate_json.get('work', []):
                     des = e.get('description', '') or ''
-                    work = work +','+ e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + des + '\n'
+                    work = work + ',' + e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime',
+                                                                                                         '') + ',' + e.get(
+                        'v', '') + ',' + des + '\n'
                 exp_location = candidate_json.get('exp_location', '')
                 exp_salary = candidate_json.get('exp_salary', '')
                 tag_list = ','.join(candidate_json.get('tag_list', []))
 
-            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region, gender, age, position, degree, major, large_comps, school, edu, work, exp_location, exp_salary, tag_list]
+            l = [job_id, candidate_id, create_time, candidate_name, source, wechat, phone, resume, con_str, region,
+                 gender, age, position, degree, major, large_comps, school, edu, work, exp_location, exp_salary,
+                 tag_list]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
@@ -526,21 +597,25 @@ def generate_candidate_csv_by_job_maimai(job_id, start_date, end_date):
             io.truncate(0)
         except Exception as e:
             logger.info(f'test_download_candidate_maimai_error4, {c_j}')
-            logger.info(f'test_download_candidate_maimai_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+            logger.info(
+                f'test_download_candidate_maimai_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+
 
 def pNull(s):
-    if s is None or s == None or s =='null':
+    if s is None or s == None or s == 'null':
         return ''
     return s or ''
+
 
 def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date, list_name):
     res = get_resume_by_filter(manage_account_id, platform, start_date, end_date, list_name)
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校','年龄', '教育经历', '工作经历', '语言能力', '工作总结']
+    l = ['候选人ID', '创建时间', '候选人姓名', '电话', '邮箱', '地区', '岗位', '最高学历', '专业', '毕业院校', '年龄',
+         '教育经历', '工作经历', '语言能力', '工作总结']
     l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8") + codecs.BOM_UTF8.decode() + l_encode[0]
     w.writerow(l_encode)
     yield io.getvalue()
     io.seek(0)
@@ -570,7 +645,7 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
             if len(profile.get('educations', [])) > 0:
                 school = profile.get('educations', [])[0].get('schoolName', '')
             age = -1
-            for i in range(len(profile.get('educations', []))-1, -1, -1):
+            for i in range(len(profile.get('educations', [])) - 1, -1, -1):
                 time_info = profile.get('educations', [])[i].get('timeInfo', '')
                 if time_info != '':
                     index = -1
@@ -596,7 +671,8 @@ def generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_da
                 languages = f"{languages}{pNull(lan.get('language', ''))},{pNull(lan.get('des', ''))}\n"
             summary = profile.get('summary', '')
 
-            l = [candidate_id, create_time, candidate_name,phone, email, region, position, sdegree, major, school, age, edu, work, languages, summary]
+            l = [candidate_id, create_time, candidate_name, phone, email, region, position, sdegree, major, school, age,
+                 edu, work, languages, summary]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
@@ -612,9 +688,11 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
     io = StringIO()
     w = csv.writer(io)
 
-    l = ['候选人ID', '创建时间', '候选人姓名','地区','性别', '年龄','工作总时长', '在职公司', '岗位', '最高学历', '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向', '简历标签']
+    l = ['候选人ID', '创建时间', '候选人姓名', '地区', '性别', '年龄', '工作总时长', '在职公司', '岗位', '最高学历',
+         '专业', '历史公司', '毕业院校', '教育经历', '工作经历', '预期职位', '预期地点', '预期薪水', '其他倾向',
+         '简历标签']
     l_encode = [csv_encode(_l) for _l in l]
-    l_encode[0] = codecs.BOM_UTF8.decode("utf8")+codecs.BOM_UTF8.decode()+l_encode[0]
+    l_encode[0] = codecs.BOM_UTF8.decode("utf8") + codecs.BOM_UTF8.decode() + l_encode[0]
     w.writerow(l_encode)
     yield io.getvalue()
     io.seek(0)
@@ -644,21 +722,27 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
             school = profile.get('school', '')
             schools = ''
             for s in profile.get('edu', []):
-                schools = schools + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree', '') + ',' + s.get('v', '') + '\n'
+                schools = schools + s.get('school', '') + ',' + s.get('department', '') + ',' + s.get('sdegree',
+                                                                                                      '') + ',' + s.get(
+                    'v', '') + '\n'
             if 'current_company' in profile:
-                work_detail = profile['current_company'].get('company', '') + ',' + profile['current_company'].get('position', '') + ',' + profile['current_company'].get('worktime', '') + '\n'
+                work_detail = profile['current_company'].get('company', '') + ',' + profile['current_company'].get(
+                    'position', '') + ',' + profile['current_company'].get('worktime', '') + '\n'
             else:
                 work_detail = ''
             for e in profile.get('exp', []):
                 des = e.get('description', '') or ''
-                work_detail = work_detail +','+ e.get('company', '') + ',' + e.get('position', '') + ',' + e.get('worktime', '') + ',' + e.get('v', '') + ',' + des + '\n'
-            
+                work_detail = work_detail + ',' + e.get('company', '') + ',' + e.get('position', '') + ',' + e.get(
+                    'worktime', '') + ',' + e.get('v', '') + ',' + des + '\n'
+
             exp_positon = ','.join(profile['job_preferences'].get('positons', []))
             exp_location = ','.join(profile['job_preferences'].get('province_cities', []))
             exp_salary = profile['job_preferences'].get('salary', '')
             exp_prefer = ','.join(profile['job_preferences'].get('prefessions', []))
             tags = ','.join(profile.get('tag_list', []))
-            l = [candidate_id, create_time, candidate_name, region,gender, age, work_time, company, position, sdegree, major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer, tags]
+            l = [candidate_id, create_time, candidate_name, region, gender, age, work_time, company, position, sdegree,
+                 major, large_comps, school, schools, work_detail, exp_positon, exp_location, exp_salary, exp_prefer,
+                 tags]
             l_encode = [csv_encode(_l) for _l in l]
             w.writerow(l_encode)
             yield io.getvalue()
@@ -667,6 +751,7 @@ def generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date
         except Exception as e:
             logger.info(f'download_resume_error4,{profile_json}')
             logger.info(f'download_resume_error4,{candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+
 
 def format_json_str(body):
     r = ""
@@ -684,8 +769,10 @@ def format_json_str(body):
         r = body[1:-1] if len(body) > 0 and body[0] == "\"" and body[-1] == "\"" else body
     return r
 
-def fetch_json_str(body, key, default_v = ''):
-    return format_json_str(body[key ]) if key in body else default_v
+
+def fetch_json_str(body, key, default_v=''):
+    return format_json_str(body[key]) if key in body else default_v
+
 
 def generate_csv(res):
     s = res[0][6].replace('\n', '\\n')
@@ -693,17 +780,18 @@ def generate_csv(res):
     format_resume_json = json.loads(res[0][8].replace('\n', '\\n'))
     io = StringIO()
     w = csv.writer(io)
-    w.writerow(['简历', '结果', '匹配结果', '姓名', '性别', '年龄/出生', '期望职位', '期望薪资', '最高学历', '专业', '工作经历', '教育经历', '工作城市', '电话', '邮箱', '技能', '项目经历'])
+    w.writerow(['简历', '结果', '匹配结果', '姓名', '性别', '年龄/出生', '期望职位', '期望薪资', '最高学历', '专业',
+                '工作经历', '教育经历', '工作城市', '电话', '邮箱', '技能', '项目经历'])
     for idx, r in enumerate(res_l):
         file_name = os.path.basename(r['f_path'])
         l = [file_name, r['res'], r['remark'],
-            fetch_json_str(format_resume_json[idx], '姓名'), fetch_json_str(format_resume_json[idx], '性别'),
-            fetch_json_str(format_resume_json[idx], '年龄/出生'), fetch_json_str(format_resume_json[idx], '期望职位'),
-            fetch_json_str(format_resume_json[idx], '期望薪资'), fetch_json_str(format_resume_json[idx], '最高学历'),
-            fetch_json_str(format_resume_json[idx], '专业'), fetch_json_str(format_resume_json[idx], '工作经历'),
-            fetch_json_str(format_resume_json[idx], '教育经历'), fetch_json_str(format_resume_json[idx], '工作城市'),
-            fetch_json_str(format_resume_json[idx], '电话'), fetch_json_str(format_resume_json[idx], '邮箱'),
-            fetch_json_str(format_resume_json[idx], '技能'), fetch_json_str(format_resume_json[idx], '项目经历')]
+             fetch_json_str(format_resume_json[idx], '姓名'), fetch_json_str(format_resume_json[idx], '性别'),
+             fetch_json_str(format_resume_json[idx], '年龄/出生'), fetch_json_str(format_resume_json[idx], '期望职位'),
+             fetch_json_str(format_resume_json[idx], '期望薪资'), fetch_json_str(format_resume_json[idx], '最高学历'),
+             fetch_json_str(format_resume_json[idx], '专业'), fetch_json_str(format_resume_json[idx], '工作经历'),
+             fetch_json_str(format_resume_json[idx], '教育经历'), fetch_json_str(format_resume_json[idx], '工作城市'),
+             fetch_json_str(format_resume_json[idx], '电话'), fetch_json_str(format_resume_json[idx], '邮箱'),
+             fetch_json_str(format_resume_json[idx], '技能'), fetch_json_str(format_resume_json[idx], '项目经历')]
         w.writerow(l)
         yield io.getvalue()
         io.seek(0)
@@ -716,12 +804,14 @@ def imglist_to_text(img_url_list):
         res = res + img_to_text(img)
     return res
 
+
 def img_to_text(f_path):
     res = reader.readtext(f_path)
     s = ''
     for r in res:
         s = s + r[1] + '\n'
     return s
+
 
 def download_file(url):
     file_name = os.path.basename(url)
@@ -734,6 +824,7 @@ def download_file(url):
     else:
         return None
 
+
 def content_transfer(f_path):
     file_name = os.path.basename(f_path)
     if f_path.endswith('jpg') or f_path.endswith('jpeg') or f_path.endswith('png'):
@@ -743,7 +834,7 @@ def content_transfer(f_path):
         start_time = datetime.datetime.now()
         pdf = fitz.open(f_path)
         for page in pdf:
-            mat=fitz.Matrix(10,10)
+            mat = fitz.Matrix(10, 10)
             pix = page.get_pixmap(matrix=mat)
             png_file_name = f"{file_name.split('.')[0]}-page-{page.number}.png"
             pix.save(png_file_name)
@@ -752,7 +843,8 @@ def content_transfer(f_path):
         end_pdf_time = datetime.datetime.now()
         res = imglist_to_text(final_url_list)
         end_txt_time = datetime.datetime.now()
-        logger.info(f'[tool_service] content transfer pdf -> jpg time consumption = {(end_pdf_time - start_time).total_seconds()}, jpg -> text time consumption = {(end_txt_time - end_pdf_time).total_seconds()}')
+        logger.info(
+            f'[tool_service] content transfer pdf -> jpg time consumption = {(end_pdf_time - start_time).total_seconds()}, jpg -> text time consumption = {(end_txt_time - end_pdf_time).total_seconds()}')
         for u in final_url_list:
             os.remove(u)
         return True, res
@@ -765,10 +857,10 @@ def content_transfer(f_path):
         tables = f.tables
         last_cell = ''
         for t in tables:
-           for r in  t.rows:
-               for c in r.cells:
-                   s = c.text.strip()
-                   if s != '' and s != last_cell:
+            for r in t.rows:
+                for c in r.cells:
+                    s = c.text.strip()
+                    if s != '' and s != last_cell:
                         result_str += ';' + s
                         last_cell = s
         return True, result_str
@@ -777,9 +869,10 @@ def content_transfer(f_path):
     else:
         return False, "EXT_NOT_SUPPORT"
 
+
 def content_extract_and_filter(file_raw_data, jd):
     # chatgpt = ChatGPT()
-    #先做个人为截断，如果有问题再说
+    # 先做个人为截断，如果有问题再说
     start_time = datetime.datetime.now()
     ext_prompt_msg = '以下是候选人信息，请提取关键信息并结构化输出\n$$$\n' + file_raw_data[0:3500] + "\n$$$"
     ext_prompt = Prompt()
@@ -811,9 +904,11 @@ def content_extract_and_filter(file_raw_data, jd):
     res = gpt_manager.chat_task(filter_prompt)
     end_judge_time = datetime.datetime.now()
 
-    logger.info(f'[content_extract_and_filter] format resume time = {(end_format_time - start_time).total_seconds()}, parse result time = {(end_parse_time - end_format_time).total_seconds()}, judge time = {(end_judge_time - end_parse_time).total_seconds()}')
+    logger.info(
+        f'[content_extract_and_filter] format resume time = {(end_format_time - start_time).total_seconds()}, parse result time = {(end_parse_time - end_format_time).total_seconds()}, judge time = {(end_judge_time - end_parse_time).total_seconds()}')
     # res = chatgpt.chat(filter_prompt)
     return res, format_info
+
 
 def exec_filter_task(manage_account_id, file_list, jd):
     filter_result = []
@@ -827,7 +922,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
             filter_result.append({
                 "f_path": file_name,
                 "res": file_raw_data,
-                "remark":""
+                "remark": ""
             })
             continue
 
@@ -861,8 +956,10 @@ def deserialize_raw_profile(raw_profile):
         logger.error(traceback.format_exc())
         return None
 
+
 def customized_user_scenario(manage_account_id, context, platform, scenario_info):
     create_customized_scenario_setting(manage_account_id, platform, context, scenario_info)
+
 
 def get_default_greeting_scenario():
     msg = 'Hi \n'
@@ -870,6 +967,7 @@ def get_default_greeting_scenario():
     msg += 'your Exp. seems a good match\n'
     msg += 'would you like to explore this opportunity? Thanks!'
     return msg
+
 
 def get_default_chat_scenario():
     scenario_options = ['要简历', '约电话', '转介绍', '召回']
@@ -887,12 +985,14 @@ def get_default_chat_scenario():
         r[scenario] = msg
     return r
 
+
 def get_leave_msg(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)[0][0]
     if scenario_info == None or len(scenario_info) == 0:
         return get_default_greeting_scenario()
     else:
         return json.loads(scenario_info, strict=False)
+
 
 def get_chat_scenario(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_CHAT)[0][0]
@@ -905,6 +1005,7 @@ def get_chat_scenario(manage_account_id, platform):
 _tag_id_cache = {}
 _tag_name_id_cache = {}
 
+
 def ensure_cache(manage_account_id, platform):
     if manage_account_id not in _tag_id_cache:
         _tag_id_cache[manage_account_id] = {}
@@ -914,6 +1015,7 @@ def ensure_cache(manage_account_id, platform):
             _tag_id_cache[manage_account_id][id_tag[0]] = id_tag[1]
             _tag_name_id_cache[manage_account_id][id_tag[1]] = id_tag[0]
     return _tag_id_cache[manage_account_id], _tag_name_id_cache[manage_account_id]
+
 
 def get_check_tag_ids(manage_account_id, tags, platform):
     user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
@@ -925,11 +1027,13 @@ def get_check_tag_ids(manage_account_id, tags, platform):
             tag_ids.append(user_tag_id_cache[tag])
     return tag_ids
 
+
 def create_profile_tag(manage_account_id, platform, tag):
     user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
     if tag in user_tag_id_cache:
         logger.info("[tool_service] tag = {} already exist, ignore create")
-        return {'tag_id': user_tag_id_cache[tag], 'tag': tag, 'manage_account_id': manage_account_id, 'platform': platform, 'tag': tag}, None
+        return {'tag_id': user_tag_id_cache[tag], 'tag': tag, 'manage_account_id': manage_account_id,
+                'platform': platform, 'tag': tag}, None
     try:
         tag_id = create_profile_tag_db(manage_account_id, platform, tag)
     except BaseException as e:
@@ -938,12 +1042,15 @@ def create_profile_tag(manage_account_id, platform, tag):
     user_id_tag_cache[tag_id] = tag
     user_tag_id_cache[tag] = tag_id
 
-    return {'tag_id': tag_id, 'tag': tag, 'manage_account_id': manage_account_id, 'platform': platform, 'tag': tag}, None
+    return {'tag_id': tag_id, 'tag': tag, 'manage_account_id': manage_account_id, 'platform': platform,
+            'tag': tag}, None
+
 
 def query_profile_tag_by_user(manage_account_id, platform):
     user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
     tags = list(user_tag_id_cache.keys())
     return tags, None
+
 
 def query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidate_id, platform):
     id_tags = query_profile_tag_relation_by_user_and_candidate_db(manage_account_id, candidate_id, platform)
@@ -953,6 +1060,7 @@ def query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidat
 
     return tags, None
 
+
 def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
@@ -961,19 +1069,35 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
     for idx, tag_id in enumerate(tag_ids):
         relations = query_id_by_profile_tag_relation(manage_account_id, candidate_id, platform, [tags[idx]])
         if relations and len(relations) > 0:
-            logger.info("[tool_service] associate_profile_tag existing relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
+            logger.info(
+                "[tool_service] associate_profile_tag existing relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}",
+                manage_account_id, candidate_id, platform, tag_id, tags[idx])
             continue
         associate_profile_tag(manage_account_id, candidate_id, platform, tag_id, tags[idx])
-        logger.info("[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}", manage_account_id, candidate_id, platform, tag_id, tags[idx])
+        logger.info(
+            "[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}",
+            manage_account_id, candidate_id, platform, tag_id, tags[idx])
     return tags, None
+
+
+def upload_profile_status(manage_account_id, candidate_id, platform, profile):
+    status = profile["profile"]["status"]
+    if status is None:
+        return
+
+    upload_profile_status_dao(manage_account_id, candidate_id, platform, status)
+
 
 def deassociate_profile_tags(manage_account_id, candidate_id, platform, tags):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
         return None, "tags中存在无效tag"
     delete_profile_tag_relation(manage_account_id, candidate_id, platform, tags)
-    logger.info("[tool_service] delete_profile_tag_relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_ids = {}, tags = {}", manage_account_id, candidate_id, platform, tag_ids, tags)
+    logger.info(
+        "[tool_service] delete_profile_tag_relation manage_account_id = {}, candidate_id = {}, platform = {}, tag_ids = {}, tags = {}",
+        manage_account_id, candidate_id, platform, tag_ids, tags)
     return tags, None
+
 
 def delete_profile_tags(manage_account_id, candidate_id, platform, tags):
     user_id_tag_cache, user_tag_id_cache = ensure_cache(manage_account_id, platform)
@@ -987,12 +1111,16 @@ def delete_profile_tags(manage_account_id, candidate_id, platform, tags):
     for idx, tag in enumerate(tags):
         user_id_tag_cache.pop(tag_ids[idx])
         user_tag_id_cache.pop(tag)
-    logger.info("[tool_service] delete manage_account_id = {}, candidate_id = {}, platform = {}, tags = {}", manage_account_id, candidate_id, platform, tags)
+    logger.info("[tool_service] delete manage_account_id = {}, candidate_id = {}, platform = {}, tags = {}",
+                manage_account_id, candidate_id, platform, tags)
     return None, None
+
 
 def transfer_profile():
     # to do refactor for download excel
     return None
+
+
 def cv_str(obj, dent):
     cv = ""
     if type(obj) == dict:
@@ -1009,6 +1137,7 @@ def cv_str(obj, dent):
         cv += (str(obj) + '\n')
     return cv
 
+
 def get_max_time_info(time_info_str, default_time):
     if not time_info_str:
         return default_time
@@ -1017,6 +1146,7 @@ def get_max_time_info(time_info_str, default_time):
     for t in times:
         max_start_year = max(max_start_year, int(t))
     return max_start_year
+
 
 def get_min_time_info(time_info_str, default_time):
     if not time_info_str:
@@ -1027,23 +1157,24 @@ def get_min_time_info(time_info_str, default_time):
         min_start_year = min(min_start_year, int(t))
     return min_start_year
 
+
 def parse_profile(profile):
     profile = deserialize_raw_profile(profile)
     if profile is None:
         return None
-    res = {'candidateId' : None,
-                 'department': None,
-                 'lastCompany': None,
-                 'title': None,
-                 'lastTitle': None,
-                 'last5Jump': None,
-                 'name':None,
-                 'location':None,
-                 'contactInfo': None,
-                 'cv':None,
-                 'age': None,
-                 'isChinese': None,
-                 'languages': None}
+    res = {'candidateId': None,
+           'department': None,
+           'lastCompany': None,
+           'title': None,
+           'lastTitle': None,
+           'last5Jump': None,
+           'name': None,
+           'location': None,
+           'contactInfo': None,
+           'cv': None,
+           'age': None,
+           'isChinese': None,
+           'languages': None}
     if 'id' in profile:
         res['candidateId'] = profile['id']
     if 'profile' in profile:
@@ -1074,7 +1205,47 @@ def parse_profile(profile):
         res['cv'] = cv_str(profile, 0)
     if name:
         res['isChinese'] = False
-        chs_names = ['Zhao', 'Qian', 'Sun', 'Li', 'Zhou', 'Wu', 'Zheng', 'Wang', 'Feng', 'Chen', 'Zhu', 'Wei', 'Shen', 'Han', 'Yang', 'Qin', 'You', 'Xu', 'He', 'Lv', 'Shi', 'Zhang', 'Kong', 'Cao', 'Yan', 'Hua', 'Jin', 'Tao', 'Jiang', 'Xie', 'Zou', 'Yu', 'Bo', 'Shui', 'Dou', 'Yun', 'SU', 'Pan', 'Ge', 'Fan', 'Peng', 'Lang', 'Lu', 'Chang', 'Ma', 'Miao', 'Feng', 'Hua', 'Fang', 'Yu', 'Ren', 'Yuan', 'Liu', 'Bao', 'Shi', 'Tang', 'Fei', 'Lian', 'Qin', 'Xue', 'Lei', 'He', 'Ni', 'Teng', 'Yin', 'Luo', 'Bi', 'Hao', 'Wu', 'An', 'Chang', 'Le', 'Yu', 'Fu', 'Pi', 'Qi', 'Kang', 'Bu', 'Gu', 'Meng', 'Ping', 'Huang', 'He', 'Mu', 'Xiao', 'Yin', 'Yao', 'Shao', 'Qi', 'Mao', 'Di', 'Mi', 'Bei', 'Ming', 'Zang', 'Ji', 'FU', 'Cheng', 'Dai', 'Song', 'Ji', 'Shu', 'Qu', 'Dong', 'Liang', 'Du', 'Lan', 'Min', 'Jia', 'Lou', 'Tong', 'Guo', 'Lin', 'Diao', 'Zhong', 'Qiu', 'Luo', 'Gao', 'Xia', 'Cai', 'Tian', 'Hu', 'Ling', 'Huo', 'Ling', 'Wan', 'Zhi', 'ke', 'Guan', 'Mo', 'Miao', 'Xie', 'Zong', 'Ding', 'Deng', 'Shan', 'Hang', 'Bao', 'Zuo', 'Cui', 'Niu', 'Weng', 'Xun', 'Yang', 'Hui', 'Gong', 'Cheng', 'Hua', 'Pei', 'Rong', 'Jiao', 'Mu', 'Gu', 'Che', 'Hou', 'Mi', 'Quan', 'Ban', 'Gong', 'Ning', 'Chou', 'Luan', 'Zu', 'Fu', 'Liu', 'Long', 'Ye', 'Si', 'Bai', 'Huai', 'Cong', 'Lai', 'Zhuo', 'Qiao', 'Shuang', 'Dang', 'Cui', 'Tan', 'Ran', 'Bian', 'Chai', 'Liao', 'Gong', 'Jian', 'Sha', 'You', 'Hai', 'Wen', 'Zhai', 'Kou', 'Rao', 'Pu', 'Ou', 'She', 'Nian', 'Ai', 'Ha', 'An', 'Zhan', 'Ruan', 'Bing', 'Tu', 'Zhuang', 'Geng', 'Guang', 'Chao', 'AH', 'AU', 'BIK', 'BING', 'BIT', 'BONG', 'BUN', 'CHAI', 'CHAK', 'CHAM', 'CHAN', 'CHANG', 'CHAT', 'CHAU', 'CHEN', 'CHENG', 'CHEONG', 'CHEUK', 'CHEUNG', 'CHI', 'CHIANG', 'CHICKC', 'HIGN', 'CHIK', 'CHIN', 'CHING', 'CHIT', 'CHIU', 'CHO', 'CHOI', 'CHOK', 'CHONG', 'CHOR', 'CHOW', 'CHOY', 'CHU', 'CHUEN', 'CHUI', 'CHUM', 'CHUN', 'CHUNG', 'DIK', 'DIU', 'FAT', 'FA', 'FAI', 'FAN', 'FANG', 'FEI', 'FO', 'FOG', 'FOK', 'FONG', 'FOO', 'FOOK', 'FOON', 'FORK', 'FU', 'FUI', 'FUK', 'FUNG', 'HING', 'HA', 'HAN', 'HANG', 'HAU', 'HEI', 'HEUNG', 'HIM', 'HIN', 'HIP', 'HIU', 'HO', 'HOHO', 'HOI', 'HOK', 'HON', 'HONG', 'HOU', 'HSU', 'HSUI', 'HUANG', 'HUEN', 'HUI', 'HUNG', 'HWANG', 'JIM', 'KA', 'KAI', 'KAK', 'KAM', 'KAN', 'KANG', 'KAR', 'KAU', 'KEI', 'KEUNG', 'KHOO', 'KIM', 'KIN', 'KING', 'KIT', 'KIU', 'KO', 'KOK', 'KON', 'KONG', 'KOON', 'KOT', 'KU', 'KUA', 'KUEN', 'KUI', 'KUK', 'KUN', 'KUNG', 'KUO', 'KWAI', 'KWAN', 'KWING', 'KWOK', 'KWONG', 'LAI', 'LAM', 'LAN', 'LAP', 'LARM', 'LAU', 'LAW', 'LEE', 'LEI', 'LEONG', 'LEUNG', 'LI', 'LIANG', 'LIAO', 'LIEW', 'LIK', 'LIM', 'LIN', 'LING', 'LIP', 'LIT', 'LIU', 'LO', 'LOI', 'LOK', 'LONG', 'LOO', 'LOOK', 'LOONG', 'LOW', 'LUEN', 'LUET', 'LUI', 'LUK', 'LUMLUN', 'LUN', 'LUNG', 'MA', 'MAK', 'MAN', 'MANG', 'MAO', 'MAR', 'MEI', 'MIN', 'MING', 'MIU', 'MO', 'MOK', 'MOOK', 'MOON', 'MUI', 'MUK', 'MUNG', 'NAM', 'NANG', 'NAR', 'NEI', 'NEUNG', 'NG', 'NGA', 'NGAI', 'NGAN', 'NGAU', 'NGO', 'NGON', 'NIE', 'NIN', 'NING', 'NUI', 'O', 'OI', 'ON', 'PAK', 'PANG', 'PAT', 'PAU', 'PEI', 'PIK', 'PIN', 'PING', 'PIU', 'PO', 'POK', 'PONG', 'POO', 'POON', 'PUI', 'PUN', 'SAI', 'SAM', 'SAN', 'SANG', 'SAU', 'SE', 'SECK', 'SEE', 'SEI', 'SEK', 'SHAN', 'SHE', 'SHEK', 'SHEUNG', 'SHI', 'SHIH', 'SHING', 'SHIU', 'SHP', 'SHU', 'SHUE', 'SHUEN', 'SHUK', 'SHUM', 'SHUN', 'SI', 'SIK', 'SIM', 'SIN', 'SING', 'SIT', 'SIU', 'SO', 'SUEN', 'SUET', 'SUI', 'SUM', 'SUN', 'SUNG', 'SZE', 'TAI', 'TAK', 'TAM', 'TAN', 'TANG', 'TAO', 'TAT', 'TAU', 'TIM', 'TIN', 'TING', 'TIP', 'TIT', 'TO', 'TONG', 'TSAM', 'TSANG', 'TSE', 'TSIM', 'TSO', 'TSOI', 'TSUI', 'TUEN', 'TUNG', 'TYE', 'UNG', 'VONG', 'WAH', 'WAI', 'WAN', 'WANG', 'WAT', 'WING', 'WO', 'WON', 'WONG', 'WOO', 'WOOD', 'WOON', 'WU', 'WUI', 'WUN', 'WUT', 'YAM', 'YAN', 'YANG', 'YAO', 'YAT', 'YAU', 'YEE', 'YEI', 'YEN', 'YEUK', 'YEUNG', 'YI', 'YICK', 'YIK', 'YIM', 'YIN', 'YING', 'YIP', 'YIU', 'YOUNG', 'YU', 'YUE', 'YUEN', 'YUET', 'YUI', 'YUK', 'YUNG', 'ZHANG']
+        chs_names = ['Zhao', 'Qian', 'Sun', 'Li', 'Zhou', 'Wu', 'Zheng', 'Wang', 'Feng', 'Chen', 'Zhu', 'Wei', 'Shen',
+                     'Han', 'Yang', 'Qin', 'You', 'Xu', 'He', 'Lv', 'Shi', 'Zhang', 'Kong', 'Cao', 'Yan', 'Hua', 'Jin',
+                     'Tao', 'Jiang', 'Xie', 'Zou', 'Yu', 'Bo', 'Shui', 'Dou', 'Yun', 'SU', 'Pan', 'Ge', 'Fan', 'Peng',
+                     'Lang', 'Lu', 'Chang', 'Ma', 'Miao', 'Feng', 'Hua', 'Fang', 'Yu', 'Ren', 'Yuan', 'Liu', 'Bao',
+                     'Shi', 'Tang', 'Fei', 'Lian', 'Qin', 'Xue', 'Lei', 'He', 'Ni', 'Teng', 'Yin', 'Luo', 'Bi', 'Hao',
+                     'Wu', 'An', 'Chang', 'Le', 'Yu', 'Fu', 'Pi', 'Qi', 'Kang', 'Bu', 'Gu', 'Meng', 'Ping', 'Huang',
+                     'He', 'Mu', 'Xiao', 'Yin', 'Yao', 'Shao', 'Qi', 'Mao', 'Di', 'Mi', 'Bei', 'Ming', 'Zang', 'Ji',
+                     'FU', 'Cheng', 'Dai', 'Song', 'Ji', 'Shu', 'Qu', 'Dong', 'Liang', 'Du', 'Lan', 'Min', 'Jia', 'Lou',
+                     'Tong', 'Guo', 'Lin', 'Diao', 'Zhong', 'Qiu', 'Luo', 'Gao', 'Xia', 'Cai', 'Tian', 'Hu', 'Ling',
+                     'Huo', 'Ling', 'Wan', 'Zhi', 'ke', 'Guan', 'Mo', 'Miao', 'Xie', 'Zong', 'Ding', 'Deng', 'Shan',
+                     'Hang', 'Bao', 'Zuo', 'Cui', 'Niu', 'Weng', 'Xun', 'Yang', 'Hui', 'Gong', 'Cheng', 'Hua', 'Pei',
+                     'Rong', 'Jiao', 'Mu', 'Gu', 'Che', 'Hou', 'Mi', 'Quan', 'Ban', 'Gong', 'Ning', 'Chou', 'Luan',
+                     'Zu', 'Fu', 'Liu', 'Long', 'Ye', 'Si', 'Bai', 'Huai', 'Cong', 'Lai', 'Zhuo', 'Qiao', 'Shuang',
+                     'Dang', 'Cui', 'Tan', 'Ran', 'Bian', 'Chai', 'Liao', 'Gong', 'Jian', 'Sha', 'You', 'Hai', 'Wen',
+                     'Zhai', 'Kou', 'Rao', 'Pu', 'Ou', 'She', 'Nian', 'Ai', 'Ha', 'An', 'Zhan', 'Ruan', 'Bing', 'Tu',
+                     'Zhuang', 'Geng', 'Guang', 'Chao', 'AH', 'AU', 'BIK', 'BING', 'BIT', 'BONG', 'BUN', 'CHAI', 'CHAK',
+                     'CHAM', 'CHAN', 'CHANG', 'CHAT', 'CHAU', 'CHEN', 'CHENG', 'CHEONG', 'CHEUK', 'CHEUNG', 'CHI',
+                     'CHIANG', 'CHICKC', 'HIGN', 'CHIK', 'CHIN', 'CHING', 'CHIT', 'CHIU', 'CHO', 'CHOI', 'CHOK',
+                     'CHONG', 'CHOR', 'CHOW', 'CHOY', 'CHU', 'CHUEN', 'CHUI', 'CHUM', 'CHUN', 'CHUNG', 'DIK', 'DIU',
+                     'FAT', 'FA', 'FAI', 'FAN', 'FANG', 'FEI', 'FO', 'FOG', 'FOK', 'FONG', 'FOO', 'FOOK', 'FOON',
+                     'FORK', 'FU', 'FUI', 'FUK', 'FUNG', 'HING', 'HA', 'HAN', 'HANG', 'HAU', 'HEI', 'HEUNG', 'HIM',
+                     'HIN', 'HIP', 'HIU', 'HO', 'HOHO', 'HOI', 'HOK', 'HON', 'HONG', 'HOU', 'HSU', 'HSUI', 'HUANG',
+                     'HUEN', 'HUI', 'HUNG', 'HWANG', 'JIM', 'KA', 'KAI', 'KAK', 'KAM', 'KAN', 'KANG', 'KAR', 'KAU',
+                     'KEI', 'KEUNG', 'KHOO', 'KIM', 'KIN', 'KING', 'KIT', 'KIU', 'KO', 'KOK', 'KON', 'KONG', 'KOON',
+                     'KOT', 'KU', 'KUA', 'KUEN', 'KUI', 'KUK', 'KUN', 'KUNG', 'KUO', 'KWAI', 'KWAN', 'KWING', 'KWOK',
+                     'KWONG', 'LAI', 'LAM', 'LAN', 'LAP', 'LARM', 'LAU', 'LAW', 'LEE', 'LEI', 'LEONG', 'LEUNG', 'LI',
+                     'LIANG', 'LIAO', 'LIEW', 'LIK', 'LIM', 'LIN', 'LING', 'LIP', 'LIT', 'LIU', 'LO', 'LOI', 'LOK',
+                     'LONG', 'LOO', 'LOOK', 'LOONG', 'LOW', 'LUEN', 'LUET', 'LUI', 'LUK', 'LUMLUN', 'LUN', 'LUNG', 'MA',
+                     'MAK', 'MAN', 'MANG', 'MAO', 'MAR', 'MEI', 'MIN', 'MING', 'MIU', 'MO', 'MOK', 'MOOK', 'MOON',
+                     'MUI', 'MUK', 'MUNG', 'NAM', 'NANG', 'NAR', 'NEI', 'NEUNG', 'NG', 'NGA', 'NGAI', 'NGAN', 'NGAU',
+                     'NGO', 'NGON', 'NIE', 'NIN', 'NING', 'NUI', 'O', 'OI', 'ON', 'PAK', 'PANG', 'PAT', 'PAU', 'PEI',
+                     'PIK', 'PIN', 'PING', 'PIU', 'PO', 'POK', 'PONG', 'POO', 'POON', 'PUI', 'PUN', 'SAI', 'SAM', 'SAN',
+                     'SANG', 'SAU', 'SE', 'SECK', 'SEE', 'SEI', 'SEK', 'SHAN', 'SHE', 'SHEK', 'SHEUNG', 'SHI', 'SHIH',
+                     'SHING', 'SHIU', 'SHP', 'SHU', 'SHUE', 'SHUEN', 'SHUK', 'SHUM', 'SHUN', 'SI', 'SIK', 'SIM', 'SIN',
+                     'SING', 'SIT', 'SIU', 'SO', 'SUEN', 'SUET', 'SUI', 'SUM', 'SUN', 'SUNG', 'SZE', 'TAI', 'TAK',
+                     'TAM', 'TAN', 'TANG', 'TAO', 'TAT', 'TAU', 'TIM', 'TIN', 'TING', 'TIP', 'TIT', 'TO', 'TONG',
+                     'TSAM', 'TSANG', 'TSE', 'TSIM', 'TSO', 'TSOI', 'TSUI', 'TUEN', 'TUNG', 'TYE', 'UNG', 'VONG', 'WAH',
+                     'WAI', 'WAN', 'WANG', 'WAT', 'WING', 'WO', 'WON', 'WONG', 'WOO', 'WOOD', 'WOON', 'WU', 'WUI',
+                     'WUN', 'WUT', 'YAM', 'YAN', 'YANG', 'YAO', 'YAT', 'YAU', 'YEE', 'YEI', 'YEN', 'YEUK', 'YEUNG',
+                     'YI', 'YICK', 'YIK', 'YIM', 'YIN', 'YING', 'YIP', 'YIU', 'YOUNG', 'YU', 'YUE', 'YUEN', 'YUET',
+                     'YUI', 'YUK', 'YUNG', 'ZHANG']
         for split_name in name.split(' '):
             if ('\u4E00' <= split_name <= '\u9FFF') or ('\u3400' <= split_name <= '\u4DBF') or split_name in chs_names:
                 res['isChinese'] = True
@@ -1096,8 +1267,9 @@ def parse_profile(profile):
         educations = profile['educations']
         graduated_year = 1000
         for education in educations:
-            if 'timeInfo' in education and education['timeInfo'] is not None and\
-            (('majorInfo' in education and 'Masters degree' in education['majorInfo']) or ('degreeInfo' in education and 'Masters degree' in education['degreeInfo'])):
+            if 'timeInfo' in education and education['timeInfo'] is not None and \
+                    (('majorInfo' in education and 'Masters degree' in education['majorInfo']) or (
+                            'degreeInfo' in education and 'Masters degree' in education['degreeInfo'])):
                 graduated_year = get_max_time_info(education['timeInfo'], graduated_year)
                 start_age = 23
             elif 'timeInfo' in education and education['timeInfo'] is not None:
@@ -1119,16 +1291,17 @@ def parse_profile(profile):
         res['last5Jump'] = last_5_jump
     return res
 
+
 def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contact2str):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
         return None, "tags中存在无效tag"
     candidate_ids = query_candidate_id_by_tag_relation(manage_account_id, platform, tags)
     total_count = get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids)
-    start = (page - 1)*limit
+    start = (page - 1) * limit
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids, start, limit)
     details = []
-    data = {'page': page, 'limit':limit, 'total': total_count, 'details': details}
+    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
 
     for row in rows:
         profile = parse_profile(row[1])
@@ -1148,6 +1321,3 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
 #         p = parse_profile(line)
 #         print(json.dumps(p, ensure_ascii=False))
 #         print('=================')
-
-
-
