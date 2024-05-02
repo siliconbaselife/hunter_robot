@@ -649,11 +649,13 @@ def data_to_excel_file(file_path, titles, data):
         count = 2
 
         for row in data:
+            logger.log(row)
             worksheet.write_row('A{}'.format(count), row, row_formatter)
             count += 1
+        logger.info('----------------')
     except BaseException as e:
         logger.error("[backend_tools] data to excel error {}", e)
-        logger.error(e)
+        logger.error(traceback.format_exc())
     finally:
         workbook.close()
 
@@ -680,6 +682,7 @@ def download_profile_by_tag_web():
     titles = []
     excel_data = []
     search_datas = search_datas['details']
+    logger.info('[backend_tools] search_datas = {}', len(search_datas))
     if len(search_datas) > 0:
         for k in search_datas[0]:
             titles.append(k)
@@ -688,7 +691,6 @@ def download_profile_by_tag_web():
             for k in search_data:
                 row.append(search_data[k])
             excel_data.append(row)
-    logger.info('[download_profile_by_tag_web] {} , {}', titles, excel_data)
     cur_time = datetime.datetime.now()
     file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
     data_to_excel_file(file_path, titles, excel_data)
