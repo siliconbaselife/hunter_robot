@@ -127,7 +127,7 @@ def query_jobnames():
     jobnames = query_myjob_lists(manage_account_id, account_id)
     logger.info(f'query_jobnames manage_account_id: {manage_account_id} account_id: {account_id} jobnames: {jobnames}')
 
-    return Response(json.dumps(get_web_res_suc_with_data(jobnames)))
+    return Response(json.dumps(get_web_res_suc_with_data(jobnames), ensure_ascii=False))
 
 
 @manage_web_v2.route("/recruit/account/jobnames/set", methods=['POST'])

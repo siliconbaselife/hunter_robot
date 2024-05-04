@@ -204,7 +204,7 @@ def query_myjob_lists(manage_account_id, account_id):
     if config_raw is None:
         return []
 
-    config = json.loads(config_raw)
+    config = json.loads(config_raw, strict=False)
     if "jobnames" not in config:
         return []
 
