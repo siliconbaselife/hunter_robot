@@ -117,6 +117,31 @@ def task_fetch_api():
     }
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
 
+
+@manage_web_v2.route("/recruit/account/jobnames/fetch", methods=['POST'])
+@web_exception_handler
+def query_jobnames():
+    manage_account_id = request.json['manageAccountID']
+    account_id = request.json['accountID']
+
+    jobnames = query_myjob_lists(manage_account_id, account_id)
+    logger.info(f'query_jobnames manage_account_id: {manage_account_id} account_id: {account_id} jobnames: {jobnames}')
+
+    return Response(json.dumps(get_web_res_suc_with_data(jobnames)))
+
+
+@manage_web_v2.route("/recruit/account/jobnames/set", methods=['POST'])
+@web_exception_handler
+def set_jobnames():
+    manage_account_id = request.json['manageAccountID']
+    account_id = request.json['accountID']
+    jobnames = request.json['jobnames']
+    logger.info(f'set_jobnames manage_account_id: {manage_account_id} account_id: {account_id} jobnames: {jobnames}')
+
+    update_myjob_lists(manage_account_id, account_id, jobnames)
+
+    return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
+
 @manage_web_v2.route("/backend/manage/account/register/v2", methods=['POST'])
 @web_exception_handler
 def register_account_api():
