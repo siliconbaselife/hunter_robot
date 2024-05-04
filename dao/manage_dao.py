@@ -177,7 +177,7 @@ def select_extention_config(manage_account_id, account_id):
     if len(data) == 0:
         return None
 
-    return data[0]
+    return data[0][0]
 
 
 def update_extention_config(manage_account_id, account_id, config):
