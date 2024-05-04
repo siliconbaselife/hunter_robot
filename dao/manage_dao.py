@@ -181,5 +181,5 @@ def select_extention_config(manage_account_id, account_id):
 
 
 def update_extention_config(manage_account_id, account_id, config):
-    sql = f"update account set extention_config = '{json.dumps(config)}' where manage_account_id = '{manage_account_id}' and account_id = '{account_id}'"
+    sql = f"update account set extention_config = '{json.dumps(config, ensure_ascii=False)}' where manage_account_id = '{manage_account_id}' and account_id = '{account_id}'"
     dbm.update(sql)
