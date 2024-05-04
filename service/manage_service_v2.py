@@ -216,7 +216,7 @@ def update_myjob_lists(manage_account_id, account_id, jobnames):
     if config_raw is None:
         config = {}
     else:
-        config = json.loads(config_raw)
+        config = json.loads(config_raw, strict=False)
 
     config["jobnames"] = jobnames
     update_extention_config(manage_account_id, account_id, config)

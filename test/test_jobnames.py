@@ -24,5 +24,5 @@ def test_set():
 
 if __name__ == "__main__":
     test_query()
-    # test_set()
-    # test_query()
+    test_set()
+    test_query()
