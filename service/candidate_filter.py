@@ -26,7 +26,8 @@ __filter_dispatcher = {
     'linkedin_custom_filter':linkedin_custom_filter,
     'maimai_autoload_filter_v2':maimai_autoload_filter_v2,
     'linkedin_autoload_filter_v2':linkedin_autoload_filter_v2,
-    'boss_autoload_filter_v2':boss_autoload_filter_v2,
+    'boss_autoload_filter_v2': boss_autoload_filter_v2,
+    'boss_autoload_filter_v3': boss_autoload_filter_v3,
     'liepin_autoload_filter_v2':liepin_autoload_filter_v2
 }
 
