@@ -1,8 +1,8 @@
-from dao.contact_bank_dao import new_contact, new_extension_user, query_user_credit, query_user_already_contacts, \
-    update_user_credit, update_user_already_contacts, query_contact_by_profile, update_contact_personal_email, \
-    update_contact_phone
+from dao.contact_bank_dao import new_contact, new_extension_user, query_user_credit, \
+    update_user_credit, insert_extension_user_link, query_extension_user_link, update_contact_personal_email, \
+    update_contact_phone, query_contact_by_profile
 from tools.contactout_tools import get_contactout
-from utils.extension_utils import process_profile, id_from_profile
+from utils.extension_utils import process_profile, info_from_profile
 import json
 from functools import partial
 
@@ -17,62 +17,19 @@ def register_user(user_email, credit=0):
 
 
 def fetch_user_credit(user_id):
-    return query_user_credit(user_id=user_id)
+    res = query_user_credit(user_id=user_id)
+    if len(res)==0:
+        return None
+    return res[0][0]
 
+def query_user_contact(user_id, linkedin_profile, contact_type):
+    profile = process_profile(linkedin_profile)
+    name, lid = info_from_profile(profile)
 
-def user_fetch_personal_email(user_id, linkedin_profile):
-    logger.info(f'extension user {user_id} need personal email {linkedin_profile}')
-    price = config['extension']['price']['personal_email']
-    credit = fetch_user_credit(user_id=user_id)
-    if credit < price:
-        logger.info(
-            f'extension user {user_id} credit {credit} insufficient for fetch personal email, which need {price}')
-        return None, f"credit insufficient"
-    need_update_credit = True
-
-    already_contacts = query_user_already_contacts(user_id=user_id)
+    already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=contact_type)
     if already_contacts is None:
         already_contacts = []
-    else:
-        already_contacts = json.loads(already_contacts)
-    need_update_already_contacts = True
-
-    profile = process_profile(linkedin_profile)
-    lid = id_from_profile(profile)
-    res = query_contact_by_profile(profile)
-    if len(res) == 0:
-        logger.info(f'extension user {user_id} need personal email {profile}, db not found, need fetch from outside')
-        ## no information in db, need query contactout
-        has_email, email_status = get_contactout().email_status(profile=profile, is_work_email=False)
-        if not has_email:
-            logger.info(f'extension user {user_id} need personal email {profile}, outside not found')
-            return None, f"no email"
-        res = get_contactout().fetch_email(profile=profile)
-        res = res['personal_email']
-        ## update db
-        new_contact(linked_profile=profile, linkedin_id=lid, name=lid, personal_email=res)
-    else:
-        logger.info(f'extension user {user_id} need personal email {profile}, will from db')
-        for already_profile, contact_type in already_contacts:
-            if already_profile == profile and 'personal_email' == contact_type:
-                need_update_already_contacts = False
-                need_update_credit = False
-                logger.info(
-                    f'extension user {user_id} need personal email {profile}, already purchased, no need credit')
-                break
-
-        res = json.loads(res[0][2])
-
-    if need_update_credit:
-        new_credit = credit - price
-        update_user_credit(user_id=user_id, new_credit=new_credit)
-
-    if need_update_already_contacts:
-        already_contacts.append((profile, 'personal_email'))
-        update_user_already_contacts(user_id=user_id, new_already_contacts=already_contacts)
-
-    return res, None
-
+    return len(already_contacts) > 0
 
 def user_fetch_contact(user_id, linkedin_profile, contact_tag):
     ctx_map = {
@@ -106,18 +63,17 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
         return None, f"credit insufficient"
     need_update_credit = True
 
-    already_contacts = query_user_already_contacts(user_id=user_id)
-    if already_contacts is None:
-        already_contacts = []
-    else:
-        already_contacts = json.loads(already_contacts)
-    need_update_already_contacts = True
-
     profile = process_profile(linkedin_profile)
-    lid = id_from_profile(profile)
+    name, lid = info_from_profile(profile)
     res = query_contact_by_profile(profile)
     db_item_exists = len(res) > 0
     db_content = json.loads(res[0][ctx['db_idx']]) if db_item_exists else None
+
+    already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=ctx['contact_type'])
+    if already_contacts is None:
+        already_contacts = []
+    need_update_already_contacts = True
+
     if not db_content:
         logger.info(
             f'extension user {user_id} need contact({contact_tag}) for {profile}, db not found, need fetch from outside')
@@ -137,16 +93,13 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
         else:
             logger.info(
                 f'extension user {user_id} need contact({contact_tag}) for {profile}, got outside {res}, now will new contact')
-            new_contact(linked_profile=profile, linkedin_id=lid, name=lid, **{ctx['contact_type']: res})
+            new_contact(linked_profile=profile, linkedin_id=lid, name=name, **{ctx['contact_type']: res})
     else:
         logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, will from db')
-        for already_profile, contact_type in already_contacts:
-            if already_profile == profile and ctx['contact_type'] == contact_type:
-                need_update_already_contacts = False
-                need_update_credit = False
-                logger.info(
-                    f'extension user {user_id} need contact({contact_tag}) for {profile}, already purchased, no need credit')
-                break
+        if len(already_contacts) > 0:
+            need_update_already_contacts = False
+            need_update_credit = False
+            logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, already purchased, no need credit')
         res = db_content
 
     if need_update_credit:
@@ -154,8 +107,7 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
         update_user_credit(user_id=user_id, new_credit=new_credit)
 
     if need_update_already_contacts:
-        already_contacts.append((profile, ctx['contact_type']))
-        update_user_already_contacts(user_id=user_id, new_already_contacts=already_contacts)
+        insert_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=ctx['contact_type'])
 
     return res, None
 
