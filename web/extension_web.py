@@ -62,9 +62,11 @@ def judge_user_contact_api():
         return Response(json.dumps(get_web_res_fail("contact_type 未指定"), ensure_ascii=False))
     is_contact = query_user_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_type=contact_type)
     ret = {
-        'is_contact': is_contact
+        'is_contact': is_contact,
     }
-
+    if is_contact:
+        res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
+        ret['personal_email'] = res
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 @extension_web.route("/backend/extension/contact/personalemail", methods=['POST'])
