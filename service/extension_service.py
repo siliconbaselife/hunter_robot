@@ -22,11 +22,11 @@ def fetch_user_credit(user_id):
         return None
     return res[0][0]
 
-def query_user_contact(user_id, linkedin_profile, contact_type):
+def query_user_contact(user_id, linkedin_profile, contact_tag):
     profile = process_profile(linkedin_profile)
     name, lid = info_from_profile(profile)
 
-    already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=contact_type)
+    already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=contact_tag)
     if already_contacts is None:
         already_contacts = []
     return len(already_contacts) > 0

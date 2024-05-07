@@ -60,7 +60,7 @@ def judge_user_contact_api():
     contact_type = request.json.get('contact_type', None)
     if contact_type == None:
         return Response(json.dumps(get_web_res_fail("contact_type 未指定"), ensure_ascii=False))
-    is_contact = query_user_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_type=contact_type)
+    is_contact = query_user_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
     ret = {
         'is_contact': is_contact,
     }
@@ -69,7 +69,7 @@ def judge_user_contact_api():
         ret['personal_email'] = res
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
-@extension_web.route("/backend/extension/contact/personalemail", methods=['POST'])
+@extension_web.route("/backend/extension/contact/fetch", methods=['POST'])
 @web_exception_handler
 def fetch_personal_email_api():
     user_id = request.json.get('user_id', None)
@@ -78,7 +78,11 @@ def fetch_personal_email_api():
     linkedin_profile = request.json.get('linkedin_profile', None)
     if linkedin_profile == None:
         return Response(json.dumps(get_web_res_fail("linkedin_profile 未指定"), ensure_ascii=False))
-    res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag='personal_email')
+    contact_type = request.json.get('contact_type', None)
+    valid_set = ('personal_email', 'phone')
+    if contact_type == None or contact_type not in valid_set:
+        return Response(json.dumps(get_web_res_fail(f"contact_type 未指定 或不合法(需要在{valid_set}范围里)"), ensure_ascii=False))
+    res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
     ret = {
         'msg': msg
     }
@@ -86,19 +90,3 @@ def fetch_personal_email_api():
         ret['personal_email'] = res
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
-@extension_web.route("/backend/extension/contact/phone", methods=['POST'])
-@web_exception_handler
-def fetch_phone_api():
-    user_id = request.json.get('user_id', None)
-    if user_id == None:
-        return Response(json.dumps(get_web_res_fail("user_id 未指定"), ensure_ascii=False))
-    linkedin_profile = request.json.get('linkedin_profile', None)
-    if linkedin_profile == None:
-        return Response(json.dumps(get_web_res_fail("linkedin_profile 未指定"), ensure_ascii=False))
-    res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag='phone')
-    ret = {
-        'msg': msg
-    }
-    if res is not None:
-        ret['phone'] = res
-    return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))

@@ -44,7 +44,7 @@ class ContactOut(object):
         assert res['status_code']==200, f"phone_status for {profile} data from contact out abnormal: {res}"
         res = res['profile']
         has_phone = res.get('phone', False)
-        return has_phone
+        return has_phone, None
 
     def fetch_email(self, profile):
     # def fetch_email(self, profile, is_work_email):
