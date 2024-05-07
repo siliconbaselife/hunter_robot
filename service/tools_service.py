@@ -72,6 +72,25 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform, 
     return count
 
 
+def linkedin_filter(manage_account_id, raw_profile, conditions, platform):
+    linkedin_online_resume_upload_processor(manage_account_id, raw_profile, platform, '', -20000, 20000, '')
+    profile = parse_profile(raw_profile)
+
+    if "age" in conditions.keys():
+        if profile["age"] is None:
+            return True
+
+        if profile["age"] < conditions["age"]["min_age"] or profile["age"] > conditions["age"]["max_age"]:
+            return True
+
+    if "is_chinese" in conditions.keys() and conditions["is_chinese"]:
+        if profile["isChinese"]:
+            return True
+
+    return False
+
+
+
 def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age, tag):
     if tag and len(tag) > 0:
         create_profile_tag(manage_account_id, platform, tag)
