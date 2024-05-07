@@ -57,10 +57,7 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
     logger.info(f'extension user {user_id} need contact({contact_tag}) for {linkedin_profile}')
     price = ctx['price']
     credit = fetch_user_credit(user_id=user_id)
-    if credit < price:
-        logger.info(
-            f'extension user {user_id} credit {credit} insufficient for fetch {contact_tag}, which need {price}')
-        return None, f"credit insufficient"
+    
     need_update_credit = True
 
     profile = process_profile(linkedin_profile)
@@ -72,6 +69,11 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
     already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=ctx['contact_type'])
     if already_contacts is None:
         already_contacts = []
+    if len(already_contacts) == 0:
+        if credit < price:
+            logger.info(
+                f'extension user {user_id} credit {credit} insufficient for fetch {contact_tag}, which need {price}')
+            return None, f"credit insufficient"
     need_update_already_contacts = True
 
     if not db_content:
