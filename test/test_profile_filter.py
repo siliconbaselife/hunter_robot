@@ -18,7 +18,7 @@ def test_profile_filter():
                    '"timeInfo": "2016 - 2020"}],"languages": []},"id": "www.linkedin.com/in/qishuo-kia-zheng-7458b9195"}'
     }
 
-    r = requests.post('http://www.shadowhiring.cn/backend/chat/chat', json=params)
+    r = requests.post('http://www.shadowhiring.cn/backend/tools/filterOnlineResume', json=params)
     print(f"results: {r.text}")
 
 
