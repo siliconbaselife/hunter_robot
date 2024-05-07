@@ -264,6 +264,29 @@ def upload_online_resume():
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/filterOnlineResume", methods=['POST'])
+@web_exception_handler
+def filter_online_resume():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    platform = request.json.get('platform', '')
+    profile = request.json.get('profile', [])
+    conditions = request.json.get('conditions', {})
+
+    logger.info(f'filter_online_resume:{manage_account_id},{platform}, {conditions}')
+    flag = True
+    if platform == 'Linkedin':
+        flag = linkedin_filter(manage_account_id, profile, conditions, platform)
+
+    logger.info(f'filter_online_resume:{manage_account_id},{platform}, {flag}')
+    return Response(json.dumps(get_web_res_suc_with_data({"filter": flag}), ensure_ascii=False))
+
 
 
 @tools_web.route("/backend/tools/uploadOnlineResumePDF", methods=['POST'])
