@@ -282,7 +282,10 @@ def filter_online_resume():
     logger.info(f'filter_online_resume:{manage_account_id},{platform}, {conditions}')
     flag = True
     if platform == 'Linkedin':
-        flag = linkedin_filter(manage_account_id, profile, conditions, platform)
+        try:
+            flag = linkedin_filter(manage_account_id, profile, conditions, platform)
+        except BaseException as e:
+            logger.error(traceback.format_exc())
 
     logger.info(f'filter_online_resume:{manage_account_id},{platform}, {flag}')
     return Response(json.dumps(get_web_res_suc_with_data({"filter": flag}), ensure_ascii=False))
