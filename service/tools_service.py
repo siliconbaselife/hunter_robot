@@ -74,7 +74,7 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform, 
 
 def linkedin_filter(manage_account_id, raw_profile, conditions, platform):
     linkedin_online_resume_upload_processor(manage_account_id, [raw_profile], platform, '', -20000, 20000, '')
-    profile = parse_profile(raw_profile)
+    profile = parse_profile(raw_profile, 'no_need')
 
     if "age" in conditions.keys():
         if profile["age"] is None:
@@ -88,7 +88,6 @@ def linkedin_filter(manage_account_id, raw_profile, conditions, platform):
             return True
 
     return False
-
 
 
 def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age, tag):
@@ -202,7 +201,6 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
         # upload_profile_status(manage_account_id, candidate_id, platform, p)
         # refresh_contact(manage_account_id, candidate_id, p)
     return count
-
 
 
 def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
@@ -1177,8 +1175,9 @@ def get_min_time_info(time_info_str, default_time):
     return min_start_year
 
 
-def parse_profile(profile):
-    profile = deserialize_raw_profile(profile)
+def parse_profile(profile, type='need_deserialize'):
+    if type == 'need_deserialize':
+        profile = deserialize_raw_profile(profile)
     if profile is None:
         return None
     res = {'candidateId': None,
