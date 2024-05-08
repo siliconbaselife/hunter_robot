@@ -85,7 +85,7 @@ def linkedin_filter(manage_account_id, raw_profile, conditions, platform):
             return True
 
     if "is_chinese" in conditions.keys() and conditions["is_chinese"]:
-        if profile["isChinese"]:
+        if not profile["isChinese"]:
             return True
 
     return False
