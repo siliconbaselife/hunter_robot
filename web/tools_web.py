@@ -279,7 +279,6 @@ def filter_online_resume():
     profile = request.json.get('profile', [])
     conditions = request.json.get('conditions', {})
 
-    logger.info(f"profile: {profile}")
     logger.info(f'filter_online_resume:{manage_account_id},{platform}, {conditions}')
     flag = True
     if platform == 'Linkedin':
