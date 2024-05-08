@@ -76,6 +76,7 @@ def linkedin_filter(manage_account_id, raw_profile, conditions, platform):
     linkedin_online_resume_upload_processor(manage_account_id, [raw_profile], platform, '', -20000, 20000, '')
     profile = parse_profile(raw_profile, 'no_need')
 
+    logger.info(f"profile: {profile}")
     if "age" in conditions.keys():
         if profile["age"] is None:
             return True
