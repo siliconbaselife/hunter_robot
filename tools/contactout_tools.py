@@ -71,7 +71,7 @@ class ContactOut(object):
         req_url = f'{self.url_base}?profile={profile}&include_phone=true'
         headers = {
             'authorization': 'basic',
-            'token': token,
+            'token': self.token,
         }
         res = requests.get(req_url, headers=headers)
         logger.info(f'request contactout record: {req_url}: {res.text}')
