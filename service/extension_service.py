@@ -136,32 +136,32 @@ def refresh_contact_db(candidate_id, personal_email, phone):
         linked_profile = "https://{}".format(candidate_id)
         name = candidate_id.split('/')[-1]
         personal_emails = []
-        if personal_email is not None:
+        if personal_email is not None and len(personal_email) > 0:
             personal_emails.append(personal_email)
         phones = []
-        if phone is not None:
+        if phone is not None and len(phone) > 0:
             phones.append(phone)
         new_contact(linked_profile, candidate_id, name, personal_email=personal_emails, work_email=[],
                     work_email_status=[], phone=phones)
         return
 
-    if personal_email is not None and personal_email not in person_emails:
+    if personal_email is not None and len(personal_email) > 0 and personal_email not in person_emails:
         update_contact_personal_email(candidate_id, [personal_email])
-    if phone is not None and phone not in phones:
+    if phone is not None and len(phone) > 0 and phone not in phones:
         update_contact_phone(candidate_id, [phone])
 
 
 def refresh_person_contact_db(manage_account_id, candidate_id, personal_email, phone):
     logger.info(
         f"refresh_person_contact_db manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
-    if personal_email is not None:
+    if personal_email is not None and len(personal_email) > 0:
         origin_personal_email = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
                                                         contact_type="personal_email")
         if len(origin_personal_email) == 0:
             insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
                                        contact_type="personal_email")
 
-    if phone is not None:
+    if phone is not None and len(phone) > 0:
         origin_phone = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
                                                contact_type="phone")
         if len(origin_phone) == 0:
