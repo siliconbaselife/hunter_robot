@@ -155,14 +155,14 @@ def refresh_person_contact_db(manage_account_id, candidate_id, personal_email, p
     logger.info(
         f"refresh_person_contact_db manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
     if personal_email is not None:
-        personal_email_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
+        origin_personal_email = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
                                                         contact_type="personal_email")
-        if personal_email_flag is None:
+        if len(origin_personal_email) == 0:
             insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
                                        contact_type="personal_email")
 
     if phone is not None:
-        phone_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
+        origin_phone = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
                                                contact_type="phone")
-        if phone_flag is None:
+        if len(origin_phone) == 0:
             insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="phone")
