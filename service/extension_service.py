@@ -1,6 +1,4 @@
-from dao.contact_bank_dao import new_contact, new_extension_user, query_user_credit, \
-    update_user_credit, insert_extension_user_link, query_extension_user_link, update_contact_personal_email, \
-    update_contact_phone, query_contact_by_profile
+from dao.contact_bank_dao import *
 from tools.contactout_tools import get_contactout
 from utils.extension_utils import process_profile, info_from_profile
 import json
@@ -127,28 +125,22 @@ def refresh_contact_db(candidate_id, personal_email, phone):
     if personal_email is None and phone is None:
         return
     name = candidate_id.split('/')[-1]
-    res = query_contact_by_profile(candidate_id)
-    if len(res) > 0:
-        origin_personal_emails = json.loads(res[0][2])
-        origin_phones = json.loads(res[0][5])
-        if personal_email not in origin_personal_emails:
-            update_contact_personal_email(candidate_id, [personal_email])
-        if phone not in origin_phones:
-            update_contact_phone(candidate_id, [phone])
-    else:
-        new_contact(linked_profile=candidate_id, linkedin_id=name, name=name, personal_email=[personal_email],
-                    phone=[phone])
+    person_emails, phones = query_contact_by_profile_id(candidate_id)
+    if personal_email not in person_emails:
+        update_contact_personal_email(candidate_id, [personal_email])
+    if phone not in phones:
+        update_contact_phone(candidate_id, [phone])
 
 
 def refresh_person_contact_db(manage_account_id, candidate_id, personal_email, phone):
-    already_contacts = query_user_already_contacts(user_id=manage_account_id)
-    if already_contacts is None:
-        already_contacts = []
-    else:
-        already_contacts = json.loads(already_contacts)
-
     if personal_email is not None:
-        pass
+        personal_email_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="personal_email")
+        if personal_email_flag is None:
+            insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="personal_email")
 
     if phone is not None:
-        pass
+        phone_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="phone")
+        if phone_flag is None:
+            insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="phone")
+
+

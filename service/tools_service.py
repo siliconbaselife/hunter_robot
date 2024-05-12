@@ -198,8 +198,13 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
         if tag and len(tag) > 0:
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
 
-        # upload_profile_status(manage_account_id, candidate_id, platform, p)
-        # refresh_contact(manage_account_id, candidate_id, p)
+        try:
+            upload_profile_status(manage_account_id, candidate_id, platform, p)
+            refresh_contact(manage_account_id, candidate_id, p)
+        except BaseException as e:
+            logger.error("简历信息存储出错:", e)
+            logger.error(str(traceback.format_exc()))
+
     return count
 
 
@@ -1098,7 +1103,7 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
 
 
 def upload_profile_status(manage_account_id, candidate_id, platform, profile):
-    status = profile["profile"]["status"]
+    status = profile["status"]
     if status is None:
         return
 

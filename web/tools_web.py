@@ -264,6 +264,12 @@ def upload_online_resume():
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
+
+@tools_web.route("/backend/tools/queryUserProfilesStatus", methods=['POST'])
+@web_exception_handler
+def query_user_profiles_status():
+    pass
+
 @tools_web.route("/backend/tools/filterOnlineResume", methods=['POST'])
 @web_exception_handler
 def filter_online_resume():
