@@ -97,8 +97,17 @@ def get_resume_total_count_by_candidate_ids_and_platform(manage_account_id, plat
 
 
 def upload_profile_status_dao(manage_account_id, candidate_id, platform, status):
-    sql = f"update user_profile_tag_relation set status = '{status}' where manage_account_id = '{manage_account_id}' and candidate_id='{candidate_id}' and platform = 'platform'"
+    sql = f"update online_resume set status = '{status}' where manage_account_id = '{manage_account_id}' and candidate_id='{candidate_id}' and platform = '{platform}'"
     return dbm.insert(sql)
+
+
+def query_profile_status_dao(manage_account_id, candidate_id, platform):
+    sql = f"select status from online_resume where manage_account_id = '{manage_account_id}' and candidate_id = '{candidate_id}' and platform = '{platform}'"
+    data = dbm.query(sql)
+    if len(data) == 0:
+        return None
+
+    return data[0][0]
 
 
 def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id):

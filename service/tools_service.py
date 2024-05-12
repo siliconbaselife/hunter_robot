@@ -208,6 +208,16 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
     return count
 
 
+def filter_already_linkedin_ids(manage_account_id, linkedin_ids):
+    rest_linkedin_ids = []
+    for linkedin_id in linkedin_ids:
+        status = query_profile_status_dao(manage_account_id, linkedin_id, 'Linkedin')
+        if status == "connected":
+            continue
+        rest_linkedin_ids.append(linkedin_id)
+    return rest_linkedin_ids
+
+
 def generate_candidate_csv_by_job_liepin(job_id, start_date, end_date):
     chat_list = get_chats_by_job_id_with_date(job_id, start_date, end_date)
     job_name = get_job_name_by_id(job_id)
