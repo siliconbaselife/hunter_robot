@@ -61,9 +61,9 @@ def query_contact_by_profile_id(linkedin_id):
         f"select linkedin_id, name, personal_email, work_email, work_email_status, phone from contact_bank where linkedin_id='{linkedin_id}'")
 
     if len(data) == 0:
-        return [], []
+        return False, [], []
 
     person_emails = json.loads(data[0][2])
     phones = json.loads(data[0][5])
 
-    return person_emails, phones
+    return True, person_emails, phones

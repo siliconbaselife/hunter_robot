@@ -16,9 +16,10 @@ def register_user(user_email, credit=0):
 
 def fetch_user_credit(user_id):
     res = query_user_credit(user_id=user_id)
-    if len(res)==0:
+    if len(res) == 0:
         return None
     return res[0][0]
+
 
 def query_user_contact(user_id, linkedin_profile, contact_tag):
     profile = process_profile(linkedin_profile)
@@ -28,6 +29,7 @@ def query_user_contact(user_id, linkedin_profile, contact_tag):
     if already_contacts is None:
         already_contacts = []
     return len(already_contacts) > 0
+
 
 def user_fetch_contact(user_id, linkedin_profile, contact_tag):
     ctx_map = {
@@ -55,7 +57,7 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
     logger.info(f'extension user {user_id} need contact({contact_tag}) for {linkedin_profile}')
     price = ctx['price']
     credit = fetch_user_credit(user_id=user_id)
-    
+
     need_update_credit = True
 
     profile = process_profile(linkedin_profile)
@@ -99,7 +101,8 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
         if len(already_contacts) > 0:
             need_update_already_contacts = False
             need_update_credit = False
-            logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, already purchased, no need credit')
+            logger.info(
+                f'extension user {user_id} need contact({contact_tag}) for {profile}, already purchased, no need credit')
         res = db_content
 
     if need_update_credit:
@@ -117,7 +120,8 @@ def refresh_contact(manage_account_id, candidate_id, profile):
     personal_email = contact_info['Email']
     phone = contact_info['Phone']
 
-    logger.info(f"refresh_contact manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
+    logger.info(
+        f"refresh_contact manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
     refresh_contact_db(candidate_id, personal_email, phone)
     refresh_person_contact_db(manage_account_id, candidate_id, personal_email, phone)
 
@@ -126,23 +130,39 @@ def refresh_contact_db(candidate_id, personal_email, phone):
     if personal_email is None and phone is None:
         return
     logger.info(f"refresh_contact_db candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
-    person_emails, phones = query_contact_by_profile_id(candidate_id)
-    if personal_email not in person_emails:
+    has_record, person_emails, phones = query_contact_by_profile_id(candidate_id)
+
+    if not has_record:
+        linked_profile = "https://{}".format(candidate_id)
+        name = candidate_id.split('/')[-1]
+        personal_emails = []
+        if personal_email is not None:
+            personal_emails.append(personal_email)
+        phones = []
+        if phone is not None:
+            phones.append(phone)
+        new_contact(linked_profile, candidate_id, name, personal_email=personal_emails, work_email=[],
+                    work_email_status=[], phone=phones)
+        return
+
+    if personal_email is not None and personal_email not in person_emails:
         update_contact_personal_email(candidate_id, [personal_email])
-    if phone not in phones:
+    if phone is not None and phone not in phones:
         update_contact_phone(candidate_id, [phone])
 
 
 def refresh_person_contact_db(manage_account_id, candidate_id, personal_email, phone):
-    logger.info(f"refresh_person_contact_db manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
+    logger.info(
+        f"refresh_person_contact_db manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
     if personal_email is not None:
-        personal_email_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="personal_email")
+        personal_email_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
+                                                        contact_type="personal_email")
         if personal_email_flag is None:
-            insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="personal_email")
+            insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
+                                       contact_type="personal_email")
 
     if phone is not None:
-        phone_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="phone")
+        phone_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id,
+                                               contact_type="phone")
         if phone_flag is None:
             insert_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="phone")
-
-
