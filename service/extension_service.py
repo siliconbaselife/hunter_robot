@@ -124,7 +124,7 @@ def refresh_contact(manage_account_id, candidate_id, profile):
 def refresh_contact_db(candidate_id, personal_email, phone):
     if personal_email is None and phone is None:
         return
-    name = candidate_id.split('/')[-1]
+    logger.info(f"refresh_contact_db candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
     person_emails, phones = query_contact_by_profile_id(candidate_id)
     if personal_email not in person_emails:
         update_contact_personal_email(candidate_id, [personal_email])
@@ -133,6 +133,7 @@ def refresh_contact_db(candidate_id, personal_email, phone):
 
 
 def refresh_person_contact_db(manage_account_id, candidate_id, personal_email, phone):
+    logger.info(f"refresh_person_contact_db manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
     if personal_email is not None:
         personal_email_flag = query_extension_user_link(user_id=manage_account_id, linkedin_id=candidate_id, contact_type="personal_email")
         if personal_email_flag is None:
