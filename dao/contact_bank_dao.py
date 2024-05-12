@@ -60,7 +60,7 @@ def query_contact_by_profile_id(linkedin_id):
     data = dbm.query(
         f"select linkedin_id, name, personal_email, work_email, work_email_status, phone from contact_bank where linkedin_id='{linkedin_id}'")
 
-    if len(data) == None:
+    if len(data) == 0:
         return None
 
     person_emails = json.loads(data[0][2])
