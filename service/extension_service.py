@@ -117,6 +117,7 @@ def refresh_contact(manage_account_id, candidate_id, profile):
     personal_email = contact_info['Email']
     phone = contact_info['Phone']
 
+    logger.info(f"refresh_contact manage_account_id: {manage_account_id} candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
     refresh_contact_db(candidate_id, personal_email, phone)
     refresh_person_contact_db(manage_account_id, candidate_id, personal_email, phone)
 
