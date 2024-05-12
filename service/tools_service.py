@@ -1103,7 +1103,7 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
 
 
 def upload_profile_status(manage_account_id, candidate_id, platform, profile):
-    if "status" in "status":
+    if "status" in profile:
         status = profile["status"]
     else:
         status = None
