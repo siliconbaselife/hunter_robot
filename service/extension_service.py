@@ -127,8 +127,9 @@ def refresh_contact(manage_account_id, candidate_id, profile):
 
 
 def refresh_contact_db(candidate_id, personal_email, phone):
-    if personal_email is None and phone is None:
+    if (personal_email is None or len(personal_email) == 0) and (phone is None or len(phone) == 0):
         return
+
     logger.info(f"refresh_contact_db candidate_id: {candidate_id} personal_email: {personal_email} phone: {phone}")
     has_record, person_emails, phones = query_contact_by_profile_id(candidate_id)
 
