@@ -26,6 +26,7 @@ def query_user_contact(user_id, linkedin_profile, contact_tag):
     name, lid = info_from_profile(profile)
 
     already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=contact_tag)
+    logger.info(f'user_id: {user_id} linkedin_profile: {linkedin_profile} contact_tag: {contact_tag} already_contacts: {already_contacts}')
     if already_contacts is None:
         already_contacts = []
     return len(already_contacts) > 0
