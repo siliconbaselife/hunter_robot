@@ -199,7 +199,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
 
         try:
-            upload_profile_status(manage_account_id, candidate_id, platform, p)
+            upload_profile_status(manage_account_id, candidate_id, platform, p["profile"])
             refresh_contact(manage_account_id, candidate_id, p)
         except BaseException as e:
             logger.error("简历信息存储出错:", e)
