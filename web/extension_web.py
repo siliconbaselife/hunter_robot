@@ -61,6 +61,7 @@ def judge_user_contact_api():
     if contact_type == None:
         return Response(json.dumps(get_web_res_fail("contact_type 未指定"), ensure_ascii=False))
     is_contact = query_user_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
+    logger.info(f'user_id: {user_id} is_contact: {is_contact}')
     ret = {
         'is_contact': is_contact,
     }
