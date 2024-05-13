@@ -39,7 +39,7 @@ def fetch_user_credit_api():
     if user_id == None:
         return Response(json.dumps(get_web_res_fail("user_id 未指定"), ensure_ascii=False))
     credit = fetch_user_credit(user_id=user_id)
-    if not credit:
+    if credit is None:
         return Response(json.dumps(get_web_res_fail(f"user {user_id} not in system"), ensure_ascii=False))
 
     ret = {
