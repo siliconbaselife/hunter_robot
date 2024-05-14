@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, stream_with_context,send_file,after_this_request
+from flask import Flask, Response, request, stream_with_context, send_file, after_this_request
 from flask import Blueprint
 import pandas as pd
 import xlsxwriter
@@ -24,7 +24,6 @@ from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
 
-
 logger = get_logger(config['log']['log_file'])
 
 tools_web = Blueprint('tools_web', __name__, template_folder='templates')
@@ -44,20 +43,22 @@ def candidate_csv_by_job():
         return Response(json.dumps(get_web_res_fail("岗位和账户不符"), ensure_ascii=False))
     platform = ret[0][1]
     if platform == 'maimai':
-        response = Response(stream_with_context(generate_candidate_csv_by_job_maimai(job_id, start_date, end_date)), mimetype='text/csv')
+        response = Response(stream_with_context(generate_candidate_csv_by_job_maimai(job_id, start_date, end_date)),
+                            mimetype='text/csv')
     elif platform == 'Linkedin':
-        response = Response(stream_with_context(generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date)), mimetype='text/csv')
+        response = Response(stream_with_context(generate_candidate_csv_by_job_Linkedin(job_id, start_date, end_date)),
+                            mimetype='text/csv')
     elif platform == 'Boss':
-        response = Response(stream_with_context(generate_candidate_csv_by_job_Boss(job_id, start_date, end_date)), mimetype='text/csv')
+        response = Response(stream_with_context(generate_candidate_csv_by_job_Boss(job_id, start_date, end_date)),
+                            mimetype='text/csv')
     elif platform == 'liepin':
-        response = Response(stream_with_context(generate_candidate_csv_by_job_liepin(job_id, start_date, end_date)), mimetype='text/csv')
+        response = Response(stream_with_context(generate_candidate_csv_by_job_liepin(job_id, start_date, end_date)),
+                            mimetype='text/csv')
     else:
         return Response(json.dumps(get_web_res_fail("平台不支持"), ensure_ascii=False))
     response.headers.set("Content-Disposition", "attachment", filename='result.csv')
     logger.info(f"filter_task_result_download, {manage_account_id}")
     return response
-
-
 
 
 @tools_web.route("/backend/tools/createTask", methods=['POST'])
@@ -80,7 +81,7 @@ def create_task():
         return Response(json.dumps(get_web_res_fail("上传文件为空"), ensure_ascii=False))
     if int(request.headers.get('Content-Length', 0)) > 10000000:
         return Response(json.dumps(get_web_res_fail("单任务不能超过10M"), ensure_ascii=False))
-    
+
     taskname = request.form.get('taskname', None)
     filename = request.form.get('filename', None)
     if str_is_none(filename):
@@ -92,15 +93,16 @@ def create_task():
     filename = str(int(time.time())) + "_" + filename
     file_url = generate_thumbnail(filename, zip_file)
 
-    logger.info(f"new_resume_filter_task:{manage_account_id}, {file_url}, {int(request.headers.get('Content-Length', 0))}")
+    logger.info(
+        f"new_resume_filter_task:{manage_account_id}, {file_url}, {int(request.headers.get('Content-Length', 0))}")
     create_new_filter_task(manage_account_id, jd, file_url, taskname)
 
     return Response(json.dumps(get_web_res_suc_with_data("任务创建成功"), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/filterTaskList", methods=['POST'])
 @web_exception_handler
 def filter_task_list():
-
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -114,15 +116,16 @@ def filter_task_list():
     res = []
     for t in task_list:
         res.append({
-            "task_id":t[0],
-            "taskname":t[7],
+            "task_id": t[0],
+            "taskname": t[7],
             "zip_name": os.path.basename(t[2]),
-            "status":t[3],
-            "create_time":t[4].strftime("%Y-%m-%d %H:%M:%S"),
-            "expect_exec_time": filter_task_exec_cache.get(t[2],0)
+            "status": t[3],
+            "create_time": t[4].strftime("%Y-%m-%d %H:%M:%S"),
+            "expect_exec_time": filter_task_exec_cache.get(t[2], 0)
         })
     logger.info(f"filter_task_list:{manage_account_id}, {res}")
     return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/filterTaskResult", methods=['POST'])
 @web_exception_handler
@@ -157,8 +160,6 @@ def exec_schedule_task():
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
 
-
-
 @tools_web.route('/backend/user/register', methods=['POST'])
 @web_exception_handler
 def register():
@@ -178,8 +179,6 @@ def register():
     else:
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
 
-    
-
 
 @tools_web.route('/backend/user/verifyEmailCode', methods=['POST'])
 @web_exception_handler
@@ -187,7 +186,7 @@ def verify_email_code():
     email = request.json.get('email', '')
     if str_is_none(email):
         return Response(json.dumps(get_web_res_fail('信息为空'), ensure_ascii=False))
-    
+
     status, msg, code = user_verify_email(email)
     if str_is_none(code):
         return Response(json.dumps(get_web_res_fail('验证码发送失败'), ensure_ascii=False))
@@ -203,7 +202,7 @@ def verify_email_code():
 @web_exception_handler
 def download_online_resume():
     # cookie_user_name = request.cookies.get('user_name', None)
-    #插件没有domain，无法直接携带cookie
+    # 插件没有domain，无法直接携带cookie
     # cookie_user_name = request.json.get('user_name', None)
     # if cookie_user_name == None:
     #     return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -216,26 +215,29 @@ def download_online_resume():
     start_date = request.args.get('start_date', '')
     end_date = request.args.get('end_date', '')
     list_name = request.args.get('list_name', '')
-    if manage_account_id == '' or platform == '' or platform not in ('maimai', 'Linkedin') or start_date == '' or end_date == '':
+    if manage_account_id == '' or platform == '' or platform not in (
+            'maimai', 'Linkedin') or start_date == '' or end_date == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    
+
     if platform == 'maimai':
-        response = Response(stream_with_context(generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date)), mimetype='text/csv')
+        response = Response(
+            stream_with_context(generate_resume_csv_maimai(manage_account_id, platform, start_date, end_date)),
+            mimetype='text/csv')
         response.headers.set("Content-Disposition", "attachment", filename='maimai_result.csv')
     elif platform == 'Linkedin':
-        response = Response(stream_with_context(generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date, list_name)), mimetype='text/csv')
+        response = Response(stream_with_context(
+            generate_resume_csv_Linkedin(manage_account_id, platform, start_date, end_date, list_name)),
+            mimetype='text/csv')
         response.headers.set("Content-Disposition", "attachment", filename='Linkedin_result.csv')
     logger.info(f"online_resume_download, {manage_account_id}, {platform}, {start_date}, {end_date}")
     return response
-    
-    
 
 
 @tools_web.route("/backend/tools/uploadOnlineResume", methods=['POST'])
 @web_exception_handler
 def upload_online_resume():
     # cookie_user_name = request.cookies.get('user_name', None)
-    #插件没有domain，无法直接携带cookie
+    # 插件没有domain，无法直接携带cookie
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -254,22 +256,67 @@ def upload_online_resume():
     logger.info(f'upload_online_resume:{manage_account_id},{platform}, {len(profile)}, {list_name}')
     if len(profile) == 0 or platform == '' or platform not in ('maimai', 'Linkedin'):
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
-    
+
     if platform == 'maimai':
         count = maimai_online_resume_upload_processor(manage_account_id, profile, platform, tag)
     elif platform == 'Linkedin':
-        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age, tag)
-
+        count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age,
+                                                        max_age, tag)
 
     logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tools/queryUserProfilesStatus", methods=['POST'])
+@web_exception_handler
+def query_user_profiles_status():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    linkedin_ids = request.json.get('linkedin_ids', [])
+    r_linkedin_ids = filter_already_linkedin_ids(manage_account_id, linkedin_ids)
+    logger.info(
+        f'query_user_profiles_status query_user_profiles_status: {query_user_profiles_status} linkedin_ids: {linkedin_ids} r_linkedin_ids: {r_linkedin_ids}')
+
+    return Response(json.dumps(get_web_res_suc_with_data({"linkedin_ids": r_linkedin_ids}), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/filterOnlineResume", methods=['POST'])
+@web_exception_handler
+def filter_online_resume():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    platform = request.json.get('platform', '')
+    profile = request.json.get('profile', [])
+    conditions = request.json.get('conditions', {})
+
+    logger.info(f'filter_online_resume:{manage_account_id},{platform}, {conditions}')
+    flag = True
+    if platform == 'Linkedin':
+        try:
+            flag = linkedin_filter(manage_account_id, profile, conditions, platform)
+        except BaseException as e:
+            logger.error(traceback.format_exc())
+
+    logger.info(f'filter_online_resume:{manage_account_id},{platform}, {flag}')
+    return Response(json.dumps(get_web_res_suc_with_data({"filter": flag}), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/uploadOnlineResumePDF", methods=['POST'])
 @web_exception_handler
 def upload_online_resume_pdf():
-    #插件没有domain，无法直接携带cookie
+    # 插件没有domain，无法直接携带cookie
     cookie_user_name = request.form.get('user_name', None)
     if cookie_user_name is None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -290,6 +337,7 @@ def upload_online_resume_pdf():
     logger.info(f'upload_online_resume_pdf:{manage_account_id},{platform}, {filename}, {cv_addr}')
     ret = upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/addResumeList", methods=['POST'])
 @web_exception_handler
@@ -330,6 +378,7 @@ def get_resume_list():
     ret = get_resume_list_db(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/pluginConfig", methods=['POST'])
 @web_exception_handler
 def pluginConfig():
@@ -357,7 +406,7 @@ def pluginConfig():
 @web_exception_handler
 def resume_exist():
     # cookie_user_name = request.cookies.get('user_name', None)
-    #插件没有domain，无法直接携带cookie
+    # 插件没有domain，无法直接携带cookie
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -377,34 +426,38 @@ def resume_exist():
     else:
         return Response(json.dumps(get_web_res_suc_with_data(False), ensure_ascii=False))
 
+
 @tools_web.route("/backend/conversation/report", methods=['POST'])
 @web_exception_handler
 def conversation_report():
-# 参数格式
-#{
-#  "candidate_id": "aaaa",
-#  "platform": "maimai",
-#  "contact": {
-#    "phone": "",
-#    "email": "",
-#    "wechat": ""
-#  },
-#  "conversation": [
-#    {
-#      "speaker": "",
-#      "msg": ""
-#    }
-#  ]
-#}
+    # 参数格式
+    # {
+    #  "candidate_id": "aaaa",
+    #  "platform": "maimai",
+    #  "contact": {
+    #    "phone": "",
+    #    "email": "",
+    #    "wechat": ""
+    #  },
+    #  "conversation": [
+    #    {
+    #      "speaker": "",
+    #      "msg": ""
+    #    }
+    #  ]
+    # }
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
     contact = request.json.get('contact', '')
     conversations = request.json.get('conversations', '')
-    logger.info(f'conversation report :platform = {platform}, candidate_id = {candidate_id}, contact = {contact}, conversations = {conversations}')
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or contact == '' or conversations == '':
+    logger.info(
+        f'conversation report :platform = {platform}, candidate_id = {candidate_id}, contact = {contact}, conversations = {conversations}')
+    if candidate_id == '' or platform == '' or platform not in (
+            'maimai', 'Boss', 'Linkedin', 'liepin') or contact == '' or conversations == '':
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     create_conversation_report(candidate_id, platform, contact, conversations)
     return Response(json.dumps(get_web_res_suc_with_data(True), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getLeaveMsg", methods=['POST'])
 @web_exception_handler
@@ -420,9 +473,11 @@ def get_leave_msg_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(manage_account_id, platform))
+    logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(manage_account_id,
+                                                                                                    platform))
     msg = get_leave_msg(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/customizedGreetingScenario", methods=['POST'])
 @web_exception_handler
@@ -439,7 +494,9 @@ def customized_greeting_scenario_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(manage_account_id, platform, scenario))
+    logger.info(
+        "[backend_tools] customized_greeting_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
     customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
@@ -458,9 +515,12 @@ def apply_chat_scenario_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] customized_greeting_scenario_web manage_account_id = {},  platform = {}, scenario = {}".format(manage_account_id, platform, scenario))
+    logger.info(
+        "[backend_tools] customized_greeting_scenario_web manage_account_id = {},  platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
     msg = get_chat_scenario(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/customizedChatScenario", methods=['POST'])
 @web_exception_handler
@@ -477,9 +537,12 @@ def customized_chat_scenario_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] customized_chat_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(manage_account_id, platform, scenario))
+    logger.info(
+        "[backend_tools] customized_chat_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
     customized_user_scenario(manage_account_id, SCENARIO_CHAT, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/createProfileTag", methods=['POST'])
 @web_exception_handler
@@ -495,12 +558,16 @@ def create_profile_tag_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] create profile tag for manage_account_id = {}, platform = {}, tag = {}".format(manage_account_id, platform, tag))
+    logger.info("[backend_tools] create profile tag for manage_account_id = {}, platform = {}, tag = {}".format(
+        manage_account_id, platform, tag))
     res, error_msg = create_profile_tag(manage_account_id, platform, tag)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    logger.info("[backend_tools] create profile tag for manage_account_id = {}, platform = {}, tag = {} -> res = {}".format(manage_account_id, platform, tag, res))
+    logger.info(
+        "[backend_tools] create profile tag for manage_account_id = {}, platform = {}, tag = {} -> res = {}".format(
+            manage_account_id, platform, tag, res))
     return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getTagsByUser", methods=['POST'])
 @web_exception_handler
@@ -515,12 +582,15 @@ def get_tags_by_user_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] get profile tag for manage_account_id = {}, platform = {}".format(manage_account_id, platform))
+    logger.info(
+        "[backend_tools] get profile tag for manage_account_id = {}, platform = {}".format(manage_account_id, platform))
     res, error_msg = query_profile_tag_by_user(manage_account_id, platform)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    logger.info("[backend_tools] get profile tag for manage_account_id = {}, platform = {} -> res = {}".format(manage_account_id, platform, res))
+    logger.info("[backend_tools] get profile tag for manage_account_id = {}, platform = {} -> res = {}".format(
+        manage_account_id, platform, res))
     return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getTagsByUserAndCandidate", methods=['POST'])
 @web_exception_handler
@@ -536,12 +606,17 @@ def get_tags_by_user_and_candidate_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] get profile tags by manage_account_id = {} and candidate_id = {}, platform = {}".format(manage_account_id, candidate_id, platform))
+    logger.info(
+        "[backend_tools] get profile tags by manage_account_id = {} and candidate_id = {}, platform = {}".format(
+            manage_account_id, candidate_id, platform))
     tags, error_msg = query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidate_id, platform)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    logger.info("[backend_tools] get profile tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
+    logger.info(
+        "[backend_tools] get profile tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(
+            manage_account_id, candidate_id, platform, tags))
     return Response(json.dumps(get_web_res_suc_with_data(tags), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/associateProfileTag", methods=['POST'])
 @web_exception_handler
@@ -549,7 +624,8 @@ def associate_profile_tags_web():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
     tags = request.json.get('tags', [])
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0:
+    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(
+            tags) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
@@ -558,12 +634,17 @@ def associate_profile_tags_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] associate_profile_tags_web manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
+    logger.info(
+        "[backend_tools] associate_profile_tags_web manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(
+            manage_account_id, candidate_id, platform, tags))
     _, error_msg = associate_profile_tags(manage_account_id, candidate_id, platform, tags)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    logger.info("[backend_tools] associate_profile_tags_web done by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
+    logger.info(
+        "[backend_tools] associate_profile_tags_web done by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(
+            manage_account_id, candidate_id, platform, tags))
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/deassociateProfileTag", methods=['POST'])
 @web_exception_handler
@@ -571,7 +652,8 @@ def deassociate_profile_tags_web():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
     tags = request.json.get('tags', [])
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0:
+    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(
+            tags) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
@@ -580,12 +662,17 @@ def deassociate_profile_tags_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] deassociate_profile_tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
+    logger.info(
+        "[backend_tools] deassociate_profile_tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(
+            manage_account_id, candidate_id, platform, tags))
     _, error_msg = deassociate_profile_tags(manage_account_id, candidate_id, platform, tags)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    logger.info("[backend_tools] deassociate_profile_tags tags done by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
+    logger.info(
+        "[backend_tools] deassociate_profile_tags tags done by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(
+            manage_account_id, candidate_id, platform, tags))
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/deleteProfileTag", methods=['POST'])
 @web_exception_handler
@@ -593,7 +680,8 @@ def delete_profile_tags_web():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
     tags = request.json.get('tags', [])
-    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0:
+    if candidate_id == '' or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(
+            tags) == 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
@@ -602,12 +690,17 @@ def delete_profile_tags_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] delete profile tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
+    logger.info(
+        "[backend_tools] delete profile tags by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(
+            manage_account_id, candidate_id, platform, tags))
     _, error_msg = delete_profile_tags(manage_account_id, candidate_id, platform, tags)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    logger.info("[backend_tools] delete profile tags done by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(manage_account_id, candidate_id, platform, tags))
+    logger.info(
+        "[backend_tools] delete profile tags done by manage_account_id = {} and candidate_id = {}, platform = {}, tags = {}".format(
+            manage_account_id, candidate_id, platform, tags))
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/searchProfileInfoByTag", methods=['POST'])
 @web_exception_handler
@@ -616,7 +709,8 @@ def search_profile_by_tag_web():
     tags = request.json.get('tags', [])
     page = request.json.get('page', 1)
     limit = request.json.get('limit', 20)
-    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0 or page <= 0 or limit <= 0:
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(
+            tags) == 0 or page <= 0 or limit <= 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
@@ -625,12 +719,16 @@ def search_profile_by_tag_web():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] search profile by tag manage_account_id = {}, platform = {}, tags = {}".format(manage_account_id, platform, tags))
+    logger.info("[backend_tools] search profile by tag manage_account_id = {}, platform = {}, tags = {}".format(
+        manage_account_id, platform, tags))
     data, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, False)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    logger.info("[backend_tools] get profile tag done for manage_account_id = {}, platform = {}, tags = {} -> res = {}".format(manage_account_id, platform, tags, data))
+    logger.info(
+        "[backend_tools] get profile tag done for manage_account_id = {}, platform = {}, tags = {} -> res = {}".format(
+            manage_account_id, platform, tags, data))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 def data_to_excel_file(file_path, titles, data):
     try:
@@ -653,18 +751,20 @@ def data_to_excel_file(file_path, titles, data):
             count += 1
     except BaseException as e:
         logger.error("[backend_tools] data to excel error {}", e)
-        logger.error(e)
+        logger.error(traceback.format_exc())
     finally:
         workbook.close()
 
+
 @tools_web.route("/backend/tools/downloadProfileInfoByTag", methods=['POST'])
 @web_exception_handler
-def download_profile_by_tag_web111():
+def download_profile_by_tag_web():
     platform = request.json.get('platform', '')
     tags = request.json.get('tags', [])
     page = request.json.get('page', 1)
     limit = request.json.get('limit', 9999)
-    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(tags) == 0 or page <= 0 or limit <= 0:
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(
+            tags) == 0 or page <= 0 or limit <= 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
@@ -673,13 +773,15 @@ def download_profile_by_tag_web111():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    logger.info("[backend_tools] search profile by tag manage_account_id = {}, platform = {}, tags = {}".format(manage_account_id, platform, tags))
+    logger.info("[backend_tools] download_profile_by_tag_web manage_account_id = {}, platform = {}, tags = {}".format(
+        manage_account_id, platform, tags))
     search_datas, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, True)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
     titles = []
     excel_data = []
     search_datas = search_datas['details']
+    logger.info('[backend_tools] search_datas = {}', len(search_datas))
     if len(search_datas) > 0:
         for k in search_datas[0]:
             titles.append(k)
@@ -691,6 +793,7 @@ def download_profile_by_tag_web111():
     cur_time = datetime.datetime.now()
     file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
     data_to_excel_file(file_path, titles, excel_data)
+
     @after_this_request
     def remove_file(response):
         try:
@@ -698,5 +801,5 @@ def download_profile_by_tag_web111():
         except Exception as error:
             logger.error("[backend_tools] error remove file {}".format(file_path))
         return response
-    return send_file(file_path, as_attachment=True)
 
+    return send_file(file_path, as_attachment=True)

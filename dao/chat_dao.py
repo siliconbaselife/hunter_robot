@@ -13,30 +13,38 @@ def query_conf(user_id, tag):
     if len(data) == 0:
         return None
 
-    conf = json.loads(data[0][3])
+    conf = json.loads(data[0][3].replace("\n", "\\n"))
 
     return conf
 
 
 def add_conf(user_id, tag, content):
-    sql = f"insert into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{json.dumps(content, ensure_ascii=False)}')"
+    sql = f"insert into user_chat_conf(manage_account_id, tag, content) values('{user_id}', '{tag}', '{transfer_msg(json.dumps(content, ensure_ascii=False))}')"
     dbm.insert(sql)
 
 
+def transfer_msg(js):
+    js = js.replace("\n", "\\n")
+    js = js.replace("\'", "\\'")
+    js = js.replace('\"', '\\"')
+    return js
+
+
 def update_conf(user_id, tag, content):
-    sql = f"update user_chat_conf set content = '{json.dumps(content, ensure_ascii=False)}' where manage_account_id = '{user_id}' and tag = '{tag}'"
+    sql = f"update user_chat_conf set content = '{transfer_msg(json.dumps(content, ensure_ascii=False))}' where manage_account_id = '{user_id}' and tag = '{tag}'"
     dbm.update(sql)
 
 
 def query_confs(user_id):
     sql = f"select * from user_chat_conf where manage_account_id = '{user_id}'"
     data = dbm.query(sql)
+    logger.info(data)
     confs = []
     for i in range(len(data)):
         confs.append({
             'manage_account_id': data[i][1],
             'tag': data[i][2],
-            'content': json.loads(data[i][3])
+            'content': json.loads(data[i][3].replace("\n", "\\n"))
         })
 
     return confs

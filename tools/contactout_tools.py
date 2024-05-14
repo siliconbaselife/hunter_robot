@@ -44,7 +44,7 @@ class ContactOut(object):
         assert res['status_code']==200, f"phone_status for {profile} data from contact out abnormal: {res}"
         res = res['profile']
         has_phone = res.get('phone', False)
-        return has_phone
+        return has_phone, None
 
     def fetch_email(self, profile):
     # def fetch_email(self, profile, is_work_email):
@@ -71,7 +71,7 @@ class ContactOut(object):
         req_url = f'{self.url_base}?profile={profile}&include_phone=true'
         headers = {
             'authorization': 'basic',
-            'token': token,
+            'token': self.token,
         }
         res = requests.get(req_url, headers=headers)
         logger.info(f'request contactout record: {req_url}: {res.text}')

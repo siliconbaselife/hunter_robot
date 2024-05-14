@@ -5,12 +5,12 @@ def test_chat():
     params = {
         'user_id': 'lishundong2009@163.com',
         'account_id': 'test',
-        'candidate_id': 'test',
+        'candidate_id': 'www.linkedin.com/in/myoungkyou-ha-9ba40511a',
         'details': [
             {"speaker": "robot",
              "msg": "Hi, Louisa Keddad, I am recruiting for Anxin Web Shield, and we are currently hiring IT engineers in Algeria. Your background seems well-suited for this position. Would you be interested in discussing it further?,Location: Algiers",
              "time": 1711937400},
-            {"speaker": "user", "msg": "thank you, I don't want a job", "time": 1711957400}
+            {"speaker": "user", "msg": "yes, please", "time": 1711957400}
         ]
     }
 

@@ -1,4 +1,5 @@
 import json
+import traceback
 
 from dao.chat_dao import query_conf, add_conf, update_conf, query_confs, query_chat, add_chat, update_chat
 from dao.tool_dao import query_profile_tag_relation_by_user_and_candidate_db
@@ -6,18 +7,34 @@ from dao.tool_dao import query_profile_tag_relation_by_user_and_candidate_db
 from utils.log import get_logger
 from utils.config import config as config
 from algo.llm_inference import gpt_manager, Prompt
+from dao.manage_dao import get_profile_by_id
 
 import time
 
 logger = get_logger(config['log']['log_file'])
 
 
-def conf(user_id, tag, conf):
+def transfer_conf(chat_conf):
+    for key in chat_conf.keys():
+        chat_conf[key] = transfer_msg(chat_conf[key])
+
+    return chat_conf
+
+
+def transfer_msg(msg):
+    msg = msg.replace("\n", "\\n")
+    msg = msg.replace("\'", "\\'")
+    msg = msg.replace('\"', '\\"')
+    return msg
+
+
+def conf(user_id, tag, chat_conf):
+    # chat_conf = transfer_conf(chat_conf)
     data_conf = query_conf(user_id, tag)
     if data_conf is not None:
-        update_conf(user_id, tag, conf)
+        update_conf(user_id, tag, chat_conf)
     else:
-        add_conf(user_id, tag, conf)
+        add_conf(user_id, tag, chat_conf)
 
 
 def get_conf(user_id):
@@ -134,7 +151,7 @@ def chat(user_id, account_id, candidate_id, details):
     if len(msg_infos) == 0:
         return msg_infos
 
-    msg_infos = transfer_msg_infos(msg_infos)
+    msg_infos = transfer_msg_infos(msg_infos, candidate_id)
 
     details.extend(msg_infos)
     history_chat = query_chat(user_id, account_id, candidate_id)
@@ -143,21 +160,41 @@ def chat(user_id, account_id, candidate_id, details):
         update_chat(user_id, account_id, candidate_id, details_str)
     else:
         add_chat(user_id, account_id, candidate_id, details_str)
-    logger.info(f"plugin chat user_id: {user_id} account_id: {account_id} candidate_id: {candidate_id} details: {details} msg_infos: {msg_infos}")
+    logger.info(
+        f"plugin chat user_id: {user_id} account_id: {account_id} candidate_id: {candidate_id} details: {details} msg_infos: {msg_infos}")
 
     return msg_infos
 
 
-def transfer_msg_infos(msg_infos):
+def fetch_name(candidate_id):
+    name = ""
+    try:
+        raw_profile = get_profile_by_id(candidate_id)
+        profile = json.loads(raw_profile[0][0])
+        name = profile["profile"]["name"]
+    except BaseException as e:
+        logger.error(traceback.format_exc())
+        logger.error(e)
+
+    return name
+
+
+def transfer_msg_infos(msg_infos, candidate_id):
     r_msg_infos = []
+    name = fetch_name(candidate_id)
     for msg_info in msg_infos:
         r_msg_infos.append({
             "speaker": "robot",
-            "msg": msg_info,
+            "msg": transfer_profile_msg(msg_info, name),
             "time": int(time.time())
         })
 
     return r_msg_infos
+
+
+def transfer_profile_msg(msg_info, name):
+    msg_info = msg_info.replace("{name}", name)
+    return msg_info
 
 
 def transfer_details(details):

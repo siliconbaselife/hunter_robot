@@ -5,6 +5,8 @@ def process_profile(ori_profile):
         profile = profile[:-1]
     return profile
 
-def id_from_profile(profile):
+def info_from_profile(profile):
     ## 'https://www.linkedin.com/in/zhouren'
-    return profile.split('/')[-1]
+    name = profile.split('/')[-1]
+    lid = profile.split('www.')[-1]
+    return name, lid
