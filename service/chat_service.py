@@ -15,7 +15,8 @@ __chat_dispatcher = {
     'maimai_direct_robot': MaimaiDirectRobot,
     'main_chat_robot': MainChatRobot,
     'main_bd_robot': MainBDRobot,
-    'main_chat_robot_v2': MainChatRobotV2
+    'main_chat_robot_v2': MainChatRobotV2,
+    'main_chat_robot_v3': MainChatRobotV3
 }
 
 def chat_service(account_id, job_id, candidate_id, robot_api, page_history_msg, db_history_msg, source):

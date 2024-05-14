@@ -7,3 +7,4 @@ from .maimai_direct_robot import MaimaiDirectRobot
 from .main_chat_robot import MainChatRobot
 from .main_bd_robot import MainBDRobot
 from .main_chat_robot_v2 import MainChatRobotV2
+from .main_chat_robot_v3 import MainChatRobotV3

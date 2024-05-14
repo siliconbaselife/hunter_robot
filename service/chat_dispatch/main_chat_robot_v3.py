@@ -32,7 +32,7 @@ class INTENTION(Enum):
 
 class MainChatRobotV3(BaseChatRobot):
     def __init__(self, robot_api, account_id, job_id, candidate_id, source=None):
-        super(MainChatRobotV2, self).__init__(robot_api, account_id, job_id, candidate_id, source)
+        super(MainChatRobotV3, self).__init__(robot_api, account_id, job_id, candidate_id, source)
         self._job_id = job_id
         self.job_config = json.loads(get_job_by_id(job_id)[0][6], strict=False)
         self.platform = get_job_by_id(job_id)[0][1]
@@ -63,7 +63,7 @@ class MainChatRobotV3(BaseChatRobot):
                 if page_history_msg[len(page_history_msg) - i - 1]["speaker"] == "robot":
                     break
                 new_msgs.append(page_history_msg[len(page_history_msg) - i - 1])
-            # logger.info(f"MainChatRobotV2_new_msgs: {new_msgs}")
+            # logger.info(f"MainChatRobotV3_new_msgs: {new_msgs}")
             new_msgs.reverse()
             r_new_msgs = []
             for msg in new_msgs:
@@ -102,13 +102,16 @@ class MainChatRobotV3(BaseChatRobot):
             intention = self.deal_intention(processed_history_msgs)
             if has_contact_db(self._candidate_id, self._account_id):
                 self._status_infos['has_contact'] = True
+            self.ask_questions(intention)
             r_msg, action = self.generate_reply(intention, processed_history_msgs)
             self.deal_r_msg(r_msg, action)
-            logger.info(f"MainChatRobotV2处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            self.update_question_collections_2_status_infos()
+            logger.info(f"MainChatRobotV3处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
             update_status_infos_v2(self._candidate_id, self._account_id, json.dumps(self._status_infos, ensure_ascii=False), self._job_id)
-            logger.info(f"MainChatRobotV2需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
+            ## TODO update question_collections
+            logger.info(f"MainChatRobotV3需要返回给客户 {self._candidate_id} 的话术 '{self._next_msg}' 以及动作 {self._status}")
         except BaseException as e:
-            logger.info(f'MainChatRobotV2,{self._candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
+            logger.info(f'MainChatRobotV3,{self._candidate_id}, {e}, {e.args}, {traceback.format_exc()}')
 
     def fetch_template_info(self):
         rs = query_template_config(self.template_id)
@@ -125,8 +128,10 @@ class MainChatRobotV3(BaseChatRobot):
         return question_list, remain_question_list
 
     def fetch_question_collection(self):
-        ## TODO query from db, will return map
-        pass
+        return self._status_infos['question_collection']
+
+    def update_question_collections_2_status_infos(self):
+        self._status_infos['question_collection'] = self._questions_collection
 
     def fetch_now_status(self):
         res = query_status_infos_v2(self._candidate_id, self._account_id, self._job_id)
@@ -148,10 +153,12 @@ class MainChatRobotV3(BaseChatRobot):
             status_info['neg_intention'] = False
         if 'ask_rount' not in status_info:
             status_info['ask_rount'] = 0
+        if 'question_collection' not in status_info:
+            status_info['question_collection'] = {}
         return status_info
 
     def deal_question_collections(self, history_msgs):
-        detect_msg_list = []
+        merge_msgs = ''
         reach_user_msg = False
         for i in range(len(history_msgs)-1, -1, -1):
             msg = history_msgs[i]
@@ -159,8 +166,35 @@ class MainChatRobotV3(BaseChatRobot):
                 break
             if msg['speaker'] == 'user':
                 reach_user_msg = True
-                detect_msg_list.append(msg['msg'])
-        detect_prompt = ''''''
+                merge_msgs+=f"{msg['msg']}\n"
+        
+        prefix = ''
+        questions_str=''
+        for i, q in enumerate(self._questions_to_ask):
+            questions_str+=f'{i}: {q}\n'
+        prompt = f'''
+{prefix}
+你是一个猎头，你正在跟候选人沟通交流，你需要从用户的消息中提取你感兴趣的问题的答案。下面是你感兴趣的问题：
+##
+你感兴趣的问题列表：
+{questions_str}
+###
+请从用户的消息里提取这些问题的答案，返回中需要包括问题的序号和提取出来的答案信息。以换行符隔开不同的问题；如果没有发现有这些问题的答案，就返回：无。示例1：
+##
+2 <关于问题2的答案>
+4 <关于问题4的答案>
+###
+'''
+        r_msg = gpt_chat.generic_chat({"history_chat": [], "system_prompt": prompt, "user_message": merge_msgs})
+        if r_msg[0]=='无':
+            return
+        for line in r_msg.split('\n'):
+            question_index = int(line[0])
+            answer = line[2:]
+            question = self._questions_to_ask[question_index]
+            if question not in self._questions_collection:
+                self._questions_collection[question] = []
+            self._questions_collection[question].append(answer)
 
     def deal_r_msg(self, r_msg, action):
         self._status = action
@@ -229,8 +263,30 @@ class MainChatRobotV3(BaseChatRobot):
         return r_msg, ChatStatus.NormalChat
 
     def no_intention_reply(self, history_msgs):
-        if self._status_infos['has_contact']:
+        ask_question_msg = self.generate_question_2_ask()
+        has_contact = self._status_infos['has_contact']
+        if ask_question_msg:
+            logger.info(f'MainChatRobotV3 no_intention_reply, will ask_question {ask_question_msg}')
+            return ask_question_msg, ChatStatus.NormalChat
+        if has_contact:
             return '', ChatStatus.NoTalk
+                    
+        reply_msg = self.generate_ask_contact_reply(history_msgs)
+        return reply_msg, ChatStatus.NormalChat
+
+    def generate_question_2_ask(self):
+        if len(self._remain_questions_to_ask) > 0:
+            random_choose_idx = random.randint(-1, len(self._remain_questions_to_ask)-1)
+            ## random, probability 1/n no ask question, this logic TOBE observed in pratice
+            if random_choose_idx >0:
+                ## pop from remain, this question will not be asked any more
+                question_2_ask = self._remain_questions_to_ask.pop(random_choose_idx)
+                if question_2_ask not in self._questions_collection:
+                    self._questions_collection[question_2_ask] = []
+                return question_2_ask
+        return None
+
+    def generate_ask_contact_reply(self, history_msgs):
         m = "找机会找候选人要联系方式, $PHONE$"
         if self.platform == 'Linkedin':
             prefix = '请用英语回答问题。一定要用英语回答。一定要用英语回答。一定要用英语回答。'
@@ -254,7 +310,7 @@ class MainChatRobotV3(BaseChatRobot):
         '''
         msgs, user_msg = self.transfer_msgs(history_msgs)
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
-        return r_msg.replace("$PHONE$", ""), ChatStatus.NormalChat
+        return r_msg.replace("$PHONE$", "")
 
     def negtive_reply(self):
         if self._status_infos['has_contact']:
@@ -298,12 +354,12 @@ class MainChatRobotV3(BaseChatRobot):
 
     def deal_contact_chi(self, history_msgs):
         if "contact_flag" in self._status_infos and self._status_infos["contact_flag"]:
-            logger.info(f'MainChatRobotV2 already_have_contact, {self._candidate_id}')
+            logger.info(f'MainChatRobotV3 already_have_contact, {self._candidate_id}')
             return True
 
         db_has_contact = has_contact_db(self._candidate_id, self._account_id)
         if db_has_contact:
-            logger.info(f'MainChatRobotV2 already_have_contact, {self._candidate_id}')
+            logger.info(f'MainChatRobotV3 already_have_contact, {self._candidate_id}')
             self._status_infos["contact_flag"] = True
             return True
         #这里等于有了一种联系方式就没再进行萃取了，直接return了
@@ -368,7 +424,7 @@ class MainChatRobotV3(BaseChatRobot):
         user_msg_list = []
         num = 1
         for i in range(len(history_msgs)):
-            logger.info(f"MainChatRobotV2  {i} msg: {history_msgs[len(history_msgs) - i - 1]}")
+            logger.info(f"MainChatRobotV3  {i} msg: {history_msgs[len(history_msgs) - i - 1]}")
             if history_msgs[len(history_msgs) - i - 1]["speaker"] == "system":
                 if "好友请求" in history_msgs[len(history_msgs) - i - 1]["msg"]:
                     num += 1
@@ -382,7 +438,7 @@ class MainChatRobotV3(BaseChatRobot):
             user_msg_list.append(history_msgs[len(history_msgs) - i - 1]["msg"])
         user_msg_list.reverse()
         user_msg = "\n".join(user_msg_list)
-        logger.info(f"MainChatRobotV2 user_msg: {user_msg}")
+        logger.info(f"MainChatRobotV3 user_msg: {user_msg}")
 
         if num == 1:
             num += 1
