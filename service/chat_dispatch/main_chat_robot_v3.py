@@ -15,7 +15,7 @@ import traceback
 import time
 
 from enum import Enum
-
+import random
 import requests
 
 logger = get_logger(config['log']['log_file'])
@@ -102,7 +102,6 @@ class MainChatRobotV3(BaseChatRobot):
             intention = self.deal_intention(processed_history_msgs)
             if has_contact_db(self._candidate_id, self._account_id):
                 self._status_infos['has_contact'] = True
-            self.ask_questions(intention)
             r_msg, action = self.generate_reply(intention, processed_history_msgs)
             self.deal_r_msg(r_msg, action)
             self.update_question_collections_2_status_infos()
@@ -123,7 +122,7 @@ class MainChatRobotV3(BaseChatRobot):
         return self.job_config.get("reply_infos", {})
 
     def fetch_questions_to_ask(self, already_question_collection):
-        question_list = self.job_config.get("questions_to_ask", [])
+        question_list = self.job_config['dynamic_job_config'].get("questions_to_ask", [])
         remain_question_list = list(set(question_list) - set(already_question_collection.keys()))
         return question_list, remain_question_list
 
@@ -186,6 +185,7 @@ class MainChatRobotV3(BaseChatRobot):
 ###
 '''
         r_msg = gpt_chat.generic_chat({"history_chat": [], "system_prompt": prompt, "user_message": merge_msgs})
+        logger.info(f"MainChatRobotV3 deal_question_collections, user merge msgs: {merge_msgs}, system_prompt: {prompt}, return from llm: {r_msg}")
         if r_msg[0]=='无':
             return
         for line in r_msg.split('\n'):
@@ -263,8 +263,10 @@ class MainChatRobotV3(BaseChatRobot):
         return r_msg, ChatStatus.NormalChat
 
     def no_intention_reply(self, history_msgs):
-        ask_question_msg = self.generate_question_2_ask()
+        logger.info(f'MainChatRobotV3 no_intention_reply in')
         has_contact = self._status_infos['has_contact']
+        ask_question_msg = self.generate_question_2_ask(has_contact)
+        
         if ask_question_msg:
             logger.info(f'MainChatRobotV3 no_intention_reply, will ask_question {ask_question_msg}')
             return ask_question_msg, ChatStatus.NormalChat
@@ -274,11 +276,11 @@ class MainChatRobotV3(BaseChatRobot):
         reply_msg = self.generate_ask_contact_reply(history_msgs)
         return reply_msg, ChatStatus.NormalChat
 
-    def generate_question_2_ask(self):
+    def generate_question_2_ask(self, need_ask_question, quit_prob=0.3):
         if len(self._remain_questions_to_ask) > 0:
-            random_choose_idx = random.randint(-1, len(self._remain_questions_to_ask)-1)
-            ## random, probability 1/n no ask question, this logic TOBE observed in pratice
-            if random_choose_idx >0:
+            random_range = len(self._remain_questions_to_ask)-1 if need_ask_question else int(len(self._remain_questions_to_ask)* (1+quit_prob))
+            random_choose_idx = random.randint(0, random_range)
+            if random_choose_idx < len(self._remain_questions_to_ask):
                 ## pop from remain, this question will not be asked any more
                 question_2_ask = self._remain_questions_to_ask.pop(random_choose_idx)
                 if question_2_ask not in self._questions_collection:
@@ -462,6 +464,7 @@ class MainChatRobotV3(BaseChatRobot):
             return INTENTION.NOINTENTION
 
         result_msg = gpt_chat.generic_chat({"user_message": msg_prompt})
+        logger.info(f"MainChatRobotV3 deal_intention, user user_message: {msg_prompt}, return from llm: {result_msg}")
 
         if "A.拒绝" in result_msg:
             return INTENTION.NEGTIVE

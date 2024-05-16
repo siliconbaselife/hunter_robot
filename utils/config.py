@@ -95,6 +95,7 @@ config['job_register'] = {
         "filter_config_v2":"boss_autoload_filter_v2",
         "chat_config":"base_common_chat",
         "chat_config_v2":"main_chat_robot_v2",
+        "chat_config_v3":"main_chat_robot_v3",
         "recall_config":"zp"
     },
     "Linkedin":{
