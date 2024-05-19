@@ -2,6 +2,8 @@ import json
 import re
 import traceback
 import datetime
+import xlsxwriter
+
 def cv_str(obj, dent):
     cv = ""
     if type(obj) == dict:
@@ -147,13 +149,45 @@ def parse_profile(profile):
         res['last5Jump'] = last_5_jump
     return res
 
+def data_to_excel_file(file_path, titles, data):
+    try:
+        workbook = xlsxwriter.Workbook(file_path)
+        worksheet = workbook.add_worksheet()
+        title_formatter = workbook.add_format()
+        title_formatter.set_border(1)
+        title_formatter.set_bg_color('#cccccc')
+        title_formatter.set_align('center')
+        title_formatter.set_bold()
+
+        row_formatter = workbook.add_format()
+        row_formatter.set_text_wrap(True)
+        worksheet.set_column(9,9, 60, row_formatter)
+        worksheet.write_row('A1', titles, title_formatter)
+        count = 2
+        for row in  data:
+
+            worksheet.write_row('A{}'.format(count), row, row_formatter)
+            count += 1
+    except BaseException as e:
+        logger.error("[backend_tools] data to excel error {}", e)
+        logger.error(traceback.format_exc())
+    finally:
+        workbook.close()
 def main():
     with open('/Users/db24/tmp/dumps/dump.data', 'r') as f:
         lines = f.readlines()
 
     for line in lines:
         p = parse_profile(line)
-        print(json.dumps(p))
+        titles = []
+        rows = []
+        row = []
+        for k in p:
+            titles.append(k)
+            row.append(p[k])
+        rows.append(row)
+        data_to_excel_file('/Users/db24/tmp/dumps/t.xlsx', titles, rows)
+        # print(json.dumps(p))
 
 if __name__ == '__main__':
     main()
