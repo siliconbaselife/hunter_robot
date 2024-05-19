@@ -742,7 +742,7 @@ def data_to_excel_file(file_path, titles, data):
 
         row_formatter = workbook.add_format()
         row_formatter.set_text_wrap(True)
-        worksheet.set_column(9,9, 60, row_formatter)
+        worksheet.set_column(8,8, 60, row_formatter)
         worksheet.write_row('A1', titles, title_formatter)
         count = 2
 

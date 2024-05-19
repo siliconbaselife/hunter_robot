@@ -1201,7 +1201,7 @@ def parse_profile(profile, type='need_deserialize'):
         return None
     res = {'candidateId': None,
            'department': None,
-           'lastCompany': None,
+           'company': None,
            'title': None,
            'lastTitle': None,
            'last5Jump': None,
