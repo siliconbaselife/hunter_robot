@@ -157,44 +157,76 @@ class MainChatRobotV3(BaseChatRobot):
         return status_info
 
     def deal_question_collections(self, history_msgs):
-        merge_msgs = ''
-        reach_user_msg = False
-        for i in range(len(history_msgs)-1, -1, -1):
-            msg = history_msgs[i]
-            if reach_user_msg and msg['speaker'] != 'user':
-                break
-            if msg['speaker'] == 'user':
-                reach_user_msg = True
-                merge_msgs+=f"{msg['msg']}\n"
-        
+        ## 用最新用户信息
+        # msg_list = []
+        # reach_user_msg = False
+        # for i in range(len(history_msgs)-1, -1, -1):
+        #     msg = history_msgs[i]
+        #     if msg['speaker'] != 'user' and reach_user_msg:
+        #         break
+        #     if msg['speaker'] == 'user':
+        #         reach_user_msg = True
+        #         msg_list.append(msg['msg'])
+
+        # msg_list = sorted(msg_list, reverse=True)
+        # msg_str = ''
+        # for msg in msg_list:
+        #     msg_str+=f'{msg}\n'
+
+        # 用所有用户的信息
+        msg_str = ''
+        for msg in history_msgs:
+            if msg['speaker']== 'user':
+                msg_str+=f'{msg["msg"]}\n'
+
+        ## 用所有历史信息，llm会乱提取
+        # msg_str = ''
+        # for i in range(len(history_msgs)):
+        #     msg = history_msgs[i]
+        #     if msg["speaker"] == "system":
+        #         continue
+        #     msg_str += "我: " if msg["speaker"] == "robot" else "候选人: "
+        #     msg_str += msg["msg"] + "\n"
+
+        # if len(msg_str) == 0:
+        #     return ""
         prefix = ''
         questions_str=''
         for i, q in enumerate(self._questions_to_ask):
             questions_str+=f'{i}: {q}\n'
         prompt = f'''
 {prefix}
-你是一个猎头，你正在跟候选人沟通交流，你需要从用户的消息中提取你感兴趣的问题的答案。下面是你感兴趣的问题：
-##
-你感兴趣的问题列表：
-{questions_str}
+你是一个猎头，你正在跟候选人沟通交流，你需要从用户的消息中提取你感兴趣的问题的答案。
+用户的历史消息在以下分隔符###中，
+你感兴趣的问题列表在以下分隔符@@@中：
 ###
-请从用户的消息里提取这些问题的答案，返回中需要包括问题的序号和提取出来的答案信息。以换行符隔开不同的问题；如果没有发现有这些问题的答案，就返回：无。示例1：
-##
+{msg_str}
+###
+@@@
+{questions_str}
+@@@
+请从用户的消息里提取这些问题的答案。
+具体要求：
+返回中包括 有答案的问题的序号 和 对应提取出来的答案信息，以换行符隔开不同的问题，一定注意，没有答案的问题不需要！没有答案的问题不需要！没有答案的问题不需要！；
+如果没有发现所有问题都没有找到答案，就只返回：无。
+以下是一个示例：
 2 <关于问题2的答案>
 4 <关于问题4的答案>
-###
 '''
-        r_msg = gpt_chat.generic_chat({"history_chat": [], "system_prompt": prompt, "user_message": merge_msgs})
-        logger.info(f"MainChatRobotV3 deal_question_collections, user merge msgs: {merge_msgs}, system_prompt: {prompt}, return from llm: {r_msg}")
+        r_msg = gpt_chat.generic_chat({"user_message": prompt})
+        logger.info(f"MainChatRobotV3 deal_question_collections, prompt: {prompt}, return from llm: {r_msg}")
         if r_msg[0]=='无':
             return
         for line in r_msg.split('\n'):
             question_index = int(line[0])
             answer = line[2:]
+            if question_index=='无' or answer=='无':
+                continue
             question = self._questions_to_ask[question_index]
-            if question not in self._questions_collection:
-                self._questions_collection[question] = []
-            self._questions_collection[question].append(answer)
+            self._questions_collection[question] = answer
+            # if question not in self._questions_collection:
+            #     self._questions_collection[question] = []
+            # self._questions_collection[question].append(answer)
 
     def deal_r_msg(self, r_msg, action):
         self._status = action
@@ -283,8 +315,8 @@ class MainChatRobotV3(BaseChatRobot):
             if random_choose_idx < len(self._remain_questions_to_ask):
                 ## pop from remain, this question will not be asked any more
                 question_2_ask = self._remain_questions_to_ask.pop(random_choose_idx)
-                if question_2_ask not in self._questions_collection:
-                    self._questions_collection[question_2_ask] = []
+                # self._questions_collection[question_2_ask] = []
+                self._questions_collection[question_2_ask] = ''
                 return question_2_ask
         return None
 

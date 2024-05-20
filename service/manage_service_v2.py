@@ -102,8 +102,8 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config, templa
     else:
         job_config['filter_config'] = config['job_register'][platform_type]["custom_filter_config"]
     try:
-        job_config['chat_config'] = config['job_register'][platform_type]["chat_config_v3"]
-        logger.info(f"new_job_service, use chat_config_v3: {job_config['chat_config']}")
+        job_config['chat_config'] = config['job_register'][platform_type]["chat_config_v2"]
+        logger.info(f"new_job_service, use chat_config_v2: {job_config['chat_config']}")
     except:
         job_config['chat_config'] = config['job_register'][platform_type]["chat_config_v2"]
         logger.info(f"new_job_service, use chat_config_v2: {job_config['chat_config']}")
