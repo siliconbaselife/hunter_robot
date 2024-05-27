@@ -8,7 +8,7 @@ from utils.config import config
 import json
 import math
 
-from service.extension_service import new_extension_user, fetch_user_credit, update_user_credit, user_fetch_contact, query_user_contact
+from service.extension_service import fetch_user_credit, update_user_credit, user_fetch_contact, query_user_contact
 
 extension_web = Blueprint('extension_web', __name__, template_folder='templates')
 
