@@ -580,7 +580,7 @@ def generate_email_content_web():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info(
-        "[backend_tools] generate_email_content manage_account_id = {},  platform = {}, template = {}, candidate_id = {}".format(
+        "[backend_tools] generate_email_content_web manage_account_id = {},  platform = {}, template = {}, candidate_id = {}".format(
             manage_account_id, platform, template, candidate_id))
     msg = generate_email_content(manage_account_id, platform, candidate_id, template)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
@@ -602,7 +602,7 @@ def send_email_content_web():
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info(
-        "[backend_tools] generate_email_content manage_account_id = {},  platform = {}, content = {}, candidate_id = {}".format(
+        "[backend_tools] send_email_content_web manage_account_id = {},  platform = {}, content = {}, candidate_id = {}".format(
             manage_account_id, platform, content, candidate_id))
     msg = send_email_content(manage_account_id, platform, candidate_id, title, content)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
