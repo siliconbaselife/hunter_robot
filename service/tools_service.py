@@ -1201,7 +1201,7 @@ def parse_profile(profile, type='need_deserialize'):
         return None
     res = {'candidateId': None,
            'department': None,
-           'lastCompany': None,
+           'company': None,
            'title': None,
            'lastTitle': None,
            'last5Jump': None,
@@ -1219,7 +1219,7 @@ def parse_profile(profile, type='need_deserialize'):
     experience = profile['experiences'][0] if 'experiences' in profile and len(profile['experiences']) > 0 else None
     if experience and 'companyName' in experience:
         res['department'] = experience['companyName']
-        res['lastCompany'] = experience['companyName']
+        res['company'] = experience['companyName']
 
     if 'role' in profile:
         res['title'] = profile['role']

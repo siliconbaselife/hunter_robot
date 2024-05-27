@@ -741,8 +741,8 @@ def data_to_excel_file(file_path, titles, data):
         title_formatter.set_bold()
 
         row_formatter = workbook.add_format()
-        row_formatter.set_border(1)
-
+        row_formatter.set_text_wrap(True)
+        worksheet.set_column(8,8, 60, row_formatter)
         worksheet.write_row('A1', titles, title_formatter)
         count = 2
 
@@ -784,10 +784,14 @@ def download_profile_by_tag_web():
     logger.info('[backend_tools] search_datas = {}', len(search_datas))
     if len(search_datas) > 0:
         for k in search_datas[0]:
+            if k == 'department':
+                continue
             titles.append(k)
         for search_data in search_datas:
             row = []
             for k in search_data:
+                if k == 'department':
+                    continue
                 row.append(search_data[k])
             excel_data.append(row)
     cur_time = datetime.datetime.now()
