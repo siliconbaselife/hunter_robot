@@ -566,7 +566,7 @@ def customized_chat_scenario_web():
 
 @tools_web.route("/backend/tools/generateEmailContent", methods=['POST'])
 @web_exception_handler
-def generate_email_content():
+def generate_email_content_web():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', None)
     template = request.json.get('template', None)
@@ -587,7 +587,7 @@ def generate_email_content():
 
 @tools_web.route("/backend/tools/sendEmailContent", methods=['POST'])
 @web_exception_handler
-def send_email_content():
+def send_email_content_web():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', None)
     title = request.json.get('title', None)
