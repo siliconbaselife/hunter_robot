@@ -20,7 +20,6 @@ manage_web_v3 = Blueprint('manage_web_v3', __name__, template_folder='templates'
 logger = get_logger(config['log']['log_file'])
 
 
-## TODO
 @manage_web_v3.route("/backend/manage/taskUpdate/v3", methods=['POST'])
 @web_exception_handler
 def task_update_api():
@@ -35,8 +34,22 @@ def task_update_api():
     platform = request.json['platform']
     params = request.json['params']
 
-    logger.info(f'task_update_request_v2:{manage_account_id}, {account_id},{platform}, {params}')
+    logger.info(f'task_update_request_v3:{manage_account_id}, {account_id},{platform}, {params}')
     update_config_service_v3(manage_account_id, account_id, platform, params)
 
     return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
 
+@manage_web_v3.route("/backend/manage/metaConfig/v3", methods=['POST'])
+@web_exception_handler
+def meta_config():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    
+    a = json.load(open('file/meta_config_v3.json'))
+
+    return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))

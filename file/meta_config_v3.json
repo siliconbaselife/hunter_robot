@@ -366,6 +366,57 @@
             },
             "neg_words": {
                 "config_type": "multi_input"
+            },
+            "location": {
+                "config_type": "multi_input"
+            },
+            "expect_jobs": {
+                "config_type": "multi_input"
+            },
+            "status": {
+                "config_type": "multi_choice",
+                "choice_enum": [
+                    {
+                        "value": "0",
+                        "label": "离职-随时到岗"
+                    },
+                    {
+                        "value": "1",
+                        "label": "在职-暂不考虑"
+                    },
+                    {
+                        "value": "2",
+                        "label": "在职-考虑机会"
+                    },
+                    {
+                        "value": "3",
+                        "label": "在职-月内到岗"
+                    }
+                ]
+            },
+            "company_show_name": {
+                "config_type": "multi_input"
+            },
+            "salary_info": {
+                "config_type": "multi_input"
+            },
+            "location_info": {
+                "config_type": "multi_input"
+            },
+            "benifits_info": {
+                "config_type": "multi_input"
+            },
+            "env_info": {
+                "config_type": "multi_input"
+            },
+            "worktime_info": {
+                "config_type": "multi_input"
+            },
+            "more_benifits_info": {
+                "config_type": "multi_input"
+            },
+            "other_info": {
+                "config_type": "multi_input"
             }
         }
     },

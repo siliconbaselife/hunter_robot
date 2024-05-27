@@ -26,9 +26,12 @@ gpt_chat = GptChat()
 class INTENTION(Enum):
     POSITIVE = 1
     NEGTIVE = 2
-    QUESTIOM = 3
-    NOINTENTION = 4
-
+    QUESTIOM_PAYMENT = 3    ##薪资
+    QUESTIOM_BENIFITS = 4   ##福利
+    QUESTIOM_POSITION = 5   ##工作地点
+    QUESTIOM_WORKTIME = 6   ##工作时长
+    QUESTIOM_OTHER = 7      ##岗位相关的其他问题
+    NOINTENTION = -1
 
 class MainChatRobotV3(BaseChatRobot):
     def __init__(self, robot_api, account_id, job_id, candidate_id, source=None):
@@ -98,7 +101,7 @@ class MainChatRobotV3(BaseChatRobot):
             processed_history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
             logger.info(f"MainChatRobotV3处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
             self.deal_contact(processed_history_msgs)
-            self.deal_question_collections(processed_history_msgs)
+            # self.deal_question_collections(processed_history_msgs)
             intention = self.deal_intention(processed_history_msgs)
             if has_contact_db(self._candidate_id, self._account_id):
                 self._status_infos['has_contact'] = True
@@ -156,77 +159,77 @@ class MainChatRobotV3(BaseChatRobot):
             status_info['question_collection'] = {}
         return status_info
 
-    def deal_question_collections(self, history_msgs):
-        ## 用最新用户信息
-        # msg_list = []
-        # reach_user_msg = False
-        # for i in range(len(history_msgs)-1, -1, -1):
-        #     msg = history_msgs[i]
-        #     if msg['speaker'] != 'user' and reach_user_msg:
-        #         break
-        #     if msg['speaker'] == 'user':
-        #         reach_user_msg = True
-        #         msg_list.append(msg['msg'])
+#     def deal_question_collections(self, history_msgs):
+#         ## 用最新用户信息
+#         # msg_list = []
+#         # reach_user_msg = False
+#         # for i in range(len(history_msgs)-1, -1, -1):
+#         #     msg = history_msgs[i]
+#         #     if msg['speaker'] != 'user' and reach_user_msg:
+#         #         break
+#         #     if msg['speaker'] == 'user':
+#         #         reach_user_msg = True
+#         #         msg_list.append(msg['msg'])
 
-        # msg_list = sorted(msg_list, reverse=True)
-        # msg_str = ''
-        # for msg in msg_list:
-        #     msg_str+=f'{msg}\n'
+#         # msg_list = sorted(msg_list, reverse=True)
+#         # msg_str = ''
+#         # for msg in msg_list:
+#         #     msg_str+=f'{msg}\n'
 
-        # 用所有用户的信息
-        msg_str = ''
-        for msg in history_msgs:
-            if msg['speaker']== 'user':
-                msg_str+=f'{msg["msg"]}\n'
+#         # 用所有用户的信息
+#         msg_str = ''
+#         for msg in history_msgs:
+#             if msg['speaker']== 'user':
+#                 msg_str+=f'{msg["msg"]}\n'
 
-        ## 用所有历史信息，llm会乱提取
-        # msg_str = ''
-        # for i in range(len(history_msgs)):
-        #     msg = history_msgs[i]
-        #     if msg["speaker"] == "system":
-        #         continue
-        #     msg_str += "我: " if msg["speaker"] == "robot" else "候选人: "
-        #     msg_str += msg["msg"] + "\n"
+#         ## 用所有历史信息，llm会乱提取
+#         # msg_str = ''
+#         # for i in range(len(history_msgs)):
+#         #     msg = history_msgs[i]
+#         #     if msg["speaker"] == "system":
+#         #         continue
+#         #     msg_str += "我: " if msg["speaker"] == "robot" else "候选人: "
+#         #     msg_str += msg["msg"] + "\n"
 
-        # if len(msg_str) == 0:
-        #     return ""
-        prefix = ''
-        questions_str=''
-        for i, q in enumerate(self._questions_to_ask):
-            questions_str+=f'{i}: {q}\n'
-        prompt = f'''
-{prefix}
-你是一个猎头，你正在跟候选人沟通交流，你需要从用户的消息中提取你感兴趣的问题的答案。
-用户的历史消息在以下分隔符###中，
-你感兴趣的问题列表在以下分隔符@@@中：
-###
-{msg_str}
-###
-@@@
-{questions_str}
-@@@
-请从用户的消息里提取这些问题的答案。
-具体要求：
-返回中包括 有答案的问题的序号 和 对应提取出来的答案信息，以换行符隔开不同的问题，一定注意，没有答案的问题不需要！没有答案的问题不需要！没有答案的问题不需要！；
-如果没有发现所有问题都没有找到答案，就只返回：无。
-以下是一个示例：
-2 <关于问题2的答案>
-4 <关于问题4的答案>
-'''
-        r_msg = gpt_chat.generic_chat({"user_message": prompt})
-        logger.info(f"MainChatRobotV3 deal_question_collections, prompt: {prompt}, return from llm: {r_msg}")
-        if r_msg[0]=='无':
-            return
-        for line in r_msg.split('\n'):
-            question_index = int(line[0])
-            answer = line[2:]
-            if question_index=='无' or answer=='无':
-                continue
-            question = self._questions_to_ask[question_index]
-            self._questions_collection[question] = answer
-            # if question not in self._questions_collection:
-            #     self._questions_collection[question] = []
-            # self._questions_collection[question].append(answer)
+#         # if len(msg_str) == 0:
+#         #     return ""
+#         prefix = ''
+#         questions_str=''
+#         for i, q in enumerate(self._questions_to_ask):
+#             questions_str+=f'{i}: {q}\n'
+#         prompt = f'''
+# {prefix}
+# 你是一个猎头，你正在跟候选人沟通交流，你需要从用户的消息中提取你感兴趣的问题的答案。
+# 用户的历史消息在以下分隔符###中，
+# 你感兴趣的问题列表在以下分隔符@@@中：
+# ###
+# {msg_str}
+# ###
+# @@@
+# {questions_str}
+# @@@
+# 请从用户的消息里提取这些问题的答案。
+# 具体要求：
+# 返回中包括 有答案的问题的序号 和 对应提取出来的答案信息，以换行符隔开不同的问题，一定注意，没有答案的问题不需要！没有答案的问题不需要！没有答案的问题不需要！；
+# 如果没有发现所有问题都没有找到答案，就只返回：无。
+# 以下是一个示例：
+# 2 <关于问题2的答案>
+# 4 <关于问题4的答案>
+# '''
+#         r_msg = gpt_chat.generic_chat({"user_message": prompt})
+#         logger.info(f"MainChatRobotV3 deal_question_collections, prompt: {prompt}, return from llm: {r_msg}")
+#         if r_msg[0]=='无':
+#             return
+#         for line in r_msg.split('\n'):
+#             question_index = int(line[0])
+#             answer = line[2:]
+#             if question_index=='无' or answer=='无':
+#                 continue
+#             question = self._questions_to_ask[question_index]
+#             self._questions_collection[question] = answer
+#             # if question not in self._questions_collection:
+#             #     self._questions_collection[question] = []
+#             # self._questions_collection[question].append(answer)
 
     def deal_r_msg(self, r_msg, action):
         self._status = action
@@ -234,7 +237,6 @@ class MainChatRobotV3(BaseChatRobot):
         self._msg_list.append({'speaker': 'robot', 'msg': self._next_msg, 'algo_judge_intent': 'chat',
                                'time': format_time(datetime.now())})
         # self._next_msg = self._next_msg.replace('。', '。\n')
-        
     def generate_reply(self, intention, history_msgs):
         if not self._status_infos["sent_first_msg"]:
             self._status_infos["sent_first_msg"] = True
@@ -245,8 +247,9 @@ class MainChatRobotV3(BaseChatRobot):
             return self.positive_reply()
         if intention == INTENTION.NOINTENTION:
             return self.no_intention_reply(history_msgs)
-        if intention == INTENTION.QUESTIOM:
-            return self.deal_question_reply(history_msgs)
+        if intention == INTENTION.QUESTIOM_PAYMENT or intention == INTENTION.QUESTIOM_BENIFITS \
+            or intention == INTENTION.QUESTIOM_POSITION or intention == INTENTION.QUESTIOM_WORKTIME or intention == INTENTION.QUESTIOM_OTHER:
+            return self.deal_question_reply(history_msgs, intention)
         return "", ChatStatus.NoTalk
 
     def first_reply(self, intention):
@@ -264,14 +267,15 @@ class MainChatRobotV3(BaseChatRobot):
             else:
                 return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact
 
-    def deal_question_reply(self, history_msgs):
+    def deal_question_reply(self, history_msgs, qustion_intention):
+        plugin_q_prompt, plugin_r_prompt = self.generate_question_intention_reply_prompt(qustion_intention)
         if self.platform == 'Linkedin':
             prefix = '请用英语回答问题。一定要用英语回答。一定要用英语回答。一定要用英语回答。'
         else:
             prefix = ''
         prompt = f'''
 {prefix}
-你是一个猎头，你正在跟候选人推荐一个岗位，简洁回答候选人的问题。
+你是一个猎头，你正在跟候选人推荐一个岗位，简洁回答候选人的问题({plugin_q_prompt})。
 不要说之前重复的话
 不要用敬语
 不要问用户问题
@@ -282,6 +286,7 @@ class MainChatRobotV3(BaseChatRobot):
 {self._template_info["job_requirements"]}
 岗位信息:
 {self._template_info["job_description"]}
+{plugin_r_prompt}
 ###
 '''
         msgs, user_msg = self.transfer_msgs(history_msgs)
@@ -307,6 +312,21 @@ class MainChatRobotV3(BaseChatRobot):
                     
         reply_msg = self.generate_ask_contact_reply(history_msgs)
         return reply_msg, ChatStatus.NormalChat
+
+    def generate_question_intention_reply_prompt(self, question_intention):
+        job_info = self.job_config['dynamic_job_config']
+        job_info_map = {
+            INTENTION.QUESTIOM_PAYMENT: ('薪资相关', job_info['salary_info']),
+            INTENTION.QUESTIOM_BENIFITS: ('福利相关', job_info["benifits_info"]),
+            INTENTION.QUESTIOM_POSITION: ('工作地点相关', job_info["location_info"]),
+            INTENTION.QUESTIOM_WORKTIME: ('工作时长相关', job_info["location_info"]),
+            INTENTION.QUESTIOM_OTHER: ('其他', job_info["other_info"]),
+        }
+        intention_str, reply_info = job_info_map[question_intention]
+        question_prompt = f'岗位的{intention_str}问题'
+        reply_prompt = f'''岗位的{intention_str}信息：\n{reply_info}
+        '''
+        return question_prompt, reply_prompt
 
     def generate_question_2_ask(self, need_ask_question, quit_prob=0.3):
         if len(self._remain_questions_to_ask) > 0:
@@ -504,10 +524,22 @@ class MainChatRobotV3(BaseChatRobot):
         if "B.肯定" in result_msg:
             return INTENTION.POSITIVE
 
-        if "C.问岗位信息的相关问题" in result_msg:
-            return INTENTION.QUESTIOM
+        if "C.问岗位相关的薪资问题" in result_msg:
+            return INTENTION.QUESTIOM_PAYMENT
 
-        if "D.没有任何意图" in result_msg:
+        if "D.问岗位相关的福利问题" in result_msg:
+            return INTENTION.QUESTIOM_BENIFITS
+
+        if "E.问岗位相关的工作地点问题" in result_msg:
+            return INTENTION.QUESTIOM_POSITION
+
+        if "F.问岗位相关的工作时长问题" in result_msg:
+            return INTENTION.QUESTIOM_WORKTIME
+
+        if "G.问岗位相关的其他问题" in result_msg:
+            return INTENTION.QUESTIOM_OTHER
+
+        if "H.没有任何意图" in result_msg:
             return INTENTION.NOINTENTION
 
         return INTENTION.NOINTENTION
@@ -550,7 +582,7 @@ class MainChatRobotV3(BaseChatRobot):
 你是一个猎头，判断一下，下面的对话中，用户最后一段对话的意图。
 你和用户的历史对话在分隔符###中
 用户最后一段对话在分隔符@@@中
-答案选项 A.拒绝 B.肯定 C.问岗位信息的相关问题 D.没有任何意图
+答案选项 A.拒绝 B.肯定 C.问岗位相关的薪资问题 D.问岗位相关的福利问题 E.问岗位相关的工作地点问题 F.问岗位相关的工作时长问题 G.问岗位相关的其他问题  H.没有任何意图
 ###
 {msg_str}
 ###

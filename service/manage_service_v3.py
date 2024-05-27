@@ -30,20 +30,24 @@ def update_config_service_v3(manage_account_id, account_id, platform, params):
         platform_id = str(generate_random_digits(10))
         job_id = f'job_{platform}_{platform_id}'
         job_config['job_id'] = job_id
-        ret_job = new_job_service(manage_account_id, platform, job_config, template_config, job_id, platform_id)
+        ret_job = new_job_service_v3(manage_account_id, platform, job_config, template_config, job_id, platform_id)
     else:
-        ret_job = update_dynamic_job_conifg(job_config)
+        ret_job = update_dynamic_job_conifg_v3(job_config)
 
     ret_task = update_task_config_service_v3(manage_account_id, account_id, task_config, job_config)
     logger.info(f"update_config_service_v3: ret_temp {ret_temp}, ret_job {ret_job}, ret_task {ret_task}")
 
 
 
-def update_dynamic_job_conifg(dynamic_job_config):
+def update_dynamic_job_conifg_v3(dynamic_job_config):
     job_config_json = get_job_by_id(dynamic_job_config['job_id'])[0][6]
     job_config = json.loads(job_config_json)
     dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg'])
-    dynamic_job_config['recall_msg'] = process_str(dynamic_job_config['recall_msg'])
+    dynamic_job_config['recall_msg_list'] = [process_str(recall_msg).replace('"', "")
+        .replace("'","")
+        .replace("\n", ";")
+        .replace('\"', "")
+        .replace("\'", "") for recall_msg in dynamic_job_config['recall_msg_list']]
 
     if 'filter_config' in dynamic_job_config:
         update_filter_config = dynamic_job_config.pop('filter_config')
@@ -55,26 +59,34 @@ def update_dynamic_job_conifg(dynamic_job_config):
     job_config['recall_strategy_config'] = {
         "recall_msg_info_list": [
             {
-                "threshold": 86400,
-                "msg": dynamic_job_config['recall_msg']
+                "threshold": 86400*(i+1),
+                "msg": recall_msg.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             }
-        ],
+        for i, recall_msg in enumerate(dynamic_job_config['recall_msg_list'])],
         "reply_filter_flag": True
     }
-    return only_update_job_conifg_db(dynamic_job_config['job_id'], json.dumps(job_config, ensure_ascii=False))
+    job_config_json = json.dumps(job_config, ensure_ascii=False)
+    logger.info(f'update_dynamic_job_conifg_v3: {dynamic_job_config["job_id"]}, {job_config_json}')
+    return only_update_job_conifg_db(dynamic_job_config['job_id'], job_config_json)
 
 
-def new_job_service(manage_account_id, platform_type, dynamic_job_config, template_config, job_id, platform_id):
+def new_job_service_v3(manage_account_id, platform_type, dynamic_job_config, template_config, job_id, platform_id):
     # 自定义筛选，后续这个再处理
     custom_filter = 0
     # 账号共享
     share = 0
-    dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg']).replace('"', "").replace("'",
-                                                                                                            "").replace(
-        "\n", ";").replace('\"', "").replace("\'", "")
-    dynamic_job_config['recall_msg'] = process_str(dynamic_job_config['recall_msg']).replace('"', "").replace("'",
-                                                                                                              "").replace(
-        "\n", ";").replace('\"', "").replace("\'", "")
+    dynamic_job_config['touch_msg'] = process_str(dynamic_job_config['touch_msg']) \
+        .replace('"', "") \
+        .replace("'","") \
+        .replace("\n", ";") \
+        .replace('\"', "") \
+        .replace("\'", "")
+
+    dynamic_job_config['recall_msg_list'] = [process_str(recall_msg).replace('"', "")
+        .replace("'","")
+        .replace("\n", ";")
+        .replace('\"', "")
+        .replace("\'", "") for recall_msg in dynamic_job_config['recall_msg_list']]
     job_config = {}
     job_config['jobID'] = job_id
     job_config['custom_filter'] = custom_filter
@@ -85,20 +97,19 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config, templa
         job_config['filter_config'] = config['job_register'][platform_type]["custom_filter_config"]
     try:
         job_config['chat_config'] = config['job_register'][platform_type]["chat_config_v3"]
-        logger.info(f"new_job_service, use chat_config_v3: {job_config['chat_config']}")
+        logger.info(f"new_job_service_v3, use chat_config_v3: {job_config['chat_config']}")
     except:
-        job_config['chat_config'] = config['job_register'][platform_type]["chat_config_v3"]
-        logger.info(f"new_job_service, use chat_config_v3: {job_config['chat_config']}")
+        job_config['chat_config'] = config['job_register'][platform_type]["chat_config_v2"]
+        logger.info(f"new_job_service_v3, use chat_config_v3 failed: use chat_config_v2: {job_config['chat_config']}")
 
     job_config['recall_config_filter'] = "common_enhance_recall_filter"
     job_config['recall_strategy_config'] = {
         "recall_msg_info_list": [
             {
-                "threshold": 86400,
-                "msg": dynamic_job_config['recall_msg'].replace('"', "").replace("'", "").replace("\n", ";").replace(
-                    '\"', "").replace("\'", "")
+                "threshold": 86400*(i+1),
+                "msg": recall_msg.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace("\'", "")
             }
-        ],
+        for i, recall_msg in enumerate(dynamic_job_config['recall_msg_list'])],
         "reply_filter_flag": True
     }
 
@@ -113,8 +124,7 @@ def new_job_service(manage_account_id, platform_type, dynamic_job_config, templa
     jd = ''
 
     job_config_json = json.dumps(job_config, ensure_ascii=False)
-    logger.info(
-        f'new_job_service: {platform_type} {platform_id} {job_name} {robot_api} {job_config_json}, {share}, {manage_account_id},{robot_template}')
+    logger.info(f'new_job_service_v3: {platform_type} {platform_id} {job_name} {robot_api} {job_config_json}, {share}, {manage_account_id},{robot_template}')
     return register_job_db(job_id, platform_type, platform_id, job_name, jd, robot_api, job_config_json, share,
                            manage_account_id, robot_template)
 

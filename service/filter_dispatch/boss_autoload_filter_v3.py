@@ -27,7 +27,7 @@ def boss_autoload_filter_v3(candidate_info, job_res):
     expect_job = candidate_info['geekCard']['expectPositionName']
     expect_job_ok = expect_job in filter_args['expect_jobs']
 
-    ## 薪酬filter TODO 明确单位，min_salary和max_salary需要加到job_config
+    ## 薪酬filter TODO 明确单位：boss 月薪，min_salary和max_salary需要加到job_config
     pay_range = (int(filter_args['min_salary']), int(filter_args['max_salary']))
     expect_range = (int(candidate_info['geekCard']['lowSalary']), int(candidate_info['geekCard']['highSalary']))
     pay_ok = pay_range[1] > expect_range[0]
@@ -43,7 +43,7 @@ def boss_autoload_filter_v3(candidate_info, job_res):
     apply_status = {'status': candidate_info['geekCard']['applyStatus'],
                     'desc': candidate_info['geekCard']['applyStatusDesc']}
     need_status_list = filter_args['status']
-    status_ok = apply_status['status'] in need_status_list
+    status_ok = str(apply_status['status']) in need_status_list
     
     school_threshold = int(filter_args['school'])
     school_ok = False
