@@ -587,7 +587,7 @@ def generate_email_content():
 
 @tools_web.route("/backend/tools/sendEmailContent", methods=['POST'])
 @web_exception_handler
-def generate_email_content():
+def send_email_content():
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', None)
     title = request.json.get('title', None)
