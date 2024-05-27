@@ -998,7 +998,7 @@ def get_default_greeting_scenario():
     msg += 'we are looking for an candidate base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China\n'
     msg += 'your Exp. seems a good match\n'
     msg += 'would you like to explore this opportunity? Thanks!'
-    return msg
+    return {'默认' : msg}
 
 
 def get_default_chat_scenario():
@@ -1019,7 +1019,10 @@ def get_default_chat_scenario():
 
 
 def get_leave_msg(manage_account_id, platform):
-    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)[0][0]
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)
+    if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
+        return get_default_greeting_scenario()
+    scenario_info = scenario_info[0][0]
     if scenario_info == None or len(scenario_info) == 0:
         return get_default_greeting_scenario()
     else:
@@ -1027,7 +1030,10 @@ def get_leave_msg(manage_account_id, platform):
 
 
 def get_chat_scenario(manage_account_id, platform):
-    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_CHAT)[0][0]
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_CHAT)
+    if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
+        return get_default_greeting_scenario()
+    scenario_info = scenario_info[0][0]
     if scenario_info == None or len(scenario_info) == 0:
         return get_default_greeting_scenario()
     else:
