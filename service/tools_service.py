@@ -998,7 +998,7 @@ def get_default_greeting_scenario():
     msg += 'we are looking for an candidate base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China\n'
     msg += 'your Exp. seems a good match\n'
     msg += 'would you like to explore this opportunity? Thanks!'
-    return msg
+    return {'默认' : msg}
 
 
 def get_default_chat_scenario():
