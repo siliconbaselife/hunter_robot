@@ -9,11 +9,6 @@ from utils.config import config as config
 
 logger = get_logger(config['log']['extension_log_file'])
 
-
-def register_user(user_email, credit=0):
-    return new_extension_user(user_email=user_email, credit=credit)
-
-
 def fetch_user_credit(user_id):
     res = query_user_credit(user_id=user_id)
     if len(res) == 0:
