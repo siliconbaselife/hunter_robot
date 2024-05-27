@@ -500,6 +500,27 @@ def customized_greeting_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])
+@web_exception_handler
+def customized_email_scenario_web():
+    platform = request.json.get('platform', '')
+    # candidate_id = request.json.get('candidate_id', '')
+    scenario = request.json.get('scenario')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] customized_greeting_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
+    customized_user_scenario(manage_account_id, SCENARIO_EMAIL, platform, scenario)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/applyChatScenario", methods=['POST'])
 @web_exception_handler
@@ -542,6 +563,49 @@ def customized_chat_scenario_web():
             manage_account_id, platform, scenario))
     customized_user_scenario(manage_account_id, SCENARIO_CHAT, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/generateEmailContent", methods=['POST'])
+@web_exception_handler
+def generate_email_content():
+    platform = request.json.get('platform', '')
+    candidate_id = request.json.get('candidate_id', None)
+    template = request.json.get('template', None)
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or not candidate_id or not template:
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] generate_email_content manage_account_id = {},  platform = {}, template = {}, candidate_id = {}".format(
+            manage_account_id, platform, template, candidate_id))
+    msg = generate_email_content(manage_account_id, platform, candidate_id, template)
+    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/sendEmailContent", methods=['POST'])
+@web_exception_handler
+def generate_email_content():
+    platform = request.json.get('platform', '')
+    candidate_id = request.json.get('candidate_id', None)
+    title = request.json.get('title', None)
+    content = request.json.get('content', None)
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or not candidate_id or not title or not content:
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] generate_email_content manage_account_id = {},  platform = {}, content = {}, candidate_id = {}".format(
+            manage_account_id, platform, content, candidate_id))
+    msg = send_email_content(manage_account_id, platform, candidate_id, title, content)
+    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
 
 
 @tools_web.route("/backend/tools/createProfileTag", methods=['POST'])
