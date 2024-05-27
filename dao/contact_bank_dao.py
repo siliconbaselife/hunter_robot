@@ -7,7 +7,7 @@ import json
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "new_extension_user": "insert into extension_user(user_id, user_credit, already_contacts) values ('{}', {}, '{}')",
+    "new_extension_user": "insert into extension_user_credit(user_id, user_credit, already_contacts) values ('{}', {}, '{}')",
     "query_user_credit": "select user_credit from extension_user_credit where user_id='{}'",
     "update_user_credit": "update extension_user_credit set user_credit={} where user_id='{}'",
     "query_extension_user_link": "select * from extension_user_link where user_id='{}' and link_linkedin_id='{}' and link_contact_type='{}'",
