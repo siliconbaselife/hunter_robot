@@ -1447,8 +1447,8 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0:
         return None, f'{candidate_id} 无对应记录'
-    profile = parse_profile(rows[0][1])
-    if not profile['contactInfo'] or profile['contactInfo']['Email']:
+    profile = deserialize_raw_profile(rows[0][1])
+    if not profile or not profile['contactInfo'] or profile['contactInfo']['Email']:
         return None, f'{candidate_id} 无email联系方式'
     email_to = profile['contactInfo']['Email']
     # email_to = 'db24@outlook.com'
