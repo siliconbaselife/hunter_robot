@@ -1444,13 +1444,14 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
     email_info = email_info[0][0]
     email_from = email_info[0]
     email_pwd = email_info[1]
-    rows = get_resume_by_candidate_id_and_platform(manage_account_id, platform, [candidate_id])
-    if len(rows) == 0:
-        return None, f'{candidate_id} 无对应记录'
-    profile = parse_profile(rows[0][1])
-    if not profile['contactInfo'] or profile['contactInfo']['Email']:
-        return None, f'{candidate_id} 无email联系方式'
-    email_to = profile['contactInfo']['Email']
+    # rows = get_resume_by_candidate_id_and_platform(manage_account_id, platform, [candidate_id])
+    # if len(rows) == 0:
+    #     return None, f'{candidate_id} 无对应记录'
+    # profile = parse_profile(rows[0][1])
+    # if not profile['contactInfo'] or profile['contactInfo']['Email']:
+    #     return None, f'{candidate_id} 无email联系方式'
+    # email_to = profile['contactInfo']['Email']
+    email_to = 'db24@outlook.com'
     send_ret = False
     if '@163.com' in email_from:
         send_ret = send_email_163(email_from, email_to, email_pwd, title, content)
