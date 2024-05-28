@@ -1450,8 +1450,8 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
     profile = deserialize_raw_profile(rows[0][1])
     if profile and 'profile' in profile:
         profile = profile['profile']
-    logger.info('[send_email] profile = {} , candidate_di = {}'.format(profile, candidate_id))
-    if profile or not profile['contactInfo'] or profile['contactInfo']['Email']:
+    logger.info('[send_email] profile = {} , candidate_id = {}'.format(profile, candidate_id))
+    if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(profile['contactInfo']['Email']) == 0:
         return None, f'{candidate_id} 无email联系方式'
     email_to = profile['contactInfo']['Email']
     # email_to = 'db24@outlook.com'
