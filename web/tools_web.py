@@ -582,7 +582,9 @@ def generate_email_content_web():
     logger.info(
         "[backend_tools] generate_email_content_web manage_account_id = {},  platform = {}, template = {}, candidate_id = {}".format(
             manage_account_id, platform, template, candidate_id))
-    msg = generate_email_content(manage_account_id, platform, candidate_id, template)
+    data, msg = generate_email_content(manage_account_id, platform, candidate_id, template)
+    if msg is not None:
+        return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/sendEmailContent", methods=['POST'])
@@ -604,8 +606,10 @@ def send_email_content_web():
     logger.info(
         "[backend_tools] send_email_content_web manage_account_id = {},  platform = {}, content = {}, candidate_id = {}".format(
             manage_account_id, platform, content, candidate_id))
-    msg = send_email_content(manage_account_id, platform, candidate_id, title, content)
-    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+    data, msg = send_email_content(manage_account_id, platform, candidate_id, title, content)
+    if msg is not None:
+        return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
 
 @tools_web.route("/backend/tools/createProfileTag", methods=['POST'])
