@@ -1375,7 +1375,7 @@ def generate_email_content(manage_account_id, platform, candidate_id, template):
 def send_email_163(email_from, email_to, pwd, subject, body):
     email_user = email_from
     email_password = pwd
-    to_emails = [email_from]
+    to_emails = [email_to]
 
     subject = subject
     body = body
