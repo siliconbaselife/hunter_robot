@@ -1444,7 +1444,7 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
     email_info = email_info[0]
     email_from = email_info[0]
     email_pwd = email_info[1]
-    rows = get_resume_by_candidate_id_and_platform(manage_account_id, platform, [candidate_id])
+    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0:
         return None, f'{candidate_id} 无对应记录'
     profile = parse_profile(rows[0][1])
