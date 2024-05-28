@@ -1441,7 +1441,7 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
     email_info = query_email_info(manage_account_id)
     if len(email_info) == 0 or len(email_info[0]) == 0:
         return None, f'{manage_account_id}未设置邮箱'
-    email_info = email_info[0][0]
+    email_info = email_info[0]
     email_from = email_info[0]
     email_pwd = email_info[1]
     # rows = get_resume_by_candidate_id_and_platform(manage_account_id, platform, [candidate_id])
