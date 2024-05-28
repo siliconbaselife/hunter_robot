@@ -1444,17 +1444,17 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
     email_info = email_info[0]
     email_from = email_info[0]
     email_pwd = email_info[1]
-    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
-    if len(rows) == 0:
-        return None, f'{candidate_id} 无对应记录'
-    profile = deserialize_raw_profile(rows[0][1])
-    if profile and 'profile' in profile:
-        profile = profile['profile']
-    logger.info('[send_email] profile = {} , candidate_id = {}'.format(profile, candidate_id))
-    if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(profile['contactInfo']['Email']) == 0:
-        return None, f'{candidate_id} 无email联系方式'
-    email_to = profile['contactInfo']['Email']
-    # email_to = 'db24@outlook.com'
+    # rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
+    # if len(rows) == 0:
+    #     return None, f'{candidate_id} 无对应记录'
+    # profile = deserialize_raw_profile(rows[0][1])
+    # if profile and 'profile' in profile:
+    #     profile = profile['profile']
+    # logger.info('[send_email] profile = {} , candidate_id = {}'.format(profile, candidate_id))
+    # if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(profile['contactInfo']['Email']) == 0:
+    #     return None, f'{candidate_id} 无email联系方式'
+    # email_to = profile['contactInfo']['Email']
+    email_to = 'db24@outlook.com'
     logger.info('[send_email] {} {}'.format(email_from, email_to))
     send_ret = False
     if '@163.com' in email_from:
