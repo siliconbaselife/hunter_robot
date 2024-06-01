@@ -996,6 +996,16 @@ def deserialize_raw_profile(raw_profile):
 def customized_user_scenario(manage_account_id, context, platform, scenario_info, extra_info=''):
     create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info='')
 
+def get_email_template(manage_account_id, platform):
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_EMAIL)
+    if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
+        return {}
+    scenario_info = scenario_info[0][0]
+    if scenario_info == None or len(scenario_info) == 0:
+        return {}
+    else:
+        return json.loads(scenario_info, strict=False)
+
 
 def get_default_greeting_scenario():
     msg = 'Hi \n'
