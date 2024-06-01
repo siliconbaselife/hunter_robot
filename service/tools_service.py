@@ -1381,7 +1381,7 @@ def generate_email_content(manage_account_id, platform, candidate_id, template):
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0 or len(rows[0]) == 0:
         return template_val, None
-    profile = parse_profile(rows[0][0])
+    profile = parse_profile(rows[0][1])
     for key in profile:
         template_key = '#{' + key + '}'
         if profile[key] and template_key in template_val:
