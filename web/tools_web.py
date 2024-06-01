@@ -604,7 +604,7 @@ def generate_email_content_web():
     data, msg = generate_email_content(manage_account_id, platform, candidate_id, template)
     if msg is not None:
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
-    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/sendEmailContent", methods=['POST'])
 @web_exception_handler
