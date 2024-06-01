@@ -1372,15 +1372,21 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
     return data, None
 
 def generate_email_content(manage_account_id, platform, candidate_id, template):
+    email_template = get_email_template(manage_account_id, platform)
+    if email_template == {}:
+        return None, f'{candidate_id}未设置邮件模板'
+    if template not in email_template:
+        return None, f'{template}不存在, {list(email_template.keys())}'
+    template_val = email_template[template]
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0 or len(rows[0]) == 0:
-        return None, f'{candidate_id} 无对应记录'
+        return template_val, None
     profile = parse_profile(rows[0][0])
     for key in profile:
         template_key = '#{' + key + '}'
-        if profile[key] and template_key in template:
-            template = template.replace(template_key, profile[key])
-    return template, None
+        if profile[key] and template_key in template_val:
+            template_val = template_val.replace(template_key, profile[key])
+    return template_val, None
 
 def send_email_163(email_from, email_to, pwd, subject, body):
     email_user = email_from
