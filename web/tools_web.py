@@ -5,7 +5,7 @@ import xlsxwriter
 from utils.decorator import web_exception_handler
 from utils.log import get_logger
 from utils.config import config
-from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
+from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail, get_web_res_fail_code
 import json
 import math
 import traceback
@@ -613,7 +613,10 @@ def send_email_content_web():
     candidate_id = request.json.get('candidate_id', None)
     title = request.json.get('title', None)
     content = request.json.get('content', None)
-    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or not candidate_id or not title or not content:
+    email = request.json.get('email', None)
+    if email is None and candidate_id is None:
+        return Response(json.dumps(get_web_res_fail("email或candidate_id需要指定一个"), ensure_ascii=False))
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or not title or not content:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
@@ -625,9 +628,12 @@ def send_email_content_web():
     logger.info(
         "[backend_tools] send_email_content_web manage_account_id = {},  platform = {}, content = {}, candidate_id = {}".format(
             manage_account_id, platform, content, candidate_id))
-    data, msg = send_email_content(manage_account_id, platform, candidate_id, title, content)
+    data, msg = send_email_content(manage_account_id, platform, candidate_id, title, content, email)
     if msg is not None:
-        return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
+        if '无email联系方式' in msg:
+            return Response(json.dumps(get_web_res_fail_code(-2, msg), ensure_ascii=False))
+        else:
+            return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
 
