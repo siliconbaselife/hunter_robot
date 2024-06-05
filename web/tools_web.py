@@ -521,6 +521,29 @@ def customized_email_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_EMAIL, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
+@tools_web.route("/backend/tools/flushEmailCredential", methods=['POST'])
+@web_exception_handler
+def flush_email_credential_web():
+    platform = request.json.get('platform', '')
+    email = request.json.get('email', None)
+    pwd = request.json.get('pwd', None)
+    # candidate_id = request.json.get('candidate_id', '')
+    if email is None or pwd is None or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] flush_email_credential manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    flush_email_credentials(manage_account_id, email, pwd, platform)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 @tools_web.route("/backend/tools/getEmailTemplate", methods=['POST'])
 @web_exception_handler
 def get_email_scenario_web():

@@ -1006,6 +1006,10 @@ def get_email_template(manage_account_id, platform):
     else:
         return json.loads(scenario_info, strict=False)
 
+def flush_email_credentials(manage_account_id, email, pwd, platform):
+    logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
+    flush_email_credentials_db(manage_account_id, email, pwd, platform)
+
 
 def get_default_greeting_scenario():
     msg = 'Hi \n'
