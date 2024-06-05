@@ -23,6 +23,9 @@ import json5
 import re
 from os.path import basename
 from service.extension_service import refresh_contact
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
@@ -31,6 +34,7 @@ file_path_prefix = '/home/human/workspace/hunter_robot.v2.0/tmp/'
 
 SCENARIO_GREETING = 'greeting'
 SCENARIO_CHAT = 'chat'
+SCENARIO_EMAIL = 'email'
 
 
 def get_candidate_id(profile, platform):
@@ -989,8 +993,22 @@ def deserialize_raw_profile(raw_profile):
         return None
 
 
-def customized_user_scenario(manage_account_id, context, platform, scenario_info):
-    create_customized_scenario_setting(manage_account_id, platform, context, scenario_info)
+def customized_user_scenario(manage_account_id, context, platform, scenario_info, extra_info=''):
+    create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info='')
+
+def get_email_template(manage_account_id, platform):
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_EMAIL)
+    if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
+        return {}
+    scenario_info = scenario_info[0][0]
+    if scenario_info == None or len(scenario_info) == 0:
+        return {}
+    else:
+        return json.loads(scenario_info, strict=False)
+
+def flush_email_credentials(manage_account_id, email, pwd, platform):
+    logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
+    flush_email_credentials_db(manage_account_id, email, pwd, platform)
 
 
 def get_default_greeting_scenario():
@@ -1357,12 +1375,118 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
         details.append(profile)
     return data, None
 
-# if __name__ == '__main__':
-#     with open('/Users/db24/tmp/dumps/dump.data', 'r') as f:
-#         lines = f.readlines()
-#     for line in lines:
-#         # pp = json.loads(line)
-#         # print(json.dumps(pp))
-#         p = parse_profile(line)
-#         print(json.dumps(p, ensure_ascii=False))
-#         print('=================')
+def generate_email_content(manage_account_id, platform, candidate_id, template):
+    email_template = get_email_template(manage_account_id, platform)
+    if email_template == {}:
+        return None, f'{candidate_id}未设置邮件模板'
+    if template not in email_template:
+        return None, f'{template}不存在, {list(email_template.keys())}'
+    template_val = email_template[template]
+    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
+    if len(rows) == 0 or len(rows[0]) == 0:
+        return template_val, None
+    profile = parse_profile(rows[0][1])
+    for key in profile:
+        template_key = '#{' + key + '}'
+        if profile[key] and template_key in template_val:
+            template_val = template_val.replace(template_key, profile[key])
+    return template_val, None
+
+def send_email_163(email_from, email_to, pwd, subject, body):
+    email_user = email_from
+    email_password = pwd
+    to_emails = [email_to]
+
+    subject = subject
+    body = body
+
+    msg = MIMEMultipart()
+    msg['From'] = email_user
+    msg['To'] = ', '.join(to_emails)
+    msg['Subject'] = subject
+
+    msg.attach(MIMEText(body, 'plain'))
+
+    all_recipients = to_emails
+    ret = False
+    try:
+        server = smtplib.SMTP_SSL('smtp.163.com', 465)
+        server.login(email_user, email_password)
+        text = msg.as_string()
+        server.sendmail(email_user, all_recipients, text)
+        logger.info(f"[send_email_163] {email_from} -> {email_to}, {subject} send successfully")
+        ret = True
+    except Exception as e:
+        logger.error(f"[send_email_163] {email_from} -> {email_to}, {subject} send failed")
+        logger.error(traceback.format_exc())
+        ret = False
+    finally:
+        server.quit()
+    return ret
+
+def send_email_gmail(email_from, email_to, pwd, subject, body):
+    email_user = email_from
+    email_password = pwd
+    # List of recipients
+    to_emails = [email_to]
+
+    # Email content
+    subject = subject
+    body = body
+
+    # Set up the MIME
+    msg = MIMEMultipart()
+    msg['From'] = email_user
+    msg['To'] = ', '.join(to_emails)
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain'))
+    # Connect to the Gmail SMTP server using SMTP_SSL
+    server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+    try:
+        # Log in to the server
+        server.login(email_user, email_password)
+        # Send the email
+        text = msg.as_string()
+        server.sendmail(email_user, to_emails, text)
+        logger.info(f"[send_email_gmail] {email_from} -> {email_to}, {subject} send successfully")
+    except Exception as e:
+        logger.error(f"[send_email_gmail] {email_from} -> {email_to}, {subject} send failed")
+        logger.error(traceback.format_exc())
+    finally:
+        # Quit the server
+        server.quit()
+
+
+def send_email_content(manage_account_id, platform, candidate_id, title, content, email_to):
+    email_info = query_email_info(manage_account_id)
+    if len(email_info) == 0 or len(email_info[0]) == 0:
+        return None, f'{manage_account_id}未设置邮箱'
+    email_info = email_info[0]
+    email_from = email_info[0]
+    email_pwd = email_info[1]
+    if email_to is None:
+        rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
+        if len(rows) == 0:
+            return None, f'{candidate_id} 无对应记录'
+        profile = deserialize_raw_profile(rows[0][1])
+        if profile and 'profile' in profile:
+            profile = profile['profile']
+        logger.info('[send_email] profile = {} , candidate_id = {}'.format(profile, candidate_id))
+        if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(profile['contactInfo']['Email']) == 0:
+            return None, f'{candidate_id} 无email联系方式'
+        email_to = profile['contactInfo']['Email']
+    # email_to = 'db24@outlook.com'
+    logger.info('[send_email] {} {}'.format(email_from, email_to))
+    send_ret = False
+    if '@163.com' in email_from:
+        send_ret = send_email_163(email_from, email_to, email_pwd, title, content)
+    elif '@gmail' in email_from:
+        send_ret = send_email_gmail(email_from, email_to, email_pwd, title, content)
+    else:
+        return None, f'不支持邮箱{email_from}'
+    if send_ret:
+        return None, None
+    else:
+        return None, f'{email_from}发送失败, 请确认密码正确, enable smtp&pop3设置'
+
+

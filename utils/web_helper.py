@@ -3,3 +3,6 @@ def get_web_res_suc_with_data(data):
 
 def get_web_res_fail(reason):
     return {'ret': -1, 'msg': 'fail', 'data': reason}
+
+def get_web_res_fail_code(code, reason):
+    return {'ret': code, 'msg': 'fail', 'data': reason}

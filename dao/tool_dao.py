@@ -35,8 +35,11 @@ sql_dict = {
     "query_id_by_profile_tag_relation": "select id from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};",
     "query_candidate_id_by_tag_relation": "select candidate_id from user_profile_tag_relation where manage_account_id = '{}' and platform = '{}' and tag in {};",
     "delete_profile_tag_relation": "delete from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};",
-    "create_customized_scenario_setting": "insert into customized_scenario_setting(manage_account_id, platform, context, scenario_info) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), context = VALUES(context), scenario_info = VALUES(scenario_info)",
-    "query_customized_scenario_setting": "select scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'"
+    "create_customized_scenario_setting": "insert into customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info) values('{}', '{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), context = VALUES(context), scenario_info = VALUES(scenario_info), extra_info = VALUES(extra_info)",
+    "query_customized_scenario_setting": "select scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
+    "query_customized_extra_setting": "select extra_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
+    "query_email_info": "select email, pwd from email_credentials where manage_account_id = \'{}\';",
+    "flush_email_credentials" : "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)"
 }
 
 
@@ -208,14 +211,28 @@ def delete_profile_tags_db(ids):
     return dbm.query(sql_dict['delete_profile_tags'].format(db_file_join(ids)))
 
 
-def create_customized_scenario_setting(manage_account_id, platform, context, scenario_info):
+def create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info=''):
     scenario_info = json.dumps(scenario_info, ensure_ascii=False)
     scenario_info = scenario_info.replace("\n", "\\n")
     scenario_info = scenario_info.replace("\'", "\\'")
     scenario_info = scenario_info.replace('\"', '\\"')
+
+    extra_info = json.dumps(extra_info, ensure_ascii=False)
+    extra_info = extra_info.replace("\n", "\\n")
+    extra_info = extra_info.replace("\'", "\\'")
+    extra_info = extra_info.replace('\"', '\\"')
     return dbm.query(
-        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info))
+        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info, extra_info))
 
 
 def query_customized_scenario_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_scenario_setting'].format(manage_account_id, platform, context))
+
+def query_customized_extra_setting(manage_account_id, platform, context):
+    return dbm.query(sql_dict['query_customized_extra_setting'].format(manage_account_id, platform, context))
+
+def query_email_info(manage_account_id):
+    return dbm.query(sql_dict['query_email_info'].format(manage_account_id))
+
+def flush_email_credentials_db(manage_account_id, email, pwd, platform):
+    return dbm.insert(sql_dict['flush_email_credentials'].format(manage_account_id, email, pwd, platform))
