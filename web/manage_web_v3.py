@@ -11,6 +11,7 @@ from utils.utils import encrypt, decrypt, generate_random_digits,str_is_none, ge
 from utils.utils import key
 
 from service.manage_service_v3 import *
+from service.manage_service_v2 import update_config_service_v2
 from service.manage_service import cookie_check_service
 from service.task_service import get_undo_task
 from dao.manage_dao import update_hello_ids, get_hello_ids, hello_sent_db
@@ -35,8 +36,11 @@ def task_update_api():
     params = request.json['params']
 
     logger.info(f'task_update_request_v3:{manage_account_id}, {account_id},{platform}, {params}')
-    update_config_service_v3(manage_account_id, account_id, platform, params)
-
+    if platform=='Boss':
+        update_config_service_v3(manage_account_id, account_id, platform, params)
+    else:
+        update_config_service_v2(manage_account_id, account_id, platform, params)
+        
     return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
 
 @manage_web_v3.route("/backend/manage/metaConfig/v3", methods=['POST'])
