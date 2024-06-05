@@ -1010,6 +1010,14 @@ def flush_email_credentials(manage_account_id, email, pwd, platform):
     logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
     flush_email_credentials_db(manage_account_id, email, pwd, platform)
 
+def get_email_credentials(manage_account_id, platform):
+    email_credential = get_email_credentials_db(manage_account_id, platform)
+    logger.info(f'[get_email_credentials] {manage_account_id} {platform} -> {email_credential}')
+    if len(email_credential) == 0 or len(email_credential[0]) == 0:
+        return None, f'{manage_account_id}没有注册邮箱配置'
+    email_credential = email_credential[0]
+    return {'manage_account_id': email_credential[0], 'email': email_credential[1], 'pwd': email_credential[2], 'platform': email_credential[3]}, None
+
 
 def get_default_greeting_scenario():
     msg = 'Hi \n'

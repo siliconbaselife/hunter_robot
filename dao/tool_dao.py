@@ -39,7 +39,8 @@ sql_dict = {
     "query_customized_scenario_setting": "select scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_customized_extra_setting": "select extra_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_email_info": "select email, pwd from email_credentials where manage_account_id = \'{}\';",
-    "flush_email_credentials" : "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)"
+    "flush_email_credentials" : "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
+    "get_email_credentials" : "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
 }
 
 
@@ -236,3 +237,6 @@ def query_email_info(manage_account_id):
 
 def flush_email_credentials_db(manage_account_id, email, pwd, platform):
     return dbm.insert(sql_dict['flush_email_credentials'].format(manage_account_id, email, pwd, platform))
+
+def get_email_credentials_db(manage_account_id, platform):
+    return dbm.query(sql_dict['get_email_credentials'].format(manage_account_id, platform))
