@@ -58,21 +58,25 @@ def meta_config_api():
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
 
 
-@tools_web.route("/backend/manage/chatStat/v3", methods=['POST'])
+@manage_web_v3.route("/backend/manage/chatStat/v3", methods=['POST'])
 @web_exception_handler
 def chat_stat_api():
     job_id = request.json.get('jobID', "")
+    platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
     stat_result = stat_chat_service(job_id, begin_time, end_time)
     return Response(json.dumps(get_web_res_suc_with_data(stat_result), ensure_ascii=False))
 
 
-@tools_web.route("/backend/manage/candidateList/v3", methods=['POST'])
+@manage_web_v3.route("/backend/manage/candidateList/v3", methods=['POST'])
 @web_exception_handler
 def candidate_list_api():
     job_id = request.json.get('jobID', "")
+    platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
+    if platform!= 'Boss':
+        return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
     candidate_list = chat_list_service(job_id, begin_time, end_time)
     return Response(json.dumps(get_web_res_suc_with_data(candidate_list), ensure_ascii=False))

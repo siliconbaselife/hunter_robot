@@ -235,7 +235,7 @@ def chat_parse(job_id, begin_time, end_time):
             'chat': chat_info_list
         })
             
-    reply_ratio = reply_cnt/ hello_cnt
+    reply_ratio = reply_cnt/ hello_cnt if hello_cnt!=0 else 0
     return candidate_list, {
         'user_ask_cv_cnt': user_ask_cv_cnt,
         'user_ask_cnt': user_ask_cnt,
