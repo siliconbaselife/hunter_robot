@@ -584,6 +584,28 @@ def get_email_scenario_web():
     data = get_email_template(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/getDefaultEmailTemplate", methods=['POST'])
+@web_exception_handler
+def get_default_email_template_web():
+    platform = request.json.get('platform', '')
+    idx = request.json.get('idx', None)
+    if idx is None or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_default_email_template_web manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data, err_msg = get_default_email_template(int(idx), platform)
+    if err_msg is not None:
+        return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/applyChatScenario", methods=['POST'])
 @web_exception_handler

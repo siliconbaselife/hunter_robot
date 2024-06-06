@@ -41,6 +41,8 @@ sql_dict = {
     "query_email_info": "select email, pwd from email_credentials where manage_account_id = \'{}\';",
     "flush_email_credentials" : "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
     "get_email_credentials" : "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
+    "get_default_email_template_count": "select count(id) from default_email_template where platform = '{}';",
+    "get_default_email_template_by_idx" : "select template from default_email_template where platform = '{}' order by id limit {}, 1;"
 }
 
 
@@ -240,3 +242,9 @@ def flush_email_credentials_db(manage_account_id, email, pwd, platform):
 
 def get_email_credentials_db(manage_account_id, platform):
     return dbm.query(sql_dict['get_email_credentials'].format(manage_account_id, platform))
+
+def get_default_email_template_count(platform):
+    return dbm.query(sql_dict['get_default_email_template_count'].format(platform))
+
+def get_default_email_template_by_idx(platform, idx):
+    return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))

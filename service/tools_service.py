@@ -1006,6 +1006,14 @@ def get_email_template(manage_account_id, platform):
     else:
         return json.loads(scenario_info, strict=False)
 
+def get_default_email_template(idx, platform):
+    total = get_default_email_template_count(platform)[0]
+    template = get_default_email_template(platform, idx)
+    if len(template) == 0 or len(template[0]) == 0:
+        return None, f'total template is {total}, {idx} is exceeded'
+    template = template[0]
+    return {'total': total, 'idx': idx, 'template': template}
+
 def flush_email_credentials(manage_account_id, email, pwd, platform):
     logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
     flush_email_credentials_db(manage_account_id, email, pwd, platform)
