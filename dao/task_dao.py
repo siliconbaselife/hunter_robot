@@ -4,6 +4,7 @@ from utils.log import get_logger
 from utils.utils import deal_json_invaild
 import json
 import traceback
+import re
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
@@ -57,6 +58,15 @@ sql_dict = {
 
 }
 
+class LazyDecoder(json.JSONDecoder):
+    def decode(self, s, **kwargs):
+        regex_replacements = [
+            (re.compile(r'([^\\])\\([^\\])'), r'\1\\\\\2'),
+            (re.compile(r',(\s*])'), r'\1'),
+        ]
+        for regex, replacement in regex_replacements:
+            s = regex.sub(replacement, s)
+        return super().decode(s, **kwargs)
 
 def get_template_id(job_id):
     return dbm.query(sql_dict['get_template_id'].format(job_id))
@@ -235,9 +245,10 @@ def query_candidate_detail(candidate_id):
     if len(candidate_info) == 0:
         return False, None
     
-    c_j = candidate_info[0][7].replace('\n','.')
+
+    c_j = candidate_info[0][7].replace('\n','')
     # c_j = c_j.replace("\'", '\"')
-    candidate_json = json.loads(c_j, strict=False)
+    candidate_json = json.loads(c_j.replace('\n',''), strict=False, cls=LazyDecoder)
     return True, candidate_json
 
 def update_candidate_contact_db(candidate_id, contact):
