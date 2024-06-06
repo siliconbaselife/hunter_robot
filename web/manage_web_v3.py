@@ -14,7 +14,6 @@ from service.manage_service_v3 import *
 from service.manage_service_v2 import update_config_service_v2
 from service.manage_service import cookie_check_service
 from service.task_service import get_undo_task
-from dao.manage_dao import update_hello_ids, get_hello_ids, hello_sent_db
 
 manage_web_v3 = Blueprint('manage_web_v3', __name__, template_folder='templates')
 
@@ -45,7 +44,7 @@ def task_update_api():
 
 @manage_web_v3.route("/backend/manage/metaConfig/v3", methods=['POST'])
 @web_exception_handler
-def meta_config():
+def meta_config_api():
     cookie_user_name = request.cookies.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -57,3 +56,29 @@ def meta_config():
     a = json.load(open('file/meta_config_v3.json'))
 
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
+
+
+@manage_web_v3.route("/backend/manage/chatStat/v3", methods=['POST'])
+@web_exception_handler
+def chat_stat_api():
+    job_id = request.json.get('jobID', "")
+    platform = request.json.get('platform', None)
+    begin_time = request.json.get('beginTime', "")
+    end_time = request.json.get('endTime', "")
+    if platform!= 'Boss':
+        return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
+    stat_result = stat_chat_service(job_id, begin_time, end_time)
+    return Response(json.dumps(get_web_res_suc_with_data(stat_result), ensure_ascii=False))
+
+
+@manage_web_v3.route("/backend/manage/candidateList/v3", methods=['POST'])
+@web_exception_handler
+def candidate_list_api():
+    job_id = request.json.get('jobID', "")
+    platform = request.json.get('platform', None)
+    begin_time = request.json.get('beginTime', "")
+    end_time = request.json.get('endTime', "")
+    if platform!= 'Boss':
+        return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
+    candidate_list = chat_list_service(job_id, begin_time, end_time)
+    return Response(json.dumps(get_web_res_suc_with_data(candidate_list), ensure_ascii=False))

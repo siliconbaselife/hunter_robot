@@ -157,3 +157,92 @@ def update_task_config_service_v3(manage_account_id, account_id, filter_task_con
 
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_configs, ensure_ascii=False),
                                     json.dumps(job_list, ensure_ascii=False))
+
+def chat_list_service(job_id, begin_time, end_time):
+    return_list = []
+    candidate_list = chat_parse(job_id, begin_time, end_time)[0]
+    for item in candidate_list:
+        cid = item['id']
+        flag, detail = query_candidate_detail(cid)
+        if not flag:
+            continue
+        gender = '男' if detail['geekCard']['geekGender']==1 else '女'
+        degree = detail['geekCard']['geekDegree']
+        school = detail['geekCard']['geekEdu']['school']
+        item['gender'] = gender
+        item['degree'] = degree
+        item['school'] = school
+        return_list.append(item)
+    return return_list
+
+def stat_chat_service(job_id, begin_time, end_time):
+    return chat_parse(job_id, begin_time, end_time)[1]
+
+
+def chat_parse(job_id, begin_time, end_time):
+    chat_list = get_job_chat_db(job_id, begin_time, end_time)
+
+    user_ask_cv_cnt = 0
+    user_ask_cnt = 0
+    with_cv_cnt = 0
+    hello_cnt = 0
+    reply_cnt = 0
+    with_phone_cnt = 0
+    with_wechat_cnt = 0
+
+    candidate_list = []
+    for cid, cname, source, status, contact, details, recall_cnt, filter_result in chat_list:
+        phone, wechat, cv, user_reply, chat_info_list = None, None, None, False, []
+        try:
+            contact = json.loads(contact)
+            phone = contact['phone']
+            wechat = contact['wechat']
+            cv = contact['cv']
+        except BaseException as e:
+            logger.info("stat_chat_service, error parse contact: {contact}")
+
+        if cv is not None:
+            with_cv_cnt+=1
+        if phone is not None:
+            with_phone_cnt+=1
+        if wechat is not None:
+            with_wechat_cnt+=1
+
+        if source=='user_ask':
+            user_ask_cnt+=1
+            if cv is not None:
+                user_ask_cv_cnt+=1
+        else:
+            hello_cnt+=1
+            try:
+                chat_info_list = json.loads(details)
+                for item in chat_info_list:
+                    if item['speaker']=='user':
+                        user_reply = True
+                        break
+            except BaseException as e:
+                logger.info("stat_chat_service, error parse details: {details}")
+        
+        if user_reply:
+            reply_cnt+=1
+        candidate_list.append({
+            'id': cid,
+            'name': cname,
+            'phone': phone,
+            'wechat': wechat,
+            'cv': cv,
+            'reply': user_reply,
+            'chat': chat_info_list
+        })
+            
+    reply_ratio = reply_cnt/ hello_cnt if hello_cnt!=0 else 0
+    return candidate_list, {
+        'user_ask_cv_cnt': user_ask_cv_cnt,
+        'user_ask_cnt': user_ask_cnt,
+        'with_cv_cnt': with_cv_cnt,
+        'hello_cnt': hello_cnt,
+        'reply_cnt': reply_cnt,
+        'reply_ratio': reply_ratio,
+        'with_phone_cnt': with_phone_cnt,
+        'with_wechat_cnt': with_wechat_cnt
+    }

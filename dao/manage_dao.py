@@ -32,7 +32,8 @@ sql_dict = {
     "get_all_hello_ids": "select candidate_id,platform from hello_record where manage_account_id = '{}' and status = 1",
     "get_profile_by_id": "select raw_profile from online_resume where candidate_id='{}' order by id desc limit 1",
     "delete_account": "delete from account where account_id='{}' and manage_account_id='{}'",
-    "get_account_num": "select account_num from manage_account where manage_account_id='{}'"
+    "get_account_num": "select account_num from manage_account where manage_account_id='{}'",
+    "query_job_chat": "select candidate_id, candidate_name, source, status, contact, details, recall_cnt, filter_result from chat where job_id='{}' and create_time >='{}' and create_time<='{}'",
 }
 
 
@@ -183,3 +184,8 @@ def select_extention_config(manage_account_id, account_id):
 def update_extention_config(manage_account_id, account_id, config):
     sql = f"update account set extention_config = '{json.dumps(config, ensure_ascii=False)}' where manage_account_id = '{manage_account_id}' and account_id = '{account_id}'"
     dbm.update(sql)
+
+
+def get_job_chat_db(job_id, begin_time, end_time):
+    return dbm.query(sql_dict['query_job_chat'].format(job_id, begin_time, end_time))
+
