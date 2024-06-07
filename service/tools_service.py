@@ -1007,7 +1007,7 @@ def get_email_template(manage_account_id, platform):
         return json.loads(scenario_info, strict=False)
 
 def get_default_email_template(idx, platform):
-    total = get_default_email_template_count(platform)[0]
+    total = get_default_email_template_count(platform)[0][0]
     template = get_default_email_template_by_idx(platform, idx)
     if len(template) == 0 or len(template[0]) == 0:
         return None, f'total template is {total}, {idx} is exceeded'
