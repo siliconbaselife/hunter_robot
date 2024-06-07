@@ -1012,7 +1012,7 @@ def get_default_email_template(idx, platform):
     if len(template) == 0 or len(template[0]) == 0:
         return None, f'total template is {total}, {idx} is exceeded'
     template = template[0]
-    return {'total': total, 'idx': idx, 'template': template}
+    return {'total': total, 'idx': idx, 'template': template}, None
 
 def flush_email_credentials(manage_account_id, email, pwd, platform):
     logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
