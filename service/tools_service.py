@@ -1014,6 +1014,14 @@ def get_default_email_template(idx, platform):
     template = template[0][0]
     return {'total': total, 'idx': idx, 'template': template}, None
 
+def get_default_greeting_template(idx, platform):
+    total = get_default_greeting_template_count(platform)[0][0]
+    template = get_default_greeting_template_by_idx(platform, idx)
+    if len(template) == 0 or len(template[0]) == 0:
+        return None, f'total template is {total}, {idx} is exceeded'
+    template = template[0][0]
+    return {'total': total, 'idx': idx, 'template': template}, None
+
 def flush_email_credentials(manage_account_id, email, pwd, platform):
     logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
     flush_email_credentials_db(manage_account_id, email, pwd, platform)
