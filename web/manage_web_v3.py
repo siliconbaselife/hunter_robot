@@ -78,7 +78,49 @@ def candidate_list_api():
     platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
+    
+    page = request.json.get('page', None)
+    limit = request.json.get('limit', None)
+
+    # with_phone = request.json.get('phone', "")
+    # with_wechat = request.json.get('wechat', "")
+    # with_reply = request.json.get('reply', "")
+    # with_resume = request.json.get('resume', "")
+
     if platform!= 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
-    candidate_list = chat_list_service(job_id, begin_time, end_time)
-    return Response(json.dumps(get_web_res_suc_with_data(candidate_list), ensure_ascii=False))
+    candidate_list = chat_list_service(job_id, begin_time, end_time, page, limit)
+    ret_data = {
+        'list': candidate_list,
+        'page': page,
+        'limit': limit
+    }
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data), ensure_ascii=False))
+
+
+@manage_web_v3.route("/backend/manage/jobList/v3", methods=['POST'])
+@web_exception_handler
+def job_list_api():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    job_list = job_list_service(manage_account_id)
+    return Response(json.dumps(get_web_res_suc_with_data(job_list), ensure_ascii=False))
+
+
+@manage_web_v3.route("/backend/manage/exportResume/v3", methods=['POST'])
+@web_exception_handler
+def export_resume_api():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+

@@ -158,17 +158,19 @@ def update_task_config_service_v3(manage_account_id, account_id, filter_task_con
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_configs, ensure_ascii=False),
                                     json.dumps(job_list, ensure_ascii=False))
 
-def chat_list_service(job_id, begin_time, end_time):
+def chat_list_service(job_id, begin_time, end_time, page, limit):
     return_list = []
-    candidate_list = chat_parse(job_id, begin_time, end_time)[0]
+    candidate_list = chat_parse(job_id, begin_time, end_time, page, limit)[0]
     for item in candidate_list:
         cid = item['id']
         flag, detail = query_candidate_detail(cid)
-        if not flag:
-            continue
-        gender = '男' if detail['geekCard']['geekGender']==1 else '女'
-        degree = detail['geekCard']['geekDegree']
-        school = detail['geekCard']['geekEdu']['school']
+        gender, degree, school, age=None, None, None, None
+        if flag:
+            gender = '男' if detail['geekCard']['geekGender']==1 else '女'
+            degree = detail['geekCard']['geekDegree']
+            school = detail['geekCard']['geekEdu']['school']
+            age = detail['geekCard']['ageDesc']
+        item['age'] = age.replace('岁', '')
         item['gender'] = gender
         item['degree'] = degree
         item['school'] = school
@@ -179,8 +181,16 @@ def stat_chat_service(job_id, begin_time, end_time):
     return chat_parse(job_id, begin_time, end_time)[1]
 
 
-def chat_parse(job_id, begin_time, end_time):
-    chat_list = get_job_chat_db(job_id, begin_time, end_time)
+def job_list_service(manage_account_id):
+    ret_list = []
+    for item in get_job_info_by_account(manage_account_id):
+        ret_list.append({
+            'jobId': item[0],
+            'jobName': item[1]        
+        })
+
+def chat_parse(job_id, begin_time, end_time, page=None, limit=None):
+    chat_list = get_job_chat_db(job_id, begin_time, end_time, page, limit)
 
     user_ask_cv_cnt = 0
     user_ask_cnt = 0

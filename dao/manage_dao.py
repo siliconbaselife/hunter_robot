@@ -34,6 +34,8 @@ sql_dict = {
     "delete_account": "delete from account where account_id='{}' and manage_account_id='{}'",
     "get_account_num": "select account_num from manage_account where manage_account_id='{}'",
     "query_job_chat": "select candidate_id, candidate_name, source, status, contact, details, recall_cnt, filter_result from chat where job_id='{}' and create_time >='{}' and create_time<='{}'",
+    "query_job_chat_with_limit": "select candidate_id, candidate_name, source, status, contact, details, recall_cnt, filter_result from chat where job_id='{}' and create_time >='{}' and create_time<='{}' order by create_time limit {}, {}",
+    "query_account_jobs": "select job_id, job_name from job where manage_account_id='{}'",
 }
 
 
@@ -186,6 +188,11 @@ def update_extention_config(manage_account_id, account_id, config):
     dbm.update(sql)
 
 
-def get_job_chat_db(job_id, begin_time, end_time):
-    return dbm.query(sql_dict['query_job_chat'].format(job_id, begin_time, end_time))
+def get_job_chat_db(job_id, begin_time, end_time, page, limit):
+    is page is None or limit is None:
+        return dbm.query(sql_dict['query_job_chat'].format(job_id, begin_time, end_time))
+    return dbm.query(sql_dict['query_job_chat_with_limit'].format(job_id, begin_time, end_time, page, limit))
 
+
+def get_job_info_by_account(manage_account_id):
+    return dbm.query(sql_dict['query_account_jobs'].format(manage_account_id))
