@@ -83,9 +83,9 @@ def boss_autoload_filter_v3(candidate_info, job_res):
                 for w in candidate_info['geekCard'].get('geekWorks', []):
                     if c in w['company'] or w['company'] in c:
                         ex_company_ok = True
-                for c_s in candidate_info['companies']:
-                    if c_s in c or c in c_s:
-                        ex_company_ok = True
+                # for c_s in candidate_info['companies']:
+                #     if c_s in c or c in c_s:
+                #         ex_company_ok = True
 
     neg_filter_ok = True
     if 'neg_words' in filter_args and filter_args['neg_words'] != "":
@@ -110,9 +110,9 @@ def boss_autoload_filter_v3(candidate_info, job_res):
                 for w in candidate_info['geekCard'].get('geekWorks', []):
                     if c in w['company'] or w['company'] in c:
                         neg_company_ok = False
-                for c_s in candidate_info['companies']:
-                    if c_s in c or c in c_s:
-                        neg_company_ok = False
+                # for c_s in candidate_info['companies']:
+                #     if c_s in c or c in c_s:
+                #         neg_company_ok = False
 
     judge_result = {
         'judge': age_ok and degree_ok and school_ok and neg_company_ok and neg_filter_ok and ex_company_ok and tag_ok,
