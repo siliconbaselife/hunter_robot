@@ -126,7 +126,7 @@ config['job_register'] = {
 
 config['llm']['gemini'] = {
     'api_key': 'AIzaSyASOB4k_gyjPsUQZkgrm3_hw2PkyBgMI9o',
-    'model_type': 'gemini-pro',
+    'model_type': 'gemini-1.5-flash-latest',
 }
 
 config['business']['expired_time_s'] = 3600
