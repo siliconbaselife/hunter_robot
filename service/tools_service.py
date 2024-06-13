@@ -86,12 +86,10 @@ def linkedin_filter(manage_account_id, raw_profile, conditions, platform):
 
         if profile["age"] < conditions["age"]["min_age"] or profile["age"] > conditions["age"]["max_age"]:
             return True
-    logger.info(f'{profile["age"]} {conditions["age"]["min_age"]} {conditions["age"]["max_age"]}')
 
     if "is_chinese" in conditions.keys() and conditions["is_chinese"]:
         if not profile["isChinese"]:
             return True
-    logger.info(f'{conditions["is_chinese"]} {profile["isChinese"]}')
 
     return False
 
