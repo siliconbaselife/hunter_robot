@@ -1360,6 +1360,7 @@ def parse_profile(profile, type='need_deserialize'):
             elif 'timeInfo' in education and education['timeInfo'] is not None:
                 graduated_year = get_max_time_info(education['timeInfo'], graduated_year)
                 start_age = 21
+        logger.info(f"start_age: {start_age} graduated_year: {graduated_year}")
         if graduated_year != 1000:
             res['age'] = start_age + datetime.datetime.now().year - graduated_year
     if 'languages' in profile and len(profile['languages']) > 0:
@@ -1376,6 +1377,7 @@ def parse_profile(profile, type='need_deserialize'):
                 if (get_max_time_info(experience['timeInfo'], 1000)) > start_year:
                     last_5_jump += 1
         res['last5Jump'] = last_5_jump
+    logger.info(f"age: {res['age']}")
     return res
 
 
