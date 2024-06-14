@@ -50,7 +50,7 @@ class BusinessConsultant:
     def _judge_jd(self, question):
         prompt = f'请鉴别以下内容是否是一个岗位的jd，直接回复 是 或者 不是\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
-	res_msg = res_msg.replace('\n','').replace(' ','')
+        res_msg = res_msg.replace('\n','').replace(' ','')
         logger.info(f'consultant [{self._id}] _judge_jd ({prompt}), got: {res_msg}')
         assert res_msg=='是' or res_msg=='不是', f"business internel error, _judge_jd should return 是 or 不是, but got: {res_msg}"
         return res_msg=='是'
