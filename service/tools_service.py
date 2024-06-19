@@ -1242,7 +1242,7 @@ def get_min_time_info(time_info_str, default_time):
     return min_start_year
 
 
-def parse_profile(profile, type='need_deserialize'):
+def parse_profile(profile, type='need_deserialize', field_2_str =False):
     if type == 'need_deserialize':
         profile = deserialize_raw_profile(profile)
     if profile is None:
@@ -1285,7 +1285,7 @@ def parse_profile(profile, type='need_deserialize'):
         res['location'] = profile['location']
 
     if 'contactInfo' in profile:
-        res['contactInfo'] = cv_str(profile['contactInfo'], 0)
+        res['contactInfo'] = cv_str(profile['contactInfo'], 0) if field_2_str else profile['contactInfo']
     if profile:
         res['cv'] = cv_str(profile, 0)
     if name:
@@ -1360,10 +1360,11 @@ def parse_profile(profile, type='need_deserialize'):
             elif 'timeInfo' in education and education['timeInfo'] is not None:
                 graduated_year = get_max_time_info(education['timeInfo'], graduated_year)
                 start_age = 21
+        # logger.info(f"start_age: {start_age} graduated_year: {graduated_year}")
         if graduated_year != 1000:
             res['age'] = start_age + datetime.datetime.now().year - graduated_year
     if 'languages' in profile and len(profile['languages']) > 0:
-        res['languages'] = cv_str(profile['languages'], 0)
+        res['languages'] = cv_str(profile['languages'], 0) if field_2_str else profile['languages']
 
     if 'experiences' in profile and len(profile['experiences']) > 0:
         experiences = profile['experiences']
@@ -1376,6 +1377,7 @@ def parse_profile(profile, type='need_deserialize'):
                 if (get_max_time_info(experience['timeInfo'], 1000)) > start_year:
                     last_5_jump += 1
         res['last5Jump'] = last_5_jump
+    # logger.info(f"age: {res['age']}")
     return res
 
 
@@ -1409,7 +1411,7 @@ def generate_email_content(manage_account_id, platform, candidate_id, template):
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0 or len(rows[0]) == 0:
         return template_val, None
-    profile = parse_profile(rows[0][1])
+    profile = parse_profile(rows[0][1], 'need_deserialize', True)
     for key in profile:
         template_key = '#{' + key + '}'
         if profile[key] and template_key in template_val:
