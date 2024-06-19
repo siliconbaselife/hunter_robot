@@ -6,13 +6,16 @@ from threading import Thread, Lock
 
 from utils.log import get_logger
 from utils.config import config as config
+from dao.agent_dao import new_agent_history_db, query_agent_history_db
 
 logger = get_logger(config['log']['business_log_file'])
 
 def history_hooks(llm_func):
     def wrapper(*args, **kwargs):
-        res, prompt, tag = llm_func(*args, **kwargs)
+        res, prompt, tag, sess_id = llm_func(*args, **kwargs)
         ## save db
+        # logger.info(f'show tag: {tag}, {json.dumps(tag)}')
+        new_agent_history_db(sess_id=sess_id, prompt=prompt, tag=tag, response=res, llm_type='gemini')
         return res
     return wrapper
 
@@ -25,6 +28,20 @@ class BusinessConsultant:
     @property
     def id(self):
         return self._id
+
+    def history(self):
+        db_history = query_agent_history_db(self.id)
+        ret_list = []
+        for prompt, tag, response in db_history:
+            # with open('tag.json','w') as f:
+            #     f.write(tag)
+            tag = tag.replace('\n', '。')
+            ret_list.append({
+                'prompt': prompt,
+                'tag': json.loads(tag),
+                'response': response
+            })
+        return ret_list
 
     def __call__(self, src_company, target_region, job, question, platform='领英'):
         self._expired = time.time()
@@ -57,6 +74,7 @@ class BusinessConsultant:
     def _judge_jd(self, question):
         prompt = f'请鉴别以下内容是否是一个岗位的jd，直接回复 是 或者 不是\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
+        res_msg = res_msg.replace('\n','').replace(' ','')
         logger.info(f'consultant [{self._id}] _judge_jd ({prompt}), got: {res_msg}')
         assert res_msg=='是' or res_msg=='不是', f"business internel error, _judge_jd should return 是 or 不是, but got: {res_msg}"
         return res_msg=='是'
@@ -66,21 +84,21 @@ class BusinessConsultant:
         assert hasattr(self, '_llm'), "business internel error, continue chat without llm object"
         res_msg = self._llm.send_message(prompt=question)
         logger.info(f'consultant [{self._id}] _continue_chat ({question}), got: {res_msg}')
-        return res_msg, question, {'msg': question}
+        return res_msg, question, {'msg': question}, self.id
 
     @history_hooks
     def _first_free_chat(self, question):
         prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_free_chat ({prompt}), got: {res_msg}')
-        return res_msg, prompt, {'msg': question}
+        return res_msg, prompt, {'msg': question}, self.id
 
     @history_hooks
     def _first_chat(self, src_company, target_region, job, question):
         prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_chat ({question}), got: {res_msg}')
-        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'msg': question}
+        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'msg': question}, self.id
 
     @history_hooks
     def _find_tgt_company(self, src_company, target_region, job, jd):
@@ -92,7 +110,7 @@ class BusinessConsultant:
         except BaseException as e:
             logger.info(f'_find_tgt_company: parse from ({res_msg}) err: {e}, will return directly')
         logger.info(f'consultant [{self._id}] _find_tgt_company ({prompt}), got: {tgt_company_info}')
-        return tgt_company_info, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd}
+        return tgt_company_info, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd}, self.id
 
     @history_hooks
     def _platform_keyword(self, job, jd, platform='领英'):
@@ -104,7 +122,7 @@ class BusinessConsultant:
         except BaseException as e:
             logger.info(f'_platform_keyword: parse from ({res_msg}) err: {e}, will return directly')
         logger.info(f'consultant [{self._id}] _platform_keyword ({prompt}), got: {keywords}')
-        return keywords, prompt, {'job': job, 'jd': jd, 'platform': platform}
+        return keywords, prompt, {'job': job, 'jd': jd, 'platform': platform}, self.id
 
 class ConsultingFirm:
     def __init__(self):
