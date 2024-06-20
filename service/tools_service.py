@@ -1393,7 +1393,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
 
     for row in rows:
-        profile = parse_profile(row[1])
+        profile = parse_profile(row[1], 'need_deserialize', contact2str)
         if profile is None:
             continue
         profile['candidateId'] = row[0]
