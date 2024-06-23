@@ -8,8 +8,8 @@ def main():
     page = 1
     limit = 10
     contact2str = True
-    details = search_profile_by_tag(manage_account_id, platform, tags, page, limit, contact2str)['details']
-    print(details)
+    data = search_profile_by_tag(manage_account_id, platform, tags, page, limit, contact2str)
+    print(data)
 
 if __name__ == '__main__':
     main()
