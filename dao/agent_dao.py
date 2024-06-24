@@ -13,7 +13,7 @@ sql_dict = {
 }
 
 def new_agent_history_db(sess_id, prompt, tag, response, llm_type):
-    dbm.insert(sql_dict['new_history'].format(sess_id, prompt, json.dumps(tag, ensure_ascii=False), response, llm_type))
+    dbm.insert(sql_dict['new_history'].format(sess_id, prompt.replace("'", "\'"), json.dumps(tag, ensure_ascii=False), response, llm_type))
 
 def query_agent_history_db(sess_id):
     return dbm.query(sql_dict['query_history'].format(sess_id))
