@@ -6,24 +6,28 @@ from threading import Thread, Lock
 
 from utils.log import get_logger
 from utils.config import config as config
-from dao.agent_dao import new_agent_history_db, query_agent_history_db
+from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db
 
 logger = get_logger(config['log']['business_log_file'])
 
+def session_query_service(user_id):
+    return query_agent_sess_db(manage_account_id=user_id)
+
 def history_hooks(llm_func):
     def wrapper(*args, **kwargs):
-        res, prompt, tag, sess_id = llm_func(*args, **kwargs)
+        res, prompt, tag, user_id, sess_id = llm_func(*args, **kwargs)
         ## save db
         # logger.info(f'show tag: {tag}, {json.dumps(tag)}')
-        new_agent_history_db(sess_id=sess_id, prompt=prompt, tag=tag, response=res, llm_type='gemini')
+        new_agent_history_db(manage_account_id=user_id, sess_id=sess_id, prompt=prompt, tag=tag, response=res, llm_type='gemini')
         return res
     return wrapper
 
 class BusinessConsultant:
-    def __init__(self, manual_id=None):
+    def __init__(self, user_id, manual_id=None):
+        self._user = user_id
         self._id = shortuuid.uuid() if not manual_id else manual_id
         self._expired = time.time()
-        logger.info(f'consultant [{self._id}] checkin')
+        logger.info(f'consultant({self._user}) [{self._id}] checkin')
 
     @property
     def id(self):
@@ -84,21 +88,21 @@ class BusinessConsultant:
         assert hasattr(self, '_llm'), "business internel error, continue chat without llm object"
         res_msg = self._llm.send_message(prompt=question)
         logger.info(f'consultant [{self._id}] _continue_chat ({question}), got: {res_msg}')
-        return res_msg, question, {'msg': question}, self.id
+        return res_msg, question, {'msg': question}, self._user, self.id
 
     @history_hooks
     def _first_free_chat(self, question):
         prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_free_chat ({prompt}), got: {res_msg}')
-        return res_msg, prompt, {'msg': question}, self.id
+        return res_msg, prompt, {'msg': question}, self._user, self.id
 
     @history_hooks
     def _first_chat(self, src_company, target_region, job, question):
         prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_chat ({question}), got: {res_msg}')
-        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'msg': question}, self.id
+        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'msg': question}, self._user, self.id
 
     @history_hooks
     def _find_tgt_company(self, src_company, target_region, job, jd):
@@ -110,7 +114,7 @@ class BusinessConsultant:
         except BaseException as e:
             logger.info(f'_find_tgt_company: parse from ({res_msg}) err: {e}, will return directly')
         logger.info(f'consultant [{self._id}] _find_tgt_company ({prompt}), got: {tgt_company_info}')
-        return tgt_company_info, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd}, self.id
+        return tgt_company_info, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd}, self._user, self.id
 
     @history_hooks
     def _platform_keyword(self, job, jd, platform='领英'):
@@ -122,7 +126,7 @@ class BusinessConsultant:
         except BaseException as e:
             logger.info(f'_platform_keyword: parse from ({res_msg}) err: {e}, will return directly')
         logger.info(f'consultant [{self._id}] _platform_keyword ({prompt}), got: {keywords}')
-        return keywords, prompt, {'job': job, 'jd': jd, 'platform': platform}, self.id
+        return keywords, prompt, {'job': job, 'jd': jd, 'platform': platform}, self._user, self.id
 
 class ConsultingFirm:
     def __init__(self):
@@ -142,17 +146,17 @@ class ConsultingFirm:
                         self._consultants.pop(consultant_id)
             time.sleep(120)
 
-    def _get_consultant(self, consultant_id=None):
+    def _get_consultant(self, user_id, consultant_id=None):
         with self._lock:
             if consultant_id is None:
-                new_consultant = BusinessConsultant()
+                new_consultant = BusinessConsultant(user_id=user_id)
                 self._consultants[new_consultant._id] = new_consultant
                 consultant_id = new_consultant._id
             try:
                 return self._consultants[consultant_id]
             except BaseException as e:
-                logger.info(f"ConsultingFirm _get_consultant ({consultant_id}) exception: {e}, will recreate")
-                new_consultant = BusinessConsultant(consultant_id)
+                logger.info(f"ConsultingFirm _get_consultant ({user_id}, {consultant_id}) exception: {e}, will recreate")
+                new_consultant = BusinessConsultant(user_id=user_id, manual_id=consultant_id)
                 self._consultants[new_consultant._id] = new_consultant
                 consultant_id = new_consultant._id
                 return self._consultants[consultant_id]
