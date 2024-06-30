@@ -65,7 +65,7 @@ def main():
     platform = 'Linkedin'
     tags = ['菲律宾HR']
     page = 1
-    limit = 10
+    limit = 1
     contact2str = True
     data, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, contact2str)
     if error_msg is not None:
@@ -77,6 +77,7 @@ def main():
     data  = []
     for detail in details:
         row = []
+        print(detail)
         if 'candidate_id' not in detail:
             continue
         row.append(detail['candidate_id'])
