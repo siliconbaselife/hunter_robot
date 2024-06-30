@@ -78,9 +78,9 @@ def main():
     for detail in details:
         row = []
         print(detail)
-        if 'candidate_id' not in detail:
+        if 'candidateId' not in detail:
             continue
-        row.append(detail['candidate_id'])
+        row.append(detail['candidateId'])
         row.append(str(detail['age']) if 'age' in detail and detail['age'] is not None else '不确定')
         row.append(str(detail['language']) if 'language' in detail and detail['language'] is not None else '不确定')
         row.append(str(get_stability(detail)))
