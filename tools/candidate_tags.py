@@ -71,6 +71,7 @@ def main():
     if error_msg is not None:
         print(f'{error_msg}')
         exit(1)
+    print(f'get {len(data)} of candidates, {manage_account_id}-{tags} ')
     details = data['details']
     titles = ['候选人id', '年龄', '语言', '稳定性', '职位', '职能属性', '层级']
     data  = []
@@ -92,7 +93,7 @@ def main():
             row.append(str(get_hr_module(cv)))
             row.append(str(get_hr_level(cv)))
         data.append(row)
-    data_to_excel_file('./text.xlsx', titles, data)
+    data_to_excel_file('/root/f.xlsx', titles, data)
 
 
 if __name__ == '__main__':
