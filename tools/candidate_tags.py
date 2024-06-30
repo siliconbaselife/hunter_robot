@@ -65,7 +65,7 @@ def main():
     platform = 'Linkedin'
     tags = ['菲律宾HR']
     page = 1
-    limit = 1
+    limit = 10
     contact2str = True
     data, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, contact2str)
     if error_msg is not None:
