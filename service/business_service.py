@@ -26,6 +26,7 @@ class BusinessConsultant:
     def __init__(self, user_id, manual_id=None):
         self._user = user_id
         self._id = shortuuid.uuid() if not manual_id else manual_id
+        self._restore_llm_history(manual_id=manual_id)
         self._expired = time.time()
         logger.info(f'consultant({self._user}) [{self._id}] checkin')
 
@@ -75,6 +76,18 @@ class BusinessConsultant:
             'type': 'markdown'
         }
         
+
+    def _restore_llm_history(self, manual_id):
+        if manual_id is None:
+            return
+        llm_history = []
+        db_history = query_agent_history_db(manual_id)
+        for prompt, _, response in db_history:
+            llm_history.append({'role': 'user', 'parts': [prompt]})
+            llm_history.append({'role': 'model', 'parts': [response]})
+        logger.info(f'_restore_llm_history for {manual_id}, init_history len: {len(llm_history)}')
+        self._llm = Gemini(init_history=llm_history)
+
     def _judge_jd(self, question):
         prompt = f'请鉴别以下内容是否是一个岗位的jd，直接回复 是 或者 不是\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
@@ -155,7 +168,7 @@ class ConsultingFirm:
             try:
                 return self._consultants[consultant_id]
             except BaseException as e:
-                logger.info(f"ConsultingFirm _get_consultant ({user_id}, {consultant_id}) exception: {e}, will recreate")
+                logger.info(f"ConsultingFirm _get_consultant ({user_id}, {consultant_id}) exception: {e}, will recreate from db history")
                 new_consultant = BusinessConsultant(user_id=user_id, manual_id=consultant_id)
                 self._consultants[new_consultant._id] = new_consultant
                 consultant_id = new_consultant._id
@@ -163,6 +176,6 @@ class ConsultingFirm:
 
 _consulting_firm = ConsultingFirm()
 
-def get_consultant(consultant_id=None):
+def get_consultant(user_id, consultant_id=None):
     global _consulting_firm
-    return _consulting_firm._get_consultant(consultant_id=consultant_id)
+    return _consulting_firm._get_consultant(user_id, consultant_id=consultant_id)
