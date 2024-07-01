@@ -1475,12 +1475,15 @@ def send_email_gmail(email_from, email_to, pwd, subject, body):
         text = msg.as_string()
         server.sendmail(email_user, to_emails, text)
         logger.info(f"[send_email_gmail] {email_from} -> {email_to}, {subject} send successfully")
+        ret = True
     except Exception as e:
         logger.error(f"[send_email_gmail] {email_from} -> {email_to}, {subject} send failed")
         logger.error(traceback.format_exc())
+        ret = False
     finally:
         # Quit the server
         server.quit()
+    return ret
 
 
 def send_email_content(manage_account_id, platform, candidate_id, title, content, email_to):

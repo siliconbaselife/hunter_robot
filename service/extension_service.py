@@ -130,7 +130,7 @@ def refresh_contact_db(candidate_id, personal_email, phone):
     has_record, person_emails, phones = query_contact_by_profile_id(candidate_id)
 
     if not has_record:
-        linked_profile = "https://{}".format(candidate_id)
+        linked_profile = "https://www.{}".format(candidate_id)
         name = candidate_id.split('/')[-1]
         personal_emails = []
         if personal_email is not None and len(personal_email) > 0:
