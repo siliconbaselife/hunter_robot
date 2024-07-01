@@ -47,8 +47,11 @@ def agent_sess_api():
 @business_web.route("/backend/business/history", methods=['POST'])
 @web_exception_handler
 def agent_history_api():
+    user_id = request.json.get('user_id', None)
+    if user_id is None:
+        return Response(json.dumps(get_web_res_fail("user_id 需要指定"), ensure_ascii=False))
     chat_id = request.json.get('chat_id', None)
     if chat_id == None:
         return Response(json.dumps(get_web_res_fail("chat_id 内容需要指定"), ensure_ascii=False))
-    ret = get_consultant(consultant_id=chat_id).history()
+    ret = get_consultant(user_id=user_id, consultant_id=chat_id).history()
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
