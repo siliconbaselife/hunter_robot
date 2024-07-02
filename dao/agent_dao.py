@@ -14,7 +14,8 @@ sql_dict = {
 }
 
 def new_agent_history_db(manage_account_id, sess_id, prompt, tag, response, llm_type):
-    dbm.insert(sql_dict['new_history'].format(manage_account_id, sess_id, prompt.replace("'", "\'"), json.dumps(tag, ensure_ascii=False), response.replace("'", "\\'"), llm_type))
+    tag_str = json.dumps(tag, ensure_ascii=False)
+    dbm.insert(sql_dict['new_history'].format(manage_account_id, sess_id, prompt.replace("'", " "), tag_str.replace("'"," "), response.replace("'", " "), llm_type))
 
 def query_agent_sess_db(manage_account_id):
     return dbm.query(sql_dict['query_sess'].format(manage_account_id))
