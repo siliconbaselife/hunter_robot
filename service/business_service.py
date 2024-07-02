@@ -6,12 +6,26 @@ from threading import Thread, Lock
 
 from utils.log import get_logger
 from utils.config import config as config
-from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db
+from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db, query_first_prompt_db, query_history_count_db
 
 logger = get_logger(config['log']['business_log_file'])
 
 def session_query_service(user_id):
-    return query_agent_sess_db(manage_account_id=user_id)
+    sess_list = query_agent_sess_db(manage_account_id=user_id)
+    ret_list = []
+    for item in sess_list:
+        sess_id = item[0]
+        round_cnt = query_history_count_db(sess_id)
+        title = ''
+        if round_cnt > 0:
+            first_prompt = query_first_prompt_db(sess_id)
+            logger.info(f'session_query_service: {sess_id}, {query_first_prompt_db(sess_id)}, {first_prompt}')
+            start_pos = first_prompt.find('公司')
+            title = first_prompt[start_pos:start_pos+10]
+        ret_list.append(
+            {'sess_id': sess_id, 'title': title, 'round_cnt': round_cnt}
+        )
+    return ret_list
 
 def history_hooks(llm_func):
     def wrapper(*args, **kwargs):
