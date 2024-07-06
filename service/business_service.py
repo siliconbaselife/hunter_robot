@@ -75,13 +75,14 @@ class BusinessConsultant:
                 ## if is jd, analysis target company and fetch keyword for jd, if not, free consultent
                 query_jd = self._judge_jd(question=question)
                 if query_jd:
-                    tgt_company_info = self._find_tgt_company(src_company=src_company, target_region=target_region, job=job, jd=question)
-                    keywords = self._platform_keyword(job=job, jd=question, platform=platform)
-                    return {
-                        'id': self._id,
-                        'target_company': tgt_company_info,
-                        'keyword': keywords,
-                    }
+                    # tgt_company_info = self._find_tgt_company(src_company=src_company, target_region=target_region, job=job, jd=question)
+                    # keywords = self._platform_keyword(job=job, jd=question, platform=platform)
+                    # return {
+                    #     'id': self._id,
+                    #     'target_company': tgt_company_info,
+                    #     'keyword': keywords,
+                    # }
+                    return self._tgt_company_and_platform_keyword(src_company=src_company, target_region=target_region, job=job, jd=question, platform=platform)
                 else:
                     res = self._first_chat(src_company=src_company, target_region=target_region, job=job, question=question)
         else:
@@ -117,45 +118,74 @@ class BusinessConsultant:
         assert hasattr(self, '_llm'), "business internel error, continue chat without llm object"
         res_msg = self._llm.send_message(prompt=question)
         logger.info(f'consultant [{self._id}] _continue_chat ({question}), got: {res_msg}')
-        return res_msg, question, {'msg': question}, self._user, self.id
+        return res_msg, question, {'msg': question, 'type': 'normal'}, self._user, self.id
 
     @history_hooks
     def _first_free_chat(self, question):
         prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_free_chat ({prompt}), got: {res_msg}')
-        return res_msg, prompt, {'msg': question}, self._user, self.id
+        return res_msg, prompt, {'msg': question, 'type': 'normal'}, self._user, self.id
 
     @history_hooks
     def _first_chat(self, src_company, target_region, job, question):
         prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_chat ({question}), got: {res_msg}')
-        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'msg': question}, self._user, self.id
+        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'msg': question, 'type': 'normal'}, self._user, self.id
 
     @history_hooks
-    def _find_tgt_company(self, src_company, target_region, job, jd):
-        prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请给我合适的目标公司，需要以json的list返回目标公司中文名称的列表。请特别注意，只需要这个列表，不需要额外的解释，并且列表长度不要超过15。以下是岗位介绍：\n{jd}'
-        res_msg = self._llm.send_message(prompt=prompt)
+    def _tgt_company_and_platform_keyword(self, src_company, target_region, job, jd, platform='领英'):
+        ## _find_tgt_company
+        prompt_tgt_company = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请给我合适的目标公司，需要以json的list返回目标公司中文名称的列表。请特别注意，只需要这个列表，不需要额外的解释，并且列表长度不要超过15。以下是岗位介绍：\n{jd}'
+        res_msg = self._llm.send_message(prompt=prompt_tgt_company)
         tgt_company_info = res_msg
         try:
             tgt_company_info = json.loads(res_msg.replace("```json\n", "").replace("```",""))
         except BaseException as e:
             logger.info(f'_find_tgt_company: parse from ({res_msg}) err: {e}, will return directly')
-        logger.info(f'consultant [{self._id}] _find_tgt_company ({prompt}), got: {tgt_company_info}')
-        return tgt_company_info, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd}, self._user, self.id
+        logger.info(f'consultant [{self._id}] _find_tgt_company ({prompt_tgt_company}), got: {tgt_company_info}')
 
-    @history_hooks
-    def _platform_keyword(self, job, jd, platform='领英'):
-        prompt = f'匹配这个岗位 {job}，列出搜索简历跟业务相关的英文关键词，方便我在 {platform} 做搜索，需要以json的list返回关键词的列表。请特别注意，只需要这个列表，不需要额外的解释，并且列表长度不要超过15。以下是岗位介绍\n{jd}'
-        res_msg = self._llm.send_message(prompt=prompt)
+        prompt_keyword = f'匹配这个岗位 {job}，列出搜索简历跟业务相关的英文关键词，方便我在 {platform} 做搜索，需要以json的list返回关键词的列表。请特别注意，只需要这个列表，不需要额外的解释，并且列表长度不要超过15。以下是岗位介绍\n{jd}'
+        res_msg = self._llm.send_message(prompt=prompt_keyword)
         keywords = res_msg
         try:
             keywords = json.loads(res_msg.replace("```json\n", "").replace("```",""))
         except BaseException as e:
             logger.info(f'_platform_keyword: parse from ({res_msg}) err: {e}, will return directly')
-        logger.info(f'consultant [{self._id}] _platform_keyword ({prompt}), got: {keywords}')
-        return keywords, prompt, {'job': job, 'jd': jd, 'platform': platform}, self._user, self.id
+        logger.info(f'consultant [{self._id}] _platform_keyword ({prompt_keyword}), got: {keywords}')
+
+        compose_prompt = f'{prompt_tgt_company}\n\n\n\n\n{prompt_keyword}'
+        ret_msg = {
+            'id': self._id, 
+            'target_company': tgt_company_info,
+            'keyword': keywords
+        }
+        return ret_msg, compose_prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd, 'platform': platform, 'type': 'analysis'}, self._user, self.id
+
+    # @history_hooks
+    # def _find_tgt_company(self, src_company, target_region, job, jd):
+    #     prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请给我合适的目标公司，需要以json的list返回目标公司中文名称的列表。请特别注意，只需要这个列表，不需要额外的解释，并且列表长度不要超过15。以下是岗位介绍：\n{jd}'
+    #     res_msg = self._llm.send_message(prompt=prompt)
+    #     tgt_company_info = res_msg
+    #     try:
+    #         tgt_company_info = json.loads(res_msg.replace("```json\n", "").replace("```",""))
+    #     except BaseException as e:
+    #         logger.info(f'_find_tgt_company: parse from ({res_msg}) err: {e}, will return directly')
+    #     logger.info(f'consultant [{self._id}] _find_tgt_company ({prompt}), got: {tgt_company_info}')
+    #     return tgt_company_info, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd, 'type': 'normal'}, self._user, self.id
+
+    # @history_hooks
+    # def _platform_keyword(self, job, jd, platform='领英'):
+    #     prompt = f'匹配这个岗位 {job}，列出搜索简历跟业务相关的英文关键词，方便我在 {platform} 做搜索，需要以json的list返回关键词的列表。请特别注意，只需要这个列表，不需要额外的解释，并且列表长度不要超过15。以下是岗位介绍\n{jd}'
+    #     res_msg = self._llm.send_message(prompt=prompt)
+    #     keywords = res_msg
+    #     try:
+    #         keywords = json.loads(res_msg.replace("```json\n", "").replace("```",""))
+    #     except BaseException as e:
+    #         logger.info(f'_platform_keyword: parse from ({res_msg}) err: {e}, will return directly')
+    #     logger.info(f'consultant [{self._id}] _platform_keyword ({prompt}), got: {keywords}')
+    #     return keywords, prompt, {'job': job, 'jd': jd, 'platform': platform}, self._user, self.id
 
 class ConsultingFirm:
     def __init__(self):
