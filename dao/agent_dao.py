@@ -12,7 +12,7 @@ sql_dict = {
     "query_sess": "select distinct sess_id from agent_history_bank where manage_account_id='{}'",
     'query_history': "select prompt, tag, response from agent_history_bank where sess_id='{}' order by id",
     'query_history_count': "select count(1) from agent_history_bank where sess_id='{}'",
-    'query_first_prompt': "select prompt from agent_history_bank where sess_id='{}' limit 1"
+    'query_first_history': "select prompt, tag from agent_history_bank where sess_id='{}' limit 1"
 }
 
 def new_agent_history_db(manage_account_id, sess_id, prompt, tag, response, llm_type):
@@ -28,5 +28,5 @@ def query_agent_history_db(sess_id):
 def query_history_count_db(sess_id):
     return dbm.query(sql_dict['query_history_count'].format(sess_id))[0][0]
 
-def query_first_prompt_db(sess_id):
-    return dbm.query(sql_dict['query_first_prompt'].format(sess_id))[0][0]
+def query_first_history_db(sess_id):
+    return dbm.query(sql_dict['query_first_history'].format(sess_id))[0]

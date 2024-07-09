@@ -6,7 +6,7 @@ from threading import Thread, Lock
 
 from utils.log import get_logger
 from utils.config import config as config
-from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db, query_first_prompt_db, query_history_count_db
+from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db, query_first_history_db, query_history_count_db
 
 logger = get_logger(config['log']['business_log_file'])
 
@@ -18,10 +18,17 @@ def session_query_service(user_id):
         round_cnt = query_history_count_db(sess_id)
         title = ''
         if round_cnt > 0:
-            first_prompt = query_first_prompt_db(sess_id)
-            logger.info(f'session_query_service: {sess_id}, {query_first_prompt_db(sess_id)}, {first_prompt}')
-            start_pos = first_prompt.find('公司')
-            title = first_prompt[start_pos:start_pos+10]
+            first_prompt, first_tag = query_first_history_db(sess_id)
+            logger.info(f'session_query_service: {sess_id}, {first_prompt}, {first_tag}')
+            first_tag = json.loads(first_tag.replace('\n',''))
+            title = ''
+            try:
+                if 'jd' in first_tag:
+                    title = first_tag['jd'][:50]
+                else:
+                    title = first_tag['msg'][:50]
+            except BaseException as e:
+                logger.warning(f"session_query_service parse title from tag failed: {first_tag}")
         ret_list.append(
             {'sess_id': sess_id, 'title': title, 'round_cnt': round_cnt}
         )
