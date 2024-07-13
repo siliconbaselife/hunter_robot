@@ -65,7 +65,7 @@ def chat_stat_api():
     platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
-    if platform!= 'Boss':
+    if platform != 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
     stat_result = stat_chat_service(job_id, begin_time, end_time)
     return Response(json.dumps(get_web_res_suc_with_data(stat_result), ensure_ascii=False))
@@ -78,7 +78,7 @@ def candidate_list_api():
     platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
-    if platform!= 'Boss':
+    if platform != 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
     candidate_list = chat_list_service(job_id, begin_time, end_time)
     return Response(json.dumps(get_web_res_suc_with_data(candidate_list), ensure_ascii=False))
