@@ -1,3 +1,5 @@
+import json
+
 import easyocr
 import os
 import fitz
@@ -1542,3 +1544,22 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
 
 def change_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
     update_flow_status(manage_account_id, platform, tag, candidate_id, flow_status)
+
+
+def get_log(manage_account_id, platform, tag, candidate_id):
+    log = fetch_tag_log(manage_account_id, platform, tag, candidate_id)
+    return log
+
+
+def update_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log):
+    current_time = datetime.datetime.now()
+    now_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    logs = fetch_tag_log(manage_account_id, platform, tag, candidate_id)
+    logs.append(
+        {
+            "time": now_time,
+            "flow_status": flow_status,
+            "msg": new_log
+        }
+    )
+    update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs))
