@@ -500,6 +500,7 @@ def customized_greeting_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])
 @web_exception_handler
 def customized_email_scenario_web():
@@ -544,6 +545,7 @@ def flush_email_credential_web():
     flush_email_credentials(manage_account_id, email, pwd, platform)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getEmailCredential", methods=['POST'])
 @web_exception_handler
 def get_email_credential_web():
@@ -565,6 +567,7 @@ def get_email_credential_web():
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(email_credential_info), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getEmailTemplate", methods=['POST'])
 @web_exception_handler
 def get_email_scenario_web():
@@ -583,6 +586,7 @@ def get_email_scenario_web():
             manage_account_id, platform))
     data = get_email_template(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getDefaultEmailTemplate", methods=['POST'])
 @web_exception_handler
@@ -605,6 +609,7 @@ def get_default_email_template_web():
     if err_msg is not None:
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getDefaultGreetingTemplate", methods=['POST'])
 @web_exception_handler
@@ -671,6 +676,7 @@ def customized_chat_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_CHAT, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/generateEmailContent", methods=['POST'])
 @web_exception_handler
 def generate_email_content_web():
@@ -693,6 +699,7 @@ def generate_email_content_web():
     if msg is not None:
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/sendEmailContent", methods=['POST'])
 @web_exception_handler
@@ -923,7 +930,7 @@ def data_to_excel_file(file_path, titles, data):
 
         row_formatter = workbook.add_format()
         row_formatter.set_text_wrap(True)
-        worksheet.set_column(8,8, 60, row_formatter)
+        worksheet.set_column(8, 8, 60, row_formatter)
         worksheet.write_row('A1', titles, title_formatter)
         count = 2
 
@@ -988,3 +995,38 @@ def download_profile_by_tag_web():
         return response
 
     return send_file(file_path, as_attachment=True)
+
+
+@tools_web.route("/backend/tools/searchProfileInfoByTag/v2", methods=['POST'])
+@web_exception_handler
+def search_profile_by_tag_web():
+    pass
+
+
+@tools_web.route("/backend/tools/searchCompanysByTag", methods=['POST'])
+@web_exception_handler
+def search_company_by_tag_web():
+    pass
+
+
+@tools_web.route("/backend/tools/searchTagInfos", methods=['POST'])
+@web_exception_handler
+def search_tag_infos():
+    pass
+
+
+@tools_web.route("/backend/tools/changeFlowStatus", methods=['POST'])
+@web_exception_handler
+def change_flow_status():
+    pass
+
+
+@tools_web.route("/backend/tools/getCandidateLog", methods=['POST'])
+@web_exception_handler
+def get_candidate_log():
+    pass
+
+@tools_web.route("/backend/tools/addCandidateLog", methods=['POST'])
+@web_exception_handler
+def add_candidate_log():
+    pass
