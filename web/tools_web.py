@@ -1024,9 +1024,35 @@ def change_flow_status():
 @tools_web.route("/backend/tools/getCandidateLog", methods=['POST'])
 @web_exception_handler
 def get_candidate_log():
-    pass
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    logs = get_log(manage_account_id, '', tag, candidate_id)
+    logger.info(
+        f"get_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, logs: {logs}")
+    return Response(json.dumps(get_web_res_suc_with_data(logs), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/addCandidateLog", methods=['POST'])
 @web_exception_handler
 def add_candidate_log():
-    pass
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    new_log = request.json.get('new_log', '')
+    flow_status = request.json.get('flow_status', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    logger.info(
+        f"add_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, new_log: {new_log}")
+    add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))

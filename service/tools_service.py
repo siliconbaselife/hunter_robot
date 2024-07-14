@@ -1551,7 +1551,7 @@ def get_log(manage_account_id, platform, tag, candidate_id):
     return log
 
 
-def update_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log):
+def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log):
     current_time = datetime.datetime.now()
     now_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
     logs = fetch_tag_log(manage_account_id, platform, tag, candidate_id)
