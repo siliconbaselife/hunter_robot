@@ -996,6 +996,7 @@ def deserialize_raw_profile(raw_profile):
 def customized_user_scenario(manage_account_id, context, platform, scenario_info, extra_info=''):
     create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info='')
 
+
 def get_email_template(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_EMAIL)
     if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
@@ -1006,6 +1007,7 @@ def get_email_template(manage_account_id, platform):
     else:
         return json.loads(scenario_info, strict=False)
 
+
 def get_default_email_template(idx, platform):
     total = get_default_email_template_count(platform)[0][0]
     template = get_default_email_template_by_idx(platform, idx)
@@ -1013,6 +1015,7 @@ def get_default_email_template(idx, platform):
         return None, f'total template is {total}, {idx} is exceeded'
     template = template[0][0]
     return {'total': total, 'idx': idx, 'template': template}, None
+
 
 def get_default_greeting_template(idx, platform):
     total = get_default_greeting_template_count(platform)[0][0]
@@ -1022,9 +1025,11 @@ def get_default_greeting_template(idx, platform):
     template = template[0][0]
     return {'total': total, 'idx': idx, 'template': template}, None
 
+
 def flush_email_credentials(manage_account_id, email, pwd, platform):
     logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
     flush_email_credentials_db(manage_account_id, email, pwd, platform)
+
 
 def get_email_credentials(manage_account_id, platform):
     email_credential = get_email_credentials_db(manage_account_id, platform)
@@ -1032,7 +1037,8 @@ def get_email_credentials(manage_account_id, platform):
     if len(email_credential) == 0 or len(email_credential[0]) == 0:
         return None, f'{manage_account_id}没有注册邮箱配置'
     email_credential = email_credential[0]
-    return {'manage_account_id': email_credential[0], 'email': email_credential[1], 'pwd': email_credential[2], 'platform': email_credential[3]}, None
+    return {'manage_account_id': email_credential[0], 'email': email_credential[1], 'pwd': email_credential[2],
+            'platform': email_credential[3]}, None
 
 
 def get_default_greeting_scenario():
@@ -1040,7 +1046,7 @@ def get_default_greeting_scenario():
     msg += 'we are looking for an candidate base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China\n'
     msg += 'your Exp. seems a good match\n'
     msg += 'would you like to explore this opportunity? Thanks!'
-    return {'默认' : msg}
+    return {'默认': msg}
 
 
 def get_default_chat_scenario():
@@ -1242,7 +1248,7 @@ def get_min_time_info(time_info_str, default_time):
     return min_start_year
 
 
-def parse_profile(profile, type='need_deserialize', field_2_str =False):
+def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if type == 'need_deserialize':
         profile = deserialize_raw_profile(profile)
     if profile is None:
@@ -1401,6 +1407,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
         details.append(profile)
     return data, None
 
+
 def generate_email_content(manage_account_id, platform, candidate_id, template):
     email_template = get_email_template(manage_account_id, platform)
     if email_template == {}:
@@ -1417,6 +1424,7 @@ def generate_email_content(manage_account_id, platform, candidate_id, template):
         if profile[key] and template_key in template_val:
             template_val = template_val.replace(template_key, profile[key])
     return template_val, None
+
 
 def send_email_163(email_from, email_to, pwd, subject, body):
     email_user = email_from
@@ -1449,6 +1457,7 @@ def send_email_163(email_from, email_to, pwd, subject, body):
     finally:
         server.quit()
     return ret
+
 
 def send_email_gmail(email_from, email_to, pwd, subject, body):
     email_user = email_from
@@ -1501,7 +1510,8 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
         if profile and 'profile' in profile:
             profile = profile['profile']
         logger.info('[send_email] profile = {} , candidate_id = {}'.format(profile, candidate_id))
-        if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(profile['contactInfo']['Email']) == 0:
+        if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(
+                profile['contactInfo']['Email']) == 0:
             return None, f'{candidate_id} 无email联系方式'
         email_to = profile['contactInfo']['Email']
     # email_to = 'db24@outlook.com'
@@ -1519,3 +1529,16 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
         return None, f'{email_from}发送失败, 请确认密码正确, enable smtp&pop3设置'
 
 
+def search_tag_flow_infos(manage_account_id, platform, tag):
+    data = query_tag_flow_status(manage_account_id, platform, tag)
+    flow_infos = {}
+    for d in data:
+        flow_status = d[1]
+        if flow_status not in flow_infos.keys():
+            flow_infos[flow_status] = 0
+        flow_infos[flow_status] += 1
+    return flow_infos
+
+
+def change_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
+    update_flow_status(manage_account_id, platform, tag, candidate_id, flow_status)

@@ -39,12 +39,12 @@ sql_dict = {
     "query_customized_scenario_setting": "select scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_customized_extra_setting": "select extra_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_email_info": "select email, pwd from email_credentials where manage_account_id = \'{}\';",
-    "flush_email_credentials" : "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
-    "get_email_credentials" : "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
+    "flush_email_credentials": "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
+    "get_email_credentials": "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
     "get_default_email_template_count": "select count(id) from default_email_template where platform = '{}';",
-    "get_default_email_template_by_idx" : "select template from default_email_template where platform = '{}' order by id limit {}, 1;",
+    "get_default_email_template_by_idx": "select template from default_email_template where platform = '{}' order by id limit {}, 1;",
     "get_default_greeting_template_count": "select count(id) from default_greeting_template where platform = '{}';",
-    "get_default_greeting_template_by_idx" : "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;"
+    "get_default_greeting_template_by_idx": "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;"
 }
 
 
@@ -227,32 +227,66 @@ def create_customized_scenario_setting(manage_account_id, platform, context, sce
     extra_info = extra_info.replace("\'", "\\'")
     extra_info = extra_info.replace('\"', '\\"')
     return dbm.query(
-        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info, extra_info))
+        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info,
+                                                              extra_info))
 
 
 def query_customized_scenario_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_scenario_setting'].format(manage_account_id, platform, context))
 
+
 def query_customized_extra_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_extra_setting'].format(manage_account_id, platform, context))
+
 
 def query_email_info(manage_account_id):
     return dbm.query(sql_dict['query_email_info'].format(manage_account_id))
 
+
 def flush_email_credentials_db(manage_account_id, email, pwd, platform):
     return dbm.insert(sql_dict['flush_email_credentials'].format(manage_account_id, email, pwd, platform))
+
 
 def get_email_credentials_db(manage_account_id, platform):
     return dbm.query(sql_dict['get_email_credentials'].format(manage_account_id, platform))
 
+
 def get_default_email_template_count(platform):
     return dbm.query(sql_dict['get_default_email_template_count'].format(platform))
+
 
 def get_default_email_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))
 
+
 def get_default_greeting_template_count(platform):
     return dbm.query(sql_dict['get_default_greeting_template_count'].format(platform))
 
+
 def get_default_greeting_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_greeting_template_by_idx'].format(platform, idx))
+
+
+def query_tag_flow_status(manage_account_id, platform, tag):
+    sql = f"select candidate_id, flow_status from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
+    data = dbm.query(sql)
+    return data
+
+
+def update_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
+    update_sql = f"update user_profile_tag_relation set flow_status ='{flow_status}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    dbm.update(update_sql)
+
+
+def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
+    sql = f"select log from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    data = dbm.query(sql)
+    if len(data) > 0:
+        return json.loads(data[0][0])
+    else:
+        return []
+
+
+def update_tag_log(manage_account_id, platform, tag, candidate_id, log):
+    update_sql = f"update user_profile_tag_relation set log = '{log}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    dbm.update(update_sql)
