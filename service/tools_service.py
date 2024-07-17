@@ -1410,6 +1410,10 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
     return data, None
 
 
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit):
+    pass
+
+
 def generate_email_content(manage_account_id, platform, candidate_id, template):
     email_template = get_email_template(manage_account_id, platform)
     if email_template == {}:
@@ -1539,7 +1543,15 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
         if flow_status not in flow_infos.keys():
             flow_infos[flow_status] = 0
         flow_infos[flow_status] += 1
-    return flow_infos
+
+    status_infos = {}
+    # todo => status_infos的生成
+    infos = {
+        "flow_infos": flow_infos,
+        "status_infos": status_infos
+    }
+
+    return infos
 
 
 def change_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
@@ -1563,3 +1575,7 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
         }
     )
     update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs))
+
+def search_company_by_tags(manage_account_id, platform, tag):
+    pass
+
