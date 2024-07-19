@@ -73,7 +73,7 @@ def main():
         exit(1)
     details = data['details']
     print(f'get {len(details)} of candidates, {manage_account_id}-{tags} ')
-    titles = ['候选人id', '年龄', '语言', '稳定性', '职位', '职能属性', '层级']
+    titles = ['候选人id', '年龄', '语言', '稳定性', '职位', '职能属性', '层级', '简历']
     data  = []
     for detail in details:
         row = []
@@ -89,10 +89,12 @@ def main():
             row.append('不确定')
             row.append('不确定')
             row.append('不确定')
+            row.append('无')
         else:
             row.append(str(get_hr_attribute(cv)))
             row.append(str(get_hr_module(cv)))
             row.append(str(get_hr_level(cv)))
+            row.append(detail['cv'])
         data.append(row)
     data_to_excel_file('/root/f.xlsx', titles, data)
 
