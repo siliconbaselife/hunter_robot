@@ -2,13 +2,14 @@ from dao.tool_dao import *
 from utils.db_manager import dbm
 from service.tools_service import deserialize_raw_profile
 
-step = 33001
-id_start = 1
-id_end = id_start + step
-count = 0
+
 
 
 def main():
+    step = 33001
+    id_start = 1
+    id_end = id_start + step
+    count = 0
     while True:
         query_sql = 'select id, raw_profile from online_resume where id >= {} and id <= {}'.format(id_start, id_end)
         print(query_sql)
@@ -40,7 +41,6 @@ def main():
 
 
 def debug():
-
     id_debug = 33084
     query_sql = 'select id, raw_profile from online_resume where id >= {} and id <= {}'.format(id_debug, id_debug)
     print(query_sql)
