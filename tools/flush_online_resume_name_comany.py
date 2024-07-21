@@ -7,7 +7,7 @@ from service.tools_service import deserialize_raw_profile
 
 def main():
     step = 1000
-    id_start = 33001
+    id_start = 62001
     id_end = id_start + step
     count = 0
     while True:
