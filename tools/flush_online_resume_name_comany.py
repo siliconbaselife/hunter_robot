@@ -8,7 +8,7 @@ id_end = id_start + step
 
 
 while True:
-    rows = dbm.query('select id, profile from online_resume where id >= {} and id <= {}'.format(id_start, id_start))
+    rows = dbm.query('select id, raw_profile from online_resume where id >= {} and id <= {}'.format(id_start, id_start))
     print('query {} row of {} - {}'.format(len(rows), id_start, id_end))
     if len(rows) == 0:
         print('done')
