@@ -8,7 +8,9 @@ id_end = id_start + step
 count = 0
 
 while True:
-    rows = dbm.query('select id, raw_profile from online_resume where id >= {} and id <= {}'.format(id_start, id_start))
+    query_sql = 'select id, raw_profile from online_resume where id >= {} and id <= {}'.format(id_start, id_start)
+    print(query_sql)
+    rows = dbm.query(query_sql)
     print('query {} row of {} - {}, updated = {}'.format(len(rows), id_start, id_end, count))
     if len(rows) == 0:
         print('done')
