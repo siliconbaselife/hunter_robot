@@ -242,7 +242,7 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform, 
                     "description": des
                 })
             p['exp'] = exp
-            parsed = parse_profile(p)
+            parsed = parse_profile(p, 'no_need')
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
                                   parsed['name'] if 'name' in parsed else '',
                                   parsed['company'] if 'company' in parsed else '')
@@ -373,7 +373,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 "\'", "")
             p['profile']['name'] = name.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace(
                 "\'", "")
-            parsed = parse_profile(p)
+            parsed = parse_profile(p, 'no_need')
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
                                   parsed['name'] if 'name' in parsed else '',
                                   parsed['company'] if 'company' in parsed else '')
