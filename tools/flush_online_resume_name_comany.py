@@ -12,11 +12,14 @@ def get_company(profile):
         company = profile['company']
     else:
         company = ''
+
+    if company is None:
+        company = ''
     return company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
 
 def main():
     step = 1000
-    id_start = 1
+    id_start = 100001
     id_end = id_start + step
     count = 0
     while True:
