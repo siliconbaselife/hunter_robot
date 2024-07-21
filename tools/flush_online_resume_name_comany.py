@@ -9,7 +9,7 @@ count = 0
 
 while True:
     rows = dbm.query('select id, raw_profile from online_resume where id >= {} and id <= {}'.format(id_start, id_start))
-    print('query {} row of {} - {}, updated'.format(len(rows), id_start, id_end, count))
+    print('query {} row of {} - {}, updated = {}'.format(len(rows), id_start, id_end, count))
     if len(rows) == 0:
         print('done')
         break
