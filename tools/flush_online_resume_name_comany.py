@@ -4,6 +4,15 @@ from service.tools_service import deserialize_raw_profile
 
 
 
+def get_company(profile):
+    experience = profile['experiences'][0] if 'experiences' in profile and len(profile['experiences']) > 0 else None
+    if experience and 'companyName' in experience:
+        company = experience['companyName']
+    elif 'company' in profile:
+        company = profile['company']
+    else:
+        company = ''
+    return company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
 
 def main():
     step = 1000
@@ -28,9 +37,8 @@ def main():
             if 'profile' in profile:
                 profile = profile['profile']
             name = profile['name'] if 'name' in profile else ''
-            company = profile['company'] if 'company' in profile else ''
             name = name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
-            company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+            company = get_company(profile)
             sql = f'update online_resume set name = \'{name}\', company = \'{company}\' where id = {rid}'
             # print(f'{sql}')
             dbm.update(sql)
