@@ -52,6 +52,7 @@ def debug():
     name = profile['name'] if 'name' in profile else ''
     company = profile['company'] if 'company' in profile else ''
     name = name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+    company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     sql = f'update online_resume set name = \'{name}\', company = \'{company}\' where id = {rid}'
     print(sql)
 
