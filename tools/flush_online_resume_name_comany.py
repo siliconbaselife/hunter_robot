@@ -6,8 +6,8 @@ from service.tools_service import deserialize_raw_profile
 
 
 def main():
-    step = 33001
-    id_start = 1
+    step = 1000
+    id_start = 33001
     id_end = id_start + step
     count = 0
     while True:
@@ -41,6 +41,7 @@ def main():
 
 
 def debug():
+
     id_debug = 33084
     query_sql = 'select id, raw_profile from online_resume where id >= {} and id <= {}'.format(id_debug, id_debug)
     print(query_sql)
