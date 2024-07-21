@@ -21,18 +21,15 @@ while True:
         p = row[1]
         profile = deserialize_raw_profile(p)
         if profile is None:
-            print('profile is None')
             continue
         if 'profile' in profile:
             profile = profile['profile']
         name = profile['name'] if 'name' in profile else ''
         company = profile['company'] if 'company' in profile else ''
         sql = f'update online_resume set name = \'{name}\', company = \'{company}\' where id = {rid}'
-        print(f'{sql}')
+        # print(f'{sql}')
         dbm.update(sql)
         count += 1
-        if count >= 10:
-            exit()
 
     id_start += step
     id_end += step
