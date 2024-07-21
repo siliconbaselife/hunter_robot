@@ -59,4 +59,4 @@ def debug():
     print(sql)
 
 if __name__ == '__main__':
-    debug()
+    main()
