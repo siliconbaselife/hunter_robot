@@ -22,7 +22,7 @@ while True:
             continue
         name = profile['name'] if 'name' in profile else ''
         company = profile['company'] if 'company' in profile else ''
-        sql = f'update online_resume set name = \'{name}\', company = \'{company}\''
+        sql = f'update online_resume set name = \'{name}\', company = \'{company}\' where id = {rid}'
         print(f'{sql}')
         dbm.update(sql)
         count += 1
