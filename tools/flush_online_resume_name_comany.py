@@ -19,6 +19,7 @@ while True:
         p = row[1]
         profile = deserialize_raw_profile(p)
         if profile is None:
+            print('profile is None')
             continue
         if 'profile' in profile:
             profile = profile['profile']
