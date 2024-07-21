@@ -19,7 +19,7 @@ def get_company(profile):
 
 def main():
     step = 1000
-    id_start = 100001
+    id_start = 352001
     id_end = id_start + step
     count = 0
     while True:
