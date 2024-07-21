@@ -20,6 +20,8 @@ while True:
         profile = deserialize_raw_profile(p)
         if profile is None:
             continue
+        if 'profile' in profile:
+            profile = profile['profile']
         name = profile['name'] if 'name' in profile else ''
         company = profile['company'] if 'company' in profile else ''
         sql = f'update online_resume set name = \'{name}\', company = \'{company}\' where id = {rid}'
