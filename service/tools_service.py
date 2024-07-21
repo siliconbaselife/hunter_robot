@@ -244,8 +244,8 @@ def maimai_online_resume_upload_processor(manage_account_id, profile, platform, 
             p['exp'] = exp
             parsed = parse_profile(p, 'no_need')
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
-                                  parsed['name'] if 'name' in parsed else '',
-                                  parsed['company'] if 'company' in parsed else '')
+                                  parsed['name'] if parsed['name'] else '',
+                                  parsed['company'] if parsed['company'] else '')
             count = count + 1
         if tag and len(tag) > 0:
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
@@ -375,8 +375,8 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 "\'", "")
             parsed = parse_profile(p, 'no_need')
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
-                                  parsed['name'] if 'name' in parsed else '',
-                                  parsed['company'] if 'company' in parsed else '')
+                                parsed['name'] if parsed['name'] else '',
+                                parsed['company'] if parsed['company'] else '')
 
         if tag and len(tag) > 0:
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
