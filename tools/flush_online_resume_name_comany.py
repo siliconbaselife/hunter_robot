@@ -2,7 +2,7 @@ from dao.tool_dao import *
 from utils.db_manager import dbm
 from service.tools_service import deserialize_raw_profile
 
-step = 1000
+step = 33001
 id_start = 1
 id_end = id_start + step
 count = 0
@@ -28,6 +28,8 @@ def main():
                 profile = profile['profile']
             name = profile['name'] if 'name' in profile else ''
             company = profile['company'] if 'company' in profile else ''
+            name = name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+            company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
             sql = f'update online_resume set name = \'{name}\', company = \'{company}\' where id = {rid}'
             # print(f'{sql}')
             dbm.update(sql)

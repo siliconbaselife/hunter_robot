@@ -122,6 +122,8 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     raw_profile = raw_profile.replace("\n", "\\n")
     raw_profile = raw_profile.replace("\'", "\\'")
     raw_profile = raw_profile.replace('\"', '\\"')
+    name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+    company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
     else:
