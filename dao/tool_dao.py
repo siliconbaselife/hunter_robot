@@ -13,8 +13,8 @@ sql_dict = {
     "create_new_filter_task": "insert into resume_filter_task(manage_account_id, jd, resume_url,taskname) values ('{}', '{}', '{}','{}')",
     "update_filter_result": "update resume_filter_task set filter_result='{}', format_resumes = '{}' where id={}",
     "get_filter_task_by_id": "select id, manage_account_id, resume_url, status, create_time,jd,filter_result,taskname, format_resumes from resume_filter_task where id={}",
-    "upload_online_profile": "insert into online_resume(manage_account_id, platform, raw_profile, candidate_id) values ('{}', '{}', '{}', '{}')",
-    "update_raw_profile": "update online_resume set raw_profile='{}' where platform = '{}' and candidate_id='{}'",
+    "upload_online_profile": "insert into online_resume(manage_account_id, platform, raw_profile, candidate_id, name, company) values ('{}', '{}', '{}', '{}', '{}', '{}')",
+    "update_raw_profile": "update online_resume set raw_profile='{}', name = '{}', company = '{}' where platform = '{}' and candidate_id='{}'",
     "upload_online_profile_pdf": "insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform": "select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
     "get_resume_by_candidate_ids_and_platform": "select candidate_id, raw_profile, cv_url from online_resume where candidate_id in {} and platform='{}' and manage_account_id='{}' order by id limit {}, {}",
@@ -118,15 +118,17 @@ def query_profile_status_dao(manage_account_id, candidate_id, platform):
     return data[0][0]
 
 
-def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id):
+def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id, name, company):
     raw_profile = raw_profile.replace("\n", "\\n")
     raw_profile = raw_profile.replace("\'", "\\'")
     raw_profile = raw_profile.replace('\"', '\\"')
+    name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+    company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
-        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, platform, candidate_id))
+        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
     else:
-        dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id))
-        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, platform, candidate_id))
+        dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name, company))
+        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
 
 
 def upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr):
