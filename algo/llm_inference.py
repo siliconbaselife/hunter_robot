@@ -18,8 +18,8 @@ import time
 
 cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
 
-secret_token_0 = "gAAAAABlWsO9M5MHWyTjwMrJTxqj1yfzfuvJXNAxVFCZT4AoyklbVX3_EpmIVv59HhTjg4bYIZugs2sXBHDDpfvuJaThWXZr_lRomw5YYMNVdq9atyo7gcQUs8u8iDbsO3qOVDBKH_BXkGoiFJWXdAJSnJqT3xCKcg=="
-OPENAI_API_KEY_0 = cipher.decrypt(secret_token_0).decode()
+# secret_token_0 = "gAAAAABlWsO9M5MHWyTjwMrJTxqj1yfzfuvJXNAxVFCZT4AoyklbVX3_EpmIVv59HhTjg4bYIZugs2sXBHDDpfvuJaThWXZr_lRomw5YYMNVdq9atyo7gcQUs8u8iDbsO3qOVDBKH_BXkGoiFJWXdAJSnJqT3xCKcg=="
+# OPENAI_API_KEY_0 = cipher.decrypt(secret_token_0).decode()
 
 secret_token_1 = "gAAAAABlaH0Znj77bm5n9luPszWTgtDYl74onM5l7zfswQESZqBKEexjJpSvpldN8HIY9ZbS_-p0ne8dlicFl8ckg_iI4kPI6E6pg-PMzCdF_thb1PfT4HCv5swyUzu9JZmEtXFVjyYJD4Bqu1EqAkSU9kzd802AQg=="
 OPENAI_API_KEY_1 = cipher.decrypt(secret_token_1).decode()
@@ -81,7 +81,7 @@ class GPTManager:
         logger.info(f"GPTManager init")
         self.pool = ThreadPoolExecutor(2)
         self.gpt_map = {
-            "ThreadPoolExecutor-0_0": ChatGPT(OPENAI_API_KEY_0),
+            "ThreadPoolExecutor-0_0": ChatGPT(OPENAI_API_KEY_1),
             "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_1)
         }
     def exec_task(self, prompt):
