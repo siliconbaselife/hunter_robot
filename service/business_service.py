@@ -6,9 +6,12 @@ from threading import Thread, Lock
 
 from utils.log import get_logger
 from utils.config import config as config
-from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db, query_first_history_db, query_history_count_db
+from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db, query_first_history_db, query_history_count_db, mask_history_db
 
 logger = get_logger(config['log']['business_log_file'])
+
+def del_history_service(consultant_id):
+    mask_history_db(consultant_id)
 
 def session_query_service(user_id):
     sess_list = query_agent_sess_db(manage_account_id=user_id)

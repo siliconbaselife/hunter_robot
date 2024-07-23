@@ -66,3 +66,4 @@ CREATE TABLE IF NOT EXISTS `agent_history_bank`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table agent_history_bank add `llm_type` VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'LLM名称'  after `response`;
 alter table agent_history_bank add `manage_account_id` VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'manage_account_id'  after `id`;
+alter table agent_history_bank add `visible` bigint(10) unsigned NOT NULL DEFAULT 1 COMMENT 'visible to user'  after `response`;
