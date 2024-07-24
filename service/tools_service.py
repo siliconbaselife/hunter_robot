@@ -1267,7 +1267,8 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
            'cv': None,
            'age': None,
            'isChinese': None,
-           'languages': None}
+           'languages': None,
+           'experiences': None}
     if 'id' in profile:
         res['candidateId'] = profile['id']
     if 'profile' in profile:
@@ -1276,6 +1277,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if experience and 'companyName' in experience:
         res['department'] = experience['companyName']
         res['company'] = experience['companyName']
+    res = profile['experiences']
 
     if 'role' in profile:
         res['title'] = profile['role']
@@ -1385,6 +1387,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
                 if (get_max_time_info(experience['timeInfo'], 1000)) > start_year:
                     last_5_jump += 1
         res['last5Jump'] = last_5_jump
+        res['experiences'] = experiences
     # logger.info(f"age: {res['age']}")
     return res
 
@@ -1410,8 +1413,39 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
     return data, None
 
 
-def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit):
-    pass
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, contact2str):
+    total_count = query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name)
+    start = (page - 1) * limit
+
+    details = []
+    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
+    rows = query_tag_filter_profiles(manage_account_id, platform, tag, company, candidate_name, start, limit)
+
+    for row in rows:
+        profile = parse_profile(row[1], 'need_deserialize', contact2str)
+        if profile is None:
+            continue
+        profile['candidateId'] = row[0]
+        profile['cvUrl'] = row[2]
+        profile['abstract'] = fetch_abstract(profile)
+        details.append(profile)
+    return data, None
+
+
+def fetch_abstract(profile):
+    if "experiences" not in profile:
+        return ""
+
+    abstract = ""
+    for experience in profile["experiences"][:3]:
+        company = experience["companyName"] if "companyName" in experience else ""
+        title = experience["works"][0]["workPosition"] if len(experience["works"]) > 0 and "workPosition" in \
+                                                          experience["works"][0] else ""
+        time_info = experience["works"][0]["workTimeInfo"] if len(experience["works"]) > 0 and "workTimeInfo" in \
+                                                              experience["works"][0] else ""
+        abstract += f"{company} {title} {time_info}"
+
+    return abstract
 
 
 def generate_email_content(manage_account_id, platform, candidate_id, template):
@@ -1545,10 +1579,21 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
         flow_infos[flow_status] += 1
 
     status_infos = {}
-    # todo => status_infos的生成
+    status_infos["connected"] = 0
+    status_infos["wait connect"] = 0
+    status_infos["pending"] = 0
+    companys_dict = {}
+    data = query_tag_resume_infos(manage_account_id, platform, tag)
+    for d in data:
+        company = d[0]
+        companys_dict[company] = 1
+        status = d[1]
+        status_infos[status] += 1
+
     infos = {
         "flow_infos": flow_infos,
-        "status_infos": status_infos
+        "status_infos": status_infos,
+        "companys": list(companys_dict)
     }
 
     return infos
@@ -1575,7 +1620,3 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
         }
     )
     update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs))
-
-def search_company_by_tags(manage_account_id, platform, tag):
-    pass
-

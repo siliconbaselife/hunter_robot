@@ -290,3 +290,33 @@ def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
 def update_tag_log(manage_account_id, platform, tag, candidate_id, log):
     update_sql = f"update user_profile_tag_relation set log = '{log}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
     dbm.update(update_sql)
+
+
+def query_tag_resume_infos(manage_account_id, platform, tag):
+    sql = f"select a.company, a.status FROM online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}' and candidate_id in (SELECT candidate_id FROM user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}')"
+    data = dbm.query(sql)
+    return data
+
+
+def query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name):
+    sql = f"select count(*) from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
+    if company is not None and len(company) > 0:
+        sql += f" and company = '{company}'"
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and name = '{candidate_name}'"
+    sql += f" and candidate_id in (select candidate_id from user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}')"
+
+    data = dbm.query(sql)
+    return data[0][0]
+
+
+def query_tag_filter_profiles(manage_account_id, platform, tag, company, candidate_name, page, limit):
+    sql = f"select count(*) from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
+    if company is not None and len(company) > 0:
+        sql += f" and company = '{company}'"
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and name = '{candidate_name}'"
+    sql += f" and candidate_id in (select candidate_id from user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}') limit {page}, {limit}"
+
+    data = dbm.query(sql)
+    return data

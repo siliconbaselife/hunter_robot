@@ -1012,28 +1012,28 @@ def search_profile_by_tag_web_v2():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-    data = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit)
+    data = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, True)
     logger.info(
         f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} page: {page} limit: {limit} data:{len(data)}")
 
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
 
-@tools_web.route("/backend/tools/searchCompanysByTag", methods=['POST'])
-@web_exception_handler
-def search_company_by_tag_web():
-    tag = request.json.get('tag', '')
-    cookie_user_name = request.cookies.get('user_name', None)
-    platform = request.json.get('platform', '')
-    if cookie_user_name == None:
-        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
-    else:
-        manage_account_id = decrypt(cookie_user_name, key)
-
-    companys = search_company_by_tags(manage_account_id, platform, tag)
-    logger.info(
-        f"search_company_by_tag_web manage_account_id: {manage_account_id} platform: {platform} tag: {tag} companys: {companys}")
-    return Response(json.dumps(get_web_res_suc_with_data(companys), ensure_ascii=False))
+# @tools_web.route("/backend/tools/searchCompanysByTag", methods=['POST'])
+# @web_exception_handler
+# def search_company_by_tag_web():
+#     tag = request.json.get('tag', '')
+#     cookie_user_name = request.cookies.get('user_name', None)
+#     platform = request.json.get('platform', '')
+#     if cookie_user_name == None:
+#         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+#     else:
+#         manage_account_id = decrypt(cookie_user_name, key)
+#
+#     companys = search_company_by_tags(manage_account_id, platform, tag)
+#     logger.info(
+#         f"search_company_by_tag_web manage_account_id: {manage_account_id} platform: {platform} tag: {tag} companys: {companys}")
+#     return Response(json.dumps(get_web_res_suc_with_data(companys), ensure_ascii=False))
 
 
 @tools_web.route("/backend/tools/searchTagInfos", methods=['POST'])
@@ -1103,6 +1103,7 @@ def add_candidate_log():
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
+
     logger.info(
         f"add_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, new_log: {new_log}")
     add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log)
