@@ -1443,7 +1443,7 @@ def fetch_abstract(profile):
                                                           experience["works"][0] else ""
         time_info = experience["works"][0]["workTimeInfo"] if len(experience["works"]) > 0 and "workTimeInfo" in \
                                                               experience["works"][0] else ""
-        abstract += f"{company} {title} {time_info}"
+        abstract += f"{company} {title} {time_info}\n"
 
     return abstract
 
