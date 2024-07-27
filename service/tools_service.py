@@ -36,6 +36,7 @@ SCENARIO_GREETING = 'greeting'
 SCENARIO_CHAT = 'chat'
 SCENARIO_EMAIL = 'email'
 
+
 def cv_str(obj, dent):
     cv = ""
     if type(obj) == dict:
@@ -51,6 +52,7 @@ def cv_str(obj, dent):
     elif type(obj) == str or type(obj) == int or type(obj) == float:
         cv += (str(obj) + '\n')
     return cv
+
 
 def deserialize_raw_profile(raw_profile):
     while type(raw_profile) == tuple:
@@ -71,7 +73,7 @@ def deserialize_raw_profile(raw_profile):
         return None
 
 
-def parse_profile(profile, type='need_deserialize', field_2_str =False):
+def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if type == 'need_deserialize':
         profile = deserialize_raw_profile(profile)
     if profile is None:
@@ -376,8 +378,8 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                 "\'", "")
             parsed = parse_profile(p, 'no_need')
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
-                                parsed['name'] if parsed['name'] else '',
-                                parsed['company'] if parsed['company'] else '')
+                                  parsed['name'] if parsed['name'] else '',
+                                  parsed['company'] if parsed['company'] else '')
 
         if tag and len(tag) > 0:
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
@@ -1157,6 +1159,7 @@ def exec_filter_task(manage_account_id, file_list, jd):
 def customized_user_scenario(manage_account_id, context, platform, scenario_info, extra_info=''):
     create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info='')
 
+
 def get_email_template(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_EMAIL)
     if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
@@ -1167,6 +1170,7 @@ def get_email_template(manage_account_id, platform):
     else:
         return json.loads(scenario_info, strict=False)
 
+
 def get_default_email_template(idx, platform):
     total = get_default_email_template_count(platform)[0][0]
     template = get_default_email_template_by_idx(platform, idx)
@@ -1174,6 +1178,7 @@ def get_default_email_template(idx, platform):
         return None, f'total template is {total}, {idx} is exceeded'
     template = template[0][0]
     return {'total': total, 'idx': idx, 'template': template}, None
+
 
 def get_default_greeting_template(idx, platform):
     total = get_default_greeting_template_count(platform)[0][0]
@@ -1183,9 +1188,11 @@ def get_default_greeting_template(idx, platform):
     template = template[0][0]
     return {'total': total, 'idx': idx, 'template': template}, None
 
+
 def flush_email_credentials(manage_account_id, email, pwd, platform):
     logger.info(f'[flush_email_credentials] {manage_account_id} {email} {pwd} {platform}')
     flush_email_credentials_db(manage_account_id, email, pwd, platform)
+
 
 def get_email_credentials(manage_account_id, platform):
     email_credential = get_email_credentials_db(manage_account_id, platform)
@@ -1193,7 +1200,8 @@ def get_email_credentials(manage_account_id, platform):
     if len(email_credential) == 0 or len(email_credential[0]) == 0:
         return None, f'{manage_account_id}没有注册邮箱配置'
     email_credential = email_credential[0]
-    return {'manage_account_id': email_credential[0], 'email': email_credential[1], 'pwd': email_credential[2], 'platform': email_credential[3]}, None
+    return {'manage_account_id': email_credential[0], 'email': email_credential[1], 'pwd': email_credential[2],
+            'platform': email_credential[3]}, None
 
 
 def get_default_greeting_scenario():
@@ -1201,7 +1209,7 @@ def get_default_greeting_scenario():
     msg += 'we are looking for an candidate base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China\n'
     msg += 'your Exp. seems a good match\n'
     msg += 'would you like to explore this opportunity? Thanks!'
-    return {'默认' : msg}
+    return {'默认': msg}
 
 
 def get_default_chat_scenario():
@@ -1366,9 +1374,6 @@ def transfer_profile():
     return None
 
 
-
-
-
 def get_max_time_info(time_info_str, default_time):
     if not time_info_str:
         return default_time
@@ -1466,6 +1471,7 @@ def generate_email_content(manage_account_id, platform, candidate_id, template):
             template_val = template_val.replace(template_key, profile[key])
     return template_val, None
 
+
 def send_email_163(email_from, email_to, pwd, subject, body):
     email_user = email_from
     email_password = pwd
@@ -1497,6 +1503,7 @@ def send_email_163(email_from, email_to, pwd, subject, body):
     finally:
         server.quit()
     return ret
+
 
 def send_email_gmail(email_from, email_to, pwd, subject, body):
     email_user = email_from
@@ -1549,7 +1556,8 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
         if profile and 'profile' in profile:
             profile = profile['profile']
         logger.info('[send_email] profile = {} , candidate_id = {}'.format(profile, candidate_id))
-        if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(profile['contactInfo']['Email']) == 0:
+        if not profile or 'contactInfo' not in profile or 'Email' not in profile['contactInfo'] or len(
+                profile['contactInfo']['Email']) == 0:
             return None, f'{candidate_id} 无email联系方式'
         email_to = profile['contactInfo']['Email']
     # email_to = 'db24@outlook.com'
@@ -1617,4 +1625,6 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
             "msg": new_log
         }
     )
+    logger.info(
+        f"add_tag_log manage_account_id: {manage_account_id} platform: {platform} tag: {tag} candidate_id: {candidate_id} flow_status: {flow_status} new_log: {new_log}")
     update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs))
