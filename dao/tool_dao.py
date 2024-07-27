@@ -334,3 +334,4 @@ def query_tag_filter_profiles(manage_account_id, platform, tag, company, candida
     logger.info(f"query_tag_filter_profiles: {sql}")
     data = dbm.query(sql)
     return data
+

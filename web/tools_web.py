@@ -1010,7 +1010,7 @@ def search_profile_by_tag_web_v2():
 
     data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, False)
     logger.info(
-        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} page: {page} limit: {limit} data:{len(data)}")
+        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} status：{status} stage: {stage} page: {page} limit: {limit} data:{len(data)}")
 
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
@@ -1057,14 +1057,14 @@ def change_flow_status():
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     flow_status = request.json.get('flow_status', '')
-    if cookie_user_name == None:
+    if cookie_user_name is None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
     logger.info(
         f"change_flow_status: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, flow_status: {flow_status}")
-    change_flow_status(manage_account_id, platform, tag, candidate_id, flow_status)
+    change_flow_status_service(manage_account_id, platform, tag, candidate_id, flow_status)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
 
@@ -1075,7 +1075,7 @@ def get_candidate_log():
     candidate_id = request.json.get('candidate_id', '')
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
-    if cookie_user_name == None:
+    if cookie_user_name is None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)

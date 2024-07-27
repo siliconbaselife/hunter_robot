@@ -1597,7 +1597,7 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
     return infos
 
 
-def change_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
+def change_flow_status_service(manage_account_id, platform, tag, candidate_id, flow_status):
     update_flow_status(manage_account_id, platform, tag, candidate_id, flow_status)
 
 
