@@ -328,7 +328,7 @@ def query_tag_filter_profiles(manage_account_id, platform, tag, company, candida
     if company is not None and len(company) > 0:
         sql += f" and company = '{company}'"
     if candidate_name is not None and len(candidate_name) > 0:
-        sql += f" and name = '{candidate_name}'"
+        sql += f" and name like '%{candidate_name}%'"
     sql += f" and candidate_id in (select candidate_id from user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}') limit {page}, {limit}"
 
     logger.info(f"query_tag_filter_profiles: {sql}")
