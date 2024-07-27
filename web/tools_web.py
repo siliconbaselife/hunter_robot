@@ -1080,7 +1080,7 @@ def get_candidate_log():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-    logs = get_log(manage_account_id, '', tag, candidate_id)
+    logs = get_log(manage_account_id, platform, tag, candidate_id)
     logger.info(
         f"get_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, logs: {logs}")
     return Response(json.dumps(get_web_res_suc_with_data(logs), ensure_ascii=False))
