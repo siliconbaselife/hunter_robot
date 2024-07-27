@@ -1428,8 +1428,7 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
         profile['abstract'] = fetch_abstract(profile)
         stage = query_stage_by_id(manage_account_id, platform, tag, profile['candidateId'])
         profile["stage"] = stage
-
-        del profile['experiences']
+        profile['experiences'] = None
         details.append(profile)
     return data, None
 
