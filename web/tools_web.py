@@ -993,7 +993,8 @@ def download_profile_by_tag_web():
 @tools_web.route("/backend/tools/searchProfileInfoByTag/v2", methods=['POST'])
 @web_exception_handler
 def search_profile_by_tag_web_v2():
-    tag = request.json.get('tag', '')
+    tags = request.json.get('tags', '')
+    tag = tags[0]
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     page = request.json.get('page', 1)
