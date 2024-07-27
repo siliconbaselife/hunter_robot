@@ -1008,7 +1008,7 @@ def search_profile_by_tag_web_v2():
 
     data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, True)
     logger.info(
-        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} page: {page} limit: {limit} data:{data}")
+        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} page: {page} limit: {limit} data:{len(data)}")
 
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 

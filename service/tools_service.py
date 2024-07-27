@@ -1425,7 +1425,7 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
         profile['cvUrl'] = row[2]
         profile['abstract'] = fetch_abstract(profile)
         details.append(profile)
-    return details, None
+    return data, None
 
 
 def fetch_abstract(profile):
