@@ -338,8 +338,7 @@ def query_tag_filter_profiles(manage_account_id, platform, tag, company, candida
     return data
 
 
-def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status, page,
-                             limit):
+def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status):
     sql = f"select count(*) from user_profile_tag_relation a inner join online_resume b on a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
@@ -349,7 +348,6 @@ def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidat
         sql += f" and a.flow_status = '{stage}'"
     if status is not None and len(status) > 0:
         sql += f" and b.status = '{status}'"
-    sql += f" limit {page}, {limit}"
 
     s = time.time()
     data = dbm.query(sql)
