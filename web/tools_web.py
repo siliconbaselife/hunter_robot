@@ -998,8 +998,10 @@ def search_profile_by_tag_web_v2():
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     page = request.json.get('page', 1)
-    company = request.json.get('company', '')
-    candidate_name = request.json.get('candidate_name', '')
+    company = request.json.get('company_name', '')
+    candidate_name = request.json.get('name', '')
+    status = request.json.get('status', '')
+    stage = request.json.get('stage')
     limit = request.json.get('limit', 20)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
