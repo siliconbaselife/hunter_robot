@@ -202,7 +202,6 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
         last_5_jump = 0
         start_year = datetime.datetime.now().year - 5
         for experience in experiences:
-            logger.info(f"experience: {experience}")
             # if 'timeInfo' in experience and experience['timeInfo'] != None and type(experience['timeInfo']) == str:
             if 'timeInfo' in experience and experience['timeInfo'] != None:
                 if (get_max_time_info(experience['timeInfo'], 1000)) > start_year:
