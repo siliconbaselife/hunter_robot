@@ -39,12 +39,12 @@ sql_dict = {
     "query_customized_scenario_setting": "select scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_customized_extra_setting": "select extra_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_email_info": "select email, pwd from email_credentials where manage_account_id = \'{}\';",
-    "flush_email_credentials" : "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
-    "get_email_credentials" : "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
+    "flush_email_credentials": "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
+    "get_email_credentials": "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
     "get_default_email_template_count": "select count(id) from default_email_template where platform = '{}';",
-    "get_default_email_template_by_idx" : "select template from default_email_template where platform = '{}' order by id limit {}, 1;",
+    "get_default_email_template_by_idx": "select template from default_email_template where platform = '{}' order by id limit {}, 1;",
     "get_default_greeting_template_count": "select count(id) from default_greeting_template where platform = '{}';",
-    "get_default_greeting_template_by_idx" : "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;"
+    "get_default_greeting_template_by_idx": "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;"
 }
 
 
@@ -127,7 +127,9 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
     else:
-        dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name, company))
+        dbm.insert(
+            sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
+                                                     company))
         return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
 
 
@@ -229,32 +231,41 @@ def create_customized_scenario_setting(manage_account_id, platform, context, sce
     extra_info = extra_info.replace("\'", "\\'")
     extra_info = extra_info.replace('\"', '\\"')
     return dbm.query(
-        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info, extra_info))
+        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info,
+                                                              extra_info))
 
 
 def query_customized_scenario_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_scenario_setting'].format(manage_account_id, platform, context))
 
+
 def query_customized_extra_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_extra_setting'].format(manage_account_id, platform, context))
+
 
 def query_email_info(manage_account_id):
     return dbm.query(sql_dict['query_email_info'].format(manage_account_id))
 
+
 def flush_email_credentials_db(manage_account_id, email, pwd, platform):
     return dbm.insert(sql_dict['flush_email_credentials'].format(manage_account_id, email, pwd, platform))
+
 
 def get_email_credentials_db(manage_account_id, platform):
     return dbm.query(sql_dict['get_email_credentials'].format(manage_account_id, platform))
 
+
 def get_default_email_template_count(platform):
     return dbm.query(sql_dict['get_default_email_template_count'].format(platform))
+
 
 def get_default_email_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))
 
+
 def get_default_greeting_template_count(platform):
     return dbm.query(sql_dict['get_default_greeting_template_count'].format(platform))
+
 
 def get_default_greeting_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_greeting_template_by_idx'].format(platform, idx))
@@ -290,13 +301,14 @@ def query_tag_resume_infos(manage_account_id, platform, tag):
     data = dbm.query(sql)
     return data
 
+
 def query_stage_by_id(manage_account_id, platform, tag, candidate_id):
     sql = f"select flow_status from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
     data = dbm.query(sql)
     if len(data) == 0:
         return ""
     else:
-        return data[0]
+        return data[0][0]
 
 
 def query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name):
