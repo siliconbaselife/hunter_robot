@@ -1415,7 +1415,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
     return data, None
 
 
-def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, status, stage, limit,
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, limit,
                              contact2str):
     total_count = query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name)
     start = (page - 1) * limit
