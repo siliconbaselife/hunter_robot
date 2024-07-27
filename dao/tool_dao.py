@@ -352,8 +352,8 @@ def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidat
     s = time.time()
     data = dbm.query(sql)
     e = time.time()
-    logger.info(f"query_tag_filter_profiles_new: {sql} time: {e - s}")
-    return data
+    logger.info(f"query_tag_filter_num_new: {sql} time: {e - s}")
+    return data[0][0]
 
 
 def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, page,
