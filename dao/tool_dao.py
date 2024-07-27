@@ -311,5 +311,6 @@ def query_tag_filter_profiles(manage_account_id, platform, tag, company, candida
         sql += f" and name = '{candidate_name}'"
     sql += f" and candidate_id in (select candidate_id from user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}') limit {page}, {limit}"
 
+    logger.info(f"query_tag_filter_profiles: {sql}")
     data = dbm.query(sql)
     return data
