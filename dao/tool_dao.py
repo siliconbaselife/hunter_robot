@@ -290,6 +290,14 @@ def query_tag_resume_infos(manage_account_id, platform, tag):
     data = dbm.query(sql)
     return data
 
+def query_stage_by_id(manage_account_id, platform, tag, candidate_id):
+    sql = f"select flow_status from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    data = dbm.query(sql)
+    if len(data) == 0:
+        return ""
+    else:
+        return data[0]
+
 
 def query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name):
     sql = f"select count(*) from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
@@ -304,7 +312,7 @@ def query_tag_filter_num(manage_account_id, platform, tag, company, candidate_na
 
 
 def query_tag_filter_profiles(manage_account_id, platform, tag, company, candidate_name, page, limit):
-    sql = f"select candidate_id, raw_profile, cv_url from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
+    sql = f"select candidate_id, raw_profile, cv_url, status from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
     if company is not None and len(company) > 0:
         sql += f" and company = '{company}'"
     if candidate_name is not None and len(candidate_name) > 0:

@@ -1424,17 +1424,20 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
             continue
         profile['candidateId'] = row[0]
         profile['cvUrl'] = row[2]
+        profile['status'] = row[3]
         profile['abstract'] = fetch_abstract(profile)
+        stage = query_stage_by_id(manage_account_id, platform, tag, profile['candidateId'])
+        profile["stage"] = stage
+
+        del profile['experiences']
         details.append(profile)
     return data, None
 
 
 def fetch_abstract(profile):
     if "experiences" not in profile:
-        logger.info("fetch_abstract no experiences")
         return ""
 
-    logger.info(f"experiences: {profile['experiences']}")
     abstract = ""
     for experience in profile["experiences"][:3]:
         company = experience["companyName"] if "companyName" in experience else ""
