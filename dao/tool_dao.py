@@ -3,6 +3,7 @@ import uuid
 from utils.config import config
 from utils.log import get_logger
 import json
+import time
 
 logger = get_logger(config['log']['log_file'])
 
@@ -349,6 +350,8 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
     if status is not None and len(status) > 0:
         sql += f" and b.status = '{status}'"
 
-    logger.info(f"query_tag_filter_profiles_new: {sql}")
+    s = time.time()
     data = dbm.query(sql)
+    e = time.time()
+    logger.info(f"query_tag_filter_profiles_new: {sql} time: {e - s}")
     return data
