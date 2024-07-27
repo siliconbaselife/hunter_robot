@@ -284,6 +284,7 @@ def update_flow_status(manage_account_id, platform, tag, candidate_id, flow_stat
 
 def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
     sql = f"select log from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    logger.info(f'fetch_tag_log sql: {sql}')
     data = dbm.query(sql)
     if len(data) > 0:
         return json.loads(data[0][0])

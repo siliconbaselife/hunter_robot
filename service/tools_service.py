@@ -1627,4 +1627,4 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
     )
     logger.info(
         f"add_tag_log manage_account_id: {manage_account_id} platform: {platform} tag: {tag} candidate_id: {candidate_id} flow_status: {flow_status} logs: {logs}")
-    update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs))
+    update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs, ensure_ascii=False))
