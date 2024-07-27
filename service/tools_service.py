@@ -1408,6 +1408,42 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
         details.append(profile)
     return data, None
 
+
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, contact2str):
+    total_count = query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name)
+    start = (page - 1) * limit
+
+    details = []
+    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
+    rows = query_tag_filter_profiles(manage_account_id, platform, tag, company, candidate_name, start, limit)
+
+    for row in rows:
+        profile = parse_profile(row[1], 'need_deserialize', contact2str)
+        if profile is None:
+            continue
+        profile['candidateId'] = row[0]
+        profile['cvUrl'] = row[2]
+        profile['abstract'] = fetch_abstract(profile)
+        details.append(profile)
+    return data, None
+
+
+def fetch_abstract(profile):
+    if "experiences" not in profile:
+        return ""
+
+    abstract = ""
+    for experience in profile["experiences"][:3]:
+        company = experience["companyName"] if "companyName" in experience else ""
+        title = experience["works"][0]["workPosition"] if len(experience["works"]) > 0 and "workPosition" in \
+                                                          experience["works"][0] else ""
+        time_info = experience["works"][0]["workTimeInfo"] if len(experience["works"]) > 0 and "workTimeInfo" in \
+                                                              experience["works"][0] else ""
+        abstract += f"{company} {title} {time_info}\n"
+
+    return abstract
+
+
 def generate_email_content(manage_account_id, platform, candidate_id, template):
     email_template = get_email_template(manage_account_id, platform)
     if email_template == {}:
@@ -1526,3 +1562,54 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
         return None, f'{email_from}发送失败, 请确认密码正确, enable smtp&pop3设置'
 
 
+def search_tag_flow_infos(manage_account_id, platform, tag):
+    data = query_tag_flow_status(manage_account_id, platform, tag)
+    flow_infos = {}
+    for d in data:
+        flow_status = d[1]
+        if flow_status not in flow_infos.keys():
+            flow_infos[flow_status] = 0
+        flow_infos[flow_status] += 1
+
+    status_infos = {}
+    status_infos["connected"] = 0
+    status_infos["wait connect"] = 0
+    status_infos["pending"] = 0
+    companys_dict = {}
+    data = query_tag_resume_infos(manage_account_id, platform, tag)
+    for d in data:
+        company = d[0]
+        companys_dict[company] = 1
+        status = d[1]
+        status_infos[status] += 1
+
+    infos = {
+        "flow_infos": flow_infos,
+        "status_infos": status_infos,
+        "companys": list(companys_dict)
+    }
+
+    return infos
+
+
+def change_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
+    update_flow_status(manage_account_id, platform, tag, candidate_id, flow_status)
+
+
+def get_log(manage_account_id, platform, tag, candidate_id):
+    log = fetch_tag_log(manage_account_id, platform, tag, candidate_id)
+    return log
+
+
+def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log):
+    current_time = datetime.datetime.now()
+    now_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+    logs = fetch_tag_log(manage_account_id, platform, tag, candidate_id)
+    logs.append(
+        {
+            "time": now_time,
+            "flow_status": flow_status,
+            "msg": new_log
+        }
+    )
+    update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs))

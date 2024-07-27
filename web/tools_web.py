@@ -988,3 +988,116 @@ def download_profile_by_tag_web():
         return response
 
     return send_file(file_path, as_attachment=True)
+
+
+@tools_web.route("/backend/tools/searchProfileInfoByTag/v2", methods=['POST'])
+@web_exception_handler
+def search_profile_by_tag_web_v2():
+    tag = request.json.get('tag', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    page = request.json.get('page', 1)
+    company = request.json.get('company', '')
+    candidate_name = request.json.get('candidate_name', '')
+    limit = request.json.get('limit', 20)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    data = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, True)
+    logger.info(
+        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} page: {page} limit: {limit} data:{len(data)}")
+
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+
+# @tools_web.route("/backend/tools/searchCompanysByTag", methods=['POST'])
+# @web_exception_handler
+# def search_company_by_tag_web():
+#     tag = request.json.get('tag', '')
+#     cookie_user_name = request.cookies.get('user_name', None)
+#     platform = request.json.get('platform', '')
+#     if cookie_user_name == None:
+#         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+#     else:
+#         manage_account_id = decrypt(cookie_user_name, key)
+#
+#     companys = search_company_by_tags(manage_account_id, platform, tag)
+#     logger.info(
+#         f"search_company_by_tag_web manage_account_id: {manage_account_id} platform: {platform} tag: {tag} companys: {companys}")
+#     return Response(json.dumps(get_web_res_suc_with_data(companys), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/searchTagInfos", methods=['POST'])
+@web_exception_handler
+def search_tag_infos():
+    tag = request.json.get('tag', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    infos = search_tag_flow_infos(manage_account_id, platform, tag)
+    logger.info(
+        f"search_tag_infos manage_account_id: {manage_account_id} platform: {platform} tag: {tag} infos: {infos}")
+    return Response(json.dumps(get_web_res_suc_with_data(infos), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/changeFlowStatus", methods=['POST'])
+@web_exception_handler
+def change_flow_status():
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    flow_status = request.json.get('flow_status', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    logger.info(
+        f"change_flow_status: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, flow_status: {flow_status}")
+    change_flow_status(manage_account_id, platform, tag, candidate_id, flow_status)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/getCandidateLog", methods=['POST'])
+@web_exception_handler
+def get_candidate_log():
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    logs = get_log(manage_account_id, '', tag, candidate_id)
+    logger.info(
+        f"get_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, logs: {logs}")
+    return Response(json.dumps(get_web_res_suc_with_data(logs), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/addCandidateLog", methods=['POST'])
+@web_exception_handler
+def add_candidate_log():
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    new_log = request.json.get('new_log', '')
+    flow_status = request.json.get('flow_status', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    logger.info(
+        f"add_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, new_log: {new_log}")
+    add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
