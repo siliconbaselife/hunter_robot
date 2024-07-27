@@ -344,3 +344,11 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
         sql += f" and b.company = '{company}' "
     if candidate_name is not None and len(candidate_name) > 0:
         sql += f" and b.name like '%{candidate_name}%'"
+    if stage is not None and len(stage) > 0:
+        sql += f" and a.flow_status = '{stage}'"
+    if status is not None and len(status) > 0:
+        sql += f" and b.status = '{status}'"
+
+    logger.info(f"query_tag_filter_profiles_new: {sql}")
+    data = dbm.query(sql)
+    return data

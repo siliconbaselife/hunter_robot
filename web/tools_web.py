@@ -1008,7 +1008,7 @@ def search_profile_by_tag_web_v2():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-    data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, False)
+    data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, limit, False)
     logger.info(
         f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} status：{status} stage: {stage} page: {page} limit: {limit} data:{len(data)}")
 

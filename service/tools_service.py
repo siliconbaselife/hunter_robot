@@ -1415,13 +1415,15 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
     return data, None
 
 
-def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, limit, contact2str):
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, page, status, stage, limit,
+                             contact2str):
     total_count = query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name)
     start = (page - 1) * limit
 
     details = []
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
-    rows = query_tag_filter_profiles(manage_account_id, platform, tag, company, candidate_name, start, limit)
+    rows = query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status,
+                                         start, limit)
 
     for row in rows:
         profile = parse_profile(row[1], 'need_deserialize', contact2str)
@@ -1431,8 +1433,8 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
         profile['cvUrl'] = row[2]
         profile['status'] = row[3]
         profile['abstract'] = fetch_abstract(profile)
-        stage = query_stage_by_id(manage_account_id, platform, tag, profile['candidateId'])
-        profile["stage"] = stage
+        # stage = query_stage_by_id(manage_account_id, platform, tag, profile['candidateId'])
+        profile["stage"] = row[4]
         profile['experiences'] = None
         details.append(profile)
     return data, None
