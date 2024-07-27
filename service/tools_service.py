@@ -206,6 +206,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str =False):
                 if (get_max_time_info(experience['timeInfo'], 1000)) > start_year:
                     last_5_jump += 1
         res['last5Jump'] = last_5_jump
+        res["experiences"] = experiences
     # logger.info(f"age: {res['age']}")
     return res
 
