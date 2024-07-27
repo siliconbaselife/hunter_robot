@@ -1430,8 +1430,10 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
 
 def fetch_abstract(profile):
     if "experiences" not in profile:
+        logger.info("fetch_abstract no experiences")
         return ""
 
+    logger.info(f"experiences: {profile['experiences']}")
     abstract = ""
     for experience in profile["experiences"][:3]:
         company = experience["companyName"] if "companyName" in experience else ""
