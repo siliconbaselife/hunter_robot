@@ -304,7 +304,7 @@ def query_tag_filter_num(manage_account_id, platform, tag, company, candidate_na
 
 
 def query_tag_filter_profiles(manage_account_id, platform, tag, company, candidate_name, page, limit):
-    sql = f"select count(*) from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
+    sql = f"select candidate_id, raw_profile, cv_url from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
     if company is not None and len(company) > 0:
         sql += f" and company = '{company}'"
     if candidate_name is not None and len(candidate_name) > 0:
