@@ -606,6 +606,68 @@ def get_default_email_template_web():
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/getDefaultInmailTemplate", methods=['POST'])
+@web_exception_handler
+def get_default_inmail_template_web():
+    platform = request.json.get('platform', '')
+    idx = request.json.get('idx', None)
+    if idx is None or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_default_inmail_template manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data, err_msg = get_default_inmail_template(int(idx), platform)
+    if err_msg is not None:
+        return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/getInmailTemplate", methods=['POST'])
+@web_exception_handler
+def get_inmail_scenario_web():
+    platform = request.json.get('platform', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_greeting_scenario_web manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data = get_inmail_template(manage_account_id, platform)
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/customizedInmailTemplate", methods=['POST'])
+@web_exception_handler
+def customized_inmail_scenario_web():
+    platform = request.json.get('platform', '')
+    # candidate_id = request.json.get('candidate_id', '')
+    scenario = request.json.get('scenario')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] customized_inmail_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
+    customized_user_scenario(manage_account_id, SCENARIO_INMAIL, platform, scenario)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 @tools_web.route("/backend/tools/getDefaultGreetingTemplate", methods=['POST'])
 @web_exception_handler
 def get_default_greeting_template_web():
@@ -623,7 +685,28 @@ def get_default_greeting_template_web():
     logger.info(
         "[backend_tools] get_default_greeting_template_web manage_account_id = {}, platform = {}".format(
             manage_account_id, platform))
-    data, err_msg = get_default_email_template(int(idx), platform)
+    data, err_msg = get_default_greeting_template(int(idx), platform)
+    if err_msg is not None:
+        return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/getDefaultGreetingTemplateV2", methods=['POST', 'GET'])
+@web_exception_handler
+def get_default_greeting_template_webv2():
+    platform = request.json.get('platform', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_default_greeting_template_web manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data, err_msg = get_default_greeting_template_v2(platform)
     if err_msg is not None:
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))

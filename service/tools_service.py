@@ -35,6 +35,7 @@ file_path_prefix = '/home/human/workspace/hunter_robot.v2.0/tmp/'
 SCENARIO_GREETING = 'greeting'
 SCENARIO_CHAT = 'chat'
 SCENARIO_EMAIL = 'email'
+SCENARIO_INMAIL = 'inmail'
 
 
 def cv_str(obj, dent):
@@ -1169,6 +1170,16 @@ def get_email_template(manage_account_id, platform):
     else:
         return json.loads(scenario_info, strict=False)
 
+def get_inmail_template(manage_account_id, platform):
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_INMAIL)
+    if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
+        return {}
+    scenario_info = scenario_info[0][0]
+    if scenario_info == None or len(scenario_info) == 0:
+        return {}
+    else:
+        return json.loads(scenario_info, strict=False)
+
 
 def get_default_email_template(idx, platform):
     total = get_default_email_template_count(platform)[0][0]
@@ -1178,6 +1189,23 @@ def get_default_email_template(idx, platform):
     template = template[0][0]
     return {'total': total, 'idx': idx, 'template': template}, None
 
+def get_default_inmail_template(idx, platform):
+    total = get_default_inmail_template_count(platform)[0][0]
+    template = get_default_inmail_template_by_idx(platform, idx)
+    if len(template) == 0 or len(template[0]) == 0:
+        return None, f'total template is {total}, {idx} is exceeded'
+    template = template[0][0]
+    return {'total': total, 'idx': idx, 'template': template}, None
+
+
+def get_default_greeting_template_v2(idx, platform):
+    templates = get_all_default_greeting_template(platform)
+    if len(templates) == 0 or len(templates[0]) == 0:
+        return None, f'no greeting template'
+    res = []
+    for template in templates:
+        res.append(template[0])
+    return res, None
 
 def get_default_greeting_template(idx, platform):
     total = get_default_greeting_template_count(platform)[0][0]

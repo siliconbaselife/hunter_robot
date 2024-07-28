@@ -44,8 +44,11 @@ sql_dict = {
     "get_email_credentials": "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
     "get_default_email_template_count": "select count(id) from default_email_template where platform = '{}';",
     "get_default_email_template_by_idx": "select template from default_email_template where platform = '{}' order by id limit {}, 1;",
+    "get_default_inmail_template_count": "select count(id) from default_inmail_template where platform = '{}';",
+    "get_default_inmail_template_by_idx": "select template from default_inmail_template where platform = '{}' order by id limit {}, 1;",
     "get_default_greeting_template_count": "select count(id) from default_greeting_template where platform = '{}';",
-    "get_default_greeting_template_by_idx": "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;"
+    "get_default_greeting_template_by_idx": "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;",
+    "get_all_default_greeting_template": "select template from default_greeting_template where platform = '{}' order by id asc"
 }
 
 
@@ -264,12 +267,22 @@ def get_default_email_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))
 
 
+def get_default_inmail_template_count(platform):
+    return dbm.query(sql_dict['get_default_email_template_count'].format(platform))
+
+
+def get_default_inmail_template_by_idx(platform, idx):
+    return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))
+
 def get_default_greeting_template_count(platform):
     return dbm.query(sql_dict['get_default_greeting_template_count'].format(platform))
 
 
 def get_default_greeting_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_greeting_template_by_idx'].format(platform, idx))
+
+def get_all_default_greeting_template(platform):
+    return dbm.query(sql_dict['get_all_default_greeting_template'].format(platform))
 
 
 def query_tag_flow_status(manage_account_id, platform, tag):
