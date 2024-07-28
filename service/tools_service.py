@@ -1198,7 +1198,7 @@ def get_default_inmail_template(idx, platform):
     return {'total': total, 'idx': idx, 'template': template}, None
 
 
-def get_default_greeting_template_v2(idx, platform):
+def get_default_greeting_template_v2(platform):
     templates = get_all_default_greeting_template(platform)
     if len(templates) == 0 or len(templates[0]) == 0:
         return None, f'no greeting template'
