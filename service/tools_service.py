@@ -26,6 +26,7 @@ from service.extension_service import refresh_contact
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from dao.contact_bank_dao import query_user_link_by_id_set, query_contact_by_id_set
 
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
@@ -1441,6 +1442,27 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
         details.append(profile)
     return data, None
 
+def fetch_contact_infos(manage_account_id, candidate_ids):
+    ret_dict = {}
+    user_links = query_user_link_by_id_set(manage_account_id, candidate_ids)
+    contacts = query_contact_by_id_set(linkedin_id_set=candidate_ids)
+    contact_dict = {}
+    for linkedin_id, personal_email, work_email, phone in contacts:
+        contact_dict[linkedin_id] = {
+            'Email': json.loads(personal_email)+ json.loads(work_email),
+            'Phone': json.loads(phone)
+        }
+    for link_linkedin_id, link_contact_type in user_links:
+        if link_linkedin_id not in ret_dict:
+            ret_dict[link_linkedin_id] = {}
+        contact_key = 'Email' if 'email' in link_contact_type else 'Phone'
+        if contact_key not in ret_dict[link_linkedin_id]:
+            ret_dict[link_linkedin_id][contact_key] = []
+        contact_content = contact_dict.get(link_linkedin_id, {}).get(contact_key, [])
+        ret_dict[link_linkedin_id][contact_key] += contact_content
+    logger.info(f'fetch_contact_infos, from |{contacts}| |{user_links}| to |{ret_dict}|')
+    return ret_dict
+
 
 def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, limit,
                              contact2str):
@@ -1451,9 +1473,22 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
     rows = query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status,
                                          start, limit)
-
+    candidate_ids = [row[0] for row in rows]
+    candidate_contact_infos = fetch_contact_infos(manage_account_id, candidate_ids)
     for row in rows:
         profile = parse_profile(row[1], 'need_deserialize', contact2str)
+        candidate_id = row[0]
+        if candidate_id in candidate_contact_infos:
+            if not profile['contactInfo'].get('Phone', ''):
+                bank_phone = candidate_contact_infos[candidate_id].get('Phone', [])
+                if len(bank_phone):
+                    logger.info(f'manage_account_id {manage_account_id}, linkedin {candidate_id}, will update phone to: ({len(bank_phone)}) {bank_phone[0]}')
+                    profile['contactInfo']['Phone'] = bank_phone[0]
+            if not profile['contactInfo'].get('Email', ''):
+                bank_email = candidate_contact_infos[candidate_id].get('Email', [])
+                if len(bank_email):
+                    logger.info(f'manage_account_id {manage_account_id}, linkedin {candidate_id}, will update email to: ({len(bank_email)}) {bank_email[0]}')
+                    profile['contactInfo']['Email'] = bank_email[0]
         if profile is None:
             continue
         profile['candidateId'] = row[0]
