@@ -1444,6 +1444,8 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
 
 def fetch_contact_infos(manage_account_id, candidate_ids):
     ret_dict = {}
+    if not candidate_ids:
+        return ret_dict
     user_links = query_user_link_by_id_set(manage_account_id, candidate_ids)
     contacts = query_contact_by_id_set(linkedin_id_set=candidate_ids)
     contact_dict = {}
