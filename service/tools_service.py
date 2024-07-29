@@ -1476,7 +1476,7 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
     rows = query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status,
                                          start, limit)
     candidate_ids = [row[0] for row in rows]
-    candidate_contact_infos = fetch_contact_infos(manage_account_id, candidate_ids)
+    candidate_contact_infos = {}#fetch_contact_infos(manage_account_id, candidate_ids)
     for row in rows:
         profile = parse_profile(row[1], 'need_deserialize', contact2str)
         candidate_id = row[0]
