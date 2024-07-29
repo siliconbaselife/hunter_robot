@@ -71,7 +71,7 @@ def query_contact_by_profile_id(linkedin_id):
     return True, person_emails, phones
 
 def query_contact_by_id_set(linkedin_id_set):
-    return dbm.query(sql_dict['query_contact_from_id_set'].format(linkedin_id_set))
+    return dbm.query(sql_dict['query_contact_from_id_set'].format(json.dumps(linkedin_id_set).replace('[', '(').replace(']', ')')))
 
 def query_user_link_by_id_set(user_id, linkedin_id_set):
-    return dbm.query(sql_dict['query_link_from_id_set'].format(user_id, linkedin_id_set))
+    return dbm.query(sql_dict['query_link_from_id_set'].format(user_id, json.dumps(linkedin_id_set).replace('[', '(').replace(']', ')')))
