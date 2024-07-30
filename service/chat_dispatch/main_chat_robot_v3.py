@@ -94,18 +94,26 @@ class MainChatRobotV3(BaseChatRobot):
         logger.info(f"MainChatRobotV3_prepared_msg:{self._candidate_id}, {self._job_id}, {history_msg}")
         return history_msg
 
+    def deal_user_round(self, history_msgs):
+        user_round = 0
+        for msg in history_msgs:
+            if msg['speaker'] == 'user':
+                user_round+=1
+        return user_round
+
     def contact(self, page_history_msg, db_history_msg):
         logger.info(f"MainChatRobotV3_page_history_msg: {self._candidate_id}, {self._job_id}, {page_history_msg}")
         logger.info(f"MainChatRobotV3_db_history_msg:{self._candidate_id}, {self._job_id}, {db_history_msg}")
         try:
             processed_history_msgs = self.prepare_msgs(page_history_msg, db_history_msg)
-            logger.info(f"MainChatRobotV3处理前 {self._candidate_id} 的状态信息是 {self._status_infos}")
+            user_round = self.deal_user_round(processed_history_msgs)
+            logger.info(f"MainChatRobotV3处理前 {self._candidate_id} 的状态信息是 {self._status_infos}, user_round: {user_round}")
             self.deal_contact(processed_history_msgs)
             # self.deal_question_collections(processed_history_msgs)
             intention = self.deal_intention(processed_history_msgs)
             if has_contact_db(self._candidate_id, self._account_id):
                 self._status_infos['has_contact'] = True
-            r_msg, action = self.generate_reply(intention, processed_history_msgs)
+            r_msg, action = self.generate_reply(intention, processed_history_msgs, user_round)
             self.deal_r_msg(r_msg, action)
             self.update_question_collections_2_status_infos()
             logger.info(f"MainChatRobotV3处理后 {self._candidate_id} 的状态信息是 {self._status_infos}")
@@ -237,14 +245,14 @@ class MainChatRobotV3(BaseChatRobot):
         self._msg_list.append({'speaker': 'robot', 'msg': self._next_msg, 'algo_judge_intent': 'chat',
                                'time': format_time(datetime.now())})
         # self._next_msg = self._next_msg.replace('。', '。\n')
-    def generate_reply(self, intention, history_msgs):
+    def generate_reply(self, intention, history_msgs, user_round):
         if not self._status_infos["sent_first_msg"]:
             self._status_infos["sent_first_msg"] = True
             return self.first_reply(intention)
         if intention == INTENTION.NEGTIVE:
-            return self.negtive_reply()
+            return self.negtive_reply(user_round=user_round)
         if intention == INTENTION.POSITIVE:
-            return self.positive_reply()
+            return self.positive_reply(user_round=user_round)
         if intention == INTENTION.NOINTENTION:
             return self.no_intention_reply(history_msgs)
         if intention == INTENTION.QUESTIOM_PAYMENT or intention == INTENTION.QUESTIOM_BENIFITS \
@@ -366,7 +374,11 @@ class MainChatRobotV3(BaseChatRobot):
         r_msg = gpt_chat.generic_chat({"history_chat": msgs, "system_prompt": prompt, "user_message": user_msg})
         return r_msg.replace("$PHONE$", "")
 
-    def negtive_reply(self):
+    def negtive_reply(self, user_round):
+        if user_round==1:
+            manual_reply = self._reply_infos.get('negtive_msg', None)
+            if manual_reply:
+                return manual_reply, ChatStatus.NormalChat
         if self._status_infos['has_contact']:
             return "", ChatStatus.NoTalk
         else:
@@ -379,7 +391,11 @@ class MainChatRobotV3(BaseChatRobot):
             else:
                 return "", ChatStatus.NoTalk
 
-    def positive_reply(self):
+    def positive_reply(self, user_round):
+        if user_round==1:
+            manual_reply = self._reply_infos.get('positive_msg', None)
+            if manual_reply:
+                return manual_reply, ChatStatus.NormalChat
         if self._status_infos['has_contact']:
             return "", ChatStatus.NoTalk
         else:
