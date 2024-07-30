@@ -376,8 +376,9 @@ class MainChatRobotV3(BaseChatRobot):
 
     def negtive_reply(self, user_round):
         if user_round==1:
-            manual_reply = self._reply_infos.get('negtive_msg', None)
+            manual_reply = self._reply_infos.get('negative_msg', None)
             if manual_reply:
+                logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for negative case user_round 1: {manual_reply}")
                 return manual_reply, ChatStatus.NormalChat
         if self._status_infos['has_contact']:
             return "", ChatStatus.NoTalk
@@ -395,6 +396,7 @@ class MainChatRobotV3(BaseChatRobot):
         if user_round==1:
             manual_reply = self._reply_infos.get('positive_msg', None)
             if manual_reply:
+                logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for positive case user_round 1: {manual_reply}")
                 return manual_reply, ChatStatus.NormalChat
         if self._status_infos['has_contact']:
             return "", ChatStatus.NoTalk
