@@ -249,6 +249,17 @@ class MainChatRobotV3(BaseChatRobot):
         if not self._status_infos["sent_first_msg"]:
             self._status_infos["sent_first_msg"] = True
             return self.first_reply(intention)
+        if user_round==1:
+            if intention == INTENTION.NEGTIVE:
+                manual_reply = self._reply_infos.get('negative_msg', None)
+                if manual_reply:
+                    logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for negative case user_round 1: {manual_reply}")
+                    return manual_reply, ChatStatus.NormalChat
+            else:
+                manual_reply = self._reply_infos.get('positive_msg', None)
+                if manual_reply:
+                    logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for positive case user_round 1: {manual_reply}")
+                    return manual_reply, ChatStatus.NormalChat
         if intention == INTENTION.NEGTIVE:
             return self.negtive_reply(user_round=user_round)
         if intention == INTENTION.POSITIVE:
@@ -260,20 +271,23 @@ class MainChatRobotV3(BaseChatRobot):
             return self.deal_question_reply(history_msgs, intention)
         return "", ChatStatus.NoTalk
 
+    def need_wechat(self):
+        return self.job_config['dynamic_job_config'].get("ask_wechat", True)
+
     def first_reply(self, intention):
         self._status_infos['ask_contact'] = True
         if self._status_infos['has_contact']:
             return '', ChatStatus.NoTalk
         if intention == INTENTION.NEGTIVE:
             if self.platform == 'Linkedin':
-                return "ok, when there's a new job opening on my end, I will share it with you right away.", ChatStatus.NeedContact
+                return "ok, when there's a new job opening on my end, I will share it with you right away.", ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
             else:
-                return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact
+                return "您看方便留个电话或者微信吗，我这边有新的岗位也可以第一时间给您分享", ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
         else:
             if self.platform == 'Linkedin':
-                return "Hello, would it be convenient to leave a resume for us to discuss further?", ChatStatus.NeedContact
+                return "Hello, would it be convenient to leave a resume for us to discuss further?", ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
             else:
-                return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact
+                return '您好，方便留个联系方式咱细聊下吗?', ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
 
     def deal_question_reply(self, history_msgs, qustion_intention):
         plugin_q_prompt, plugin_r_prompt = self.generate_question_intention_reply_prompt(qustion_intention)
@@ -375,11 +389,6 @@ class MainChatRobotV3(BaseChatRobot):
         return r_msg.replace("$PHONE$", "")
 
     def negtive_reply(self, user_round):
-        if user_round==1:
-            manual_reply = self._reply_infos.get('negative_msg', None)
-            if manual_reply:
-                logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for negative case user_round 1: {manual_reply}")
-                return manual_reply, ChatStatus.NormalChat
         if self._status_infos['has_contact']:
             return "", ChatStatus.NoTalk
         else:
@@ -393,11 +402,6 @@ class MainChatRobotV3(BaseChatRobot):
                 return "", ChatStatus.NoTalk
 
     def positive_reply(self, user_round):
-        if user_round==1:
-            manual_reply = self._reply_infos.get('positive_msg', None)
-            if manual_reply:
-                logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for positive case user_round 1: {manual_reply}")
-                return manual_reply, ChatStatus.NormalChat
         if self._status_infos['has_contact']:
             return "", ChatStatus.NoTalk
         else:

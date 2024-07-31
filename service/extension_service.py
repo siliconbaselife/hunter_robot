@@ -99,7 +99,7 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
                 f'extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), got outside {res}, now will new contact')
             new_contact(linked_profile=profile, linkedin_id=lid, name=name, **{ctx['contact_type']: res})
     else:
-        logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, will from db')
+        logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, will from db, credit({credit}), will cost {price if len(already_contacts)== 0 else 0}')
         if len(already_contacts) > 0:
             need_update_already_contacts = False
             need_update_credit = False
