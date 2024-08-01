@@ -6,6 +6,7 @@ from utils.utils import format_time
 import copy
 from datetime import datetime
 
+
 def get_id_name(candidate_info, platform_type):
     if platform_type == 'maimai':
         return candidate_info['id'], candidate_info['name']
@@ -17,6 +18,7 @@ def get_id_name(candidate_info, platform_type):
         return candidate_info['usercIdEncode'], candidate_info['showName']
     return '', ''
 
+
 def process_independent_encode_multi(account_id, candidate_ids):
     independent = get_independent_by_account_id(account_id)
     ret = []
@@ -27,12 +29,14 @@ def process_independent_encode_multi(account_id, candidate_ids):
             ret.append(c)
     return ret
 
+
 def process_independent_encode(account_id, candidate_id):
     independent = get_independent_by_account_id(account_id)
     if independent == 1:
         return account_id + "_" + candidate_id
     else:
         return candidate_id
+
 
 # def process_independent_decode(candidate_id):
 #     return
@@ -49,7 +53,7 @@ def filter_time(time_percent, retain_sum):
         if sum == 0:
             t["mount"] = 0
         else:
-            t["mount"] = round(t["mount"] / sum * retain_sum) 
+            t["mount"] = round(t["mount"] / sum * retain_sum)
     return filter_time_res
 
 
@@ -62,7 +66,7 @@ def re_org_task(config_data, today_sub_task_log, job_id):
     for job_config in config_data:
         if job_id != '' and job_config["jobID"] != job_id:
             continue
-        if job_config['taskType']=='batchTouch':
+        if job_config['taskType'] == 'batchTouch':
             retain_sum = job_config["helloSum"] - sub_task_dict[job_config["jobID"]][5]
 
             time_percent = job_config["timeMount"]
@@ -71,15 +75,16 @@ def re_org_task(config_data, today_sub_task_log, job_id):
             touch_msg = json.loads(get_job_by_id(job_config["jobID"])[0][6])["touch_msg"]
 
             r_job = {
-                "jobID":job_config["jobID"],
-                "taskType":job_config['taskType'],
+                "jobID": job_config["jobID"],
+                "taskType": job_config['taskType'],
                 "helloSum": retain_sum,
-                "timeMount":time_percent_filtered,
+                "timeMount": time_percent_filtered,
                 "filter": job_config["filter"],
                 "touch_msg": touch_msg
             }
             res.append(r_job)
     return res
+
 
 def re_org_task_v2(config_data, today_sub_task_log, job_id):
     sub_task_dict = {}
@@ -91,14 +96,14 @@ def re_org_task_v2(config_data, today_sub_task_log, job_id):
             continue
         if config_data[i]["active"] != 1:
             continue
-        if config_data[i]['taskType']=='batchTouch':
+        if config_data[i]['taskType'] == 'batchTouch':
             retain_sum = config_data[i]["helloSum"] - sub_task_dict[config_data[i]["jobID"]][5]
             touch_msg = json.loads(get_job_by_id(config_data[i]["jobID"])[0][6])["dynamic_job_config"]["touch_msg"]
             # job_name = json.loads(query_template_config(get_job_by_id(config_data[i]["jobID"])[0][12])[0][0])["job_name"]
             r_job = {
-                "jobID":config_data[i]["jobID"],
+                "jobID": config_data[i]["jobID"],
                 # "job_name":config_data[i].get('job_name', ''),
-                "taskType":config_data[i]['taskType'],
+                "taskType": config_data[i]['taskType'],
                 "helloSum": retain_sum,
                 # "timeMount":time_percent_filtered,
                 "filter": config_data[i]["filter"],
@@ -107,25 +112,27 @@ def re_org_task_v2(config_data, today_sub_task_log, job_id):
             res.append(r_job)
     return res
 
+
 def get_job_by_id_service(job_id):
     return get_job_by_id(job_id)
 
+
 def get_undo_task(account_id, job_id, ver):
-    #取当天任务
-    #根据当前时间点计算返回config的适配
-    #向log表插入每个小task的记录
+    # 取当天任务
+    # 根据当前时间点计算返回config的适配
+    # 向log表插入每个小task的记录
     config_data = json.loads(get_account_task_db(account_id))
 
     today_date = format_time(datetime.now(), '%Y-%m-%d')
-    today_sub_task_log = get_account_task_log_db(account_id, today_date)  
+    today_sub_task_log = get_account_task_log_db(account_id, today_date)
     for j in config_data:
-        if job_id != '' and job_id!=j["jobID"]:
+        if job_id != '' and job_id != j["jobID"]:
             continue
         log_need_init = True
         for log in today_sub_task_log:
             if log[2] == j["jobID"]:
                 log_need_init = False
-        if j['taskType']=='batchTouch' and log_need_init:
+        if j['taskType'] == 'batchTouch' and log_need_init:
             logger.info(f'get_undo_task init job {account_id}, {j["jobID"]}, {today_date}, no task log, will init')
             init_task_log_db(account_id, j["jobID"], today_date, j["helloSum"])
     today_sub_task_log = get_account_task_log_db(account_id, today_date)
@@ -136,8 +143,25 @@ def get_undo_task(account_id, job_id, ver):
     logger.info(f'get_undo_task for {account_id}, {job_id}, {today_date}, will return {res}')
     return res
 
+
+def get_job_id_by_job_name(boss_job_name, account_id):
+    job_infos = get_account_config(account_id)
+    for job_info in job_infos:
+        job_id = job_info["jobID"]
+        job_name = job_info["filter"]["boss_job_name"]
+        if boss_job_name == job_name:
+            return job_id
+    return ""
+
+
+def is_candidate_has_job(account_id, candidate_id):
+    job_id = fetch_candidate_job_id(account_id, candidate_id)
+    return len(job_id)
+
+
 def update_touch_task(account_id, job_id, hello_cnt=1):
     hello_exec_db(account_id, job_id, format_time(datetime.now(), '%Y-%m-%d'), hello_cnt)
+
 
 def generate_task(jobs):
     base_config = config['task']['task_config_base']
@@ -153,29 +177,33 @@ def generate_task(jobs):
 def friend_report_service(account_id, candidate_id):
     add_friend_report(account_id, candidate_id)
 
+
 def get_one_time_task_service(account_id):
     db_ret = get_one_time_task_by_account_id(account_id)
     ret = []
     for d in db_ret:
         ret.append({
             "task_id": d[0],
-            "task_config":json.loads(d[1])
+            "task_config": json.loads(d[1])
         })
     return ret
+
 
 def update_one_time_status_service(status, id):
     return update_one_time_status_by_id(status, id)
 
+
 def new_one_time_task_service(account_id, one_time_task_config):
     return new_one_time_task_db(account_id, one_time_task_config)
+
 
 def get_one_time_task_list_service(account_id):
     db_ret = get_one_time_task_list_db(account_id)
     ret = []
     for dr in db_ret:
         ret.append({
-            "id":dr[0],
-            "task_config":json.loads(dr[1]),
-            "status":dr[2]
+            "id": dr[0],
+            "task_config": json.loads(dr[1]),
+            "status": dr[2]
         })
     return ret
