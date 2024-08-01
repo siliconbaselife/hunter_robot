@@ -156,7 +156,7 @@ def get_job_id_by_job_name(boss_job_name, account_id):
 
 def is_candidate_has_job(account_id, candidate_id):
     job_id = fetch_candidate_job_id(account_id, candidate_id)
-    return len(job_id) > 0
+    return job_id
 
 
 def update_touch_task(account_id, job_id, hello_cnt=1):

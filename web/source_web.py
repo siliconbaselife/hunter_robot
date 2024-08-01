@@ -125,10 +125,10 @@ def has_job():
     account_id = request.json['accountID']
     candidate_id = request.json["candidateId"]
 
-    flag = is_candidate_has_job(account_id, candidate_id)
-    logger.info(f"has_job account_id: {account_id} candidate_id: {candidate_id} flag: {flag}")
+    job_id = is_candidate_has_job(account_id, candidate_id)
+    logger.info(f"has_job account_id: {account_id} candidate_id: {candidate_id} job_id: {job_id}")
 
-    return Response(json.dumps(get_web_res_suc_with_data(flag)))
+    return Response(json.dumps(get_web_res_suc_with_data(job_id)))
 
 
 @source_web.route("/recruit/job/job_id", methods=['POST'])
