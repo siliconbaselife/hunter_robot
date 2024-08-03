@@ -396,7 +396,7 @@ def fetch_candidate_job_id(account_id, candidate_id):
     if len(data) == 0:
         return ""
     else:
-        return json.loads(data[0][0])
+        return data[0][0]
 
 
 if __name__ == "__main__":
