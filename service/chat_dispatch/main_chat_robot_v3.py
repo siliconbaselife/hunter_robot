@@ -97,9 +97,18 @@ class MainChatRobotV3(BaseChatRobot):
 
     def deal_user_round(self, history_msgs):
         user_round = 0
-        for msg in history_msgs:
+        i = 0
+        while i < len(history_msgs):
+            msg = history_msgs[i]
             if msg['speaker'] == 'user':
                 user_round+=1
+                i+=1
+                for j in range(i, len(history_msgs)):
+                    msg = history_msgs[j]
+                    if msg['speaker'] != 'user':
+                        i = j
+                        break
+            i+=1
         return user_round
 
     def contact(self, page_history_msg, db_history_msg):
@@ -267,7 +276,7 @@ class MainChatRobotV3(BaseChatRobot):
                 if manual_reply:
                     self._status_infos["sent_first_msg"] = True
                     logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for positive case user_round 1: {manual_reply}")
-                    return manual_reply, ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
+                    return manual_reply, ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat1
         if not self._status_infos["sent_first_msg"]:
             self._status_infos["sent_first_msg"] = True
             return self.first_reply(intention)
