@@ -48,15 +48,16 @@ sql_dict = {
     "insert_filter_cache": "insert into candidate_filter_cache(candidate_id, job_id, prompt,filter_result) values ('{}','{}','{}','{}')",
     "get_filter_cache": "select candidate_id, job_id, prompt, filter_result from candidate_filter_cache where candidate_id='{}' and job_id='{}'",
     "update_filter_cache": "update candidate_filter_cache set prompt='{}',filter_result='{}' where candidate_id='{}' and job_id='{}'",
-    "delete_account_by_id":"delete from account where account_id='{}'",
-    "get_template_id":"select robot_template from job where job_id='{}'",
-    "update_status_infos":"update chat set status_infos = '{}' where candidate_id = '{}' and account_id = '{}'",
-    "query_template_config":"select template_config from llm_template where template_id = '{}'",
-    "query_status_infos":"select status_infos from chat where candidate_id = '{}' and account_id = '{}'",
-    "query_status_infos_v2":"select status_infos from chat where candidate_id = '{}' and account_id = '{}' and job_id = '{}'",
-    "update_status_infos_v2":"update chat set status_infos = '{}' where candidate_id = '{}' and account_id = '{}' and job_id='{}'"
+    "delete_account_by_id": "delete from account where account_id='{}'",
+    "get_template_id": "select robot_template from job where job_id='{}'",
+    "update_status_infos": "update chat set status_infos = '{}' where candidate_id = '{}' and account_id = '{}'",
+    "query_template_config": "select template_config from llm_template where template_id = '{}'",
+    "query_status_infos": "select status_infos from chat where candidate_id = '{}' and account_id = '{}'",
+    "query_status_infos_v2": "select status_infos from chat where candidate_id = '{}' and account_id = '{}' and job_id = '{}'",
+    "update_status_infos_v2": "update chat set status_infos = '{}' where candidate_id = '{}' and account_id = '{}' and job_id='{}'"
 
 }
+
 
 class LazyDecoder(json.JSONDecoder):
     def decode(self, s, **kwargs):
@@ -67,6 +68,7 @@ class LazyDecoder(json.JSONDecoder):
         for regex, replacement in regex_replacements:
             s = regex.sub(replacement, s)
         return super().decode(s, **kwargs)
+
 
 def get_template_id(job_id):
     return dbm.query(sql_dict['get_template_id'].format(job_id))
@@ -79,10 +81,13 @@ def update_status_infos(candidate_id, account_id, status_infos):
 def query_template_config(template_id):
     return dbm.query(sql_dict['query_template_config'].format(template_id))
 
+
 def query_status_infos_v2(candidate_id, account_id, job_id):
     return dbm.query(sql_dict['query_status_infos_v2'].format(candidate_id, account_id, job_id))
+
+
 def update_status_infos_v2(candidate_id, account_id, status_infos, job_id):
-    dbm.update(sql_dict['update_status_infos_v2'].format(status_infos, candidate_id, account_id,job_id))
+    dbm.update(sql_dict['update_status_infos_v2'].format(status_infos, candidate_id, account_id, job_id))
 
 
 def query_status_infos(candidate_id, account_id):
@@ -119,6 +124,8 @@ def has_contact_db(candidate_id, account_id):
         if r[0] != None and r[0] != 'NULL' and r[0] != '':
             flag = True
     return flag
+
+
 def get_contact_db(candidate_id, account_id):
     ret = dbm.query(sql_dict['has_contact'].format(candidate_id, account_id))
     if len(ret) == 0:
@@ -186,15 +193,21 @@ def query_robotapi_db(job_id):
 
 
 def register_account_db(account_id, platform_type, platform_id, jobs, task_config, desc, manage_account_id):
-    return dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc,
-                                                   manage_account_id, 'v1'))
+    return dbm.insert(
+        sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, desc,
+                                            manage_account_id, 'v1'))
+
 
 def delete_account_by_id(account_id):
     return dbm.delete(sql_dict['delete_account_by_id'].format(account_id))
 
-def register_account_db_v2(account_id, platform_type, platform_id, jobs, task_config, account_name, manage_account_id, ver):
-    return dbm.insert(sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, account_name,
-                                                   manage_account_id, ver))
+
+def register_account_db_v2(account_id, platform_type, platform_id, jobs, task_config, account_name, manage_account_id,
+                           ver):
+    return dbm.insert(
+        sql_dict['register_account'].format(account_id, platform_type, platform_id, jobs, task_config, account_name,
+                                            manage_account_id, ver))
+
 
 def query_account_id_db(platform_type, platform_id):
     return dbm.query(sql_dict['query_account_id'].format(platform_type, platform_id))[0][0]
@@ -240,16 +253,17 @@ def query_candidate_name_and_filter_result(candidate_id):
 def query_candidate_by_id(candidate_id):
     return dbm.query(sql_dict['query_candidate'].format(candidate_id))
 
+
 def query_candidate_detail(candidate_id):
     candidate_info = dbm.query(sql_dict['query_candidate'].format(candidate_id))
     if len(candidate_info) == 0:
         return False, None
-    
 
-    c_j = candidate_info[0][7].replace('\n','')
+    c_j = candidate_info[0][7].replace('\n', '')
     # c_j = c_j.replace("\'", '\"')
-    candidate_json = json.loads(c_j.replace('\n',''), strict=False, cls=LazyDecoder)
+    candidate_json = json.loads(c_j.replace('\n', ''), strict=False, cls=LazyDecoder)
     return True, candidate_json
+
 
 def update_candidate_contact_db(candidate_id, contact):
     dbm.update(sql_dict['update_candidate_contact'].format(contact, candidate_id))
@@ -268,7 +282,7 @@ def new_chat_db(account_id, job_id, candidate_id, candidate_name, source=None, s
 def query_chat_db(account_id, job_id, candidate_id):
     dbret = dbm.query(sql_dict['query_chat_details'].format(account_id, job_id, candidate_id))
     ret = []
-    for dr in  dbret:
+    for dr in dbret:
         details = dr[1].replace('\n', '。').replace('\\n', '。')
         ret.append([dr[0], details, dr[2]])
     return ret
@@ -328,12 +342,13 @@ def get_job_by_id(job_id):
     new_ret = []
     for r in ret:
         s = r[6].replace('\n', '\\n')
-        new_ret.append([r[0], r[1], r[2], r[3], r[4], r[5], s, r[7], r[8], r[9], r[10],r[11], r[12]])
+        new_ret.append([r[0], r[1], r[2], r[3], r[4], r[5], s, r[7], r[8], r[9], r[10], r[11], r[12]])
     return new_ret
 
 
 def get_chats_by_job_id_with_start(job_id, start, limit):
     return dbm.query(sql_dict["get_chats_by_job_id_with_start"].format(job_id, start, limit))
+
 
 def get_chats_by_job_id_with_date(job_id, start_date, end_date):
     return dbm.query(sql_dict["get_chats_by_job_id_with_date"].format(job_id, start_date, end_date))
@@ -364,6 +379,24 @@ def add_recall_count(account_id, candidate_id):
 
 def add_friend_report(account_id, candidate_id):
     dbm.update(sql_dict['add_friend_report'].format(account_id, candidate_id))
+
+
+def get_account_config(account_id):
+    sql = f"select task_config from account where account_id = '{account_id}'"
+    data = dbm.query(sql)
+    if len(data) == 0:
+        return []
+    else:
+        return json.loads(data[0][0])
+
+
+def fetch_candidate_job_id(account_id, candidate_id):
+    sql = f"select job_id from chat where account_id = '{account_id}' and candidate_id = '{candidate_id}'"
+    data = dbm.query(sql)
+    if len(data) == 0:
+        return ""
+    else:
+        return data[0][0]
 
 
 if __name__ == "__main__":

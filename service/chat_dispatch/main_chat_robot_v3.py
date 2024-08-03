@@ -44,10 +44,11 @@ class MainChatRobotV3(BaseChatRobot):
         self._reply_infos = self.fetch_reply_infos()
         self._questions_collection = self.fetch_question_collection()
         self._questions_to_ask, self._remain_questions_to_ask = self.fetch_questions_to_ask(self._questions_collection)
+        self._first_replys = self.fetch_manual_first_replys()
         self._template_info = self.fetch_template_info()
         self._msg_list = []
 
-        logger.info(f'MainChatRobotV3: {candidate_id}| {job_id}| {self._status_infos}| {self.template_id}| {self._reply_infos}| {self._questions_to_ask}| {self._remain_questions_to_ask}| {self._questions_collection.keys()}')
+        logger.info(f'MainChatRobotV3: {candidate_id}| {job_id}| {self._status_infos}| {self.template_id}| {self._reply_infos}| {self._questions_to_ask}| {self._remain_questions_to_ask}| {self._questions_collection.keys()} | {self._first_replys}')
 
     def _parse_face(self, msg):
         for item in self._useless_msgs:
@@ -131,6 +132,14 @@ class MainChatRobotV3(BaseChatRobot):
 
     def fetch_reply_infos(self):
         return self.job_config.get("reply_infos", {})
+    
+    def fetch_manual_first_replys(self):
+        positive_reply = self.job_config['dynamic_job_config'].get("positive", None)
+        negative_reply = self.job_config['dynamic_job_config'].get("negative", None)
+        return {
+            'negative': negative_reply,
+            'positive': positive_reply
+        }
 
     def fetch_questions_to_ask(self, already_question_collection):
         question_list = self.job_config['dynamic_job_config'].get("questions_to_ask", [])
@@ -251,12 +260,12 @@ class MainChatRobotV3(BaseChatRobot):
             return self.first_reply(intention)
         if user_round==1:
             if intention == INTENTION.NEGTIVE:
-                manual_reply = self._reply_infos.get('negative_msg', None)
+                manual_reply = self._first_replys['negative']
                 if manual_reply:
                     logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for negative case user_round 1: {manual_reply}")
                     return manual_reply, ChatStatus.NormalChat
             else:
-                manual_reply = self._reply_infos.get('positive_msg', None)
+                manual_reply = self._first_replys['positive']
                 if manual_reply:
                     logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for positive case user_round 1: {manual_reply}")
                     return manual_reply, ChatStatus.NormalChat
