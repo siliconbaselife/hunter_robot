@@ -228,7 +228,8 @@ def candidate_chat_api():
     candidate_id = process_independent_encode(account_id, candidate_id)
 
     ## job use first register job of account:
-    job_id = request.form.get('jobID', None)
+    # job_id = request.form.get('jobID', None)
+    job_id = request.json["jobID"]
     if job_id is None or job_id == "" or job_id == "NULL" or job_id == "None":
         job_id_info = get_job_id_in_chat(account_id, candidate_id)
         if len(job_id_info) == 0:
