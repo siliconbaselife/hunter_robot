@@ -382,7 +382,7 @@ def add_friend_report(account_id, candidate_id):
 
 
 def get_account_config(account_id):
-    sql = f"select * from account where account_id = '{account_id}'"
+    sql = f"select task_config from account where account_id = '{account_id}'"
     data = dbm.query(sql)
     if len(data) == 0:
         return []

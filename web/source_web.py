@@ -136,9 +136,9 @@ def has_job():
 def get_job_id():
     job_name = request.json['jobName']
     account_id = request.json['accountID']
-    logger.info(f"get_job_id job_name: {job_name} account_id: {account_id}")
 
     job_id = get_job_id_by_job_name(job_name, account_id)
+    logger.info(f"get_job_id job_name: {job_name} account_id: {account_id} job_id: {job_id}")
 
     return Response(json.dumps(get_web_res_suc_with_data(job_id)))
 
