@@ -283,15 +283,14 @@ def candidate_chat_api():
     candidate_info = query_chat_db(account_id, job_id, candidate_id)
     if len(candidate_info) == 0:
         details = json.dumps(page_history_msg, ensure_ascii=False)
-        logger.info(
-            f'candidate chat not in db, new candidate will supply: {account_id} {job_id} {candidate_id} {candidate_name} {details}')
+        logger.info(f'candidate chat not in db, new candidate will supply: {account_id} {job_id} {candidate_id} {candidate_name} {details}')
         new_chat_db(account_id, job_id, candidate_id, candidate_name, source, details=details)
     else:
         source, db_history_msg, _ = candidate_info[0]
         # logger.info(f'show candidate: {source} {db_history_msg}: {db_history_msg is not None}')
-        if db_history_msg is None or db_history_msg == 'None' or db_history_msg == "":
-            source = None
-            db_history_msg = None
+        if db_history_msg is None or db_history_msg =='None' or db_history_msg == "":
+            source=None
+            db_history_msg=None
         else:
             try:
                 db_history_msg = json.loads(db_history_msg, strict=False)

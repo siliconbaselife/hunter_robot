@@ -19,6 +19,7 @@ class ChatStatus(Enum):
     Init = 'init',
     NormalChat = 'normal_chat',
     NeedContact = 'need_contact',
+    NeedContactNoWechat = 'need_contact_without_wx',
     HasContact = 'has_contact',
     NeedEnsure = 'need_ensure',
     FinishSuc = 'finish_suc',
