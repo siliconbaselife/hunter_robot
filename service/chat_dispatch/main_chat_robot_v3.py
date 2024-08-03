@@ -255,20 +255,22 @@ class MainChatRobotV3(BaseChatRobot):
                                'time': format_time(datetime.now())})
         # self._next_msg = self._next_msg.replace('。', '。\n')
     def generate_reply(self, intention, history_msgs, user_round):
-        if not self._status_infos["sent_first_msg"]:
-            self._status_infos["sent_first_msg"] = True
-            return self.first_reply(intention)
         if user_round==1:
             if intention == INTENTION.NEGTIVE:
                 manual_reply = self._first_replys['negative']
                 if manual_reply:
+                    self._status_infos["sent_first_msg"] = True
                     logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for negative case user_round 1: {manual_reply}")
-                    return manual_reply, ChatStatus.NormalChat
+                    return manual_reply, ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
             else:
                 manual_reply = self._first_replys['positive']
                 if manual_reply:
+                    self._status_infos["sent_first_msg"] = True
                     logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for positive case user_round 1: {manual_reply}")
-                    return manual_reply, ChatStatus.NormalChat
+                    return manual_reply, ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
+        if not self._status_infos["sent_first_msg"]:
+            self._status_infos["sent_first_msg"] = True
+            return self.first_reply(intention)
         if intention == INTENTION.NEGTIVE:
             return self.negtive_reply(user_round=user_round)
         if intention == INTENTION.POSITIVE:
