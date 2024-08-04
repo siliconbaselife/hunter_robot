@@ -521,7 +521,7 @@ def get_leave_msg_web_v2():
 
 @tools_web.route("/backend/tools/customizedGreetingScenarioV2", methods=['POST'])
 @web_exception_handler
-def customized_greeting_scenario_web():
+def customized_greeting_scenario_web_v2():
     platform = request.json.get('platform', '')
     scenario = request.json.get('scenario')
     rid = request.json.get('id', None)
