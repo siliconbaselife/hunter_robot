@@ -1160,6 +1160,8 @@ def exec_filter_task(manage_account_id, file_list, jd):
 def customized_user_scenario(manage_account_id, context, platform, scenario_info, extra_info=''):
     create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info='')
 
+def update_user_scenario(rid, scenario_info, extra_info=''):
+    update_customized_scenario_setting(scenario_info, extra_info, rid)
 
 def get_email_template(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_EMAIL)
@@ -1239,6 +1241,13 @@ def get_default_greeting_scenario():
     msg += 'would you like to explore this opportunity? Thanks!'
     return {'默认': msg}
 
+def get_default_greeting_scenario_v2():
+    msg = 'Hi \n'
+    msg += 'we are looking for an candidate base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China\n'
+    msg += 'your Exp. seems a good match\n'
+    msg += 'would you like to explore this opportunity? Thanks!'
+    return [{'id':0, 'msg': msg}]
+
 
 def get_default_chat_scenario():
     scenario_options = ['要简历', '约电话', '转介绍', '召回']
@@ -1266,6 +1275,16 @@ def get_leave_msg(manage_account_id, platform):
         return get_default_greeting_scenario()
     else:
         return json.loads(scenario_info, strict=False)
+
+def get_leave_msg_v2(manage_account_id, platform):
+    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)
+    if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
+        return get_default_greeting_scenario_v2()
+    else:
+        ret = []
+        for rid, s_info in scenario_info:
+            ret.append({'id': rid, 'msg':s_info})
+        return json.loads(ret, strict=False)
 
 
 def get_chat_scenario(manage_account_id, platform):
