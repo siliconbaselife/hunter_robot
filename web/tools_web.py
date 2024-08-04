@@ -538,9 +538,9 @@ def customized_greeting_scenario_web_v2():
         "[backend_tools] customized_greeting_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
             manage_account_id, platform, scenario))
     if rid is None:
-        customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
+        create_customized_greeting(manage_account_id, platform, scenario)
     else:
-        update_user_scenario(rid, scenario, '')
+        update_customized_greeting_service(rid, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])

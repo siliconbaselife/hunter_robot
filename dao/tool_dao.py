@@ -50,7 +50,10 @@ sql_dict = {
     "get_default_inmail_template_by_idx": "select template from default_inmail_template where platform = '{}' order by id limit {}, 1;",
     "get_default_greeting_template_count": "select count(id) from default_greeting_template where platform = '{}';",
     "get_default_greeting_template_by_idx": "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;",
-    "get_all_default_greeting_template": "select template from default_greeting_template where platform = '{}' order by id asc"
+    "get_all_default_greeting_template": "select template from default_greeting_template where platform = '{}' order by id asc",
+    "create_customized_greeting": "insert into customized_greeting(manage_account_id, platform, scenario_info) VALUES('{}', '{}', '{}');",
+    "update_customized_greeting": "update customized_greeting set scenario_info = '{}' where id = '{}'",
+    "query_customized_greeting": "select id, scenario_info from customized_greeting where manage_account_id = '{}' and platform = '{}'"
 }
 
 
@@ -406,3 +409,18 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
     e = time.time()
     logger.info(f"query_tag_filter_profiles_new: {sql} time: {e - s}")
     return data
+
+def create_customized_greeting(manage_account_id, platform, scenario_info):
+    scenario_info = scenario_info.replace("\n", "\\n")
+    scenario_info = scenario_info.replace("\'", "\\'")
+    scenario_info = scenario_info.replace('\"', '\\"')
+    return dbm.query(sql_dict['create_customized_greeting'].format(manage_account_id, platform, scenario_info))
+
+def update_customized_greeting(scenario_info, rid):
+    scenario_info = scenario_info.replace("\n", "\\n")
+    scenario_info = scenario_info.replace("\'", "\\'")
+    scenario_info = scenario_info.replace('\"', '\\"')
+    return dbm.query(sql_dict['update_customized_greeting'].format(scenario_info, rid))
+
+def query_customized_greeting(manage_account_id, platform):
+    return dbm.query(sql_dict['query_customized_greeting'].format(manage_account_id, platform))
