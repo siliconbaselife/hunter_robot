@@ -500,6 +500,49 @@ def customized_greeting_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/getLeaveMsgV2", methods=['POST'])
+@web_exception_handler
+def get_leave_msg_web_v2():
+    platform = request.json.get('platform', '')
+    # candidate_id = request.json.get('candidate_id', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(manage_account_id,
+                                                                                                    platform))
+    msg = get_leave_msg_v2(manage_account_id, platform)
+    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/customizedGreetingScenarioV2", methods=['POST'])
+@web_exception_handler
+def customized_greeting_scenario_web_v2():
+    platform = request.json.get('platform', '')
+    scenario = request.json.get('scenario')
+    rid = request.json.get('id', None)
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] customized_greeting_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
+    if rid is None:
+        customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
+    else:
+        update_user_scenario(rid, scenario, '')
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 @tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])
 @web_exception_handler
 def customized_email_scenario_web():
