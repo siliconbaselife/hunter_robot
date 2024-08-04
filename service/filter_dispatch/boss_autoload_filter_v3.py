@@ -1,10 +1,9 @@
 import json
 from .utils import degree_compare_v2
 import time
-from utils.utils import is_211, is_985, get_degree_num,str_is_none
+from utils.utils import is_211, is_985, get_degree_num, str_is_none
 from utils.log import get_logger
 from utils.config import config
-
 
 logger = get_logger(config['log']['log_file'])
 
@@ -34,20 +33,22 @@ def boss_autoload_filter_v3(candidate_info, job_res):
         pay_ok = pay_range[1] > expect_range[0]
     else:
         pay_ok = True
-    
+
     ## 位置filter TODO 模糊匹配调试，location需要加到job_config
     expect_loc = {'name': candidate_info['geekCard']['expectLocationName'],
-                  'code': candidate_info['geekCard']['expectLocationCode'],
-                  'sub': candidate_info['geekCard']['expectSubLocationName']}
+                  'code': candidate_info['geekCard']['expectLocationCode'] if 'expectLocationCode' in candidate_info[
+                      'geekCard'] else candidate_info['geekCard']['expectLocation'],
+                  'sub': candidate_info['geekCard']['expectSubLocationName'] if 'expectSubLocationName' in
+                                                                                candidate_info['geekCard'] else None}
     offer_loc_list = filter_args['location']
     loc_ok = expect_loc['name'] in offer_loc_list
-    
+
     ## 状态filter TODO status 需要增加到job_config
     apply_status = {'status': candidate_info['geekCard']['applyStatus'],
                     'desc': candidate_info['geekCard']['applyStatusDesc']}
     need_status_list = filter_args['status']
     status_ok = str(apply_status['status']) in need_status_list
-    
+
     school_threshold = int(filter_args['school'])
     school_ok = False
     for edu in candidate_info['geekCard'].get('geekEdus', []):
@@ -72,8 +73,8 @@ def boss_autoload_filter_v3(candidate_info, job_res):
             tag_ok = False
             for jt in job_tags:
                 if c_json in jt or jt in c_json:
-                    tag_ok = True    
-    
+                    tag_ok = True
+
     ex_company_ok = True
     if 'ex_company' in filter_args and filter_args['ex_company'] != "":
         ex_company = []
@@ -100,7 +101,6 @@ def boss_autoload_filter_v3(candidate_info, job_res):
             for n in neg_words:
                 if c_json in n or n in c_json:
                     neg_filter_ok = False
-    
 
     neg_company_ok = True
     if 'neg_company' in filter_args and filter_args['neg_company'] != "":
@@ -126,7 +126,7 @@ def boss_autoload_filter_v3(candidate_info, job_res):
             'neg_company_ok': neg_company_ok,
             'neg_filter_ok': neg_filter_ok,
             'ex_company_ok': ex_company_ok,
-            'tag_ok':tag_ok,
+            'tag_ok': tag_ok,
             'expect_job_ok': expect_job_ok,
             'pay_ok': pay_ok,
             'loc_ok': loc_ok,
@@ -134,4 +134,3 @@ def boss_autoload_filter_v3(candidate_info, job_res):
         }
     }
     return judge_result
-
