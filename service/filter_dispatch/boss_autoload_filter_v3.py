@@ -29,8 +29,11 @@ def boss_autoload_filter_v3(candidate_info, job_res):
 
     ## 薪酬filter TODO 明确单位：boss 月薪，min_salary和max_salary需要加到job_config
     pay_range = (int(filter_args['min_salary']), int(filter_args['max_salary']))
-    expect_range = (int(candidate_info['geekCard']['lowSalary']), int(candidate_info['geekCard']['highSalary']))
-    pay_ok = pay_range[1] > expect_range[0]
+    if 'lowSalary' in candidate_info['geekCard'] and 'highSalary' in candidate_info['geekCard']:
+        expect_range = (int(candidate_info['geekCard']['lowSalary']), int(candidate_info['geekCard']['highSalary']))
+        pay_ok = pay_range[1] > expect_range[0]
+    else:
+        pay_ok = True
     
     ## 位置filter TODO 模糊匹配调试，location需要加到job_config
     expect_loc = {'name': candidate_info['geekCard']['expectLocationName'],
