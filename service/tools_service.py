@@ -1277,7 +1277,7 @@ def get_leave_msg(manage_account_id, platform):
         return json.loads(scenario_info, strict=False)
 
 def get_leave_msg_v2(manage_account_id, platform):
-    scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_GREETING)
+    scenario_info = query_customized_scenario_setting_with_id(manage_account_id, platform, SCENARIO_GREETING)
     if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
         return get_default_greeting_scenario_v2()
     else:
