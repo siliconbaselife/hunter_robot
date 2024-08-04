@@ -1285,7 +1285,7 @@ def get_leave_msg_v2(manage_account_id, platform):
         logger.info("get_leave_msg_v2 = {}".format(scenario_info))
         for rid, s_info in scenario_info:
             ret.append({'id': rid, 'msg':s_info})
-        return json.loads(ret, strict=False)
+        return ret
 
 
 def get_chat_scenario(manage_account_id, platform):
