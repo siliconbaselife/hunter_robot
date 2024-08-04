@@ -26,17 +26,18 @@ degree_transfer_map = {
     "highSchool": "高中",
     "high school": "高中",
     "cetificate": "中专",
-    "Cetificate": "中专",
-    "QS500 硕士": "硕士",
-    "QS500 本科": "本科",
-    "QS500 博士": "博士",
-    "双一流 硕士": "硕士",
-    "双一流 本科": "本科",
-    "双一流 博士": "博士"
+    "Cetificate": "中专"
 }
 
 
 def degree_compare_v2(degree, min_degree):
+    if "硕士" in degree:
+        degree = "硕士"
+    if "博士" in degree:
+        degree = "博士"
+    if "本科" in degree:
+        degree = "本科"
+
     degree_list = ['NB', '初中及以下', '中专', '高中', '大专', '本科', '硕士', '博士']
     degree_map = {d: i for i, d in enumerate(degree_list)}
     if '/' in degree:
