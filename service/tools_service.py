@@ -1282,6 +1282,7 @@ def get_leave_msg_v2(manage_account_id, platform):
         return get_default_greeting_scenario_v2()
     else:
         ret = []
+        logger.info("get_leave_msg_v2 = {}".format(scenario_info))
         for rid, s_info in scenario_info:
             ret.append({'id': rid, 'msg':s_info})
         return json.loads(ret, strict=False)
