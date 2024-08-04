@@ -276,7 +276,7 @@ class MainChatRobotV3(BaseChatRobot):
                 if manual_reply:
                     self._status_infos["sent_first_msg"] = True
                     logger.info(f"MainChatRobotV3 {self._candidate_id} manual_reply for positive case user_round 1: {manual_reply}")
-                    return manual_reply, ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat1
+                    return manual_reply, ChatStatus.NeedContact if self.need_wechat() else ChatStatus.NeedContactNoWechat
         if not self._status_infos["sent_first_msg"]:
             self._status_infos["sent_first_msg"] = True
             return self.first_reply(intention)
