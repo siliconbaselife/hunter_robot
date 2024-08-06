@@ -10,7 +10,6 @@ logger = get_logger(config['log']['log_file'])
 
 def fetch_geek_card(candidate_info):
     card = candidate_info["geekCard"]
-    del card["positionName"]
     del card["interactDesc"]
     del card["feedback"]
     card_json = json.dumps(card, ensure_ascii=False)
