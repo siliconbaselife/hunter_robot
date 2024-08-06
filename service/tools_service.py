@@ -1163,6 +1163,15 @@ def customized_user_scenario(manage_account_id, context, platform, scenario_info
 def update_user_scenario(rid, scenario_info, extra_info=''):
     update_customized_scenario_setting(scenario_info, extra_info, rid)
 
+def create_customized_greeting_service(manage_account_id, platform, scenario_info):
+    create_customized_greeting(manage_account_id, platform, scenario_info)
+
+def update_customized_greeting_service(scenario_info, rid):
+    update_customized_greeting(scenario_info, rid)
+
+def query_customized_greeting_service(manage_account_id, platform):
+    query_customized_greeting(manage_account_id, platform)
+
 def get_email_template(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_EMAIL)
     if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
@@ -1277,7 +1286,7 @@ def get_leave_msg(manage_account_id, platform):
         return json.loads(scenario_info, strict=False)
 
 def get_leave_msg_v2(manage_account_id, platform):
-    scenario_info = query_customized_scenario_setting_with_id(manage_account_id, platform, SCENARIO_GREETING)
+    scenario_info = query_customized_greeting(manage_account_id, platform)
     if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
         return get_default_greeting_scenario_v2()
     else:
