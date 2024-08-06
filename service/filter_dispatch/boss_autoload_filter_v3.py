@@ -8,6 +8,12 @@ from utils.config import config
 logger = get_logger(config['log']['log_file'])
 
 
+def fetch_geek_card(candidate_info):
+    card = candidate_info["geekCard"]
+    card_json = json.dumps(card, ensure_ascii=False)
+    return card_json
+
+
 def boss_autoload_filter_v3(candidate_info, job_res):
     filter_args = json.loads(job_res[6])['dynamic_job_config']
 
@@ -62,6 +68,7 @@ def boss_autoload_filter_v3(candidate_info, job_res):
             school_ok = True
 
     c_json = json.dumps(candidate_info, ensure_ascii=False)
+    card_json = fetch_geek_card(candidate_info)
 
     tag_ok = True
     if 'job_tags' in filter_args and filter_args['job_tags'] != "":
@@ -72,7 +79,7 @@ def boss_autoload_filter_v3(candidate_info, job_res):
         if len(job_tags) > 0:
             tag_ok = False
             for jt in job_tags:
-                if c_json in jt or jt in c_json:
+                if card_json in jt or jt in card_json:
                     tag_ok = True
 
     ex_company_ok = True
@@ -99,7 +106,7 @@ def boss_autoload_filter_v3(candidate_info, job_res):
                 neg_words.append(j)
         if len(neg_words) > 0:
             for n in neg_words:
-                if c_json in n or n in c_json:
+                if card_json in n or n in card_json:
                     neg_filter_ok = False
 
     neg_company_ok = True

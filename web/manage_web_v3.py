@@ -35,7 +35,7 @@ def task_update_api():
     params = request.json['params']
 
     logger.info(f'task_update_request_v3:{manage_account_id}, {account_id},{platform}, {params}')
-    if platform=='Boss':
+    if platform == 'Boss':
         update_config_service_v3(manage_account_id, account_id, platform, params)
     else:
         update_config_service_v2(manage_account_id, account_id, platform, params)
