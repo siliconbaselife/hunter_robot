@@ -543,6 +543,29 @@ def customized_greeting_scenario_web_v2():
         update_customized_greeting_service(scenario, rid)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/deleteGreetingScenarioV2", methods=['POST'])
+@web_exception_handler
+def delete_greeting_scenario_web_v2():
+    platform = request.json.get('platform', '')
+    rid = request.json.get('id', None)
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] delete_greeting_scenario_web_v2 manage_account_id = {}, platform = {}, rid = {}".format(
+            manage_account_id, platform, rid))
+    if rid is None:
+        return Response(json.dumps(get_web_res_fail("id不存在"), ensure_ascii=False))
+    else:
+        update_customized_greeting_service(scenario, rid)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 @tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])
 @web_exception_handler
 def customized_email_scenario_web():

@@ -53,6 +53,7 @@ sql_dict = {
     "get_all_default_greeting_template": "select template from default_greeting_template where platform = '{}' order by id asc",
     "create_customized_greeting": "insert into customized_greeting(manage_account_id, platform, scenario_info) VALUES('{}', '{}', '{}');",
     "update_customized_greeting": "update customized_greeting set scenario_info = '{}' where id = '{}'",
+    "delete_customized_greeting": "delete from customized_greeting where id = '{}'",
     "query_customized_greeting": "select id, scenario_info from customized_greeting where manage_account_id = '{}' and platform = '{}'"
 }
 
@@ -421,6 +422,9 @@ def update_customized_greeting(scenario_info, rid):
     scenario_info = scenario_info.replace("\'", "\\'")
     scenario_info = scenario_info.replace('\"', '\\"')
     return dbm.query(sql_dict['update_customized_greeting'].format(scenario_info, rid))
+
+def delete_customized_greeting(rid):
+    return dbm.query(sql_dict['delete_customized_greeting'].format(rid))
 
 def query_customized_greeting(manage_account_id, platform):
     return dbm.query(sql_dict['query_customized_greeting'].format(manage_account_id, platform))

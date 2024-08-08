@@ -1169,6 +1169,9 @@ def create_customized_greeting_service(manage_account_id, platform, scenario_inf
 def update_customized_greeting_service(scenario_info, rid):
     update_customized_greeting(scenario_info, rid)
 
+def delete_customized_greeting_service(rid):
+    delete_customized_greeting(rid)
+
 def query_customized_greeting_service(manage_account_id, platform):
     query_customized_greeting(manage_account_id, platform)
 
