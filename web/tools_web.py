@@ -563,7 +563,7 @@ def delete_greeting_scenario_web_v2():
     if rid is None:
         return Response(json.dumps(get_web_res_fail("id不存在"), ensure_ascii=False))
     else:
-        update_customized_greeting_service(rid)
+        delete_customized_greeting_service(rid)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])
