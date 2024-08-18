@@ -130,11 +130,12 @@ def get_age(profile):
         elif has_master:
             # print('has_education has_master')
             age_compare = 21 + datetime.datetime.now().year - min_education_start_year
-        elif has_education and min_education_start_year != 1000000:
+        elif has_education and min_education_start_year < 1000000:
             # print('has_education')
             age_sure = 18 + datetime.datetime.now().year - min_education_start_year
         if age_sure:
             # print("age_sure = ...")
+            logger.info(f"get_age age_sure: {age_sure}")
             return None if age_sure > 100 or age_sure <= 0 else age_sure
 
         if not has_experience:
@@ -146,6 +147,7 @@ def get_age(profile):
         else:
             # print('has_experience age_compare max')
             age = max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
+            logger.info(f"get_age age: {age_sure}")
             return None if age > 100 or age_sure <= 0 else age
     except BaseException as e:
         logger.error(f"get_age error => {e}")
