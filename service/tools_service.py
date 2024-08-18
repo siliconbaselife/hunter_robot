@@ -28,6 +28,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dao.contact_bank_dao import query_user_link_by_id_set, query_contact_by_id_set
 
+from algo.llm_inference import gpt_manager
+from algo.llm_base_model import Prompt
+
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
 
@@ -144,6 +147,29 @@ def get_age(profile):
     except:
         return None
 
+
+def cal_work_time(experiences):
+    min_work_start_year = 1900
+
+    for experience in experiences:
+        if 'companyName' in experience['companyName'] and (
+                'intern' in experience['companyName'] or 'Intern' in experience['companyName']):
+            continue
+        intern = False
+        if 'works' in experience and len(experience['works']) > 0:
+            for work in experience['works']:
+                if 'workPosition' in work and (
+                        'intern' in work['workPosition'] or 'Intern' in work['workPosition']):
+                    intern = True
+                    break
+        if intern:
+            continue
+        min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year),
+                                  min_work_start_year)
+
+    return None if min_work_start_year == 1900 else min_work_start_year
+
+
 def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if type == 'need_deserialize':
         profile = deserialize_raw_profile(profile)
@@ -161,7 +187,8 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
            'cv': None,
            'age': None,
            'isChinese': None,
-           'languages': None}
+           'languages': None,
+           'workTime': None}
     if 'id' in profile:
         res['candidateId'] = profile['id']
     if 'profile' in profile:
@@ -1770,3 +1797,44 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
     logger.info(
         f"add_tag_log manage_account_id: {manage_account_id} platform: {platform} tag: {tag} candidate_id: {candidate_id} flow_status: {flow_status} logs: {logs}")
     update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs, ensure_ascii=False))
+
+
+def parse_profile_gpt(profile):
+    prompt_msg = f"profile[0:3500] \nThis is a LinkedIn resume of a candidate. As a headhunter, you need to analyze the resume and summarize two aspects:\n1 => Industry Experience and Expertise\n2 => Career Highlights\nThe result should be represented in JSON format with 'industry_experience' for industry experience and expertise, and 'job_info' for career highlights. \nSummarize the content in no more than 50 words, and ensure it is within 50 words.\nThe result content is returned in Chinese."
+    prompt = Prompt()
+    prompt.add_user_message(prompt_msg)
+    output = gpt_manager.chat_task(prompt)
+    try:
+        details = json.loads(output, strict=False)
+    except BaseException as e:
+        logger.error(f"parse_profile_gpt json格式异常: {output}")
+        return {}
+
+    return details
+
+
+def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai):
+    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
+    if len(rows) == 0:
+        return {}
+
+    raw_profile = deserialize_raw_profile(rows[0][1])
+    profile = parse_profile(raw_profile, 'no', True)
+    if use_ai:
+        apt_profile_info = parse_profile_gpt(profile)
+        if "industry_experience" in apt_profile_info:
+            profile["industry_experience"] = apt_profile_info["industry_experience"]
+        if "job_info" in apt_profile_info:
+            profile["job_info"] = apt_profile_info["job_info"]
+
+    if "workTime" in profile and profile["workTime"] is not None:
+        profile["workTimeStr"] = f"{profile['workTime']}年至今"
+
+    if "age" in profile and profile["age"] is not None:
+        if profile["age"] <= 0 or profile["age"] > 100:
+            profile["age"] = None
+
+    if "last5Jump" in profile and profile["last5Jump"] is not None:
+        profile["last5JumpStr"] = f"5年{profile['last5Jump']}跳"
+
+    return profile
