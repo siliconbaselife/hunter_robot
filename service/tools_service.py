@@ -138,7 +138,7 @@ def get_age(profile):
         return 21 + datetime.datetime.now().year - min_work_start_year
     else:
         print('has_experience age_compare max')
-        max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
+        return max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
 
 def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if type == 'need_deserialize':
