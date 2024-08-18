@@ -124,10 +124,10 @@ def get_age(profile):
         logger.info(f"2 get_age => min_work_start_year: {min_work_start_year}")
         age_sure = None
         age_compare = None
-        if has_education and has_bachelor:
+        if has_education and has_bachelor and min_education_start_year < 1000000:
             # print('has_education has_bachelor')
             age_sure = 18 + datetime.datetime.now().year - min_education_start_year
-        elif has_master:
+        elif has_master and min_education_start_year < 1000000:
             # print('has_education has_master')
             age_compare = 21 + datetime.datetime.now().year - min_education_start_year
         elif has_education and min_education_start_year < 1000000:
