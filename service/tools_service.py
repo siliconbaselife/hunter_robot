@@ -104,7 +104,6 @@ def get_age(profile):
                     min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
                 else:
                     min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
-                    logger.info(f"education => min_education_start_year: {min_education_start_year}")
                 has_education = True
         logger.info(f"1 get_age => min_education_start_year: {min_education_start_year}")
         if 'experiences' in profile and len(profile['experiences']) > 0:
@@ -121,6 +120,7 @@ def get_age(profile):
                     continue
                 has_experience = True
                 min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year), min_work_start_year)
+                logger.info(f"get_age experiences timeInfo => {experience['timeInfo']} min_work_start_year: {min_work_start_year}")
         logger.info(f"2 get_age => min_education_start_year: {min_education_start_year}")
         age_sure = None
         age_compare = None
