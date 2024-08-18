@@ -8,7 +8,10 @@ def test():
     r = rows[0][0]
     print(len(r))
     profile = parse_profile(r, 'need_deserialize', True)
-    print(profile['age'])
+    if profile is None:
+        print('profile is None')
+    else:
+        print(profile['age'])
 
 if __name__ == '__main__':
     test()
