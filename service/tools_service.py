@@ -180,7 +180,7 @@ def cal_work_time(experiences):
         if intern:
             continue
         logger.info(f"cal_work_time {experience['timeInfo']}")
-        min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year),
+        min_work_start_year = min(get_min_time_info(experience['timeInfo'], 100000),
                                   min_work_start_year)
     logger.info(f"cal_work_time min_work_start_year: {min_work_start_year}")
     return None if min_work_start_year == 1900 else min_work_start_year
