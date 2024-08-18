@@ -121,7 +121,7 @@ def get_age(profile):
                 has_experience = True
                 min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year), min_work_start_year)
                 logger.info(f"get_age experiences timeInfo => {experience['timeInfo']} min_work_start_year: {min_work_start_year}")
-        logger.info(f"2 get_age => min_education_start_year: {min_education_start_year}")
+        logger.info(f"2 get_age => min_work_start_year: {min_work_start_year}")
         age_sure = None
         age_compare = None
         if has_education and has_bachelor:
@@ -130,7 +130,7 @@ def get_age(profile):
         elif has_master:
             # print('has_education has_master')
             age_compare = 21 + datetime.datetime.now().year - min_education_start_year
-        elif has_education:
+        elif has_education and min_education_start_year != 1000000:
             # print('has_education')
             age_sure = 18 + datetime.datetime.now().year - min_education_start_year
         if age_sure:
