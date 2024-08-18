@@ -266,6 +266,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
                 res['isChinese'] = True
     # age
     res['age'] = get_age(profile)
+    logger.info(f"get_age => {res['age']}")
     if 'languages' in profile and len(profile['languages']) > 0:
         res['languages'] = cv_str(profile['languages'], 0) if field_2_str else profile['languages']
 
