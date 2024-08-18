@@ -300,6 +300,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
                     last_5_jump += 1
         res['last5Jump'] = last_5_jump
         res["experiences"] = experiences
+        res["workTime"] = cal_work_time(experiences)
     # logger.info(f"age: {res['age']}")
     return res
 
