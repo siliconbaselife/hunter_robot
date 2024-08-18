@@ -1829,6 +1829,9 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
 
     raw_profile = deserialize_raw_profile(rows[0][1])
     profile = parse_profile(raw_profile, 'no', True)
+    if 'cv' in profile:
+        del profile['cv']
+
     if use_ai:
         apt_profile_info = parse_profile_gpt(profile)
         if "industry_experience" in apt_profile_info:
