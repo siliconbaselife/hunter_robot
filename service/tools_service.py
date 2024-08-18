@@ -1837,7 +1837,7 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
         if "industry_experience" in apt_profile_info:
             profile["industry_experience"] = apt_profile_info["industry_experience"]
         if "career_highlights" in apt_profile_info:
-            profile["career_highlights"] = apt_profile_info["job_info"]
+            profile["career_highlights"] = apt_profile_info["career_highlights"]
 
     if "workTime" in profile and profile["workTime"] is not None:
         profile["workTimeStr"] = f"{profile['workTime']}年至今"
