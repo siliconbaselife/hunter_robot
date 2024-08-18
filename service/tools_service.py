@@ -75,6 +75,67 @@ def deserialize_raw_profile(raw_profile):
         return None
 
 
+
+def get_age(profile):
+    # 优先看本科开始年份 + 18
+    # 如果有多个本科学历，选择开始时间最早的那个
+    # 如果没有本科学历
+    # 计算研究生学历，开始时间 + 21
+    # 如果有多个研究生学历，选择开始时间最早的那个
+    # 计算最早工作年限 + 21
+    # 研究生学历计算出的年纪 和 工作年限计算出的年纪 谁大就选谁
+    try:
+        has_education = False
+        has_master = False
+        has_bachelor = False
+        has_experience = False
+        min_education_start_year = 1000000
+        min_work_start_year = 1000000
+        if 'educations' in profile or len(profile['educations']) > 0:
+            for education in profile['educations']:
+                if 'Bachelor' in profile['degreeInfo'] or 'bachelor' in profile['degreeInfo'] or 'Bachelor' in profile['majorInfo'] or 'bachelor' in profile['majorInfo']:
+                    has_bachelor = True
+                    min_education_start_year = min(get_min_time_info(profile['timeInfo'], min_education_start_year), min_education_start_year)
+                elif 'Master' in profile['degreeInfo'] or 'master' in profile['degreeInfo'] or 'Master' in profile['majorInfo'] or 'master' in profile['majorInfo']:
+                    has_master = True
+                    min_education_start_year = min(get_min_time_info(profile['timeInfo'], min_education_start_year), min_education_start_year)
+                else:
+                    min_education_start_year = min(get_min_time_info(profile['timeInfo'], min_education_start_year), min_education_start_year)
+                has_education = True
+        if 'experiences' in profile and len(profile['experiences']) > 0:
+            for experience in profile['experiences']:
+                if 'companyName' in experience['companyName'] and ('intern' in experience['companyName'] or 'Intern' in experience['companyName']):
+                    continue
+                intern = False
+                if 'works' in experience and len(experience['works']) > 0:
+                    for work in experience['work']:
+                        if 'workPosition' in work and ('intern' in work['workPosition'] or 'Intern' in work['workPosition']):
+                            intern = True
+                            break
+                if intern:
+                    continue
+                has_experience = True
+                min_work_start_year = min(get_min_time_info(profile['timeInfo'], min_work_start_year), min_work_start_year)
+        age_sure = None
+        age_compare = None
+        if has_education and has_bachelor:
+            age_sure = 18 + datetime.datetime.now().year - min_education_start_year
+        elif has_master:
+            age_compare = 21 + datetime.datetime.now().year - min_education_start_year
+        elif has_education:
+            age_sure = 18 + datetime.datetime.now().year - min_education_start_year
+        if age_sure:
+            return age_sure
+
+        if not has_experience:
+            return age_compare
+        elif age_compare is None:
+            return 21 + datetime.datetime.now().year - min_work_start_year
+        else:
+            max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
+    except:
+        return None
+
 def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if type == 'need_deserialize':
         profile = deserialize_raw_profile(profile)
@@ -168,34 +229,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
             if ('\u4E00' <= split_name <= '\u9FFF') or ('\u3400' <= split_name <= '\u4DBF') or split_name in chs_names:
                 res['isChinese'] = True
     # age
-    if 'educations' not in profile or len(profile['educations']) == 0:
-        if 'experiences' in profile:
-            experiences = profile['experiences']
-            min_start_year = 9999
-            for experience in experiences:
-                if 'timeInfo' in experience:
-                    min_start_year = get_min_time_info(experience['timeInfo'], min_start_year)
-            if min_start_year != 9999:
-                start_age = 21
-                duration = datetime.datetime.now().year - min_start_year
-                if duration > 0:
-                    age = start_age + duration
-                    res['age'] = age
-    else:
-        educations = profile['educations']
-        graduated_year = 1000
-        for education in educations:
-            if 'timeInfo' in education and education['timeInfo'] is not None and \
-                    (('majorInfo' in education and 'Masters degree' in education['majorInfo']) or (
-                            'degreeInfo' in education and 'Masters degree' in education['degreeInfo'])):
-                graduated_year = get_max_time_info(education['timeInfo'], graduated_year)
-                start_age = 23
-            elif 'timeInfo' in education and education['timeInfo'] is not None:
-                graduated_year = get_max_time_info(education['timeInfo'], graduated_year)
-                start_age = 21
-        # logger.info(f"start_age: {start_age} graduated_year: {graduated_year}")
-        if graduated_year != 1000:
-            res['age'] = start_age + datetime.datetime.now().year - graduated_year
+    res['age'] = get_age(profile)
     if 'languages' in profile and len(profile['languages']) > 0:
         res['languages'] = cv_str(profile['languages'], 0) if field_2_str else profile['languages']
 
