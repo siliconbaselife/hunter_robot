@@ -1522,6 +1522,7 @@ def get_min_time_info(time_info_str, default_time):
     times = re.findall(r'\d\d\d\d', time_info_str)
     for t in times:
         min_start_year = min(min_start_year, int(t))
+    logger.info(f"get_min_time_info time_info_str: {time_info_str} times: {times}")
     return min_start_year
 
 
