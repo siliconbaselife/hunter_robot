@@ -144,7 +144,8 @@ def get_age(profile):
             # print('has_experience age_compare max')
             age = max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
             return None if age > 100 else age
-    except:
+    except BaseException as e:
+        logger.error(f"get_age error => {e}")
         return None
 
 
