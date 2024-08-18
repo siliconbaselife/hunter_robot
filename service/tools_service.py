@@ -1804,6 +1804,7 @@ def parse_profile_gpt(profile):
     prompt = Prompt()
     prompt.add_user_message(prompt_msg)
     output = gpt_manager.chat_task(prompt)
+    logger.info(f"output: {output}")
     try:
         details = json.loads(output, strict=False)
     except BaseException as e:
