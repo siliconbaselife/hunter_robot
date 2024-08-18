@@ -177,8 +177,10 @@ def cal_work_time(experiences):
             for work in experience['works']:
                 if 'workPosition' in work and (
                         'intern' in work['workPosition'] or 'Intern' in work['workPosition']):
-                    intern = True
-                    break
+                    continue
+                if "workTimeInfo" in work:
+                    min_work_start_year = min(get_min_time_info(work['workTimeInfo'], min_work_start_year),
+                                              min_work_start_year)
         if intern:
             continue
         logger.info(f"cal_work_time {experience['timeInfo']}")
