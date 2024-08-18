@@ -118,19 +118,26 @@ def get_age(profile):
     age_sure = None
     age_compare = None
     if has_education and has_bachelor:
+        print('has_education has_bachelor')
         age_sure = 18 + datetime.datetime.now().year - min_education_start_year
     elif has_master:
+        print('has_education has_master')
         age_compare = 21 + datetime.datetime.now().year - min_education_start_year
     elif has_education:
+        print('has_education')
         age_sure = 18 + datetime.datetime.now().year - min_education_start_year
     if age_sure:
+        print("age_sure = ...")
         return age_sure
 
     if not has_experience:
+        print('age compare !has_experience')
         return age_compare
     elif age_compare is None:
+        print('has_experience age_compar is none')
         return 21 + datetime.datetime.now().year - min_work_start_year
     else:
+        print('has_experience age_compare max')
         max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
 
 def parse_profile(profile, type='need_deserialize', field_2_str=False):
