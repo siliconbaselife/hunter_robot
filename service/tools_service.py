@@ -1844,4 +1844,7 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
     if "last5Jump" in profile and profile["last5Jump"] is not None:
         profile["last5JumpStr"] = f"5年{profile['last5Jump']}跳"
 
+    if "experiences" in profile:
+        del profile["experiences"]
+
     return profile
