@@ -92,14 +92,14 @@ def get_age(profile):
     min_work_start_year = 1000000
     if 'educations' in profile or len(profile['educations']) > 0:
         for education in profile['educations']:
-            if 'Bachelor' in profile['degreeInfo'] or 'bachelor' in profile['degreeInfo'] or 'Bachelor' in profile['majorInfo'] or 'bachelor' in profile['majorInfo']:
+            if 'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in education['majorInfo'] or 'bachelor' in education['majorInfo']:
                 has_bachelor = True
-                min_education_start_year = min(get_min_time_info(profile['timeInfo'], min_education_start_year), min_education_start_year)
-            elif 'Master' in profile['degreeInfo'] or 'master' in profile['degreeInfo'] or 'Master' in profile['majorInfo'] or 'master' in profile['majorInfo']:
+                min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
+            elif 'Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in education['majorInfo'] or 'master' in education['majorInfo']:
                 has_master = True
-                min_education_start_year = min(get_min_time_info(profile['timeInfo'], min_education_start_year), min_education_start_year)
+                min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
             else:
-                min_education_start_year = min(get_min_time_info(profile['timeInfo'], min_education_start_year), min_education_start_year)
+                min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
             has_education = True
     if 'experiences' in profile and len(profile['experiences']) > 0:
         for experience in profile['experiences']:
@@ -114,7 +114,7 @@ def get_age(profile):
             if intern:
                 continue
             has_experience = True
-            min_work_start_year = min(get_min_time_info(profile['timeInfo'], min_work_start_year), min_work_start_year)
+            min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year), min_work_start_year)
     age_sure = None
     age_compare = None
     if has_education and has_bachelor:
