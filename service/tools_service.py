@@ -135,7 +135,7 @@ def get_age(profile):
             age_sure = 18 + datetime.datetime.now().year - min_education_start_year
         if age_sure:
             # print("age_sure = ...")
-            logger.info(f"get_age age_sure: {age_sure}")
+            logger.info(f"get_age age_sure: {age_sure} has_education: {has_education} has_bachelor: {has_bachelor} min_education_start_year: {min_education_start_year}")
             return None if age_sure > 100 or age_sure <= 0 else age_sure
 
         if not has_experience:
