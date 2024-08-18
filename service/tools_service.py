@@ -129,17 +129,18 @@ def get_age(profile):
             age_sure = 18 + datetime.datetime.now().year - min_education_start_year
         if age_sure:
             # print("age_sure = ...")
-            return age_sure
+            return None if age_sure > 100 else age_sure
 
         if not has_experience:
             # print('age compare !has_experience')
-            return age_compare
+            return None if age_compare > 100 else age_compare
         elif age_compare is None:
             # print('has_experience age_compar is none')
-            return 21 + datetime.datetime.now().year - min_work_start_year
+            return None if min_work_start_year == 1000000 else 21 + datetime.datetime.now().year - min_work_start_year
         else:
             # print('has_experience age_compare max')
-            return max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
+            age = max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
+            return None if age > 100 else age
     except:
         return None
 
