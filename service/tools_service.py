@@ -28,6 +28,9 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dao.contact_bank_dao import query_user_link_by_id_set, query_contact_by_id_set
 
+from algo.llm_inference import gpt_manager
+from algo.llm_base_model import Prompt
+
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
 
@@ -75,7 +78,6 @@ def deserialize_raw_profile(raw_profile):
         return None
 
 
-
 def get_age(profile):
     # 优先看本科开始年份 + 18
     # 如果有多个本科学历，选择开始时间最早的那个
@@ -93,29 +95,37 @@ def get_age(profile):
         min_work_start_year = 1000000
         if 'educations' in profile or len(profile['educations']) > 0:
             for education in profile['educations']:
-                if 'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in education['majorInfo'] or 'bachelor' in education['majorInfo']:
+                if 'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
+                        education['majorInfo'] or 'bachelor' in education['majorInfo']:
                     has_bachelor = True
-                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
-                elif 'Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in education['majorInfo'] or 'master' in education['majorInfo']:
+                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
+                                                   min_education_start_year)
+                elif 'Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in \
+                        education['majorInfo'] or 'master' in education['majorInfo']:
                     has_master = True
-                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
+                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
+                                                   min_education_start_year)
                 else:
-                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year), min_education_start_year)
+                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
+                                                   min_education_start_year)
                 has_education = True
         if 'experiences' in profile and len(profile['experiences']) > 0:
             for experience in profile['experiences']:
-                if 'companyName' in experience['companyName'] and ('intern' in experience['companyName'] or 'Intern' in experience['companyName']):
+                if 'companyName' in experience['companyName'] and (
+                        'intern' in experience['companyName'] or 'Intern' in experience['companyName']):
                     continue
                 intern = False
                 if 'works' in experience and len(experience['works']) > 0:
                     for work in experience['works']:
-                        if 'workPosition' in work and ('intern' in work['workPosition'] or 'Intern' in work['workPosition']):
+                        if 'workPosition' in work and (
+                                'intern' in work['workPosition'] or 'Intern' in work['workPosition']):
                             intern = True
                             break
                 if intern:
                     continue
                 has_experience = True
-                min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year), min_work_start_year)
+                min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year),
+                                          min_work_start_year)
         age_sure = None
         age_compare = None
         if has_education and has_bachelor:
@@ -144,6 +154,29 @@ def get_age(profile):
     except:
         return None
 
+
+def cal_work_time(experiences):
+    min_work_start_year = 1900
+
+    for experience in experiences:
+        if 'companyName' in experience['companyName'] and (
+                'intern' in experience['companyName'] or 'Intern' in experience['companyName']):
+            continue
+        intern = False
+        if 'works' in experience and len(experience['works']) > 0:
+            for work in experience['works']:
+                if 'workPosition' in work and (
+                        'intern' in work['workPosition'] or 'Intern' in work['workPosition']):
+                    intern = True
+                    break
+        if intern:
+            continue
+        min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year),
+                                  min_work_start_year)
+
+    return None if min_work_start_year == 1900 else min_work_start_year
+
+
 def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if type == 'need_deserialize':
         profile = deserialize_raw_profile(profile)
@@ -161,7 +194,8 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
            'cv': None,
            'age': None,
            'isChinese': None,
-           'languages': None}
+           'languages': None,
+           'workTime': None}
     if 'id' in profile:
         res['candidateId'] = profile['id']
     if 'profile' in profile:
@@ -252,6 +286,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
                     last_5_jump += 1
         res['last5Jump'] = last_5_jump
         res["experiences"] = experiences
+        res["workTime"] = cal_work_time(experiences)
     # logger.info(f"age: {res['age']}")
     return res
 
@@ -1202,20 +1237,26 @@ def exec_filter_task(manage_account_id, file_list, jd):
 def customized_user_scenario(manage_account_id, context, platform, scenario_info, extra_info=''):
     create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info='')
 
+
 def update_user_scenario(rid, scenario_info, extra_info=''):
     update_customized_scenario_setting(scenario_info, extra_info, rid)
+
 
 def create_customized_greeting_service(manage_account_id, platform, scenario_info):
     create_customized_greeting(manage_account_id, platform, scenario_info)
 
+
 def update_customized_greeting_service(scenario_info, rid):
     update_customized_greeting(scenario_info, rid)
+
 
 def delete_customized_greeting_service(rid):
     delete_customized_greeting(rid)
 
+
 def query_customized_greeting_service(manage_account_id, platform):
     query_customized_greeting(manage_account_id, platform)
+
 
 def get_email_template(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_EMAIL)
@@ -1226,6 +1267,7 @@ def get_email_template(manage_account_id, platform):
         return {}
     else:
         return json.loads(scenario_info, strict=False)
+
 
 def get_inmail_template(manage_account_id, platform):
     scenario_info = query_customized_scenario_setting(manage_account_id, platform, SCENARIO_INMAIL)
@@ -1246,6 +1288,7 @@ def get_default_email_template(idx, platform):
     template = template[0][0]
     return {'total': total, 'idx': idx, 'template': template}, None
 
+
 def get_default_inmail_template(idx, platform):
     total = get_default_inmail_template_count(platform)[0][0]
     template = get_default_inmail_template_by_idx(platform, idx)
@@ -1263,6 +1306,7 @@ def get_default_greeting_template_v2(platform):
     for template in templates:
         res.append(template[0])
     return res, None
+
 
 def get_default_greeting_template(idx, platform):
     total = get_default_greeting_template_count(platform)[0][0]
@@ -1295,12 +1339,13 @@ def get_default_greeting_scenario():
     msg += 'would you like to explore this opportunity? Thanks!'
     return {'默认': msg}
 
+
 def get_default_greeting_scenario_v2():
     msg = 'Hi \n'
     msg += 'we are looking for an candidate base in Irvine/Seattle for FFALCON who is expanding streaming business, it\'s the leading smart TVs & AIoT company in China\n'
     msg += 'your Exp. seems a good match\n'
     msg += 'would you like to explore this opportunity? Thanks!'
-    return [{'id':0, 'msg': msg}]
+    return [{'id': 0, 'msg': msg}]
 
 
 def get_default_chat_scenario():
@@ -1330,6 +1375,7 @@ def get_leave_msg(manage_account_id, platform):
     else:
         return json.loads(scenario_info, strict=False)
 
+
 def get_leave_msg_v2(manage_account_id, platform):
     scenario_info = query_customized_greeting(manage_account_id, platform)
     if len(scenario_info) == 0 or len(scenario_info[0]) == 0:
@@ -1338,7 +1384,7 @@ def get_leave_msg_v2(manage_account_id, platform):
         ret = []
         logger.info("get_leave_msg_v2 = {}".format(scenario_info))
         for rid, s_info in scenario_info:
-            ret.append({'id': rid, 'msg':s_info})
+            ret.append({'id': rid, 'msg': s_info})
         return ret
 
 
@@ -1516,6 +1562,7 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
         details.append(profile)
     return data, None
 
+
 def fetch_contact_infos(manage_account_id, candidate_ids):
     ret_dict = {}
     if not candidate_ids:
@@ -1526,7 +1573,7 @@ def fetch_contact_infos(manage_account_id, candidate_ids):
     contact_dict = {}
     for linkedin_id, personal_email, work_email, phone in contacts:
         contact_dict[linkedin_id] = {
-            'Email': json.loads(personal_email)+ json.loads(work_email),
+            'Email': json.loads(personal_email) + json.loads(work_email),
             'Phone': json.loads(phone)
         }
     for link_linkedin_id, link_contact_type in user_links:
@@ -1538,7 +1585,7 @@ def fetch_contact_infos(manage_account_id, candidate_ids):
         contact_content = contact_dict.get(link_linkedin_id, {}).get(contact_key, [])
         ret_dict[link_linkedin_id][contact_key] += contact_content
     e = time.time()
-    logger.info(f'fetch_contact_infos, from |{contacts}| |{user_links}| to |{ret_dict}|, cost: {e-b}s')
+    logger.info(f'fetch_contact_infos, from |{contacts}| |{user_links}| to |{ret_dict}|, cost: {e - b}s')
     return ret_dict
 
 
@@ -1560,12 +1607,14 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
             if not profile['contactInfo'].get('Phone', ''):
                 bank_phone = candidate_contact_infos[candidate_id].get('Phone', [])
                 if len(bank_phone):
-                    logger.info(f'manage_account_id {manage_account_id}, linkedin {candidate_id}, will update phone to: ({len(bank_phone)}) {bank_phone[0]}')
+                    logger.info(
+                        f'manage_account_id {manage_account_id}, linkedin {candidate_id}, will update phone to: ({len(bank_phone)}) {bank_phone[0]}')
                     profile['contactInfo']['Phone'] = bank_phone[0]
             if not profile['contactInfo'].get('Email', ''):
                 bank_email = candidate_contact_infos[candidate_id].get('Email', [])
                 if len(bank_email):
-                    logger.info(f'manage_account_id {manage_account_id}, linkedin {candidate_id}, will update email to: ({len(bank_email)}) {bank_email[0]}')
+                    logger.info(
+                        f'manage_account_id {manage_account_id}, linkedin {candidate_id}, will update email to: ({len(bank_email)}) {bank_email[0]}')
                     profile['contactInfo']['Email'] = bank_email[0]
         if profile is None:
             continue
@@ -1770,3 +1819,44 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
     logger.info(
         f"add_tag_log manage_account_id: {manage_account_id} platform: {platform} tag: {tag} candidate_id: {candidate_id} flow_status: {flow_status} logs: {logs}")
     update_tag_log(manage_account_id, platform, tag, candidate_id, json.dumps(logs, ensure_ascii=False))
+
+
+def parse_profile_gpt(profile):
+    prompt_msg = f"profile[0:3500] \nThis is a LinkedIn resume of a candidate. As a headhunter, you need to analyze the resume and summarize two aspects:\n1 => Industry Experience and Expertise\n2 => Career Highlights\nThe result should be represented in JSON format with 'industry_experience' for industry experience and expertise, and 'job_info' for career highlights. \nSummarize the content in no more than 50 words, and ensure it is within 50 words.\nThe result content is returned in Chinese."
+    prompt = Prompt()
+    prompt.add_user_message(prompt_msg)
+    output = gpt_manager.chat_task(prompt)
+    try:
+        details = json.loads(output, strict=False)
+    except BaseException as e:
+        logger.error(f"parse_profile_gpt json格式异常: {output}")
+        return {}
+
+    return details
+
+
+def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai):
+    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
+    if len(rows) == 0:
+        return {}
+
+    raw_profile = deserialize_raw_profile(rows[0][1])
+    profile = parse_profile(raw_profile, 'no', True)
+    if use_ai:
+        apt_profile_info = parse_profile_gpt(profile)
+        if "industry_experience" in apt_profile_info:
+            profile["industry_experience"] = apt_profile_info["industry_experience"]
+        if "job_info" in apt_profile_info:
+            profile["job_info"] = apt_profile_info["job_info"]
+
+    if "workTime" in profile and profile["workTime"] is not None:
+        profile["workTimeStr"] = f"{profile['workTime']}年至今"
+
+    if "age" in profile and profile["age"] is not None:
+        if profile["age"] <= 0 or profile["age"] > 100:
+            profile["age"] = None
+
+    if "last5Jump" in profile and profile["last5Jump"] is not None:
+        profile["last5JumpStr"] = f"5年{profile['last5Jump']}跳"
+
+    return profile
