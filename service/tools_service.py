@@ -1808,7 +1808,7 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
 
 
 def parse_profile_gpt(profile):
-    prompt_msg = f"{json.dumps(profile)[0:3500]} \nThis is a LinkedIn resume of a candidate. As a headhunter, you need to analyze the resume and summarize two aspects:\n1 => Industry Experience and Expertise\n2 => Career Highlights\nThe result should be represented in JSON format with 'industry_experience' for industry experience and expertise, and 'job_info' for career highlights. \nSummarize the content in no more than 50 words, and ensure it is within 50 words.\nThe result content is returned in Chinese."
+    prompt_msg = f"{json.dumps(profile)[0:3500]} \nThis is a LinkedIn resume of a candidate. As a headhunter, you need to analyze the resume and summarize two aspects:\n1 => Industry Experience and Expertise\n2 => Career Highlights\nThe result should be represented in JSON format with 'industry_experience' for industry experience and expertise, and 'career_highlights' for career highlights. \nSummarize the content in no more than 50 words, and ensure it is within 50 words.\nThe result content is returned in Chinese."
     prompt = Prompt()
     prompt.add_user_message(prompt_msg)
     output = gpt_manager.chat_task(prompt)
@@ -1836,8 +1836,8 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
         apt_profile_info = parse_profile_gpt(profile)
         if "industry_experience" in apt_profile_info:
             profile["industry_experience"] = apt_profile_info["industry_experience"]
-        if "job_info" in apt_profile_info:
-            profile["job_info"] = apt_profile_info["job_info"]
+        if "career_highlights" in apt_profile_info:
+            profile["career_highlights"] = apt_profile_info["job_info"]
 
     if "workTime" in profile and profile["workTime"] is not None:
         profile["workTimeStr"] = f"{profile['workTime']}年至今"
