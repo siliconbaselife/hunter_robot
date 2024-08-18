@@ -107,7 +107,7 @@ def get_age(profile):
                 continue
             intern = False
             if 'works' in experience and len(experience['works']) > 0:
-                for work in experience['work']:
+                for work in experience['works']:
                     if 'workPosition' in work and ('intern' in work['workPosition'] or 'Intern' in work['workPosition']):
                         intern = True
                         break
