@@ -475,18 +475,25 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             p['profile']['name'] = name.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace(
                 "\'", "")
             parsed = parse_profile(p, 'no_need')
+            b1 = time.time()
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
                                   parsed['name'] if parsed['name'] else '',
                                   parsed['company'] if parsed['company'] else '')
+            logger.info(f'upload_online_profile used time: {time.time() - b1}')
 
         if tag and len(tag) > 0:
+            b1 = time.time()
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
+            logger.info(f'associate_profile_tags used time: {time.time() - b1}')
 
         try:
-
+            b1 = time.time()
             upload_profile_status(manage_account_id, candidate_id, platform, p["profile"])
+            logger.info(f'upload_profile_status used time: {time.time() - b1}')
 
+            b2 = time.time()
             refresh_contact(manage_account_id, candidate_id, p)
+            logger.info(f'upload_profile_status used time: {time.time() - b2}')
         except BaseException as e:
             logger.error("简历信息存储出错:", e)
             logger.error(str(traceback.format_exc()))
