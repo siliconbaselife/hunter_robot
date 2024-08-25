@@ -23,6 +23,7 @@ from utils.utils import decrypt, user_code_cache
 from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
+import time
 
 logger = get_logger(config['log']['log_file'])
 
@@ -1268,7 +1269,8 @@ def parse_profile_by_ai():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
+    before_time = time.time()
     profile = parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai)
     logger.info(
-        f"parse_profile_by_ai => manage_account_id: {manage_account_id} candidate_id: {candidate_id} platform: {platform} use_ai: {use_ai} profile: {profile}")
+        f"parse_profile_by_ai used time: {time.time() - before_time} => manage_account_id: {manage_account_id} candidate_id: {candidate_id} platform: {platform} use_ai: {use_ai} profile: {profile}")
     return Response(json.dumps(get_web_res_suc_with_data(profile), ensure_ascii=False))
