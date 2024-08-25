@@ -15,7 +15,7 @@ sql_dict = {
     "update_filter_result": "update resume_filter_task set filter_result='{}', format_resumes = '{}' where id={}",
     "get_filter_task_by_id": "select id, manage_account_id, resume_url, status, create_time,jd,filter_result,taskname, format_resumes from resume_filter_task where id={}",
     "upload_online_profile": "insert into online_resume(manage_account_id, platform, raw_profile, candidate_id, name, company) values ('{}', '{}', '{}', '{}', '{}', '{}')",
-    "update_raw_profile": "update online_resume set raw_profile='{}', name = '{}', company = '{}' where platform = '{}' and candidate_id='{}'",
+    "update_raw_profile": "update online_resume set raw_profile='{}', name = '{}', company = '{}' where platform = '{}' and candidate_id='{}' and manage_account_id='{}'",
     "upload_online_profile_pdf": "insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform": "select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
     "get_resume_by_candidate_ids_and_platform": "select candidate_id, raw_profile, cv_url from online_resume where candidate_id in {} and platform='{}' and manage_account_id='{}' order by id limit {}, {}",
@@ -136,7 +136,7 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         b1 = time.time()
-        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
+        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id))
         logger.info(
             f"update_raw_profile time: {time.time() - b1} sql: {sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id)}")
 
@@ -146,7 +146,7 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
             sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
                                                      company))
         b1 = time.time()
-        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
+        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id))
         logger.info(
             f"update_raw_profile time: {time.time() - b1} sql: {sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id)}")
         return
