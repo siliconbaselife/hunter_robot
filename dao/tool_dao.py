@@ -136,9 +136,10 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         b1 = time.time()
-        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id))
+        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id)
+        dbm.update(sql)
         logger.info(
-            f"update_raw_profile time: {time.time() - b1} sql: {sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id)}")
+            f"update_raw_profile time: {time.time() - b1} sql: {sql}")
 
         return
     else:
@@ -146,9 +147,10 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
             sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
                                                      company))
         b1 = time.time()
-        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id))
+        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id)
+        dbm.update(sql)
         logger.info(
-            f"update_raw_profile time: {time.time() - b1} sql: {sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id)}")
+            f"update_raw_profile time: {time.time() - b1} sql: {sql}")
         return
 
 
