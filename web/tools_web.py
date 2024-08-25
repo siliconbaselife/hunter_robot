@@ -239,6 +239,7 @@ def download_online_resume():
 def upload_online_resume():
     # cookie_user_name = request.cookies.get('user_name', None)
     # 插件没有domain，无法直接携带cookie
+    before_time = time.time()
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -264,7 +265,7 @@ def upload_online_resume():
         count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age,
                                                         max_age, tag)
 
-    logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
+    logger.info(f'upload_online_resume_exec used time => {time.time() - before_time} :{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
 
