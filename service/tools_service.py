@@ -183,10 +183,10 @@ def cal_work_time(experiences):
                                               min_work_start_year)
         if intern:
             continue
-        logger.info(f"cal_work_time {experience['timeInfo']}")
+        # logger.info(f"cal_work_time {experience['timeInfo']}")
         min_work_start_year = min(get_min_time_info(experience['timeInfo'], 100000),
                                   min_work_start_year)
-    logger.info(f"cal_work_time min_work_start_year: {min_work_start_year}")
+    # logger.info(f"cal_work_time min_work_start_year: {min_work_start_year}")
     return None if min_work_start_year == 2900 else min_work_start_year
 
 
@@ -290,7 +290,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
                 res['isChinese'] = True
     # age
     res['age'] = get_age(profile)
-    logger.info(f"get_age => {res['age']}")
+    # logger.info(f"get_age => {res['age']}")
     if 'languages' in profile and len(profile['languages']) > 0:
         res['languages'] = cv_str(profile['languages'], 0) if field_2_str else profile['languages']
 
