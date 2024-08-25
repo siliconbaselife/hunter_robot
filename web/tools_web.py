@@ -1259,6 +1259,7 @@ def add_candidate_log():
 @tools_web.route("/backend/tools/parseProfileByAI", methods=['POST'])
 @web_exception_handler
 def parse_profile_by_ai():
+    before_time = time.time()
     candidate_id = request.json.get('candidate_id', '')
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
@@ -1269,7 +1270,7 @@ def parse_profile_by_ai():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-    before_time = time.time()
+
     profile = parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai)
     logger.info(
         f"parse_profile_by_ai used time: {time.time() - before_time} => manage_account_id: {manage_account_id} candidate_id: {candidate_id} platform: {platform} use_ai: {use_ai} profile: {profile}")
