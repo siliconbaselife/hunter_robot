@@ -109,7 +109,7 @@ def get_age(profile):
                     min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
                                                    min_education_start_year)
                 has_education = True
-        logger.info(f"1 get_age => min_education_start_year: {min_education_start_year}")
+        # logger.info(f"1 get_age => min_education_start_year: {min_education_start_year}")
         if 'experiences' in profile and len(profile['experiences']) > 0:
             for experience in profile['experiences']:
                 if 'companyName' in experience['companyName'] and (
@@ -129,9 +129,9 @@ def get_age(profile):
                 has_experience = True
                 min_work_start_year = min(get_min_time_info(experience['timeInfo'], min_work_start_year),
                                           min_work_start_year)
-                logger.info(
-                    f"get_age experiences timeInfo => {experience['timeInfo']} min_work_start_year: {min_work_start_year}")
-        logger.info(f"2 get_age => min_work_start_year: {min_work_start_year}")
+                # logger.info(
+                #     f"get_age experiences timeInfo => {experience['timeInfo']} min_work_start_year: {min_work_start_year}")
+        # logger.info(f"2 get_age => min_work_start_year: {min_work_start_year}")
         age_sure = None
         age_compare = None
         if has_education and has_bachelor and min_education_start_year < 1000000:
@@ -145,8 +145,8 @@ def get_age(profile):
             age_sure = 18 + datetime.datetime.now().year - min_education_start_year
         if age_sure:
             # print("age_sure = ...")
-            logger.info(
-                f"get_age age_sure: {age_sure} has_education: {has_education} has_bachelor: {has_bachelor} min_education_start_year: {min_education_start_year}")
+            # logger.info(
+            #     f"get_age age_sure: {age_sure} has_education: {has_education} has_bachelor: {has_bachelor} min_education_start_year: {min_education_start_year}")
             return None if age_sure > 100 or age_sure <= 0 else age_sure
 
         if not has_experience:
@@ -158,7 +158,7 @@ def get_age(profile):
         else:
             # print('has_experience age_compare max')
             age = max(age_compare, 21 + datetime.datetime.now().year - min_work_start_year)
-            logger.info(f"get_age age: {age_sure}")
+            # logger.info(f"get_age age: {age_sure}")
             return None if age > 100 or age <= 0 else age
     except BaseException as e:
         logger.error(f"get_age error => {e}")
@@ -1558,7 +1558,7 @@ def get_min_time_info(time_info_str, default_time):
     times = re.findall(r'\d\d\d\d', time_info_str)
     for t in times:
         min_start_year = min(min_start_year, int(t))
-    logger.info(f"get_min_time_info time_info_str: {time_info_str} times: {times} min_start_year: {min_start_year}")
+    # logger.info(f"get_min_time_info time_info_str: {time_info_str} times: {times} min_start_year: {min_start_year}")
     return min_start_year
 
 
