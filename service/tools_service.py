@@ -371,6 +371,7 @@ def linkedin_filter(manage_account_id, raw_profile, conditions, platform):
 
 
 def linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age, max_age, tag):
+    before_time = time.time()
     if tag and len(tag) > 0:
         create_profile_tag(manage_account_id, platform, tag)
     count = 0
@@ -482,14 +483,14 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             associate_profile_tags(manage_account_id, candidate_id, platform, tag)
 
         try:
-            before_time = time.time()
+
             upload_profile_status(manage_account_id, candidate_id, platform, p["profile"])
-            logger.info(f"upload_profile_status => used time: {before_time - time.time()}")
+
             refresh_contact(manage_account_id, candidate_id, p)
         except BaseException as e:
             logger.error("简历信息存储出错:", e)
             logger.error(str(traceback.format_exc()))
-
+    logger.info(f"linkedin_online_resume_upload_processor => used time: {time.time() - before_time}")
     return count
 
 
