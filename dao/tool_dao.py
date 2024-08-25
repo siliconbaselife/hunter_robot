@@ -135,12 +135,21 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
-        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
+        b1 = time.time()
+        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
+        logger.info(
+            f"update_raw_profile time: {time.time() - b1} sql: {sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id)}")
+
+        return
     else:
         dbm.insert(
             sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
                                                      company))
-        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
+        b1 = time.time()
+        dbm.update(sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id))
+        logger.info(
+            f"update_raw_profile time: {time.time() - b1} sql: {sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id)}")
+        return
 
 
 def upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr):
@@ -244,6 +253,7 @@ def create_customized_scenario_setting(manage_account_id, platform, context, sce
         sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info,
                                                               extra_info))
 
+
 def update_customized_scenario_setting(rid, scenario_info, extra_info):
     scenario_info = json.dumps(scenario_info, ensure_ascii=False)
     scenario_info = scenario_info.replace("\n", "\\n")
@@ -261,9 +271,9 @@ def update_customized_scenario_setting(rid, scenario_info, extra_info):
 def query_customized_scenario_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_scenario_setting'].format(manage_account_id, platform, context))
 
+
 def query_customized_scenario_setting_with_id(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_scenario_setting_with_id'].format(manage_account_id, platform, context))
-
 
 
 def query_customized_extra_setting(manage_account_id, platform, context):
@@ -297,12 +307,14 @@ def get_default_inmail_template_count(platform):
 def get_default_inmail_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))
 
+
 def get_default_greeting_template_count(platform):
     return dbm.query(sql_dict['get_default_greeting_template_count'].format(platform))
 
 
 def get_default_greeting_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_greeting_template_by_idx'].format(platform, idx))
+
 
 def get_all_default_greeting_template(platform):
     return dbm.query(sql_dict['get_all_default_greeting_template'].format(platform))
@@ -411,11 +423,13 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
     logger.info(f"query_tag_filter_profiles_new: {sql} time: {e - s}")
     return data
 
+
 def create_customized_greeting(manage_account_id, platform, scenario_info):
     scenario_info = scenario_info.replace("\n", "\\n")
     scenario_info = scenario_info.replace("\'", "\\'")
     scenario_info = scenario_info.replace('\"', '\\"')
     return dbm.query(sql_dict['create_customized_greeting'].format(manage_account_id, platform, scenario_info))
+
 
 def update_customized_greeting(scenario_info, rid):
     scenario_info = scenario_info.replace("\n", "\\n")
@@ -423,8 +437,10 @@ def update_customized_greeting(scenario_info, rid):
     scenario_info = scenario_info.replace('\"', '\\"')
     return dbm.query(sql_dict['update_customized_greeting'].format(scenario_info, rid))
 
+
 def delete_customized_greeting(rid):
     return dbm.query(sql_dict['delete_customized_greeting'].format(rid))
+
 
 def query_customized_greeting(manage_account_id, platform):
     return dbm.query(sql_dict['query_customized_greeting'].format(manage_account_id, platform))
