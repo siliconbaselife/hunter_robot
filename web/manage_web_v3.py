@@ -35,7 +35,7 @@ def task_update_api():
     params = request.json['params']
 
     logger.info(f'task_update_request_v3:{manage_account_id}, {account_id},{platform}, {params}')
-    if platform=='Boss':
+    if platform == 'Boss':
         update_config_service_v3(manage_account_id, account_id, platform, params)
     else:
         update_config_service_v2(manage_account_id, account_id, platform, params)
@@ -65,10 +65,24 @@ def chat_stat_api():
     platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
-    if platform!= 'Boss':
+
+    page = request.json.get('page', None)
+    limit = request.json.get('limit', None)
+
+    with_phone = request.json.get('phone', False)
+    with_wechat = request.json.get('wechat', False)
+    with_reply = request.json.get('reply', False)
+    with_resume = request.json.get('resume', False)
+
+    if platform != 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
-    stat_result = stat_chat_service(job_id, begin_time, end_time)
-    return Response(json.dumps(get_web_res_suc_with_data(stat_result), ensure_ascii=False))
+    stat_result = stat_chat_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume)
+    ret_data = {
+        'stat': stat_result,
+        'page': page,
+        'limit': limit
+    }
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data), ensure_ascii=False))
 
 
 @manage_web_v3.route("/backend/manage/candidateList/v3", methods=['POST'])
@@ -82,14 +96,14 @@ def candidate_list_api():
     page = request.json.get('page', None)
     limit = request.json.get('limit', None)
 
-    # with_phone = request.json.get('phone', "")
-    # with_wechat = request.json.get('wechat', "")
-    # with_reply = request.json.get('reply', "")
-    # with_resume = request.json.get('resume', "")
+    with_phone = request.json.get('phone', False)
+    with_wechat = request.json.get('wechat', False)
+    with_reply = request.json.get('reply', False)
+    with_resume = request.json.get('resume', False)
 
     if platform!= 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
-    candidate_list = chat_list_service(job_id, begin_time, end_time, page, limit)
+    candidate_list = chat_list_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume)
     ret_data = {
         'list': candidate_list,
         'page': page,

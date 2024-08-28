@@ -16,6 +16,8 @@ sql_dict = {
     "update_contact_personal_email": "update contact_bank set personal_email = '{}' where linkedin_id = '{}'",
     "update_contact_phone": "update contact_bank set phone = '{}' where linkedin_id = '{}'",
     "query_contact_by_profile": "select linkedin_id, name, personal_email, work_email, work_email_status, phone from contact_bank where linkedin_profile='{}'",
+    'query_link_from_id_set': "select link_linkedin_id, link_contact_type from extension_user_link where user_id='{}' and link_linkedin_id in {}",
+    'query_contact_from_id_set': "select linkedin_id, personal_email, work_email, phone from contact_bank where linkedin_id in {}"
 }
 
 
@@ -67,3 +69,9 @@ def query_contact_by_profile_id(linkedin_id):
     phones = json.loads(data[0][5])
 
     return True, person_emails, phones
+
+def query_contact_by_id_set(linkedin_id_set):
+    return dbm.query(sql_dict['query_contact_from_id_set'].format(json.dumps(linkedin_id_set).replace('[', '(').replace(']', ')')))
+
+def query_user_link_by_id_set(user_id, linkedin_id_set):
+    return dbm.query(sql_dict['query_link_from_id_set'].format(user_id, json.dumps(linkedin_id_set).replace('[', '(').replace(']', ')')))

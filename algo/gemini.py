@@ -6,7 +6,7 @@ from utils.config import config as config
 genai.configure(api_key=config['llm']['gemini']['api_key'])
 
 class Gemini(object):
-    def __init__(self):
+    def __init__(self, init_history=None):
         self._safety_config = {
             genai.types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: genai.types.HarmBlockThreshold.BLOCK_NONE,
             genai.types.HarmCategory.HARM_CATEGORY_HARASSMENT: genai.types.HarmBlockThreshold.BLOCK_NONE,
@@ -15,6 +15,8 @@ class Gemini(object):
         }
         self._model = config['llm']['gemini']['model_type']
         self._chat = None
+        if init_history:
+            self._chat = genai.GenerativeModel(self._model).start_chat(history=init_history)
 
     def send_message(self, prompt, temperature=0.4):
         if not self._chat:
@@ -24,4 +26,3 @@ class Gemini(object):
         response.resolve()
         msg = response.text
         return msg
-

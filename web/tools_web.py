@@ -23,6 +23,7 @@ from utils.utils import decrypt, user_code_cache
 from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
+import time
 
 logger = get_logger(config['log']['log_file'])
 
@@ -238,6 +239,7 @@ def download_online_resume():
 def upload_online_resume():
     # cookie_user_name = request.cookies.get('user_name', None)
     # 插件没有domain，无法直接携带cookie
+    before_time = time.time()
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -263,7 +265,7 @@ def upload_online_resume():
         count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age,
                                                         max_age, tag)
 
-    logger.info(f'upload_online_resume_exec:{manage_account_id},{platform}, {count}')
+    logger.info(f'upload_online_resume_exec used time => {time.time() - before_time} :{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
 
@@ -500,6 +502,72 @@ def customized_greeting_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/getLeaveMsgV2", methods=['POST'])
+@web_exception_handler
+def get_leave_msg_web_v2():
+    platform = request.json.get('platform', '')
+    # candidate_id = request.json.get('candidate_id', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info("[backend_tools] request for leave msg for candidate_id = {}, platform = {}".format(manage_account_id,
+                                                                                                    platform))
+    msg = get_leave_msg_v2(manage_account_id, platform)
+    return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/customizedGreetingScenarioV2", methods=['POST'])
+@web_exception_handler
+def customized_greeting_scenario_web_v2():
+    platform = request.json.get('platform', '')
+    scenario = request.json.get('scenario')
+    rid = request.json.get('id', None)
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] customized_greeting_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
+    if rid is None:
+        create_customized_greeting(manage_account_id, platform, scenario)
+    else:
+        update_customized_greeting_service(scenario, rid)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/deleteGreetingScenarioV2", methods=['POST'])
+@web_exception_handler
+def delete_greeting_scenario_web_v2():
+    platform = request.json.get('platform', '')
+    rid = request.json.get('id', None)
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] delete_greeting_scenario_web_v2 manage_account_id = {}, platform = {}, rid = {}".format(
+            manage_account_id, platform, rid))
+    if rid is None:
+        return Response(json.dumps(get_web_res_fail("id不存在"), ensure_ascii=False))
+    else:
+        delete_customized_greeting_service(rid)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 @tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])
 @web_exception_handler
 def customized_email_scenario_web():
@@ -602,6 +670,111 @@ def get_default_email_template_web():
         "[backend_tools] get_default_email_template_web manage_account_id = {}, platform = {}".format(
             manage_account_id, platform))
     data, err_msg = get_default_email_template(int(idx), platform)
+    if err_msg is not None:
+        return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/getDefaultInmailTemplate", methods=['POST'])
+@web_exception_handler
+def get_default_inmail_template_web():
+    platform = request.json.get('platform', '')
+    idx = request.json.get('idx', None)
+    if idx is None or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_default_inmail_template manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data, err_msg = get_default_inmail_template(int(idx), platform)
+    if err_msg is not None:
+        return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/getInmailTemplate", methods=['POST'])
+@web_exception_handler
+def get_inmail_scenario_web():
+    platform = request.json.get('platform', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_greeting_scenario_web manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data = get_inmail_template(manage_account_id, platform)
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/customizedInmailTemplate", methods=['POST'])
+@web_exception_handler
+def customized_inmail_scenario_web():
+    platform = request.json.get('platform', '')
+    # candidate_id = request.json.get('candidate_id', '')
+    scenario = request.json.get('scenario')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] customized_inmail_scenario_web manage_account_id = {}, platform = {}, scenario = {}".format(
+            manage_account_id, platform, scenario))
+    customized_user_scenario(manage_account_id, SCENARIO_INMAIL, platform, scenario)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/getDefaultGreetingTemplate", methods=['POST'])
+@web_exception_handler
+def get_default_greeting_template_web():
+    platform = request.json.get('platform', '')
+    idx = request.json.get('idx', None)
+    if idx is None or platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_default_greeting_template_web manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data, err_msg = get_default_greeting_template(int(idx), platform)
+    if err_msg is not None:
+        return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/getDefaultGreetingTemplateV2", methods=['POST', 'GET'])
+@web_exception_handler
+def get_default_greeting_template_webv2():
+    platform = request.json.get('platform', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_default_greeting_template_web manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    data, err_msg = get_default_greeting_template_v2(platform)
     if err_msg is not None:
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
@@ -966,3 +1139,140 @@ def download_profile_by_tag_web():
         return response
 
     return send_file(file_path, as_attachment=True)
+
+
+@tools_web.route("/backend/tools/searchProfileInfoByTag/v2", methods=['POST'])
+@web_exception_handler
+def search_profile_by_tag_web_v2():
+    tags = request.json.get('tags', [])
+    tag = tags[0]
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    page = request.json.get('page', 1)
+    company = request.json.get('company_name', '')
+    candidate_name = request.json.get('name', '')
+    status = request.json.get('status', '')
+    stage = request.json.get('stage')
+    limit = request.json.get('limit', 20)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, limit, False)
+    logger.info(
+        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} status：{status} stage: {stage} page: {page} limit: {limit} data:{len(data)}")
+
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+
+# @tools_web.route("/backend/tools/searchCompanysByTag", methods=['POST'])
+# @web_exception_handler
+# def search_company_by_tag_web():
+#     tag = request.json.get('tag', '')
+#     cookie_user_name = request.cookies.get('user_name', None)
+#     platform = request.json.get('platform', '')
+#     if cookie_user_name == None:
+#         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+#     else:
+#         manage_account_id = decrypt(cookie_user_name, key)
+#
+#     companys = search_company_by_tags(manage_account_id, platform, tag)
+#     logger.info(
+#         f"search_company_by_tag_web manage_account_id: {manage_account_id} platform: {platform} tag: {tag} companys: {companys}")
+#     return Response(json.dumps(get_web_res_suc_with_data(companys), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/searchTagInfos", methods=['POST'])
+@web_exception_handler
+def search_tag_infos():
+    tag = request.json.get('tag', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    infos = search_tag_flow_infos(manage_account_id, platform, tag)
+    logger.info(
+        f"search_tag_infos manage_account_id: {manage_account_id} platform: {platform} tag: {tag} infos: {infos}")
+    return Response(json.dumps(get_web_res_suc_with_data(infos), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/changeFlowStatus", methods=['POST'])
+@web_exception_handler
+def change_flow_status():
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    flow_status = request.json.get('flow_status', '')
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    logger.info(
+        f"change_flow_status: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, flow_status: {flow_status}")
+    change_flow_status_service(manage_account_id, platform, tag, candidate_id, flow_status)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/getCandidateLog", methods=['POST'])
+@web_exception_handler
+def get_candidate_log():
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    logs = get_log(manage_account_id, platform, tag, candidate_id)
+    logger.info(
+        f"get_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, logs: {logs}")
+    return Response(json.dumps(get_web_res_suc_with_data(logs), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/addCandidateLog", methods=['POST'])
+@web_exception_handler
+def add_candidate_log():
+    tag = request.json.get('tag', '')
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    new_log = request.json.get('new_log', '')
+    flow_status = request.json.get('flow_status', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    logger.info(
+        f"add_candidate_log: manage_account_id {manage_account_id}, candidate_id {candidate_id}, tag {tag}, platform {platform}, new_log: {new_log}")
+    add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new_log)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/parseProfileByAI", methods=['POST'])
+@web_exception_handler
+def parse_profile_by_ai():
+    before_time = time.time()
+    candidate_id = request.json.get('candidate_id', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    use_ai = request.json.get('use_ai', False)
+
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+
+    profile = parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai)
+    logger.info(
+        f"parse_profile_by_ai used time: {time.time() - before_time} => manage_account_id: {manage_account_id} candidate_id: {candidate_id} platform: {platform} use_ai: {use_ai} profile: {profile}")
+    return Response(json.dumps(get_web_res_suc_with_data(profile), ensure_ascii=False))

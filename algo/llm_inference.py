@@ -82,7 +82,7 @@ class GPTManager:
         self.pool = ThreadPoolExecutor(2)
         self.gpt_map = {
             "ThreadPoolExecutor-0_0": ChatGPT(OPENAI_API_KEY_0),
-            "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_1)
+            "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_0)
         }
     def exec_task(self, prompt):
         logger.info(f'chatgpt_exec {threading.current_thread().name}')

@@ -158,9 +158,9 @@ def update_task_config_service_v3(manage_account_id, account_id, filter_task_con
     return account_config_update_db(manage_account_id, account_id, json.dumps(task_configs, ensure_ascii=False),
                                     json.dumps(job_list, ensure_ascii=False))
 
-def chat_list_service(job_id, begin_time, end_time, page, limit):
+def chat_list_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume):
     return_list = []
-    candidate_list = chat_parse(job_id, begin_time, end_time, page, limit)[0]
+    candidate_list = chat_parse(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume)
     for item in candidate_list:
         cid = item['id']
         flag, detail = query_candidate_detail(cid)
@@ -177,21 +177,7 @@ def chat_list_service(job_id, begin_time, end_time, page, limit):
         return_list.append(item)
     return return_list
 
-def stat_chat_service(job_id, begin_time, end_time):
-    return chat_parse(job_id, begin_time, end_time)[1]
-
-
-def job_list_service(manage_account_id):
-    ret_list = []
-    for item in get_job_info_by_account(manage_account_id):
-        ret_list.append({
-            'jobId': item[0],
-            'jobName': item[1]        
-        })
-
-def chat_parse(job_id, begin_time, end_time, page=None, limit=None):
-    chat_list = get_job_chat_db(job_id, begin_time, end_time, page, limit)
-
+def stat_chat_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume):
     user_ask_cv_cnt = 0
     user_ask_cnt = 0
     with_cv_cnt = 0
@@ -199,18 +185,10 @@ def chat_parse(job_id, begin_time, end_time, page=None, limit=None):
     reply_cnt = 0
     with_phone_cnt = 0
     with_wechat_cnt = 0
+    candidate_list = chat_parse(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume)
 
-    candidate_list = []
-    for cid, cname, source, status, contact, details, recall_cnt, filter_result in chat_list:
-        phone, wechat, cv, user_reply, chat_info_list = None, None, None, False, []
-        try:
-            contact = json.loads(contact)
-            phone = contact['phone']
-            wechat = contact['wechat']
-            cv = contact['cv']
-        except BaseException as e:
-            logger.info("stat_chat_service, error parse contact: {contact}")
-
+    for item in candidate_list:
+        source, cv, phone, wechat, user_reply, chat_info_list = item['source'], item['cv'], item['phone'], item['wechat'], item['reply'], item['chat']
         if cv is not None:
             with_cv_cnt+=1
         if phone is not None:
@@ -224,29 +202,12 @@ def chat_parse(job_id, begin_time, end_time, page=None, limit=None):
                 user_ask_cv_cnt+=1
         else:
             hello_cnt+=1
-            try:
-                chat_info_list = json.loads(details)
-                for item in chat_info_list:
-                    if item['speaker']=='user':
-                        user_reply = True
-                        break
-            except BaseException as e:
-                logger.info("stat_chat_service, error parse details: {details}")
         
         if user_reply:
             reply_cnt+=1
-        candidate_list.append({
-            'id': cid,
-            'name': cname,
-            'phone': phone,
-            'wechat': wechat,
-            'cv': cv,
-            'reply': user_reply,
-            'chat': chat_info_list
-        })
             
     reply_ratio = reply_cnt/ hello_cnt if hello_cnt!=0 else 0
-    return candidate_list, {
+    return {
         'user_ask_cv_cnt': user_ask_cv_cnt,
         'user_ask_cnt': user_ask_cnt,
         'with_cv_cnt': with_cv_cnt,
@@ -256,3 +217,57 @@ def chat_parse(job_id, begin_time, end_time, page=None, limit=None):
         'with_phone_cnt': with_phone_cnt,
         'with_wechat_cnt': with_wechat_cnt
     }
+
+
+def job_list_service(manage_account_id):
+    ret_list = []
+    for item in get_job_info_by_account(manage_account_id):
+        ret_list.append({
+            'jobId': item[0],
+            'jobName': item[1]        
+        })
+
+def chat_parse(job_id, begin_time, end_time, page=None, limit=None, with_phone=False, with_wechat=False, with_reply=False, with_resume=False):
+    chat_list = get_job_chat_db(job_id, begin_time, end_time, page, limit)
+
+    candidate_list = []
+    for cid, cname, source, status, contact, details, recall_cnt, filter_result in chat_list:
+        phone, wechat, cv, user_reply, chat_info_list = None, None, None, False, []
+        try:
+            contact = json.loads(contact)
+            phone = contact['phone']
+            wechat = contact['wechat']
+            cv = contact['cv']
+        except BaseException as e:
+            logger.info("chat_parse, error parse contact: {contact}")
+
+        try:
+            chat_info_list = json.loads(details)
+            for item in chat_info_list:
+                if item['speaker']=='user':
+                    user_reply = True
+                    break
+        except BaseException as e:
+            logger.info("chat_parse, error parse details: {details}")
+        
+        if with_phone and phone is None:
+            continue
+        if with_resume and cv is None:
+            continue
+        if with_reply and not user_reply:
+            continue
+        if with_wechat and wechat is None:
+            continue
+
+        candidate_list.append({
+            'id': cid,
+            'name': cname,
+            'phone': phone,
+            'wechat': wechat,
+            'cv': cv,
+            'reply': user_reply,
+            'chat': chat_info_list,
+            'source': source
+        })
+    return candidate_list
+

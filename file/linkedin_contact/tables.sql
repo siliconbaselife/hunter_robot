@@ -52,3 +52,18 @@ CREATE TABLE IF NOT EXISTS `contact_bank`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 alter table contact_bank add `work_email_status` LONGTEXT NOT NULL COMMENT '工作邮件状态'  after `work_email`;
 alter table contact_bank ADD INDEX index_name (`linkedin_id`);
+
+
+CREATE TABLE IF NOT EXISTS `agent_history_bank`(
+   `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+   `sess_id` VARCHAR(200) NOT NULL COMMENT 'session id',
+   `prompt` LONGTEXT NOT NULL COMMENT 'prompt',
+   `tag` LONGTEXT COMMENT '对话tag',
+   `response` LONGTEXT NOT NULL COMMENT 'llm 回复',
+   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+   PRIMARY KEY ( `id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+alter table agent_history_bank add `llm_type` VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'LLM名称'  after `response`;
+alter table agent_history_bank add `manage_account_id` VARCHAR(100) NOT NULL DEFAULT '' COMMENT 'manage_account_id'  after `id`;
+alter table agent_history_bank add `visible` bigint(10) unsigned NOT NULL DEFAULT 1 COMMENT 'visible to user'  after `response`;

@@ -1,7 +1,7 @@
 import json
 import time
 import requests
-
+from datetime import datetime
 from utils.log import get_logger
 from utils.config import config as config
 
@@ -45,6 +45,21 @@ class ContactOut(object):
         res = res['profile']
         has_phone = res.get('phone', False)
         return has_phone, None
+
+    def query_usage(self):
+        date_str = str(datetime.now()).split(' ')[0]
+        req_url = f'https://api.contactout.com/v1/stats?period={date_str}'
+        headers = {
+            'authorization': 'basic',
+            'token': self.token,
+        }
+        res = requests.get(req_url, headers=headers)
+        assert res.status_code==200, f"stats ({req_url}) for {profile} request to contact out abnormal: {res.text}"
+        res = res.json()
+        assert res['status_code']==200, f"stats ({req_url}) for {profile} data from contact out abnormal: {res}"
+        period = res['period']
+        usage = res['usage']
+        return period, usage
 
     def fetch_email(self, profile):
     # def fetch_email(self, profile, is_work_email):

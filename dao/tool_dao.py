@@ -3,6 +3,7 @@ import uuid
 from utils.config import config
 from utils.log import get_logger
 import json
+import time
 
 logger = get_logger(config['log']['log_file'])
 
@@ -13,8 +14,8 @@ sql_dict = {
     "create_new_filter_task": "insert into resume_filter_task(manage_account_id, jd, resume_url,taskname) values ('{}', '{}', '{}','{}')",
     "update_filter_result": "update resume_filter_task set filter_result='{}', format_resumes = '{}' where id={}",
     "get_filter_task_by_id": "select id, manage_account_id, resume_url, status, create_time,jd,filter_result,taskname, format_resumes from resume_filter_task where id={}",
-    "upload_online_profile": "insert into online_resume(manage_account_id, platform, raw_profile, candidate_id) values ('{}', '{}', '{}', '{}')",
-    "update_raw_profile": "update online_resume set raw_profile='{}' where platform = '{}' and candidate_id='{}'",
+    "upload_online_profile": "insert into online_resume(manage_account_id, platform, raw_profile, candidate_id, name, company) values ('{}', '{}', '{}', '{}', '{}', '{}')",
+    "update_raw_profile": "update online_resume set raw_profile='{}', name = '{}', company = '{}' where platform = '{}' and candidate_id='{}' and manage_account_id='{}'",
     "upload_online_profile_pdf": "insert into online_resume(manage_account_id, platform, cv_url, candidate_id) values ('{}', '{}', '{}', '{}')",
     "get_resume_by_candidate_id_and_platform": "select id,candidate_id,manage_account_id,platform,create_time from online_resume where candidate_id='{}' and platform='{}' and manage_account_id='{}'",
     "get_resume_by_candidate_ids_and_platform": "select candidate_id, raw_profile, cv_url from online_resume where candidate_id in {} and platform='{}' and manage_account_id='{}' order by id limit {}, {}",
@@ -36,13 +37,24 @@ sql_dict = {
     "query_candidate_id_by_tag_relation": "select candidate_id from user_profile_tag_relation where manage_account_id = '{}' and platform = '{}' and tag in {};",
     "delete_profile_tag_relation": "delete from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}' and tag in {};",
     "create_customized_scenario_setting": "insert into customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info) values('{}', '{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), context = VALUES(context), scenario_info = VALUES(scenario_info), extra_info = VALUES(extra_info)",
+    "update_customized_scenario_setting": "update customized_scenario_setting set scenario_info = '{}', extra_info = '{}' where id = '{}';",
     "query_customized_scenario_setting": "select scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
+    "query_customized_scenario_setting_with_id": "select id, scenario_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_customized_extra_setting": "select extra_info from customized_scenario_setting where manage_account_id = '{}' and platform = '{}' and context = '{}'",
     "query_email_info": "select email, pwd from email_credentials where manage_account_id = \'{}\';",
-    "flush_email_credentials" : "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
-    "get_email_credentials" : "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
+    "flush_email_credentials": "insert into email_credentials (manage_account_id, email, pwd, platform) values('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), email = VALUES(email), pwd = VALUES(pwd), platform = VALUES(platform)",
+    "get_email_credentials": "select manage_account_id, email, pwd, platform from email_credentials where manage_account_id = '{}' and platform = '{}';",
     "get_default_email_template_count": "select count(id) from default_email_template where platform = '{}';",
-    "get_default_email_template_by_idx" : "select template from default_email_template where platform = '{}' order by id limit {}, 1;"
+    "get_default_email_template_by_idx": "select template from default_email_template where platform = '{}' order by id limit {}, 1;",
+    "get_default_inmail_template_count": "select count(id) from default_inmail_template where platform = '{}';",
+    "get_default_inmail_template_by_idx": "select template from default_inmail_template where platform = '{}' order by id limit {}, 1;",
+    "get_default_greeting_template_count": "select count(id) from default_greeting_template where platform = '{}';",
+    "get_default_greeting_template_by_idx": "select template from default_greeting_template where platform = '{}' order by id limit {}, 1;",
+    "get_all_default_greeting_template": "select template from default_greeting_template where platform = '{}' order by id asc",
+    "create_customized_greeting": "insert into customized_greeting(manage_account_id, platform, scenario_info) VALUES('{}', '{}', '{}');",
+    "update_customized_greeting": "update customized_greeting set scenario_info = '{}' where id = '{}'",
+    "delete_customized_greeting": "delete from customized_greeting where id = '{}'",
+    "query_customized_greeting": "select id, scenario_info from customized_greeting where manage_account_id = '{}' and platform = '{}'"
 }
 
 
@@ -116,15 +128,30 @@ def query_profile_status_dao(manage_account_id, candidate_id, platform):
     return data[0][0]
 
 
-def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id):
+def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id, name, company):
     raw_profile = raw_profile.replace("\n", "\\n")
     raw_profile = raw_profile.replace("\'", "\\'")
     raw_profile = raw_profile.replace('\"', '\\"')
+    name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+    company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
-        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, platform, candidate_id))
+        b1 = time.time()
+        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id)
+        dbm.update(sql)
+        logger.info(
+            f"update_raw_profile time: {time.time() - b1} sql: {sql}")
+
+        return
     else:
-        dbm.insert(sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id))
-        return dbm.update(sql_dict['update_raw_profile'].format(raw_profile, platform, candidate_id))
+        dbm.insert(
+            sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
+                                                     company))
+        b1 = time.time()
+        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id)
+        dbm.update(sql)
+        logger.info(
+            f"update_raw_profile time: {time.time() - b1} sql: {sql}")
+        return
 
 
 def upload_online_profile_pdf(manage_account_id, platform, candidate_id, cv_addr):
@@ -225,26 +252,197 @@ def create_customized_scenario_setting(manage_account_id, platform, context, sce
     extra_info = extra_info.replace("\'", "\\'")
     extra_info = extra_info.replace('\"', '\\"')
     return dbm.query(
-        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info, extra_info))
+        sql_dict['create_customized_scenario_setting'].format(manage_account_id, platform, context, scenario_info,
+                                                              extra_info))
+
+
+def update_customized_scenario_setting(rid, scenario_info, extra_info):
+    scenario_info = json.dumps(scenario_info, ensure_ascii=False)
+    scenario_info = scenario_info.replace("\n", "\\n")
+    scenario_info = scenario_info.replace("\'", "\\'")
+    scenario_info = scenario_info.replace('\"', '\\"')
+
+    extra_info = json.dumps(extra_info, ensure_ascii=False)
+    extra_info = extra_info.replace("\n", "\\n")
+    extra_info = extra_info.replace("\'", "\\'")
+    extra_info = extra_info.replace('\"', '\\"')
+    return dbm.query(
+        sql_dict['update_customized_scenario_setting'].format(scenario_info, extra_info, rid))
 
 
 def query_customized_scenario_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_scenario_setting'].format(manage_account_id, platform, context))
 
+
+def query_customized_scenario_setting_with_id(manage_account_id, platform, context):
+    return dbm.query(sql_dict['query_customized_scenario_setting_with_id'].format(manage_account_id, platform, context))
+
+
 def query_customized_extra_setting(manage_account_id, platform, context):
     return dbm.query(sql_dict['query_customized_extra_setting'].format(manage_account_id, platform, context))
+
 
 def query_email_info(manage_account_id):
     return dbm.query(sql_dict['query_email_info'].format(manage_account_id))
 
+
 def flush_email_credentials_db(manage_account_id, email, pwd, platform):
     return dbm.insert(sql_dict['flush_email_credentials'].format(manage_account_id, email, pwd, platform))
+
 
 def get_email_credentials_db(manage_account_id, platform):
     return dbm.query(sql_dict['get_email_credentials'].format(manage_account_id, platform))
 
+
 def get_default_email_template_count(platform):
     return dbm.query(sql_dict['get_default_email_template_count'].format(platform))
 
+
 def get_default_email_template_by_idx(platform, idx):
     return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))
+
+
+def get_default_inmail_template_count(platform):
+    return dbm.query(sql_dict['get_default_email_template_count'].format(platform))
+
+
+def get_default_inmail_template_by_idx(platform, idx):
+    return dbm.query(sql_dict['get_default_email_template_by_idx'].format(platform, idx))
+
+
+def get_default_greeting_template_count(platform):
+    return dbm.query(sql_dict['get_default_greeting_template_count'].format(platform))
+
+
+def get_default_greeting_template_by_idx(platform, idx):
+    return dbm.query(sql_dict['get_default_greeting_template_by_idx'].format(platform, idx))
+
+
+def get_all_default_greeting_template(platform):
+    return dbm.query(sql_dict['get_all_default_greeting_template'].format(platform))
+
+
+def query_tag_flow_status(manage_account_id, platform, tag):
+    sql = f"select candidate_id, flow_status from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
+    data = dbm.query(sql)
+    return data
+
+
+def update_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
+    update_sql = f"update user_profile_tag_relation set flow_status ='{flow_status}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    dbm.update(update_sql)
+
+
+def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
+    sql = f"select log from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    logger.info(f'fetch_tag_log sql: {sql}')
+    data = dbm.query(sql)
+    if len(data) > 0:
+        return json.loads(data[0][0])
+    else:
+        return []
+
+
+def update_tag_log(manage_account_id, platform, tag, candidate_id, log):
+    update_sql = f"update user_profile_tag_relation set log = '{log}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    dbm.update(update_sql)
+
+
+def query_tag_resume_infos(manage_account_id, platform, tag):
+    sql = f"select a.company, a.status FROM online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}' and candidate_id in (SELECT candidate_id FROM user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}')"
+    data = dbm.query(sql)
+    return data
+
+
+def query_stage_by_id(manage_account_id, platform, tag, candidate_id):
+    sql = f"select flow_status from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    data = dbm.query(sql)
+    if len(data) == 0:
+        return ""
+    else:
+        return data[0][0]
+
+
+def query_tag_filter_num(manage_account_id, platform, tag, company, candidate_name):
+    sql = f"select count(*) from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
+    if company is not None and len(company) > 0:
+        sql += f" and company = '{company}'"
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and name = '{candidate_name}'"
+    sql += f" and candidate_id in (select candidate_id from user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}')"
+
+    data = dbm.query(sql)
+    return data[0][0]
+
+
+def query_tag_filter_profiles(manage_account_id, platform, tag, company, candidate_name, page, limit):
+    sql = f"select candidate_id, raw_profile, cv_url, status from online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
+    if company is not None and len(company) > 0:
+        sql += f" and company = '{company}'"
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and name like '%{candidate_name}%'"
+    sql += f" and candidate_id in (select candidate_id from user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}') limit {page}, {limit}"
+
+    logger.info(f"query_tag_filter_profiles: {sql}")
+    data = dbm.query(sql)
+    return data
+
+
+def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status):
+    sql = f"select count(*) from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
+    if company is not None and len(company) > 0:
+        sql += f" and b.company = '{company}' "
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and b.name like '%{candidate_name}%'"
+    if stage is not None and len(stage) > 0:
+        sql += f" and a.flow_status = '{stage}'"
+    if status is not None and len(status) > 0:
+        sql += f" and b.status = '{status}'"
+
+    s = time.time()
+    data = dbm.query(sql)
+    e = time.time()
+    logger.info(f"query_tag_filter_num_new: {sql} time: {e - s}")
+    return data[0][0]
+
+
+def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, page,
+                                  limit):
+    sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
+    if company is not None and len(company) > 0:
+        sql += f" and b.company = '{company}' "
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and b.name like '%{candidate_name}%'"
+    if stage is not None and len(stage) > 0:
+        sql += f" and a.flow_status = '{stage}'"
+    if status is not None and len(status) > 0:
+        sql += f" and b.status = '{status}'"
+    sql += f" limit {page}, {limit}"
+
+    s = time.time()
+    data = dbm.query(sql)
+    e = time.time()
+    logger.info(f"query_tag_filter_profiles_new: {sql} time: {e - s}")
+    return data
+
+
+def create_customized_greeting(manage_account_id, platform, scenario_info):
+    scenario_info = scenario_info.replace("\n", "\\n")
+    scenario_info = scenario_info.replace("\'", "\\'")
+    scenario_info = scenario_info.replace('\"', '\\"')
+    return dbm.query(sql_dict['create_customized_greeting'].format(manage_account_id, platform, scenario_info))
+
+
+def update_customized_greeting(scenario_info, rid):
+    scenario_info = scenario_info.replace("\n", "\\n")
+    scenario_info = scenario_info.replace("\'", "\\'")
+    scenario_info = scenario_info.replace('\"', '\\"')
+    return dbm.query(sql_dict['update_customized_greeting'].format(scenario_info, rid))
+
+
+def delete_customized_greeting(rid):
+    return dbm.query(sql_dict['delete_customized_greeting'].format(rid))
+
+
+def query_customized_greeting(manage_account_id, platform):
+    return dbm.query(sql_dict['query_customized_greeting'].format(manage_account_id, platform))
