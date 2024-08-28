@@ -10,6 +10,8 @@ from pymysql.converters import escape_string
 from service.manage_service import delete_task, get_manage_config_service, template_insert_service, \
     template_update_service
 
+logger = get_logger(config['log']['log_file'])
+
 def update_config_service_v3(manage_account_id, account_id, platform, params):
     template_config = params['template_config']
     job_config = params['job_config']
@@ -165,12 +167,14 @@ def chat_list_service(job_id, begin_time, end_time, page, limit, with_phone, wit
         cid = item['id']
         flag, detail = query_candidate_detail(cid)
         gender, degree, school, age=None, None, None, None
-        if flag:
-            gender = '男' if detail['geekCard']['geekGender']==1 else '女'
-            degree = detail['geekCard']['geekDegree']
-            school = detail['geekCard']['geekEdu']['school']
-            age = detail['geekCard']['ageDesc']
-        item['age'] = age.replace('岁', '')
+        if not flag:
+            logger.warning(f"chat_list_service, job {job_id} candidate {cid} no details, will skip")
+            continue
+        gender = '男' if detail['geekCard']['geekGender']==1 else '女'
+        degree = detail['geekCard']['geekDegree']
+        school = detail['geekCard']['geekEdu']['school']
+        age = detail['geekCard']['ageDesc'].replace('岁', '')
+        item['age'] = age
         item['gender'] = gender
         item['degree'] = degree
         item['school'] = school

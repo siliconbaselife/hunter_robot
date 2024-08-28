@@ -189,7 +189,7 @@ def update_extention_config(manage_account_id, account_id, config):
 
 
 def get_job_chat_db(job_id, begin_time, end_time, page, limit):
-    is page is None or limit is None:
+    if page is None or limit is None:
         return dbm.query(sql_dict['query_job_chat'].format(job_id, begin_time, end_time))
     return dbm.query(sql_dict['query_job_chat_with_limit'].format(job_id, begin_time, end_time, page, limit))
 
