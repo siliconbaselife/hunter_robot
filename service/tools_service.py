@@ -383,8 +383,9 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             continue
         firt_work_year = 10000
         current_year = int(datetime.datetime.now().year)
-        if len(get_resume_by_candidate_id_and_platform(candidate_id, platform,
-                                                       manage_account_id)) == 0 and 'profile' in p:
+        # if len(get_resume_by_candidate_id_and_platform(candidate_id, platform,
+        #                                                manage_account_id)) == 0 and 'profile' in p:
+        if 'profile' in p:
             for l in p.get('profile', {}).get('languages', []):
                 language = l.get('language', '') or ''
                 l['language'] = language.replace('"', "").replace("'", "").replace("\n", ";").replace('\"', "").replace(
