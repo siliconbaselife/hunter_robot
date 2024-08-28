@@ -61,7 +61,7 @@ def meta_config_api():
 @manage_web_v3.route("/backend/manage/chatStat/v3", methods=['POST'])
 @web_exception_handler
 def chat_stat_api():
-    job_id = request.json.get('jobID', "")
+    job_id = request.json.get('jobID', None)
     platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
@@ -74,6 +74,8 @@ def chat_stat_api():
     with_reply = request.json.get('reply', False)
     with_resume = request.json.get('resume', False)
 
+    if not job_id:
+        return Response(json.dumps(get_web_res_fail("需要指定jobID"), ensure_ascii=False))
     if platform != 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
     stat_result = stat_chat_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume)
@@ -88,7 +90,7 @@ def chat_stat_api():
 @manage_web_v3.route("/backend/manage/candidateList/v3", methods=['POST'])
 @web_exception_handler
 def candidate_list_api():
-    job_id = request.json.get('jobID', "")
+    job_id = request.json.get('jobID', None)
     platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', "")
     end_time = request.json.get('endTime', "")
@@ -100,6 +102,9 @@ def candidate_list_api():
     with_wechat = request.json.get('wechat', False)
     with_reply = request.json.get('reply', False)
     with_resume = request.json.get('resume', False)
+
+    if not job_id:
+        return Response(json.dumps(get_web_res_fail("需要指定jobID"), ensure_ascii=False))
 
     if platform!= 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
