@@ -5,7 +5,7 @@ import os
 import curlify
 
 from algo.llm_base_model import Prompt
-from utils.decorator import exception_retry,cost_time
+from utils.decorator import exception_retry, cost_time
 
 from cryptography.fernet import Fernet
 
@@ -15,7 +15,6 @@ from utils.log import get_logger
 from utils.config import config
 import time
 
-
 cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
 
 secret_token_0 = "gAAAAABlWsO9M5MHWyTjwMrJTxqj1yfzfuvJXNAxVFCZT4AoyklbVX3_EpmIVv59HhTjg4bYIZugs2sXBHDDpfvuJaThWXZr_lRomw5YYMNVdq9atyo7gcQUs8u8iDbsO3qOVDBKH_BXkGoiFJWXdAJSnJqT3xCKcg=="
@@ -24,29 +23,25 @@ OPENAI_API_KEY_0 = cipher.decrypt(secret_token_0).decode()
 secret_token_1 = "gAAAAABlaH0Znj77bm5n9luPszWTgtDYl74onM5l7zfswQESZqBKEexjJpSvpldN8HIY9ZbS_-p0ne8dlicFl8ckg_iI4kPI6E6pg-PMzCdF_thb1PfT4HCv5swyUzu9JZmEtXFVjyYJD4Bqu1EqAkSU9kzd802AQg=="
 OPENAI_API_KEY_1 = cipher.decrypt(secret_token_1).decode()
 
-#新加坡机器应该不用这个代理
+# 新加坡机器应该不用这个代理
 # OPENAI_PROXY = 'http://127.0.0.1:7890'
 OPENAI_PROXY = ''
-
-
 
 logger = get_logger(config['log']['log_file'])
 
 
-
-
-
 class ChatGPT:
-    def __init__(self,OPENAI_API_KEY) -> None:
+    def __init__(self, OPENAI_API_KEY) -> None:
         openai.api_key = OPENAI_API_KEY
         # if OPENAI_PROXY != '':
         #     openai.proxy = OPENAI_PROXY
-    
+
     @exception_retry(retry_time=3, delay=2, failed_return=None)
     @cost_time
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            # model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=prompt.get_messages(),
             temperature=0.2
         )
@@ -84,14 +79,17 @@ class GPTManager:
             "ThreadPoolExecutor-0_0": ChatGPT(OPENAI_API_KEY_0),
             "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_0)
         }
+
     def exec_task(self, prompt):
         logger.info(f'chatgpt_exec {threading.current_thread().name}')
         chatgpt = self.gpt_map[threading.current_thread().name]
         return chatgpt.chat(prompt)
+
     def chat_task(self, prompt):
         f = self.pool.submit(self.exec_task, prompt)
         while not f.done():
             time.sleep(1)
         return f.result()
+
 
 gpt_manager = GPTManager()
