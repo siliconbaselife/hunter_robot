@@ -63,8 +63,8 @@ def meta_config_api():
 def chat_stat_api():
     job_id = request.json.get('jobID', None)
     platform = request.json.get('platform', None)
-    begin_time = request.json.get('beginTime', "")
-    end_time = request.json.get('endTime', "")
+    begin_time = request.json.get('beginTime', None)
+    end_time = request.json.get('endTime', None)
 
     page = request.json.get('page', None)
     limit = request.json.get('limit', None)
@@ -92,8 +92,8 @@ def chat_stat_api():
 def candidate_list_api():
     job_id = request.json.get('jobID', None)
     platform = request.json.get('platform', None)
-    begin_time = request.json.get('beginTime', "")
-    end_time = request.json.get('endTime', "")
+    begin_time = request.json.get('beginTime', None)
+    end_time = request.json.get('endTime', None)
     
     page = request.json.get('page', None)
     limit = request.json.get('limit', None)

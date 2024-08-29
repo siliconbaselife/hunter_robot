@@ -4,6 +4,8 @@ from utils.config import config
 from utils.log import get_logger
 import json
 
+from datetime import datetime
+
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
     "login_check": "select manage_account_id,password from manage_account where manage_account_id='{}'",
@@ -188,7 +190,10 @@ def update_extention_config(manage_account_id, account_id, config):
     dbm.update(sql)
 
 
-def get_job_chat_db(job_id, begin_time, end_time, page, limit):
+def get_job_chat_db(job_id, begin_time=None, end_time=None, page=None, limit=None):
+    if begin_time is None or end_time is None:
+        begin_time = '1970-01-01'
+        end_time = str(datetime.now())[:10]
     if page is None or limit is None:
         return dbm.query(sql_dict['query_job_chat'].format(job_id, begin_time, end_time))
     return dbm.query(sql_dict['query_job_chat_with_limit'].format(job_id, begin_time, end_time, page, limit))

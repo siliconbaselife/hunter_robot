@@ -232,7 +232,7 @@ def job_list_service(manage_account_id):
         })
     return ret_list
 
-def chat_parse(job_id, begin_time, end_time, page=None, limit=None, with_phone=False, with_wechat=False, with_reply=False, with_resume=False):
+def chat_parse(job_id, begin_time=None, end_time=None, page=None, limit=None, with_phone=False, with_wechat=False, with_reply=False, with_resume=False):
     chat_list = get_job_chat_db(job_id, begin_time, end_time, page, limit)
 
     candidate_list = []
