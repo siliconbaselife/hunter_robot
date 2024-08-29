@@ -47,8 +47,8 @@ class ChatGPT:
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
-            messages=prompt.get_messages()
-            # temperature=0.2
+            messages=prompt.get_messages(),
+            temperature=0.2
         )
         print(f"Total token: {response.usage.total_tokens}, cost ${response.usage.total_tokens / 1000 * 0.02}")
         return response.choices[0].message.content
