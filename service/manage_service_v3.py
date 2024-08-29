@@ -244,7 +244,7 @@ def chat_parse(job_id, begin_time, end_time, page=None, limit=None, with_phone=F
             wechat = contact['wechat']
             cv = contact['cv']
         except BaseException as e:
-            logger.info("chat_parse, error parse contact: {contact}")
+            logger.info(f"chat_parse, error parse contact: {contact}")
 
         try:
             chat_info_list = json.loads(details)
