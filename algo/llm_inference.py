@@ -41,7 +41,7 @@ class ChatGPT:
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
             # model="gpt-3.5-turbo",
-            model="gpt-4o",
+            model="gpt-4o-mini",
             messages=prompt.get_messages(),
             temperature=0.2
         )
