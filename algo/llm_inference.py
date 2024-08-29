@@ -41,7 +41,7 @@ class ChatGPT:
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
             # model="gpt-3.5-turbo",
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=prompt.get_messages(),
             temperature=0.2
         )
@@ -83,7 +83,8 @@ class GPTManager:
     def exec_task(self, prompt):
         logger.info(f'chatgpt_exec {threading.current_thread().name}')
         chatgpt = self.gpt_map[threading.current_thread().name]
-        return chatgpt.chat(prompt)
+        r = chatgpt.chat(prompt)
+        return r
 
     def chat_task(self, prompt):
         f = self.pool.submit(self.exec_task, prompt)
