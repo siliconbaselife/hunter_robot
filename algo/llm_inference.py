@@ -40,8 +40,8 @@ class ChatGPT:
     @cost_time
     def chat(self, prompt: Prompt):
         response = openai.ChatCompletion.create(
-            # model="gpt-3.5-turbo",
-            model="gpt-4o",
+            model="gpt-3.5-turbo",
+            # model="gpt-4o",
             messages=prompt.get_messages(),
             temperature=0.2
         )
