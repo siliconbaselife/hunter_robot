@@ -255,13 +255,13 @@ def chat_parse(job_id, begin_time=None, end_time=None, page=None, limit=None, wi
         except BaseException as e:
             logger.info("chat_parse, error parse details: {details}")
         
-        if with_phone and phone is None:
+        if with_phone and not phone:
             continue
-        if with_resume and cv is None:
+        if with_resume and not cv:
             continue
         if with_reply and not user_reply:
             continue
-        if with_wechat and wechat is None:
+        if with_wechat and not wechat:
             continue
 
         candidate_list.append({
