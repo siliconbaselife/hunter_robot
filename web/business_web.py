@@ -14,6 +14,7 @@ business_web = Blueprint('business_web', __name__, template_folder='templates')
 
 logger = get_logger(config['log']['business_log_file'])
 
+
 @business_web.route("/backend/business/analysis", methods=['POST'])
 @web_exception_handler
 def business_analysis_api():
@@ -28,12 +29,14 @@ def business_analysis_api():
         return Response(json.dumps(get_web_res_fail("user_id 需要指定"), ensure_ascii=False))
     if jd is None:
         return Response(json.dumps(get_web_res_fail("jd 内容需要指定"), ensure_ascii=False))
-    
-    if chat_id is not None and len(chat_id)==0:
+
+    if chat_id is not None and len(chat_id) == 0:
         chat_id = None
 
-    ret = get_consultant(user_id=user_id, consultant_id=chat_id)(src_company=src_company, target_region=region, job=job, question=jd, platform=platform)
+    ret = get_consultant(user_id=user_id, consultant_id=chat_id)(src_company=src_company, target_region=region, job=job,
+                                                                 question=jd, platform=platform)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
 
 @business_web.route("/backend/business/session", methods=['POST'])
 def agent_sess_api():
@@ -42,6 +45,11 @@ def agent_sess_api():
         return Response(json.dumps(get_web_res_fail("user_id 需要指定"), ensure_ascii=False))
     ret = session_query_service(user_id)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
+
+@business_web.route("/backend/business/session/v2", methods=['POST'])
+def agent_sess_api_v2():
+    user_id = request.json.get('user_id', None)
 
 
 @business_web.route("/backend/business/history", methods=['POST'])
@@ -56,6 +64,13 @@ def agent_history_api():
     ret = get_consultant(user_id=user_id, consultant_id=chat_id).history()
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
+
+@business_web.route("/backend/business/history/v2", methods=['POST'])
+@web_exception_handler
+def agent_history_api_v2():
+    user_id = request.json.get('user_id', None)
+
+
 @business_web.route("/backend/business/history/delete", methods=['POST'])
 @web_exception_handler
 def agent_history_del_api():
@@ -67,3 +82,9 @@ def agent_history_del_api():
         return Response(json.dumps(get_web_res_fail("chat_id 内容需要指定"), ensure_ascii=False))
     del_history_service(chat_id)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+
+@business_web.route("/backend/business/history/delete/v2", methods=['POST'])
+@web_exception_handler
+def agent_history_del_api():
+    user_id = request.json.get('user_id', None)
