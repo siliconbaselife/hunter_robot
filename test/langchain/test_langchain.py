@@ -17,8 +17,13 @@ from langchain.pydantic_v1 import BaseModel, Field
 from langchain_core.messages import BaseMessage
 from langserve import add_routes
 import os
+from langchain_openai import ChatOpenAI
 
 from cryptography.fernet import Fernet
+
+from langchain_openai import OpenAI
+
+from langchain_core.prompts import PromptTemplate
 
 cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
 
@@ -27,10 +32,37 @@ OPENAI_API_KEY_0 = cipher.decrypt(secret_token_0).decode()
 
 os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY_0
 
-loader = WebBaseLoader("https://docs.smith.langchain.com/user_guide")
-docs = loader.load()
-text_splitter = RecursiveCharacterTextSplitter()
-documents = text_splitter.split_documents(docs)
-embeddings = OpenAIEmbeddings()
-vector = FAISS.from_documents(documents, embeddings)
-retriever = vector.as_retriever()
+
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import (
+    ChatPromptTemplate,
+)
+from langchain_experimental.utilities import PythonREPL
+from langchain_openai import ChatOpenAI
+
+template = """编写一些用于解决用户问题的Python代码。 
+
+只返回Markdown格式的Python代码，例如：
+
+```python
+....
+```"""
+prompt = ChatPromptTemplate.from_messages([("system", template), ("human", "{input}")])
+
+model = ChatOpenAI()
+
+def _sanitize_output(text: str):
+    _, after = text.split("```python")
+    return after.split("```")[0]
+
+chain = prompt | model
+        # | StrOutputParser()
+        # | _sanitize_output | PythonREPL().run
+
+r = chain.invoke({"input": "2加2等于多少"})
+print(r)
+
+
+
+
+
