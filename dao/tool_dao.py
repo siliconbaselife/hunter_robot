@@ -54,7 +54,11 @@ sql_dict = {
     "create_customized_greeting": "insert into customized_greeting(manage_account_id, platform, scenario_info) VALUES('{}', '{}', '{}');",
     "update_customized_greeting": "update customized_greeting set scenario_info = '{}' where id = '{}'",
     "delete_customized_greeting": "delete from customized_greeting where id = '{}'",
-    "query_customized_greeting": "select id, scenario_info from customized_greeting where manage_account_id = '{}' and platform = '{}'"
+    "query_customized_greeting": "select id, scenario_info from customized_greeting where manage_account_id = '{}' and platform = '{}'",
+    'create_google_account': "insert into google_account (openid, manage_account_id, name, picture, google_account_email, credentials) values('{}', '{}', '{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE openid = VALUES(openid), manage_account_id = VALUES(manage_account_id), name = VALUES(name), picture = VALUES(picture), google_account_email = VALUES(google_account_email), credentials = VALUES(credentials)",
+    "query_google_account": "select openid, manage_account_id, name, picture, google_account_email, credentials from google_account where manage_account_id = '{}';",
+    "get_google_account": "select openid, manage_account_id, name, picture, google_account_email, credentials from google_account where openid = '{}' and manage_account_id = '{}';",
+    'delete_google_account': "delete from google_account where openid = '{}' and manage_account_id = '{}';",
 }
 
 
@@ -446,3 +450,16 @@ def delete_customized_greeting(rid):
 
 def query_customized_greeting(manage_account_id, platform):
     return dbm.query(sql_dict['query_customized_greeting'].format(manage_account_id, platform))
+
+def query_google_account(manage_account_id):
+    return dbm.query(sql_dict['query_google_account'].format(manage_account_id))
+
+def get_google_account(openid, manage_account_id):
+    return dbm.query(sql_dict['get_google_account'].format(openid, manage_account_id))
+
+def delete_google_account(openid, manage_account_id):
+    return dbm.query(sql_dict['delete_google_account'].format(openid, manage_account_id))
+
+def create_google_account(openid, manage_account_id, name, picture, google_account_email, credentials):
+    return dbm.insert(sql_dict['create_google_account'].format(openid, manage_account_id, name, picture, google_account_email, credentials))
+    

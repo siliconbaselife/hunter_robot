@@ -1,4 +1,4 @@
-from flask import Flask, Response, request, stream_with_context, send_file, after_this_request
+from flask import Flask, Response, request, stream_with_context, send_file, after_this_request, url_for, redirect
 from flask import Blueprint
 import pandas as pd
 import xlsxwriter
@@ -19,10 +19,11 @@ from utils.oss import generate_thumbnail
 from service.tools_service import *
 from service.schedule_service import *
 from service.manage_service import cookie_check_service
-from utils.utils import decrypt, user_code_cache
+from utils.utils import decrypt, user_code_cache, google_oauth_cache
 from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
+from service.google_service import authorize_on_google, get_credentials_on_google,  get_userinfo_by_credentials, get_accounts, create_account, revoke_account, send_message_by_gmail
 import time
 
 logger = get_logger(config['log']['log_file'])
@@ -1276,3 +1277,168 @@ def parse_profile_by_ai():
     logger.info(
         f"parse_profile_by_ai used time: {time.time() - before_time} => manage_account_id: {manage_account_id} candidate_id: {candidate_id} platform: {platform} use_ai: {use_ai} profile: {profile}")
     return Response(json.dumps(get_web_res_suc_with_data(profile), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/authorize", methods=['POST'])
+@web_exception_handler
+def authorize():
+    # 验证登录操作
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    
+    # 授权验证完成后的重定向链接
+    redirect_uri = request.json.get('redirect_uri', None)
+    if not redirect_uri:
+        return Response(json.dumps(get_web_res_fail("缺少重定向链接")))
+    
+    # 获取授权链接 和 state 流程
+        # 拿到授权链接 和 state
+        # 这次的重定向链接-我们的验证接口
+    authorization_url, state = authorize_on_google(redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True))
+        # google_oauth_cache存state和redirect_uri
+    google_oauth_cache[cookie_user_name] = {
+        state: state,
+        redirect_uri: redirect_uri,
+    }
+    
+    ret_data = {
+        'authorization_url': authorization_url,
+    }
+    logger.info(
+        f"authorize manage_account_id: {manage_account_id} authorization_url:{authorization_url}"
+    )
+    return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+
+@tools_web.route("/backend/tools/oauth2callback", methods=['GET'])
+@web_exception_handler
+def oauth2callback():
+    # 验证登录操作
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    # 谷歌返回的授权信息
+    if not manage_account_id:
+        return Response(json.dumps(get_web_res_fail("缺少manage_account_id参数")))
+    # 拿缓存中的数据
+    oauth_cache = google_oauth_cache.pop(cookie_user_name)
+    if not oauth_cache:
+        return Response(json.dumps(get_web_res_fail("没有找到对应的记录")))
+    state, redirect_uri = oauth_cache
+    # 找谷歌拿credentials
+    credentials = get_credentials_on_google(
+        state=state, 
+        redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True),
+        authorization_response = request.url.replace('http://', 'https://')
+    )
+    # 将credentials存到数据库
+    user_info = get_userinfo_by_credentials(credentials)
+    
+    res, error_msg = create_account(manage_account_id=manage_account_id, user_info=user_info, credentials=credentials.to_json())
+    
+    logger.info(
+        f"oauth2callback manage_account_id: {manage_account_id} state: {state} redirect_uri: {redirect_uri} authorization_response: {request.url.replace('http://', 'https://')} "
+    )
+    
+    if error_msg:
+        return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
+    
+    return redirect(redirect_uri)
+    
+    # 绑定给用户
+    
+
+@tools_web.route("/backend/tools/revokeGoogleAuth", methods=['POST'])
+@web_exception_handler
+def revoke_google_auth():
+    openid = request.json.get('openid', None)
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    if openid is None:
+        return Response(json.dumps(get_web_res_fail("openid为必须"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] revoke_google_auth manage_account_id = {}, openid = {}".format(
+            manage_account_id, openid))
+    data, msg = revoke_account(manage_account_id = manage_account_id, openid = openid)
+    if msg is not None:
+        return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/getSendEmailAccounts", methods=['POST'])
+@web_exception_handler
+def get_send_email_accounts():
+    platform = request.json.get('platform', '')
+    if platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get_send_email_accounts manage_account_id = {}, platform = {}".format(
+            manage_account_id, platform))
+    result_list = []
+    google_account_infos = get_accounts(manage_account_id = manage_account_id)
+    for google_account in google_account_infos:
+        result_list.append({'type': 'google_account', 'name': google_account[2], 'email': google_account[4], 'openid': google_account[0]})
+    email_credential_info, err_msg = get_email_credentials(manage_account_id, platform)
+    if err_msg is not None:
+        logger.info(
+            "[backend_tools] get_send_email_accounts get_email_credentials manage_account_id = {}, platform = {}, err_msg = {}".format(
+        manage_account_id, platform, err_msg))
+    else: 
+        result_list.append(
+            {'type': 'smtp', 'name': email_credential_info['email_credential'], 'email': email_credential_info['email_credential'], 'openid': None}
+        )
+    return Response(json.dumps(get_web_res_suc_with_data(result_list), ensure_ascii=False))
+    
+@tools_web.route("/backend/tools/sendEmailContentByGmail", methods=['POST'])
+@web_exception_handler
+def send_email_by_gmail():
+    platform = request.json.get('platform', '')
+    candidate_id = request.json.get('candidate_id', None)
+    title = request.json.get('title', None)
+    content = request.json.get('content', None)
+    email = request.json.get('email', None)
+    openid = request.json.get('openid', None)
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    if openid is None:
+        return Response(json.dumps(get_web_res_fail("openid为必须"), ensure_ascii=False))
+    if email is None and candidate_id is None:
+        return Response(json.dumps(get_web_res_fail("email或candidate_id需要指定一个"), ensure_ascii=False))
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or not title or not content:
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+
+    logger.info(
+        "[backend_tools] send_email_by_gmail manage_account_id = {}, openid = {}, platform = {}, content = {}, candidate_id = {}".format(
+            manage_account_id, openid, platform, content, candidate_id))
+    data, msg = send_message_by_gmail(manage_account_id, openid, platform, candidate_id, title, content, email)
+    if msg is not None:
+        if '无email联系方式' in msg:
+            return Response(json.dumps(get_web_res_fail_code(-2, msg), ensure_ascii=False))
+        else:
+            return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+

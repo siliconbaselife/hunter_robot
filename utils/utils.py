@@ -299,3 +299,4 @@ def process_null(l):
 
 filter_task_exec_cache = {}
 user_code_cache = {}
+google_oauth_cache = {} # 谷歌授权 {user_name: {state: string, redirect_uri: string}}
