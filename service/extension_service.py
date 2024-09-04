@@ -7,14 +7,28 @@ from functools import partial
 from utils.log import get_logger
 from utils.config import config as config
 
+from threading import Lock
+
 logger = get_logger(config['log']['extension_log_file'])
+
+class PLM:
+    def __init__(self):
+        self._global_lock = Lock()
+        self._profile_locks = {}
+
+    def get_lock(self, profile):
+        with self._global_lock:
+            if profile not in self._profile_locks:
+                self._profile_locks[profile] = Lock()
+            logger.info(f"profile {profile} return lock")
+            return self._profile_locks[profile]
+_PLM = PLM()
 
 def fetch_user_credit(user_id):
     res = query_user_credit(user_id=user_id)
     if len(res) == 0:
         return None
     return res[0][0]
-
 
 def query_user_contact(user_id, linkedin_profile, contact_tag):
     profile = process_profile(linkedin_profile)
@@ -50,73 +64,79 @@ def user_fetch_contact(user_id, linkedin_profile, contact_tag):
     }
     usage_func = get_contactout().query_usage
     assert contact_tag in ctx_map, f"user_fetch_contact only support {set(ctx_map.keys())}, but got: {contact_tag}"
-    ctx = ctx_map[contact_tag]
-    price = ctx['price']
-    credit = fetch_user_credit(user_id=user_id)
-    logger.info(f'extension user {user_id} need contact({contact_tag}) for {linkedin_profile}, his credit: {credit}, this time price: {price}')
-
-    need_update_credit = True
-
     profile = process_profile(linkedin_profile)
     name, lid = info_from_profile(profile)
-    res = query_contact_by_profile(profile)
-    db_item_exists = len(res) > 0
-    db_content = json.loads(res[0][ctx['db_idx']]) if db_item_exists else None
+    global _PLM
+    with _PLM.get_lock(profile=profile):
+        logger.info(f"extension user {user_id} profile {profile} user_fetch_contact start run...")
+        ctx = ctx_map[contact_tag]
+        price = ctx['price']
+        credit = fetch_user_credit(user_id=user_id)
+        if credit is None:
+            return None, f"user no credit"
 
-    already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=ctx['contact_type'])
-    if already_contacts is None:
-        already_contacts = []
-    if len(already_contacts) == 0:
-        if credit < price:
+        logger.info(f'extension user {user_id} need contact({contact_tag}) for {linkedin_profile}, his credit: {credit}, this time price: {price}')
+
+        need_update_credit = True
+
+        res = query_contact_by_profile(profile)
+        db_item_exists = len(res) > 0
+        db_content = json.loads(res[0][ctx['db_idx']]) if db_item_exists else None
+
+        already_contacts = query_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=ctx['contact_type'])
+        if already_contacts is None:
+            already_contacts = []
+        if len(already_contacts) == 0:
+            if credit < price:
+                logger.info(
+                    f'extension user {user_id} credit {credit} insufficient for fetch {contact_tag}, which need {price}')
+                return None, f"credit insufficient"
+        need_update_already_contacts = True
+
+        if not db_content:
             logger.info(
-                f'extension user {user_id} credit {credit} insufficient for fetch {contact_tag}, which need {price}')
-            return None, f"credit insufficient"
-    need_update_already_contacts = True
+                f'extension user {user_id} need contact({contact_tag}) for {profile}, db not found, need fetch from outside')
+            ## no information in db, need query contactout
+            has_contact, _ = ctx['status_func'](profile=profile)
+            if not has_contact:
+                logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, outside not found')
+                return None, f"no contact for {contact_tag}"
+            res = ctx['fetch_func'](profile=profile)
+            res = res[ctx['contactout_ret_field']]
+            try:
+                period, usage = usage_func()
+                logger.info(f'echo outside usage: ({period}): {usage}')
+            except BaseException as e:
+                logger.info(f'fetch outside usage err: {e}')
 
-    if not db_content:
-        logger.info(
-            f'extension user {user_id} need contact({contact_tag}) for {profile}, db not found, need fetch from outside')
-        ## no information in db, need query contactout
-        has_contact, _ = ctx['status_func'](profile=profile)
-        if not has_contact:
-            logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, outside not found')
-            return None, f"no contact for {contact_tag}"
-        res = ctx['fetch_func'](profile=profile)
-        res = res[ctx['contactout_ret_field']]
-        try:
-            period, usage = usage_func()
-            logger.info(f'echo outside usage: ({period}): {usage}')
-        except BaseException as e:
-            logger.info(f'fetch outside usage err: {e}')
-
-        ## update db
-        if db_item_exists:
-            logger.info(
-                f'extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), got outside {res}, now will update contact')
-            ctx['update_db_func'](lid, res)
+            ## update db
+            if db_item_exists:
+                logger.info(
+                    f'extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), got outside {res}, now will update contact')
+                ctx['update_db_func'](lid, res)
+            else:
+                logger.info(
+                    f'extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), got outside {res}, now will new contact')
+                new_contact(linked_profile=profile, linkedin_id=lid, name=name, **{ctx['contact_type']: res})
         else:
-            logger.info(
-                f'extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), got outside {res}, now will new contact')
-            new_contact(linked_profile=profile, linkedin_id=lid, name=name, **{ctx['contact_type']: res})
-    else:
-        logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, will from db, credit({credit}), will cost {price if len(already_contacts)== 0 else 0}')
-        if len(already_contacts) > 0:
-            need_update_already_contacts = False
-            need_update_credit = False
-            logger.info(
-                f'extension user {user_id} need contact({contact_tag}) for {profile}, already purchased, no need credit')
-        res = db_content
+            logger.info(f'extension user {user_id} need contact({contact_tag}) for {profile}, will from db, credit({credit}), will cost {price if len(already_contacts)== 0 else 0}')
+            if len(already_contacts) > 0:
+                need_update_already_contacts = False
+                need_update_credit = False
+                logger.info(
+                    f'extension user {user_id} need contact({contact_tag}) for {profile}, already purchased, no need credit')
+            res = db_content
 
-    if need_update_credit:
-        new_credit = credit - price
-        update_user_credit(user_id=user_id, new_credit=new_credit)
-        logger.info( f'extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), new_credit: {new_credit}')
+        if need_update_credit:
+            new_credit = credit - price
+            update_user_credit(user_id=user_id, new_credit=new_credit)
+            logger.info( f'extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), new_credit: {new_credit}')
 
-    if need_update_already_contacts:
-        insert_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=ctx['contact_type'])
-        logger.info(f"extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), user link insert: {ctx['contact_type']}")
+        if need_update_already_contacts:
+            insert_extension_user_link(user_id=user_id, linkedin_id=lid, contact_type=ctx['contact_type'])
+            logger.info(f"extension user {user_id} need contact({contact_tag}) for {profile}, id ({lid}), user link insert: {ctx['contact_type']}")
 
-    return res, None
+        return res, None
 
 
 def refresh_contact(manage_account_id, candidate_id, profile):
