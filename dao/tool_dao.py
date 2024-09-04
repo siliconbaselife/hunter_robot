@@ -338,7 +338,8 @@ def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
     logger.info(f'fetch_tag_log sql: {sql}')
     data = dbm.query(sql)
     if len(data) > 0:
-        return json.loads(data[0][0])
+        logs = data[0][0].replace('\n', '\\n')
+        return json.loads(logs)
     else:
         return []
 
