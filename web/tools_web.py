@@ -1298,7 +1298,7 @@ def authorize():
     # 获取授权链接 和 state 流程
         # 拿到授权链接 和 state
         # 这次的重定向链接-我们的验证接口
-    authorization_url, state = authorize_on_google(redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True))
+    authorization_url, state = authorize_on_google(redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True).replace("http:", "https:"))
         # google_oauth_cache存state和redirect_uri
     google_oauth_cache[cookie_user_name] = {
         state: state,
