@@ -1338,10 +1338,11 @@ def oauth2callback():
     if not oauth_cache:
         return Response(json.dumps(get_web_res_fail("没有找到对应的记录")))
     state, redirect_uri = oauth_cache
+    this_time_redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True).replace("http:", "https:")
     # 找谷歌拿credentials
     credentials = get_credentials_on_google(
         state=state, 
-        redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True),
+        redirect_uri = this_time_redirect_uri,
         authorization_response = request.url.replace('http://', 'https://')
     )
     # 将credentials存到数据库
