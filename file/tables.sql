@@ -261,3 +261,15 @@ CREATE TABLE IF NOT EXISTS `hello_record`(
    `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
    PRIMARY KEY ( `id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+CREATE TABLE IF NOT EXISTS `google_account` (
+  `openid` varchar(100) NOT NULL COMMENT '谷歌账号唯一id',
+  `manage_account_id` varchar(100) NOT NULL COMMENT '管理账户ID',
+  `name` varchar(100) DEFAULT NULL COMMENT '谷歌账号名称',
+  `picture` varchar(255) DEFAULT NULL COMMENT '谷歌账号头像',
+  `google_account_email` varchar(255) DEFAULT NULL COMMENT '谷歌账号绑定邮箱',
+  `credentials` text COMMENT '凭据json',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`openid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
