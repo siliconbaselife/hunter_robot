@@ -342,13 +342,15 @@ def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
     logger.info(f'fetch_tag_log sql: {sql}')
     data = dbm.query(sql)
     if len(data) > 0:
-        return json.loads(data[0][0])
+        logs = data[0][0].replace('\n', '\\n')
+        return json.loads(logs)
     else:
         return []
 
 
 def update_tag_log(manage_account_id, platform, tag, candidate_id, log):
     update_sql = f"update user_profile_tag_relation set log = '{log}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    logger.info(f"update_tag_log => {update_sql}")
     dbm.update(update_sql)
 
 
