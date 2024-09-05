@@ -1410,7 +1410,7 @@ def get_send_email_accounts():
         manage_account_id, platform, err_msg))
     else: 
         result_list.append(
-            {'type': 'smtp', 'name': email_credential_info['email_credential'], 'email': email_credential_info['email'], 'openid': None}
+            {'type': 'smtp', 'name': email_credential_info['name'], 'email': email_credential_info['email'], 'openid': None}
         )
     return Response(json.dumps(get_web_res_suc_with_data(result_list), ensure_ascii=False))
     
