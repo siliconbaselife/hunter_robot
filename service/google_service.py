@@ -36,7 +36,7 @@ def authorize_on_google(redirect_uri):
     authorization_url, state = flow.authorization_url(
         access_type='offline',
         include_granted_scopes='true',
-        prompt='select_account'
+        prompt='select_account consent'
     )
     return authorization_url, state
 
