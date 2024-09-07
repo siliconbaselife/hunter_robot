@@ -78,6 +78,34 @@ def deserialize_raw_profile(raw_profile):
         return None
 
 
+def get_education_year(profile):
+    has_education = False
+    has_master = False
+    has_bachelor = False
+    min_education_start_year = 1000000
+
+    if 'educations' in profile or len(profile['educations']) > 0:
+        for education in profile['educations']:
+            if 'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
+                    education['majorInfo'] or 'bachelor' in education['majorInfo']:
+                has_bachelor = True
+                min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
+                                               min_education_start_year)
+                return min_education_start_year, True, False, True
+            elif 'Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in \
+                    education['majorInfo'] or 'master' in education['majorInfo']:
+                has_master = True
+                min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
+                                               min_education_start_year)
+            elif 'High School' in education['degreeInfo']:
+                continue
+            else:
+                min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
+                                               min_education_start_year)
+            has_education = True
+    return min_education_start_year, has_education, has_master, has_bachelor
+
+
 def get_age(profile):
     # 优先看本科开始年份 + 18
     # 如果有多个本科学历，选择开始时间最早的那个
@@ -87,28 +115,11 @@ def get_age(profile):
     # 计算最早工作年限 + 21
     # 研究生学历计算出的年纪 和 工作年限计算出的年纪 谁大就选谁
     try:
-        has_education = False
-        has_master = False
-        has_bachelor = False
         has_experience = False
-        min_education_start_year = 1000000
         min_work_start_year = 1000000
-        if 'educations' in profile or len(profile['educations']) > 0:
-            for education in profile['educations']:
-                if 'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
-                        education['majorInfo'] or 'bachelor' in education['majorInfo']:
-                    has_bachelor = True
-                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
-                                                   min_education_start_year)
-                elif 'Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in \
-                        education['majorInfo'] or 'master' in education['majorInfo']:
-                    has_master = True
-                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
-                                                   min_education_start_year)
-                else:
-                    min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
-                                                   min_education_start_year)
-                has_education = True
+
+        min_education_start_year, has_education, has_master, has_bachelor = get_education_year(profile)
+
         logger.info(f"1 get_age => min_education_start_year: {min_education_start_year}")
         if 'experiences' in profile and len(profile['experiences']) > 0:
             for experience in profile['experiences']:
@@ -122,7 +133,8 @@ def get_age(profile):
                                 'intern' in work['workPosition'] or 'Intern' in work['workPosition']):
                             continue
                         if "workTimeInfo" in work:
-                            min_work_start_year = min(get_min_time_info(work['workTimeInfo'], min_work_start_year), min_work_start_year)
+                            min_work_start_year = min(get_min_time_info(work['workTimeInfo'], min_work_start_year),
+                                                      min_work_start_year)
 
                 if intern:
                     continue
@@ -186,7 +198,7 @@ def cal_work_time(experiences):
         # logger.info(f"cal_work_time {experience['timeInfo']}")
         if 'timeInfo' in experience:
             min_work_start_year = min(get_min_time_info(experience['timeInfo'], 100000),
-                                  min_work_start_year)
+                                      min_work_start_year)
     # logger.info(f"cal_work_time min_work_start_year: {min_work_start_year}")
     return None if min_work_start_year == 2900 else min_work_start_year
 
