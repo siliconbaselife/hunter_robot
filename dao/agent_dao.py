@@ -70,3 +70,10 @@ def update_history_msgs(user_id, session_id, history_msgs_str):
     sql = f"update chat_history_bank set history = '{history_msgs_str}' where manage_account_id = '{user_id}' and session_id = '{session_id}'"
     dbm.update(sql)
 
+
+def add_history_msgs(user_id, session_id, history_msgs_str):
+    history_msgs_str = history_msgs_str.replace("\'", "\\'")
+    history_msgs_str = history_msgs_str.replace('\"', '\\"')
+    history_msgs_str = history_msgs_str.replace('\n', '\\n')
+    sql = f"insert into chat_history_bank(manage_account_id, session_id, history) values('{user_id}', '{session_id}', '{history_msgs_str}')"
+    dbm.insert(sql)
