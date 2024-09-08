@@ -292,7 +292,11 @@ def append_msg(user_id, session_id, history_raw, msg, return_msg):
         "role": "robot",
         "msg": return_msg
     })
-    update_history_msgs(user_id, session_id, json.dumps(history_msgs, ensure_ascii=False))
+
+    if history_raw is not None:
+        update_history_msgs(user_id, session_id, json.dumps(history_msgs, ensure_ascii=False))
+    else:
+        add_history_msgs(user_id, session_id, json.dumps(history_msgs, ensure_ascii=False))
 
 
 def agent_chat_service(user_id, session_id, msg):
