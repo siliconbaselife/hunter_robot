@@ -3,15 +3,18 @@ import shortuuid
 import json
 import time
 from threading import Thread, Lock
+import uuid
 
 from utils.log import get_logger
 from utils.config import config as config
-from dao.agent_dao import new_agent_history_db, query_agent_history_db, query_agent_sess_db, query_first_history_db, query_history_count_db, mask_history_db
+from dao.agent_dao import *
 
 logger = get_logger(config['log']['business_log_file'])
 
+
 def del_history_service(consultant_id):
     mask_history_db(consultant_id)
+
 
 def session_query_service(user_id):
     sess_list = query_agent_sess_db(manage_account_id=user_id)
@@ -23,7 +26,7 @@ def session_query_service(user_id):
         if round_cnt > 0:
             first_prompt, first_tag = query_first_history_db(sess_id)
             logger.info(f'session_query_service: {sess_id}, {first_prompt}, {first_tag}')
-            first_tag = json.loads(first_tag.replace('\n',''))
+            first_tag = json.loads(first_tag.replace('\n', ''))
             title = ''
             try:
                 if 'jd' in first_tag:
@@ -37,6 +40,7 @@ def session_query_service(user_id):
         )
     return ret_list
 
+
 def history_hooks(llm_func):
     def wrapper(*args, **kwargs):
         res, prompt, tag, user_id, sess_id = llm_func(*args, **kwargs)
@@ -45,9 +49,12 @@ def history_hooks(llm_func):
             save_res = json.dumps(res, ensure_ascii=False)
         ## save db
         # logger.info(f'show tag: {tag}, {json.dumps(tag)}')
-        new_agent_history_db(manage_account_id=user_id, sess_id=sess_id, prompt=prompt, tag=tag, response=save_res, llm_type='gemini')
+        new_agent_history_db(manage_account_id=user_id, sess_id=sess_id, prompt=prompt, tag=tag, response=save_res,
+                             llm_type='gemini')
         return res
+
     return wrapper
+
 
 class BusinessConsultant:
     def __init__(self, user_id, manual_id=None):
@@ -92,9 +99,11 @@ class BusinessConsultant:
                     #     'target_company': tgt_company_info,
                     #     'keyword': keywords,
                     # }
-                    return self._tgt_company_and_platform_keyword(src_company=src_company, target_region=target_region, job=job, jd=question, platform=platform)
+                    return self._tgt_company_and_platform_keyword(src_company=src_company, target_region=target_region,
+                                                                  job=job, jd=question, platform=platform)
                 else:
-                    res = self._first_chat(src_company=src_company, target_region=target_region, job=job, question=question)
+                    res = self._first_chat(src_company=src_company, target_region=target_region, job=job,
+                                           question=question)
         else:
             res = self._continue_chat(question=question)
         return {
@@ -102,7 +111,6 @@ class BusinessConsultant:
             'msg': res,
             'type': 'markdown'
         }
-        
 
     def _restore_llm_history(self, manual_id):
         if manual_id is None:
@@ -118,10 +126,10 @@ class BusinessConsultant:
     def _judge_jd(self, question):
         prompt = f'请鉴别以下内容是否是一个岗位的jd，直接回复 是 或者 不是\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
-        res_msg = res_msg.replace('\n','').replace(' ','')
+        res_msg = res_msg.replace('\n', '').replace(' ', '')
         logger.info(f'consultant [{self._id}] _judge_jd ({prompt}), got: {res_msg}')
-        assert res_msg=='是' or res_msg=='不是', f"business internel error, _judge_jd should return 是 or 不是, but got: {res_msg}"
-        return res_msg=='是'
+        assert res_msg == '是' or res_msg == '不是', f"business internel error, _judge_jd should return 是 or 不是, but got: {res_msg}"
+        return res_msg == '是'
 
     @history_hooks
     def _continue_chat(self, question):
@@ -142,7 +150,8 @@ class BusinessConsultant:
         prompt = f'你是一位针对中国公司海外业务的咨询顾问，你的工作是根据你的专业知识和网络讯息解答问题。公司 {src_company} 要在区域 {target_region} 内招聘的一个岗位 {job}，请针对以下问题做出回答\n{question}'
         res_msg = self._llm.send_message(prompt=prompt)
         logger.info(f'consultant [{self._id}] _first_chat ({question}), got: {res_msg}')
-        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'msg': question, 'type': 'normal'}, self._user, self.id
+        return res_msg, prompt, {'src_company': src_company, 'target_region': target_region, 'job': job,
+                                 'msg': question, 'type': 'normal'}, self._user, self.id
 
     @history_hooks
     def _tgt_company_and_platform_keyword(self, src_company, target_region, job, jd, platform='领英'):
@@ -151,7 +160,7 @@ class BusinessConsultant:
         res_msg = self._llm.send_message(prompt=prompt_tgt_company)
         tgt_company_info = res_msg
         try:
-            tgt_company_info = json.loads(res_msg.replace("```json\n", "").replace("```",""))
+            tgt_company_info = json.loads(res_msg.replace("```json\n", "").replace("```", ""))
         except BaseException as e:
             logger.info(f'_find_tgt_company: parse from ({res_msg}) err: {e}, will return directly')
         logger.info(f'consultant [{self._id}] _find_tgt_company ({prompt_tgt_company}), got: {tgt_company_info}')
@@ -160,18 +169,19 @@ class BusinessConsultant:
         res_msg = self._llm.send_message(prompt=prompt_keyword)
         keywords = res_msg
         try:
-            keywords = json.loads(res_msg.replace("```json\n", "").replace("```",""))
+            keywords = json.loads(res_msg.replace("```json\n", "").replace("```", ""))
         except BaseException as e:
             logger.info(f'_platform_keyword: parse from ({res_msg}) err: {e}, will return directly')
         logger.info(f'consultant [{self._id}] _platform_keyword ({prompt_keyword}), got: {keywords}')
 
         compose_prompt = f'{prompt_tgt_company}\n\n\n\n\n{prompt_keyword}'
         ret_msg = {
-            'id': self._id, 
+            'id': self._id,
             'target_company': tgt_company_info,
             'keyword': keywords
         }
-        return ret_msg, compose_prompt, {'src_company': src_company, 'target_region': target_region, 'job': job, 'jd': jd, 'platform': platform, 'type': 'analysis'}, self._user, self.id
+        return ret_msg, compose_prompt, {'src_company': src_company, 'target_region': target_region, 'job': job,
+                                         'jd': jd, 'platform': platform, 'type': 'analysis'}, self._user, self.id
 
     # @history_hooks
     # def _find_tgt_company(self, src_company, target_region, job, jd):
@@ -196,6 +206,7 @@ class BusinessConsultant:
     #         logger.info(f'_platform_keyword: parse from ({res_msg}) err: {e}, will return directly')
     #     logger.info(f'consultant [{self._id}] _platform_keyword ({prompt}), got: {keywords}')
     #     return keywords, prompt, {'job': job, 'jd': jd, 'platform': platform}, self._user, self.id
+
 
 class ConsultingFirm:
     def __init__(self):
@@ -224,14 +235,49 @@ class ConsultingFirm:
             try:
                 return self._consultants[consultant_id]
             except BaseException as e:
-                logger.info(f"ConsultingFirm _get_consultant ({user_id}, {consultant_id}) exception: {e}, will recreate from db history")
+                logger.info(
+                    f"ConsultingFirm _get_consultant ({user_id}, {consultant_id}) exception: {e}, will recreate from db history")
                 new_consultant = BusinessConsultant(user_id=user_id, manual_id=consultant_id)
                 self._consultants[new_consultant._id] = new_consultant
                 consultant_id = new_consultant._id
                 return self._consultants[consultant_id]
 
+
 _consulting_firm = ConsultingFirm()
+
 
 def get_consultant(user_id, consultant_id=None):
     global _consulting_firm
     return _consulting_firm._get_consultant(user_id, consultant_id=consultant_id)
+
+
+def agent_history_remove_service(user_id, session_id):
+    update_chat_history_visible(user_id, session_id)
+
+
+def agent_history_list_service(user_id):
+    rows = query_chat_history(user_id)
+    history_list = []
+    for row in rows:
+        session_id, history = row
+        msg = json.loads(history)[0]["msg"]
+        title = msg[:20]
+        history_list.append({"session_id": session_id, "title": title})
+
+    return history_list
+
+
+def generate_session_id():
+    return uuid.uuid4()
+
+
+def agent_chat_service(user_id, session_id, msg):
+    if session_id is None or len(session_id) == 0:
+        session_id = generate_session_id()
+
+    history_raw = get_history_msgs(user_id, session_id)
+    if history_raw is None:
+
+    else:
+        history_msgs = json.loads(history_raw)
+
