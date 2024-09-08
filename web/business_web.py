@@ -101,6 +101,19 @@ def agent_history_list():
     return Response(json.dumps(get_web_res_suc_with_data(history_list), ensure_ascii=False))
 
 
+@business_web.route("/backend/agent/history/get", methods=['POST'])
+@web_exception_handler
+def agent_history_get():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        user_id = decrypt(cookie_user_name, key)
+    session_id = request.json.get('session_id', None)
+    history = agent_history_get_service(user_id, session_id)
+    return Response(json.dumps(get_web_res_suc_with_data(history), ensure_ascii=False))
+
+
 @business_web.route("/backend/agent/history/chat", methods=['POST'])
 @web_exception_handler
 def agent_history_chat():

@@ -329,6 +329,14 @@ def agent_chat_service(user_id, session_id, msg):
     return ""
 
 
+def agent_history_get_service(user_id, session_id):
+    history_raw = get_history_msgs(user_id, session_id)
+    if history_raw is None:
+        return []
+    else:
+        return json.loads(history_raw)
+
+
 if __name__ == "__main__":
     msg = agent_chat_service('test', 'test', 'hi')
     print(f"return msg: {msg}")
