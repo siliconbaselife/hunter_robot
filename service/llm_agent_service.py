@@ -9,6 +9,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
 from langchain.chains import LLMChain
+from enum import Enum
 
 logger = get_logger(config['log']['business_log_file'])
 
@@ -19,6 +20,18 @@ OPENAI_API_KEY = cipher.decrypt(secret_token).decode()
 os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY
 
 logger = get_logger(config['log']['log_file'])
+
+
+class Intention(Enum):
+    Normal = 1
+
+
+class ChatIntention(object):
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+
+    def judge(self, msgs):
+        return Intention.Normal
 
 
 class ChatAgent(object):
@@ -77,5 +90,6 @@ if __name__ == "__main__":
         {"role": "robot", "msg": "哪个国家?"}
     ]
 
-    res = agent.chat(relation_info="锐捷在美国对标公司 => 思科，苹果 在韩国对标公司 => 三星，lg", history=history, msg="美国")
+    res = agent.chat(relation_info="锐捷在美国对标公司 => 思科，苹果 在韩国对标公司 => 三星，lg", history=history,
+                     msg="美国")
     print(f"res => {res}")

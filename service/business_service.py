@@ -1,3 +1,5 @@
+import copy
+
 from algo.gemini import Gemini
 import shortuuid
 import json
@@ -8,6 +10,7 @@ import uuid
 from utils.log import get_logger
 from utils.config import config as config
 from dao.agent_dao import *
+from service.llm_agent_service import *
 
 logger = get_logger(config['log']['business_log_file'])
 
@@ -271,13 +274,53 @@ def generate_session_id():
     return uuid.uuid4()
 
 
+def transfer_history_msgs(history_msgs):
+    return history_msgs[-10:]
+
+
+def append_msg(user_id, session_id, history_raw, msg, return_msg):
+    history_msgs = json.loads(history_raw)
+    history_msgs.append({
+        "role": "user",
+        "msg": msg
+    })
+    history_msgs.append({
+        "role": "robot",
+        "msg": return_msg
+    })
+    update_history_msgs(user_id, session_id, json.dumps(history_msgs, ensure_ascii=False))
+
+
 def agent_chat_service(user_id, session_id, msg):
     if session_id is None or len(session_id) == 0:
         session_id = generate_session_id()
 
     history_raw = get_history_msgs(user_id, session_id)
     if history_raw is None:
-
+        history_msgs = []
     else:
         history_msgs = json.loads(history_raw)
+    history_msgs = transfer_history_msgs(history_msgs)
+    msgs = copy.deepcopy(history_msgs)
+    msgs.append({
+        "role": "user",
+        "msg": msg
+    })
 
+    chat_intention = ChatIntention()
+    intention = chat_intention.judge(msgs)
+    logger.info(f"agent_chat_service user_id: {user_id} session_id: {session_id} msgs: {msgs} intention: {intention}")
+    if intention == Intention.Normal:
+        chat_agent = ChatAgent()
+        return_msg = chat_agent.chat("", history_msgs, msg)
+        logger.info(
+            f"normal chat user_id: {user_id} session_id: {session_id} history_msgs: {history_msgs} return_msg: {return_msg}")
+        append_msg(user_id, session_id, history_raw, msg, return_msg)
+        return return_msg
+
+    return ""
+
+
+if __name__ == "__main__":
+    msg = agent_chat_service('test', 'test', 'hi')
+    print(f"return msg: {msg}")
