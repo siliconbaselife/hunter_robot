@@ -262,6 +262,7 @@ def agent_history_list_service(user_id):
     rows = query_chat_history(user_id)
     history_list = []
     for row in rows:
+        logger.info(f"row: {row}")
         session_id, history = row
         msg = json.loads(history)[0]["msg"]
         title = msg[:20]
