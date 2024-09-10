@@ -20,7 +20,7 @@ SCOPES = [
     'openid', # 将您与您在 Google 上的个人信息关联起来
     'https://www.googleapis.com/auth/userinfo.email', # 查看您 Google 帐号的主电子邮件地址
     'https://www.googleapis.com/auth/userinfo.profile', # 查看您的个人信息，包括您已公开的任何个人信息
-    'https://www.googleapis.com/auth/gmail.readonly', # 读取所有资源及其元数据，无写入操作。
+    # 'https://www.googleapis.com/auth/gmail.readonly', # 读取所有资源及其元数据，无写入操作。
     'https://www.googleapis.com/auth/gmail.send', # 仅发送信息。没有对邮箱的读取或修改权限。
 ]
 
