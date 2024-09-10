@@ -271,7 +271,7 @@ def agent_history_list_service(user_id):
 
 
 def generate_session_id():
-    return uuid.uuid4()
+    return str(uuid.uuid4())
 
 
 def transfer_history_msgs(history_msgs):
