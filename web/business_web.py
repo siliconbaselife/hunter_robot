@@ -124,5 +124,6 @@ def agent_history_chat():
         user_id = decrypt(cookie_user_name, key)
     session_id = request.json.get('session_id', None)
     msg = request.json.get('msg', None)
-    r_msg_info = agent_chat_service(user_id, session_id, msg)
-    return Response(json.dumps(get_web_res_suc_with_data(r_msg_info), ensure_ascii=False))
+    r_msg_info, session_id = agent_chat_service(user_id, session_id, msg)
+    return Response(
+        json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": r_msg_info}), ensure_ascii=False))

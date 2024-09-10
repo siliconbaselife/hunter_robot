@@ -324,9 +324,9 @@ def agent_chat_service(user_id, session_id, msg):
         logger.info(
             f"normal chat user_id: {user_id} session_id: {session_id} history_msgs: {history_msgs} return_msg: {return_msg}")
         append_msg(user_id, session_id, history_raw, msg, return_msg)
-        return return_msg
+        return return_msg, session_id
 
-    return ""
+    return "", session_id
 
 
 def agent_history_get_service(user_id, session_id):
