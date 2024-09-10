@@ -334,7 +334,7 @@ def agent_history_get_service(user_id, session_id):
     if history_raw is None:
         return []
     else:
-        return json.loads(history_raw)
+        return json.loads(history_raw, strict=False)
 
 
 if __name__ == "__main__":
