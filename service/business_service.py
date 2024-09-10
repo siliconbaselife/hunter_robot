@@ -262,9 +262,8 @@ def agent_history_list_service(user_id):
     rows = query_chat_history(user_id)
     history_list = []
     for row in rows:
-        logger.info(f"row: {row}")
         session_id, history = row
-        msg = json.loads(history)[0]["msg"]
+        msg = json.loads(history, strict=False)[0]["msg"]
         title = msg[:20]
         history_list.append({"session_id": session_id, "title": title})
 
