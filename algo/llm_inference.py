@@ -15,6 +15,8 @@ from utils.log import get_logger
 from utils.config import config
 import time
 
+from openai import OpenAI
+
 cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
 
 secret_token_0 = "gAAAAABlWsO9M5MHWyTjwMrJTxqj1yfzfuvJXNAxVFCZT4AoyklbVX3_EpmIVv59HhTjg4bYIZugs2sXBHDDpfvuJaThWXZr_lRomw5YYMNVdq9atyo7gcQUs8u8iDbsO3qOVDBKH_BXkGoiFJWXdAJSnJqT3xCKcg=="
@@ -49,6 +51,23 @@ class ChatGPT:
         return response.choices[0].message.content
 
 
+class ChatGPTNew:
+    def __init__(self, OPENAI_API_KEY) -> None:
+        self.client = OpenAI(
+            # This is the default and can be omitted
+            api_key=os.environ.get("OPENAI_API_KEY"),
+        )
+
+    @exception_retry(retry_time=3, delay=2, failed_return=None)
+    @cost_time
+    def chat(self, prompt: Prompt):
+        chat_completion = self.client.chat.completions.create(
+            messages=prompt.get_messages(),
+            model="gpt-4o-mini",
+        )
+        return chat_completion.choices[0].message.content
+
+
 class Vicuna:
     def __init__(self):
         pass
@@ -76,8 +95,8 @@ class GPTManager:
         logger.info(f"GPTManager init")
         self.pool = ThreadPoolExecutor(2)
         self.gpt_map = {
-            "ThreadPoolExecutor-0_0": ChatGPT(OPENAI_API_KEY_0),
-            "ThreadPoolExecutor-0_1": ChatGPT(OPENAI_API_KEY_0)
+            "ThreadPoolExecutor-0_0": ChatGPTNew(OPENAI_API_KEY_0),
+            "ThreadPoolExecutor-0_1": ChatGPTNew(OPENAI_API_KEY_0)
         }
 
     def exec_task(self, prompt):
