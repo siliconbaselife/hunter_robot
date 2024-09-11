@@ -53,10 +53,7 @@ class ChatGPT:
 
 class ChatGPTNew:
     def __init__(self, OPENAI_API_KEY) -> None:
-        self.client = OpenAI(
-            # This is the default and can be omitted
-            api_key=os.environ.get(OPENAI_API_KEY),
-        )
+        self.client = OpenAI(api_key=os.environ.get(OPENAI_API_KEY))
 
     @exception_retry(retry_time=3, delay=2, failed_return=None)
     @cost_time
