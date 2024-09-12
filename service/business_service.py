@@ -280,7 +280,7 @@ def transfer_history_msgs(history_msgs):
 
 def append_msg(user_id, session_id, history_raw, msg, return_msg):
     if history_raw is not None:
-        history_msgs = json.loads(history_raw)
+        history_msgs = json.loads(history_raw, strict=False)
     else:
         history_msgs = []
 
