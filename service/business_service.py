@@ -307,7 +307,7 @@ def agent_chat_service(user_id, session_id, msg):
     if history_raw is None:
         history_msgs = []
     else:
-        history_msgs = json.loads(history_raw)
+        history_msgs = json.loads(history_raw, strict=False)
     history_msgs = transfer_history_msgs(history_msgs)
     msgs = copy.deepcopy(history_msgs)
     msgs.append({
