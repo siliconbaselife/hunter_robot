@@ -1,5 +1,6 @@
 
 import base64
+import requests
 from json import dumps, loads
 from utils.log import get_logger
 from utils.config import config
@@ -109,11 +110,36 @@ def revoke_account(openid, manage_account_id):
     account_infos = get_account_by_openid(openid=openid, manage_account_id = manage_account_id)
     if len(account_infos) == 0:
         return None, f'{openid} 无对应账号记录'
+    credentials_json = account_infos[0][5]
+    credentials = credentials_json_to_instance(credentials_json=credentials_json)
+    token = credentials.token
+    error_msg = revoke_token(token)
+    if error_msg is not None:
+        return None, error_msg
     delete_google_account(openid, manage_account_id)
     return None, None
     # account_info = account_infos[0]
     # credentials = credentials_json_to_instance(account_info[5])
     # service = build("oauth2", "v2", credentials=credentials)
+
+def revoke_token(token):
+    logger.info(
+        "[backend_tools] revoke_token by token = {}".format(token)
+    )
+    url = 'https://oauth2.googleapis.com/revoke'
+    payload = {'token': token}
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+    response = requests.post(url, data=payload, headers=headers)
+    logger.info(
+        "[backend_tools] revoke_token by token = {} response status_code = {} text = {}".format(token, response.status_code, response.text)
+    )
+    if response.status_code == 200:
+        return None
+    else:
+        logger.info(
+            "[backend_tools] revoke_token by token = {} fail, response = {}".format(token, response.json())
+        )
+        return response.text
 
 
 # 将凭证json转为凭证实例
