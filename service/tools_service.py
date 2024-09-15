@@ -226,16 +226,19 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
            'age': None,
            'isChinese': None,
            'languages': None,
-           'workTime': None}
+           'workTime': None,
+           'avatar': None}
     if 'id' in profile:
         res['candidateId'] = profile['id']
+
     if 'profile' in profile:
         profile = profile['profile']
     experience = profile['experiences'][0] if 'experiences' in profile and len(profile['experiences']) > 0 else None
     if experience and 'companyName' in experience:
         res['department'] = experience['companyName']
         res['company'] = cal_company(experience['companyName'])
-
+    if 'avatar' in profile:
+        res['avatar'] = profile['avatar']
     if 'role' in profile:
         res['title'] = profile['role']
     elif 'works' in experience and len(experience['works']) > 0:
