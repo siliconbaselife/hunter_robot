@@ -340,7 +340,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
         res['last5Jump'] = last_5_jump
         res["experiences"] = experiences
         res["workTime"] = cal_work_time(experiences)
-        res['experiences'] = deal_experiences(experiences)
+        res['transfer_experiences'] = deal_experiences(experiences)
 
     if 'educations' in profile:
         res["educations"] = profile['educations']
@@ -1695,7 +1695,7 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
         # stage = query_stage_by_id(manage_account_id, platform, tag, profile['candidateId'])
         profile["stage"] = row[4]
         profile["notes"] = json.loads(row[5])
-        # profile['experiences'] = None
+        profile['experiences'] = None
         details.append(profile)
     return data, None
 
