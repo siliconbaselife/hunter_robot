@@ -1677,7 +1677,7 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
         # stage = query_stage_by_id(manage_account_id, platform, tag, profile['candidateId'])
         profile["stage"] = row[4]
         profile["notes"] = json.loads(row[5])
-        profile['experiences'] = None
+        # profile['experiences'] = None
         details.append(profile)
     return data, None
 
