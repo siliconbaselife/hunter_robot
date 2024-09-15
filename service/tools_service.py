@@ -207,6 +207,7 @@ def cal_company(companyName):
     company = companyName.split(' · ')[0]
     return company
 
+
 def deal_experiences(experiences):
     r_experiences = []
     for experience in experiences:
@@ -218,7 +219,7 @@ def deal_experiences(experiences):
             r_experience["companyName"] = companyName
             if "workPosition" in work and len(work["workPosition"]) > 0:
                 r_experience["workPosition"] = work["workPosition"]
-            if "workTimeInfo" in work in len(work["workTimeInfo"]) > 0:
+            if "workTimeInfo" in work and len(work["workTimeInfo"]) > 0:
                 r_experience["workTimeInfo"] = work["workTimeInfo"]
             r_experiences.append(r_experience)
 
@@ -346,6 +347,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
 
     # logger.info(f"age: {res['age']}")
     return res
+
 
 def get_candidate_id(profile, platform):
     if platform == 'maimai':
