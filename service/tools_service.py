@@ -322,6 +322,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
         res['last5Jump'] = last_5_jump
         res["experiences"] = experiences
         res["workTime"] = cal_work_time(experiences)
+        res['experiences'] = experiences
 
     if 'educations' in profile:
         res["educations"] = profile['educations']
