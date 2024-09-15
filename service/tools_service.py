@@ -322,6 +322,10 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
         res['last5Jump'] = last_5_jump
         res["experiences"] = experiences
         res["workTime"] = cal_work_time(experiences)
+
+    if 'educations' in profile:
+        res["educations"] = profile['educations']
+
     # logger.info(f"age: {res['age']}")
     return res
 
@@ -1916,7 +1920,7 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
     if "last5Jump" in profile and profile["last5Jump"] is not None:
         profile["last5JumpStr"] = f"5年{profile['last5Jump']}跳"
 
-    if "experiences" in profile:
-        del profile["experiences"]
+    # if "experiences" in profile:
+    #     del profile["experiences"]
 
     return profile
