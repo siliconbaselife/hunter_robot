@@ -518,7 +518,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             b1 = time.time()
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
                                   parsed['name'] if parsed['name'] else '',
-                                  parsed['company'] if parsed['company'] else '')
+                                  parsed['company'] if parsed['company'] else '', parsed['age'], parsed['isChinese'])
             logger.info(f'upload_online_profile used time: {time.time() - b1}')
 
         if tag and len(tag) > 0:
