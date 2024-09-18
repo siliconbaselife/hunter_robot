@@ -142,21 +142,23 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     age = -1 if age is None else age
     race = 1 if isChinese else 2
 
-
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         b1 = time.time()
         sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id, age, race)
+        logger.info(f"upload_online_profile update_raw_profile => sql: {sql}")
         dbm.update(sql)
         logger.info(
             f"update_raw_profile time: {time.time() - b1} sql: {sql}")
 
         return
     else:
-        dbm.insert(
-            sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
-                                                     company, age, race))
+        insert_sql = sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
+                                                 company, age, race)
+        dbm.insert(insert_sql)
+        logger.info(f"upload_online_profile upload_online_profile => sql: {insert_sql}")
         b1 = time.time()
         sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, platform, candidate_id, manage_account_id, age, race)
+        logger.info(f"upload_online_profile update_raw_profile => sql: {insert_sql}")
         dbm.update(sql)
         logger.info(
             f"update_raw_profile time: {time.time() - b1} sql: {sql}")
