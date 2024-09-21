@@ -1966,6 +1966,5 @@ def batch_deal_age_race():
                 continue
             if parsed is None:
                 continue
-            print(parsed)
             update_profile_age_and_race(manage_account_id, candidate_id, "Linkedin", parsed['age'], parsed['isChinese'])
         print(f"now id => {id}")
