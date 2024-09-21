@@ -105,6 +105,7 @@ def get_education_year(profile):
             has_education = True
     return min_education_start_year, has_education, has_master, has_bachelor
 
+import traceback
 
 def get_age(profile):
     # 优先看本科开始年份 + 18
@@ -174,7 +175,7 @@ def get_age(profile):
             return None if age > 100 or age <= 0 else age
     except BaseException as e:
         logger.error(f"get_age error => {e}")
-        print(e)
+        traceback.print_exception()
         return None
 
 
