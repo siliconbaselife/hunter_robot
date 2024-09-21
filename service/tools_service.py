@@ -1989,3 +1989,7 @@ def batch_deal_age_race():
                 continue
             update_profile_age_and_race(manage_account_id, candidate_id, "Linkedin", parsed['age'], parsed['isChinese'])
         print(f"now id => {id}")
+
+
+def disable_user_tag(manage_account_id, platform, tag):
+    delete_user_tag(manage_account_id, platform, tag)
