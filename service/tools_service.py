@@ -174,6 +174,7 @@ def get_age(profile):
             return None if age > 100 or age <= 0 else age
     except BaseException as e:
         logger.error(f"get_age error => {e}")
+        print(e)
         return None
 
 
