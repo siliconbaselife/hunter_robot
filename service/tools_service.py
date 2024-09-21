@@ -1529,7 +1529,7 @@ def query_profile_tag_by_user_new(manage_account_id, platform):
     tags = []
     for id, name in id_tags:
         tags.append(name)
-    return tags
+    return tags, None
 
 
 def query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidate_id, platform):
