@@ -86,18 +86,18 @@ def get_education_year(profile):
 
     if 'educations' in profile or len(profile['educations']) > 0:
         for education in profile['educations']:
-            if 'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
-                    education['majorInfo'] or 'bachelor' in education['majorInfo']:
+            if 'degreeInfo' in education and ('Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
+                    education['majorInfo'] or 'bachelor' in education['majorInfo']):
                 has_bachelor = True
                 min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
                                                min_education_start_year)
                 return min_education_start_year, True, False, True
-            elif 'Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in \
-                    education['majorInfo'] or 'master' in education['majorInfo']:
+            elif 'degreeInfo' in education and ('Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in \
+                    education['majorInfo'] or 'master' in education['majorInfo']):
                 has_master = True
                 min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
                                                min_education_start_year)
-            elif 'High School' in education['degreeInfo']:
+            elif 'degreeInfo' in education and 'High School' in education['degreeInfo']:
                 continue
             else:
                 min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
