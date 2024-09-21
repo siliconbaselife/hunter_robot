@@ -1154,13 +1154,17 @@ def search_profile_by_tag_web_v2():
     candidate_name = request.json.get('name', '')
     status = request.json.get('status', '')
     stage = request.json.get('stage')
+    min_age = request.json.get('min_age')
+    max_age = request.json.get('max_age')
+    race = request.json.get('race')
+
     limit = request.json.get('limit', 20)
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-    data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, limit, False)
+    data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age, max_age, race, limit, False)
     logger.info(
         f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} status：{status} stage: {stage} page: {page} limit: {limit} data:{len(data)}")
 

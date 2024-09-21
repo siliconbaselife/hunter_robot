@@ -437,7 +437,7 @@ def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidat
     return data[0][0]
 
 
-def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, page,
+def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, min_age, max_age, race, page,
                                   limit):
     sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
     if company is not None and len(company) > 0:
@@ -448,6 +448,11 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
         sql += f" and a.flow_status = '{stage}'"
     if status is not None and len(status) > 0:
         sql += f" and b.status = '{status}'"
+    if race is not None:
+        sql += f" and b.race = {race}"
+    if min_age is not None and max_age is not None:
+        sql += f" and b.age >= {min_age} and b.age <= {max_age}"
+
     sql += f" limit {page}, {limit}"
 
     s = time.time()

@@ -1661,7 +1661,7 @@ def fetch_contact_infos(manage_account_id, candidate_ids):
     return ret_dict
 
 
-def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, limit,
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age, max_age, race, limit,
                              contact2str):
     total_count = query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status)
     start = (page - 1) * limit
@@ -1669,7 +1669,7 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
     details = []
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
     rows = query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status,
-                                         start, limit)
+                                         min_age, max_age, race, start, limit)
     candidate_ids = [row[0] for row in rows]
     candidate_contact_infos = fetch_contact_infos(manage_account_id, candidate_ids)
     for row in rows:
