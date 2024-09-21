@@ -1955,6 +1955,7 @@ def batch_deal_age_race():
             break
 
         for row in rows:
+            print(row)
             tmp_id, candidate_id, manage_account_id, raw_profile = row
             id = max(tmp_id, id)
             parsed = parse_profile(raw_profile, 'need_deserialize', False)
