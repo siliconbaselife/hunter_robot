@@ -503,6 +503,6 @@ def update_profile_age_and_race(manage_account_id, candidate_id, platform, age, 
 
 
 def query_letter_profile(id):
-    sql = f"select id, candidate_id, manage_account_id, raw_profile from online_resume where id > '{id}' limit 0, 10"
+    sql = f"select id, candidate_id, manage_account_id, raw_profile from online_resume where id > '{id}' and platform = 'Linkedin' limit 0, 10"
     rows = dbm.query(sql)
     return rows
