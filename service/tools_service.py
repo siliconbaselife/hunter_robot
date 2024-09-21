@@ -1955,9 +1955,12 @@ def batch_deal_age_race():
             break
 
         for row in rows:
-            print(row)
             tmp_id, candidate_id, manage_account_id, raw_profile = row
             id = max(tmp_id, id)
-            parsed = parse_profile(raw_profile, 'need_deserialize', False)
+            try:
+                parsed = parse_profile(raw_profile, 'need_deserialize', False)
+            except BaseException as e:
+                print("parse error")
+                continue
             update_profile_age_and_race(manage_account_id, candidate_id, "Linkedin", parsed['age'], parsed['isChinese'])
         print(f"now id => {id}")
