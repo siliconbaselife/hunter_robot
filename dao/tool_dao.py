@@ -263,7 +263,7 @@ def delete_user_tag(manage_account_id, platform, tag):
 def update_user_tag_name(manage_account_id, platform, tag, tag_rename):
     sql = f"update user_profile_tag set tag = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
     dbm.update(sql)
-    sql = f"update user_profile_tag set tag = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
+    sql = f"update user_profile_tag_relation set tag = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
     dbm.update(sql)
 
 
