@@ -497,7 +497,9 @@ def create_google_account(openid, manage_account_id, name, picture, google_accou
                                                  credentials))
 
 
-def update_profile_age_and_race(manage_account_id, candidate_id, platform, age, race):
+def update_profile_age_and_race(manage_account_id, candidate_id, platform, age, isChinese):
+    age = -1 if age is None else age
+    race = 1 if isChinese else 2
     sql = f"update online_resume set age = {age}, race = {race} where platform = '{platform}' and candidate_id='{candidate_id}' and manage_account_id='{manage_account_id}'"
     dbm.update(sql)
 
