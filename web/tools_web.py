@@ -23,7 +23,8 @@ from utils.utils import decrypt, user_code_cache, google_oauth_cache
 from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
-from service.google_service import authorize_on_google, get_credentials_on_google,  get_userinfo_by_credentials, get_accounts, create_account, revoke_account, send_message_by_gmail
+from service.google_service import authorize_on_google, get_credentials_on_google, get_userinfo_by_credentials, \
+    get_accounts, create_account, revoke_account, send_message_by_gmail
 import time
 
 logger = get_logger(config['log']['log_file'])
@@ -266,7 +267,8 @@ def upload_online_resume():
         count = linkedin_online_resume_upload_processor(manage_account_id, profile, platform, list_name, min_age,
                                                         max_age, tag)
 
-    logger.info(f'upload_online_resume_exec used time => {time.time() - before_time} :{manage_account_id},{platform}, {count}')
+    logger.info(
+        f'upload_online_resume_exec used time => {time.time() - before_time} :{manage_account_id},{platform}, {count}')
     return Response(json.dumps(get_web_res_suc_with_data('成功上传'), ensure_ascii=False))
 
 
@@ -503,6 +505,7 @@ def customized_greeting_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_GREETING, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getLeaveMsgV2", methods=['POST'])
 @web_exception_handler
 def get_leave_msg_web_v2():
@@ -521,6 +524,7 @@ def get_leave_msg_web_v2():
                                                                                                     platform))
     msg = get_leave_msg_v2(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(msg), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/customizedGreetingScenarioV2", methods=['POST'])
 @web_exception_handler
@@ -546,6 +550,7 @@ def customized_greeting_scenario_web_v2():
         update_customized_greeting_service(scenario, rid)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/deleteGreetingScenarioV2", methods=['POST'])
 @web_exception_handler
 def delete_greeting_scenario_web_v2():
@@ -568,6 +573,7 @@ def delete_greeting_scenario_web_v2():
     else:
         delete_customized_greeting_service(rid)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/customizedEmailTemplate", methods=['POST'])
 @web_exception_handler
@@ -613,6 +619,7 @@ def flush_email_credential_web():
     flush_email_credentials(manage_account_id, email, pwd, platform)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getEmailCredential", methods=['POST'])
 @web_exception_handler
 def get_email_credential_web():
@@ -634,6 +641,7 @@ def get_email_credential_web():
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(email_credential_info), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getEmailTemplate", methods=['POST'])
 @web_exception_handler
 def get_email_scenario_web():
@@ -652,6 +660,7 @@ def get_email_scenario_web():
             manage_account_id, platform))
     data = get_email_template(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getDefaultEmailTemplate", methods=['POST'])
 @web_exception_handler
@@ -675,6 +684,7 @@ def get_default_email_template_web():
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getDefaultInmailTemplate", methods=['POST'])
 @web_exception_handler
 def get_default_inmail_template_web():
@@ -697,6 +707,7 @@ def get_default_inmail_template_web():
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getInmailTemplate", methods=['POST'])
 @web_exception_handler
 def get_inmail_scenario_web():
@@ -715,6 +726,7 @@ def get_inmail_scenario_web():
             manage_account_id, platform))
     data = get_inmail_template(manage_account_id, platform)
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/customizedInmailTemplate", methods=['POST'])
 @web_exception_handler
@@ -737,6 +749,7 @@ def customized_inmail_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_INMAIL, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/getDefaultGreetingTemplate", methods=['POST'])
 @web_exception_handler
 def get_default_greeting_template_web():
@@ -758,6 +771,7 @@ def get_default_greeting_template_web():
     if err_msg is not None:
         return Response(json.dumps(get_web_res_fail(err_msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getDefaultGreetingTemplateV2", methods=['POST', 'GET'])
 @web_exception_handler
@@ -823,6 +837,7 @@ def customized_chat_scenario_web():
     customized_user_scenario(manage_account_id, SCENARIO_CHAT, platform, scenario)
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
+
 @tools_web.route("/backend/tools/generateEmailContent", methods=['POST'])
 @web_exception_handler
 def generate_email_content_web():
@@ -845,6 +860,7 @@ def generate_email_content_web():
     if msg is not None:
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/sendEmailContent", methods=['POST'])
 @web_exception_handler
@@ -917,7 +933,7 @@ def get_tags_by_user_web():
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info(
         "[backend_tools] get profile tag for manage_account_id = {}, platform = {}".format(manage_account_id, platform))
-    res, error_msg = query_profile_tag_by_user(manage_account_id, platform)
+    res, error_msg = query_profile_tag_by_user_new(manage_account_id, platform)
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
     logger.info("[backend_tools] get profile tag for manage_account_id = {}, platform = {} -> res = {}".format(
@@ -1035,6 +1051,35 @@ def delete_profile_tags_web():
     return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tag/disableTag", methods=['POST'])
+@web_exception_handler
+def disable_tag():
+    tag = request.json.get('tag', '')
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    logger.info(f"disable_tag => manage_account_id: {manage_account_id} tag: {tag}")
+    disable_user_tag(manage_account_id, 'Linkedin', tag)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tag/rename", methods=['POST'])
+@web_exception_handler
+def rename():
+    tag = request.json.get('tag', '')
+    tag_rename = request.json.get('tag_rename', '')
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    logger.info(f"tag rename => manage_account_id: {manage_account_id} tag: {tag} tag_rename: {tag_rename}")
+    rename_user_tag(manage_account_id, 'Linkedin', tag, tag_rename)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+
 @tools_web.route("/backend/tools/searchProfileInfoByTag", methods=['POST'])
 @web_exception_handler
 def search_profile_by_tag_web():
@@ -1075,7 +1120,7 @@ def data_to_excel_file(file_path, titles, data):
 
         row_formatter = workbook.add_format()
         row_formatter.set_text_wrap(True)
-        worksheet.set_column(8,8, 60, row_formatter)
+        worksheet.set_column(8, 8, 60, row_formatter)
         worksheet.write_row('A1', titles, title_formatter)
         count = 2
 
@@ -1164,7 +1209,8 @@ def search_profile_by_tag_web_v2():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-    data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age, max_age, race, limit, False)
+    data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page,
+                                       min_age, max_age, race, limit, False)
     logger.info(
         f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} tag: {tag} company: {company} candidate_name: {candidate_name} status：{status} stage: {stage} page: {page} limit: {limit} data:{len(data)}")
 
@@ -1276,11 +1322,11 @@ def parse_profile_by_ai():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-
     profile = parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai)
     logger.info(
         f"parse_profile_by_ai used time: {time.time() - before_time} => manage_account_id: {manage_account_id} candidate_id: {candidate_id} platform: {platform} use_ai: {use_ai} profile: {profile}")
     return Response(json.dumps(get_web_res_suc_with_data(profile), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/authorize", methods=['POST'])
 @web_exception_handler
@@ -1293,28 +1339,28 @@ def authorize():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    
+
     # 授权验证完成后的重定向链接
     redirect_uri = request.json.get('redirect_uri', None)
     if not redirect_uri:
         return Response(json.dumps(get_web_res_fail("缺少重定向链接")))
-    
+
     # 获取授权链接 和 state 流程
-        # 拿到授权链接 和 state
-        # 这次的重定向链接-我们的验证接口
-    this_time_redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True).replace("http:", "https:")
+    # 拿到授权链接 和 state
+    # 这次的重定向链接-我们的验证接口
+    this_time_redirect_uri = url_for(endpoint="tools_web.oauth2callback", _external=True).replace("http:", "https:")
     logger.info(
         "authorize this_time_redirect_uri = {}".format(this_time_redirect_uri)
     )
     authorization_url, state = authorize_on_google(
-        redirect_uri = this_time_redirect_uri
+        redirect_uri=this_time_redirect_uri
     )
-        # google_oauth_cache存state和redirect_uri
+    # google_oauth_cache存state和redirect_uri
     google_oauth_cache[cookie_user_name] = {
         state: state,
         redirect_uri: redirect_uri,
     }
-    
+
     ret_data = {
         'authorization_url': authorization_url,
     }
@@ -1322,6 +1368,7 @@ def authorize():
         f"authorize manage_account_id: {manage_account_id} authorization_url:{authorization_url}"
     )
     return Response(json.dumps(get_web_res_suc_with_data(ret_data)))
+
 
 @tools_web.route("/backend/tools/oauth2callback", methods=['GET'])
 @web_exception_handler
@@ -1342,29 +1389,30 @@ def oauth2callback():
     if not oauth_cache:
         return Response(json.dumps(get_web_res_fail("没有找到对应的记录")))
     state, redirect_uri = oauth_cache
-    this_time_redirect_uri = url_for(endpoint = "tools_web.oauth2callback", _external=True).replace("http:", "https:")
+    this_time_redirect_uri = url_for(endpoint="tools_web.oauth2callback", _external=True).replace("http:", "https:")
     # 找谷歌拿credentials
     credentials = get_credentials_on_google(
-        state=state, 
-        redirect_uri = this_time_redirect_uri,
-        authorization_response = request.url.replace('http://', 'https://')
+        state=state,
+        redirect_uri=this_time_redirect_uri,
+        authorization_response=request.url.replace('http://', 'https://')
     )
     # 将credentials存到数据库
     user_info = get_userinfo_by_credentials(credentials)
-    
-    res, error_msg = create_account(manage_account_id=manage_account_id, user_info=user_info, credentials=credentials.to_json())
-    
+
+    res, error_msg = create_account(manage_account_id=manage_account_id, user_info=user_info,
+                                    credentials=credentials.to_json())
+
     logger.info(
         f"oauth2callback manage_account_id: {manage_account_id} state: {state} redirect_uri: {redirect_uri} authorization_response: {request.url.replace('http://', 'https://')} "
     )
-    
+
     if error_msg:
         return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
-    
+
     return redirect(redirect_uri)
-    
+
     # 绑定给用户
-    
+
 
 @tools_web.route("/backend/tools/revokeGoogleAuth", methods=['POST'])
 @web_exception_handler
@@ -1382,10 +1430,11 @@ def revoke_google_auth():
     logger.info(
         "[backend_tools] revoke_google_auth manage_account_id = {}, openid = {}".format(
             manage_account_id, openid))
-    data, msg = revoke_account(manage_account_id = manage_account_id, openid = openid)
+    data, msg = revoke_account(manage_account_id=manage_account_id, openid=openid)
     if msg is not None:
         return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/getSendEmailAccounts", methods=['POST'])
 @web_exception_handler
@@ -1404,20 +1453,23 @@ def get_send_email_accounts():
         "[backend_tools] get_send_email_accounts manage_account_id = {}, platform = {}".format(
             manage_account_id, platform))
     result_list = []
-    google_account_infos = get_accounts(manage_account_id = manage_account_id)
+    google_account_infos = get_accounts(manage_account_id=manage_account_id)
     for google_account in google_account_infos:
-        result_list.append({'type': 'google_account', 'name': google_account[2], 'email': google_account[4], 'openid': google_account[0]})
+        result_list.append({'type': 'google_account', 'name': google_account[2], 'email': google_account[4],
+                            'openid': google_account[0]})
     email_credential_info, err_msg = get_email_credentials(manage_account_id, platform)
     if err_msg is not None:
         logger.info(
             "[backend_tools] get_send_email_accounts get_email_credentials manage_account_id = {}, platform = {}, err_msg = {}".format(
-        manage_account_id, platform, err_msg))
-    else: 
+                manage_account_id, platform, err_msg))
+    else:
         result_list.append(
-            {'type': 'smtp', 'name': email_credential_info['email'], 'email': email_credential_info['email'], 'openid': None}
+            {'type': 'smtp', 'name': email_credential_info['email'], 'email': email_credential_info['email'],
+             'openid': None}
         )
     return Response(json.dumps(get_web_res_suc_with_data(result_list), ensure_ascii=False))
-    
+
+
 @tools_web.route("/backend/tools/sendEmailContentByGmail", methods=['POST'])
 @web_exception_handler
 def send_email_by_gmail():
@@ -1451,5 +1503,3 @@ def send_email_by_gmail():
         else:
             return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
-
-

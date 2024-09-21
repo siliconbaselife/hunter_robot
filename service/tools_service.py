@@ -86,13 +86,15 @@ def get_education_year(profile):
 
     if 'educations' in profile or len(profile['educations']) > 0:
         for education in profile['educations']:
-            if 'degreeInfo' in education and ('Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
+            if 'degreeInfo' in education and (
+                    'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
                     education['majorInfo'] or 'bachelor' in education['majorInfo']):
                 has_bachelor = True
                 min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
                                                min_education_start_year)
                 return min_education_start_year, True, False, True
-            elif 'degreeInfo' in education and ('Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in \
+            elif 'degreeInfo' in education and (
+                    'Master' in education['degreeInfo'] or 'master' in education['degreeInfo'] or 'Master' in \
                     education['majorInfo'] or 'master' in education['majorInfo']):
                 has_master = True
                 min_education_start_year = min(get_min_time_info(education['timeInfo'], min_education_start_year),
@@ -105,7 +107,9 @@ def get_education_year(profile):
             has_education = True
     return min_education_start_year, has_education, has_master, has_bachelor
 
+
 import traceback
+
 
 def get_age(profile):
     # 优先看本科开始年份 + 18
@@ -1520,6 +1524,14 @@ def query_profile_tag_by_user(manage_account_id, platform):
     return tags, None
 
 
+def query_profile_tag_by_user_new(manage_account_id, platform):
+    id_tags = query_profile_id_tag(manage_account_id, platform)
+    tags = []
+    for id, name in id_tags:
+        tags.append(name)
+    return tags
+
+
 def query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidate_id, platform):
     id_tags = query_profile_tag_relation_by_user_and_candidate_db(manage_account_id, candidate_id, platform)
     tags = []
@@ -1545,6 +1557,9 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
         logger.info(
             "[tool_service] associate_profile_tag manage_account_id = {}, candidate_id = {}, platform = {}, tag_id = {}, tag = {}",
             manage_account_id, candidate_id, platform, tag_id, tags[idx])
+    for tag in tags:
+        update_tag_update_time(manage_account_id, tag)
+
     return tags, None
 
 
@@ -1586,6 +1601,10 @@ def delete_profile_tags(manage_account_id, candidate_id, platform, tags):
     logger.info("[tool_service] delete manage_account_id = {}, candidate_id = {}, platform = {}, tags = {}",
                 manage_account_id, candidate_id, platform, tags)
     return None, None
+
+
+def rename_user_tag(manage_account_id, platform, tag, tag_rename):
+    update_user_tag_name(manage_account_id, platform, tag, tag_rename)
 
 
 def transfer_profile():
@@ -1661,8 +1680,10 @@ def fetch_contact_infos(manage_account_id, candidate_ids):
     return ret_dict
 
 
-def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age, max_age, race, limit,
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age,
+                             max_age, race, limit,
                              contact2str):
+    update_tag_update_time(manage_account_id, tag)
     total_count = query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status)
     start = (page - 1) * limit
 

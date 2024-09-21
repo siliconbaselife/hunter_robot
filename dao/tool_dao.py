@@ -29,7 +29,7 @@ sql_dict = {
     "add_list_relation": "insert into resume_list_relation(manage_account_id, list_name, candidate_id) values ('{}', '{}', '{}')",
     "save_config": "INSERT INTO plugin_chat_config (manage_account_id, platform, config_json) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE config_json = VALUES(config_json);",
     "create_profile_tag": "insert into user_profile_tag (manage_account_id, platform, tag) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), tag = VALUES(tag);",
-    "query_profile_id_tag": "select id, tag from user_profile_tag where manage_account_id = '{}' and platform = '{}';",
+    "query_profile_id_tag": "select id, tag from user_profile_tag where manage_account_id = '{}' and platform = '{}' and visible = 1 order by update_time desc;",
     "delete_profile_tags": "delete from user_profile_tag where id in {};",
     "query_profile_tag_relation_by_user_and_candidate_db": "select tag_id, tag from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}';",
     "associate_profile_tag": "insert into user_profile_tag_relation (manage_account_id, candidate_id, platform, tag_id, tag) values ('{}', '{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), candidate_id = VALUES(candidate_id), platform = VALUES(platform), tag_id = VALUES(tag_id), tag = VALUES(tag);",
@@ -255,6 +255,16 @@ def delete_profile_tags_db(ids):
     return dbm.query(sql_dict['delete_profile_tags'].format(db_file_join(ids)))
 
 
+def delete_user_tag(manage_account_id, platform, tag):
+    sql = f"update user_profile_tag set visible = 0 where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
+    dbm.update(sql)
+
+
+def update_user_tag_name(manage_account_id, platform, tag, tag_rename):
+    sql = f"update user_profile_tag set tag = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
+    dbm.update(sql)
+
+
 def create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info=''):
     scenario_info = json.dumps(scenario_info, ensure_ascii=False)
     scenario_info = scenario_info.replace("\n", "\\n")
@@ -437,7 +447,8 @@ def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidat
     return data[0][0]
 
 
-def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, min_age, max_age, race, page,
+def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, min_age,
+                                  max_age, race, page,
                                   limit):
     sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
     if company is not None and len(company) > 0:
@@ -513,3 +524,8 @@ def query_letter_profile(id):
     sql = f"select id, candidate_id, manage_account_id, raw_profile from online_resume where id > '{id}' and platform = 'Linkedin' limit 0, 10"
     rows = dbm.query(sql)
     return rows
+
+
+def update_tag_update_time(manage_account_id, tag):
+    sql = f"update user_profile_tag set update_time = now() where manage_account_id = '{manage_account_id}' and tag = '{tag}'"
+    dbm.update(sql)
