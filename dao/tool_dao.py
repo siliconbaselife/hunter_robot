@@ -144,7 +144,8 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
 
     if len(get_resume_by_candidate_id_and_platform(candidate_id, platform, manage_account_id)) > 0:
         b1 = time.time()
-        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, age, race, platform, candidate_id, manage_account_id)
+        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, age, race, platform, candidate_id,
+                                                    manage_account_id)
         logger.info(f"upload_online_profile update_raw_profile => sql: {sql}")
         dbm.update(sql)
         logger.info(
@@ -152,12 +153,14 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
 
         return
     else:
-        insert_sql = sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id, name,
-                                                 company, age, race)
+        insert_sql = sql_dict['upload_online_profile'].format(manage_account_id, platform, raw_profile, candidate_id,
+                                                              name,
+                                                              company, age, race)
         dbm.insert(insert_sql)
         logger.info(f"upload_online_profile upload_online_profile => sql: {insert_sql}")
         b1 = time.time()
-        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, age, race, platform, candidate_id, manage_account_id)
+        sql = sql_dict['update_raw_profile'].format(raw_profile, name, company, age, race, platform, candidate_id,
+                                                    manage_account_id)
         logger.info(f"upload_online_profile update_raw_profile => sql: {insert_sql}")
         dbm.update(sql)
         logger.info(
@@ -354,6 +357,7 @@ def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
     else:
         return []
 
+
 # def fetch_tag_logs(manage_account_id, platform, tag, candidate_ids):
 #     candidate_ids_list = ["'" + candidate_id + "'" for candidate_id in candidate_ids]
 #     candidate_ids_str = ", ".join(candidate_ids_list)
@@ -367,7 +371,6 @@ def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
 #         return logs_list
 #     else:
 #         return []
-
 
 
 def update_tag_log(manage_account_id, platform, tag, candidate_id, log):
@@ -475,15 +478,31 @@ def delete_customized_greeting(rid):
 def query_customized_greeting(manage_account_id, platform):
     return dbm.query(sql_dict['query_customized_greeting'].format(manage_account_id, platform))
 
+
 def query_google_account(manage_account_id):
     return dbm.query(sql_dict['query_google_account'].format(manage_account_id))
+
 
 def get_google_account(openid, manage_account_id):
     return dbm.query(sql_dict['get_google_account'].format(openid, manage_account_id))
 
+
 def delete_google_account(openid, manage_account_id):
     return dbm.query(sql_dict['delete_google_account'].format(openid, manage_account_id))
 
+
 def create_google_account(openid, manage_account_id, name, picture, google_account_email, credentials):
-    return dbm.insert(sql_dict['create_google_account'].format(openid, manage_account_id, name, picture, google_account_email, credentials))
-    
+    return dbm.insert(
+        sql_dict['create_google_account'].format(openid, manage_account_id, name, picture, google_account_email,
+                                                 credentials))
+
+
+def update_profile_age_and_race(manage_account_id, candidate_id, platform, age, race):
+    sql = f"update online_resume set age = {age}, race = {race} where platform = '{platform}' and candidate_id='{candidate_id}' and manage_account_id='{manage_account_id}'"
+    dbm.update(sql)
+
+
+def query_letter_profile(id):
+    sql = f"select id, candidate_id, manage_account_id, raw_profile from online_resume where id > '{id}' limit 0, 10"
+    rows = dbm.query(sql)
+    return rows

@@ -320,7 +320,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
                      'YI', 'YICK', 'YIK', 'YIM', 'YIN', 'YING', 'YIP', 'YIU', 'YOUNG', 'YU', 'YUE', 'YUEN', 'YUET',
                      'YUI', 'YUK', 'YUNG', 'ZHANG']
         for split_name in name.split(' '):
-            if ('\u4E00' <= split_name <= '\u9FFF') or ('\u3400' <= split_name <= '\u4DBF') or split_name in chs_names:
+            if ('\u4E00' <= split_name <= '\u9FFF') or ('\u3400' <= split_name <= '\u4DBF') or split_name:
                 res['isChinese'] = True
     # age
     res['age'] = get_age(profile)
@@ -1944,3 +1944,19 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
     #     del profile["experiences"]
 
     return profile
+
+
+def batch_deal_age_race():
+    id = 0
+    while True:
+        rows = query_letter_profile(id)
+        print(f"rows => {len(rows)}")
+        if len(rows) == 0:
+            break
+
+        for row in rows:
+            tmp_id, candidate_id, manage_account_id, raw_profile = row
+            id = max(tmp_id, id)
+            parsed = parse_profile(raw_profile, 'no', True)
+            update_profile_age_and_race(manage_account_id, candidate_id, "Linkedin", parsed['age'], parsed['isChinese'])
+        print(f"now id => {id}")
