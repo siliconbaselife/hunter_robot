@@ -22,7 +22,7 @@ class DBManager:
 
     def init_db(self):
         self.connection = pymysql.connect(host=self.host, port=self.port, user=self.user, password=self.password,
-                                          database=self.database,charset='utf8mb4', autocommit=True)
+                                          database=self.database, charset='utf8mb4', autocommit=True, collation='utf8mb4_unicode_ci')
         self.cursor = self.connection.cursor()
 
     def reconnect(self):
@@ -97,8 +97,8 @@ class DBManager:
             return exist
 
 
-dbm = DBManager(host=config['db']['host'], 
-                port=config['db']['port'], 
-                user=config['db']['user'], 
-                password=config['db']['pwd'], 
+dbm = DBManager(host=config['db']['host'],
+                port=config['db']['port'],
+                user=config['db']['user'],
+                password=config['db']['pwd'],
                 database=config['db']['name'])
