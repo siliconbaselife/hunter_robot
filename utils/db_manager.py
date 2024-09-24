@@ -21,8 +21,9 @@ class DBManager:
         self.init_db()
 
     def init_db(self):
-        self.connection = pymysql.connect(host=self.host, port=self.port, user=self.user, password=self.password,
-                                          database=self.database, charset='utf8mb4', autocommit=True, collation='utf8mb4_unicode_ci')
+        # self.connection = pymysql.connect(host=self.host, port=self.port, user=self.user, password=self.password,
+        #                                   database=self.database, charset='utf8mb4', autocommit=True, collation='utf8mb4_unicode_ci')
+        self.connection = pymysql.connect(host=self.host, port=self.port, user=self.user, password=self.password, database=self.database)
         self.cursor = self.connection.cursor()
 
     def reconnect(self):
