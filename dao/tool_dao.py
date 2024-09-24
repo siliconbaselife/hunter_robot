@@ -436,7 +436,7 @@ def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidat
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
     if candidate_name is not None and len(candidate_name) > 0:
-        sql += f" and b.name like '%{candidate_name}%' collate utf8_general_ci"
+        sql += f" and lower(b.name) like lower('%{candidate_name}%')"
     if stage is not None and len(stage) > 0:
         sql += f" and a.flow_status = '{stage}'"
     if status is not None and len(status) > 0:
@@ -455,7 +455,7 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
     if candidate_name is not None and len(candidate_name) > 0:
-        sql += f" and b.name like '%{candidate_name}%' collate utf8_general_ci"
+        sql += f" and lower(b.name) like lower('%{candidate_name}%')"
     if stage is not None and len(stage) > 0:
         sql += f" and a.flow_status = '{stage}'"
     if status is not None and len(status) > 0:
