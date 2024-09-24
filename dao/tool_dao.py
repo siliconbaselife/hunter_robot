@@ -441,8 +441,6 @@ def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidat
         sql += f" and a.flow_status = '{stage}'"
     if status is not None and len(status) > 0:
         sql += f" and b.status = '{status}'"
-    sql += " collate utf8_general_ci"
-
     s = time.time()
     data = dbm.query(sql)
     e = time.time()
