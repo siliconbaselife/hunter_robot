@@ -232,6 +232,99 @@ def deal_experiences(experiences):
     return r_experiences
 
 
+chs_names = ['Zhao', 'Qian', 'Sun', 'Li', 'Zhou', 'Wu', 'Zheng', 'Wang', 'Feng', 'Chen', 'Zhu', 'Wei', 'Shen',
+             'Han', 'Yang', 'Qin', 'You', 'Xu', 'He', 'Lv', 'Shi', 'Zhang', 'Kong', 'Cao', 'Yan', 'Hua', 'Jin',
+             'Tao', 'Jiang', 'Xie', 'Zou', 'Yu', 'Bo', 'Shui', 'Dou', 'Yun', 'SU', 'Pan', 'Ge', 'Fan', 'Peng',
+             'Lang', 'Lu', 'Chang', 'Ma', 'Miao', 'Feng', 'Hua', 'Fang', 'Yu', 'Ren', 'Yuan', 'Liu', 'Bao',
+             'Shi', 'Tang', 'Fei', 'Lian', 'Qin', 'Xue', 'Lei', 'He', 'Ni', 'Teng', 'Yin', 'Luo', 'Bi', 'Hao',
+             'Wu', 'An', 'Chang', 'Le', 'Yu', 'Fu', 'Pi', 'Qi', 'Kang', 'Bu', 'Gu', 'Meng', 'Ping', 'Huang',
+             'He', 'Mu', 'Xiao', 'Yin', 'Yao', 'Shao', 'Qi', 'Mao', 'Di', 'Mi', 'Bei', 'Ming', 'Zang', 'Ji',
+             'FU', 'Cheng', 'Dai', 'Song', 'Ji', 'Shu', 'Qu', 'Dong', 'Liang', 'Du', 'Lan', 'Min', 'Jia', 'Lou',
+             'Tong', 'Guo', 'Lin', 'Diao', 'Zhong', 'Qiu', 'Luo', 'Gao', 'Xia', 'Cai', 'Tian', 'Hu', 'Ling',
+             'Huo', 'Ling', 'Wan', 'Zhi', 'ke', 'Guan', 'Mo', 'Miao', 'Xie', 'Zong', 'Ding', 'Deng', 'Shan',
+             'Hang', 'Bao', 'Zuo', 'Cui', 'Niu', 'Weng', 'Xun', 'Yang', 'Hui', 'Gong', 'Cheng', 'Hua', 'Pei',
+             'Rong', 'Jiao', 'Mu', 'Gu', 'Che', 'Hou', 'Mi', 'Quan', 'Ban', 'Gong', 'Ning', 'Chou', 'Luan',
+             'Zu', 'Fu', 'Liu', 'Long', 'Ye', 'Si', 'Bai', 'Huai', 'Cong', 'Lai', 'Zhuo', 'Qiao', 'Shuang',
+             'Dang', 'Cui', 'Tan', 'Ran', 'Bian', 'Chai', 'Liao', 'Gong', 'Jian', 'Sha', 'You', 'Hai', 'Wen',
+             'Zhai', 'Kou', 'Rao', 'Pu', 'Ou', 'She', 'Nian', 'Ai', 'Ha', 'An', 'Zhan', 'Ruan', 'Bing', 'Tu',
+             'Zhuang', 'Geng', 'Guang', 'Chao', 'AH', 'AU', 'BIK', 'BING', 'BIT', 'BONG', 'BUN', 'CHAI', 'CHAK',
+             'CHAM', 'CHAN', 'CHANG', 'CHAT', 'CHAU', 'CHEN', 'CHENG', 'CHEONG', 'CHEUK', 'CHEUNG', 'CHI',
+             'CHIANG', 'CHICKC', 'HIGN', 'CHIK', 'CHIN', 'CHING', 'CHIT', 'CHIU', 'CHO', 'CHOI', 'CHOK',
+             'CHONG', 'CHOR', 'CHOW', 'CHOY', 'CHU', 'CHUEN', 'CHUI', 'CHUM', 'CHUN', 'CHUNG', 'DIK', 'DIU',
+             'FAT', 'FA', 'FAI', 'FAN', 'FANG', 'FEI', 'FO', 'FOG', 'FOK', 'FONG', 'FOO', 'FOOK', 'FOON',
+             'FORK', 'FU', 'FUI', 'FUK', 'FUNG', 'HING', 'HA', 'HAN', 'HANG', 'HAU', 'HEI', 'HEUNG', 'HIM',
+             'HIN', 'HIP', 'HIU', 'HO', 'HOHO', 'HOI', 'HOK', 'HON', 'HONG', 'HOU', 'HSU', 'HSUI', 'HUANG',
+             'HUEN', 'HUI', 'HUNG', 'HWANG', 'JIM', 'KA', 'KAI', 'KAK', 'KAM', 'KAN', 'KANG', 'KAR', 'KAU',
+             'KEI', 'KEUNG', 'KHOO', 'KIM', 'KIN', 'KING', 'KIT', 'KIU', 'KO', 'KOK', 'KON', 'KONG', 'KOON',
+             'KOT', 'KU', 'KUA', 'KUEN', 'KUI', 'KUK', 'KUN', 'KUNG', 'KUO', 'KWAI', 'KWAN', 'KWING', 'KWOK',
+             'KWONG', 'LAI', 'LAM', 'LAN', 'LAP', 'LARM', 'LAU', 'LAW', 'LEE', 'LEI', 'LEONG', 'LEUNG', 'LI',
+             'LIANG', 'LIAO', 'LIEW', 'LIK', 'LIM', 'LIN', 'LING', 'LIP', 'LIT', 'LIU', 'LO', 'LOI', 'LOK',
+             'LONG', 'LOO', 'LOOK', 'LOONG', 'LOW', 'LUEN', 'LUET', 'LUI', 'LUK', 'LUMLUN', 'LUN', 'LUNG', 'MA',
+             'MAK', 'MAN', 'MANG', 'MAO', 'MAR', 'MEI', 'MIN', 'MING', 'MIU', 'MO', 'MOK', 'MOOK', 'MOON',
+             'MUI', 'MUK', 'MUNG', 'NAM', 'NANG', 'NAR', 'NEI', 'NEUNG', 'NG', 'NGA', 'NGAI', 'NGAN', 'NGAU',
+             'NGO', 'NGON', 'NIE', 'NIN', 'NING', 'NUI', 'O', 'OI', 'ON', 'PAK', 'PANG', 'PAT', 'PAU', 'PEI',
+             'PIK', 'PIN', 'PING', 'PIU', 'PO', 'POK', 'PONG', 'POO', 'POON', 'PUI', 'PUN', 'SAI', 'SAM', 'SAN',
+             'SANG', 'SAU', 'SE', 'SECK', 'SEE', 'SEI', 'SEK', 'SHAN', 'SHE', 'SHEK', 'SHEUNG', 'SHI', 'SHIH',
+             'SHING', 'SHIU', 'SHP', 'SHU', 'SHUE', 'SHUEN', 'SHUK', 'SHUM', 'SHUN', 'SI', 'SIK', 'SIM', 'SIN',
+             'SING', 'SIT', 'SIU', 'SO', 'SUEN', 'SUET', 'SUI', 'SUM', 'SUN', 'SUNG', 'SZE', 'TAI', 'TAK',
+             'TAM', 'TAN', 'TANG', 'TAO', 'TAT', 'TAU', 'TIM', 'TIN', 'TING', 'TIP', 'TIT', 'TO', 'TONG',
+             'TSAM', 'TSANG', 'TSE', 'TSIM', 'TSO', 'TSOI', 'TSUI', 'TUEN', 'TUNG', 'TYE', 'UNG', 'VONG', 'WAH',
+             'WAI', 'WAN', 'WANG', 'WAT', 'WING', 'WO', 'WON', 'WONG', 'WOO', 'WOOD', 'WOON', 'WU', 'WUI',
+             'WUN', 'WUT', 'YAM', 'YAN', 'YANG', 'YAO', 'YAT', 'YAU', 'YEE', 'YEI', 'YEN', 'YEUK', 'YEUNG',
+             'YI', 'YICK', 'YIK', 'YIM', 'YIN', 'YING', 'YIP', 'YIU', 'YOUNG', 'YU', 'YUE', 'YUEN', 'YUET',
+             'YUI', 'YUK', 'YUNG', 'ZHANG']
+
+
+def parse_race(name):
+    chineses = ['zhao', 'qian', 'sun', 'li', 'zhou', 'wu', 'zheng', 'wang', 'feng', 'chen', 'zhu', 'wei', 'shen',
+                'han', 'yang', 'qin', 'you', 'xu', 'he', 'lv', 'shi', 'zhang', 'kong', 'cao', 'yan', 'hua', 'jin',
+                'tao', 'jiang', 'xie', 'zou', 'yu', 'bo', 'shui', 'dou', 'yun', 'su', 'pan', 'ge', 'fan', 'peng',
+                'lang', 'lu', 'chang', 'ma', 'miao', 'feng', 'hua', 'fang', 'yu', 'ren', 'yuan', 'liu', 'bao',
+                'shi', 'tang', 'fei', 'lian', 'qin', 'xue', 'lei', 'he', 'ni', 'teng', 'yin', 'luo', 'bi', 'hao',
+                'wu', 'an', 'chang', 'le', 'yu', 'fu', 'pi', 'qi', 'kang', 'bu', 'gu', 'meng', 'ping', 'huang',
+                'he', 'mu', 'xiao', 'yin', 'yao', 'shao', 'qi', 'mao', 'di', 'mi', 'bei', 'ming', 'zang', 'ji',
+                'fu', 'cheng', 'dai', 'song', 'ji', 'shu', 'qu', 'dong', 'liang', 'du', 'lan', 'min', 'jia', 'lou',
+                'tong', 'guo', 'lin', 'diao', 'zhong', 'qiu', 'luo', 'gao', 'xia', 'cai', 'tian', 'hu', 'ling',
+                'huo', 'ling', 'wan', 'zhi', 'ke', 'guan', 'mo', 'miao', 'xie', 'zong', 'ding', 'deng', 'shan',
+                'hang', 'bao', 'zuo', 'cui', 'niu', 'weng', 'xun', 'yang', 'hui', 'gong', 'cheng', 'hua', 'pei',
+                'rong', 'jiao', 'mu', 'gu', 'che', 'hou', 'mi', 'quan', 'ban', 'gong', 'ning', 'chou', 'luan',
+                'zu', 'fu', 'liu', 'long', 'ye', 'si', 'bai', 'huai', 'cong', 'lai', 'zhuo', 'qiao', 'shuang',
+                'dang', 'cui', 'tan', 'ran', 'bian', 'chai', 'liao', 'gong', 'jian', 'sha', 'you', 'hai', 'wen',
+                'zhai', 'kou', 'rao', 'pu', 'ou', 'she', 'nian', 'ai', 'ha', 'an', 'zhan', 'ruan', 'bing', 'tu',
+                'zhuang', 'geng', 'guang', 'chao', 'ah', 'au', 'bik', 'bing', 'bit', 'bong', 'bun', 'chai', 'chak',
+                'cham', 'chan', 'chang', 'chat', 'chau', 'chen', 'cheng', 'cheong', 'cheuk', 'cheung', 'chi',
+                'chiang', 'chickc', 'hign', 'chik', 'chin', 'ching', 'chit', 'chiu', 'cho', 'choi', 'chok',
+                'chong', 'chor', 'chow', 'choy', 'chu', 'chuen', 'chui', 'chum', 'chun', 'chung', 'dik', 'diu',
+                'fat', 'fa', 'fai', 'fan', 'fang', 'fei', 'fo', 'fog', 'fok', 'fong', 'foo', 'fook', 'foon',
+                'fork', 'fu', 'fui', 'fuk', 'fung', 'hing', 'ha', 'han', 'hang', 'hau', 'hei', 'heung', 'him',
+                'hin', 'hip', 'hiu', 'ho', 'hoho', 'hoi', 'hok', 'hon', 'hong', 'hou', 'hsu', 'hsui', 'huang',
+                'huen', 'hui', 'hung', 'hwang', 'jim', 'ka', 'kai', 'kak', 'kam', 'kan', 'kang', 'kar', 'kau',
+                'kei', 'keung', 'khoo', 'kim', 'kin', 'king', 'kit', 'kiu', 'ko', 'kok', 'kon', 'kong', 'koon',
+                'kot', 'ku', 'kua', 'kuen', 'kui', 'kuk', 'kun', 'kung', 'kuo', 'kwai', 'kwan', 'kwing', 'kwok',
+                'kwong', 'lai', 'lam', 'lan', 'lap', 'larm', 'lau', 'law', 'lee', 'lei', 'leong', 'leung', 'li',
+                'liang', 'liao', 'liew', 'lik', 'lim', 'lin', 'ling', 'lip', 'lit', 'liu', 'lo', 'loi', 'lok',
+                'long', 'loo', 'look', 'loong', 'low', 'luen', 'luet', 'lui', 'luk', 'lumlun', 'lun', 'lung', 'ma',
+                'mak', 'man', 'mang', 'mao', 'mar', 'mei', 'min', 'ming', 'miu', 'mo', 'mok', 'mook', 'moon',
+                'mui', 'muk', 'mung', 'nam', 'nang', 'nar', 'nei', 'neung', 'ng', 'nga', 'ngai', 'ngan', 'ngau',
+                'ngo', 'ngon', 'nie', 'nin', 'ning', 'nui', 'o', 'oi', 'on', 'pak', 'pang', 'pat', 'pau', 'pei',
+                'pik', 'pin', 'ping', 'piu', 'po', 'pok', 'pong', 'poo', 'poon', 'pui', 'pun', 'sai', 'sam', 'san',
+                'sang', 'sau', 'se', 'seck', 'see', 'sei', 'sek', 'shan', 'she', 'shek', 'sheung', 'shi', 'shih',
+                'shing', 'shiu', 'shp', 'shu', 'shue', 'shuen', 'shuk', 'shum', 'shun', 'si', 'sik', 'sim', 'sin',
+                'sing', 'sit', 'siu', 'so', 'suen', 'suet', 'sui', 'sum', 'sun', 'sung', 'sze', 'tai', 'tak',
+                'tam', 'tan', 'tang', 'tao', 'tat', 'tau', 'tim', 'tin', 'ting', 'tip', 'tit', 'to', 'tong',
+                'tsam', 'tsang', 'tse', 'tsim', 'tso', 'tsoi', 'tsui', 'tuen', 'tung', 'tye', 'ung', 'vong', 'wah',
+                'wai', 'wan', 'wang', 'wat', 'wing', 'wo', 'won', 'wong', 'woo', 'wood', 'woon', 'wu', 'wui',
+                'wun', 'wut', 'yam', 'yan', 'yang', 'yao', 'yat', 'yau', 'yee', 'yei', 'yen', 'yeuk', 'yeung',
+                'yi', 'yick', 'yik', 'yim', 'yin', 'ying', 'yip', 'yiu', 'young', 'yu', 'yue', 'yuen', 'yuet',
+                'yui', 'yuk', 'yung', 'zhang']
+
+    for split_name in name.split(' '):
+        if ('\u4E00' <= split_name <= '\u9FFF') or (
+                '\u3400' <= split_name <= '\u4DBF') or split_name.lower() in chineses:
+            return True
+    return False
+
+
 def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if type == 'need_deserialize':
         profile = deserialize_raw_profile(profile)
@@ -283,51 +376,7 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
     if profile:
         res['cv'] = cv_str(profile, 0)
     if name:
-        res['isChinese'] = False
-        chs_names = ['Zhao', 'Qian', 'Sun', 'Li', 'Zhou', 'Wu', 'Zheng', 'Wang', 'Feng', 'Chen', 'Zhu', 'Wei', 'Shen',
-                     'Han', 'Yang', 'Qin', 'You', 'Xu', 'He', 'Lv', 'Shi', 'Zhang', 'Kong', 'Cao', 'Yan', 'Hua', 'Jin',
-                     'Tao', 'Jiang', 'Xie', 'Zou', 'Yu', 'Bo', 'Shui', 'Dou', 'Yun', 'SU', 'Pan', 'Ge', 'Fan', 'Peng',
-                     'Lang', 'Lu', 'Chang', 'Ma', 'Miao', 'Feng', 'Hua', 'Fang', 'Yu', 'Ren', 'Yuan', 'Liu', 'Bao',
-                     'Shi', 'Tang', 'Fei', 'Lian', 'Qin', 'Xue', 'Lei', 'He', 'Ni', 'Teng', 'Yin', 'Luo', 'Bi', 'Hao',
-                     'Wu', 'An', 'Chang', 'Le', 'Yu', 'Fu', 'Pi', 'Qi', 'Kang', 'Bu', 'Gu', 'Meng', 'Ping', 'Huang',
-                     'He', 'Mu', 'Xiao', 'Yin', 'Yao', 'Shao', 'Qi', 'Mao', 'Di', 'Mi', 'Bei', 'Ming', 'Zang', 'Ji',
-                     'FU', 'Cheng', 'Dai', 'Song', 'Ji', 'Shu', 'Qu', 'Dong', 'Liang', 'Du', 'Lan', 'Min', 'Jia', 'Lou',
-                     'Tong', 'Guo', 'Lin', 'Diao', 'Zhong', 'Qiu', 'Luo', 'Gao', 'Xia', 'Cai', 'Tian', 'Hu', 'Ling',
-                     'Huo', 'Ling', 'Wan', 'Zhi', 'ke', 'Guan', 'Mo', 'Miao', 'Xie', 'Zong', 'Ding', 'Deng', 'Shan',
-                     'Hang', 'Bao', 'Zuo', 'Cui', 'Niu', 'Weng', 'Xun', 'Yang', 'Hui', 'Gong', 'Cheng', 'Hua', 'Pei',
-                     'Rong', 'Jiao', 'Mu', 'Gu', 'Che', 'Hou', 'Mi', 'Quan', 'Ban', 'Gong', 'Ning', 'Chou', 'Luan',
-                     'Zu', 'Fu', 'Liu', 'Long', 'Ye', 'Si', 'Bai', 'Huai', 'Cong', 'Lai', 'Zhuo', 'Qiao', 'Shuang',
-                     'Dang', 'Cui', 'Tan', 'Ran', 'Bian', 'Chai', 'Liao', 'Gong', 'Jian', 'Sha', 'You', 'Hai', 'Wen',
-                     'Zhai', 'Kou', 'Rao', 'Pu', 'Ou', 'She', 'Nian', 'Ai', 'Ha', 'An', 'Zhan', 'Ruan', 'Bing', 'Tu',
-                     'Zhuang', 'Geng', 'Guang', 'Chao', 'AH', 'AU', 'BIK', 'BING', 'BIT', 'BONG', 'BUN', 'CHAI', 'CHAK',
-                     'CHAM', 'CHAN', 'CHANG', 'CHAT', 'CHAU', 'CHEN', 'CHENG', 'CHEONG', 'CHEUK', 'CHEUNG', 'CHI',
-                     'CHIANG', 'CHICKC', 'HIGN', 'CHIK', 'CHIN', 'CHING', 'CHIT', 'CHIU', 'CHO', 'CHOI', 'CHOK',
-                     'CHONG', 'CHOR', 'CHOW', 'CHOY', 'CHU', 'CHUEN', 'CHUI', 'CHUM', 'CHUN', 'CHUNG', 'DIK', 'DIU',
-                     'FAT', 'FA', 'FAI', 'FAN', 'FANG', 'FEI', 'FO', 'FOG', 'FOK', 'FONG', 'FOO', 'FOOK', 'FOON',
-                     'FORK', 'FU', 'FUI', 'FUK', 'FUNG', 'HING', 'HA', 'HAN', 'HANG', 'HAU', 'HEI', 'HEUNG', 'HIM',
-                     'HIN', 'HIP', 'HIU', 'HO', 'HOHO', 'HOI', 'HOK', 'HON', 'HONG', 'HOU', 'HSU', 'HSUI', 'HUANG',
-                     'HUEN', 'HUI', 'HUNG', 'HWANG', 'JIM', 'KA', 'KAI', 'KAK', 'KAM', 'KAN', 'KANG', 'KAR', 'KAU',
-                     'KEI', 'KEUNG', 'KHOO', 'KIM', 'KIN', 'KING', 'KIT', 'KIU', 'KO', 'KOK', 'KON', 'KONG', 'KOON',
-                     'KOT', 'KU', 'KUA', 'KUEN', 'KUI', 'KUK', 'KUN', 'KUNG', 'KUO', 'KWAI', 'KWAN', 'KWING', 'KWOK',
-                     'KWONG', 'LAI', 'LAM', 'LAN', 'LAP', 'LARM', 'LAU', 'LAW', 'LEE', 'LEI', 'LEONG', 'LEUNG', 'LI',
-                     'LIANG', 'LIAO', 'LIEW', 'LIK', 'LIM', 'LIN', 'LING', 'LIP', 'LIT', 'LIU', 'LO', 'LOI', 'LOK',
-                     'LONG', 'LOO', 'LOOK', 'LOONG', 'LOW', 'LUEN', 'LUET', 'LUI', 'LUK', 'LUMLUN', 'LUN', 'LUNG', 'MA',
-                     'MAK', 'MAN', 'MANG', 'MAO', 'MAR', 'MEI', 'MIN', 'MING', 'MIU', 'MO', 'MOK', 'MOOK', 'MOON',
-                     'MUI', 'MUK', 'MUNG', 'NAM', 'NANG', 'NAR', 'NEI', 'NEUNG', 'NG', 'NGA', 'NGAI', 'NGAN', 'NGAU',
-                     'NGO', 'NGON', 'NIE', 'NIN', 'NING', 'NUI', 'O', 'OI', 'ON', 'PAK', 'PANG', 'PAT', 'PAU', 'PEI',
-                     'PIK', 'PIN', 'PING', 'PIU', 'PO', 'POK', 'PONG', 'POO', 'POON', 'PUI', 'PUN', 'SAI', 'SAM', 'SAN',
-                     'SANG', 'SAU', 'SE', 'SECK', 'SEE', 'SEI', 'SEK', 'SHAN', 'SHE', 'SHEK', 'SHEUNG', 'SHI', 'SHIH',
-                     'SHING', 'SHIU', 'SHP', 'SHU', 'SHUE', 'SHUEN', 'SHUK', 'SHUM', 'SHUN', 'SI', 'SIK', 'SIM', 'SIN',
-                     'SING', 'SIT', 'SIU', 'SO', 'SUEN', 'SUET', 'SUI', 'SUM', 'SUN', 'SUNG', 'SZE', 'TAI', 'TAK',
-                     'TAM', 'TAN', 'TANG', 'TAO', 'TAT', 'TAU', 'TIM', 'TIN', 'TING', 'TIP', 'TIT', 'TO', 'TONG',
-                     'TSAM', 'TSANG', 'TSE', 'TSIM', 'TSO', 'TSOI', 'TSUI', 'TUEN', 'TUNG', 'TYE', 'UNG', 'VONG', 'WAH',
-                     'WAI', 'WAN', 'WANG', 'WAT', 'WING', 'WO', 'WON', 'WONG', 'WOO', 'WOOD', 'WOON', 'WU', 'WUI',
-                     'WUN', 'WUT', 'YAM', 'YAN', 'YANG', 'YAO', 'YAT', 'YAU', 'YEE', 'YEI', 'YEN', 'YEUK', 'YEUNG',
-                     'YI', 'YICK', 'YIK', 'YIM', 'YIN', 'YING', 'YIP', 'YIU', 'YOUNG', 'YU', 'YUE', 'YUEN', 'YUET',
-                     'YUI', 'YUK', 'YUNG', 'ZHANG']
-        for split_name in name.split(' '):
-            if ('\u4E00' <= split_name <= '\u9FFF') or ('\u3400' <= split_name <= '\u4DBF') or split_name:
-                res['isChinese'] = True
+        res['isChinese'] = parse_race(name)
     # age
     res['age'] = get_age(profile)
     # logger.info(f"get_age => {res['age']}")
