@@ -1782,6 +1782,8 @@ def search_profile_by_tag_excel(manage_account_id, platform, tag, page, limit):
         else:
             excel_row.append("")
 
+        excel_data.append(excel_row)
+
     return excel_data
 
 
