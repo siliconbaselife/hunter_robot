@@ -1708,9 +1708,9 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
 
 def transfer_contact_info(contact_info):
     contact_str = ""
-    if "Phone" in contact_info and len(contact_info["Phone"] > 0):
+    if "Phone" in contact_info and len(contact_info["Phone"]) > 0:
         contact_str += f"{contact_info['Phone']}"
-    if "Email" in contact_info and len(contact_info["Email"] > 0):
+    if "Email" in contact_info and len(contact_info["Email"]) > 0:
         contact_str += f"\n {contact_info['Email']}"
     return contact_str
 
