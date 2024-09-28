@@ -1154,28 +1154,33 @@ def download_profile_by_tag_web():
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     logger.info("[backend_tools] download_profile_by_tag_web manage_account_id = {}, platform = {}, tags = {}".format(
         manage_account_id, platform, tags))
-    search_datas, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, True)
-    if error_msg:
-        return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
+
+    # search_datas, error_msg = search_profile_by_tag(manage_account_id, platform, tags, page, limit, True)
+    # if error_msg:
+    #     return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
     titles = []
-    excel_data = []
-    search_datas = search_datas['details']
-    logger.info('[backend_tools] search_datas = {}', len(search_datas))
-    if len(search_datas) > 0:
-        for k in search_datas[0]:
-            if k == 'department':
-                continue
-            titles.append(k)
-        for search_data in search_datas:
-            row = []
-            for k in search_data:
-                if k == 'department':
-                    continue
-                row.append(search_data[k])
-            excel_data.append(row)
+    # excel_data = []
+    # search_datas = search_datas['details']
+    # logger.info('[backend_tools] search_datas = {}', len(search_datas))
+    # if len(search_datas) > 0:
+    #     for k in search_datas[0]:
+    #         if k == 'department':
+    #             continue
+    #         titles.append(k)
+    #     for search_data in search_datas:
+    #         row = []
+    #         for k in search_data:
+    #             if k == 'department':
+    #                 continue
+    #             row.append(search_data[k])
+    #         excel_data.append(row)
+
     cur_time = datetime.datetime.now()
     file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
 
+    titles = ["candidate-Id", "company", "name", "title", "location", "contact", "cv", "educations", "5years Jump",
+              "age", "Chinese", "languages"]
+    excel_data = search_profile_by_tag_excel(manage_account_id, platform, tags[0], page, limit)
     logger.info(f"download_profile_by_tag_web excel_data => {excel_data}")
     data_to_excel_file(file_path, titles, excel_data)
 

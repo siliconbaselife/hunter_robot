@@ -372,7 +372,9 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
         res['location'] = profile['location']
 
     if 'contactInfo' in profile:
-        res['contactInfo'] = cv_str(profile['contactInfo'], 0) if field_2_str else profile['contactInfo']
+        # res['contactInfo'] = cv_str(profile['contactInfo'], 0) if field_2_str else profile['contactInfo']
+        res['contactInfo'] = profile['contactInfo']
+
     if profile:
         res['cv'] = cv_str(profile, 0)
     if name:
@@ -381,7 +383,8 @@ def parse_profile(profile, type='need_deserialize', field_2_str=False):
     res['age'] = get_age(profile)
     # logger.info(f"get_age => {res['age']}")
     if 'languages' in profile and len(profile['languages']) > 0:
-        res['languages'] = cv_str(profile['languages'], 0) if field_2_str else profile['languages']
+        res['languages'] = profile['languages']
+        # res['languages'] = cv_str(profile['languages'], 0) if field_2_str else profile['languages']
 
     if 'experiences' in profile and len(profile['experiences']) > 0:
         experiences = profile['experiences']
@@ -1701,6 +1704,65 @@ def search_profile_by_tag(manage_account_id, platform, tags, page, limit, contac
         profile['cvUrl'] = row[2]
         details.append(profile)
     return data, None
+
+
+def transfer_contact_info(contact_info):
+    contact_str = ""
+    if "Phone" in contact_info and len(contact_info["Phone"] > 0):
+        contact_str += f"{contact_info['Phone']}"
+    if "Email" in contact_info and len(contact_info["Email"] > 0):
+        contact_str += f"\n {contact_info['Email']}"
+    return contact_str
+
+
+def transfer_experiences(transfer_experiences_json):
+    transfer_experiences_str = ""
+    for i, experience_info in enumerate(transfer_experiences_json):
+        experience_str = f"{experience_info['companyName']} {experience_info['workPosition']} {experience_info['workTimeInfo']} \n"
+
+        transfer_experiences_str += experience_str
+
+    return transfer_experiences_str
+
+
+def transfer_educations(educations_json):
+    education_str = ""
+    for education_info in educations_json:
+        education_str += f"{education_info['schoolName']} {education_info['majorInfo']} {education_info['degreeInfo']} {education_info['timeInfo']}\n"
+
+    return education_str
+
+
+def transfer_languages(languages_json):
+    languages_str = ""
+    for languages_info in languages_json:
+        languages_str += f"{languages_info['language']}\n"
+
+    return languages_str
+
+
+def search_profile_by_tag_excel(manage_account_id, platform, tag, page, limit):
+    candidate_ids = query_candidate_id_by_tag_relation(manage_account_id, platform, [tag])
+    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids, page, limit)
+
+    excel_data = []
+    for row in rows:
+        profile = parse_profile(row[1], 'need_deserialize', True)
+        excel_row = []
+        excel_row.append(profile["candidateId"])
+        excel_row.append(profile["company"])
+        excel_row.append(profile["name"])
+        excel_row.append(profile["title"])
+        excel_row.append(profile["location"])
+        excel_row.append(transfer_contact_info(profile["contactInfo"]))
+        excel_row.append(transfer_experiences(profile["transfer_experiences"]))
+        excel_row.append(transfer_educations(profile["educations"]))
+        excel_row.append(profile["last5Jump"])
+        excel_row.append(profile["age"])
+        excel_row.append(profile["isChinese"])
+        excel_row.append(transfer_languages(profile["languages"]))
+
+    return excel_data
 
 
 def fetch_contact_infos(manage_account_id, candidate_ids):
