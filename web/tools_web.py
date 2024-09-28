@@ -1130,7 +1130,7 @@ def data_to_excel_file(file_path, titles, data):
         worksheet.set_column(7, 7, 50, row_formatter)
         worksheet.set_column(8, 8, 5, row_formatter)
         worksheet.set_column(9, 9, 5, row_formatter)
-        worksheet.set_column(10, 10, 5, row_formatter)
+        worksheet.set_column(10, 10, 7, row_formatter)
         worksheet.write_row('A1', titles, title_formatter)
         count = 2
 
