@@ -1757,13 +1757,30 @@ def search_profile_by_tag_excel(manage_account_id, platform, tag, page, limit):
         excel_row.append(profile["name"])
         excel_row.append(profile["title"])
         excel_row.append(profile["location"])
-        excel_row.append(transfer_contact_info(profile["contactInfo"]))
-        excel_row.append(transfer_experiences(profile["transfer_experiences"]))
-        excel_row.append(transfer_educations(profile["educations"]))
+
+        if "contactInfo" in profile:
+            excel_row.append(transfer_contact_info(profile["contactInfo"]))
+        else:
+            excel_row.append("")
+
+        if "transfer_experiences" in profile:
+            excel_row.append(transfer_experiences(profile["transfer_experiences"]))
+        else:
+            excel_row.append("")
+
+        if "educations" in profile:
+            excel_row.append(transfer_educations(profile["educations"]))
+        else:
+            excel_row.append("")
+
         excel_row.append(profile["last5Jump"])
         excel_row.append(profile["age"])
         excel_row.append(profile["isChinese"])
-        excel_row.append(transfer_languages(profile["languages"]))
+
+        if "languages" in profile:
+            excel_row.append(transfer_languages(profile["languages"]))
+        else:
+            excel_row.append("")
 
     return excel_data
 
