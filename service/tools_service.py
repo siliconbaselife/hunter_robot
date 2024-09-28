@@ -1718,7 +1718,11 @@ def transfer_contact_info(contact_info):
 def transfer_experiences(transfer_experiences_json):
     transfer_experiences_str = ""
     for i, experience_info in enumerate(transfer_experiences_json):
-        experience_str = f"{experience_info['companyName']} {experience_info['workPosition']} {experience_info['workTimeInfo']} \n"
+        experience_str = f"{experience_info['companyName']}\n"
+        if "workPosition" in experience_info:
+            experience_str += f" {experience_info['workPosition']} "
+        if "workTimeInfo" in experience_info:
+            experience_str += f" {experience_info['workTimeInfo']} "
 
         transfer_experiences_str += experience_str
 
@@ -1728,7 +1732,14 @@ def transfer_experiences(transfer_experiences_json):
 def transfer_educations(educations_json):
     education_str = ""
     for education_info in educations_json:
-        education_str += f"{education_info['schoolName']} {education_info['majorInfo']} {education_info['degreeInfo']} {education_info['timeInfo']}\n"
+        education_str += f"{education_info['schoolName']}"
+        if "majorInfo" in education_info:
+            education_str += f" {education_info['majorInfo']} "
+        if "degreeInfo" in education_info:
+            education_str += f" {education_info['degreeInfo']} "
+        if "timeInfo" in education_info:
+            education_str += f" {education_info['timeInfo']} "
+        education_str += "\n"
 
     return education_str
 
