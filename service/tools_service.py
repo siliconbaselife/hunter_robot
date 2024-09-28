@@ -1734,6 +1734,9 @@ def transfer_educations(educations_json):
 
 
 def transfer_languages(languages_json):
+    if languages_json is None:
+        return ""
+
     languages_str = ""
     for languages_info in languages_json:
         languages_str += f"{languages_info['language']}\n"
