@@ -1199,6 +1199,7 @@ def search_profile_by_tag_web_v2():
     page = request.json.get('page', 1)
     company = request.json.get('company_name', '')
     candidate_name = request.json.get('name', '')
+    candidate_name = candidate_name.strip()
     status = request.json.get('status', '')
     stage = request.json.get('stage')
     min_age = request.json.get('min_age')
