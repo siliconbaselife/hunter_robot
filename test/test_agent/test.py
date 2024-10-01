@@ -11,6 +11,7 @@ def get_profiles():
                                          None, None, None, 0, 10)
     profiles = []
     for row in rows:
+        print(row[1])
         profile = parse_profile(row[1], 'need_deserialize', False)
         print(profile)
         profile["raw"] = json.loads(row[1])
