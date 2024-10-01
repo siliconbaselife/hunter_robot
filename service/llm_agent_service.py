@@ -8,7 +8,7 @@ from utils.config import config
 
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from langchain.chains import LLMChain
 from enum import Enum
 
@@ -87,9 +87,10 @@ class educationAgent:
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
         prompt = PromptTemplate(
             input_variables=["structure_info"],
-            template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况，返回以下格式:\n 本科 清华 2006-2010\n研究生 斯坦福 2010-2013\n博士 香港 2013-2019"
+            template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况, 只给出有的学历，返回以下格式:\n "
+                     "[{'学历': '本科', '学校': '清华', '时间': '2007-2010'}, {'学历': '研究生', '学校': '北大', '时间': '2010-2013'}]"
         )
-        output_parser = StrOutputParser()
+        output_parser = JsonOutputParser()
         self.chain = prompt | chat | output_parser
 
     def get(self, educations):
