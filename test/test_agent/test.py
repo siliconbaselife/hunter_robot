@@ -34,6 +34,7 @@ def show_school(profile_str, educations):
     profile_str += "学历:\n"
     for education in educations:
         profile_str += f"   {education['学历']} {education['学校']} {education['时间']} \n"
+    return profile_str
 
 
 def show_end(profile):
@@ -56,7 +57,7 @@ def show_end(profile):
     #         profile_str += "\n"
     #         profile_str += value
     #     profile_str += "\n"
-    show_school(profile_str, profile["学历"])
+    profile_str = show_school(profile_str, profile["学历"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
