@@ -14,6 +14,7 @@ def get_profiles():
         profile = parse_profile(row[1], 'need_deserialize', False)
         profile["raw"] = json.loads(row[1])
         candidate_contact_infos = fetch_contact_infos('lishundong2009@163.com', [profile["candidateId"]])
+        print(candidate_contact_infos)
         profile["contact_info"] = {}
 
         phones = candidate_contact_infos[profile["candidateId"]].get('Phone', [])
