@@ -65,6 +65,7 @@ def show_end(dir, profile):
     #         profile_str += value
     #     profile_str += "\n"
     profile_str = show_school(profile_str, profile["学历"])
+    profile_str = show_experiences(profile_str, profile["工作"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
