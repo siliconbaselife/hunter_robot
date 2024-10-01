@@ -1,7 +1,7 @@
 import os
 import shutil
 from dao.tool_dao import query_tag_filter_profiles_new
-from service.tools_service import parse_profile
+from service.tools_service import *
 from service.llm_agent_service import *
 import json
 
@@ -11,10 +11,16 @@ def get_profiles():
                                          None, None, None, 0, 10)
     profiles = []
     for row in rows:
-        print(row[1])
         profile = parse_profile(row[1], 'need_deserialize', False)
-        print(profile)
         profile["raw"] = json.loads(row[1])
+        candidate_contact_infos = fetch_contact_infos('lishundong2009@163.com', [profile["candidateId"]])
+        profile["contact_info"] = {}
+
+        phones = candidate_contact_infos[profile["candidateId"]].get('Phone', [])
+        profile["contact_info"]["phone"] = phones
+        emails = candidate_contact_infos[profile["candidateId"]].get('Email', [])
+        profile["contact_info"]["email"] = emails
+
         profiles.append(profile)
 
     return profiles
@@ -24,7 +30,7 @@ def parse_normal_info(profile):
     parsed_profile = {}
     parsed_profile["name"] = profile["name"]
     parsed_profile["candidate_id"] = profile["candidateId"].split('/')[-1]
-    parsed_profile["contact_info"] = profile["contactInfo"]
+    parsed_profile["contact_info"] = profile["contact_info"]
 
     if "educations" in profile["raw"]["profile"] and len(profile["raw"]["profile"]["educations"]) > 0:
         education_agent = educationAgent()
@@ -55,10 +61,10 @@ def show_experiences(profile_str, experiences):
 def show_contact(profile_str, contact_info):
     profile_str += "联系方式:\n"
     for key, value in contact_info.items():
-        if key == "Email" and len(value) > 0:
-            profile_str += f"   邮件: {value}\n"
-        if key == "Phone" and len(value) > 0:
-            profile_str += f"   电话: {value}\n"
+        if key == "email" and len(value) > 0:
+            profile_str += f"   邮件: {value[0]}\n"
+        if key == "phone" and len(value) > 0:
+            profile_str += f"   电话: {value[0]}\n"
     return profile_str
 
 
@@ -88,12 +94,12 @@ def show_end(dir, profile):
 if __name__ == "__main__":
     print("begin agent")
     profiles = get_profiles()
-    # dir = './results'
-    # if os.path.exists(dir):
-    #     shutil.rmtree(dir)
-    # os.makedirs(dir)
-    # for profile in profiles:
-    #     parsed_profile = parse_normal_info(profile)
-    #     print(parsed_profile)
-    #     show_end(dir, parsed_profile)
+    dir = './results'
+    if os.path.exists(dir):
+        shutil.rmtree(dir)
+    os.makedirs(dir)
+    for profile in profiles:
+        parsed_profile = parse_normal_info(profile)
+        print(parsed_profile)
+        show_end(dir, parsed_profile)
     print("agent end")
