@@ -87,6 +87,7 @@ class educationAgent:
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
         prompt = PromptTemplate(
             input_variables=["structure_info"],
+            temperature=0,
             template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况, 只给出有的学历, 时间只需要到年, 返回以下格式json:\n "
                      "key 学历 学校 时间\n内容翻译成中文"
         )
@@ -103,6 +104,7 @@ class experienceAgent:
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
         prompt = PromptTemplate(
             input_variables=["structure_info"],
+            temperature=0,
             template="以下是一个人结构化的工作经历历相关信息\n{structure_info}\n请解析出该人工作经历相关情况, 按照时间先后顺序, 时间只需要到年, 只需要开始到结束的时间, 返回以下格式json:\n "
                      "key 公司 title 时间\n内容翻译成中文"
         )
