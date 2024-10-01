@@ -29,6 +29,12 @@ def parse_normal_info(profile):
     return parsed_profile
 
 
+def show_school(profile_str, educations):
+    profile_str += "学历:\n"
+    for education in educations:
+        profile_str += f"   {education['学历']} {education['学校']} {education['时间']} \n"
+
+
 def show_end(profile):
     candidate_id = profile["candidate_id"]
 
@@ -39,15 +45,17 @@ def show_end(profile):
 
     profile_path = os.path.join(dir, candidate_id)
     profile_str = ""
-    for key, value in profile.items():
-        profile_str += "\n"
-        profile_str += f"{key}:"
-        if len(value) < 20:
-            profile_str += value
-        else:
-            profile_str += "\n"
-            profile_str += value
-        profile_str += "\n"
+    profile_str += f"姓名: {profile['name']}\n"
+    # for key, value in profile.items():
+    #     profile_str += "\n"
+    #     profile_str += f"{key}:"
+    #     if len(value) < 20:
+    #         profile_str += value
+    #     else:
+    #         profile_str += "\n"
+    #         profile_str += value
+    #     profile_str += "\n"
+    show_school(profile_str, profile["学历"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
@@ -59,5 +67,5 @@ if __name__ == "__main__":
     for profile in profiles:
         parsed_profile = parse_normal_info(profile)
         print(parsed_profile)
-        # show_end(parsed_profile)
+        show_end(parsed_profile)
     print("agent end")
