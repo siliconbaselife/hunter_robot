@@ -22,6 +22,7 @@ def parse_normal_info(profile):
     parsed_profile = {}
     parsed_profile["name"] = profile["name"]
     parsed_profile["candidate_id"] = profile["candidateId"].split('/')[-1]
+    parsed_profile["contact_info"] = profile["contactInfo"]
 
     if "educations" in profile["raw"]["profile"] and len(profile["raw"]["profile"]["educations"]) > 0:
         education_agent = educationAgent()
@@ -49,6 +50,16 @@ def show_experiences(profile_str, experiences):
     return profile_str
 
 
+def show_contact(profile_str, contact_info):
+    profile_str += "联系方式:\n"
+    for key, value in contact_info.items():
+        if key == "Email" and len(value) > 0:
+            profile_str += f"   邮件: {value}\n"
+        if key == "Phone" and len(value) > 0:
+            profile_str += f"   电话: {value}\n"
+    return profile_str
+
+
 def show_end(dir, profile):
     candidate_id = profile["candidate_id"]
 
@@ -66,6 +77,7 @@ def show_end(dir, profile):
     #     profile_str += "\n"
     profile_str = show_school(profile_str, profile["学历"])
     profile_str = show_experiences(profile_str, profile["工作"])
+    profile_str = show_contact(profile_str, profile["contact_info"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
