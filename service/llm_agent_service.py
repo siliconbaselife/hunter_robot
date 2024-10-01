@@ -88,7 +88,7 @@ class educationAgent:
         prompt = PromptTemplate(
             input_variables=["structure_info"],
             template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况, 只给出有的学历，返回以下格式json:\n "
-                     "[{'学历': '本科', '学校': '清华', '时间': '2007-2010'}, {'学历': '研究生', '学校': '北大', '时间': '2010-2013'}]"
+                     "key 学历 学校 时间"
         )
         output_parser = JsonOutputParser()
         self.chain = prompt | chat | output_parser
