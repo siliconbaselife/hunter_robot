@@ -21,7 +21,7 @@ def get_profiles():
 def parse_normal_info(profile):
     parsed_profile = {}
     parsed_profile["name"] = profile["name"]
-    parsed_profile["candidate_id"] = profile["candidateId"]
+    parsed_profile["candidate_id"] = profile["candidateId"].split('/')[-1]
 
     if "educations" in profile["raw"]["profile"] and len(profile["raw"]["profile"]["educations"]) > 0:
         education_agent = educationAgent()
