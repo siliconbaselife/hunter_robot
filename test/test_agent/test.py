@@ -91,6 +91,7 @@ if __name__ == "__main__":
         shutil.rmtree(dir)
     os.makedirs(dir)
     for profile in profiles:
+        print(profile)
         parsed_profile = parse_normal_info(profile)
         print(parsed_profile)
         show_end(dir, parsed_profile)
