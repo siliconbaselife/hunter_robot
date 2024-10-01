@@ -81,6 +81,21 @@ class BenchMarkCompanyAgent:
         pass
 
 
+class educationAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+        prompt = PromptTemplate(
+            input_variables=["structure_info"],
+            template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况，返回以下格式\n 学历 学校 开始结束时间"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def get(self, educations):
+        res = self.chain.invoke({"educations": educations})
+        return res
+
+
 if __name__ == "__main__":
     agent = ChatAgent()
     history = [
