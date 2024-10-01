@@ -1,3 +1,4 @@
+import json
 import os
 
 from cryptography.fernet import Fernet
@@ -92,7 +93,7 @@ class educationAgent:
         self.chain = prompt | chat | output_parser
 
     def get(self, educations):
-        res = self.chain.invoke({"educations": educations})
+        res = self.chain.invoke({"structure_info": json.dumps(educations)})
         return res
 
 
