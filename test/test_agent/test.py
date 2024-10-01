@@ -17,7 +17,7 @@ def get_profiles():
         print(candidate_contact_infos)
         profile["contact_info"] = {}
 
-        if len(candidate_contact_infos) == 0:
+        if len(candidate_contact_infos) > 0:
             phones = candidate_contact_infos[profile["candidateId"]].get('Phone', [])
             profile["contact_info"]["phone"] = phones
             emails = candidate_contact_infos[profile["candidateId"]].get('Email', [])
