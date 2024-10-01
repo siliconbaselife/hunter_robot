@@ -27,9 +27,9 @@ def parse_normal_info(profile):
         education_agent = educationAgent()
         parsed_profile["学历"] = education_agent.get(profile["raw"]["profile"]["educations"])
 
-    if "experinces" in profile["raw"]["experinces"] and len(profile["raw"]["profile"]["experinces"]) > 0:
+    if "experiences" in profile["raw"]["experiences"] and len(profile["raw"]["profile"]["experiences"]) > 0:
         experience_agent = experienceAgent()
-        parsed_profile["工作"] = experience_agent.get(profile["raw"]["profile"]["experinces"])
+        parsed_profile["工作"] = experience_agent.get(profile["raw"]["profile"]["experiences"])
 
     return parsed_profile
 
