@@ -21,6 +21,7 @@ def get_profiles():
 def parse_normal_info(profile):
     parsed_profile = {}
     parsed_profile["name"] = profile["name"]
+    parsed_profile["candidate_id"] = profile["candidateId"]
 
     if "educations" in profile["raw"]["profile"] and len(profile["raw"]["profile"]["educations"]) > 0:
         education_agent = educationAgent()
@@ -36,7 +37,7 @@ def show_school(profile_str, educations):
 
 
 def show_end(profile):
-    candidate_id = profile["candidateId"]
+    candidate_id = profile["candidate_id"]
 
     dir = './results'
     if os.path.exists(dir):
