@@ -36,7 +36,7 @@ def show_school(profile_str, educations):
 
 
 def show_end(profile):
-    candidate_id = profile["candidate_id"]
+    candidate_id = profile["candidateId"]
 
     dir = './results'
     if os.path.exists(dir):
