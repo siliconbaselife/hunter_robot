@@ -2,7 +2,7 @@ import os
 import shutil
 from dao.tool_dao import query_tag_filter_profiles_new
 from service.tools_service import parse_profile
-from service.llm_agent_service import educationAgent
+from service.llm_agent_service import *
 import json
 
 
@@ -26,6 +26,10 @@ def parse_normal_info(profile):
     if "educations" in profile["raw"]["profile"] and len(profile["raw"]["profile"]["educations"]) > 0:
         education_agent = educationAgent()
         parsed_profile["学历"] = education_agent.get(profile["raw"]["profile"]["educations"])
+
+    if "experinces" in profile["raw"]["experinces"] and len(profile["raw"]["profile"]["experinces"]) > 0:
+        experience_agent = experienceAgent()
+        parsed_profile["工作"] = experience_agent.get(profile["raw"]["profile"]["experinces"])
 
     return parsed_profile
 

@@ -98,6 +98,22 @@ class educationAgent:
         return res
 
 
+class experienceAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+        prompt = PromptTemplate(
+            input_variables=["structure_info"],
+            template="以下是一个人结构化的工作经历历相关信息\n{structure_info}\n请解析出该人工作经历相关情况, 按照时间先后顺序,返回以下格式json:\n "
+                     "key 公司 title 时间\n内容翻译成中文"
+        )
+        output_parser = JsonOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def get(self, experiences):
+        res = self.chain.invoke({"structure_info": json.dumps(experiences)})
+        return res
+
+
 if __name__ == "__main__":
     agent = ChatAgent()
     history = [
