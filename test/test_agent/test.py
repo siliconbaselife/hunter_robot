@@ -37,13 +37,8 @@ def show_school(profile_str, educations):
     return profile_str
 
 
-def show_end(profile):
+def show_end(dir, profile):
     candidate_id = profile["candidate_id"]
-
-    dir = './results'
-    if os.path.exists(dir):
-        shutil.rmtree(dir)
-    os.makedirs(dir)
 
     profile_path = os.path.join(dir, candidate_id)
     profile_str = ""
@@ -66,8 +61,12 @@ def show_end(profile):
 if __name__ == "__main__":
     print("begin agent")
     profiles = get_profiles()
+    dir = './results'
+    if os.path.exists(dir):
+        shutil.rmtree(dir)
+    os.makedirs(dir)
     for profile in profiles:
         parsed_profile = parse_normal_info(profile)
         print(parsed_profile)
-        show_end(parsed_profile)
+        show_end(dir, parsed_profile)
     print("agent end")
