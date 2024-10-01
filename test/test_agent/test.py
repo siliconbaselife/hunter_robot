@@ -41,6 +41,14 @@ def show_school(profile_str, educations):
     return profile_str
 
 
+def show_experiences(profile_str, experiences):
+    profile_str += "工作经历:\n"
+    for experience in experiences:
+        profile_str += f"   {experience['公司']} {experience['title']} {experience['时间']} \n"
+
+    return profile_str
+
+
 def show_end(dir, profile):
     candidate_id = profile["candidate_id"]
 
