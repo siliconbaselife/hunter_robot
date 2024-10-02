@@ -183,12 +183,12 @@ class infoParseAgent:
 class EmbeddingAgent:
     def __init__(self, texts):
         print(texts)
-        # text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
-        # texts = text_splitter.create_documents(texts)
-        pages = []
-        for txt in texts:
-            pages.append(PageContent(txt))
-        print(f"texts len: {len(pages)}")
+        text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
+        pages = text_splitter.create_documents(texts)
+        # pages = []
+        # for txt in texts:
+        #     pages.append(PageContent(txt))
+        print(f"texts len: {pages}")
 
         self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
         embeddings = OpenAIEmbeddings()
