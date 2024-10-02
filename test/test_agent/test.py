@@ -96,7 +96,7 @@ def show_end(dir, profile):
 def parse_more_info(profile):
     name = profile["name"]
     print(name)
-    if "abraham" in name:
+    if "Abraham" in name:
         path = "/root/workspace/data/Abraham_Wise/msg.txt"
     if "carolina" in name:
         path = "/root/workspace/data/Carolina_Fabara/msg.txt"
