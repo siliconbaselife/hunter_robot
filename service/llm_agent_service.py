@@ -182,16 +182,11 @@ class infoParseAgent:
 
 class EmbeddingAgent:
     def __init__(self, texts):
-        print(f"texts: {texts}")
-        print(f"texts len: {len(texts)}")
         # text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
         # pages = text_splitter.create_documents(texts)
         pages = []
         for txt in texts:
             pages.append(Document(txt))
-
-        print(f"pages: {pages}")
-        print(f"pages len: {len(pages)}")
 
         self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
         embeddings = OpenAIEmbeddings()
@@ -199,12 +194,26 @@ class EmbeddingAgent:
 
     def cal(self, query):
         results = self.db.similarity_search_with_relevance_scores(query, k=10)
-        print(results)
         relation_txts = ""
         for r in results:
             relation_txts += r[0].page_content
         print(relation_txts)
         return relation_txts
+
+
+class parseAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["query", "txt"],
+            template="按照下面的问题分析文本给出结果\n{query}\n需要分析的文本如下:\n{txt}"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, query, txt):
+        res = self.chain.invoke({"query": query, "txt": txt})
+        return res
 
 
 if __name__ == "__main__":

@@ -39,7 +39,13 @@ def read_txts_raw(path):
 
 
 if __name__ == "__main__":
+    query = "列举该人跟中国相关的事件, 萃取出内容，按照时间顺序排列。"
     path = "/root/workspace/data/Abraham_Wise/msg.txt"
+
     txts = read_txts(path)
-    agent = EmbeddingAgent(txts)
-    agent.cal("列举该人跟中国相关的事件")
+    embedding_agent = EmbeddingAgent(txts)
+    txt = embedding_agent.cal(query)
+
+    parse_agent = parseAgent()
+    res = parse_agent.cal(query, txt)
+    print(res)
