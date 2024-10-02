@@ -9,6 +9,7 @@ def read_txts(path):
     token_num = 0
     txt = ""
     for line in lines:
+        print(line)
         if len(line) == 0:
             if len(txt) > 0:
                 txts.append(txt)
