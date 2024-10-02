@@ -3,7 +3,7 @@ from service.llm_agent_service import *
 
 def read_txts(path):
     with open(path, "r") as f:
-        lines = f.read()
+        lines = f.readlines()
 
     txts = []
     token_num = 0
