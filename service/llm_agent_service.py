@@ -13,6 +13,8 @@ from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 from enum import Enum
 
 logger = get_logger(config['log']['business_log_file'])
@@ -179,6 +181,9 @@ class infoParseAgent:
 
 class EmbeddingAgent:
     def __init__(self, texts):
+        text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
+        texts = text_splitter.create_documents(texts)
+
         self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
         embeddings = OpenAIEmbeddings()
         self.db = Chroma.from_documents(documents=texts, embedding=embeddings)

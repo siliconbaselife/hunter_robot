@@ -24,8 +24,16 @@ def read_txts(path):
     return txts
 
 
+def read_txts_raw(path):
+    with open(path, "r") as f:
+        lines = f.read()
+
+    txt_str = "".join(lines)
+    return txt_str
+
+
 if __name__ == "__main__":
     path = "/root/workspace/data/Abraham_Wise/msg.txt"
-    txts = read_txts(path)
+    txts = read_txts_raw(path)
     agent = EmbeddingAgent(txts)
     agent.cal("列举该人跟中国相关的时间")
