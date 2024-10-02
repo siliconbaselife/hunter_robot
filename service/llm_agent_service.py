@@ -198,9 +198,12 @@ class EmbeddingAgent:
         self.db = Chroma.from_documents(documents=pages, embedding=embeddings)
 
     def cal(self, query):
-        results = self.db.similarity_search_with_relevance_scores(query, k=100)
+        results = self.db.similarity_search_with_relevance_scores(query, k=10)
+        relation_txts = ""
         for r in results:
-            print(r)
+            relation_txts += str(r)
+        print(relation_txts)
+        return relation_txts
 
 
 if __name__ == "__main__":
