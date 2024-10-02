@@ -186,7 +186,7 @@ class EmbeddingAgent:
 
         self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
         embeddings = OpenAIEmbeddings()
-        self.db = Chroma.from_documents(documents=texts, embedding=embeddings)
+        self.db = Chroma.from_documents(documents=texts, embedding=embeddings, persist_directory="ebd")
 
     def cal(self, query):
         docs = self.db.similarity_search(query)
