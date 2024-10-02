@@ -92,7 +92,7 @@ class educationAgent:
                      "{json_format}\n内容翻译成中文"
         )
         output_parser = JsonOutputParser()
-        self.json_format = "[{'学历': '本科', '学校': '清华', '时间': '2009-2013'}, {'学历': '研究生', '学校': '本大', '时间': None}]"
+        self.json_format = "[{'学历': '本科', '学校': '清华', '时间': '2009-2013'}, {'学历': '研究生', '学校': '本大', '时间': ''}]"
         self.chain = prompt | chat | output_parser
 
     def get(self, educations):
@@ -109,7 +109,7 @@ class experienceAgent:
                      "{json_format} \n内容翻译成中文"
         )
         output_parser = JsonOutputParser()
-        self.json_format = "[{'公司': '阿里巴巴', 'title': '销售总监', '时间': '2010-2011'}, {'公司': '百度', 'title': 'HR', '时间': None}]"
+        self.json_format = "[{'公司': '阿里巴巴', 'title': '销售总监', '时间': '2010-2011'}, {'公司': '百度', 'title': 'HR', '时间': ''}]"
         self.chain = prompt | chat | output_parser
 
     def get(self, experiences):
