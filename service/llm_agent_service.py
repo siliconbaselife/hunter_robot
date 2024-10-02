@@ -156,7 +156,6 @@ class infoParseAgent:
         self.chain.invoke({"txt": relation_infos})
 
 
-
 if __name__ == "__main__":
     agent = ChatAgent()
     history = [

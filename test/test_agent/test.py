@@ -106,12 +106,22 @@ def parse_more_info(profile):
         lines = f.readlines()
 
     txt = ""
+    token_num = 0
     for line in lines:
         if len(line) == 0:
             if len(txt) > 0:
                 txts.append(txt)
             txt = ""
+            token_num = 0
+        token_num += len(line)
+        if token_num > 2000:
+            txts.append(txt)
+            txt = 0
+            token_num = 0
         txt += line
+
+    agent = infoParseAgent()
+    agent.get(txts)
 
 
 
