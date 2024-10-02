@@ -73,6 +73,7 @@ def show_contact(profile_str, contact_info):
 def show_chinese_relation(profile_str, chinese_relation):
     profile_str += "中国相关:\n"
     profile_str += chinese_relation
+    return profile_str
 
 
 def show_end(dir, profile):
