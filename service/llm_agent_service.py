@@ -201,7 +201,7 @@ class EmbeddingAgent:
         results = self.db.similarity_search_with_relevance_scores(query, k=10)
         relation_txts = ""
         for r in results:
-            relation_txts += str(r)
+            relation_txts += r.page_content
         print(relation_txts)
         return relation_txts
 
