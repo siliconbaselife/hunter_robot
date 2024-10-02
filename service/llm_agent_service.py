@@ -188,7 +188,9 @@ class EmbeddingAgent:
         pages = []
         for txt in texts:
             pages.append(Document(txt))
-        print(f"texts len: {pages}")
+
+        print(f"pages: {pages}")
+        print(f"pages len: {len(pages)}")
 
         self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
         embeddings = OpenAIEmbeddings()
