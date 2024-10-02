@@ -118,9 +118,9 @@ def parse_more_info(profile):
         token_num += len(line)
         if token_num > 2000:
             txts.append(txt)
-            txt = 0
+            txt = ""
             token_num = 0
-        txt += str(line)
+        txt += line
 
     agent = infoParseAgent()
     agent.get(txts)
