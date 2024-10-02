@@ -183,7 +183,7 @@ class EmbeddingAgent:
     def __init__(self, texts):
         text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=200, chunk_overlap=0)
         texts = text_splitter.create_documents(texts)
-        print(f"texts len: {len(texts)}")
+        print(f"texts len: {texts}")
 
         self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
         embeddings = OpenAIEmbeddings()
