@@ -14,6 +14,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from lanchain import PageContent
 
 from enum import Enum
 
@@ -182,13 +183,16 @@ class infoParseAgent:
 class EmbeddingAgent:
     def __init__(self, texts):
         print(texts)
-        text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
-        texts = text_splitter.create_documents(texts)
-        print(f"texts len: {texts}")
+        # text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
+        # texts = text_splitter.create_documents(texts)
+        pages = []
+        for txt in texts:
+            pages.append(PageContent(txt))
+        print(f"texts len: {len(pages)}")
 
         self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
         embeddings = OpenAIEmbeddings()
-        self.db = Chroma.from_documents(documents=texts, embedding=embeddings)
+        self.db = Chroma.from_documents(documents=pages, embedding=embeddings)
 
     def cal(self, query):
         docs = self.db.similarity_search(query)
