@@ -121,7 +121,7 @@ class parseChineseRelationAgent:
         prompt = PromptTemplate(
             input_variables=["info"],
             template="这段文字是一个人相关的文章，请萃取出该段文字中，该人与中国相关的内容，并总结归纳，有时间或者能推算出时间，请记录时间。"
-                     "返回格式json如下, 如果没有相关内容txt内容为空: \n key => txt \n文本如下: \n {info}"
+                     "返回格式json如下, 如果没有相关内容txt内容为空, 返回必须是json格式: \n key => txt \n文本如下: \n {info}"
         )
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
@@ -145,7 +145,8 @@ class infoParseAgent:
     def get(self, infos):
         relation_infos = ""
         for info in infos:
-            parse_info = self.agent.parse(info)
+            parse_info_str = self.agent.parse(info)
+            parse_info = json.loads(parse_info_str)
             print("-------------------")
             print(info)
             print(parse_info)
