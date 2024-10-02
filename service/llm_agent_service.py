@@ -202,7 +202,7 @@ class EmbeddingAgent:
         print(results)
         relation_txts = ""
         for r in results:
-            relation_txts += r.page_content
+            relation_txts += r[0].page_content
         print(relation_txts)
         return relation_txts
 
