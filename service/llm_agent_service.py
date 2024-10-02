@@ -88,7 +88,7 @@ class educationAgent:
         prompt = PromptTemplate(
             input_variables=["structure_info", "json_format"],
             temperature=0,
-            template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况, 只给出有的学历, 时间只需要到年, 返回以下格式json, 找不到的key可以为空:\n "
+            template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况, 只给出有的学历, 时间只需要到年, 返回以下格式json, 找不到的key可以为空, 没有的学历不显示:\n "
                      "{json_format}\n内容翻译成中文"
         )
         output_parser = JsonOutputParser()

@@ -107,7 +107,7 @@ def parse_more_info(parsed_profile, profile):
         path = "/root/workspace/data/Abraham_Wise/msg.txt"
     if "Carolina" in name:
         path = "/root/workspace/data/Carolina_Fabara/msg.txt"
-    if "shchow" in name:
+    if "Chow" in name:
         path = "/root/workspace/data/周胜馥/msg.txt"
 
     txts = []
