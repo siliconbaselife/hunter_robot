@@ -36,4 +36,4 @@ if __name__ == "__main__":
     path = "/root/workspace/data/Abraham_Wise/msg.txt"
     txts = read_txts_raw(path)
     agent = EmbeddingAgent(txts)
-    agent.cal("列举该人跟中国相关的时间")
+    agent.cal("列举该人跟中国相关的事件")
