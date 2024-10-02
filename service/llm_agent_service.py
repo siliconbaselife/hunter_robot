@@ -127,7 +127,7 @@ class parseChineseRelationAgent:
         self.chain = prompt | chat | output_parser
 
     def parse(self, info):
-        res = self.chain.invoke({"info": json.dumps(info)})
+        res = self.chain.invoke({"info": info})
         return res
 
 
