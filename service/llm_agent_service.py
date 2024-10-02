@@ -128,7 +128,12 @@ class parseChineseRelationAgent:
 
     def parse(self, info):
         res = self.chain.invoke({"info": info})
-        res = res.replace('json', '')
+        if "json" in res:
+            ress = res.split('\n')
+            ress = ress[1:]
+            ress = ress[:-1]
+            res = "".join(ress)
+
         return res
 
 
@@ -147,7 +152,6 @@ class infoParseAgent:
         relation_infos = ""
         for info in infos:
             parse_info_str = self.agent.parse(info)
-            print(parse_info_str)
             parse_info = json.loads(parse_info_str)
             print("-------------------")
             print(info)
