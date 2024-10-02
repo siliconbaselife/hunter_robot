@@ -70,6 +70,10 @@ def show_contact(profile_str, contact_info):
     return profile_str
 
 
+def show_chinese_relation(profile_str, chinese_relation):
+    profile_str += "中国相关:\n"
+    profile_str += chinese_relation
+
 def show_end(dir, profile):
     candidate_id = profile["candidate_id"]
 
@@ -88,12 +92,13 @@ def show_end(dir, profile):
     profile_str = show_school(profile_str, profile["学历"])
     profile_str = show_experiences(profile_str, profile["工作"])
     profile_str = show_contact(profile_str, profile["contact_info"])
+    profile_str = show_chinese_relation(profile_str, profile["chinese_relation"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
 
 
-def parse_more_info(profile):
+def parse_more_info(parsed_profile, profile):
     name = profile["name"]
     print(name)
     if "Abraham" in name:
@@ -123,7 +128,8 @@ def parse_more_info(profile):
         txt += line
 
     agent = infoParseAgent()
-    agent.get(txts)
+    res = agent.get(txts)
+    parsed_profile["chinese_relation"] = res
 
 
 if __name__ == "__main__":
@@ -134,8 +140,8 @@ if __name__ == "__main__":
         shutil.rmtree(dir)
     os.makedirs(dir)
     for profile in profiles:
-        # parsed_profile = parse_normal_info(profile)
-        parsed_profile = parse_more_info(profile)
+        parsed_profile = parse_normal_info(profile)
+        parse_more_info(parsed_profile, profile)
         print(parsed_profile)
         show_end(dir, parsed_profile)
     print("agent end")
