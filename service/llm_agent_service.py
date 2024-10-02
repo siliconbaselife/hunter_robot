@@ -14,7 +14,6 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain import PageContent
 
 from enum import Enum
 
