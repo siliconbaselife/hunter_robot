@@ -120,7 +120,7 @@ def parse_more_info(profile):
             txts.append(txt)
             txt = 0
             token_num = 0
-        txt += line
+        txt += str(line)
 
     agent = infoParseAgent()
     agent.get(txts)
