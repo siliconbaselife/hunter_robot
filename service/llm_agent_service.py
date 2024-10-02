@@ -86,16 +86,17 @@ class educationAgent:
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         prompt = PromptTemplate(
-            input_variables=["structure_info"],
+            input_variables=["structure_info", "json_format"],
             temperature=0,
-            template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况, 只给出有的学历, 时间只需要到年, 返回以下格式json:\n "
-                     "key => 学历 学校 时间, json格式是这样 学历: '', 学校: '', 时间: ''\n内容翻译成中文"
+            template="以下是一个人结构化的学历相关信息\n{structure_info}\n请解析出该人 本科、研究生、博士 学历情况, 只给出有的学历, 时间只需要到年, 返回以下格式json, 找不到的key可以为空:\n "
+                     "{json_format}\n内容翻译成中文"
         )
         output_parser = JsonOutputParser()
+        self.json_format = "[{'学历': '本科', '学校': '清华', '时间': '2009-2013'}, {'学历': '研究生', '学校': '本大', '时间': None}]"
         self.chain = prompt | chat | output_parser
 
     def get(self, educations):
-        res = self.chain.invoke({"structure_info": json.dumps(educations)})
+        res = self.chain.invoke({"structure_info": json.dumps(educations), "json_format": self.json_format})
         return res
 
 
@@ -103,15 +104,16 @@ class experienceAgent:
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         prompt = PromptTemplate(
-            input_variables=["structure_info"],
-            template="以下是一个人结构化的工作经历历相关信息\n{structure_info}\n请解析出该人工作经历相关情况, 按照时间先后顺序, 时间只需要到年, 只需要开始到结束的时间, 返回以下格式json:\n "
-                     "key => 公司 title 时间, json格式是这样 公司: '', title: '', 时间: ''\n内容翻译成中文"
+            input_variables=["structure_info", "json_format"],
+            template="以下是一个人结构化的工作经历历相关信息\n{structure_info}\n请解析出该人工作经历相关情况, 按照时间先后顺序, 时间只需要到年, 只需要开始到结束的时间, 返回以下格式json, 找不到的key可以为空:\n "
+                     "{json_format} \n内容翻译成中文"
         )
         output_parser = JsonOutputParser()
+        self.json_format = "[{'公司': '阿里巴巴', 'title': '销售总监', '时间': '2010-2011'}, {'公司': '百度', 'title': 'HR', '时间': None}]"
         self.chain = prompt | chat | output_parser
 
     def get(self, experiences):
-        res = self.chain.invoke({"structure_info": json.dumps(experiences)})
+        res = self.chain.invoke({"structure_info": json.dumps(experiences), "json_format": self.json_format})
         return res
 
 
