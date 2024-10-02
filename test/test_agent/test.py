@@ -92,8 +92,10 @@ def show_end(dir, profile):
     with open(profile_path, 'w') as f:
         f.write(profile_str)
 
+
 def parse_more_info(profile):
     name = profile["name"]
+    print(name)
     if "abraham" in name:
         path = "/root/workspace/data/Abraham_Wise/msg.txt"
     if "carolina" in name:
@@ -122,13 +124,6 @@ def parse_more_info(profile):
 
     agent = infoParseAgent()
     agent.get(txts)
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
