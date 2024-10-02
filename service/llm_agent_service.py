@@ -161,7 +161,8 @@ class infoParseAgent:
                 for txt in  parse_info['txt']:
                     relation_infos += txt + "\n"
 
-        self.chain.invoke({"txt": relation_infos})
+        res = self.chain.invoke({"txt": relation_infos})
+        return res
 
 
 if __name__ == "__main__":

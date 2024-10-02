@@ -74,6 +74,7 @@ def show_chinese_relation(profile_str, chinese_relation):
     profile_str += "中国相关:\n"
     profile_str += chinese_relation
 
+
 def show_end(dir, profile):
     candidate_id = profile["candidate_id"]
 
@@ -130,6 +131,7 @@ def parse_more_info(parsed_profile, profile):
     agent = infoParseAgent()
     res = agent.get(txts)
     parsed_profile["chinese_relation"] = res
+    return parsed_profile
 
 
 if __name__ == "__main__":
@@ -141,7 +143,7 @@ if __name__ == "__main__":
     os.makedirs(dir)
     for profile in profiles:
         parsed_profile = parse_normal_info(profile)
-        parse_more_info(parsed_profile, profile)
+        parsed_profile = parse_more_info(parsed_profile, profile)
         print(parsed_profile)
         show_end(dir, parsed_profile)
     print("agent end")
