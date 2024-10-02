@@ -7,13 +7,8 @@ from utils.log import get_logger
 from utils.config import config
 
 from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
-from langchain.chains import LLMChain
-from langchain.chains import RetrievalQA
-from langchain.document_loaders import UnstructuredMarkdownLoader
-from langchain.text_splitter import MarkdownTextSplitter
-from langchain.vectorstores import Chroma
+
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 
