@@ -92,6 +92,34 @@ def show_end(dir, profile):
     with open(profile_path, 'w') as f:
         f.write(profile_str)
 
+def parse_more_info(profile):
+    name = profile["name"]
+    if "abraham" in name:
+        path = "/root/workspace/data/Abraham_Wise/msg.txt"
+    if "carolina" in name:
+        path = "/root/workspace/data/Carolina_Fabara/msg.txt"
+    if "shchow" in name:
+        path = "/root/workspace/data/周胜馥/msg.txt"
+
+    txts = []
+    with open(path, 'r') as f:
+        lines = f.readlines()
+
+    txt = ""
+    for line in lines:
+        if len(line) == 0:
+            if len(txt) > 0:
+                txts.append(txt)
+            txt = ""
+        txt += line
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     print("begin agent")
@@ -101,7 +129,8 @@ if __name__ == "__main__":
         shutil.rmtree(dir)
     os.makedirs(dir)
     for profile in profiles:
-        parsed_profile = parse_normal_info(profile)
+        # parsed_profile = parse_normal_info(profile)
+        parsed_profile = parse_more_info(profile)
         print(parsed_profile)
         show_end(dir, parsed_profile)
     print("agent end")

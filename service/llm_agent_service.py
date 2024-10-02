@@ -84,7 +84,7 @@ class BenchMarkCompanyAgent:
 
 class educationAgent:
     def __init__(self):
-        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         prompt = PromptTemplate(
             input_variables=["structure_info"],
             temperature=0,
@@ -101,10 +101,9 @@ class educationAgent:
 
 class experienceAgent:
     def __init__(self):
-        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         prompt = PromptTemplate(
             input_variables=["structure_info"],
-            temperature=0,
             template="以下是一个人结构化的工作经历历相关信息\n{structure_info}\n请解析出该人工作经历相关情况, 按照时间先后顺序, 时间只需要到年, 只需要开始到结束的时间, 返回以下格式json:\n "
                      "key 公司 title 时间\n内容翻译成中文"
         )
@@ -114,6 +113,48 @@ class experienceAgent:
     def get(self, experiences):
         res = self.chain.invoke({"structure_info": json.dumps(experiences)})
         return res
+
+
+class parseChineseRelationAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["info"],
+            template="这段文字是一个人相关的文章，请萃取出该段文字中，该人与中国相关的内容，并总结归纳，有时间或者能推算出时间，请记录时间。"
+                     "返回格式json如下, 如果没有相关内容txt内容为空: \n {'txt': ''} \n文本如下: \n {info}"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def parse(self, info):
+        res = self.chain.invoke({"info": json.dumps(info)})
+        return res
+
+
+class infoParseAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["txt"],
+            template="这段文字是一个人与中国相关的文章信息，请整理内容，去除掉重复的信息，按照时间线顺序排序内容。\n文本如下: {txt}"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+        self.agent = parseChineseRelationAgent()
+
+    def get(self, infos):
+        relation_infos = ""
+        for info in infos:
+            parse_info = self.agent.parse(info)
+            print("-------------------")
+            print(info)
+            print(parse_info)
+            print("-------------------")
+            if 'txt' in parse_info and parse_info['txt'] is not None and len(parse_info['txt']) > 0:
+                relation_infos += parse_info['txt'] + "\n"
+
+        self.chain.invoke({"txt": relation_infos})
+
 
 
 if __name__ == "__main__":
