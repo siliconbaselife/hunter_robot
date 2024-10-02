@@ -105,7 +105,7 @@ def parse_more_info(parsed_profile, profile):
     print(name)
     if "Abraham" in name:
         path = "/root/workspace/data/Abraham_Wise/msg.txt"
-    if "carolina" in name:
+    if "Carolina" in name:
         path = "/root/workspace/data/Carolina_Fabara/msg.txt"
     if "shchow" in name:
         path = "/root/workspace/data/周胜馥/msg.txt"
@@ -144,7 +144,7 @@ if __name__ == "__main__":
     os.makedirs(dir)
     for profile in profiles:
         parsed_profile = parse_normal_info(profile)
-        parsed_profile = parse_more_info(parsed_profile, profile)
+        # parsed_profile = parse_more_info(parsed_profile, profile)
         print(parsed_profile)
         show_end(dir, parsed_profile)
     print("agent end")
