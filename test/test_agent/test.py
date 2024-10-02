@@ -94,7 +94,7 @@ def show_end(dir, profile):
     profile_str = show_school(profile_str, profile["学历"])
     profile_str = show_experiences(profile_str, profile["工作"])
     profile_str = show_contact(profile_str, profile["contact_info"])
-    profile_str = show_chinese_relation(profile_str, profile["chinese_relation"])
+    # profile_str = show_chinese_relation(profile_str, profile["chinese_relation"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
