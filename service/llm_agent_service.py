@@ -10,6 +10,13 @@ from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 from langchain.chains import LLMChain
+from langchain.chains import RetrievalQA
+from langchain.document_loaders import UnstructuredMarkdownLoader
+from langchain.text_splitter import MarkdownTextSplitter
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chat_models import ChatOpenAI
+
 from enum import Enum
 
 logger = get_logger(config['log']['business_log_file'])
@@ -172,6 +179,17 @@ class infoParseAgent:
         "\n".join(ress)
 
         return res
+
+
+class EmbeddingAgent:
+    def __init__(self, texts):
+        self.llm = ChatOpenAI(model='gpt-4o-mini', temperature=0)
+        embeddings = OpenAIEmbeddings()
+        self.db = Chroma.from_documents(documents=texts, embedding=embeddings)
+
+    def cal(self, query):
+        docs = self.db.similarity_search(query)
+        print(docs)
 
 
 if __name__ == "__main__":

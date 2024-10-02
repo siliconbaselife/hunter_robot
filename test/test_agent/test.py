@@ -128,8 +128,8 @@ def parse_more_info(parsed_profile, profile):
         if token_num > 2000:
             txts.append(txt)
             txt = ""
-            token_num = 0
         txt += line
+        token_num = len(txt)
 
     agent = infoParseAgent()
     res = agent.get(txts)
