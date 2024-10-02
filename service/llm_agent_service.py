@@ -146,6 +146,7 @@ class infoParseAgent:
         relation_infos = ""
         for info in infos:
             parse_info_str = self.agent.parse(info)
+            print(parse_info_str)
             parse_info = json.loads(parse_info_str)
             print("-------------------")
             print(info)
