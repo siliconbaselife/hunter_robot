@@ -28,7 +28,12 @@ def read_txts_raw(path):
     with open(path, "r") as f:
         lines = f.read()
 
-    txt_str = "".join(lines)
+    txt_str = ""
+    for line in lines:
+        if len(line) == 0 or line == '\n':
+            continue
+        txt_str += line
+
     return txt_str
 
 
