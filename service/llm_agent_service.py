@@ -158,7 +158,8 @@ class infoParseAgent:
             print(parse_info)
             print("-------------------")
             if 'txt' in parse_info and parse_info['txt'] is not None and len(parse_info['txt']) > 0:
-                relation_infos += parse_info['txt'] + "\n"
+                for txt in  parse_info['txt']:
+                    relation_infos += txt + "\n"
 
         self.chain.invoke({"txt": relation_infos})
 
