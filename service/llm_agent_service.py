@@ -182,7 +182,7 @@ class infoParseAgent:
 class EmbeddingAgent:
     def __init__(self, texts):
         print(texts)
-        text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=200, chunk_overlap=0)
+        text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
         texts = text_splitter.create_documents(texts)
         print(f"texts len: {texts}")
 
