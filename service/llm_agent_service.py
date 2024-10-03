@@ -63,8 +63,9 @@ class ChatAgent(object):
         return history_str
 
     def chat(self, relation_info, history, msg):
+        history_str = self.transfer_msgs(history)
         res = self.chain.invoke(
-            {"relation_info": relation_info, "history_str": self.transfer_msgs(history), "question": msg})
+            {"relation_info": relation_info, "history_str": history_str, "question": msg})
         return res
 
 
