@@ -224,7 +224,14 @@ class summarizeAgent:
 
     def get(self, content, query):
         res = self.chain.invoke({"content": content, "query": query})
-        return res
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if line == '\n':
+                continue
+            rres += line
+
+        return rres
 
 
 class EmbeddingAgent:

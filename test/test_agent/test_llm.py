@@ -33,7 +33,6 @@ if __name__ == "__main__":
     content = ""
     for txt in txts:
         event_list = extract_agent.parse(txt, query)
-        print(event_list)
         for event in event_list:
             if len(event["txt"]) == 0:
                 continue
