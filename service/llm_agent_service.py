@@ -189,18 +189,18 @@ class extractionRelationAgent:
                      "返回格式json如下, 如果没有相关内容txt内容为空, 返回必须是json格式, 翻译成中文, json格式如下, 一定要按照我给的这个格式返回: \n{json_format} \n"
                      "文本如下: \n{info} \n 问题如下: \n{query}"
         )
-        output_parser = StrOutputParser()
+        output_parser = JsonOutputParser()
         self.join_format = "[{'txt': 'hahaha'}, {'txt': 'lalala'}]"
         self.chain = prompt | chat | output_parser
 
     def parse(self, info, query):
         res = self.chain.invoke({"info": info, "json_format": self.join_format, "query": query})
-        print(res)
-        if "json" in res:
-            ress = res.split('\n')
-            ress = ress[1:]
-            ress = ress[:-1]
-            res = "".join(ress)
+        # print(res)
+        # if "json" in res:
+        #     ress = res.split('\n')
+        #     ress = ress[1:]
+        #     ress = ress[:-1]
+        #     res = "".join(ress)
 
         return json.loads(res)
 
