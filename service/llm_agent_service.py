@@ -202,7 +202,7 @@ class extractionRelationAgent:
         #     ress = ress[:-1]
         #     res = "".join(ress)
 
-        lines = res.split('/n')
+        lines = res.split('\n')
         rres = ""
         for line in lines:
             if "```" in line:
