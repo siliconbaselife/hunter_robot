@@ -208,7 +208,7 @@ class extractionRelationAgent:
             if "```" in line:
                 continue
             rres += line
-
+        print(rres)
         return json.loads(rres)
 
 
