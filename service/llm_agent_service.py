@@ -195,7 +195,6 @@ class extractionRelationAgent:
 
     def parse(self, info, query):
         res = self.chain.invoke({"info": info, "json_format": self.join_format, "query": query})
-        print("before=> \n" + res)
         # if "json" in res:
         #     ress = res.split('\n')
         #     ress = ress[1:]
@@ -208,7 +207,6 @@ class extractionRelationAgent:
             if "```" in line:
                 continue
             rres += line
-        print("after=> \n " + rres)
         return json.loads(rres)
 
 
