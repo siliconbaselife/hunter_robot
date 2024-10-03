@@ -185,7 +185,7 @@ class extractionRelationAgent:
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         prompt = PromptTemplate(
             input_variables=["info", "json_format", "query"],
-            template="这段文字是一个人相关的文章，请萃取出该段文字中，与问题相关的信息，并总结归纳，有时间或者能推算出时间。"
+            template="这段文字是一个人相关的文章，请萃取出该段文字中，与问题相关的信息，并总结归纳成一个json列表，有时间或者能推算出时间。"
                      "返回格式json如下, 如果没有相关内容txt内容为空, 返回必须是json格式, 翻译成中文, json格式如下, 一定要按照我给的这个格式返回: \n{json_format} \n"
                      "文本如下: \n{info} \n 问题如下: \n{query}"
         )
@@ -195,14 +195,13 @@ class extractionRelationAgent:
 
     def parse(self, info, query):
         res = self.chain.invoke({"info": info, "json_format": self.join_format, "query": query})
-        print(res)
         if "json" in res:
             ress = res.split('\n')
             ress = ress[1:]
             ress = ress[:-1]
             res = "".join(ress)
 
-        return res
+        return json.loads(res)
 
 
 class summarizeAgent:
