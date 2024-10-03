@@ -201,7 +201,7 @@ class extractionRelationAgent:
         #     ress = ress[1:]
         #     ress = ress[:-1]
         #     res = "".join(ress)
-
+        print(res)
         return json.loads(res)
 
 
