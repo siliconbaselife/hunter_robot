@@ -182,7 +182,7 @@ class infoParseAgent:
 
 class extractionRelationAgent:
     def __init__(self):
-        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        chat = ChatOpenAI(model="gpt-4o", temperature=0)
         prompt = PromptTemplate(
             input_variables=["info", "json_format", "query"],
             template="这段文字是一个人相关的文章，请萃取出该段文字中，与问题相关的信息，并总结归纳成一个json列表，有时间或者能推算出时间。"
