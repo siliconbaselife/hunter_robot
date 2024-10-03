@@ -195,6 +195,7 @@ class extractionRelationAgent:
 
     def parse(self, info, query):
         res = self.chain.invoke({"info": info, "json_format": self.join_format, "query": query})
+        print(res)
         if "json" in res:
             ress = res.split('\n')
             ress = ress[1:]
