@@ -180,6 +180,45 @@ class infoParseAgent:
         return res
 
 
+class extractionRelationAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["info", "json_format", "query"],
+            template="这段文字是一个人相关的文章，请萃取出该段文字中，与问题相关的信息，并总结归纳，有时间或者能推算出时间，请记录时间。"
+                     "返回格式json如下, 如果没有相关内容txt内容为空, 返回必须是json格式, 翻译成中文, json格式如下: \n {json_format} \n"
+                     "文本如下: \n {info} \n 问题如下: {query}"
+        )
+        output_parser = StrOutputParser()
+        self.join_format = "[{'txt': 'hahaha'}, {'txt': 'lalala'}]"
+        self.chain = prompt | chat | output_parser
+
+    def parse(self, info, query):
+        res = self.chain.invoke({"info": info, "json_format": self.join_format, "query": query})
+        if "json" in res:
+            ress = res.split('\n')
+            ress = ress[1:]
+            ress = ress[:-1]
+            res = "".join(ress)
+
+        return res
+
+
+class summarizeAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["content", "query"],
+            template="请按照问题解析文本内容，解析结果按照事件顺序排列，去掉重复内容，或者是与问题不相关的内容。\n 文本内通如下: {content} \n 问题如下: \n{query}"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def get(self, content, query):
+        res = self.chain.invoke({"content": content, "query": query})
+        return res
+
+
 class EmbeddingAgent:
     def __init__(self, texts):
         # text_splitter = RecursiveCharacterTextSplitter(separators=["\n"], chunk_size=1, chunk_overlap=0)
