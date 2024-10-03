@@ -52,7 +52,8 @@ class ChatAgent(object):
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
 
-    def transfer_msgs(self, history_msgs):
+    @staticmethod
+    def transfer_msgs(history_msgs):
         history_str = ""
         for msg in history_msgs:
             if msg["role"] == "robot":
