@@ -225,9 +225,9 @@ class summarizeAgent:
         lines = res.split('\n')
         rres = ""
         for line in lines:
-            if line == '\n':
+            if line == '':
                 continue
-            rres += line
+            rres += line + "\n"
 
         return rres
 
