@@ -190,7 +190,7 @@ class extractionRelationAgent:
                      "文本如下: \n{info} \n 问题如下: \n{query}"
         )
         output_parser = StrOutputParser()
-        self.join_format = "[{'txt': 'hahaha'}, {'txt': 'lalala'}]"
+        self.join_format = '[{"txt": "hahaha"}, {"txt": "lalala"}]'
         self.chain = prompt | chat | output_parser
 
     def parse(self, info, query):
