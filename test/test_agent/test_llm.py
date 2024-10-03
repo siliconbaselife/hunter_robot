@@ -35,6 +35,8 @@ if __name__ == "__main__":
         event_list = extract_agent.parse(txt, query)
         print(event_list)
         for event in event_list:
+            if len(event["txt"]) == 0:
+                continue
             content += event["txt"] + "\n"
 
     summerize_agent = summarizeAgent()
