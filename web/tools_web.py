@@ -1150,10 +1150,10 @@ def data_to_excel_file(file_path, titles, data):
 def download_profile_by_tag_web():
     platform = request.json.get('platform', '')
     tags = request.json.get('tags', [])
-    page = request.json.get('page', 1)
+    page = request.json.get('page', 0)
     limit = request.json.get('limit', 9999)
     if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin') or len(
-            tags) == 0 or page <= 0 or limit <= 0:
+            tags) == 0 or page < 0 or limit <= 0:
         return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
     cookie_user_name = request.json.get('user_name', None)
     if cookie_user_name == None:
