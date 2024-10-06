@@ -103,8 +103,8 @@ def show_end(dir, profile):
     if "chinese_relation" in profile:
         profile_str = show_chinese_relation(profile_str, profile["chinese_relation"])
 
-    if "academic_relation" in profile:
-        profile_str = show_academic_relation(profile_str, profile["academic_relation"])
+    # if "academic_relation" in profile:
+    #     profile_str = show_academic_relation(profile_str, profile["academic_relation"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
