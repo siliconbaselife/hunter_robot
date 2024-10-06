@@ -148,6 +148,29 @@ class parseChineseRelationAgent:
         return res
 
 
+class parseAcademicRelationAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["info", "json_format"],
+            template="这段文字是一个人相关的文章，请萃取出该段文字中，该人与学术相关的内容，并总结归纳，有时间或者能推算出时间，请记录时间。"
+                     "返回格式json如下, 如果没有相关内容txt内容为空, 返回必须是json格式, 翻译成中文, json格式如下: \n {json_format} \n文本如下: \n {info}"
+        )
+        output_parser = StrOutputParser()
+        self.join_format = "[{'txt': 'hahaha'}, {'txt': 'lalala'}]"
+        self.chain = prompt | chat | output_parser
+
+    def parse(self, info):
+        res = self.chain.invoke({"info": info, "json_format": self.join_format})
+        if "json" in res:
+            ress = res.split('\n')
+            ress = ress[1:]
+            ress = ress[:-1]
+            res = "".join(ress)
+
+        return res
+
+
 class infoParseAgent:
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
@@ -158,6 +181,40 @@ class infoParseAgent:
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
         self.agent = parseChineseRelationAgent()
+
+    def get(self, infos):
+        relation_infos = ""
+        for info in infos:
+            parse_info_str = self.agent.parse(info)
+            parse_info = json.loads(parse_info_str)
+            print("-------------------")
+            print(info)
+            print(parse_info)
+            print("-------------------")
+            # if 'txt' in parse_info and parse_info['txt'] is not None and len(parse_info['txt']) > 0:
+            #     for txt in parse_info['txt']:
+            #         relation_infos += txt + "\n"
+            for info in parse_info:
+                relation_infos += info["txt"] + "\n"
+
+        res = self.chain.invoke({"txt": relation_infos})
+        ress = res.split('\n')
+        ress = ress[1:]
+        "\n".join(ress)
+
+        return res
+
+
+class academicInfoParseAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["txt"],
+            template="这段文字是一个人与学术相关的文章信息，请整理内容，去除掉重复的信息，尽量按照时间线顺序排序内容。\n文本如下: \n{txt}"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+        self.agent = parseAcademicRelationAgent()
 
     def get(self, infos):
         relation_infos = ""

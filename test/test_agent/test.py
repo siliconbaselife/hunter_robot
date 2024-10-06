@@ -76,6 +76,12 @@ def show_chinese_relation(profile_str, chinese_relation):
     return profile_str
 
 
+def show_academic_relation(profile_str, academic_relation):
+    profile_str += "学术相关:\n"
+    profile_str += academic_relation
+    return academic_relation
+
+
 def show_end(dir, profile):
     candidate_id = profile["candidate_id"]
 
@@ -96,6 +102,9 @@ def show_end(dir, profile):
     profile_str = show_contact(profile_str, profile["contact_info"])
     if "chinese_relation" in profile:
         profile_str = show_chinese_relation(profile_str, profile["chinese_relation"])
+
+    if "academic_relation" in profile:
+        profile_str = show_academic_relation(profile_str, profile["academic_relation"])
 
     with open(profile_path, 'w') as f:
         f.write(profile_str)
@@ -134,6 +143,11 @@ def parse_more_info(parsed_profile, profile):
     agent = infoParseAgent()
     res = agent.get(txts)
     parsed_profile["chinese_relation"] = res
+
+    academic_agent = academicInfoParseAgent()
+    res = academic_agent.get(txts)
+    parsed_profile["academic_relation"] = res
+
     return parsed_profile
 
 
