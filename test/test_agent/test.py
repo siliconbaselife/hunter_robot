@@ -81,7 +81,7 @@ def show_academic_relation(profile_str, academic_relation):
     profile_str += "学术相关:\n"
     profile_str += academic_relation
     profile_str += '\n'
-    return academic_relation
+    return profile_str
 
 
 def show_end(dir, profile):
