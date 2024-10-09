@@ -1584,6 +1584,14 @@ def query_profile_tag_by_user_new(manage_account_id, platform):
     return tags, None
 
 
+def query_profile_tag_by_user_new_v2(manage_account_id, platform):
+    rows = query_profile_id_tag(manage_account_id, platform)
+    tags = []
+    for row in rows:
+        tags.append({"tag": row[0], "tag_str": row[1]})
+    return tags, None
+
+
 def query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidate_id, platform):
     id_tags = query_profile_tag_relation_by_user_and_candidate_db(manage_account_id, candidate_id, platform)
     tags = []

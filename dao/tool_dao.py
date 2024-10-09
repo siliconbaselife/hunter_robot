@@ -225,6 +225,12 @@ def query_profile_id_tag(manage_account_id, platform):
     return dbm.query(sql_dict['query_profile_id_tag'].format(manage_account_id, platform))
 
 
+def query_profile_id_tag_v2(manage_account_id, platform):
+    sql = f"select id, tag, tag_str from user_profile_tag where manage_account_id = '{manage_account_id}' and platform = '{platform}' and visible = 1 order by update_time desc;"
+    rows = dbm.query(sql)
+    return rows
+
+
 def query_profile_tag_relation_by_user_and_candidate_db(manage_account_id, candidate_id, platform):
     return dbm.query(
         sql_dict['query_profile_tag_relation_by_user_and_candidate_db'].format(manage_account_id, candidate_id,
@@ -261,10 +267,10 @@ def delete_user_tag(manage_account_id, platform, tag):
 
 
 def update_user_tag_name(manage_account_id, platform, tag, tag_rename):
-    sql = f"update user_profile_tag set tag = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
+    sql = f"update user_profile_tag set tag_str = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
     dbm.update(sql)
-    sql = f"update user_profile_tag_relation set tag = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
-    dbm.update(sql)
+    # sql = f"update user_profile_tag_relation set tag = '{tag_rename}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}'"
+    # dbm.update(sql)
 
 
 def create_customized_scenario_setting(manage_account_id, platform, context, scenario_info, extra_info=''):

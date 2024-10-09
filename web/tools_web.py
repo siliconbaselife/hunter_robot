@@ -941,6 +941,30 @@ def get_tags_by_user_web():
     return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tools/getTagsByUser/v2", methods=['POST'])
+@web_exception_handler
+def get_tags_by_user_web_v2():
+    platform = request.json.get('platform', '')
+    if platform == '' or platform not in ('maimai', 'Boss', 'Linkedin', 'liepin'):
+        return Response(json.dumps(get_web_res_fail("参数错误"), ensure_ascii=False))
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    logger.info(
+        "[backend_tools] get profile tag for manage_account_id = {}, platform = {}".format(manage_account_id, platform))
+
+    res, error_msg = query_profile_tag_by_user_new_v2(manage_account_id, platform)
+    if error_msg:
+        return Response(json.dumps(get_web_res_fail(error_msg), ensure_ascii=False))
+    logger.info("[backend_tools] get profile tag for manage_account_id = {}, platform = {} -> res = {}".format(
+        manage_account_id, platform, res))
+    return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
+
+
 @tools_web.route("/backend/tools/getTagsByUserAndCandidate", methods=['POST'])
 @web_exception_handler
 def get_tags_by_user_and_candidate_web():
