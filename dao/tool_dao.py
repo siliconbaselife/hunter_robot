@@ -28,7 +28,7 @@ sql_dict = {
     "get_resume_list_db": "select list_name from resume_list where manage_account_id='{}' and platform='{}'",
     "add_list_relation": "insert into resume_list_relation(manage_account_id, list_name, candidate_id) values ('{}', '{}', '{}')",
     "save_config": "INSERT INTO plugin_chat_config (manage_account_id, platform, config_json) VALUES ('{}', '{}', '{}') ON DUPLICATE KEY UPDATE config_json = VALUES(config_json);",
-    "create_profile_tag": "insert into user_profile_tag (manage_account_id, platform, tag, tag_str) VALUES ('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), tag = VALUES(tag);",
+    "create_profile_tag": "insert into user_profile_tag (manage_account_id, platform, tag, tag_str) VALUES ('{}', '{}', '{}', '{}') ON DUPLICATE KEY UPDATE manage_account_id = VALUES(manage_account_id), platform = VALUES(platform), tag = VALUES(tag), visible;",
     "query_profile_id_tag": "select id, tag from user_profile_tag where manage_account_id = '{}' and platform = '{}' and visible = 1 order by update_time desc;",
     "delete_profile_tags": "delete from user_profile_tag where id in {};",
     "query_profile_tag_relation_by_user_and_candidate_db": "select tag_id, tag from user_profile_tag_relation where manage_account_id = '{}' and candidate_id = '{}' and platform = '{}';",
