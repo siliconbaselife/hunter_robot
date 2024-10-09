@@ -1835,7 +1835,7 @@ def fetch_contact_infos(manage_account_id, candidate_ids):
 def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age,
                              max_age, race, limit,
                              contact2str):
-    update_tag_update_time(manage_account_id, tag)
+    # update_tag_update_time(manage_account_id, tag)
     total_count = query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status)
     start = (page - 1) * limit
 
