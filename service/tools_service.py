@@ -1585,7 +1585,7 @@ def query_profile_tag_by_user_new(manage_account_id, platform):
 
 
 def query_profile_tag_by_user_new_v2(manage_account_id, platform):
-    rows = query_profile_id_tag(manage_account_id, platform)
+    rows = query_profile_id_tag_v2(manage_account_id, platform)
     tags = []
     for row in rows:
         tags.append({"tag": row[0], "tag_str": row[1]})
