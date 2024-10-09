@@ -1563,6 +1563,9 @@ def create_profile_tag(manage_account_id, platform, tag):
     except BaseException as e:
         logger.error("[tool_service] create profile tag failed for {}, {}, {}".format(manage_account_id, platform, tag))
         return None, "创建profile tag失败"
+    if tag_id == 0:
+        return None, "不允许重复的tag名称，请换一个名称"
+
     user_id_tag_cache[tag_id] = tag
     user_tag_id_cache[tag] = tag_id
 
