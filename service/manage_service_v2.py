@@ -41,7 +41,9 @@ def my_account_list_service_v2(manage_account_id):
         for job_id in jobs:
             job_db = get_job_by_id(job_id)[0]
             job_config = json.loads(job_db[6])['dynamic_job_config']
-            llm_config = json.loads(get_llm_config_by_id_db(job_db[12]))
+            r = get_llm_config_by_id_db(job_db[12])
+            logger.info(f"get_llm_config_by_id_db r => {r}")
+            llm_config = json.loads(r, strict=False)
             jobs_ret[job_db[0]] = job_config
             llm_ret[job_db[0]] = llm_config
 
