@@ -127,3 +127,21 @@ def agent_history_chat():
     r_msg_info, session_id = agent_chat_service(user_id, session_id, msg)
     return Response(
         json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": r_msg_info}), ensure_ascii=False))
+
+
+@business_web.route("/backend/agent/functions", methods=['POST'])
+@web_exception_handler
+def agent_functions():
+    functions = agent_functions_get_service()
+    return Response(json.dumps(get_web_res_suc_with_data(functions), ensure_ascii=False))
+
+
+@business_web.route("/backend/agent/chat_stream")
+@web_exception_handler
+def chat_stream():
+    def generate_results():
+        for number in range(1, 10):
+            time.sleep(1)
+            yield float(number) / 10
+
+    return Response(generate_results)

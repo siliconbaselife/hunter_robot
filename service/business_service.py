@@ -337,6 +337,11 @@ def agent_history_get_service(user_id, session_id):
         return json.loads(history_raw, strict=False)
 
 
+def agent_functions_get_service():
+    functions = query_agent_functions()
+    return functions
+
+
 if __name__ == "__main__":
     msg = agent_chat_service('test', 'test', 'hi')
     print(f"return msg: {msg}")

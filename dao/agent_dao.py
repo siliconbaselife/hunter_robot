@@ -77,3 +77,12 @@ def add_history_msgs(user_id, session_id, history_msgs_str):
     history_msgs_str = history_msgs_str.replace('\n', '\\n')
     sql = f"insert into chat_history_bank(manage_account_id, session_id, history) values('{user_id}', '{session_id}', '{history_msgs_str}')"
     dbm.insert(sql)
+
+
+def query_agent_functions():
+    sql = f"select agent_function from agent_function"
+    rows = dbm.query(sql)
+    functions = []
+    for row in rows:
+        functions.append(json.loads(row[0]))
+    return functions
