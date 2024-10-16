@@ -143,5 +143,6 @@ def chat_stream():
         for number in range(1, 10):
             time.sleep(1)
             yield float(number) / 10
+        yield "结束了!!!"
 
     return Response(generate_results)
