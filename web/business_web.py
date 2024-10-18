@@ -140,12 +140,15 @@ def agent_functions():
 @web_exception_handler
 def chat_stream():
     def event_stream():
+        session_id = '123456'
         content = ''
         count = 0
         while count < 10:
-            yield f"data: Message {str(count)}\n\n"
+            resData = {"session_id": session_id, "r_msg": str(count)}
+            yield f"data: {json.dumps(get_web_res_suc_with_data(resData))}\n\n"
             content += str(count)
             count += 1
             time.sleep(1)
-        yield f"event: end\ndata: {content}\n\n"
+        finalResData = {"session_id": session_id, "r_msg": content}
+        yield f"event: end\ndata: {json.dumps(get_web_res_suc_with_data(finalResData))}\n\n"
     return Response(event_stream(), mimetype='text/event-stream')
