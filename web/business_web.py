@@ -136,7 +136,7 @@ def agent_functions():
     return Response(json.dumps(get_web_res_suc_with_data(functions), ensure_ascii=False))
 
 
-@business_web.route("/backend/agent/chat_stream", methods=['POST'])
+@business_web.route("/backend/agent/chat_stream", methods=['GET'])
 @web_exception_handler
 def chat_stream():
     def event_stream():
