@@ -136,13 +136,16 @@ def agent_functions():
     return Response(json.dumps(get_web_res_suc_with_data(functions), ensure_ascii=False))
 
 
-@business_web.route("/backend/agent/chat_stream")
+@business_web.route("/backend/agent/chat_stream", methods=['POST'])
 @web_exception_handler
 def chat_stream():
-    def generate_results():
-        for number in range(1, 10):
+    def event_stream():
+        content = ''
+        count = 0
+        while count < 10:
+            yield f"data: Message {str(count)}\n\n"
+            content += str(count)
+            count += 1
             time.sleep(1)
-            yield float(number) / 10
-        yield "结束了!!!"
-
-    return Response(generate_results)
+        yield f"event: end\ndata: {content}\n\n"
+    return Response(event_stream(), mimetype='text/event-stream')
