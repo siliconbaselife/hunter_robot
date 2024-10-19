@@ -365,7 +365,7 @@ logging.getLogger("langchain.retrievers.web_search").setLevel(logging.INFO)
 
 
 def google_search(n, query):
-    search = GoogleSearchAPIWrapper(k=n, allow_dangerous_requests=True)
+    search = GoogleSearchAPIWrapper(k=n)
 
     search_prompt = PromptTemplate(
         input_variables=["question"],
