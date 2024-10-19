@@ -21,7 +21,7 @@ from langchain_core.tools import Tool
 from langchain_google_community import GoogleSearchAPIWrapper
 
 from langchain.chains import LLMChain
-from langchain.retrievers.web_research import WebResearchRetriever
+from langchain.retrievers import WebResearchRetriever
 
 from enum import Enum
 
