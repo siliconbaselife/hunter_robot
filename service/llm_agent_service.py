@@ -384,7 +384,7 @@ def google_search(n, query):
     #     func=search.run,
     # )
 
-    web_research_retriever = WebResearchRetriever.from_llm(vectorstore=vectorstore, llm=llm_chain, search=search)
+    web_research_retriever = WebResearchRetriever(vectorstore=vectorstore, llm=llm_chain, search=search)
     docs = web_research_retriever.get_relavant_documents(query)
 
     return docs
