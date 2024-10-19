@@ -8,7 +8,8 @@ from utils.config import config
 
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
-from langchain.retrievers.web_research import QuestionListOutputParser
+# from langchain.retrievers.web_research import QuestionListOutputParser
+from langchain_core.output_parsers.list import ListOutputParser
 
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
@@ -347,7 +348,7 @@ def google_search(n, query):
                  " a question mark at the end: {question}"
     )
     llm = ChatOpenAI(temperature=0)
-    llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=QuestionListOutputParser())
+    llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=ListOutputParser())
     vectorstore = Chroma(embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai")
     # tool = Tool(
     #     name="google_search",
