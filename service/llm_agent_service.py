@@ -21,7 +21,7 @@ from langchain_core.tools import Tool
 from langchain_google_community import GoogleSearchAPIWrapper
 
 from langchain.chains import LLMChain
-from langchain.retrievers.web_research import WebResearchRetrieve
+from langchain.retrievers.web_research import WebResearchRetriever
 
 from enum import Enum
 
@@ -355,7 +355,7 @@ def google_search(n, query):
     #     func=search.run,
     # )
 
-    web_research_retriever = WebResearchRetrieve.from_llm(vectorstore=vectorstore, llm=llm, search=search)
+    web_research_retriever = WebResearchRetriever.from_llm(vectorstore=vectorstore, llm=llm, search=search)
     docs = web_research_retriever.get_relavant_documents(query)
 
     return docs
