@@ -364,7 +364,8 @@ def google_search(n, query):
                  "that are similar to this question. The output should be a numbered list of questions and each should have"
                  " a question mark at the end: {question}"
     )
-    llm = ChatOpenAI(temperature=0)
+    # llm = ChatOpenAI(temperature=0)
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     # llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=QuestionListOutputParser())
     llm_chain = search_prompt | llm | QuestionListOutputParser
     vectorstore = Chroma(embedding_function=OpenAIEmbeddings())
