@@ -29,7 +29,7 @@ from langchain_core.tools import Tool
 from langchain_google_community import GoogleSearchAPIWrapper
 
 # from langchain.chains import LLMChain
-from langchain_community.retrievers import WebResearchRetriever
+from langchain.retrievers import WebResearchRetriever
 
 from enum import Enum
 
@@ -385,7 +385,6 @@ def google_search(n, query):
     # )
     wb = WebResearchRetriever(allow_dangerous_requests=True)
     web_research_retriever = wb.from_llm(vectorstore=vectorstore, llm=llm, search=search)
-    web_research_retriever.allow_dangerous_requests = True
     docs = web_research_retriever.get_relavant_documents(query)
 
     return docs
