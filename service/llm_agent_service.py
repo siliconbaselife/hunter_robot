@@ -1,14 +1,18 @@
 import json
 import os
+import re
 
 from cryptography.fernet import Fernet
 
 from utils.log import get_logger
 from utils.config import config
 
+from typing import List
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
-from langchain.retrievers.web_research import QuestionListOutputParser
+# from langchain.retrievers.web_research import QuestionListOutputParser
+from langchain.output_parses.pydantic import PydanticOutputParser
+from Pydantic import BaseModel, Field
 
 # from langchain.vectorstores import Chroma
 from langchain_community.vectorstores import Chroma
@@ -336,6 +340,19 @@ class parseAgent:
     def cal(self, query, txt):
         res = self.chain.invoke({"query": query, "txt": txt})
         return res
+
+
+class LineList(BaseModel):
+    lines: List[str] = Field(description="Question")
+
+
+class QuestionListOutputParser(PydanticOutputParser):
+    def __init__(self) -> None:
+        super().__init__(pydantic_object=LineList)
+
+    def parse(self, text) -> LineList:
+        lines = re.findall(r"\d+\..*?\n", text)
+        return LineList(lines=lines)
 
 
 def google_search(n, query):
