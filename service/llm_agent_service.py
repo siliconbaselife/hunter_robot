@@ -17,7 +17,7 @@ from pydantic import BaseModel, Field
 # from langchain.vectorstores import Chroma
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import OpenAIEmbeddings
-from langchain.chat_models import ChatOpenAI
+from langchain_community.chat_models import ChatOpenAI
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
@@ -26,7 +26,7 @@ from langchain_core.tools import Tool
 from langchain_google_community import GoogleSearchAPIWrapper
 
 from langchain.chains import LLMChain
-from langchain.retrievers import WebResearchRetriever
+from langchain_community.retrievers import WebResearchRetriever
 
 from enum import Enum
 
