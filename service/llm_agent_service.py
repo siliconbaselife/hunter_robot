@@ -346,6 +346,7 @@ class parseAgent:
 
 
 class LineList(BaseModel):
+    allow_dangerous_requests: bool = True
     lines: List[str] = Field(description="Question")
 
 
