@@ -25,7 +25,7 @@ from langchain.docstore.document import Document
 from langchain_core.tools import Tool
 from langchain_google_community import GoogleSearchAPIWrapper
 
-from langchain.chains import LLMChain
+# from langchain.chains import LLMChain
 from langchain_community.retrievers import WebResearchRetriever
 
 from enum import Enum
@@ -365,7 +365,8 @@ def google_search(n, query):
                  " a question mark at the end: {question}"
     )
     llm = ChatOpenAI(temperature=0)
-    llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=QuestionListOutputParser())
+    # llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=QuestionListOutputParser())
+    llm_chain = search_prompt | llm | QuestionListOutputParser
     vectorstore = Chroma(embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai")
     # tool = Tool(
     #     name="google_search",
