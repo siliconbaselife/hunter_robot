@@ -11,7 +11,8 @@ from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 # from langchain.retrievers.web_research import QuestionListOutputParser
 from langchain_core.output_parsers.list import ListOutputParser
 
-from langchain.vectorstores import Chroma
+# from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.chat_models import ChatOpenAI
 
