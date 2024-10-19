@@ -367,7 +367,7 @@ def google_search(n, query):
     llm = ChatOpenAI(temperature=0)
     # llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=QuestionListOutputParser())
     llm_chain = search_prompt | llm | QuestionListOutputParser
-    vectorstore = Chroma(embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai")
+    vectorstore = Chroma(embedding_function=OpenAIEmbeddings())
     # tool = Tool(
     #     name="google_search",
     #     description="Search Google for recent results.",
