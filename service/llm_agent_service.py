@@ -346,7 +346,6 @@ class parseAgent:
 
 
 class LineList(BaseModel):
-    allow_dangerous_requests: bool = True
     lines: List[str] = Field(description="Question")
 
 
@@ -385,7 +384,7 @@ def google_search(n, query):
     #     func=search.run,
     # )
 
-    web_research_retriever = WebResearchRetriever(vectorstore=vectorstore, llm=llm_chain, search=search)
+    web_research_retriever = WebResearchRetriever(vectorstore=vectorstore, llm=llm_chain, search=search, allow_dangerous_requests=True)
     docs = web_research_retriever.get_relavant_documents(query)
 
     return docs
