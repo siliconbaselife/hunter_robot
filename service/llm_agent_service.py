@@ -12,7 +12,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
 # from langchain.retrievers.web_research import QuestionListOutputParser
 from langchain.output_parsers.pydantic import PydanticOutputParser
-from Pydantic import BaseModel, Field
+from pydantic import BaseModel, Field
 
 # from langchain.vectorstores import Chroma
 from langchain_community.vectorstores import Chroma
