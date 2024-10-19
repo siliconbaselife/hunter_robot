@@ -7,7 +7,7 @@ from utils.log import get_logger
 from utils.config import config
 
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
+from langchain_core.output_parsers import StrOutputParser, JsonOutputParser, QuestionListOutputParser
 
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
@@ -15,6 +15,12 @@ from langchain.chat_models import ChatOpenAI
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
+
+from langchain_core.tools import Tool
+from langchain_google_community import GoogleSearchAPIWrapper
+
+from langchain.chains import LLMChain
+from langchain.retrievers.web_research import WebResearchRetrieve
 
 from enum import Enum
 
@@ -25,6 +31,9 @@ cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
 secret_token = "gAAAAABlWsO9M5MHWyTjwMrJTxqj1yfzfuvJXNAxVFCZT4AoyklbVX3_EpmIVv59HhTjg4bYIZugs2sXBHDDpfvuJaThWXZr_lRomw5YYMNVdq9atyo7gcQUs8u8iDbsO3qOVDBKH_BXkGoiFJWXdAJSnJqT3xCKcg=="
 OPENAI_API_KEY = cipher.decrypt(secret_token).decode()
 os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY
+
+os.environ["GOOGLE_CSE_ID"] = "a5bb86389c8d54e04"
+os.environ["GOOGLE_API_KEY"] = "AIzaSyADsE884QVkWz_Y8X1zJMvGl3lVmJ-IbZc"
 
 logger = get_logger(config['log']['log_file'])
 
@@ -325,6 +334,30 @@ class parseAgent:
     def cal(self, query, txt):
         res = self.chain.invoke({"query": query, "txt": txt})
         return res
+
+
+def google_search(n, query):
+    search = GoogleSearchAPIWrapper(k=n)
+
+    search_prompt = PromptTemplate(
+        input_variables=["question"],
+        template="you are an assistant tasked with improving Google search results. Generate 5 Google search queries "
+                 "that are similar to this question. The output should be a numbered list of questions and each should have"
+                 " a question mark at the end: {question}"
+    )
+    llm = ChatOpenAI(temperature=0)
+    llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=QuestionListOutputParser())
+    vectorstore = Chroma(embedding_function=OpenAIEmbeddings(), persist_directory="./chroma_db_oai")
+    # tool = Tool(
+    #     name="google_search",
+    #     description="Search Google for recent results.",
+    #     func=search.run,
+    # )
+
+    web_research_retriever = WebResearchRetrieve.from_llm(vectorstore=vectorstore, llm=llm, search=search)
+    docs = web_research_retriever.get_relavant_documents(query)
+
+    return docs
 
 
 if __name__ == "__main__":

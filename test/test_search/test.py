@@ -1,7 +1,3 @@
-from service.search_service import *
+from service.llm_agent_service import *
 
-
-results = google_search(5, "请问华为在印尼的对标公司")
-
-for result in results:
-    print(result)
+docs = google_search(5, "请问华为在印尼的对标公司")
