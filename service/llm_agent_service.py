@@ -358,6 +358,12 @@ class QuestionListOutputParser(PydanticOutputParser):
         return LineList(lines=lines)
 
 
+import logging
+
+logging.basicConfig()
+logging.getLogger("langchain.retrievers.web_search").setLevel(logging.INFO)
+
+
 def google_search(n, query):
     search = GoogleSearchAPIWrapper(k=n)
 
