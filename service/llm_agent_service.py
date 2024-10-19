@@ -365,7 +365,7 @@ logging.getLogger("langchain.retrievers.web_search").setLevel(logging.INFO)
 
 
 def google_search(n, query):
-    search = GoogleSearchAPIWrapper(k=n)
+    search = GoogleSearchAPIWrapper(k=n, allow_dangerous_requests=True)
 
     search_prompt = PromptTemplate(
         input_variables=["question"],
@@ -384,7 +384,7 @@ def google_search(n, query):
     #     func=search.run,
     # )
 
-    web_research_retriever = WebResearchRetriever(vectorstore=vectorstore, llm=llm_chain, search=search, allow_dangerous_requests=True)
+    web_research_retriever = WebResearchRetriever(vectorstore=vectorstore, llm=llm_chain, search=search)
     docs = web_research_retriever.get_relavant_documents(query)
 
     return docs
