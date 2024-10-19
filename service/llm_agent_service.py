@@ -385,6 +385,7 @@ def google_search(n, query):
     # )
 
     web_research_retriever = WebResearchRetriever(vectorstore=vectorstore, llm=llm_chain, search=search)
+    web_research_retriever.allow_dangerous_requests = True
     docs = web_research_retriever.get_relavant_documents(query)
 
     return docs
