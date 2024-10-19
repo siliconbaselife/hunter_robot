@@ -383,8 +383,8 @@ def google_search(n, query):
     #     description="Search Google for recent results.",
     #     func=search.run,
     # )
-
-    web_research_retriever = WebResearchRetriever.from_llm(vectorstore=vectorstore, llm=llm, search=search)
+    wb = WebResearchRetriever(allow_dangerous_requests=True)
+    web_research_retriever = wb.from_llm(vectorstore=vectorstore, llm=llm, search=search)
     web_research_retriever.allow_dangerous_requests = True
     docs = web_research_retriever.get_relavant_documents(query)
 
