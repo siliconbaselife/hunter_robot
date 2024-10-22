@@ -18,18 +18,17 @@ from langchain.output_parsers.pydantic import PydanticOutputParser
 from pydantic import BaseModel, Field
 
 # from langchain.vectorstores import Chroma
-from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import OpenAIEmbeddings
-from langchain_community.chat_models import ChatOpenAI
+from langchain.vectorstores import Chroma
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.chat_models.openai import ChatOpenAI
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.docstore.document import Document
 
 from langchain_core.tools import Tool
-from langchain_google_community import GoogleSearchAPIWrapper
+from langchain.utilities import GoogleSearchAPIWrapper
 
-# from langchain.chains import LLMChain
-from langchain.retrievers import WebResearchRetriever
+from langchain.retrievers.web_research import WebResearchRetriever
 
 from enum import Enum
 
@@ -376,16 +375,15 @@ def google_search(n, query):
     # llm = ChatOpenAI(temperature=0)
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     # llm_chain = LLMChain(llm=llm, prompt=search_prompt, output_parser=QuestionListOutputParser())
-    llm_chain = search_prompt | llm | QuestionListOutputParser
+    llm_chain = search_prompt | llm | QuestionListOutputParser()
     vectorstore = Chroma(embedding_function=OpenAIEmbeddings())
     # tool = Tool(
     #     name="google_search",
     #     description="Search Google for recent results.",
     #     func=search.run,
     # )
-    wb = WebResearchRetriever(allow_dangerous_requests=True)
-    web_research_retriever = wb.from_llm(vectorstore=vectorstore, llm=llm, search=search)
-    docs = web_research_retriever.get_relavant_documents(query)
+    web_research_retriever = WebResearchRetriever.from_llm(vectorstore=vectorstore, llm=llm, search=search, allow_dangerous_requests=True)
+    docs = web_research_retriever.get_relevant_documents(query)
 
     return docs
 
