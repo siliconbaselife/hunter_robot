@@ -29,6 +29,9 @@ from langchain_core.tools import Tool
 from langchain.utilities import GoogleSearchAPIWrapper
 
 from langchain.retrievers.web_research import WebResearchRetriever
+from langchain_community.document_loaders import WebBaseLoader
+from langchain.embeddings.openai import OpenAIEmbeddings
+from scipy.spatial import distance
 
 from enum import Enum
 
@@ -344,6 +347,21 @@ class parseAgent:
         return res
 
 
+class searchAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["query", "search_txt"],
+            template="你需要按照google搜索结果，整合内容，得出问题结论，问题: \n{query} \n 返回结果需要是json格式，key 为answer，只需要回答答案不要说废话 \n搜索结果如下: \n{search_txt}"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, query, search_infos):
+        res = self.chain.invoke({"query": query, "search_txt": json.dumps(search_infos)})
+        return res
+
+
 class LineList(BaseModel):
     lines: List[str] = Field(description="Question")
 
@@ -363,7 +381,7 @@ logging.basicConfig()
 logging.getLogger("langchain.retrievers.web_search").setLevel(logging.INFO)
 
 
-def google_search(n, query):
+def google_search_back(n, query):
     search = GoogleSearchAPIWrapper(k=n)
 
     search_prompt = PromptTemplate(
@@ -382,10 +400,163 @@ def google_search(n, query):
     #     description="Search Google for recent results.",
     #     func=search.run,
     # )
-    web_research_retriever = WebResearchRetriever.from_llm(vectorstore=vectorstore, llm=llm, search=search, allow_dangerous_requests=True)
+    web_research_retriever = WebResearchRetriever.from_llm(vectorstore=vectorstore, llm=llm_chain, search=search,
+                                                           allow_dangerous_requests=True)
     docs = web_research_retriever.get_relevant_documents(query)
 
     return docs
+
+
+search = GoogleSearchAPIWrapper(k=10)
+
+
+def top5_results(query):
+    return search.results(query, 5)
+
+
+def google_search(n, query):
+    tool = Tool(
+        name="Google Search Snippets",
+        description="Search Google for recent results.",
+        func=top5_results,
+    )
+    rs = tool.run(query)
+    for r in rs:
+        link = r["link"]
+        loader = WebBaseLoader(link)
+        docs = loader.load()
+        print(docs)
+
+    return rs
+
+
+class googleKeyAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["query"],
+            template="你需要根据我的问题设计google搜索的关键字，能让我搜索出问题的相关信息，问题如下: \n {query} \n"
+                     "返回2个关键字，返回格式为json，返回key为keywords"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, query):
+        res = self.chain.invoke({"query": query})
+        print(res)
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if "```" in line:
+                continue
+            rres += line
+
+        res_json = json.loads(rres)
+        key_words = res_json["keywords"]
+        return key_words
+
+
+# def top10_results(query):
+#     return search.results(query, 5)
+
+
+class googleSearchAgent:
+    def __init__(self, n=5):
+        self.search = GoogleSearchAPIWrapper(k=n)
+        self.embeddings = OpenAIEmbeddings()
+        self.tool = Tool(
+            name="Google Search Snippets",
+            description="Search Google for recent results.",
+            func=top5_results,
+        )
+
+    def cal(self, key_word, query):
+        query_features = self.embeddings.embed_query(query)
+        rs = self.tool.run(key_word)
+
+        relation_txt = []
+        for r in rs:
+            print(r)
+            link = r["link"]
+            try:
+                loader = WebBaseLoader(link)
+                docs = loader.load()
+            except BaseException as e:
+                continue
+
+            doc = str(docs[0])
+            lines = doc.split('\n')
+
+            info_txt = ''
+            token_num = 0
+            times = 0
+            for line in lines:
+                line = line.strip().replace(" ", "")
+                if len(line) == 0:
+                    continue
+                info_txt += line
+                token_num += len(line)
+                # print(line)
+                # print(token_num)
+                if token_num > 1000:
+                    txt_features = self.embeddings.embed_query(info_txt)
+                    txt_distance = distance.cosine(query_features, txt_features)
+                    if txt_distance < 0.2:
+                        relation_txt.append(info_txt)
+
+                    print("--------------------------------------------")
+                    print(info_txt)
+                    print(txt_distance)
+                    print("--------------------------------------------")
+                    info_txt = ""
+                    token_num = 0
+                times += 1
+                if times > 5:
+                    break
+
+            if token_num > 0:
+                txt_features = self.embeddings.embed_query(info_txt)
+                txt_distance = distance.cosine(query_features, txt_features)
+                if txt_distance < 0.2:
+                    relation_txt.append(info_txt)
+
+        # print(f"相关文档 数量: {len(relation_txt)}: {relation_txt}")
+        return relation_txt
+
+
+class comprehendAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        extract_prompt = PromptTemplate(
+            input_variables=["query", "txt"],
+            template="萃取出问题内容中与问题相关的内容，要简要，不超过50个字，文本如下: \n {txt} \n 问题如下: \n {query}"
+        )
+        output_parser = StrOutputParser()
+        self.extract_chain = extract_prompt | chat | output_parser
+
+        prompt = PromptTemplate(
+            input_variables=["query", "txt"],
+            template="这个是我们从google上萃取出的相关文本内容: \n {txt} \n 这个是我们的问题: \n {query} \n 请根据提示，以及你自己的理解以及你自己已有的知识回答问题。返回结果控制在200个字以内。"
+        )
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, query, txts):
+        extract_txt = ""
+        for txt in txts:
+            res = self.extract_chain.invoke({"query": query, "txt": txt})
+            print(f"萃取出的结果: {res}")
+            extract_txt += res
+
+        res = self.chain.invoke({"query": query, "txt": extract_txt})
+        return res
+
+
+class OnlineSearchAgent:
+    def __init__(self):
+        pass
+
+    def cal(self, query):
+        pass
 
 
 if __name__ == "__main__":
