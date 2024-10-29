@@ -66,7 +66,7 @@ class ChatAgent(object):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
         prompt = PromptTemplate(
             input_variables=["relation_info", "history_str", "question"],
-            template="你是一个猎头/HR的咨询助理，需要回答问题，保证回复在150字以内，尽量不超过100字。\n当前咨询内容相关信息如下:\n"
+            template="你是一个猎头/HR的咨询助理，需要回答问题，保证回复在150字以内，尽量不超过100字。\n回复结果需要有美观的格式\n当前咨询内容相关信息如下:\n"
                      "{relation_info}\n历史聊天记录如下:\n{history_str}\n当前用户问题:\n{question}"
         )
         output_parser = StrOutputParser()
@@ -88,6 +88,15 @@ class ChatAgent(object):
         res = self.chain.invoke(
             {"relation_info": relation_info, "history_str": history_str, "question": msg})
         return res
+
+
+# class ChatAgentRaw(object):
+#     def __init__(self):
+#         self.chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+#         prompt = PromptTemplate()
+#     def chat(self, msg):
+#         r = self.chat.predict(msg)
+#         print(r)
 
 
 class KeyWordsAgent:
