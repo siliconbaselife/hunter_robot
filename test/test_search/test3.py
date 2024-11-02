@@ -1,6 +1,6 @@
 from service.llm_agent_service import *
 
-query = "印尼劳动法规定年假一年多少天?"
+query = "tiktok最近在美国怎么了?"
 
 google_key_agent = googleKeyAgent()
 key_words = google_key_agent.cal(query)
@@ -15,7 +15,7 @@ for key_word in key_words:
     relation_txt = google_search_agent.cal(key_word, query)
     relation_txts.extend(relation_txt)
 
-res = comprehend_agent.cal(relation_txts, query)
+res = comprehend_agent.cal(query, relation_txts)
 
 print("-----------------")
 print(f"问题: {query}")

@@ -445,7 +445,7 @@ class googleKeyAgent:
         prompt = PromptTemplate(
             input_variables=["query"],
             template="你需要根据我的问题设计google搜索的关键字，能让我搜索出问题的相关信息，问题如下: \n {query} \n"
-                     "返回2个关键字，返回格式为json，返回key为keywords"
+                     "返回2个关键字，一个关键字是中文，一个关键字是英文，返回格式为json，返回key为keywords"
         )
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
@@ -461,7 +461,11 @@ class googleKeyAgent:
             rres += line
 
         res_json = json.loads(rres)
-        key_words = res_json["keywords"]
+        key_word_list = res_json["keywords"]
+        key_words = []
+        for _, value in key_word_list.items():
+            key_words.append(value)
+
         return key_words
 
 
@@ -479,6 +483,29 @@ class googleSearchAgent:
             func=top5_results,
         )
 
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["query", "snippet"],
+            template="这个是google搜索出的摘要，帮我判断一下摘要跟我的问题是否相关，A.相关，B.不相关"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def is_snippet_relation(self, query, snippet):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        prompt = PromptTemplate(
+            input_variables=["query", "snippet"],
+            template="这个是google搜索出的摘要，帮我判断一下摘要跟我的问题是否相关，A.相关，B.不相关. \n 问题: {query} \n 摘要: {snippet}"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+        res = self.chain.invoke({"query": query, "snippet": snippet})
+        print(f"is_snippet_relation = > {res}")
+        if "A.相关" in res:
+            return True
+        else:
+            return False
+
     def cal(self, key_word, query):
         query_features = self.embeddings.embed_query(query)
         rs = self.tool.run(key_word)
@@ -487,20 +514,30 @@ class googleSearchAgent:
         for r in rs:
             print(r)
             link = r["link"]
+            if ".pdf" in link:
+                continue
+
+            snippet = r["snippet"]
+            if not self.is_snippet_relation(query, snippet):
+                print("链接不相关")
+                continue
+
             try:
                 loader = WebBaseLoader(link)
                 docs = loader.load()
             except BaseException as e:
+                print("获取不到内容")
                 continue
 
             doc = str(docs[0])
             lines = doc.split('\n')
+            print(f"lines: {len(lines)}")
 
             info_txt = ''
             token_num = 0
             times = 0
             for line in lines:
-                line = line.strip().replace(" ", "")
+                line = line.strip()
                 if len(line) == 0:
                     continue
                 info_txt += line
@@ -510,8 +547,10 @@ class googleSearchAgent:
                 if token_num > 1000:
                     txt_features = self.embeddings.embed_query(info_txt)
                     txt_distance = distance.cosine(query_features, txt_features)
-                    if txt_distance < 0.2:
-                        relation_txt.append(info_txt)
+                    print(f"info_txt: {info_txt}")
+                    print(f"txt_distance: {txt_distance}")
+                    # if txt_distance < 0.2:
+                    relation_txt.append(info_txt)
 
                     print("--------------------------------------------")
                     print(info_txt)
@@ -519,9 +558,9 @@ class googleSearchAgent:
                     print("--------------------------------------------")
                     info_txt = ""
                     token_num = 0
-                times += 1
-                if times > 5:
-                    break
+                    times += 1
+                    if times > 5:
+                        break
 
             if token_num > 0:
                 txt_features = self.embeddings.embed_query(info_txt)
@@ -538,14 +577,14 @@ class comprehendAgent:
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         extract_prompt = PromptTemplate(
             input_variables=["query", "txt"],
-            template="萃取出问题内容中与问题相关的内容，要简要，不超过50个字，文本如下: \n {txt} \n 问题如下: \n {query}"
+            template="萃取出问题内容中与问题相关的内容，要简要，不超过50个字，如果认为文本内容与问题不相关，返回'不相关'。文本如下: \n {txt} \n 问题如下: \n {query}"
         )
         output_parser = StrOutputParser()
         self.extract_chain = extract_prompt | chat | output_parser
 
         prompt = PromptTemplate(
             input_variables=["query", "txt"],
-            template="这个是我们从google上萃取出的相关文本内容: \n {txt} \n 这个是我们的问题: \n {query} \n 请根据提示，以及你自己的理解以及你自己已有的知识回答问题。返回结果控制在200个字以内。"
+            template="这个是我们从google上萃取出的相关文本内容: \n {txt} \n 这个是我们的问题: \n {query} \n 请根据提示，以及你自己的理解以及你自己已有的知识回答问题。返回结果控制在200个字以内。返回结果用markdown格式。"
         )
         self.chain = prompt | chat | output_parser
 
@@ -553,6 +592,11 @@ class comprehendAgent:
         extract_txt = ""
         for txt in txts:
             res = self.extract_chain.invoke({"query": query, "txt": txt})
+            if "不相关" in res:
+                continue
+
+            print("txt = >")
+            print(txt)
             print(f"萃取出的结果: {res}")
             extract_txt += res
 
