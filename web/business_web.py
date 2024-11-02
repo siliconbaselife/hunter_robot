@@ -129,6 +129,21 @@ def agent_history_chat():
         json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": r_msg_info}), ensure_ascii=False))
 
 
+@business_web.route("/backend/agent/search", methods=['POST'])
+@web_exception_handler
+def agent_search():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        user_id = decrypt(cookie_user_name, key)
+    query = request.json.get('query', None)
+
+    res, session_id = agent_chat_search_service(user_id, query)
+    return Response(
+        json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": res}), ensure_ascii=False))
+
+
 @business_web.route("/backend/agent/functions", methods=['POST'])
 @web_exception_handler
 def agent_functions():
@@ -151,4 +166,5 @@ def chat_stream():
             time.sleep(1)
         finalResData = {"session_id": session_id, "r_msg": content}
         yield f"event: end\ndata: {json.dumps(get_web_res_suc_with_data(finalResData))}\n\n"
+
     return Response(event_stream(), mimetype='text/event-stream')

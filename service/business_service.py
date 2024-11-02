@@ -329,6 +329,17 @@ def agent_chat_service(user_id, session_id, msg):
     return "", session_id
 
 
+def agent_chat_search_service(user_id, query):
+    session_id = generate_session_id()
+    search_main = SearchMan()
+
+    res = search_main.cal(query)
+    logger.info(f"agent_chat_search_service user_id: {user_id} session_id: {session_id} query: {query} res: {res}")
+    append_msg(user_id, session_id, None, query, res)
+
+    return res, session_id
+
+
 def agent_history_get_service(user_id, session_id):
     history_raw = get_history_msgs(user_id, session_id)
     if history_raw is None:

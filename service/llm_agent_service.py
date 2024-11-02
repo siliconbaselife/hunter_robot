@@ -452,7 +452,6 @@ class googleKeyAgent:
 
     def cal(self, query):
         res = self.chain.invoke({"query": query})
-        print(res)
         lines = res.split('\n')
         rres = ""
         for line in lines:
@@ -500,7 +499,6 @@ class googleSearchAgent:
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
         res = self.chain.invoke({"query": query, "snippet": snippet})
-        print(f"is_snippet_relation = > {res}")
         if "A.相关" in res:
             return True
         else:
@@ -519,19 +517,19 @@ class googleSearchAgent:
 
             snippet = r["snippet"]
             if not self.is_snippet_relation(query, snippet):
-                print("链接不相关")
+                logger.info(f"googleSearchAgent 链接 {link} 跟问题 {query} 不相关")
                 continue
 
             try:
                 loader = WebBaseLoader(link)
                 docs = loader.load()
             except BaseException as e:
-                print("获取不到内容")
+                print(f"googleSearchAgent 链接 {link} 获取不到内容")
                 continue
 
             doc = str(docs[0])
             lines = doc.split('\n')
-            print(f"lines: {len(lines)}")
+            print(f"googleSearchAgent 链接 {link} 跟问题 {query} 获取到内容 {len(lines)} 行")
 
             info_txt = ''
             token_num = 0
@@ -542,20 +540,19 @@ class googleSearchAgent:
                     continue
                 info_txt += line
                 token_num += len(line)
-                # print(line)
-                # print(token_num)
+
                 if token_num > 1000:
-                    txt_features = self.embeddings.embed_query(info_txt)
-                    txt_distance = distance.cosine(query_features, txt_features)
-                    print(f"info_txt: {info_txt}")
-                    print(f"txt_distance: {txt_distance}")
+                    # txt_features = self.embeddings.embed_query(info_txt)
+                    # txt_distance = distance.cosine(query_features, txt_features)
+
                     # if txt_distance < 0.2:
                     relation_txt.append(info_txt)
 
-                    print("--------------------------------------------")
-                    print(info_txt)
-                    print(txt_distance)
-                    print("--------------------------------------------")
+                    # print("--------------------------------------------")
+                    # print(info_txt)
+                    # print(txt_distance)
+                    # print("--------------------------------------------")
+
                     info_txt = ""
                     token_num = 0
                     times += 1
@@ -563,10 +560,10 @@ class googleSearchAgent:
                         break
 
             if token_num > 0:
-                txt_features = self.embeddings.embed_query(info_txt)
-                txt_distance = distance.cosine(query_features, txt_features)
-                if txt_distance < 0.2:
-                    relation_txt.append(info_txt)
+                # txt_features = self.embeddings.embed_query(info_txt)
+                # txt_distance = distance.cosine(query_features, txt_features)
+                # if txt_distance < 0.2:
+                relation_txt.append(info_txt)
 
         # print(f"相关文档 数量: {len(relation_txt)}: {relation_txt}")
         return relation_txt
@@ -595,12 +592,33 @@ class comprehendAgent:
             if "不相关" in res:
                 continue
 
-            print("txt = >")
-            print(txt)
-            print(f"萃取出的结果: {res}")
+            # print("txt = >")
+            # print(txt)
+            logger.info(f"comprehendAgent 问题 {query} 萃取出的结果: {res}")
             extract_txt += res
 
         res = self.chain.invoke({"query": query, "txt": extract_txt})
+        return res
+
+
+class SearchMan:
+    def __init__(self):
+        self.google_key_agent = googleKeyAgent()
+        self.google_search_agent = googleSearchAgent()
+        self.comprehend_agent = comprehendAgent()
+
+    def cal(self, query):
+        logger.info(f"SearchMan get query: {query}")
+        key_words = self.google_key_agent.cal(query)
+        logger.info(f"key_words: {key_words}")
+
+        relation_txts = []
+        for key_word in key_words:
+            logger.info(f"begin search key word: {key_word}")
+            relation_txt = self.google_search_agent.cal(key_word, query)
+            relation_txts.extend(relation_txt)
+
+        res = self.comprehend_agent.cal(query, relation_txts)
         return res
 
 

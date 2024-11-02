@@ -1,5 +1,7 @@
 from service.llm_agent_service import *
+import time
 
+begin = time.time()
 query = "tiktok最近在美国怎么了?"
 
 google_key_agent = googleKeyAgent()
@@ -17,8 +19,11 @@ for key_word in key_words:
 
 res = comprehend_agent.cal(query, relation_txts)
 
+end = time.time()
+
 print("-----------------")
 print(f"问题: {query}")
 print(f"生成keywords: {key_words}")
 print(f"google搜索到相关文章 {len(relation_txts)} 条")
 print(f"最终AI答案: {res}")
+print(f"使用时间: {end - begin}")
