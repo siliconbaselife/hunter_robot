@@ -66,7 +66,7 @@ class ChatAgent(object):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
         prompt = PromptTemplate(
             input_variables=["relation_info", "history_str", "question"],
-            template="你是一个猎头/HR的咨询助理，需要回答问题，保证回复在150字以内，尽量不超过100字。\n回复结果需要有美观的格式\n当前咨询内容相关信息如下:\n"
+            template="你是一个猎头/HR的咨询助理，需要回答问题，保证回复在250字以内，尽量不超过200字。\n回复结果尽量用markdown格式\n当前咨询内容相关信息如下:\n"
                      "{relation_info}\n历史聊天记录如下:\n{history_str}\n当前用户问题:\n{question}"
         )
         output_parser = StrOutputParser()
@@ -581,7 +581,7 @@ class comprehendAgent:
 
         prompt = PromptTemplate(
             input_variables=["query", "txt"],
-            template="这个是我们从google上萃取出的相关文本内容: \n {txt} \n 这个是我们的问题: \n {query} \n 请根据提示，以及你自己的理解以及你自己已有的知识回答问题。返回结果控制在200个字以内。返回结果用markdown格式。"
+            template="这个是我们从google上萃取出的相关文本内容: \n {txt} \n 这个是我们的问题: \n {query} \n 请根据提示，以及你自己的理解以及你自己已有的知识回答问题。返回结果控制在400个字以内。返回结果用markdown格式。"
         )
         self.chain = prompt | chat | output_parser
 
