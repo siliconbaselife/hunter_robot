@@ -1852,6 +1852,9 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
         profile = parse_profile(row[1], 'need_deserialize', contact2str)
         candidate_id = row[0]
         if candidate_id in candidate_contact_infos:
+            if 'contactInfo' not in profile:
+                continue
+
             if not profile['contactInfo'].get('Phone', ''):
                 bank_phone = candidate_contact_infos[candidate_id].get('Phone', [])
                 if len(bank_phone):

@@ -2,7 +2,7 @@ from service.llm_agent_service import *
 import time
 
 begin = time.time()
-query = "tiktok最近在美国怎么了?"
+query = "欣旺达有哪些方向的产业?"
 
 google_key_agent = googleKeyAgent()
 key_words = google_key_agent.cal(query)
