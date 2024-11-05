@@ -69,7 +69,7 @@ def deserialize_raw_profile(raw_profile):
     new_raw_profile = pattern.sub(' ', raw_profile)
     try:
         new_raw_profile = new_raw_profile.replace('\n', '\\n')
-        new_raw_profile.replace('\\', '')
+        new_raw_profile = new_raw_profile.replace('\\', '')
         if new_raw_profile.endswith('\\n'):
             new_raw_profile = new_raw_profile[:-2]
         return json.loads(new_raw_profile, strict=False)
