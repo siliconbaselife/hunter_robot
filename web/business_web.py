@@ -144,6 +144,12 @@ def agent_search():
         json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": res}), ensure_ascii=False))
 
 
+@business_web.route("/backend/agent/normal", methods=['POST'])
+@web_exception_handler
+def agent_normal():
+    pass
+
+
 @business_web.route("/backend/agent/functions", methods=['POST'])
 @web_exception_handler
 def agent_functions():

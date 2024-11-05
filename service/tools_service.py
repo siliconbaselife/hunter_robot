@@ -1850,6 +1850,9 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
     candidate_contact_infos = fetch_contact_infos(manage_account_id, candidate_ids)
     for row in rows:
         profile = parse_profile(row[1], 'need_deserialize', contact2str)
+        if profile is None:
+            continue
+
         candidate_id = row[0]
         if candidate_id in candidate_contact_infos:
             if 'contactInfo' not in profile:
