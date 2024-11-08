@@ -2158,3 +2158,18 @@ def batch_deal_age_race():
 
 def disable_user_tag(manage_account_id, platform, tag):
     delete_user_tag(manage_account_id, platform, tag)
+
+
+def save_company_service(tag, company_id, linkedin_doc):
+    f = query_company_tag(tag, company_id)
+    if not f:
+        add_company_tag(tag, company_id)
+
+    linkedin_doc = linkedin_doc.replace('\n', '\\n')
+    linkedin_doc = linkedin_doc.replace('\\', '')
+
+    f = query_company_info(company_id)
+    if f:
+        add_company_linkedin_doc(company_id, linkedin_doc)
+    else:
+        update_company_linkedin_doc(company_id, linkedin_doc)

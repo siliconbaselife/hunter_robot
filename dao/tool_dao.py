@@ -536,3 +536,30 @@ def query_letter_profile(id):
 def update_tag_update_time(manage_account_id, tag):
     sql = f"update user_profile_tag set update_time = now() where manage_account_id = '{manage_account_id}' and tag = '{tag}'"
     dbm.update(sql)
+
+
+def query_company_tag(tag, company_id):
+    query = f"select * from company_tag where tag = '{tag}' and company_id = '{company_id}'"
+    rows = dbm.query(query)
+    return len(rows) > 0
+
+
+def add_company_tag(tag, company_id):
+    sql = f"insert into company_tag(tag, company_id) values('{tag}', '{company_id}')"
+    dbm.insert(sql)
+
+
+def query_company_info(company_id):
+    query = f"select * from company_info where company_id = '{company_id}'"
+    rows = dbm.query(query)
+    return len(rows) > 0
+
+
+def add_company_linkedin_doc(company_id, linkedin_doc):
+    insert = f"insert into company_info(company_id, linkedin_doc) values('{company_id}', '{linkedin_doc}')"
+    dbm.insert(insert)
+
+
+def update_company_linkedin_doc(company_id, linkedin_doc):
+    update = f"update company_info set linkedin_doc = '{linkedin_doc}' where company_id = '{company_id}'"
+    dbm.update(update)

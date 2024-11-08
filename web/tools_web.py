@@ -1359,7 +1359,7 @@ def parse_profile_by_ai():
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     use_ai = request.json.get('use_ai', False)
-    language = request.json.get('language', 'chinese')
+    language = request.json.get('language', 'Chinese')
 
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
@@ -1547,3 +1547,15 @@ def send_email_by_gmail():
         else:
             return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/save_company", methods=['POST'])
+@web_exception_handler
+def save_company():
+    tag = request.json.get('tag', None)
+    company_id = request.json.get('company_id', None)
+    linkedin_doc = request.json.get('linkedin_doc', None)
+    logger.info(f"save company tag: {tag} company_id: {company_id}")
+    save_company_service(tag, company_id, linkedin_doc)
+
+    return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))
