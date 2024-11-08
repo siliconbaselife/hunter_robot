@@ -4,6 +4,6 @@ if __name__ == "__main__":
     print("company doc")
     tag = "test"
     company_id = "test.com"
-    linkedin_doc = '{"over_view": "test", "website": "test.com", "industry": "test", "company_size": "18 person", ' \
+    linkedin_doc = '{"overview": "test", "website": "test.com", "industry": "test", "company_size": "18 person", ' \
                    '"headquaters": "Chinese", "Founded": "2020", "specialties": "test"}'
     save_company_service(tag, company_id, linkedin_doc)
