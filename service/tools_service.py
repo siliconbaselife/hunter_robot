@@ -2169,7 +2169,7 @@ def save_company_service(tag, company_id, linkedin_doc):
     linkedin_doc = linkedin_doc.replace('\\', '')
 
     f = query_company_info(company_id)
-    if f:
+    if not f:
         add_company_linkedin_doc(company_id, linkedin_doc)
     else:
         update_company_linkedin_doc(company_id, linkedin_doc)
