@@ -2083,8 +2083,8 @@ def add_tag_log(manage_account_id, platform, tag, candidate_id, flow_status, new
     update_tag_log(manage_account_id, platform, tag, candidate_id, logs)
 
 
-def parse_profile_gpt(profile):
-    prompt_msg = f"{json.dumps(profile)[0:3500]} \nThis is a LinkedIn resume of a candidate. As a headhunter, you need to analyze the resume and summarize two aspects:\n1 => Industry Experience and Expertise\n2 => Career Highlights\nThe result should be represented in JSON format with 'industry_experience' for industry experience and expertise, and 'career_highlights' for career highlights. \nSummarize the content in no more than 50 words, and ensure it is within 50 words.\nThe result content is returned in Chinese.\nEnsure the output is a valid JSON object in a compact format without any additional explanations, escape characters, newline characters, or backslashes."
+def parse_profile_gpt(profile, language):
+    prompt_msg = f"{json.dumps(profile)[0:3500]} \nThis is a LinkedIn resume of a candidate. As a headhunter, you need to analyze the resume and summarize two aspects:\n1 => Industry Experience and Expertise\n2 => Career Highlights\nThe result should be represented in JSON format with 'industry_experience' for industry experience and expertise, and 'career_highlights' for career highlights. \nSummarize the content in no more than 50 words, and ensure it is within 50 words.\nThe result content is returned in {language}.\nEnsure the output is a valid JSON object in a compact format without any additional explanations, escape characters, newline characters, or backslashes."
     prompt = Prompt()
     prompt.add_user_message(prompt_msg)
     output = gpt_manager.chat_task(prompt)
@@ -2098,7 +2098,7 @@ def parse_profile_gpt(profile):
     return details
 
 
-def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai):
+def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai, language):
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0:
         return {}
@@ -2109,7 +2109,7 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
         del profile['cv']
 
     if use_ai:
-        apt_profile_info = parse_profile_gpt(profile)
+        apt_profile_info = parse_profile_gpt(profile, language)
         if "industry_experience" in apt_profile_info:
             profile["industry_experience"] = apt_profile_info["industry_experience"]
         if "career_highlights" in apt_profile_info:
@@ -2123,7 +2123,10 @@ def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_a
             profile["age"] = None
 
     if "last5Jump" in profile and profile["last5Jump"] is not None:
-        profile["last5JumpStr"] = f"5年{profile['last5Jump']}跳"
+        if language == 'Chinese':
+            profile["last5JumpStr"] = f"5年{profile['last5Jump']}跳"
+        elif language == 'English':
+            profile["last5JumpStr"] = f"{profile['last5Jump']} career changes in 5 years"
 
     # if "experiences" in profile:
     #     del profile["experiences"]

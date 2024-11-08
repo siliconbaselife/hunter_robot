@@ -1359,13 +1359,14 @@ def parse_profile_by_ai():
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     use_ai = request.json.get('use_ai', False)
+    language = request.json.get('language', 'chinese')
 
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
-    profile = parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai)
+    profile = parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai, language)
     logger.info(
         f"parse_profile_by_ai used time: {time.time() - before_time} => manage_account_id: {manage_account_id} candidate_id: {candidate_id} platform: {platform} use_ai: {use_ai} profile: {profile}")
     return Response(json.dumps(get_web_res_suc_with_data(profile), ensure_ascii=False))
