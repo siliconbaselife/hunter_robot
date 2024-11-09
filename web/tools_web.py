@@ -1359,7 +1359,9 @@ def parse_profile_by_ai():
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     use_ai = request.json.get('use_ai', False)
-    language = request.json.get('language', 'Chinese')
+    # language = request.json.get('language', 'Chinese')
+    language = request.headers.get('language', 'zh')
+    language = 'Chinese' if language == 'zh' else 'English'
 
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
