@@ -17,7 +17,7 @@ if __name__ == "__main__":
         print(linkedin_doc)
         linkedin_doc = linkedin_doc.replace('\n', '\\n')
         linkedin_doc = linkedin_doc.replace('\\"', ' ')
-        # linkedin_doc = linkedin_doc.replace('\\', '')
+        linkedin_doc = linkedin_doc.replace('\\', '')
 
         print(company_id)
         print(linkedin_doc)
