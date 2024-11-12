@@ -14,6 +14,7 @@ if __name__ == "__main__":
 
     for i, row in enumerate(rows):
         company_id, linkedin_doc = row
+        print(linkedin_doc)
         company_info = json.loads(linkedin_doc, strict=False)
         company_info["company_id"] = company_id
         with open(os.path.join(dir, f"{i}.json"), 'w') as f:
