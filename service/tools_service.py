@@ -2165,7 +2165,6 @@ def save_company_service(tag, company_id, linkedin_doc):
         f = query_company_tag(tag, company_id)
         if not f:
             add_company_tag(tag, company_id)
-
         linkedin_doc = linkedin_doc.replace('\n', '\\n')
         linkedin_doc = linkedin_doc.replace('\'', '\\')
         linkedin_doc = linkedin_doc.replace('\"', '\\"')

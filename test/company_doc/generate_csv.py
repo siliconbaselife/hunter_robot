@@ -18,7 +18,7 @@ if __name__ == "__main__":
         linkedin_doc = linkedin_doc.replace('\\', '')
         # linkedin_doc = linkedin_doc.replace('\\"', '\\"')
         # linkedin_doc = linkedin_doc.replace('\'', '\\')
-
+        print(company_id)
         print(linkedin_doc)
         company_info = json.loads(linkedin_doc, strict=False)
         company_info["company_id"] = company_id
