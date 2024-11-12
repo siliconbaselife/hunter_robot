@@ -14,10 +14,10 @@ if __name__ == "__main__":
 
     for i, row in enumerate(rows):
         company_id, linkedin_doc = row
-        print(linkedin_doc)
-        linkedin_doc = linkedin_doc.replace('\n', '\\n')
-        linkedin_doc = linkedin_doc.replace('\\"', ' ')
-        linkedin_doc = linkedin_doc.replace('\\', '')
+        # print(linkedin_doc)
+        # linkedin_doc = linkedin_doc.replace('\n', '\\n')
+        # linkedin_doc = linkedin_doc.replace('\\"', ' ')
+        # linkedin_doc = linkedin_doc.replace('\\', '')
 
         print(company_id)
         print(linkedin_doc)
