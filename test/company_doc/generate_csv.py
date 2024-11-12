@@ -18,9 +18,12 @@ if __name__ == "__main__":
         # linkedin_doc = linkedin_doc.replace('\n', '\\n')
         # linkedin_doc = linkedin_doc.replace('\\"', ' ')
         # linkedin_doc = linkedin_doc.replace('\\', '')
+        linkedin_doc[0] = ""
+        linkedin_doc[-1] = ""
 
         print(company_id)
         print(linkedin_doc)
+
         company_info = json.loads(linkedin_doc, strict=False)
         company_info["company_id"] = company_id
         with open(os.path.join(dir, f"{i}.json"), 'w') as f:
