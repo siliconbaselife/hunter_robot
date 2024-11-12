@@ -563,3 +563,9 @@ def add_company_linkedin_doc(company_id, linkedin_doc):
 def update_company_linkedin_doc(company_id, linkedin_doc):
     update = f"update company_info set linkedin_doc = '{linkedin_doc}' where company_id = '{company_id}'"
     dbm.update(update)
+
+
+def query_all_company_info():
+    query = f"select company_id, linkedin_doc from company_info"
+    rows = dbm.query(query)
+    return rows
