@@ -14,7 +14,8 @@ if __name__ == "__main__":
 
     for i, row in enumerate(rows):
         company_id, linkedin_doc = row
-        linkedin_doc["company_id"] = company_id
+        company_info = json.loads(linkedin_doc)
+        company_info["company_id"] = company_id
         with open(os.path.join(dir, f"{i}.json")) as f:
             f.write(json.dumps(linkedin_doc))
 
