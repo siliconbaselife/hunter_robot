@@ -2167,8 +2167,8 @@ def save_company_service(tag, company_id, linkedin_doc):
             add_company_tag(tag, company_id)
 
         linkedin_doc = linkedin_doc.replace('\n', '   ')
-        linkedin_doc = linkedin_doc.replace('\'', ' ')
-        linkedin_doc = linkedin_doc.replace('\"', ' ')
+        # linkedin_doc = linkedin_doc.replace('\'', ' ')
+        # linkedin_doc = linkedin_doc.replace('\"', ' ')
 
         linkedin_doc = json.dumps(linkedin_doc)
         f = query_company_info(company_id)
