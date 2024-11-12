@@ -2165,6 +2165,7 @@ def save_company_service(tag, company_id, linkedin_doc):
         f = query_company_tag(tag, company_id)
         if not f:
             add_company_tag(tag, company_id)
+        logger.info(f"linkedin_doc => {linkedin_doc}")
         linkedin_doc = linkedin_doc.replace('\n', '   ')
         linkedin_json = json.loads(linkedin_doc, strict=False)
 
