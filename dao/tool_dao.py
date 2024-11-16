@@ -241,6 +241,11 @@ def associate_profile_tag(manage_account_id, candidate_id, platform, tag_id, tag
     return dbm.query(sql_dict['associate_profile_tag'].format(manage_account_id, candidate_id, platform, tag_id, tag))
 
 
+def delete_profile_tag(manage_account_id, candidate_id, platform, tag):
+    sql = f"delete from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and candidate_id = '{candidate_id}' and platform = '{platform}' and tag = '{tag}'"
+    dbm.update(sql)
+
+
 def query_id_by_profile_tag_relation(manage_account_id, candidate_id, platform, tags):
     return dbm.query(sql_dict['query_id_by_profile_tag_relation'].format(manage_account_id, candidate_id, platform,
                                                                          db_file_join(tags)))
@@ -454,10 +459,53 @@ def query_tag_filter_num_new(manage_account_id, platform, tag, company, candidat
     return data[0][0]
 
 
+def query_filter_num_new(manage_account_id, platform, company, candidate_name, stage, status):
+    sql = f"select count(*) from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}'"
+    if company is not None and len(company) > 0:
+        sql += f" and b.company = '{company}' "
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and lower(b.name) like lower('%{candidate_name}%')"
+    if stage is not None and len(stage) > 0:
+        sql += f" and a.flow_status = '{stage}'"
+    if status is not None and len(status) > 0:
+        sql += f" and b.status = '{status}'"
+    s = time.time()
+    data = dbm.query(sql)
+    e = time.time()
+    logger.info(f"query_tag_filter_num_new: {sql} time: {e - s}")
+    return data[0][0]
+
+
 def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, min_age,
                                   max_age, race, page,
                                   limit):
     sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
+    if company is not None and len(company) > 0:
+        sql += f" and b.company = '{company}' "
+    if candidate_name is not None and len(candidate_name) > 0:
+        sql += f" and lower(b.name) like lower('%{candidate_name}%')"
+    if stage is not None and len(stage) > 0:
+        sql += f" and a.flow_status = '{stage}'"
+    if status is not None and len(status) > 0:
+        sql += f" and b.status = '{status}'"
+    if race is not None:
+        sql += f" and b.race = {race}"
+    if min_age is not None and max_age is not None:
+        sql += f" and b.age >= {min_age} and b.age <= {max_age}"
+
+    sql += f" limit {page}, {limit}"
+
+    s = time.time()
+    data = dbm.query(sql)
+    e = time.time()
+    logger.info(f"query_tag_filter_profiles_new: {sql} time: {e - s}")
+    return data
+
+
+def query_filter_profiles_new(manage_account_id, platform, company, candidate_name, stage, status, min_age,
+                              max_age, race, page,
+                              limit):
+    sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}'"
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
     if candidate_name is not None and len(candidate_name) > 0:

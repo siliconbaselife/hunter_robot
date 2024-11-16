@@ -1644,6 +1644,10 @@ def associate_profile_tags(manage_account_id, candidate_id, platform, tags):
     return tags, None
 
 
+def delete_profile_tag_service(manage_account_id, candidate_id, platform, tag):
+    delete_profile_tag(manage_account_id, candidate_id, platform, tag)
+
+
 def upload_profile_status(manage_account_id, candidate_id, platform, profile):
     if "status" in profile:
         status = profile["status"]
@@ -1853,17 +1857,8 @@ def fetch_contact_infos(manage_account_id, candidate_ids):
     return ret_dict
 
 
-def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age,
-                             max_age, race, limit,
-                             contact2str):
-    # update_tag_update_time(manage_account_id, tag)
-    total_count = query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status)
-    start = (page - 1) * limit
-
+def transfer_data_to_profiles(manage_account_id, contact2str, rows):
     details = []
-    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
-    rows = query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status,
-                                         min_age, max_age, race, start, limit)
     candidate_ids = [row[0] for row in rows]
     candidate_contact_infos = fetch_contact_infos(manage_account_id, candidate_ids)
     for row in rows:
@@ -1900,6 +1895,34 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
         profile["notes"] = json.loads(logs, strict=False)
         profile['experiences'] = None
         details.append(profile)
+    return details
+
+
+def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page, min_age,
+                             max_age, race, limit,
+                             contact2str):
+    total_count = query_tag_filter_num_new(manage_account_id, platform, tag, company, candidate_name, stage, status)
+    start = (page - 1) * limit
+
+    rows = query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status,
+                                         min_age, max_age, race, start, limit)
+    details = transfer_data_to_profiles(manage_account_id, contact2str, rows)
+    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
+
+    return data, None
+
+
+def search_profile_by_tag_v2_all(manage_account_id, platform, company, candidate_name, status, stage, page, min_age,
+                                 max_age, race, limit,
+                                 contact2str):
+    total_count = query_filter_num_new(manage_account_id, platform, company, candidate_name, stage, status)
+    start = (page - 1) * limit
+
+    rows = query_filter_profiles_new(manage_account_id, platform, company, candidate_name, stage, status,
+                                     min_age, max_age, race, start, limit)
+    details = transfer_data_to_profiles(manage_account_id, contact2str, rows)
+    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
+
     return data, None
 
 
