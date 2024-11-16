@@ -965,6 +965,34 @@ def get_tags_by_user_web_v2():
     return Response(json.dumps(get_web_res_suc_with_data(res), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tools/toptag", methods=['POST'])
+@web_exception_handler
+def toptag():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    tag = request.json.get('tag', '')
+    top_tag(manage_account_id, tag)
+
+    return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))
+
+
+@tools_web.route("/backend/tools/cancel_toptag", methods=['POST'])
+@web_exception_handler
+def cancel_toptag():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    tag = request.json.get('tag', '')
+    cancel_top_tag(manage_account_id, tag)
+
+    return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))
+
+
 @tools_web.route("/backend/tools/getTagsByUserAndCandidate", methods=['POST'])
 @web_exception_handler
 def get_tags_by_user_and_candidate_web():

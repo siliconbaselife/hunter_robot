@@ -226,7 +226,7 @@ def query_profile_id_tag(manage_account_id, platform):
 
 
 def query_profile_id_tag_v2(manage_account_id, platform):
-    sql = f"select id, tag, tag_str from user_profile_tag where manage_account_id = '{manage_account_id}' and platform = '{platform}' and visible = 1 order by update_time desc;"
+    sql = f"select id, tag, tag_str, top from user_profile_tag where manage_account_id = '{manage_account_id}' and platform = '{platform}' and visible = 1 order by update_time desc;"
     rows = dbm.query(sql)
     return rows
 
@@ -569,3 +569,8 @@ def query_all_company_info():
     query = f"select company_id, linkedin_doc from company_info"
     rows = dbm.query(query)
     return rows
+
+
+def update_profile_tag_top(manage_accout_id, tag, top_status):
+    update = f"update user_profile_tag set top = '{top_status}' where manage_accout_id = '{manage_accout_id}' and tag = '{tag}'"
+    dbm.update(update)

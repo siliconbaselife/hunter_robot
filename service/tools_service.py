@@ -1591,9 +1591,26 @@ def query_profile_tag_by_user_new(manage_account_id, platform):
 def query_profile_tag_by_user_new_v2(manage_account_id, platform):
     rows = query_profile_id_tag_v2(manage_account_id, platform)
     tags = []
+    top_num = 0
     for row in rows:
-        tags.append({"tag": row[1], "tag_str": row[2]})
+        if row[3] == 1:
+            tags.append({"tag": row[1], "tag_str": row[2], "top": top_num})
+            top_num += 1
+        else:
+            tags.append({"tag": row[1], "tag_str": row[2], "top": -1})
     return tags, None
+
+
+def top_tag(manage_account_id, tag):
+    if len(tag):
+        return
+    update_profile_tag_top(manage_account_id, tag, 1)
+
+
+def cancel_top_tag(manage_account_id, tag):
+    if len(tag):
+        return
+    update_profile_tag_top(manage_account_id, tag, 0)
 
 
 def query_profile_tag_relation_by_user_and_candidate(manage_account_id, candidate_id, platform):
