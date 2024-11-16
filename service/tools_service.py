@@ -2085,7 +2085,7 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
     if len(tag) > 0:
         data = query_tag_resume_infos(manage_account_id, platform, tag)
     else:
-        data = query_tag_resume_infos(manage_account_id, platform)
+        data = query_all_resume_infos(manage_account_id, platform)
 
     for d in data:
         company = d[0]
