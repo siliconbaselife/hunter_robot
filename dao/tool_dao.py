@@ -365,6 +365,12 @@ def query_tag_flow_status(manage_account_id, platform, tag):
     return data
 
 
+def query_all_flow_status(manage_account_id, platform):
+    sql = f"select candidate_id, flow_status from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}'"
+    data = dbm.query(sql)
+    return data
+
+
 def update_flow_status(manage_account_id, platform, tag, candidate_id, flow_status):
     update_sql = f"update user_profile_tag_relation set flow_status ='{flow_status}' where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
     dbm.update(update_sql)
@@ -404,6 +410,12 @@ def update_tag_log(manage_account_id, platform, tag, candidate_id, log):
 
 def query_tag_resume_infos(manage_account_id, platform, tag):
     sql = f"select a.company, a.status FROM online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}' and candidate_id in (SELECT candidate_id FROM user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}' and tag = '{tag}')"
+    data = dbm.query(sql)
+    return data
+
+
+def query_all_resume_infos(manage_account_id, platform):
+    sql = f"select a.company, a.status FROM online_resume a where manage_account_id = '{manage_account_id}' and platform = '{platform}' and candidate_id in (SELECT candidate_id FROM user_profile_tag_relation WHERE manage_account_id = '{manage_account_id}')"
     data = dbm.query(sql)
     return data
 

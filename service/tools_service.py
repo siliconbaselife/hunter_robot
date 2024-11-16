@@ -2064,7 +2064,11 @@ def send_email_content(manage_account_id, platform, candidate_id, title, content
 
 
 def search_tag_flow_infos(manage_account_id, platform, tag):
-    data = query_tag_flow_status(manage_account_id, platform, tag)
+    if len(tag) > 0:
+        data = query_tag_flow_status(manage_account_id, platform, tag)
+    else:
+        data = query_all_flow_status(manage_account_id, platform, tag)
+
     flow_infos = {}
     for d in data:
         flow_status = d[1]
@@ -2077,7 +2081,12 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
     status_infos["wait connect"] = 0
     status_infos["pending"] = 0
     companys_dict = {}
-    data = query_tag_resume_infos(manage_account_id, platform, tag)
+
+    if len(tag) > 0:
+        data = query_tag_resume_infos(manage_account_id, platform, tag)
+    else:
+        data = query_all_flow_status(manage_account_id, platform, tag)
+
     for d in data:
         company = d[0]
         companys_dict[company] = 1
