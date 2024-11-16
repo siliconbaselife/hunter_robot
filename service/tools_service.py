@@ -1608,7 +1608,7 @@ def top_tag(manage_account_id, tag):
 
 
 def cancel_top_tag(manage_account_id, tag):
-    if len(tag):
+    if len(tag) == 0:
         return
     update_profile_tag_top(manage_account_id, tag, 0)
 

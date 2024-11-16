@@ -974,6 +974,7 @@ def toptag():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     tag = request.json.get('tag', '')
+    logger.info(f"toptag manage_account_id:{manage_account_id} tag: {tag}")
     top_tag(manage_account_id, tag)
 
     return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))
@@ -988,6 +989,7 @@ def cancel_toptag():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
     tag = request.json.get('tag', '')
+    logger.info(f"cancel_top_tag manage_account_id:{manage_account_id} tag: {tag}")
     cancel_top_tag(manage_account_id, tag)
 
     return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))

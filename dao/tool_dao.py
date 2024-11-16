@@ -620,5 +620,5 @@ def query_all_company_info():
 
 
 def update_profile_tag_top(manage_accout_id, tag, top_status):
-    update = f"update user_profile_tag set top = '{top_status}' where manage_accout_id = '{manage_accout_id}' and tag = '{tag}'"
+    update = f"update user_profile_tag set top = '{top_status}' where manage_account_id = '{manage_accout_id}' and tag = '{tag}'"
     dbm.update(update)
