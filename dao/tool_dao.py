@@ -620,6 +620,21 @@ def add_company_linkedin_doc(company_id, linkedin_doc):
     dbm.insert(insert)
 
 
+def query_company_infos():
+    query = f"select company_id, linkedin_doc from company_info"
+    rows = dbm.query(query)
+
+    company_infos = []
+    for row in rows:
+        company_infos.append({"company_id": row[0], "linkedin_doc": row[1]})
+    return company_infos
+
+
+def update_company_website_info(company_id, website_doc):
+    update = f"update company_info set website = '{website_doc}' where company_id = '{company_id}'"
+    dbm.update(update)
+
+
 def update_company_linkedin_doc(company_id, linkedin_doc):
     update = f"update company_info set linkedin_doc = '{linkedin_doc}' where company_id = '{company_id}'"
     dbm.update(update)
