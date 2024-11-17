@@ -13,6 +13,7 @@ def run():
         linkedin_doc = company_info["linkedin_doc"]
         linkedin_doc = linkedin_doc[1:]
         linkedin_doc = linkedin_doc[:-1]
+
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
         print(f"website: {website}")
@@ -26,7 +27,11 @@ def run():
             print(f"获取到内容")
 
             doc = str(docs[0].page_content)
+            doc = doc.replace('\\', ' ')
             doc = doc.replace("\n", " ")
+            doc = doc.replace("\'", " ")
+            doc = doc.replace("\"", " ")
+
             update_company_website_info(company_id, doc)
         except BaseException as e:
             print(f"googleSearchAgent 链接 {website} 获取不到内容")
