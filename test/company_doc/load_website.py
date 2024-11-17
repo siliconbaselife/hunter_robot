@@ -19,11 +19,11 @@ def run():
         try:
             loader = WebBaseLoader(website)
             docs = loader.load()
+            doc = str(docs[0].page_content)
+            doc = doc.replace("\n", " ")
+            update_company_website_info(company_id, doc)
         except BaseException as e:
             print(f"googleSearchAgent 链接 {website} 获取不到内容")
-        doc = str(docs[0].page_content)
-        doc = doc.replace("\n", " ")
-        update_company_website_info(company_id, doc)
 
 
 if __name__ == "__main__":
