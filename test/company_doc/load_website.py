@@ -20,6 +20,7 @@ def run():
         linkedin_doc = linkedin_doc[:-1]
 
         website_doc = company_info["website"]
+        print(website_doc)
         if website_doc is not None:
             print("已经有网页内容")
             continue
