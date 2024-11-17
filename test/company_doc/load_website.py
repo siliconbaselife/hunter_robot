@@ -4,6 +4,10 @@ from dao.tool_dao import query_company_infos
 from dao.tool_dao import update_company_website_info
 import json
 
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
 def run():
     company_infos = query_company_infos()
@@ -22,7 +26,7 @@ def run():
             while try_time < 3:
                 try:
                     loader = WebBaseLoader(website)
-                    loader.requests_kwargs = {'verify': False, "timeout": 5}
+                    loader.requests_kwargs = {'verify': False, "timeout": 10}
                     try_time += 1
                     docs = loader.load()
                 except BaseException as e:

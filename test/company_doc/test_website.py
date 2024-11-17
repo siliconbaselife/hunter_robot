@@ -1,6 +1,9 @@
 from langchain_community.document_loaders import WebBaseLoader
+import urllib3
 
-website = "http://www.solarturbines.com"
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+website = "https://www.solarlandscape.com/"
 try:
     loader = WebBaseLoader(website)
     loader.requests_kwargs = {'verify': False, "timeout": 10}
