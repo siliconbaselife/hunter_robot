@@ -11,6 +11,8 @@ def run():
         company_id = company_info["company_id"]
         print(company_id)
         linkedin_doc = company_info["linkedin_doc"]
+        linkedin_doc = linkedin_doc[1:]
+        linkedin_doc = linkedin_doc[:-1]
         print(linkedin_doc)
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
