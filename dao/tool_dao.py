@@ -632,6 +632,7 @@ def query_company_infos():
 
 def update_company_website_info(company_id, website_doc):
     update = f"update company_info set website = '{website_doc}' where company_id = '{company_id}'"
+    print(update)
     dbm.update(update)
 
 
