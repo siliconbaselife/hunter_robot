@@ -23,7 +23,7 @@ def run():
             if docs is None:
                 print("获取不到内容")
                 continue
-            print("获取到内容")
+            print(f"获取到内容: {docs}")
 
             doc = str(docs[0].page_content)
             doc = doc.replace("\n", " ")
