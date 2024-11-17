@@ -23,8 +23,8 @@ def run():
                 try:
                     loader = WebBaseLoader(website)
                     loader.requests_kwargs = {'verify': False, "timeout": 5}
-                    docs = loader.load()
                     try_time += 1
+                    docs = loader.load()
                 except BaseException as e:
                     print(f"第 {try_time} 次获取不到")
 
