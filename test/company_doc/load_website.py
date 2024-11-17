@@ -18,6 +18,11 @@ def run():
         linkedin_doc = linkedin_doc[1:]
         linkedin_doc = linkedin_doc[:-1]
 
+        website_doc = company_info["website"]
+        if website_doc is not None:
+            print("已经有网页内容")
+            continue
+
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
         print(f"website: {website}")

@@ -621,12 +621,12 @@ def add_company_linkedin_doc(company_id, linkedin_doc):
 
 
 def query_company_infos():
-    query = f"select company_id, linkedin_doc from company_info"
+    query = f"select company_id, linkedin_doc, website from company_info"
     rows = dbm.query(query)
 
     company_infos = []
     for row in rows:
-        company_infos.append({"company_id": row[0], "linkedin_doc": row[1]})
+        company_infos.append({"company_id": row[0], "linkedin_doc": row[1], "website": row[2]})
     return company_infos
 
 
