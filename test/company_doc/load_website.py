@@ -18,6 +18,7 @@ def run():
         print(f"website: {website}")
         try:
             loader = WebBaseLoader(website)
+            loader.requests_kwargs = {'verify': False}
             docs = loader.load()
             doc = str(docs[0].page_content)
             doc = doc.replace("\n", " ")
