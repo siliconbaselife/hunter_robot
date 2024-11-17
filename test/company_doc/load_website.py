@@ -22,7 +22,7 @@ def run():
             while try_time < 3:
                 try:
                     loader = WebBaseLoader(website)
-                    loader.requests_kwargs = {'verify': False, "timeout": 10}
+                    loader.requests_kwargs = {'verify': False, "timeout": 5}
                     docs = loader.load()
                     try_time += 1
                 except BaseException as e:
