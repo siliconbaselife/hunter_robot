@@ -18,9 +18,16 @@ def run():
         website = linkedin_info["website"]
         print(f"website: {website}")
         try:
-            loader = WebBaseLoader(website)
-            loader.requests_kwargs = {'verify': False, "timeout": 5}
-            docs = loader.load()
+            try_time = 0
+            while try_time < 3:
+                try:
+                    loader = WebBaseLoader(website)
+                    loader.requests_kwargs = {'verify': False, "timeout": 10}
+                    docs = loader.load()
+                    try_time += 1
+                except BaseException as e:
+                    print(f"第 {try_time} 次获取不到")
+
             if docs is None:
                 print("获取不到内容")
                 continue
