@@ -9,13 +9,13 @@ def run():
     company_infos = query_company_infos()
     for company_info in company_infos:
         company_id = company_info["company_id"]
-        print(company_id)
+        print(f"company_id: {company_id}")
         linkedin_doc = company_info["linkedin_doc"]
         linkedin_doc = linkedin_doc[1:]
         linkedin_doc = linkedin_doc[:-1]
-        print(linkedin_doc)
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
+        print(f"website: {website}")
         try:
             loader = WebBaseLoader(website)
             docs = loader.load()
