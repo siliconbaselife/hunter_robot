@@ -1,5 +1,5 @@
 from langchain_community.document_loaders import WebBaseLoader
-from tool_dao import update_company_website_info
+from dao.tool_dao import update_company_website_info
 from dao.tool_dao import query_company_infos
 from dao.tool_dao import update_company_website_info
 import json
@@ -14,10 +14,10 @@ def run():
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
         try:
-            loader = WebBaseLoader(link)
+            loader = WebBaseLoader(website)
             docs = loader.load()
         except BaseException as e:
-            print(f"googleSearchAgent 链接 {link} 获取不到内容")
+            print(f"googleSearchAgent 链接 {website} 获取不到内容")
         doc = str(docs[0].page_content)
         doc = doc.replace("\n", " ")
         update_company_website_info(company_id, doc)
