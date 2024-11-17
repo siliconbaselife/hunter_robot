@@ -18,7 +18,7 @@ def run():
         print(f"website: {website}")
         try:
             loader = WebBaseLoader(website)
-            loader.requests_kwargs = {'verify': False, "timeout": 10}
+            loader.requests_kwargs = {'verify': False, "timeout": 5}
             docs = loader.load()
             if docs is None:
                 print("获取不到内容")
