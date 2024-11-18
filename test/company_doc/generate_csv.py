@@ -22,13 +22,12 @@ if __name__ == "__main__":
         linkedin_doc = linkedin_doc[:-1]
 
         print(company_id)
-        print(linkedin_doc)
 
         company_info = json.loads(linkedin_doc, strict=False)
         company_info["company_id"] = company_id
-        company_info["website"] = website_doc
+        company_info["website_doc"] = website_doc
         with open(os.path.join(dir, f"{i}.json"), 'w') as f:
-            f.write(json.dumps(linkedin_doc))
+            f.write(json.dumps(company_info))
 
 
 
