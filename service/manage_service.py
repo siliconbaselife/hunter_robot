@@ -354,7 +354,7 @@ def query_manage_user_infos(manage_account_id, start_day, end_day):
     for user_id in user_ids:
         user_info = {}
 
-        user_credit = query_user_credit(user_id)
+        user_credit = query_user_credit_new(user_id)
         user_info["credit"] = user_credit
         active, infos = query_user_infos(user_id, start_day, end_day)
         user_info["user_infos"] = infos
@@ -369,7 +369,7 @@ def query_manage_user_infos(manage_account_id, start_day, end_day):
     manage_infos = {}
     manage_infos["user_infos"] = user_infos
     manage_infos["all_infos"] = all_infos
-    manage_credit = query_user_credit(manage_account_id)
+    manage_credit = query_user_credit_new(manage_account_id)
     manage_infos["credit"] = manage_credit
 
     return manage_infos
