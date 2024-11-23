@@ -33,6 +33,12 @@ def query_user_credit(user_id):
     return dbm.query(sql_dict['query_user_credit'].format(user_id))
 
 
+def query_user_credit_new(user_id):
+    rows = dbm.query(sql_dict['query_user_credit'].format(user_id))
+    if len(rows) == 0:
+        return 0
+    return rows[0][0]
+
 def query_extension_user_link(user_id, linkedin_id, contact_type):
     return dbm.query(sql_dict['query_extension_user_link'].format(user_id, linkedin_id, contact_type))
 
