@@ -652,6 +652,6 @@ def update_profile_tag_top(manage_accout_id, tag, top_status):
 
 
 def select_profile_infos(manage_accout_id, start_day, end_day):
-    sql = f"select candidate_id, status from online_resume where manage_account_id = '{manage_accout_id}' and update_time > {start_day} and update_time < {end_day}"
+    sql = f"select candidate_id, status from online_resume where manage_account_id = '{manage_accout_id}' and update_time > '{start_day}' and update_time < '{end_day}'"
     rows = dbm.query(sql)
     return rows
