@@ -201,3 +201,25 @@ def get_job_chat_db(job_id, begin_time=None, end_time=None, page=None, limit=Non
 
 def get_job_info_by_account(manage_account_id):
     return dbm.query(sql_dict['query_account_jobs'].format(manage_account_id))
+
+
+def select_manage_users(manage_account_id):
+    sql = f"select user_id from manage where manage_id = '{manage_account_id}'"
+    rows = dbm.query(sql)
+    user_ids = []
+    for row in rows:
+        user_ids.append(row[0])
+
+    return user_ids
+
+
+def select_manage_user(manage_account_id, user_id):
+    sql = f"select count(*) from manage where manage_id = '{manage_account_id}' and user_id = '{user_id}'"
+    rows = dbm.query(sql)
+
+    return rows[0][0] > 0
+
+
+def insert_manage_user(manage_account_id, user_id):
+    insert = f"insert into manage(manage_id, user_id) values('{manage_account_id}', '{user_id}')"
+    dbm.update(insert)

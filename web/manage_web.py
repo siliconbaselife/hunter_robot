@@ -1243,3 +1243,38 @@ def get_ip():
     manage_account_list = get_stat_id_dict()[manage_id]
     ret = get_stat_service(manage_account_list)
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
+
+
+@manage_web.route("/backend/manage/manage_credits", methods=['GET'])
+@web_exception_handler
+def manage_credits():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    user_id = request.json.get('user_id', None)
+    credit = request.json.get('credit', None)
+
+    f = manager_update_credits(manage_account_id, user_id, credit)
+    if not f:
+        Response(json.dumps(get_web_res_fail("失败"), ensure_ascii=False))
+
+    return Response(json.dumps(get_web_res_suc_with_data("成功"), ensure_ascii=False))
+
+
+@manage_web.route("/backend/manage/manage_infos", methods=['GET'])
+@web_exception_handler
+def manage_infos():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    start_day = request.json.get('start_day', None)
+    end_day = request.json.get('end_day', None)
+
+    manage_infos = query_manage_user_infos(manage_account_id, start_day, end_day)
+    return Response(json.dumps(get_web_res_suc_with_data(manage_infos), ensure_ascii=False))

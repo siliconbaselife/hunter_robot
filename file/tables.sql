@@ -296,3 +296,11 @@ CREATE TABLE `company_info` (
   PRIMARY KEY (`id`),
   KEY `company_id` (`company_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+CREATE TABLE `manage` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `manage_id` varchar(100) NOT NULL DEFAULT "" COMMENT '管理员账户',
+  `user_ids` varchar(100) NOT NULL DEFAULT "" COMMENT '用户id',
+  PRIMARY KEY (`id`),
+  KEY `manage_user_id` (`manage_id`,`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
