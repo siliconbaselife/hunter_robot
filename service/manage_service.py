@@ -336,6 +336,9 @@ def query_user_infos(manage_account_id, start_day, end_day):
         "wait connected": 0,
         "pending": 0
     }
+    for row in rows:
+        status = row[1]
+        user_infos[status] += 1
 
     return len(rows) > 0, user_infos
 
