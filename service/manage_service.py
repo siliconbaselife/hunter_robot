@@ -333,7 +333,7 @@ def query_user_infos(manage_account_id, start_day, end_day):
     rows = select_profile_infos(manage_account_id, start_day, end_day)
     user_infos = {
         "connected": 0,
-        "wait connected": 0,
+        "wait connect": 0,
         "pending": 0
     }
     for row in rows:
@@ -350,7 +350,7 @@ def query_manage_user_infos(manage_account_id, start_day, end_day):
 
     all_infos = {
         "connected": 0,
-        "wait connected": 0,
+        "wait connect": 0,
         "pending": 0
     }
     user_infos = []
@@ -364,7 +364,7 @@ def query_manage_user_infos(manage_account_id, start_day, end_day):
         user_info["active"] = active
 
         all_infos["connected"] += infos["connected"]
-        all_infos["wait connected"] += infos["wait connected"]
+        all_infos["wait connect"] += infos["wait connect"]
         all_infos["pending"] += infos["pending"]
 
         user_infos.append(user_info)
