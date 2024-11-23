@@ -356,7 +356,7 @@ def query_manage_user_infos(manage_account_id, start_day, end_day):
 
         user_credit = query_user_credit(user_id)
         user_info["credit"] = user_credit
-        active, infos = query_user_infos(manage_account_id, start_day, end_day)
+        active, infos = query_user_infos(user_id, start_day, end_day)
         user_info["user_infos"] = infos
         user_info["active"] = active
 
