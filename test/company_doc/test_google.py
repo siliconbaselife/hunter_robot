@@ -46,7 +46,7 @@ def is_website(link, website):
 def google_search(company_name, website):
     rs = tool.run(company_name)
     num = 0
-    docs = []
+    google_docs = []
     for r in rs:
         link = r["link"]
         if is_website(link, website):
@@ -68,11 +68,11 @@ def google_search(company_name, website):
         doc = doc.replace("\n", " ")
         doc = doc.replace("\'", " ")
         doc = doc.replace("\"", " ")
-        docs.append(doc)
+        google_docs.append(doc)
         if num >= 5:
             break
 
-    return docs
+    return google_docs
 
 
 def run():
