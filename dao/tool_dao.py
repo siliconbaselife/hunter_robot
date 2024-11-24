@@ -638,7 +638,6 @@ def update_company_website_info(company_id, website_doc):
 
 def update_company_google_search_info(company_id, google_search_doc):
     update = f"update company_info set google_search_doc = '{google_search_doc}' where company_id = '{company_id}'"
-    print(update)
     dbm.update(update)
 
 

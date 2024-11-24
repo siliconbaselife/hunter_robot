@@ -84,10 +84,10 @@ def run():
         linkedin_doc = linkedin_doc[1:]
         linkedin_doc = linkedin_doc[:-1]
 
-        google_search_doc = company_info["google_search_doc"]
-        if google_search_doc is not None:
-            print("已经有搜索内容")
-            continue
+        # google_search_doc = company_info["google_search_doc"]
+        # if google_search_doc is not None:
+        #     print("已经有搜索内容")
+        #     continue
 
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
