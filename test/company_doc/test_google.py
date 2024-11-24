@@ -32,10 +32,10 @@ def is_website(link, website):
     print(f"is_website {link} {name1} {website} {name2}")
 
     if "linkedin" in link:
-        return False
+        return True
 
     if "youtube" in link:
-        return False
+        return True
 
     if name1 != name2:
         return False
