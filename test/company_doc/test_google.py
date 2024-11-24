@@ -92,7 +92,7 @@ def run():
         website = linkedin_info["website"]
         company_name = linkedin_info["name"]
         docs = google_search(company_name, website)
-        update_company_google_search_info(company_id, docs)
+        update_company_google_search_info(company_id, json.dumps(docs))
 
 
 if __name__ == "__main__":
