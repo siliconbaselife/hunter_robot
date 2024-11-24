@@ -68,6 +68,7 @@ def google_search(company_name, website):
         doc = doc.replace("\n", " ")
         doc = doc.replace("\'", " ")
         doc = doc.replace("\"", " ")
+        doc = doc.replace("\t", " ")
         google_docs.append(doc)
         if num >= 5:
             break
