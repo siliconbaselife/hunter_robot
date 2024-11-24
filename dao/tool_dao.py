@@ -621,17 +621,23 @@ def add_company_linkedin_doc(company_id, linkedin_doc):
 
 
 def query_company_infos():
-    query = f"select company_id, linkedin_doc, website from company_info"
+    query = f"select company_id, linkedin_doc, website, google_search_doc from company_info"
     rows = dbm.query(query)
 
     company_infos = []
     for row in rows:
-        company_infos.append({"company_id": row[0], "linkedin_doc": row[1], "website": row[2]})
+        company_infos.append(
+            {"company_id": row[0], "linkedin_doc": row[1], "website": row[2], "google_search_doc": row[3]})
     return company_infos
 
 
 def update_company_website_info(company_id, website_doc):
     update = f"update company_info set website = '{website_doc}' where company_id = '{company_id}'"
+    dbm.update(update)
+
+
+def update_company_google_search_info(company_id, google_search_doc):
+    update = f"update company_info set google_search_doc = '{google_search_doc}' where company_id = '{company_id}'"
     dbm.update(update)
 
 
