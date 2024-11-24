@@ -37,6 +37,9 @@ def is_website(link, website):
     if "youtube" in link:
         return True
 
+    if "wikipedia" in link:
+        return True
+
     if name1 != name2:
         return False
 
