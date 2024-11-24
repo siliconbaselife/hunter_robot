@@ -34,6 +34,9 @@ def is_website(link, website):
     if "linkedin" in link:
         return False
 
+    if "youtube" in link:
+        return False
+
     if name1 != name2:
         return False
 
@@ -59,13 +62,15 @@ def google_search(company_name, website):
             continue
 
         num += 1
-        doc = str(docs[0])
+        doc = str(docs[0].page_content)
         doc = doc[:1000]
         doc = doc.replace('\\', ' ')
         doc = doc.replace("\n", " ")
         doc = doc.replace("\'", " ")
         doc = doc.replace("\"", " ")
         docs.append(doc)
+        if num >= 5:
+            break
 
     return docs
 
