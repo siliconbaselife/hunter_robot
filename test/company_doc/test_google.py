@@ -80,7 +80,7 @@ def run():
 
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
-        company_name = company_info["name"]
+        company_name = linkedin_info["name"]
         docs = google_search(company_name, website)
         update_company_google_search_info(company_id, docs)
 
