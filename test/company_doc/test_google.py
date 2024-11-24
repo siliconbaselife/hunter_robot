@@ -1,5 +1,6 @@
 import urllib3
 import json
+import os
 from dao.tool_dao import query_company_infos
 from dao.tool_dao import update_company_google_search_info
 from langchain_core.tools import Tool
