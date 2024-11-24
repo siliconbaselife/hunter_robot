@@ -8,6 +8,9 @@ from langchain_community.document_loaders import WebBaseLoader
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+os.environ["GOOGLE_CSE_ID"] = "a5bb86389c8d54e04"
+os.environ["GOOGLE_API_KEY"] = "AIzaSyADsE884QVkWz_Y8X1zJMvGl3lVmJ-IbZc"
+
 search = GoogleSearchAPIWrapper(k=10)
 
 
