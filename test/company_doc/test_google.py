@@ -70,7 +70,6 @@ def run():
     for company_info in company_infos:
         company_id = company_info["company_id"]
         linkedin_doc = company_info["linkedin_doc"]
-        company_name = company_info["name"]
         linkedin_doc = linkedin_doc[1:]
         linkedin_doc = linkedin_doc[:-1]
 
@@ -81,6 +80,7 @@ def run():
 
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
+        company_name = company_info["name"]
         docs = google_search(company_name, website)
         update_company_google_search_info(company_id, docs)
 
