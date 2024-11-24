@@ -63,7 +63,7 @@ def google_search(company_name, website):
 
         num += 1
         doc = str(docs[0].page_content)
-        doc = doc[:1000]
+        doc = doc[:2000]
         doc = doc.replace('\\', ' ')
         doc = doc.replace("\n", " ")
         doc = doc.replace("\'", " ")
