@@ -30,6 +30,10 @@ def is_website(link, website):
     name1 = link.replace("http://", "").replace("https://", "").replace("www.", "").split(".")[0]
     name2 = website.replace("http://", "").replace("https://", "").replace("www.", "").split(".")[0]
     print(f"is_website {link} {name1} {website} {name2}")
+
+    if "linkedin" in link:
+        return False
+
     if name1 != name2:
         return False
 
@@ -43,6 +47,7 @@ def google_search(company_name, website):
     for r in rs:
         link = r["link"]
         if is_website(link, website):
+            print("链接不需要获取")
             continue
 
         try:
@@ -50,7 +55,7 @@ def google_search(company_name, website):
             loader.requests_kwargs = {'verify': False, "timeout": 10}
             docs = loader.load()
         except BaseException as e:
-            print(f"googleSearchAgent 链接 {link} 获取不到内容")
+            print(f"google_search 链接 {link} 获取不到内容")
             continue
 
         num += 1
