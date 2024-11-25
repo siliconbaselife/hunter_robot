@@ -30,7 +30,7 @@ if __name__ == "__main__":
         if google_search_doc is not None:
             company_info["google_search_doc"] = json.loads(google_search_doc, strict=False)
         else:
-            company_info["google_search_doc"] = None
+            company_info["google_search_doc"] = []
 
         with open(os.path.join(dir, f"{i}.json"), 'w') as f:
             f.write(json.dumps(company_info))
