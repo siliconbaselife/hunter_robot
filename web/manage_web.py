@@ -1234,7 +1234,7 @@ def meta_config():
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
 
 
-@manage_web.route("/backend/manage/statistic", methods=['GET'])
+@manage_web.route("/backend/manage/statistic", methods=['POST'])
 @web_exception_handler
 def get_ip():
     manage_id = request.args.get('manage_id')
@@ -1245,7 +1245,7 @@ def get_ip():
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 
-@manage_web.route("/backend/manage/manage_credits", methods=['GET'])
+@manage_web.route("/backend/manage/manage_credits", methods=['POST'])
 @web_exception_handler
 def manage_credits():
     cookie_user_name = request.cookies.get('user_name', None)
@@ -1264,7 +1264,7 @@ def manage_credits():
     return Response(json.dumps(get_web_res_suc_with_data("成功"), ensure_ascii=False))
 
 
-@manage_web.route("/backend/manage/manage_infos", methods=['GET'])
+@manage_web.route("/backend/manage/manage_infos", methods=['POST'])
 @web_exception_handler
 def manage_infos():
     cookie_user_name = request.cookies.get('user_name', None)
