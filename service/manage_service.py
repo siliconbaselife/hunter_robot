@@ -362,6 +362,7 @@ def query_manage_user_infos(manage_account_id, start_day, end_day):
         active, infos = query_user_infos(user_id, start_day, end_day)
         user_info["user_infos"] = infos
         user_info["active"] = active
+        user_info["user_id"] = user_id
 
         all_infos["connected"] += infos["connected"]
         all_infos["wait connect"] += infos["wait connect"]
