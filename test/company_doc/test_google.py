@@ -61,7 +61,7 @@ def google_search(company_name, website):
             loader.requests_kwargs = {'verify': False, "timeout": 10}
             docs = loader.load()
         except BaseException as e:
-            print(f"google_search 链接 {link} 获取不到内容")
+            print(f"google_search 公司 {company_name} 获取不到内容")
             continue
 
         num += 1
