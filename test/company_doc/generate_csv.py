@@ -13,7 +13,7 @@ if __name__ == "__main__":
     os.makedirs(dir)
 
     for i, row in enumerate(rows):
-        company_id, linkedin_doc, website_doc = row
+        company_id, linkedin_doc, website_doc, google_search_doc = row
         # print(linkedin_doc)
         # linkedin_doc = linkedin_doc.replace('\n', '\\n')
         # linkedin_doc = linkedin_doc.replace('\\"', ' ')
@@ -26,6 +26,7 @@ if __name__ == "__main__":
         company_info = json.loads(linkedin_doc, strict=False)
         company_info["company_id"] = company_id
         company_info["website_doc"] = website_doc
+        company_info["google_search_doc"] = google_search_doc
         with open(os.path.join(dir, f"{i}.json"), 'w') as f:
             f.write(json.dumps(company_info))
 
