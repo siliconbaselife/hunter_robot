@@ -51,12 +51,12 @@ def google_search(company_name, website):
     num = 0
     google_docs = []
     for r in rs:
-        link = r["link"]
-        if is_website(link, website):
-            print("链接不需要获取")
-            continue
-
         try:
+            link = r["link"]
+            if is_website(link, website):
+                print("链接不需要获取")
+                continue
+
             loader = WebBaseLoader(link)
             loader.requests_kwargs = {'verify': False, "timeout": 10}
             docs = loader.load()
@@ -87,10 +87,10 @@ def run():
         linkedin_doc = linkedin_doc[1:]
         linkedin_doc = linkedin_doc[:-1]
 
-        # google_search_doc = company_info["google_search_doc"]
-        # if google_search_doc is not None:
-        #     print("已经有搜索内容")
-        #     continue
+        google_search_doc = company_info["google_search_doc"]
+        if google_search_doc is not None:
+            print("已经有搜索内容")
+            continue
 
         linkedin_info = json.loads(linkedin_doc)
         website = linkedin_info["website"]
