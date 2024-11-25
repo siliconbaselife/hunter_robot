@@ -26,7 +26,7 @@ if __name__ == "__main__":
         company_info = json.loads(linkedin_doc, strict=False)
         company_info["company_id"] = company_id
         company_info["website_doc"] = website_doc
-        company_info["google_search_doc"] = json.loads(google_search_doc)
+        company_info["google_search_doc"] = json.loads(google_search_doc, strict=False)
         with open(os.path.join(dir, f"{i}.json"), 'w') as f:
             f.write(json.dumps(company_info))
 
