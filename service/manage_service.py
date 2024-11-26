@@ -317,12 +317,12 @@ def add_manage_user_id(manage_account_id, user_id):
 
 
 def manager_update_credits(manage_account_id, user_id, credit):
-    manage_credit = query_user_credit(manage_account_id)
+    manage_credit = query_user_credit_new(manage_account_id)
 
     if credit > 0 and manage_credit < credit:
         return False
 
-    user_credit = query_user_credit(user_id)
+    user_credit = query_user_credit_new(user_id)
     update_user_credit(user_id, user_credit + credit)
 
     update_user_credit(manage_account_id, manage_credit + credit)
