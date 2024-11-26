@@ -370,6 +370,8 @@ def query_manage_user_infos(manage_account_id, start_day, end_day):
 
         user_infos.append(user_info)
 
+    sorted(user_infos, key=lambda user_info : user_info["active"] != "active")
+
     manage_infos = {}
     manage_infos["user_infos"] = user_infos
     manage_infos["all_infos"] = all_infos
