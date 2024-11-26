@@ -213,6 +213,16 @@ def select_manage_users(manage_account_id):
     return user_ids
 
 
+def add_manage_user(manage_account_id, user_id):
+    select = f"select count(*) from manage where manage_id = '{manage_account_id}' and user_id = '{user_id}'"
+    rows = dbm.query(select)
+    if rows[0][0] > 0:
+        return
+
+    insert = f"insert into manage(manage_id, user_id) values('{manage_account_id}', '{user_id}')"
+    dbm.insert(insert)
+
+
 def select_manage_user(manage_account_id, user_id):
     sql = f"select count(*) from manage where manage_id = '{manage_account_id}' and user_id = '{user_id}'"
     rows = dbm.query(sql)
