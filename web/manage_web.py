@@ -1278,3 +1278,5 @@ def manage_infos():
 
     manage_infos = query_manage_user_infos(manage_account_id, start_day, end_day)
     return Response(json.dumps(get_web_res_suc_with_data(manage_infos), ensure_ascii=False))
+
+

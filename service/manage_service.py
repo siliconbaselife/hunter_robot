@@ -325,7 +325,7 @@ def manager_update_credits(manage_account_id, user_id, credit):
     user_credit = query_user_credit_new(user_id)
     update_user_credit(user_id, user_credit + credit)
 
-    update_user_credit(manage_account_id, manage_credit + credit)
+    update_user_credit(manage_account_id, manage_credit - credit)
     return True
 
 
