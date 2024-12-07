@@ -892,7 +892,6 @@ def send_email_content_web():
             return Response(json.dumps(get_web_res_fail(msg), ensure_ascii=False))
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
-
 @tools_web.route("/backend/tools/sendEmailContents", methods=['POST'])
 @web_exception_handler
 def send_email_contents_web():
@@ -907,10 +906,34 @@ def send_email_contents_web():
     else:
         manage_account_id = decrypt(cookie_user_name, key)
 
+    # type: 'google_account' | 'smtp'
+    type = request.json.get('type', 'smtp')
+    openid = request.json.get('openid', '')
+
     logger.info(
-        f"send_email_content_web => manage: {manage_account_id} send email to candidate_ids: {candidate_ids} title: {title} ")
-    send_email_contents(manage_account_id, platform, candidate_ids, title, content)
+        f"send_email_content_web => manage: {manage_account_id} send email to candidate_ids: {candidate_ids} title: {title} type: {type} openid: {openid}")
+    
+    send_email_contents(manage_account_id, platform, candidate_ids, title, content, type, openid)
     return Response(json.dumps(get_web_res_suc_with_data("成功"), ensure_ascii=False))
+
+# @tools_web.route("/backend/tools/sendEmailContents", methods=['POST'])
+# @web_exception_handler
+# def send_email_contents_web():
+#     platform = request.json.get('platform', '')
+#     candidate_ids = request.json.get('candidate_ids', [])
+#     title = request.json.get('title', None)
+#     content = request.json.get('content', None)
+
+#     cookie_user_name = request.json.get('user_name', None)
+#     if cookie_user_name == None:
+#         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+#     else:
+#         manage_account_id = decrypt(cookie_user_name, key)
+
+#     logger.info(
+#         f"send_email_content_web => manage: {manage_account_id} send email to candidate_ids: {candidate_ids} title: {title} ")
+#     send_email_contents(manage_account_id, platform, candidate_ids, title, content)
+#     return Response(json.dumps(get_web_res_suc_with_data("成功"), ensure_ascii=False))
 
 
 @tools_web.route("/backend/tools/createProfileTag", methods=['POST'])
