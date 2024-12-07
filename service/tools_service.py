@@ -21,6 +21,8 @@ from dao.manage_dao import get_job_name_by_id
 from dao.contact_bank_dao import *
 import json5
 import re
+import threading
+
 from os.path import basename
 from service.extension_service import refresh_contact
 import smtplib
@@ -2027,6 +2029,70 @@ def send_email_gmail(email_from, email_to, pwd, subject, body):
         # Quit the server
         server.quit()
     return ret
+
+
+def send_email_contents(manage_account_id, platform, candidate_ids, title, content):
+    logger.info(f"send_email_contents manage_account_id: {manage_account_id} candidate_ids: {candidate_ids} send email")
+    threads = []
+    for candidate_id in candidate_ids:
+        t = threading.Thread(target=send_email_content_raw,
+                             args=(manage_account_id, platform, candidate_id, title, content))
+        t.start()
+        threads.append(t)
+
+    for t in threads:
+        t.join()
+
+    logger.info(f"send_email_contents manage_account_id: {manage_account_id} candidate_ids: {candidate_ids} finished")
+
+
+def send_email_content_raw(manage_account_id, platform, candidate_id, email_title, content):
+    rows = query_extension_user_link(manage_account_id, candidate_id, "personal_email")
+    if len(rows) == 0:
+        logger.info(f"manage_account_id has no personal_email candidate_id: {candidate_id}")
+        return
+
+    f, person_emails, phones = query_contact_by_profile_id(candidate_id)
+    if not f:
+        logger.info(f"联系方式没有 {candidate_id} 的记录")
+        return
+
+    if len(person_emails) == 0:
+        logger.info(f"{candidate_id} 没有 personal email的记录")
+        return
+
+    email_to = person_emails[0]
+
+    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
+    if len(rows) == 0:
+        logger.info(f"manage_account_id: {manage_account_id} 没有 {candidate_id} 的id")
+        return
+
+    raw_profile = deserialize_raw_profile(rows[0][1])
+    profile = parse_profile(raw_profile, 'no', True)
+    profile = parse_profile(profile)
+
+    name = ""
+    if "name" in profile:
+        name = profile["name"]
+
+    title = ""
+    if "title" in profile:
+        title = profile["title"]
+
+    company = ""
+    if "company" in profile.keys():
+        company = profile["company"]
+
+    send_title = email_title.replace("{name}", name)
+    send_title = send_title.replace("{title}", title)
+    send_title = send_title.replace("{company}", company)
+
+    send_content = content.replace("{name}", name)
+    send_content = send_content.replace("{title}", title)
+    send_content = send_content.replace("{company}", company)
+
+    send_email_content(manage_account_id, platform, candidate_id, send_title, send_content, email_to)
 
 
 def send_email_content(manage_account_id, platform, candidate_id, title, content, email_to):
