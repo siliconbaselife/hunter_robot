@@ -243,26 +243,26 @@ def send_email_contents(manage_account_id, platform, candidate_ids, title, conte
 def send_email_content_raw(manage_account_id, platform, candidate_id, email_title, content, type, openid):
     rows = query_extension_user_link(manage_account_id, candidate_id, "personal_email")
     if len(rows) == 0:
-        logger.info(f"manage_account_id has no personal_email candidate_id: {candidate_id}")
+        logger.info(f"send_email_content_raw => manage_account_id {manage_account_id} has no personal_email candidate_id: {candidate_id}")
         return
 
     f, person_emails, phones = query_contact_by_profile_id(candidate_id)
     if not f:
-        logger.info(f"联系方式没有 {candidate_id} 的记录")
+        logger.info(f"send_email_content_raw => 联系方式没有 {candidate_id} 的记录")
         return
 
     if len(person_emails) == 0:
-        logger.info(f"{candidate_id} 没有 personal email的记录")
+        logger.info(f"send_email_content_raw => {candidate_id} 没有 personal email的记录")
         return
 
     email_to = person_emails[0]
 
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0:
-        logger.info(f"manage_account_id: {manage_account_id} 没有 {candidate_id} 的id")
+        logger.info(f"send_email_content_raw => manage_account_id: {manage_account_id} 没有 {candidate_id} 的id")
         return
 
-    logger.info(f"send_email_content_raw {type(rows[0][1])} rows: {rows[0][1]}")
+    logger.info(f"send_email_content_raw => send_email_content_raw {type(rows[0][1])} rows: {rows[0][1]}")
     raw_profile = deserialize_raw_profile(rows[0][1])
     profile = parse_profile(raw_profile, 'no', True)
     profile = parse_profile(profile)
@@ -291,3 +291,4 @@ def send_email_content_raw(manage_account_id, platform, candidate_id, email_titl
         send_message_by_gmail(manage_account_id, openid, platform, candidate_id, send_title, send_content, email_to)
     else:
         send_email_content(manage_account_id, platform, candidate_id, send_title, send_content, email_to)
+    logger.info(f"send_email_content_raw => manage_account_id {manage_account_id} send successed candidate_id: {candidate_id}")
