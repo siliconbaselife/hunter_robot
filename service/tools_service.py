@@ -33,8 +33,6 @@ from dao.contact_bank_dao import query_user_link_by_id_set, query_contact_by_id_
 from algo.llm_inference import gpt_manager
 from algo.llm_base_model import Prompt
 
-from service.google_service import send_message_by_gmail
-
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
 
