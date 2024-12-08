@@ -266,10 +266,11 @@ def send_email_content_raw(manage_account_id, platform, candidate_id, email_titl
         if len(rows) == 0:
             logger.info(f"send_email_content_raw => manage_account_id: {manage_account_id} 没有 {candidate_id} 的id")
             return
+        raw_profile = rows[0][1]
 
-        logger.info(f"send_email_content_raw => send_email_content_raw rows: {rows[0][1]}")
-        logger.info(f"send_email_content_raw => {type(rows[0][1])}")
-        raw_profile = deserialize_raw_profile(rows[0][1])
+        logger.info(f"send_email_content_raw => send_email_content_raw rows: {raw_profile}")
+        logger.info(f"send_email_content_raw => {type(raw_profile)}")
+        raw_profile = deserialize_raw_profile(raw_profile)
         profile = parse_profile(raw_profile, 'no', True)
         profile = parse_profile(profile)
 
