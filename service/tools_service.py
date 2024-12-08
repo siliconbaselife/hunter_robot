@@ -62,9 +62,11 @@ def cv_str(obj, dent):
 
 
 def deserialize_raw_profile(raw_profile):
+    logger.info(
+        f"1 deserialize_raw_profile => type: {type(raw_profile)} {type(raw_profile) != str} raw_profile: {raw_profile}")
     while type(raw_profile) == tuple:
         raw_profile = raw_profile[0]
-    logger.info(f"deserialize_raw_profile => type: {type(raw_profile)} {type(raw_profile) != str} raw_profile: {raw_profile}")
+    logger.info(f"2 deserialize_raw_profile => type: {type(raw_profile)} {type(raw_profile) != str} raw_profile: {raw_profile}")
     if raw_profile is None or type(raw_profile) != str:
         logger.error("[deserialize_raw_profile] raw profile not str")
         return None
