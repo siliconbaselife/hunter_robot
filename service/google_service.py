@@ -241,6 +241,8 @@ def send_email_contents(manage_account_id, platform, candidate_ids, title, conte
 
 
 def send_email_content_raw(manage_account_id, platform, candidate_id, email_title, content, type, openid):
+    logger.info(
+        f"send_email_content_raw => manage_account_id {manage_account_id} candidate_id: {candidate_id} begin send")
     rows = query_extension_user_link(manage_account_id, candidate_id, "personal_email")
     if len(rows) == 0:
         logger.info(f"send_email_content_raw => manage_account_id {manage_account_id} has no personal_email candidate_id: {candidate_id}")
