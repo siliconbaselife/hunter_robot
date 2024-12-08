@@ -242,7 +242,7 @@ def send_email_contents(manage_account_id, platform, candidate_ids, title, conte
     logger.info(f"send_email_contents manage_account_id: {manage_account_id} candidate_ids: {candidate_ids} finished")
 
 
-def send_email_content_raw(manage_account_id, platform, candidate_id, email_title, content, type, openid):
+def send_email_content_raw(manage_account_id, platform, candidate_id, email_title, content, email_type, openid):
     logger.info(
         f"send_email_content_raw => manage_account_id {manage_account_id} candidate_id: {candidate_id} begin send")
     try:
@@ -294,7 +294,7 @@ def send_email_content_raw(manage_account_id, platform, candidate_id, email_titl
         send_content = send_content.replace("{title}", title)
         send_content = send_content.replace("{company}", company)
 
-        if type == "google_account":
+        if email_type == "google_account":
             send_message_by_gmail(manage_account_id, openid, platform, candidate_id, send_title, send_content, email_to)
         else:
             send_email_content(manage_account_id, platform, candidate_id, send_title, send_content, email_to)
