@@ -267,7 +267,7 @@ def send_email_content_raw(manage_account_id, platform, candidate_id, email_titl
             logger.info(f"send_email_content_raw => manage_account_id: {manage_account_id} 没有 {candidate_id} 的id")
             return
 
-        logger.info(f"send_email_content_raw => send_email_content_raw {type(rows[0][1])} rows: {rows[0][1]}")
+        logger.info(f"send_email_content_raw => send_email_content_raw rows: {rows[0][1]}")
         raw_profile = deserialize_raw_profile(rows[0][1])
         profile = parse_profile(raw_profile, 'no', True)
         profile = parse_profile(profile)
