@@ -1,4 +1,6 @@
 import base64
+import traceback
+
 import requests
 from json import dumps, loads
 from utils.log import get_logger
@@ -243,54 +245,57 @@ def send_email_contents(manage_account_id, platform, candidate_ids, title, conte
 def send_email_content_raw(manage_account_id, platform, candidate_id, email_title, content, type, openid):
     logger.info(
         f"send_email_content_raw => manage_account_id {manage_account_id} candidate_id: {candidate_id} begin send")
-    rows = query_extension_user_link(manage_account_id, candidate_id, "personal_email")
-    if len(rows) == 0:
-        logger.info(f"send_email_content_raw => manage_account_id {manage_account_id} has no personal_email candidate_id: {candidate_id}")
-        return
+    try:
+        rows = query_extension_user_link(manage_account_id, candidate_id, "personal_email")
+        if len(rows) == 0:
+            logger.info(f"send_email_content_raw => manage_account_id {manage_account_id} has no personal_email candidate_id: {candidate_id}")
+            return
 
-    f, person_emails, phones = query_contact_by_profile_id(candidate_id)
-    if not f:
-        logger.info(f"send_email_content_raw => 联系方式没有 {candidate_id} 的记录")
-        return
+        f, person_emails, phones = query_contact_by_profile_id(candidate_id)
+        if not f:
+            logger.info(f"send_email_content_raw => 联系方式没有 {candidate_id} 的记录")
+            return
 
-    if len(person_emails) == 0:
-        logger.info(f"send_email_content_raw => {candidate_id} 没有 personal email的记录")
-        return
+        if len(person_emails) == 0:
+            logger.info(f"send_email_content_raw => {candidate_id} 没有 personal email的记录")
+            return
 
-    email_to = person_emails[0]
+        email_to = person_emails[0]
 
-    rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
-    if len(rows) == 0:
-        logger.info(f"send_email_content_raw => manage_account_id: {manage_account_id} 没有 {candidate_id} 的id")
-        return
+        rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
+        if len(rows) == 0:
+            logger.info(f"send_email_content_raw => manage_account_id: {manage_account_id} 没有 {candidate_id} 的id")
+            return
 
-    logger.info(f"send_email_content_raw => send_email_content_raw {type(rows[0][1])} rows: {rows[0][1]}")
-    raw_profile = deserialize_raw_profile(rows[0][1])
-    profile = parse_profile(raw_profile, 'no', True)
-    profile = parse_profile(profile)
+        logger.info(f"send_email_content_raw => send_email_content_raw {type(rows[0][1])} rows: {rows[0][1]}")
+        raw_profile = deserialize_raw_profile(rows[0][1])
+        profile = parse_profile(raw_profile, 'no', True)
+        profile = parse_profile(profile)
 
-    name = ""
-    if "name" in profile:
-        name = profile["name"]
+        name = ""
+        if "name" in profile:
+            name = profile["name"]
 
-    title = ""
-    if "title" in profile:
-        title = profile["title"]
+        title = ""
+        if "title" in profile:
+            title = profile["title"]
 
-    company = ""
-    if "company" in profile.keys():
-        company = profile["company"]
+        company = ""
+        if "company" in profile.keys():
+            company = profile["company"]
 
-    send_title = email_title.replace("{name}", name)
-    send_title = send_title.replace("{title}", title)
-    send_title = send_title.replace("{company}", company)
+        send_title = email_title.replace("{name}", name)
+        send_title = send_title.replace("{title}", title)
+        send_title = send_title.replace("{company}", company)
 
-    send_content = content.replace("{name}", name)
-    send_content = send_content.replace("{title}", title)
-    send_content = send_content.replace("{company}", company)
+        send_content = content.replace("{name}", name)
+        send_content = send_content.replace("{title}", title)
+        send_content = send_content.replace("{company}", company)
 
-    if type == "google_account":
-        send_message_by_gmail(manage_account_id, openid, platform, candidate_id, send_title, send_content, email_to)
-    else:
-        send_email_content(manage_account_id, platform, candidate_id, send_title, send_content, email_to)
+        if type == "google_account":
+            send_message_by_gmail(manage_account_id, openid, platform, candidate_id, send_title, send_content, email_to)
+        else:
+            send_email_content(manage_account_id, platform, candidate_id, send_title, send_content, email_to)
+    except BaseException as e:
+        logger.error(traceback.format_exc())
     logger.info(f"send_email_content_raw => manage_account_id {manage_account_id} send successed candidate_id: {candidate_id}")
