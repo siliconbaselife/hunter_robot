@@ -23,8 +23,7 @@ from utils.utils import decrypt, user_code_cache, google_oauth_cache
 from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
-from service.google_service import authorize_on_google, get_credentials_on_google, get_userinfo_by_credentials, \
-    get_accounts, create_account, revoke_account, send_message_by_gmail
+from service.google_service import *
 import time
 
 logger = get_logger(config['log']['log_file'])

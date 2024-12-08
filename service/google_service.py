@@ -225,6 +225,21 @@ def send_message_by_gmail(manage_account_id, openid, platform, candidate_id, tit
         return None, error.error_details
 
 
+def send_email_contents(manage_account_id, platform, candidate_ids, title, content, type, openid):
+    logger.info(f"send_email_contents manage_account_id: {manage_account_id} candidate_ids: {candidate_ids} send email")
+    threads = []
+    for candidate_id in candidate_ids:
+        t = threading.Thread(target=send_email_content_raw,
+                             args=(manage_account_id, platform, candidate_id, title, content, type, openid))
+        t.start()
+        threads.append(t)
+
+    for t in threads:
+        t.join()
+
+    logger.info(f"send_email_contents manage_account_id: {manage_account_id} candidate_ids: {candidate_ids} finished")
+
+
 def send_email_content_raw(manage_account_id, platform, candidate_id, email_title, content, type, openid):
     rows = query_extension_user_link(manage_account_id, candidate_id, "personal_email")
     if len(rows) == 0:

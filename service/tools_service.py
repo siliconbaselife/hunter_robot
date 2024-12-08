@@ -2030,19 +2030,7 @@ def send_email_gmail(email_from, email_to, pwd, subject, body):
         server.quit()
     return ret
 
-def send_email_contents(manage_account_id, platform, candidate_ids, title, content, type, openid):
-    logger.info(f"send_email_contents manage_account_id: {manage_account_id} candidate_ids: {candidate_ids} send email")
-    threads = []
-    for candidate_id in candidate_ids:
-        t = threading.Thread(target=send_email_content_raw,
-                             args=(manage_account_id, platform, candidate_id, title, content, type, openid))
-        t.start()
-        threads.append(t)
 
-    for t in threads:
-        t.join()
-
-    logger.info(f"send_email_contents manage_account_id: {manage_account_id} candidate_ids: {candidate_ids} finished")
     
 
 
