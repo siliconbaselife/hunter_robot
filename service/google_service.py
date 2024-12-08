@@ -268,11 +268,9 @@ def send_email_content_raw(manage_account_id, platform, candidate_id, email_titl
             return
         raw_profile = rows[0][1]
 
-        logger.info(f"send_email_content_raw => send_email_content_raw rows: {raw_profile}")
-        logger.info(f"send_email_content_raw => {type(raw_profile)}")
+        # logger.info(f"send_email_content_raw => send_email_content_raw {type(raw_profile)} rows: {raw_profile}")
         raw_profile = deserialize_raw_profile(str(raw_profile))
         profile = parse_profile(raw_profile, 'no', True)
-        profile = parse_profile(profile)
 
         name = ""
         if "name" in profile:
