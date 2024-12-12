@@ -21,7 +21,7 @@ sql_dict = {
 }
 
 
-def new_extension_user(user_id, credit=0):
+def new_extension_user(user_id, credit=400):
     dbm.insert(sql_dict['new_extension_user'].format(user_id, credit))
 
 
