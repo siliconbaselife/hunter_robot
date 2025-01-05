@@ -1665,6 +1665,10 @@ def upload_profile_status(manage_account_id, candidate_id, platform, profile):
     upload_profile_status_dao(manage_account_id, candidate_id, platform, status)
 
 
+def upload_profile_status_only(manage_account_id, candidate_id, platform, status):
+    upload_profile_status_dao(manage_account_id, candidate_id, platform, status)
+
+
 def deassociate_profile_tags(manage_account_id, candidate_id, platform, tags):
     tag_ids = get_check_tag_ids(manage_account_id, tags, platform)
     if not tag_ids:
@@ -2032,10 +2036,6 @@ def send_email_gmail(email_from, email_to, pwd, subject, body):
         # Quit the server
         server.quit()
     return ret
-
-
-    
-
 
 
 # def send_email_contents(manage_account_id, platform, candidate_ids, title, content):

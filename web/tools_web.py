@@ -235,6 +235,23 @@ def download_online_resume():
     return response
 
 
+@tools_web.route("/backend/tools/uploadProfileStatus", methods=['POST'])
+@web_exception_handler
+def upload_profile_status():
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    status = request.json.get('status', 'wait connect')
+    candidate_id = request.json.get('candidate_id', '')
+    upload_profile_status_only(manage_account_id, candidate_id, 'Linkedin', status)
+
+    return Response(json.dumps(get_web_res_suc_with_data('更新成功'), ensure_ascii=False))
+
+
 @tools_web.route("/backend/tools/uploadOnlineResume", methods=['POST'])
 @web_exception_handler
 def upload_online_resume():
