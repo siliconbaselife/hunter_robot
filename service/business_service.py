@@ -263,6 +263,7 @@ def agent_history_list_service(user_id):
     history_list = []
     for row in rows:
         session_id, history = row
+        logger.info(f"agent_history_list_service history => '{history}'")
         msg = json.loads(history, strict=False)[0]["msg"]
         title = msg[:20]
         history_list.append({"session_id": session_id, "title": title})
