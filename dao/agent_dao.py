@@ -64,7 +64,7 @@ def get_history_msgs(user_id, session_id):
 
 
 def update_history_msgs(user_id, session_id, history_msgs_str):
-    history_msgs_str.replace('\\', '')
+    history_msgs_str.replace('\\', ' ')
     history_msgs_str = history_msgs_str.replace("\'", "\\'")
     history_msgs_str = history_msgs_str.replace('\"', '\\"')
     history_msgs_str = history_msgs_str.replace('\n', '\\n')
@@ -73,7 +73,7 @@ def update_history_msgs(user_id, session_id, history_msgs_str):
 
 
 def add_history_msgs(user_id, session_id, history_msgs_str):
-    history_msgs_str.replace('\\', '')
+    history_msgs_str.replace('\\', ' ')
     history_msgs_str = history_msgs_str.replace("\'", "\\'")
     history_msgs_str = history_msgs_str.replace('\"', '\\"')
     history_msgs_str = history_msgs_str.replace('\n', '\\n')
