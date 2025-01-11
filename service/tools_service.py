@@ -1600,10 +1600,10 @@ def query_profile_tag_by_user_new_v2(manage_account_id, platform):
     top_num = 0
     for row in rows:
         if row[3] == 1:
-            tags.append({"tag": row[1], "tag_str": row[2], "top": top_num})
+            tags.append({"tag": row[1], "tag_str": row[2], "top": top_num, "type": row[4]})
             top_num += 1
         else:
-            tags.append({"tag": row[1], "tag_str": row[2], "top": -1})
+            tags.append({"tag": row[1], "tag_str": row[2], "top": -1, "type": row[4]})
     return tags, None
 
 
@@ -2171,6 +2171,13 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
         "flow_infos": flow_infos,
         "status_infos": status_infos,
         "companys": list(companys_dict)
+    }
+
+    return infos
+
+def search_tag_flow_infos_v2(manage_account_id, platform, tag):
+    infos = {
+
     }
 
     return infos

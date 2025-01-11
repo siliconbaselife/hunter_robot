@@ -1430,6 +1430,22 @@ def search_tag_infos():
         f"search_tag_infos manage_account_id: {manage_account_id} platform: {platform} tag: {tag} infos: {infos}")
     return Response(json.dumps(get_web_res_suc_with_data(infos), ensure_ascii=False))
 
+@tools_web.route("/backend/tools/searchTagInfos/v2", methods=['POST'])
+@web_exception_handler
+def search_tag_infos_v2():
+    tag = request.json.get('tag', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    platform = request.json.get('platform', '')
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    infos = search_tag_flow_infos_v2(manage_account_id, platform, tag)
+    logger.info(
+        f"search_tag_infos manage_account_id: {manage_account_id} platform: {platform} tag: {tag} infos: {infos}")
+    return Response(json.dumps(get_web_res_suc_with_data(infos), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/changeFlowStatus", methods=['POST'])
 @web_exception_handler

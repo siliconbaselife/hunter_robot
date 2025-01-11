@@ -226,7 +226,7 @@ def query_profile_id_tag(manage_account_id, platform):
 
 
 def query_profile_id_tag_v2(manage_account_id, platform):
-    sql = f"select id, tag, tag_str, top from user_profile_tag where manage_account_id = '{manage_account_id}' and platform = '{platform}' and visible = 1 order by update_time desc;"
+    sql = f"select id, tag, tag_str, top, tag_type from user_profile_tag where manage_account_id = '{manage_account_id}' and platform = '{platform}' and visible = 1 order by update_time desc;"
     rows = dbm.query(sql)
     return rows
 
