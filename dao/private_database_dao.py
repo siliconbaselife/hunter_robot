@@ -7,8 +7,10 @@ logger = get_logger(config['log']['log_file'])
 table_names = {}
 
 
-def query_private_tags(tag):
-    select_columns = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table_names[tag]}'"
+def query_private_tags(manage_account_id, tag):
+    table = table_names[manage_account_id][tag]
+
+    select_columns = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table}'"
     raw_columns = dbm.query(select_columns)
     columns = []
     for column in raw_columns:
@@ -23,24 +25,24 @@ def query_private_tags(tag):
     tag_infos = {}
     for column in columns:
         tag_infos[column] = {}
-        sql_type = f"DESCRIBE '{table_names[tag]}' `tag_type`"
+        sql_type = f"DESCRIBE '{table}' `tag_type`"
         rows = dbm.query(sql_type)
         column_type = rows[0][1]
         if column_type == 'int':
             tag_infos[column]["column_type"] = "number"
         else:
             tag_infos[column]["column_type"] = "varchar(255)"
-            sql = f"select distinct('{column}') from '{table_names[tag]}'"
+            sql = f"select distinct('{column}') from '{table}'"
             rows = dbm.query(sql)
             tag_infos[column]["enumeration"] = []
             for row in rows:
-                tag_infos[column]["enumeration"].append(row)
+                tag_infos[column]["enumeration"].append(row[0])
 
     return tag_infos
 
 
-def query_private_tag_filter_num(tag, column_infos):
-    table_name = table_names[tag]
+def query_private_tag_filter_num(manage_account_id, tag, column_infos):
+    table_name = table_names[manage_account_id][tag]
     sql = f'select count(*) from {table_name}'
     if len(column_infos) > 0:
         sql += ' where '
@@ -62,9 +64,9 @@ def query_private_tag_filter_num(tag, column_infos):
     return rows[0][0]
 
 
-def query_private_tag_filter_profiles(tag, column_infos):
-    table_name = table_names[tag]
-    sql = f'select profile from {table_name}'
+def query_private_tag_filter_profiles(manage_account_id, tag, column_infos, page, limit):
+    table_name = table_names[manage_account_id][tag]
+    sql = f'select candidate_id, profile from {table_name}'
     if len(column_infos) > 0:
         sql += ' where '
 
@@ -79,6 +81,8 @@ def query_private_tag_filter_profiles(tag, column_infos):
 
         if i < len(column_infos.keys()) - 1:
             sql += "and"
+
+    sql += f" limit {page}, {limit}"
 
     rows = dbm.query(sql)
 

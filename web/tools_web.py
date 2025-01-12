@@ -1368,6 +1368,27 @@ def search_profile_by_tag_web_v2():
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tools/searchProfileInfoByTag/v3", methods=['POST'])
+@web_exception_handler
+def search_profile_by_tag_web_v3():
+    page = request.json.get('page', 1)
+    limit = request.json.get('limit', 20)
+    tag = request.json.get('tag', '')
+    filters = request.json.get("filters", "{}")
+
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    data, _ = search_profile_by_tag_v3(manage_account_id, page, limit, tag, filters)
+
+    logger.info(
+        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} limit: {limit} filters: {filters}")
+    return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
+
+
 @tools_web.route("/backend/tools/searchProfileInfoAll/v2", methods=['POST'])
 @web_exception_handler
 def search_profile_all_web_v2():
@@ -1429,6 +1450,7 @@ def search_tag_infos():
     logger.info(
         f"search_tag_infos manage_account_id: {manage_account_id} platform: {platform} tag: {tag} infos: {infos}")
     return Response(json.dumps(get_web_res_suc_with_data(infos), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/searchTagInfos/v2", methods=['POST'])
 @web_exception_handler
