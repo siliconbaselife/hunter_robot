@@ -43,12 +43,11 @@ def deal_profile(profile):
         "service_country": res["service_country"],
         "rank_of_position": res["rank_of_position"],
         "department": res["department"],
-        "cooperative_department":  res["cooperative_department"]
+        "cooperative_department": res["cooperative_department"],
+        "profile": profile["profile"]
     }
 
     add_profile(profile_info)
-
-
 
 
 if __name__ == "__main__":
@@ -58,7 +57,7 @@ if __name__ == "__main__":
     profiles = get_huawei_profiles()
     agent = huiweiPeopleAgent()
     print(f"获取到 {len(profiles)} 份简历")
-    for profile in profiles[:50]:
+    for profile in profiles[:10]:
         deal_profile(profile)
 
     print("识别完成")
