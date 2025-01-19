@@ -76,9 +76,8 @@ def query_private_tags(manage_account_id, tag):
         else:
             tag_infos[column] = {}
             tag_infos[column]["column_type"] = "string"
-            sql = f"select distinct('{column}') from '{table}'"
 
-
+            sql = f"select distinct({column}) from {table}"
             tag_infos[column]["enumeration"] = []
             rows = dbm.query(sql)
             for row in rows:
