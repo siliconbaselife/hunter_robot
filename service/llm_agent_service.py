@@ -621,6 +621,39 @@ class SearchMan:
         res = self.comprehend_agent.cal(query, relation_txts)
         return res
 
+class huiweiPeopleAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+
+        output_parser = StrOutputParser()
+        prompt = PromptTemplate(
+            input_variables=["profile"],
+            template='{profile}\n'
+                     '====================================\n'
+                     '以上是一个候选人在linkedin的简历。请帮我对该简历进行分析，并返回json格式。\n'
+                     '需要萃取出的字段如下\n'
+                     'age => 通过学校毕业的时间，大学 + 22，研究生 + 25，高中 + 18\n'
+                     'chinese => 是否是中国人\n'
+                     'graduate_school => 毕业学校，最高学历\n'
+                     'service_or_product_type => 根据简历判断一下，他的服务与产品类型，如果无法判断，给出 "无法判断" 的字段。枚举值有 "手机终端" "手机周边生态" "网络传输" "数字能源-储能" "新能源汽车" "无法判断"\n'
+                     'function_type => 根据简历判断一下，他的职能类型，如果无法判断，给出 "无法判断" 的字段。枚举值有 "运营商-终端业务客户管理" "零售渠道分销" "独立站销售" "数字营销" "电商运营" "Market" "运营商-网络传输客户管理" "国家经理" "销售VP" "PR" "GR" "product sales" '
+                     '"solution" "GTM" "项目管理" "售后" "交付" "战略" "财务" "风控" "采购" "人力" "行政" "供应链管理" "IT" "技术-仿真/软硬件研发" "无法判断"\n'
+                     'service_country => 服务的国家，如果无法判断，给出 "无法判断" 的字段。\n'
+                     'rank_of_position => 根据简历判断一下，他的岗位级别，如果无法判断，给出 "无法判断" 的字段。枚举值有 "manager" "主管" "director" "CXO" "无法判断"\n'
+                     'cooperative_department => 根据简历判断一下，与他协同的部分，如果无法判断，给出 "无法判断" 的字段。枚举值有 "销售协同市场" "产品协同市场" "iot协同市场" "无法判断"'
+        )
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, profile):
+        self.chain.invoke({"profile": profile})
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if "```" in line:
+                continue
+            rres += line
+        return json.loads(res)
+
 
 class OnlineSearchAgent:
     def __init__(self):
