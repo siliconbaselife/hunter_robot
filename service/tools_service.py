@@ -2192,14 +2192,14 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
 
 def search_tag_flow_infos_v2(manage_account_id, platform, tag):
     tag_infos = query_private_tags(manage_account_id, tag)
-    r_infos = {}
-    for column, column_info in tag_infos:
-        if column_info["column_type"] == "number":
-            r_infos[column] = "number"
-        else:
-            r_infos[column] = column_info["enumerate"]
+    # r_infos = {}
+    # for column, column_info in tag_infos:
+    #     if column_info["column_type"] == "number":
+    #         r_infos[column] = "number"
+    #     else:
+    #         r_infos[column] = column_info["enumerate"]
 
-    return r_infos
+    return tag_infos
 
 
 def change_flow_status_service(manage_account_id, platform, tag, candidate_id, flow_status):
