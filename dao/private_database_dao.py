@@ -10,20 +10,6 @@ table_names = {
     }
 }
 
-# column_infos = {
-#     "lishundong2009@163.com": {
-#         "华为" : {
-#             "Age": {
-#                 "column_type": "number"
-#             },
-#             "Name": {
-#                 "column_type": "string"
-#             },
-#             "Company"
-#         }
-#     }
-# }
-
 
 def query_private_tags_old(manage_account_id, tag):
     table = table_names[manage_account_id][tag]
