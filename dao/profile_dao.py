@@ -36,4 +36,5 @@ def add_profile(profile_info):
              f"values('{candidate_id}', '{age}', '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{school_level}', '{five_years_jump_times}', "
     f"'{service_or_product_type}', '{function_type}', '{service_country}', '{rank_of_position}', '{department}', '{cooperative_department}')"
 
+    print(insert)
     dbm.insert(insert)
