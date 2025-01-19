@@ -53,7 +53,7 @@ def query_private_tags_old(manage_account_id, tag):
 
 def query_private_tags(manage_account_id, tag):
     table = table_names[manage_account_id][tag]
-    sql = f"show columns from '{table}'"
+    sql = f"show columns from {table}"
     print(sql)
     rows = dbm.query(sql)
     print(rows)
