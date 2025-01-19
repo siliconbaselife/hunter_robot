@@ -10,8 +10,22 @@ table_names = {
     }
 }
 
+# column_infos = {
+#     "lishundong2009@163.com": {
+#         "华为" : {
+#             "Age": {
+#                 "column_type": "number"
+#             },
+#             "Name": {
+#                 "column_type": "string"
+#             },
+#             "Company"
+#         }
+#     }
+# }
 
-def query_private_tags(manage_account_id, tag):
+
+def query_private_tags_old(manage_account_id, tag):
     table = table_names[manage_account_id][tag]
 
     select_columns = f"SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{table}'"
@@ -22,6 +36,12 @@ def query_private_tags(manage_account_id, tag):
             continue
 
         if column == 'profile':
+            continue
+
+        if column == 'create_time':
+            continue
+
+        if column == 'update_time':
             continue
 
         columns.append(column)
@@ -36,6 +56,35 @@ def query_private_tags(manage_account_id, tag):
             tag_infos[column]["column_type"] = "number"
         else:
             tag_infos[column]["column_type"] = "varchar(255)"
+            sql = f"select distinct('{column}') from '{table}'"
+            rows = dbm.query(sql)
+            tag_infos[column]["enumeration"] = []
+            for row in rows:
+                tag_infos[column]["enumeration"].append(row[0])
+
+    return tag_infos
+
+
+def query_private_tags_old_2(manage_account_id, tag):
+    table = table_names[manage_account_id][tag]
+    sql = f"show columns from '{table}'"
+    rows = dbm.query(sql)
+
+    tag_infos = {}
+    for row in rows:
+        column = row[0]
+        column_type = row[1]
+
+        if column == 'id' or column == 'profile' or column == 'create_time' or column == 'update_time':
+            continue
+
+        if column == 'Name':
+            tag_infos[column]["column_type"] = "string"
+
+        if column_type == 'int':
+            tag_infos[column]["column_type"] = "number"
+        else:
+            tag_infos[column]["column_type"] = "string"
             sql = f"select distinct('{column}') from '{table}'"
             rows = dbm.query(sql)
             tag_infos[column]["enumeration"] = []
