@@ -315,7 +315,7 @@ CREATE TABLE `huawei` (
   `Graduate_School` VARCHAR(255) NOT NULL,
   `Education_Background` VARCHAR(255) NOT NULL,
   `School_Level` VARCHAR(255) NOT NULL,
-  `Five_Years_Jump_Times` int unsigned NOT NULL,
+  `Five_Years_Jump_Times` int NOT NULL,
   `Service_Or_Product_Type` VARCHAR(255) NOT NULL,
   `Function_Type` VARCHAR(255) NOT NULL,
   `Service_Country` VARCHAR(255) NOT NULL,
