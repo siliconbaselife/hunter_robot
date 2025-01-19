@@ -308,7 +308,7 @@ CREATE TABLE `manage` (
 CREATE TABLE `huawei` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `candidate_id` varchar(255) NOT NULL,
-  `Age` int unsigned NOT NULL,
+  `Age` int NOT NULL,
   `Name` VARCHAR(255) NOT NULL,
   `Company` VARCHAR(255) NOT NULL,
   `Chinese` VARCHAR(255) NOT NULL,
