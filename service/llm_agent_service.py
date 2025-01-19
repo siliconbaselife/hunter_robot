@@ -667,7 +667,7 @@ class huiweiPeopleAgent:
             if "```" in line:
                 continue
             rres += line
-        return json.loads(res)
+        return json.loads(rres)
 
 
 class OnlineSearchAgent:
