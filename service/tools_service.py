@@ -92,7 +92,7 @@ def get_education_year(profile):
     has_bachelor = False
     min_education_start_year = 1000000
 
-    if 'educations' in profile or len(profile['educations']) > 0:
+    if 'educations' in profile and len(profile['educations']) > 0:
         for education in profile['educations']:
             if 'degreeInfo' in education and (
                     'Bachelor' in education['degreeInfo'] or 'bachelor' in education['degreeInfo'] or 'Bachelor' in \
