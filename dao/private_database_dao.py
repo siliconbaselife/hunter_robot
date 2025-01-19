@@ -4,7 +4,11 @@ from utils.log import get_logger
 
 logger = get_logger(config['log']['log_file'])
 
-table_names = {}
+table_names = {
+    "lishundong2009@163.com": {
+        "华为": "huawei"
+    }
+}
 
 
 def query_private_tags(manage_account_id, tag):
