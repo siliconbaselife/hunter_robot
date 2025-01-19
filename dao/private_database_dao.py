@@ -63,7 +63,7 @@ def query_private_tags(manage_account_id, tag):
         column = row[0]
         column_type = row[1]
 
-        if column == 'id' or column == 'profile' or column == 'create_time' or column == 'update_time':
+        if column == 'id' or column == 'profile' or column == 'create_time' or column == 'update_time' or column == 'candidate_id':
             continue
 
         if column == 'Name':
