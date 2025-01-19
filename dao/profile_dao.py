@@ -30,11 +30,12 @@ def add_profile(profile_info):
     rank_of_position = profile_info["rank_of_position"]
     department = profile_info["department"]
     cooperative_department = profile_info["cooperative_department"]
+    profile = profile_info["profile"]
 
     insert = f"insert into huawei(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, School_Level, Five_Years_Jump_Times, " \
-             f"Service_Or_Product_Type, Function_type, Service_Country, Rank_Of_Position, Department, Cooperative_Department) " \
+             f"Service_Or_Product_Type, Function_type, Service_Country, Rank_Of_Position, Department, Cooperative_Department, profile) " \
              f"values('{candidate_id}', {age}, '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{school_level}', '{five_years_jump_times}', " \
-    f"'{service_or_product_type}', '{function_type}', '{service_country}', '{rank_of_position}', '{department}', '{cooperative_department}')"
+    f"'{service_or_product_type}', '{function_type}', '{service_country}', '{rank_of_position}', '{department}', '{cooperative_department}', '{profile}')"
 
     print(insert)
     dbm.insert(insert)
