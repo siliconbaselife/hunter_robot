@@ -33,7 +33,7 @@ def deal_profile(profile):
         "age": res["age"],
         "name": profile["name"],
         "company": profile["department"],
-        "chinese": res["chinese"],
+        "chinese": "yes" if res["chinese"] else "no",
         "graduate_school": res["graduate_school"],
         "education_background": res["education_background"],
         "school_level": res["school_level"],
