@@ -67,15 +67,20 @@ def query_private_tags(manage_account_id, tag):
             continue
 
         if column == 'Name':
+            tag_infos[column] = {}
             tag_infos[column]["column_type"] = "string"
 
         if column_type == 'int':
+            tag_infos[column] = {}
             tag_infos[column]["column_type"] = "number"
         else:
+            tag_infos[column] = {}
             tag_infos[column]["column_type"] = "string"
             sql = f"select distinct('{column}') from '{table}'"
-            rows = dbm.query(sql)
+
+
             tag_infos[column]["enumeration"] = []
+            rows = dbm.query(sql)
             for row in rows:
                 tag_infos[column]["enumeration"].append(row[0])
 
