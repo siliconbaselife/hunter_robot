@@ -69,6 +69,7 @@ def query_private_tags(manage_account_id, tag):
         if column == 'Name':
             tag_infos[column] = {}
             tag_infos[column]["column_type"] = "string"
+            continue
 
         if column_type == 'int':
             tag_infos[column] = {}
