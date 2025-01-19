@@ -320,6 +320,7 @@ CREATE TABLE `huawei` (
   `Function_Type` VARCHAR(255) NOT NULL,
   `Service_Country` VARCHAR(255) NOT NULL,
   `Rank_Of_Position` VARCHAR(255) NOT NULL,
+  `Department` VARCHAR(255) NOT NULL,
   `Cooperative_Department` VARCHAR(255) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',

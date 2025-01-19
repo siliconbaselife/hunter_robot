@@ -35,11 +35,14 @@ def deal_profile(profile):
         "company": profile["department"],
         "chinese": res["chinese"],
         "graduate_school": res["graduate_school"],
+        "education_background": res["education_background"],
+        "school_level": res["school_level"],
         "five_years_jump_times": res["service_or_product_type"],
-        "service_or_product_type": res["function_type"],
-        "function_type": res["solution"],
+        "service_or_product_type": res["service_or_product_type"],
+        "function_type": res["function_type"],
         "service_country": res["service_country"],
         "rank_of_position": res["rank_of_position"],
+        "department": res["department"],
         "cooperative_department":  res["cooperative_department"]
     }
 
