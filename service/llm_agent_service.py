@@ -659,7 +659,8 @@ class huiweiPeopleAgent:
         self.chain = prompt | chat | output_parser
 
     def cal(self, profile):
-        self.chain.invoke({"profile": profile})
+        res = self.chain.invoke({"profile": profile})
+        print(res)
         lines = res.split('\n')
         rres = ""
         for line in lines:
