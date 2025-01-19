@@ -304,3 +304,25 @@ CREATE TABLE `manage` (
   PRIMARY KEY (`id`),
   KEY `manage_user_id` (`manage_id`,`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+CREATE TABLE `huawei` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `candidate_id` varchar(255) NOT NULL,
+  `Age` int unsigned NOT NULL,
+  `Name` VARCHAR(255) NOT NULL,
+  `Company` VARCHAR(255) NOT NULL,
+  `Chinese` VARCHAR(255) NOT NULL,
+  `Graduate_School` VARCHAR(255) NOT NULL,
+  `Education_Background` VARCHAR(255) NOT NULL,
+  `School_Level` VARCHAR(255) NOT NULL,
+  `Five_Years_Jump_Times` int unsigned NOT NULL,
+  `Service_Or_Product_Type` VARCHAR(255) NOT NULL,
+  `Function_Type` VARCHAR(255) NOT NULL,
+  `Service_Country` VARCHAR(255) NOT NULL,
+  `Rank_Of_Position` VARCHAR(255) NOT NULL,
+  `Cooperative_Department` VARCHAR(255) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `candidate_id` (candidate_id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
