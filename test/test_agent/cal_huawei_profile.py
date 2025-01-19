@@ -37,7 +37,7 @@ def deal_profile(profile):
         "graduate_school": res["graduate_school"],
         "education_background": res["education_background"],
         "school_level": res["school_level"],
-        "five_years_jump_times": res["service_or_product_type"],
+        "five_years_jump_times": profile["last5Jump"],
         "service_or_product_type": res["service_or_product_type"],
         "function_type": res["function_type"],
         "service_country": res["service_country"],
