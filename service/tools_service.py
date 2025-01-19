@@ -33,6 +33,8 @@ from dao.contact_bank_dao import query_user_link_by_id_set, query_contact_by_id_
 from algo.llm_inference import gpt_manager
 from algo.llm_base_model import Prompt
 
+from dao.private_database_dao import *
+
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
 
@@ -1600,10 +1602,10 @@ def query_profile_tag_by_user_new_v2(manage_account_id, platform):
     top_num = 0
     for row in rows:
         if row[3] == 1:
-            tags.append({"tag": row[1], "tag_str": row[2], "top": top_num})
+            tags.append({"tag": row[1], "tag_str": row[2], "top": top_num, "type": row[4]})
             top_num += 1
         else:
-            tags.append({"tag": row[1], "tag_str": row[2], "top": -1})
+            tags.append({"tag": row[1], "tag_str": row[2], "top": -1, "type": row[4]})
     return tags, None
 
 
@@ -1867,7 +1869,7 @@ def fetch_contact_infos(manage_account_id, candidate_ids):
     return ret_dict
 
 
-def transfer_data_to_profiles(manage_account_id, contact2str, rows):
+def transfer_data_to_profiles(manage_account_id, contact2str, rows, normal=True):
     details = []
     candidate_ids = [row[0] for row in rows]
     candidate_contact_infos = fetch_contact_infos(manage_account_id, candidate_ids)
@@ -1896,14 +1898,16 @@ def transfer_data_to_profiles(manage_account_id, contact2str, rows):
         if profile is None:
             continue
         profile['candidateId'] = row[0]
-        profile['cvUrl'] = row[2]
-        profile['status'] = row[3]
+        if normal:
+            profile['cvUrl'] = row[2]
+            profile['status'] = row[3]
         profile['abstract'] = fetch_abstract(profile)
         # stage = query_stage_by_id(manage_account_id, platform, tag, profile['candidateId'])
-        profile["stage"] = row[4]
-        logs = row[5].replace('\n', '\\n')
-        profile["notes"] = json.loads(logs, strict=False)
-        profile['experiences'] = None
+        if normal:
+            profile["stage"] = row[4]
+            logs = row[5].replace('\n', '\\n')
+            profile["notes"] = json.loads(logs, strict=False)
+            profile['experiences'] = None
         details.append(profile)
     return details
 
@@ -1920,6 +1924,16 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
 
     return data, None
+
+
+def search_profile_by_tag_v3(manage_account_id, page, limit, tag, filters):
+    total_count = query_private_tag_filter_num(manage_account_id, tag, filters)
+    start = (page - 1) * limit
+    rows = query_private_tag_filter_profiles(manage_account_id, tag, filters, start, limit)
+    details = transfer_data_to_profiles(manage_account_id, False, rows, False)
+    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
+
+    return data
 
 
 def search_profile_by_tag_v2_all(manage_account_id, platform, company, candidate_name, status, stage, page, min_age,
@@ -2174,6 +2188,18 @@ def search_tag_flow_infos(manage_account_id, platform, tag):
     }
 
     return infos
+
+
+def search_tag_flow_infos_v2(manage_account_id, platform, tag):
+    tag_infos = query_private_tags(manage_account_id, tag)
+    r_infos = {}
+    for column, column_info in tag_infos:
+        if column_info["column_type"] == "number":
+            r_infos[column] = "number"
+        else:
+            r_infos[column] = column_info["enumerate"]
+
+    return r_infos
 
 
 def change_flow_status_service(manage_account_id, platform, tag, candidate_id, flow_status):
