@@ -28,7 +28,8 @@ def add_profile(profile_info):
     rank_of_position = profile_info["rank_of_position"]
     cooperative_department = profile_info["cooperative_department"]
 
-    insert = f"insert into huawei('candidate_id', 'Age', 'Name', 'Company', 'Chinese', 'Graduate_School', 'Five_Years_Jump_Times', 'Service_Or_Product_Type', 'Function_type', 'Service_Country', 'Rank_Of_Position', 'Cooperative_Department') " \
+    insert = f"insert into huawei('candidate_id', 'Age', 'Name', 'Company', 'Chinese', 'Graduate_School', 'Five_Years_Jump_Times', " \
+             f"'Service_Or_Product_Type', 'Function_type', 'Service_Country', 'Rank_Of_Position', 'Cooperative_Department') " \
              f"values('{candidate_id}', '{age}', '{name}', '{company}', '{chinese}', '{graduate_school}', '{five_years_jump_times}', "
     f"'{service_or_product_type}', '{function_type}', '{service_country}', '{rank_of_position}', '{cooperative_department}')"
 
