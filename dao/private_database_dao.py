@@ -103,7 +103,7 @@ def query_private_tag_filter_num(manage_account_id, tag, column_infos):
             if type == "number":
                 sql += f" {column} BETWEEN {value[0]} and {value[1]} "
             else:
-                sql += f" {column} = {value}"
+                sql += f" {column} = '{value}'"
 
         if i < len(column_infos.keys()) - 1:
             sql += "and"
@@ -130,7 +130,7 @@ def query_private_tag_filter_profiles(manage_account_id, tag, column_infos, page
             if type == "number":
                 sql += f" {column} BETWEEN {value[0]} and {value[1]} "
             else:
-                sql += f" {column} = {value}"
+                sql += f" {column} = '{value}'"
 
         if i < len(column_infos.keys()) - 1:
             sql += "and"
