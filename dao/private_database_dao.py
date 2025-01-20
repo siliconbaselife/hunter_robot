@@ -97,14 +97,18 @@ def query_private_tag_filter_num(manage_account_id, tag, column_infos):
         column_content = column_infos[column]
         type = column_content["column_type"]
         value = column_content["value"]
-        if type == "number":
-            sql += f" {column} BETWEEN {value[0]} and {value[1]} "
+        if column == "Name":
+            sql += f" {column} like '%{value}%' "
         else:
-            sql += f" {column} == {value}"
+            if type == "number":
+                sql += f" {column} BETWEEN {value[0]} and {value[1]} "
+            else:
+                sql += f" {column} = {value}"
 
         if i < len(column_infos.keys()) - 1:
             sql += "and"
 
+    logger.info(sql)
     rows = dbm.query(sql)
 
     return rows[0][0]
@@ -120,10 +124,13 @@ def query_private_tag_filter_profiles(manage_account_id, tag, column_infos, page
         column_content = column_infos[column]
         type = column_content["column_type"]
         value = column_content["value"]
-        if type == "number":
-            sql += f" {column} BETWEEN {value[0]} and {value[1]} "
+        if column == "Name":
+            sql += f" {column} like '%{value}%' "
         else:
-            sql += f" {column} == {value}"
+            if type == "number":
+                sql += f" {column} BETWEEN {value[0]} and {value[1]} "
+            else:
+                sql += f" {column} = {value}"
 
         if i < len(column_infos.keys()) - 1:
             sql += "and"
