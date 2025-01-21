@@ -10,7 +10,7 @@ def get_huawei_profiles():
     page_len = 50
     for i in range(int(total_num / page_len) + 1):
         rows = query_tag_filter_profiles_new("lishundong2009@163.com", "Linkedin", "huawei-法国", None, None, None,
-                                             None, None, None, None, i, page_len)
+                                             None, None, None, None, i * page_len, page_len)
         profiles = transfer_data_to_profiles("lishundong2009@163.com", "False", rows)
         for i, profile in enumerate(profiles):
             profile["profile"] = rows[i][1]
