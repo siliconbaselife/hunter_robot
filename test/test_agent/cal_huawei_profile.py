@@ -57,7 +57,7 @@ if __name__ == "__main__":
     profiles = get_huawei_profiles()
     agent = huiweiPeopleAgent()
     print(f"获取到 {len(profiles)} 份简历")
-    for profile in profiles[:50]:
+    for profile in profiles[:200]:
         deal_profile(profile)
 
     print("识别完成")
