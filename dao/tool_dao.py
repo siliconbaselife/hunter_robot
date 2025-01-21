@@ -507,6 +507,7 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
 
     sql += f" limit {page}, {limit}"
 
+    print(f"sql => {sql}")
     s = time.time()
     data = dbm.query(sql)
     e = time.time()
