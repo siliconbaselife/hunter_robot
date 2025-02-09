@@ -61,6 +61,25 @@ class ChatIntention(object):
         return Intention.Normal
 
 
+class CompanyAgent(object):
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+        prompt = PromptTemplate(
+            input_variables=["job_position", "country", "industry_type"],
+            template="1. 通过网页搜索，找到与{job_position}和{country}相关的公司名单。 \n 2.分析这些公司，识别出潜在的人才来源，特别关"
+                     "注{industry_type}行业中的公司。\n 3. 提取关键信息，分析同质化的产品或者相同销售渠道的产品类型，生成可寻访的目标公司"
+                     "名单且对公司有疑问也进行追问，并将其整理成一份简明的备忘录。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
+                     "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式"
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def chat(self, job_position, country, industry_type):
+        res = self.chain.invoke(
+            {"job_position": job_position, "country": country, "industry_type": industry_type})
+        return res
+
+
 class ChatAgent(object):
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
@@ -620,6 +639,7 @@ class SearchMan:
 
         res = self.comprehend_agent.cal(query, relation_txts)
         return res
+
 
 class huiweiPeopleAgent:
     def __init__(self):
