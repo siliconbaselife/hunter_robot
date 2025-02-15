@@ -194,3 +194,51 @@ def chat_function():
     return Response(
         json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": return_msgs}), ensure_ascii=False))
 
+
+@business_web.route("/backend/agent/strategy/chat", methods=['post'])
+@web_exception_handler
+def strategy_chat():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        user_id = decrypt(cookie_user_name, key)
+    msg = request.json.get('msg', None)
+    pass
+
+
+@business_web.route("/backend/agent/strategy/history/list", methods=['post'])
+@web_exception_handler
+def strategy_history_list():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        user_id = decrypt(cookie_user_name, key)
+    pass
+
+
+@business_web.route("/backend/agent/strategy/history/get", methods=['post'])
+@web_exception_handler
+def strategy_history_get():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        user_id = decrypt(cookie_user_name, key)
+    session_id = request.json.get('session_id', None)
+    pass
+
+
+@business_web.route("/backend/agent/strategy/update", methods=['post'])
+@web_exception_handler
+def strategy_update():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        user_id = decrypt(cookie_user_name, key)
+    session_id = request.json.get('session_id', None)
+    strategy_msg = request.json.get('strategy_msg', None)
+    pass
+
