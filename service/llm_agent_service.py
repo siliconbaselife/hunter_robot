@@ -87,6 +87,7 @@ class CompanyAgent(object):
             ress = ress[1:]
             ress = ress[:-1]
             res = "".join(ress)
+        print(res)
         product_directions = json.loads(res)
 
         return product_directions
