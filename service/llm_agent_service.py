@@ -68,8 +68,8 @@ class CompanyAgent(object):
             input_variables=["job_position", "country", "industry_type"],
             template="1. 通过网页搜索，找到与{job_position}和{country}相关的公司名单。 \n 2.分析这些公司，识别出潜在的人才来源，特别关"
                      "注{industry_type}行业中的公司。\n 3. 提取关键信息，分析同质化的产品或者相同销售渠道的产品类型，生成可寻访的目标公司"
-                     "。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
-                     "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式"
+                     "。\n 4. 给出尽可能多的公司"
+                     "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式，两个key company_name, description"
         )
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
