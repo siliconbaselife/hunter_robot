@@ -365,7 +365,7 @@ def agent_chat_special_service(user_id, function_key, contents):
     if function_key == "benchmarking_company":
         r_msg = ""
         for product_name, companys in rs.items():
-            r_msg += product_name + "\n"
+            r_msg += "<h3>" + product_name + "<h3><br>"
             for company_info in companys:
                 r_msg += company_info["company_name"] + " => "
                 r_msg += company_info["description"] + "<br>"
