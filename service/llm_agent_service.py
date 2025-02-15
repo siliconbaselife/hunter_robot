@@ -83,11 +83,14 @@ class CompanyAgent(object):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
         print(res)
-        lines = res.split('\n')
-        lines = lines[1:]
-        lines = lines[:-1]
-        rres = " ".join(lines)
-        print(rres)
+
+        rres = ""
+        if "```json" in res:
+            lines = res.split('\n')
+            lines = lines[1:]
+            lines = lines[:-1]
+            rres = " ".join(lines)
+            print(rres)
         product_directions = json.loads(rres)
 
         return product_directions
