@@ -108,7 +108,11 @@ class CompanyAgent(object):
         company_list = transfer_json(res)
         return product, company_list
 
-    def chat(self, job_position, country, industry_type):
+    def chat(self, contents):
+        job_position = contents["job_position"]
+        country = contents["country"]
+        industry_type = contents["industry_type"]
+
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
 
@@ -117,7 +121,8 @@ class CompanyAgent(object):
 
         company_infos = {}
         with concurrent.futures.ThreadPoolExecutor() as executor:
-            futures = [executor.submit(self.run, job_position, country, industry_type, products[i]) for i in range(len(products))]
+            futures = [executor.submit(self.run, job_position, country, industry_type, products[i]) for i in
+                       range(len(products))]
             for future in concurrent.futures.as_completed(futures):
                 product, company_list = future.result()
                 company_infos[product] = company_list
@@ -148,7 +153,13 @@ class JDAgent(object):
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
 
-    def chat(self, job_title, industry, location, application_email, additional_requirements):
+    def chat(self, contents):
+        job_title = contents["job_title"]
+        industry = contents["industry"]
+        location = contents["location"]
+        application_email = contents["application_email"]
+        additional_requirements = contents["additional_requirements"]
+
         res = self.chain.invoke(
             {"job_title": job_title, "industry": industry, "location": location, "application_email": application_email,
              "additional_requirements": additional_requirements})

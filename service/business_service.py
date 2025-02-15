@@ -333,15 +333,36 @@ def agent_chat_service(user_id, session_id, msg):
 
     return "", session_id
 
+
+from service.llm_agent_service import CompanyAgent, JDAgent
+
+
 def agent_chat_special_service(user_id, function_key, contents):
     session_id = generate_session_id()
 
+    agent = None
     if function_key == "benchmarking_company":
-        pass
+        agent = CompanyAgent()
 
     if function_key == "generate_jd":
-        pass
+        agent = JDAgent()
 
+    rs = None
+    for i in range(3):
+        try:
+            rs = agent.chat(contents)
+        except BaseException as e:
+            logger.error(f"agent_chat_special_service error => {e}")
+        break
+
+    if rs is None:
+        return "system error"
+
+    if function_key == "benchmarking_company":
+
+
+
+    return rs
 
 
 
