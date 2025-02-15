@@ -105,6 +105,7 @@ class CompanyAgent(object):
             {"job_position": job_position, "country": country, "industry_type": industry_type})
 
         product_directions = transfer_json(res)
+        print(product_directions)
         products = [product_info["product_type"] for product_info in product_directions[industry_type]]
         company_infos = []
         for product in products:
