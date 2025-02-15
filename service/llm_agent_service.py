@@ -93,7 +93,9 @@ class CompanyAgent(object):
 
         company_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type", "product"],
-            template=""
+            template="what are the {product} in the {country} industry? List at least 20 companies and provide a description for each company, with the description being within 20 words."
+                     "return the results as a JSON array with the keys `company_name` and `description`.on other word, only json. return only english."
+                     "return format [company1, company2]"
         )
         output_parser = StrOutputParser()
         self.company_chain = company_prompt | chat | output_parser
@@ -103,7 +105,7 @@ class CompanyAgent(object):
             {"job_position": job_position, "country": country, "industry_type": industry_type})
 
         product_directions = transfer_json(res)
-        products = product_directions[industry_type]
+        products = [product_info["product_type"] for product_info in product_directions[industry_type]]
         company_infos = []
         for product in products:
             res = self.company_chain.invoke(
