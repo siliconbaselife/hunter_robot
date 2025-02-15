@@ -50,7 +50,7 @@ def update_chat_history_visible(user_id, session_id):
 
 
 def query_chat_history(user_id):
-    sql = f"select session_id, history from chat_history_bank where manage_account_id = '{user_id}' and visible = '1' order by update_time"
+    sql = f"select session_id, history from chat_history_bank where manage_account_id = '{user_id}' and visible = '1' order by update_time desc"
     return dbm.query(sql)
 
 
