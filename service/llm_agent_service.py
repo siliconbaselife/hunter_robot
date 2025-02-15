@@ -35,6 +35,8 @@ from scipy.spatial import distance
 
 from enum import Enum
 
+import concurrent.futures
+
 logger = get_logger(config['log']['business_log_file'])
 
 cipher = Fernet("Rthp08pOy1BzlI_PFXKXEXmqmxGv0k_DUsmFGjr6NZs=")
@@ -100,6 +102,12 @@ class CompanyAgent(object):
         output_parser = StrOutputParser()
         self.company_chain = company_prompt | chat | output_parser
 
+    def run(self, job_position, country, industry_type, product):
+        res = self.company_chain.invoke(
+            {"job_position": job_position, "country": country, "industry_type": industry_type, "product": product})
+        company_list = transfer_json(res)
+        return product, company_list
+
     def chat(self, job_position, country, industry_type):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
@@ -107,12 +115,15 @@ class CompanyAgent(object):
         product_directions = transfer_json(res)
         print(product_directions)
         products = product_directions[industry_type]
+
         company_infos = {}
-        for product in products:
-            res = self.company_chain.invoke(
-                {"job_position": job_position, "country": country, "industry_type": industry_type, "product": product})
-            company_list = transfer_json(res)
-            company_infos[product] = company_list
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+
+            for product in products:
+                futures = [executor.submit(self.run, job_position, country, industry_type, product)]
+            for future in concurrent.futures.as_completed(futures):
+                product, company_list = future.result()
+                company_infos[product] = company_list
 
         return company_infos
 
