@@ -117,8 +117,8 @@ class CompanyAgent(object):
             {"job_position": job_position, "country": country, "industry_type": industry_type})
 
         print(res)
-        product_directions = transfer_json(res)
-        products = product_directions[industry_type]
+        products = transfer_json(res)
+        # products = product_directions[industry_type]
 
         company_infos = {}
         with concurrent.futures.ThreadPoolExecutor() as executor:
