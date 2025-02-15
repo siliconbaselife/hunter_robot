@@ -61,6 +61,16 @@ class ChatIntention(object):
         return Intention.Normal
 
 
+def transfer_json(r_txt):
+    rres = ""
+    if "```json" in r_txt:
+        lines = res.split('\n')
+        lines = lines[1:]
+        lines = lines[:-1]
+        rres = " ".join(lines)
+    return json.loads(rres)
+
+
 class CompanyAgent(object):
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
@@ -81,19 +91,27 @@ class CompanyAgent(object):
         output_parser = StrOutputParser()
         self.product_chain = product_prompt | chat | output_parser
 
+        company_prompt = PromptTemplate(
+            input_variables=["job_position", "country", "industry_type", "product"],
+            template=""
+        )
+        output_parser = StrOutputParser()
+        self.company_chain = company_prompt | chat | output_parser
+
     def chat(self, job_position, country, industry_type):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
 
-        rres = ""
-        if "```json" in res:
-            lines = res.split('\n')
-            lines = lines[1:]
-            lines = lines[:-1]
-            rres = " ".join(lines)
-        product_directions = json.loads(rres)
+        product_directions = transfer_json(res)
+        products = product_directions[industry_type]
+        company_infos = []
+        for product in products:
+            res = self.company_chain.invoke(
+                {"job_position": job_position, "country": country, "industry_type": industry_type, "product": product})
+            company_list = transfer_json(res)
+            company_infos[product] = company_list
 
-        return product_directions
+        return company_infos
 
 
 class JDAgent(object):
