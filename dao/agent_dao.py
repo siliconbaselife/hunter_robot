@@ -86,5 +86,6 @@ def query_agent_functions():
     rows = dbm.query(sql)
     function_infos = []
     for row in rows:
-        function_infos.append({"agent_name": row[0], "agent_key": row[1], "key_words": json.loads(row[2])})
+        print(row)
+        function_infos.append({"agent_name": row[0], "agent_key": row[1], "key_words": json.loads(row[2], strict=False)})
     return function_infos
