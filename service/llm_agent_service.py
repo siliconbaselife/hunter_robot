@@ -63,7 +63,7 @@ class ChatIntention(object):
 
 class CompanyAgent(object):
     def __init__(self):
-        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
         # prompt = PromptTemplate(
         #     input_variables=["job_position", "country", "industry_type"],
         #     template="1. 通过网页搜索，找到与{job_position}和{country}相关的公司名单。 \n 2.分析这些公司，识别出潜在的人才来源，特别关"
@@ -82,11 +82,10 @@ class CompanyAgent(object):
     def chat(self, job_position, country, industry_type):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
-        rres = ""
-        for line in res.split('\n'):
-            if "```" in line:
-                continue
-            rres += line
+        lines = res.split('\n')
+        lines = lines[1:]
+        lines = lines[:-1]
+        rres = " ".join(lines)
         print(rres)
         product_directions = json.loads(rres)
 
