@@ -106,7 +106,7 @@ class CompanyAgent(object):
 
         product_directions = transfer_json(res)
         print(product_directions)
-        products = [product_info["product_type"] for product_info in product_directions[industry_type]]
+        products = product_directions[industry_type]
         company_infos = []
         for product in products:
             res = self.company_chain.invoke(
