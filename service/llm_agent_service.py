@@ -113,7 +113,6 @@ class CompanyAgent(object):
             {"job_position": job_position, "country": country, "industry_type": industry_type})
 
         product_directions = transfer_json(res)
-        print(product_directions)
         products = product_directions[industry_type]
 
         company_infos = {}
@@ -121,8 +120,6 @@ class CompanyAgent(object):
             futures = [executor.submit(self.run, job_position, country, industry_type, products[i]) for i in range(len(products))]
             for future in concurrent.futures.as_completed(futures):
                 product, company_list = future.result()
-                print(product)
-                print(company_list)
                 company_infos[product] = company_list
 
         return company_infos
