@@ -367,8 +367,8 @@ def agent_chat_special_service(user_id, function_key, contents):
         for product_name, companys in rs.items():
             r_msg += product_name + "\n"
             for company_info in companys:
-                r_msg += company_info["company_name"] + "  "
-                r_msg += company_info["description"] + "\n"
+                r_msg += company_info["company_name"] + " => "
+                r_msg += company_info["description"] + "<br>"
         rs = r_msg
 
     append_msg(user_id, session_id, None, msg, rs)
