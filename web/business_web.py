@@ -188,7 +188,7 @@ def chat_function():
     function_key = request.json.get('function_key', None)
     contents = request.json.get('contents', None)
 
-    return_msgs = agent_chat_special_service(user_id, function_key, contents)
+    session_id, return_msgs = agent_chat_special_service(user_id, function_key, contents)
 
     return Response(
         json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": r_msg_info}), ensure_ascii=False))

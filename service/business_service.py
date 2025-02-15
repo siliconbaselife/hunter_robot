@@ -341,11 +341,15 @@ def agent_chat_special_service(user_id, function_key, contents):
     session_id = generate_session_id()
 
     agent = None
+    msg = ""
     if function_key == "benchmarking_company":
         agent = CompanyAgent()
+        msg = f"find benchmarking company => job position: {contents['job_position']} country: {contents['country']} industry type: {contents['industry_type']}"
 
     if function_key == "generate_jd":
         agent = JDAgent()
+        msg = f"generate JD => title: {contents['job_title']} industry: {contents['industry']} location: {contents['location']} " \
+              f"email: {contents['application_email']} additional requirements: {contents['additional_requirements']}"
 
     rs = None
     for i in range(3):
@@ -356,14 +360,20 @@ def agent_chat_special_service(user_id, function_key, contents):
         break
 
     if rs is None:
-        return "system error"
+        return session_id, "system error"
 
     if function_key == "benchmarking_company":
+        r_msg = ""
+        for product_name, companys in rs.items():
+            r_msg += product_name + "\n"
+            for company_info in companys:
+                r_msg += company_info["company_name"] + "  "
+                r_msg += company_info["description"] + "\n"
+        rs = r_msg
 
+    append_msg(user_id, session_id, None, msg, rs)
 
-
-    return rs
-
+    return session_id, rs
 
 
 def agent_chat_search_service(user_id, query):
