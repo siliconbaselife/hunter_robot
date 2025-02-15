@@ -82,6 +82,7 @@ class CompanyAgent(object):
     def chat(self, job_position, country, industry_type):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
+        print(res)
         lines = res.split('\n')
         lines = lines[1:]
         lines = lines[:-1]
