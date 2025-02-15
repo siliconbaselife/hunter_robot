@@ -2,7 +2,7 @@ from service.llm_agent_service import CompanyAgent
 from service.llm_agent_service import JDAgent
 
 agent = CompanyAgent()
-r = agent.chat({"job_position": 'sales', "country": '英国', "industry_type": '家庭储能'})
+r = agent.chat({"job_position": 'sales', "country": '英国', "industry_type": '储能'})
 
 # jd_agent = JDAgent()
 # r = jd_agent.chat(
