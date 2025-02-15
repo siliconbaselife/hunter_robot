@@ -171,7 +171,7 @@ class ChatAgent(object):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
         prompt = PromptTemplate(
             input_variables=["relation_info", "history_str", "question"],
-            template="你是一个猎头/HR的咨询助理，需要回答问题，保证回复在250字以内，尽量不超过200字。\n回复结果尽量用markdown格式\n当前咨询内容相关信息如下:\n"
+            template="你是一个猎头/HR的咨询助理，需要回答问题。\n回复结果尽量用markdown格式\n当前咨询内容相关信息如下:\n"
                      "{relation_info}\n历史聊天记录如下:\n{history_str}\n当前用户问题:\n{question}"
         )
         output_parser = StrOutputParser()
