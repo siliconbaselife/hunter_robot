@@ -116,6 +116,7 @@ class CompanyAgent(object):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
 
+        print(res)
         product_directions = transfer_json(res)
         products = product_directions[industry_type]
 
