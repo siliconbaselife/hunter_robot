@@ -37,7 +37,7 @@ def session_query_service(user_id):
                 else:
                     title = first_tag['msg'][:50]
             except BaseException as e:
-                logger.warning(f"session_query_service parse title from tag failed: {first_tag}")
+                logger.error(f"session_query_service parse title from tag failed: {first_tag}")
         ret_list.append(
             {'sess_id': sess_id, 'title': title, 'round_cnt': round_cnt}
         )
