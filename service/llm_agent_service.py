@@ -82,13 +82,13 @@ class CompanyAgent(object):
     def chat(self, job_position, country, industry_type):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
-        if "json" in res:
-            ress = res.split('\n')
-            ress = ress[1:]
-            ress = ress[:-1]
-            res = "".join(ress)
-        print(res)
-        product_directions = json.loads(res)
+        rres = ""
+        for line in res.split('\n'):
+            if "```" in line:
+                continue
+            rres += line
+        print(rres)
+        product_directions = json.loads(rres)
 
         return product_directions
 
