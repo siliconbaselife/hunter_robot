@@ -348,7 +348,7 @@ def agent_chat_special_service(user_id, function_key, contents):
 
     if function_key == "generate_jd":
         agent = JDAgent()
-        msg = f"generate JD => title: {contents['job_title']} industry: {contents['industry_type']} location: {contents['location']} " \
+        msg = f"generate JD => title: {contents['job_title']} industry: {contents['industry_type']} location: {contents['country']} " \
               f"email: {contents['application_email']} additional requirements: {contents['additional_requirements']}"
 
     rs = None
