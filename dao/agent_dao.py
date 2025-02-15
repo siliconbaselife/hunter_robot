@@ -82,9 +82,9 @@ def add_history_msgs(user_id, session_id, history_msgs_str):
 
 
 def query_agent_functions():
-    sql = f"select agent_function from agent_function"
+    sql = f"select * from agent_function"
     rows = dbm.query(sql)
-    functions = []
+    function_infos = []
     for row in rows:
-        functions.append(json.loads(row[0]))
-    return functions
+        function_infos.append({"agent_name": row[0], "agent_key": row[1], "key_words": json.loads(row[2])})
+    return function_infos

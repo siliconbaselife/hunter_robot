@@ -4,6 +4,7 @@ from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 from utils.decorator import web_exception_handler
 from utils.log import get_logger
 from utils.config import config
+from service.chat_plugin_service import *
 
 from utils.utils import key, decrypt
 
@@ -174,3 +175,21 @@ def chat_stream():
         yield f"event: end\ndata: {json.dumps(get_web_res_suc_with_data(finalResData))}\n\n"
 
     return Response(event_stream(), mimetype='text/event-stream')
+
+
+@business_web.route("/backend/agent/chat_function", methods=['post'])
+@web_exception_handler
+def chat_function():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name is None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        user_id = decrypt(cookie_user_name, key)
+    function_key = request.json.get('function_key', None)
+    contents = request.json.get('contents', None)
+
+    return_msgs = agent_chat_special_service(user_id, function_key, contents)
+
+    return Response(
+        json.dumps(get_web_res_suc_with_data({"session_id": session_id, "r_msg": r_msg_info}), ensure_ascii=False))
+

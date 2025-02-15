@@ -68,8 +68,8 @@ class CompanyAgent(object):
             input_variables=["job_position", "country", "industry_type"],
             template="1. 通过网页搜索，找到与{job_position}和{country}相关的公司名单。 \n 2.分析这些公司，识别出潜在的人才来源，特别关"
                      "注{industry_type}行业中的公司。\n 3. 提取关键信息，分析同质化的产品或者相同销售渠道的产品类型，生成可寻访的目标公司"
-                     "名单且对公司有疑问也进行追问，并将其整理成一份简明的备忘录。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
-                     "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式"
+                     "。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
+                     "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式，格式如下: [{'公司1', '公司1描述'}, {'公司2', '公司2描述'}]"
         )
         output_parser = StrOutputParser()
         self.chain = prompt | chat | output_parser
@@ -77,6 +77,36 @@ class CompanyAgent(object):
     def chat(self, job_position, country, industry_type):
         res = self.chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
+        return res
+
+
+class JDAgent(object):
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+        prompt = PromptTemplate(
+            input_variables=["job_title", "industry", "location", "application_email", "additional_requirements"],
+            template="You are a professional Executive Search Consultant for global talent recruitment. Your task is to "
+                     "create a LinkedIn recruitment ad based on the following variables. Follow the steps below to ensure "
+                     "the ad content is concise and professional to attract suitable candidates.\nThe job title is {{job_title}}, "
+                     "in the {{industry}} industry， and the work location is {{location}}.\nWrite a job description that "
+                     "is clear and attractive, highlighting the key responsibilities and requirements of the position.\nAdd "
+                     "the application email at the end of the ad: {{application_email}}.\nEnsure the overall tone is concise "
+                     "and professional, with a beautiful layout. Include emoticons in the front text to make it lively, "
+                     "aligning with the concerns of white-collar workers in the corresponding recruitment country and the "
+                     "community style of LinkedIn. At the end of the article, generate keywords that match this LinkedIn "
+                     "recruitment ad, such as #recruit #jobs and other relevant keywords.\nAdd a variable: {{additional_requirements}} "
+                     "to supplement or modify the input content information.\nAll user input content is first translated into English, "
+                     "and then the output text is unified into English. If there is output content in other languages, it is also translated "
+                     "into English to ensure language consistency. Do not include any XML tags in the output.\nPlease ensure that the "
+                     "output is well-structured and follows the guidelines provided."
+        )
+        output_parser = StrOutputParser()
+        self.chain = prompt | chat | output_parser
+
+    def chat(self, job_title, industry, location, application_email, additional_requirements):
+        res = self.chain.invoke(
+            {"job_title": job_title, "industry": industry, "location": location, "application_email": application_email,
+             "additional_requirements": additional_requirements})
         return res
 
 

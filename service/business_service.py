@@ -333,6 +333,17 @@ def agent_chat_service(user_id, session_id, msg):
 
     return "", session_id
 
+def agent_chat_special_service(user_id, function_key, contents):
+    session_id = generate_session_id()
+
+    if function_key == "benchmarking_company":
+        pass
+
+    if function_key == "generate_jd":
+        pass
+
+
+
 
 def agent_chat_search_service(user_id, query):
     session_id = generate_session_id()
@@ -354,8 +365,16 @@ def agent_history_get_service(user_id, session_id):
 
 
 def agent_functions_get_service():
-    functions = query_agent_functions()
-    return functions
+    function_infos = query_agent_functions()
+    r_function_infos = []
+    for function_info in function_infos:
+        r_function_infos.append({
+            "txt": function_info["agent_name"],
+            "key": function_info["agent_key"],
+            "key_words": function_info["key_words"]
+        })
+
+    return r_function_infos
 
 
 if __name__ == "__main__":
