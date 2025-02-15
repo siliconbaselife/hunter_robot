@@ -118,11 +118,12 @@ class CompanyAgent(object):
 
         company_infos = {}
         with concurrent.futures.ThreadPoolExecutor() as executor:
-
             for product in products:
                 futures = [executor.submit(self.run, job_position, country, industry_type, product)]
             for future in concurrent.futures.as_completed(futures):
                 product, company_list = future.result()
+                print(product)
+                print(company_list)
                 company_infos[product] = company_list
 
         return company_infos
