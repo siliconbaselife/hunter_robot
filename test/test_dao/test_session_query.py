@@ -1,4 +1,4 @@
-from service.business_service import session_query_service
+from service.business_service import agent_history_list_service
 
-rs = session_query_service('lishundong2009@163.com')
+rs = agent_history_list_service('lishundong2009@163.com')
 print(rs)
