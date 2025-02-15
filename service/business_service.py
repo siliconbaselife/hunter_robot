@@ -269,7 +269,7 @@ def agent_history_list_service(user_id):
         except BaseException as e:
             logger.error(f"agent_history_list_service history parse error => {history}")
             continue
-        title = msg[:20]
+        title = msg[:40]
         history_list.append({"session_id": session_id, "title": title})
 
     return history_list
