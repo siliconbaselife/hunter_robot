@@ -357,6 +357,8 @@ def agent_chat_special_service(user_id, function_key, contents):
             rs = agent.chat(contents)
         except BaseException as e:
             logger.error(f"agent_chat_special_service error => {e}")
+            logger.error(traceback.format_exc())
+            continue
         break
 
     if rs is None:
