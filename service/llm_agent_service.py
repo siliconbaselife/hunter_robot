@@ -64,18 +64,23 @@ class ChatIntention(object):
 class CompanyAgent(object):
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-        prompt = PromptTemplate(
+        # prompt = PromptTemplate(
+        #     input_variables=["job_position", "country", "industry_type"],
+        #     template="1. 通过网页搜索，找到与{job_position}和{country}相关的公司名单。 \n 2.分析这些公司，识别出潜在的人才来源，特别关"
+        #              "注{industry_type}行业中的公司。\n 3. 提取关键信息，分析同质化的产品或者相同销售渠道的产品类型，生成可寻访的目标公司"
+        #              "。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
+        #              "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式 3个key company_name description product_type"
+        # )
+        product_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type"],
-            template="1. 通过网页搜索，找到与{job_position}和{country}相关的公司名单。 \n 2.分析这些公司，识别出潜在的人才来源，特别关"
-                     "注{industry_type}行业中的公司。\n 3. 提取关键信息，分析同质化的产品或者相同销售渠道的产品类型，生成可寻访的目标公司"
-                     "。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
-                     "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式 3个key company_name description product_type"
+            template="what are the product directions in {country} {industry_type}? Return the results as a JSON array with the key as product_type"
         )
+
         output_parser = StrOutputParser()
-        self.chain = prompt | chat | output_parser
+        self.product_chain = product_prompt | chat | output_parser
 
     def chat(self, job_position, country, industry_type):
-        res = self.chain.invoke(
+        res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
         return res
 
