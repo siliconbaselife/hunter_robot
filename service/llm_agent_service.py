@@ -86,7 +86,7 @@ class CompanyAgent(object):
         product_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type"],
             template="what are the product directions in {country} {industry_type}? Return the results as a JSON with the "
-                     "key as product_type. on other word, only json. return only english."
+                     "on other word, only json. return only english."
                      "return format [product1, product2]"
         )
 
