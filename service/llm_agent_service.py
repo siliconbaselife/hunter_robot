@@ -64,7 +64,7 @@ class ChatIntention(object):
 def transfer_json(r_txt):
     rres = ""
     if "```json" in r_txt:
-        lines = res.split('\n')
+        lines = r_txt.split('\n')
         lines = lines[1:]
         lines = lines[:-1]
         rres = " ".join(lines)
