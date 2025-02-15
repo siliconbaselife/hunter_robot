@@ -156,7 +156,7 @@ class JDAgent(object):
     def chat(self, contents):
         job_title = contents["job_title"]
         industry = contents["industry_type"]
-        location = contents["location"]
+        location = contents["country"]
         application_email = contents["application_email"]
         additional_requirements = contents["additional_requirements"]
 
