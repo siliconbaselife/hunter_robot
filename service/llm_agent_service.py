@@ -82,7 +82,14 @@ class CompanyAgent(object):
     def chat(self, job_position, country, industry_type):
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
-        return res
+        if "json" in res:
+            ress = res.split('\n')
+            ress = ress[1:]
+            ress = ress[:-1]
+            res = "".join(ress)
+        product_directions = json.loads(res)
+
+        return product_directions
 
 
 class JDAgent(object):
