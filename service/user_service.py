@@ -1,11 +1,14 @@
 import random
 import smtplib
+import traceback
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
 from dao.manage_dao import login_check_db, manage_account_register
 from dao.contact_bank_dao import new_extension_user
+from dao.manage_dao import add_manage_user
 import json
+import traceback
 from utils.log import get_logger
 from utils.config import config
 
@@ -46,6 +49,12 @@ def user_register(passwd, email, invite_account):
     desc = '线上注册'
     manage_account_register(passwd, email, desc, c_j, invite_account)
     new_extension_user(email)
+    try:
+        add_manage_user('clement.hu689@gmail.com', email)
+    except BaseException as e:
+        logger.error(f"add_manage_user error => {e}")
+        logger.error(traceback.format_exc())
+
     return 0, ""
 
 
