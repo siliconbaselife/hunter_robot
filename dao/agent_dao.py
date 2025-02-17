@@ -86,5 +86,43 @@ def query_agent_functions():
     rows = dbm.query(sql)
     function_infos = []
     for row in rows:
-        function_infos.append({"agent_name": row[1], "agent_key": row[2], "key_words": json.loads(row[3], strict=False)})
+        function_infos.append(
+            {"agent_name": row[1], "agent_key": row[2], "key_words": json.loads(row[3], strict=False)})
     return function_infos
+
+
+def add_strategy(manage_account_id, strategy_id, strategy_txt, strategy_content):
+    strategy_txt = strategy_txt.replace("\'", " ")
+    strategy_txt = strategy_txt.replace('\"', ' ')
+    strategy_txt = strategy_txt.replace('\n', ' ')
+    strategy_content = strategy_content.replace("\'", " ")
+    strategy_content = strategy_content.replace('\"', ' ')
+    strategy_content = strategy_content.replace('\n', ' ')
+
+    insert = f"insert into ai_strategy(manage_account_id, strategy_id, strategy_txt, strategy_content) values('{manage_account_id}', '{strategy_id}', '{strategy_txt}', '{strategy_content}')"
+    dbm.insert(insert)
+
+
+def update_strategy(manage_account_id, strategy_id, strategy_content):
+    strategy_content = strategy_content.replace("\'", " ")
+    strategy_content = strategy_content.replace('\"', ' ')
+    strategy_content = strategy_content.replace('\n', ' ')
+    update = f"update ai_strategy set strategy_content = '{strategy_content}' where manage_account_id = '{manage_account_id}' and strategy_id = '{strategy_id}'"
+    dbm.update(update)
+
+
+def query_strategy_list(manage_account_id):
+    select = f"select strategy_id, strategy_txt from ai_strategy where manage_account_id = '{manage_account_id}'"
+    rows = dbm.query(select)
+    rs = []
+    for row in rows:
+        rs.append({"strategy_id": row[0], "strategy_txt": row[1]})
+
+    return rs
+
+
+def query_strategy(manage_account_id, strategy_id):
+    select = f"select strategy_content from ai_strategy where manage_account_id = '{manage_account_id}' and strategy_id = '{strategy_id}'"
+    rows = dbm.query(select)
+
+    return json.loads(rows[0][0])

@@ -337,3 +337,16 @@ CREATE TABLE `agent_function` (
   PRIMARY KEY (`id`),
   KEY `agent_name_key_id` (`agent_name`, `agent_key`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+CREATE TABLE `ai_strategy` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `manage_account_id` varchar(100) NOT NULL COMMENT '管理账户ID',
+  `strategy_id` varchar(100) NOT NULL DEFAULT "" COMMENT '策略id',
+  `strategy_txt` text NOT NULL DEFAULT "" COMMENT '策略文本',
+  `strategy_content` text NOT NULL DEFAULT "" COMMENT '策略内容',
+  `visible` tinyint NOT NULL DEFAULT 1 COMMENT '可见性',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `manage_account_id_strategy_id` (manage_account_id, strategy_id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
