@@ -1,3 +1,5 @@
+import traceback
+
 from flask import Flask, Response, request
 from flask import Blueprint
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
@@ -60,13 +62,20 @@ def judge_user_contact_api():
     contact_type = request.json.get('contact_type', None)
     if contact_type == None:
         return Response(json.dumps(get_web_res_fail("contact_type 未指定"), ensure_ascii=False))
-    is_contact = query_user_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
-    ret = {
-        'is_contact': is_contact,
-    }
-    if is_contact:
-        res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
-        ret['personal_email'] = res
+
+    try:
+        is_contact = query_user_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
+        ret = {
+            'is_contact': is_contact,
+        }
+        if is_contact:
+            res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
+            ret['personal_email'] = res
+    except BaseException as e:
+        logger.error(e)
+        logger.error(traceback.format_exc())
+        return Response(json.dumps(get_web_res_fail('服务暂时异常，请稍等一会儿'), ensure_ascii=False))
+
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
 @extension_web.route("/backend/extension/contact/fetch", methods=['POST'])
@@ -82,7 +91,13 @@ def fetch_personal_email_api():
     valid_set = ('personal_email', 'phone')
     if contact_type == None or contact_type not in valid_set:
         return Response(json.dumps(get_web_res_fail(f"contact_type 未指定 或不合法(需要在{valid_set}范围里)"), ensure_ascii=False))
-    res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
+    try:
+        res, msg = user_fetch_contact(user_id=user_id, linkedin_profile=linkedin_profile, contact_tag=contact_type)
+    except BaseException as e:
+        logger.error(e)
+        logger.error(traceback.format_exc())
+        return Response(json.dumps(get_web_res_fail('服务暂时异常，请稍等一会儿'), ensure_ascii=False))
+
     ret = {
         'msg': msg
     }
