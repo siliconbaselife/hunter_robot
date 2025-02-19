@@ -74,7 +74,7 @@ def judge_user_contact_api():
     except BaseException as e:
         logger.error(e)
         logger.error(traceback.format_exc())
-        return Response(json.dumps(get_web_res_fail('服务暂时异常，请稍等一会儿'), ensure_ascii=False))
+        return Response(json.dumps(get_web_res_fail('功能运维中，技术同学加班加点修复中~ 小伙伴们耐心等待'), ensure_ascii=False))
 
     return Response(json.dumps(get_web_res_suc_with_data(ret), ensure_ascii=False))
 
@@ -96,7 +96,7 @@ def fetch_personal_email_api():
     except BaseException as e:
         logger.error(e)
         logger.error(traceback.format_exc())
-        return Response(json.dumps(get_web_res_fail('服务暂时异常，请稍等一会儿'), ensure_ascii=False))
+        return Response(json.dumps(get_web_res_fail('功能运维中，技术同学加班加点修复中~ 小伙伴们耐心等待'), ensure_ascii=False))
 
     ret = {
         'msg': msg
