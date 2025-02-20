@@ -333,6 +333,7 @@ CREATE TABLE `agent_function` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `agent_name` varchar(100) NOT NULL DEFAULT "" COMMENT 'agent名字',
   `agent_key` varchar(100) NOT NULL DEFAULT "" COMMENT 'agent key',
+  `des` varchar(1024) NOT NULL DEFAULT "" COMMENT '描述',
   `key_words` varchar(1024) NOT NULL DEFAULT "" COMMENT 'key words',
   PRIMARY KEY (`id`),
   KEY `agent_name_key_id` (`agent_name`, `agent_key`)

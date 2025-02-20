@@ -87,7 +87,7 @@ def query_agent_functions():
     function_infos = []
     for row in rows:
         function_infos.append(
-            {"agent_name": row[1], "agent_key": row[2], "key_words": json.loads(row[3], strict=False)})
+            {"agent_name": row[1], "des": row[2], "agent_key": row[3], "key_words": json.loads(row[4], strict=False)})
     return function_infos
 
 
