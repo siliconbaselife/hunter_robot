@@ -337,6 +337,17 @@ def agent_chat_service(user_id, session_id, msg):
 from service.llm_agent_service import CompanyAgent, JDAgent
 
 
+def deal_benchmarking_company(rs):
+    r_msg = ""
+    for product_name, companys in rs.items():
+        r_msg += "<h3>" + product_name + "</h3>"
+        for i, company_info in enumerate(companys):
+            r_msg += f"{i + 1}. <b>" + company_info["company_name"] + "</b> - "
+            r_msg += company_info["description"] + "<br>"
+        r_msg += "<br>"
+    return r_msg
+
+
 def agent_chat_special_service(user_id, function_key, contents):
     session_id = generate_session_id()
 
@@ -344,7 +355,7 @@ def agent_chat_special_service(user_id, function_key, contents):
     msg = ""
     if function_key == "benchmarking_company":
         agent = CompanyAgent()
-        msg = f"find benchmarking company => job position: {contents['job_position']} country: {contents['country']} industry type: {contents['industry_type']}"
+        msg = f"欢迎！Easy Hire AI会在这里帮助您找到与您所需职位和行业相关的公司信息。通过分析这些公司，我们将识别潜在的人才来源，并整理出可寻访的产品方向。\n可提问：\n给我目标公司名单？"
 
     if function_key == "generate_jd":
         agent = JDAgent()
@@ -365,14 +376,7 @@ def agent_chat_special_service(user_id, function_key, contents):
         return session_id, "system error"
 
     if function_key == "benchmarking_company":
-        r_msg = ""
-        for product_name, companys in rs.items():
-            r_msg += "<h3>" + product_name + "</h3>"
-            for company_info in companys:
-                r_msg += "<b>" + company_info["company_name"] + "</b> => "
-                r_msg += company_info["description"] + "<br>"
-            r_msg += "<br>"
-        rs = r_msg
+        rs = deal_benchmarking_company(rs)
 
     append_msg(user_id, session_id, None, msg, rs)
 
