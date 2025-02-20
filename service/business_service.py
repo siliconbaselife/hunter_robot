@@ -409,6 +409,7 @@ def agent_functions_get_service():
         r_function_infos.append({
             "txt": function_info["agent_name"],
             "key": function_info["agent_key"],
+            "des": function_info["des"],
             "key_words": function_info["key_words"]
         })
 
