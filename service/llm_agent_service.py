@@ -96,7 +96,7 @@ class CompanyAgent(object):
         company_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type", "product"],
             template="what are the {product} in the {country} industry? List at least 20 companies and provide a description for each company, with the description being within 20 words."
-                     "return the results as a JSON array with the keys `company_name` and `description`, company_name return English and Chinese, English name in the bracket, Chinese name out the bracket, description return only Chinese.on other word, only json. return only english."
+                     "return the results as a JSON array with the keys `english_company_name`, `chinese_company_name` and `description`, , description return only Chinese.on other word, only json. return only english."
                      "return format [company1, company2]"
         )
         output_parser = StrOutputParser()
