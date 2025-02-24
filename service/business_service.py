@@ -342,7 +342,7 @@ def deal_benchmarking_company(rs):
     for product_name, companys in rs.items():
         r_msg += "<h3>" + product_name + "</h3>"
         for i, company_info in enumerate(companys):
-            r_msg += f"{i + 1}. <b>" + company_info["company_name"] + "</b> - "
+            r_msg += f"{i + 1}. <b>" + company_info["chinese_company_name"] + " (" + company_info["english_company_name"] + ")" + "</b> - "
             r_msg += company_info["description"] + "<br>"
         r_msg += "<br>"
     return r_msg
