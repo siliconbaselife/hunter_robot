@@ -58,6 +58,10 @@ if __name__ == "__main__":
     agent = huiweiPeopleAgent()
     print(f"获取到 {len(profiles)} 份简历")
     for profile in profiles:
-        deal_profile(profile)
+        try:
+            deal_profile(profile)
+        except BaseException as e:
+            print(e)
+            print(traceback.format_exc())
 
     print("识别完成")
