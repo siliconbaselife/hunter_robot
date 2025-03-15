@@ -83,7 +83,7 @@ class CompanyAgent(object):
         #              "。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
         #              "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式 3个key company_name description product_type"
         # )
-        product_prompt = PromptTemplate(
+        self.product_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type"],
             template="what are the product directions in {country} {industry_type}? Return the results as a JSON with the "
                      "on other word, only json. return only Chinese."
@@ -91,7 +91,7 @@ class CompanyAgent(object):
         )
 
         output_parser = StrOutputParser()
-        self.product_chain = product_prompt | chat | output_parser
+        self.product_chain = self.product_prompt | chat | output_parser
 
         self.company_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type", "product"],
@@ -115,6 +115,7 @@ class CompanyAgent(object):
 
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
+        self.product_chain.format(job_position=job_position, country=country, industry_type=industry_type)
 
         products = transfer_json(res)
         # products = product_directions[industry_type]
@@ -129,12 +130,12 @@ class CompanyAgent(object):
 
         return company_infos
 
-    def get_prompt(self, contents):
-        job_position = contents["job_position"]
-        country = contents["country"]
-        industry_type = contents["industry_type"]
-
-        return self.company_prompt.format(job_position=job_position, country=country, industry_type=industry_type)
+    # def get_prompt(self, contents):
+    #     job_position = contents["job_position"]
+    #     country = contents["country"]
+    #     industry_type = contents["industry_type"]
+    #
+    #     return self.company_prompt.format(job_position=job_position, country=country, industry_type=industry_type)
 
 
 class JDAgent(object):

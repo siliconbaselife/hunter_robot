@@ -356,7 +356,7 @@ def agent_chat_special_service(user_id, function_key, contents):
     if function_key == "benchmarking_company":
         agent = CompanyAgent()
         # msg = f"欢迎！Easy Hire AI会在这里帮助您找到与您所需职位和行业相关的公司信息。通过分析这些公司，我们将识别潜在的人才来源，并整理出可寻访的产品方向。\n可提问：\n给我目标公司名单？"
-        msg = f"目标公司"
+        msg = f"请给我 {contents['country']} {contents['industry_type']} 行业 {contents['job_position']} 岗位的目标公司名单"
 
     if function_key == "generate_jd":
         agent = JDAgent()
