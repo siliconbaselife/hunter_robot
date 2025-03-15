@@ -1,0 +1,286 @@
+user root;
+worker_processes auto;
+pid /run/nginx.pid;
+include /etc/nginx/modules-enabled/*.conf;
+
+events {
+        worker_connections 768;
+        # multi_accept on;
+}
+
+http {
+
+        ##
+        # Basic Settings
+        ##
+
+        sendfile on;
+        tcp_nopush on;
+        types_hash_max_size 2048;
+        # server_tokens off;
+        underscores_in_headers on;
+
+        # server_names_hash_bucket_size 64;
+        # server_name_in_redirect off;
+
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        ##
+        # SSL Settings
+        ##
+
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3; # Dropping SSLv3, ref: POODLE
+        ssl_prefer_server_ciphers on;
+
+        ##
+        # Logging Settings
+        ##
+
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+
+        ##
+        # Gzip Settings
+        ##
+
+         gzip on;
+
+         gzip_vary on;
+        # gzip_proxied any;
+         gzip_comp_level 6;
+        # gzip_buffers 16 8k;
+        # gzip_http_version 1.1;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+        ##
+        # Virtual Host Configs
+        ##
+
+        server {
+         listen 443 ssl;
+         server_name www.easyhireai.com;
+
+         #ssl_certificate /root/workspace/cert/www.easyhireai.com/www.easyhireai.com.pem;
+         #ssl_certificate_key /root/workspace/cert/www.easyhireai.com/www.easyhireai.com.key;
+
+                 #  ssl_certificate /root/workspace/cert/www.easyhireai.com/fullchain.pem;
+                 #  ssl_certificate_key /root/workspace/cert/www.easyhireai.com/privkey.pem;
+
+                 ssl_certificate /etc/letsencrypt/live/easyhireai.com/fullchain.pem;
+                 ssl_certificate_key /etc/letsencrypt/live/easyhireai.com/privkey.pem;
+
+
+         ssl_session_cache shared:SSL:1m;
+         ssl_session_timeout 5m;
+
+         ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+         ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
+
+         #表示优先使用服务端加密套件。默认开启
+         ssl_prefer_server_ciphers on;
+
+         location / {
+                proxy_pass http://127.0.0.1:11113;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                add_header Access-Control-Allow-Credentials 'true';
+             }
+
+         location /manage/ {
+                alias  /root/workspace/AIhunter/;
+                index  index.html index.htm;
+                try_files $uri $uri/ /index.html;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                add_header Access-Control-Allow-Origin *;
+                add_header Access-Control-Allow-Credentials 'true';
+                add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+
+         location /recruit/ {
+                 proxy_pass http://47.237.0.89:2040;
+                 proxy_redirect off;
+                 proxy_set_header Host $host;
+                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header X-Real-IP $remote_addr;
+                 add_header Access-Control-Allow-Origin *;
+                 add_header Access-Control-Allow-Credentials 'true';
+                 add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+
+         location /backend/ {
+                 proxy_pass http://47.237.0.89:2040;
+                 proxy_redirect off;
+                 proxy_set_header Host $host;
+                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header X-Real-IP $remote_addr;
+                 add_header Access-Control-Allow-Credentials 'true';
+                 add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+        }
+
+                server {
+         listen 443 ssl;
+         server_name www.easyhireai.cn;
+
+         #ssl_certificate /root/workspace/cert/www.easyhireai.com/www.easyhireai.com.pem;
+         #ssl_certificate_key /root/workspace/cert/www.easyhireai.com/www.easyhireai.com.key;
+
+                 #  ssl_certificate /root/workspace/cert/www.easyhireai.com/fullchain.pem;
+                 #  ssl_certificate_key /root/workspace/cert/www.easyhireai.com/privkey.pem;
+
+                 ssl_certificate /etc/letsencrypt/live/easyhireai.cn/fullchain.pem;
+                 ssl_certificate_key /etc/letsencrypt/live/easyhireai.cn/privkey.pem;
+
+
+
+         ssl_session_cache shared:SSL:1m;
+         ssl_session_timeout 5m;
+
+         ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+         ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;
+
+         #表示优先使用服务端加密套件。默认开启
+         ssl_prefer_server_ciphers on;
+
+         location / {
+                proxy_pass http://127.0.0.1:11113;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                add_header Access-Control-Allow-Credentials 'true';
+             }
+
+         location /manage/ {
+                alias  /root/workspace/AIhunter/;
+                index  index.html index.htm;
+                try_files $uri $uri/ /index.html;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                add_header Access-Control-Allow-Origin *;
+                add_header Access-Control-Allow-Credentials 'true';
+                add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+
+         location /recruit/ {
+                 proxy_pass http://47.237.0.89:2040;
+                 proxy_redirect off;
+                 proxy_set_header Host $host;
+                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header X-Real-IP $remote_addr;
+                 add_header Access-Control-Allow-Origin *;
+                 add_header Access-Control-Allow-Credentials 'true';
+                 add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+
+         location /backend/ {
+                 proxy_pass http://47.237.0.89:2040;
+                 proxy_redirect off;
+                 proxy_set_header Host $host;
+                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header X-Real-IP $remote_addr;
+                 add_header Access-Control-Allow-Credentials 'true';
+                 add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+        }
+
+        server {
+         listen       8448 ssl;
+         server_name  8.219.246.173;
+
+         ssl_certificate      /root/workspace/cert/server.crt;
+         ssl_certificate_key  /root/workspace/cert/server_nopwd.key;
+         #ssl_certificate /root/workspace/cert/www.easyhireai.com/www.easyhireai.com.pem
+         #ssl_certificate_key /root/workspace/cert/www.easyhireai.com/www.easyhireai.com.key
+
+         ssl_session_cache    shared:SSL:1m;
+         ssl_session_timeout  5m;
+
+         ssl_ciphers  ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+         ssl_prefer_server_ciphers  on;
+
+         location / {
+             proxy_pass http://127.0.0.1:8008;
+             index  index.html index.htm index.jsp;
+         }
+         }
+
+         map $http_upgrade $connection_upgrade {
+             default upgrade;
+             ''      close;
+         }
+         server {
+             listen 80;
+             server_name shadowhiring.com shadowhiring.cn;
+
+             location / {
+                proxy_pass http://127.0.0.1:11113;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                add_header Access-Control-Allow-Credentials 'true';
+             }
+             location /hunter/ {
+                     root /root/html;
+                     index index.html index.htm;
+             }
+
+
+             location /manage/ {
+                alias  /root/workspace/AIhunter/;
+                index  index.html index.htm;
+                try_files $uri $uri/ /index.html;
+                proxy_redirect off;
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Real-IP $remote_addr;
+                add_header Access-Control-Allow-Origin *;
+                add_header Access-Control-Allow-Credentials 'true';
+                add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+
+
+             location /recruit/ {
+                 proxy_pass http://47.237.0.89:2040;
+                 proxy_redirect off;
+                 proxy_set_header Host $host;
+                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header X-Real-IP $remote_addr;
+                 add_header Access-Control-Allow-Origin *;
+                 add_header Access-Control-Allow-Credentials 'true';
+                 add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+             location /backend/ {
+                 proxy_pass http://47.237.0.89:2040;
+                 proxy_redirect off;
+                 proxy_set_header Host $host;
+                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                 proxy_set_header X-Real-IP $remote_addr;
+                 add_header Access-Control-Allow-Credentials 'true';
+                 add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+                 add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+             }
+
+
+         }
+
+}
+
+

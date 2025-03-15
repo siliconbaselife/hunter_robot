@@ -93,14 +93,14 @@ class CompanyAgent(object):
         output_parser = StrOutputParser()
         self.product_chain = product_prompt | chat | output_parser
 
-        company_prompt = PromptTemplate(
+        self.company_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type", "product"],
             template="what are the {product} in the {country} industry? List at least 20 companies and provide a description for each company, with the description being within 20 words."
                      "return the results as a JSON array with the keys `english_company_name`, `chinese_company_name` and `description`, , description return only Chinese.on other word, only json. return only english."
                      "return format [company1, company2]"
         )
         output_parser = StrOutputParser()
-        self.company_chain = company_prompt | chat | output_parser
+        self.company_chain = self.company_prompt | chat | output_parser
 
     def run(self, job_position, country, industry_type, product):
         res = self.company_chain.invoke(
@@ -129,11 +129,18 @@ class CompanyAgent(object):
 
         return company_infos
 
+    def get_prompt(self, contents):
+        job_position = contents["job_position"]
+        country = contents["country"]
+        industry_type = contents["industry_type"]
+
+        return self.company_prompt.format(job_position=job_position, country=country, industry_type=industry_type)
+
 
 class JDAgent(object):
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
-        prompt = PromptTemplate(
+        self.prompt = PromptTemplate(
             input_variables=["job_title", "industry", "location", "application_email", "additional_requirements"],
             template="You are a professional Executive Search Consultant for global talent recruitment. Your task is to "
                      "create a LinkedIn recruitment ad based on the following variables. Follow the steps below to ensure "
@@ -151,7 +158,7 @@ class JDAgent(object):
                      "output is well-structured and follows the guidelines provided."
         )
         output_parser = StrOutputParser()
-        self.chain = prompt | chat | output_parser
+        self.chain = self.prompt | chat | output_parser
 
     def chat(self, contents):
         job_title = contents["job_title"]
@@ -164,6 +171,14 @@ class JDAgent(object):
             {"job_title": job_title, "industry": industry, "location": location, "application_email": application_email,
              "additional_requirements": additional_requirements})
         return res
+
+    # def get_prompt(self, contents):
+    #     job_title = contents["job_title"]
+    #     industry = contents["industry_type"]
+    #     location = contents["country"]
+    #     application_email = contents["application_email"]
+    #     additional_requirements = contents["additional_requirements"]
+    #     return self.prompt()
 
 
 class ChatAgent(object):
