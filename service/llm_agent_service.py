@@ -83,7 +83,7 @@ class CompanyAgent(object):
         #              "。\n 4. 再根据不同的产品方向整理出公司名单，每个产品类型要20家公司，"
         #              "对公司介绍在20个字节以内。\n 5. 输出的内容应为一份清晰的备忘录，返回json格式 3个key company_name description product_type"
         # )
-        self.product_prompt = PromptTemplate(
+        product_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type"],
             template="what are the product directions in {country} {industry_type}? Return the results as a JSON with the "
                      "on other word, only json. return only Chinese."
@@ -91,16 +91,16 @@ class CompanyAgent(object):
         )
 
         output_parser = StrOutputParser()
-        self.product_chain = self.product_prompt | chat | output_parser
+        self.product_chain = product_prompt | chat | output_parser
 
-        self.company_prompt = PromptTemplate(
+        company_prompt = PromptTemplate(
             input_variables=["job_position", "country", "industry_type", "product"],
             template="what are the {product} in the {country} industry? List at least 20 companies and provide a description for each company, with the description being within 20 words."
                      "return the results as a JSON array with the keys `english_company_name`, `chinese_company_name` and `description`, , description return only Chinese.on other word, only json. return only english."
                      "return format [company1, company2]"
         )
         output_parser = StrOutputParser()
-        self.company_chain = self.company_prompt | chat | output_parser
+        self.company_chain = company_prompt | chat | output_parser
 
     def run(self, job_position, country, industry_type, product):
         res = self.company_chain.invoke(
@@ -115,7 +115,6 @@ class CompanyAgent(object):
 
         res = self.product_chain.invoke(
             {"job_position": job_position, "country": country, "industry_type": industry_type})
-        self.product_chain.format(job_position=job_position, country=country, industry_type=industry_type)
 
         products = transfer_json(res)
         # products = product_directions[industry_type]
