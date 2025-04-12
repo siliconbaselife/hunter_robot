@@ -1562,7 +1562,7 @@ def match_profile_by_AI():
         manage_account_id = decrypt(cookie_user_name, key)
 
     r = jd_match_service(manage_account_id, candidate_id, jd)
-    return Response(json.dumps(get_web_res_suc_with_data(r), ensure_ascii=False))
+    return Response(get_web_res_suc_with_data(r))
 
 
 @tools_web.route("/backend/tools/authorize", methods=['POST'])
