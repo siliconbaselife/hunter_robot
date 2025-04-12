@@ -1552,7 +1552,7 @@ def parse_profile_by_ai():
 
 @tools_web.route("/backend/tools/matchProfileByAI", methods=['POST'])
 @web_exception_handler
-def parse_profile_by_ai():
+def match_profile_by_AI():
     candidate_id = request.json.get('candidate_id', '')
     jd = request.json.get('jd', '')
     cookie_user_name = request.cookies.get('user_name', None)
@@ -1563,6 +1563,7 @@ def parse_profile_by_ai():
 
     r = jd_match_service(manage_account_id, candidate_id, jd)
     return Response(json.dumps(get_web_res_suc_with_data(r), ensure_ascii=False))
+
 
 @tools_web.route("/backend/tools/authorize", methods=['POST'])
 @web_exception_handler
