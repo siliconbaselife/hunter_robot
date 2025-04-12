@@ -194,7 +194,7 @@ class JDMatchAgent(object):
         self.chain = self.prompt | chat | output_parser
 
     def chat(self, jd, profile):
-        res = self.chain.invoke(jd, profile)
+        res = self.chain.invoke({"jd": jd, "profile": profile})
         return res
 
 
