@@ -188,7 +188,7 @@ class JDMatchAgent(object):
             input_variables=["jd", "profile"],
             template="1. 接收输入的{jd} 和候选人的{profile} \n 2. 分析职位描述和简历，评估它们之间的匹配度。 "
                      "\n 3. 输出匹配度的评分，范围从0到100。 \n 4. 根据提供匹配的原因，解释为什么该简历与职位描述匹配或不匹配。 "
-                     "\n 5. 输出结果时，不要包含任何XML标签。\n 6.返回结果需要用json格式 评分key=>score 描述key=>desc"
+                     "\n 5. 输出结果时，不要包含任何XML标签。\n 6.返回结果需要用json格式 评分key=>score 描述key=>desc \n 7.desc返回结果模块与模块之间换行符隔开"
         )
         output_parser = StrOutputParser()
         self.chain = self.prompt | chat | output_parser
