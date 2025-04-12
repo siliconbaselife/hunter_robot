@@ -357,8 +357,9 @@ def jd_match_service(user_id, candidate_id, jd):
         return ""
     raw_profile = rows[0][1]
     r = agent.chat(jd, raw_profile)
+    info = json.loads(r)
 
-    return r
+    return info
 
 
 def agent_chat_special_service(user_id, function_key, contents):
