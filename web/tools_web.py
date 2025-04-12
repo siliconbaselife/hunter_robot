@@ -1549,6 +1549,17 @@ def parse_profile_by_ai():
     return Response(json.dumps(get_web_res_suc_with_data(profile), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tools/matchProfileByAI", methods=['POST'])
+@web_exception_handler
+def parse_profile_by_ai():
+    candidate_id = request.json.get('candidate_id', '')
+    jd = request.json.get('jd', '')
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
 @tools_web.route("/backend/tools/authorize", methods=['POST'])
 @web_exception_handler
 def authorize():

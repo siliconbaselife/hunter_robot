@@ -11,6 +11,7 @@ from utils.log import get_logger
 from utils.config import config as config
 from dao.agent_dao import *
 from service.llm_agent_service import *
+from dao.tool_dao import get_resume_by_candidate_ids_and_platform
 
 logger = get_logger(config['log']['business_log_file'])
 
@@ -342,10 +343,22 @@ def deal_benchmarking_company(rs):
     for product_name, companys in rs.items():
         r_msg += "<h3>" + product_name + "</h3>"
         for i, company_info in enumerate(companys):
-            r_msg += f"{i + 1}. <b>" + company_info["chinese_company_name"] + " (" + company_info["english_company_name"] + ")" + "</b> - "
+            r_msg += f"{i + 1}. <b>" + company_info["chinese_company_name"] + " (" + company_info[
+                "english_company_name"] + ")" + "</b> - "
             r_msg += company_info["description"] + "<br>"
         r_msg += "<br>"
     return r_msg
+
+
+def jd_match_service(user_id, candidate_id, jd):
+    agent = JDMatchAgent()
+    rows = get_resume_by_candidate_ids_and_platform(user_id, "Linkedin", [candidate_id], 0, 1)
+    if len(rows) == 0:
+        return ""
+    raw_profile = rows[0][1]
+    r = agent.chat(jd, raw_profile)
+
+    return r
 
 
 def agent_chat_special_service(user_id, function_key, contents):
