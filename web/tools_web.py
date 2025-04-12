@@ -25,6 +25,7 @@ from dao.task_dao import get_job_by_id
 from utils.utils import key
 from service.google_service import *
 import time
+from service.business_service import *
 
 logger = get_logger(config['log']['log_file'])
 
@@ -1559,6 +1560,9 @@ def parse_profile_by_ai():
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
+
+    r = jd_match_service(manage_account_id, candidate_id, jd)
+    return Response(json.dumps(get_web_res_suc_with_data(r), ensure_ascii=False))
 
 @tools_web.route("/backend/tools/authorize", methods=['POST'])
 @web_exception_handler
