@@ -793,6 +793,41 @@ class CompanyServiceOrProductType:
         return befores, middles, afters
 
 
+class catlPeopleAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        output_parser = StrOutputParser()
+        prompt = PromptTemplate(
+            input_variables=["profile", "befores", "middles", "afters"],
+            template='{profile}\n'
+                     '====================================\n'
+                     '以上是一个候选人在linkedin的简历。请帮我对该简历进行分析，并返回json格式。\n'
+                     '需要萃取出的字段如下\n'
+                     'age => 通过学校毕业的时间，大学 + 22，研究生 + 25，高中 + 18\n'
+                     'chinese => 是否是中国人\n'
+                     'graduate_school => 毕业学校，最高学历学校。如果没有 返回 "无法判断"\n'
+                     'education_background => 学历，枚举值 "本科" "研究生" "博士" "博士后" "其他"，不能判断就返回 "其他"\n'
+                     'school_level => 学校的层级，枚举值 "常青藤联盟" "双一流" "985" "211" "QS前100" "QS前300" "QS前500" "QS前1000" "其他", 不能判断就返回 "其他"\n'
+                     'function_type => 区分简历的职能，先判断简历是属于前台、中台还是后台, 然后判断属于相应哪个枚举值，前台枚举值 {befores}, 中台枚举值 {middles}, 后台枚举值 {afters}\n'
+                     'service_country => 服务的国家，如果无法判断，给出 "无法判断" 的字段。\n'
+                     'rank_of_position => 根据简历判断一下，他的岗位级别，如果无法判断，给出 "无法判断" 的字段。枚举值有 "Specialist" "Supervisor" "manager" '
+                     '"director" "General Manager " "Vice President " "CXO" "无法判断"\n'
+        )
+
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, profile):
+        res = self.chain.invoke({"profile": profile})
+        print(res)
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if "```" in line:
+                continue
+            rres += line
+        return json.loads(rres)
+
+
 class huiweiPeopleAgent:
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)

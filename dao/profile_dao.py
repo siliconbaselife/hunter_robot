@@ -35,7 +35,31 @@ def add_profile(profile_info):
     insert = f"insert into huawei(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, School_Level, Five_Years_Jump_Times, " \
              f"Service_Or_Product_Type, Function_type, Service_Country, Rank_Of_Position, Department, Cooperative_Department, profile) " \
              f"values('{candidate_id}', {age}, '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{school_level}', '{five_years_jump_times}', " \
-    f"'{service_or_product_type}', '{function_type}', '{service_country}', '{rank_of_position}', '{department}', '{cooperative_department}', '{profile}')"
+             f"'{service_or_product_type}', '{function_type}', '{service_country}', '{rank_of_position}', '{department}', '{cooperative_department}', '{profile}')"
+
+    print(insert)
+    dbm.insert(insert)
+
+
+def add_catl_profile(profile_info):
+    candidate_id = profile_info['candidate_id']
+    age = profile_info['age']
+    name = profile_info['name']
+    company = profile_info['company']
+    chinese = profile_info['chinese']
+    graduate_school = profile_info['graduate_school']
+    education_background = profile_info['education_background']
+    school_level = profile_info['school_level']
+    five_years_jump_times = profile_info['five_years_jump_times']
+    function_type = profile_info["function_type"]
+    service_country = profile_info["service_country"]
+    rank_of_position = profile_info["rank_of_position"]
+    profile = profile_info["profile"]
+
+    insert = f"insert into huawei(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, School_Level, Five_Years_Jump_Times, " \
+             f"Function_type, Service_Country, Rank_Of_Position, profile) " \
+             f"values('{candidate_id}', {age}, '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{school_level}', '{five_years_jump_times}', " \
+             f"'{function_type}', '{service_country}', '{rank_of_position}', '{profile}')"
 
     print(insert)
     dbm.insert(insert)
