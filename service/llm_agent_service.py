@@ -774,6 +774,15 @@ class CompanyServiceOrProductType:
     def cal(self, company):
         res = self.chain.invoke({"company": company})
         print(res)
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if "```" in line:
+                continue
+            if "JSON" in line:
+                continue
+            rres += line
+
         r = json.loads(res)
         befores = r["前台"]
         middles = [v for k, v in r["中台"].items()]
