@@ -767,14 +767,20 @@ class CompanyServiceOrProductType:
             input_variables=["company"],
             template='帮我划分 {company} 公司的职能业务，按照 前台，中台，后台。前台按照不同事业部分类。中台分成两种，一种按照业务场景，一种按照'
                      '技术分类。后台也分成两种，一种按照业务属性，一种按照职能。'
-                     '\n返回json格式, 只返回json内容,json格式如下: \n {{"前台": ["事业部1", "事业部2"]], "中台": {{"业务场景": [], "技术": []}}, "后台": {{"业务属性": [], "职能": []}}}}'
+                     '\n返回json格式, 只返回json内容, json格式如下: \n {{"前台": ["事业部1", "事业部2"]], "中台": {{"业务场景": [], "技术": []}}, "后台": {{"业务属性": [], "职能": []}}}}'
         )
         self.chain = prompt | chat | output_parser
 
     def cal(self, company):
         res = self.chain.invoke({"company": company})
         print(res)
-        r = json.loads(res)
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if "```" in line:
+                continue
+            rres += line
+        r = json.loads(rres)
         befores = r["前台"]
         middles = [v for k, v in r["中台"].items()]
         afters = [v for k, v in r["后台"].items()]
