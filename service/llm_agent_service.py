@@ -198,7 +198,6 @@ class JDMatchAgent(object):
         return res
 
 
-
 class ChatAgent(object):
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
@@ -758,6 +757,25 @@ class SearchMan:
 
         res = self.comprehend_agent.cal(query, relation_txts)
         return res
+
+
+class CompanyServiceOrProductType:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        output_parser = StrOutputParser()
+        prompt = PromptTemplate(
+            input_variables=["company"],
+            template='帮我划分 {} 公司的职能业务，按照 前台，中台，后台。前台按照不同事业部分类。中台分成两种，一种按照业务场景，一种按照'
+                     '技术分类。后台也分成两种，一种按照业务属性，一种按照职能。'
+                     '\n返回json格式，格式如下: \n'
+                     '{"前台": [], "中台": [], "后台": []}'
+        )
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, company):
+        res = self.chain.invoke({"company": company})
+        r = json.loads(res)
+        return r
 
 
 class huiweiPeopleAgent:
