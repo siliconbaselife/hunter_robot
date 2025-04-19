@@ -782,8 +782,12 @@ class CompanyServiceOrProductType:
             rres += line
         r = json.loads(rres)
         befores = r["前台"]
-        middles = [v for k, v in r["中台"].items()]
-        afters = [v for k, v in r["后台"].items()]
+        middles = []
+        for k, v in r["中台"].items():
+            middles.extend(v)
+        afters = []
+        for k, v in r["后台"].items():
+            afters.extend(v)
         print(f"befores: {befores} middles: {middles} afters: {afters}")
 
         return befores, middles, afters
