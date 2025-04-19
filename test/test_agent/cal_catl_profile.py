@@ -25,5 +25,4 @@ if __name__ == "__main__":
     profiles = get_catl_profiles()
     print(f"获取到 {len(profiles)} 份简历")
     company_agent = CompanyServiceOrProductType()
-    function_infos = company_agent.cal("宁德时代")
-    print(function_infos)
+    befores, middles, afters = company_agent.cal("宁德时代")

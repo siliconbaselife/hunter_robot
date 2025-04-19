@@ -775,7 +775,12 @@ class CompanyServiceOrProductType:
     def cal(self, company):
         res = self.chain.invoke({"company": company})
         r = json.loads(res)
-        return r
+        befores = r["前台"]
+        middles = [v for k, v in r["中台"].items()]
+        afters = [v for k, v in r["后台"].items()]
+        print(f"befores: {befores} middles: {middles} afters: {afters}")
+
+        return befores, middles, afters
 
 
 class huiweiPeopleAgent:
