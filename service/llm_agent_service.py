@@ -808,7 +808,7 @@ class catlPeopleAgent:
                      'graduate_school => 毕业学校，最高学历学校。如果没有 返回 "无法判断"\n'
                      'education_background => 学历，枚举值 "本科" "研究生" "博士" "博士后" "其他"，不能判断就返回 "其他"\n'
                      'school_level => 学校的层级，枚举值 "常青藤联盟" "双一流" "985" "211" "QS前100" "QS前300" "QS前500" "QS前1000" "其他", 不能判断就返回 "其他"\n'
-                     'function_type => 区分简历的职能，先判断简历是属于前台、中台还是后台, 然后判断属于相应哪个枚举值，前台枚举值 {befores}, 中台枚举值 {middles}, 后台枚举值 {afters}\n'
+                     'function_type => 区分简历的职能，先判断简历是属于前台、中台还是后台, 然后判断属于相应哪个枚举值, 只能返回是某个枚举值，如果无法判断，给出 "无法判断" 的字段, 前台枚举值 {befores}, 中台枚举值 {middles}, 后台枚举值 {afters}\n'
                      'service_country => 服务的国家，如果无法判断，给出 "无法判断" 的字段。\n'
                      'rank_of_position => 根据简历判断一下，他的岗位级别，如果无法判断，给出 "无法判断" 的字段。枚举值有 "Specialist" "Supervisor" "manager" '
                      '"director" "General Manager " "Vice President " "CXO" "无法判断"\n'
