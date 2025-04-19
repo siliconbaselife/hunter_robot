@@ -47,7 +47,7 @@ def deal_profile(profile):
         "profile": profile["profile"]
     }
 
-    add_profile(profile_info)
+    add_catl_profile(profile_info)
 
 
 if __name__ == "__main__":
