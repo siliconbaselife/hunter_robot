@@ -767,7 +767,7 @@ class CompanyServiceOrProductType:
             input_variables=["company"],
             template='帮我划分 {company} 公司的职能业务，按照 前台，中台，后台。前台按照不同事业部分类。中台分成两种，一种按照业务场景，一种按照'
                      '技术分类。后台也分成两种，一种按照业务属性，一种按照职能。'
-                     '\n返回json格式'
+                     '\n返回json格式\nkey 分为 前台、中台、后台'
         )
         self.chain = prompt | chat | output_parser
 
