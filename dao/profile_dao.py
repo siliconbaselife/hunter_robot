@@ -56,7 +56,7 @@ def add_catl_profile(profile_info):
     rank_of_position = profile_info["rank_of_position"]
     profile = profile_info["profile"]
 
-    insert = f"insert into huawei(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, School_Level, Five_Years_Jump_Times, " \
+    insert = f"insert into catl(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, School_Level, Five_Years_Jump_Times, " \
              f"Function_type, Service_Country, Rank_Of_Position, profile) " \
              f"values('{candidate_id}', {age}, '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{school_level}', '{five_years_jump_times}', " \
              f"'{function_type}', '{service_country}', '{rank_of_position}', '{profile}')"
