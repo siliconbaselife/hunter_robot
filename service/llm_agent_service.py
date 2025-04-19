@@ -816,8 +816,8 @@ class catlPeopleAgent:
 
         self.chain = prompt | chat | output_parser
 
-    def cal(self, profile):
-        res = self.chain.invoke({"profile": profile})
+    def cal(self, profile, befores, middles, afters):
+        res = self.chain.invoke({"profile": profile, "befores": befores, "middles": middles, "afters": afters})
         print(res)
         lines = res.split('\n')
         rres = ""

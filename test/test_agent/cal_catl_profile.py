@@ -19,9 +19,9 @@ def get_catl_profiles():
     return all_profiles
 
 
-def deal_profile(profile):
+def deal_profile(profile, befores, middles, afters):
     candidate_id = profile["candidateId"]
-    res = agent.cal(profile["profile"])
+    res = agent.cal(profile["profile"], befores, middles, afters)
     profile_info = {
         "candidate_id": candidate_id,
         "age": -1 if res["age"] == "无法判断" else int(res["age"]),
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     befores, middles, afters = company_agent.cal("宁德时代")
     for profile in profiles[:5]:
         try:
-            deal_profile(profile)
+            deal_profile(profile, befores, middles, afters)
         except BaseException as e:
             print(e)
             print(traceback.format_exc())
