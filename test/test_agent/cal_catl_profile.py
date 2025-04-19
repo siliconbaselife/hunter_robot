@@ -48,7 +48,7 @@ if __name__ == "__main__":
     company_agent = CompanyServiceOrProductType()
     agent = catlPeopleAgent()
     befores, middles, afters = company_agent.cal("宁德时代")
-    for profile in profiles[:5]:
+    for profile in profiles:
         try:
             deal_profile(profile, befores, middles, afters)
         except BaseException as e:
