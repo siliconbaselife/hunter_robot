@@ -143,7 +143,7 @@ class KeyWordsAgent(object):
         self.prompt = PromptTemplate(
             input_variables=["job_title", "country", "product_name"],
             template="As a recruitment assistant, I am here to help you obtain relevant keywords for your job search. \n"
-                     "By analyzing the input parameters such as {job_title}, {Country}, {product_name}, I will generate "
+                     "By analyzing the input parameters such as {job_title}, {country}, {product_name}, I will generate "
                      "a structured analysis to guide your talent search. use tavily_search and google_search_api to search \n"
                      "Define the business purpose of the product/service based on the input: Explain what the product or \n"
                      "service does and its key function in the market. For example: For energy storage, it could be balancing "
