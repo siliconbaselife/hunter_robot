@@ -377,6 +377,10 @@ def agent_chat_special_service(user_id, function_key, contents):
         msg = f"generate JD => title: {contents['job_title']} industry: {contents['industry_type']} country: {contents['country']} " \
               f"email: {contents['application_email']} additional requirements: {contents['additional_requirements']}"
 
+    if function_key == "keywords":
+        agent = KeyWordsAgent()
+        msg = f"请给我输出linkedin的keywords，参数: {contents['job_title']} {contents['country']} {contents['product_name']}"
+
     rs = None
     for i in range(3):
         try:

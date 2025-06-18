@@ -137,6 +137,42 @@ class CompanyAgent(object):
     #     return self.company_prompt.format(job_position=job_position, country=country, industry_type=industry_type)
 
 
+class KeyWordsAgent(object):
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+        self.prompt = PromptTemplate(
+            input_variables=["job_title", "country", "product_name"],
+            template="As a recruitment assistant, I am here to help you obtain relevant keywords for your job search. \n"
+                     "By analyzing the input parameters such as {job_title}, {Country}, {product_name}, I will generate "
+                     "a structured analysis to guide your talent search. use tavily_search and google_search_api to search \n"
+                     "Define the business purpose of the product/service based on the input: Explain what the product or \n"
+                     "service does and its key function in the market. For example: For energy storage, it could be balancing "
+                     "power supply and demand. \n Identify similar job titles that could be associated with this role: \n Based "
+                     "on the given job title, list similar roles that are common in this industry. \n Example: For a sales "
+                     "role related to energy storage, possible titles could include Key Account Sales, Account Manager, "
+                     "or Business Development Manager. \n List industry/service-specific terminology related to the product/service: \n"
+                     "Identify specific jargon, abbreviations, or terms commonly used in this field. \n Example: For energy storage, "
+                     "terms might include BESS (Battery Energy Storage Systems), Smart Grid, or Peak Shaving. \n Provide additional "
+                     "potential search keywords relevant to the role and industry: \n List additional terms that will help "
+                     "with talent sourcing, such as skills, market focus, or industry technologies. \n Example: Keywords "
+                     "could be “Energy Storage,” “Grid Modernization,” “Battery Technology,” etc. \n Final Output: \n Provide "
+                     "a structured list of relevant keywords based on the analysis. These should be in English and Chinese, "
+                     "and should match the input parameters. \n 标题 和商业 等解释都用中文 \n keyword部分要加上中文解释 \n 返回表格输出 \n"
+        )
+        output_parser = StrOutputParser()
+        self.chain = self.prompt | chat | output_parser
+
+    def chat(self, contents):
+        job_title = contents["job_title"]
+        country = contents["country"]
+        product_name = contents["product_name"]
+
+        res = self.chain.invoke(
+            {"job_title": job_title, "country": country, "product_name": product_name})
+        return res
+
+
+
 class JDAgent(object):
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
