@@ -272,14 +272,14 @@ class ChatAgent(object):
 #         print(r)
 
 
-class KeyWordsAgent:
-    def __init__(self, company, position, country):
-        self.company = company
-        self.position = position
-        self.country = country
-
-    def get(self):
-        pass
+# class KeyWordsAgent:
+#     def __init__(self, company, position, country):
+#         self.company = company
+#         self.position = position
+#         self.country = country
+#
+#     def get(self):
+#         pass
 
 
 class BenchMarkCompanyAgent:
