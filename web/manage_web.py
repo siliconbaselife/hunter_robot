@@ -143,13 +143,14 @@ def manage_account_login_api():
     user_name = request.json['user_name']
     password = request.json['password']
     logger.info(f'manage_account_login: {user_name}, {password}')
-    flag, msg = login_check_service(user_name, password)
+    flag, msg, is_manage = login_check_service(user_name, password)
     encode_user_name = encrypt(user_name, key)
     resp = Response(json.dumps(get_web_res_suc_with_data(
         {
             "login_ret": flag,
             "errMsg": msg,
-            "user_name": encode_user_name
+            "user_name": encode_user_name,
+            "manage": is_manage
         }
     ), ensure_ascii=False))
     if flag:

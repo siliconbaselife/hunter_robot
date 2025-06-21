@@ -8,7 +8,7 @@ from datetime import datetime
 
 logger = get_logger(config['log']['log_file'])
 sql_dict = {
-    "login_check": "select manage_account_id,password from manage_account where manage_account_id='{}'",
+    "login_check": "select manage_account_id, password, is_manage from manage_account where manage_account_id='{}'",
     "jobs_query": "select jobs from account where account_id='{}'",
     "jobs_update": "update account set jobs='{}' where account_id='{}'",
     "my_job_list_db": "select job_id, job_name, share, job_config, platform_type,robot_api, robot_template from job where manage_account_id='{}'",
@@ -202,6 +202,10 @@ def get_job_chat_db(job_id, begin_time=None, end_time=None, page=None, limit=Non
 def get_job_info_by_account(manage_account_id):
     return dbm.query(sql_dict['query_account_jobs'].format(manage_account_id))
 
+
+def get_manage_staffs(manage_account_id):
+    sql = f"select account_manage_id from staff_manage where manage_account_id = '{manage_account_id}'"
+    return dbm.query(sql)
 
 def select_manage_users(manage_account_id):
     sql = f"select user_id from manage where manage_id = '{manage_account_id}'"

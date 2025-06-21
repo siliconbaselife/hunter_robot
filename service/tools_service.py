@@ -34,6 +34,7 @@ from algo.llm_inference import gpt_manager
 from algo.llm_base_model import Prompt
 
 from dao.private_database_dao import *
+from dao.manage_dao import get_manage_staffs
 
 logger = get_logger(config['log']['log_file'])
 reader = easyocr.Reader(['ch_sim', 'en'])  # this needs to run only once to load the model into memory
@@ -1920,6 +1921,21 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
 
     rows = query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status,
                                          min_age, max_age, race, start, limit)
+    details = transfer_data_to_profiles(manage_account_id, contact2str, rows)
+    data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
+
+    return data, None
+
+
+def search_manage_profile_by_tag_v2(manage_account_id, platform, company, candidate_name, status, stage, page, min_age,
+                                    max_age, race, limit,
+                                    contact2str):
+    account_staffs = get_manage_staffs(manage_account_id)
+
+    total_count = query_tag_filter_num_manage(platform, company, candidate_name, stage, status, account_staffs)
+    start = (page - 1) * limit
+    rows = query_tag_filter_profiles_manage(platform, company, candidate_name, stage, status,
+                                            min_age, max_age, race, start, account_staffs)
     details = transfer_data_to_profiles(manage_account_id, contact2str, rows)
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
 

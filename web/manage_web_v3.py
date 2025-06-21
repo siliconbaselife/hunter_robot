@@ -7,7 +7,7 @@ import json
 import math
 from utils.web_helper import get_web_res_suc_with_data, get_web_res_fail
 
-from utils.utils import encrypt, decrypt, generate_random_digits,str_is_none, get_stat_id_dict
+from utils.utils import encrypt, decrypt, generate_random_digits, str_is_none, get_stat_id_dict
 from utils.utils import key
 
 from service.manage_service_v3 import *
@@ -39,8 +39,9 @@ def task_update_api():
         update_config_service_v3(manage_account_id, account_id, platform, params)
     else:
         update_config_service_v2(manage_account_id, account_id, platform, params)
-        
+
     return Response(json.dumps(get_web_res_suc_with_data(''), ensure_ascii=False))
+
 
 @manage_web_v3.route("/backend/manage/metaConfig/v3", methods=['POST'])
 @web_exception_handler
@@ -52,7 +53,7 @@ def meta_config_api():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-    
+
     a = json.load(open('file/meta_config_v3.json'))
 
     return Response(json.dumps(get_web_res_suc_with_data(a), ensure_ascii=False))
@@ -78,7 +79,8 @@ def chat_stat_api():
         return Response(json.dumps(get_web_res_fail("需要指定jobID"), ensure_ascii=False))
     if platform != 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
-    stat_result = stat_chat_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume)
+    stat_result = stat_chat_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply,
+                                    with_resume)
     ret_data = {
         'stat': stat_result,
         'page': page,
@@ -94,7 +96,7 @@ def candidate_list_api():
     platform = request.json.get('platform', None)
     begin_time = request.json.get('beginTime', None)
     end_time = request.json.get('endTime', None)
-    
+
     page = request.json.get('page', None)
     limit = request.json.get('limit', None)
 
@@ -106,9 +108,10 @@ def candidate_list_api():
     if not job_id:
         return Response(json.dumps(get_web_res_fail("需要指定jobID"), ensure_ascii=False))
 
-    if platform!= 'Boss':
+    if platform != 'Boss':
         return Response(json.dumps(get_web_res_fail("非boss平台不支持"), ensure_ascii=False))
-    candidate_list = chat_list_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply, with_resume)
+    candidate_list = chat_list_service(job_id, begin_time, end_time, page, limit, with_phone, with_wechat, with_reply,
+                                       with_resume)
     ret_data = {
         'list': candidate_list,
         'page': page,
@@ -132,6 +135,21 @@ def job_list_api():
     return Response(json.dumps(get_web_res_suc_with_data(job_list), ensure_ascii=False))
 
 
+@manage_web_v3.route("/backend/manage/child/list", methods=['POST'])
+@web_exception_handler
+def child_list():
+    cookie_user_name = request.cookies.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+
+    child_list = child_list_service(manage_account_id)
+    return Response(json.dumps(get_web_res_suc_with_data(child_list), ensure_ascii=False))
+
+
 @manage_web_v3.route("/backend/manage/exportResume/v3", methods=['POST'])
 @web_exception_handler
 def export_resume_api():
@@ -142,4 +160,3 @@ def export_resume_api():
         manage_account_id = decrypt(cookie_user_name, key)
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
-

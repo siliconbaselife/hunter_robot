@@ -25,11 +25,11 @@ def manage_process_api_config(manage_account_id, api_config):
 def login_check_service(user_name, password):
     user_info = login_check_db(user_name)
     if len(user_info) == 0:
-        return False, "用户不存在"
+        return False, "用户不存在", 0
     if user_info[0][1] == password:
-        return True, "登录成功"
+        return True, "登录成功", user_info[0][2]
     else:
-        return False, "用户名密码错误"
+        return False, "用户名密码错误", 0
 
 
 def cookie_check_service(user_name):
