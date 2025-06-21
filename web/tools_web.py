@@ -1376,7 +1376,7 @@ def search_profile_by_tag_web_v2():
 
 @tools_web.route("/backend/tools/manage/searchProfile", methods=['POST'])
 @web_exception_handler
-def search_profile_by_tag_web_v2():
+def search_profile_manage():
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     page = request.json.get('page', 1)
@@ -1398,7 +1398,7 @@ def search_profile_by_tag_web_v2():
     data, _ = search_manage_profile_by_tag_v2(manage_account_id, platform, company, candidate_name, status, stage, page,
                                               min_age, max_age, race, limit, False)
     logger.info(
-        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} platform: {platform} company: {company} candidate_name: {candidate_name} status：{status} stage: {stage} page: {page} limit: {limit} data:{len(data)}")
+        f"search_profile_manage manage_account_id: {manage_account_id} platform: {platform} company: {company} candidate_name: {candidate_name} status：{status} stage: {stage} page: {page} limit: {limit} data:{len(data)}")
 
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
