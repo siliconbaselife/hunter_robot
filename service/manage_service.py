@@ -343,8 +343,13 @@ def query_user_infos(manage_account_id, start_day, end_day):
     return len(rows) > 0, user_infos
 
 
-def query_manage_user_infos(manage_account_id, start_day, end_day):
-    user_ids = select_manage_users(manage_account_id)
+def query_manage_user_infos(manage_account_id, start_day, end_day, flag=False):
+    if not flag:
+        user_ids = select_manage_users(manage_account_id)
+    else:
+        rs = get_manage_staffs(manage_account_id)
+        user_ids = [r[0] for r in rs]
+
     if len(user_ids) == 0:
         return []
 

@@ -1276,8 +1276,9 @@ def manage_infos():
 
     start_day = request.json.get('start_day', None)
     end_day = request.json.get('end_day', None)
+    flag = request.json.get('flag', False)
 
-    manage_infos = query_manage_user_infos(manage_account_id, start_day, end_day)
+    manage_infos = query_manage_user_infos(manage_account_id, start_day, end_day, flag)
     return Response(json.dumps(get_web_res_suc_with_data(manage_infos), ensure_ascii=False))
 
 
