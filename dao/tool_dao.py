@@ -515,7 +515,7 @@ def query_tag_filter_num_manage(platform, company, candidate_name, stage, status
 def query_tag_filter_profiles_manage(platform, company, candidate_name, status, min_age,
                                      max_age, race, page,
                                      limit, accounts):
-    accounts_str = '(' + ','.join(accounts) + ')'
+    accounts_str = '(' + ','.join(['\'' + a + '\'' for a in accounts]) + ')'
     sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id in '{accounts_str}' and a.platform = '{platform}'"
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
