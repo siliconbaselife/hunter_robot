@@ -252,12 +252,12 @@ def child_list_service(manage_account_id):
     for account in accounts:
         tag_infos = query_profile_id_tag_v3(account, "Linkedin")
 
+        data = []
         for tag_info in tag_infos:
-            rets.append({
+            data.append({"tag": tag_info[1], "tag_str": tag_info[2]})
+        rets.append({
                 "account": account,
-                "data": [
-                    {"tag": tag_info[1], "tag_str": tag_info[2]}
-                ]
+                "data": data
             })
 
     return rets
