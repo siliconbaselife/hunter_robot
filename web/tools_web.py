@@ -1344,10 +1344,7 @@ def search_profile_by_tag_web_v2():
     tags = request.json.get('tags', [])
     tag = tags[0]
 
-    manage_account_id = request.json.get('manage_account_id', None)
     cookie_user_name = request.cookies.get('user_name', None)
-    if manage_account_id is None:
-        cookie_user_name = cookie_user_name
 
     platform = request.json.get('platform', '')
     page = request.json.get('page', 1)
@@ -1365,6 +1362,9 @@ def search_profile_by_tag_web_v2():
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
+    raw_manage_account_id = request.cookies.get('manage_account_id', None)
+    if raw_manage_account_id is not None:
+        manage_account_id = raw_manage_account_id
 
     data, _ = search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidate_name, status, stage, page,
                                        min_age, max_age, race, limit, False)
@@ -1428,6 +1428,7 @@ def search_profile_by_tag_web_v3():
 @web_exception_handler
 def search_profile_all_web_v2():
     cookie_user_name = request.cookies.get('user_name', None)
+
     platform = request.json.get('platform', '')
     page = request.json.get('page', 1)
     company = request.json.get('company_name', '')
@@ -1444,6 +1445,9 @@ def search_profile_all_web_v2():
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
+    raw_manage_account_id = request.json.get('manage_account_id', None)
+    if raw_manage_account_id is not None:
+        manage_account_id = raw_manage_account_id
 
     data, _ = search_profile_by_tag_v2_all(manage_account_id, platform, company, candidate_name, status, stage, page,
                                            min_age, max_age, race, limit, False)
