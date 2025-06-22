@@ -1930,7 +1930,10 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
 def search_manage_profile_by_tag_v2(manage_account_id, platform, company, candidate_name, status, stage, page, min_age,
                                     max_age, race, limit,
                                     contact2str):
-    account_staffs = get_manage_staffs(manage_account_id)
+    rs = get_manage_staffs(manage_account_id)
+    account_staffs = [manage_account_id]
+    for r in rs:
+        account_staffs.append(r[0])
 
     total_count = query_tag_filter_num_manage(platform, company, candidate_name, stage, status, account_staffs)
     start = (page - 1) * limit

@@ -495,7 +495,7 @@ def query_filter_num_new(manage_account_id, platform, company, candidate_name, s
 
 def query_tag_filter_num_manage(platform, company, candidate_name, stage, status, accounts):
     accounts_str = '(' + ','.join(accounts) + ')'
-    sql = f"select count(*) from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id in 'accounts_str' and a.platform = '{platform}'"
+    sql = f"select count(*) from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id in '{accounts_str}' and a.platform = '{platform}'"
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
     if candidate_name is not None and len(candidate_name) > 0:
