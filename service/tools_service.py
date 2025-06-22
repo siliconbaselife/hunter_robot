@@ -1938,7 +1938,7 @@ def search_manage_profile_by_tag_v2(manage_account_id, platform, company, candid
     total_count = query_tag_filter_num_manage(platform, company, candidate_name, stage, status, account_staffs)
     start = (page - 1) * limit
     rows = query_tag_filter_profiles_manage(platform, company, candidate_name, stage, status,
-                                            min_age, max_age, race, start, account_staffs)
+                                            min_age, max_age, race, start, limit, account_staffs)
     details = transfer_data_to_profiles(manage_account_id, contact2str, rows)
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
 

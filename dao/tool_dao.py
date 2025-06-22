@@ -512,7 +512,7 @@ def query_tag_filter_num_manage(platform, company, candidate_name, stage, status
     return data[0][0]
 
 
-def query_tag_filter_profiles_manage(platform, company, candidate_name, status, min_age,
+def query_tag_filter_profiles_manage(platform, company, candidate_name, stage, status, min_age,
                                      max_age, race, page,
                                      limit, accounts):
     accounts_str = '(' + ','.join(['\'' + a + '\'' for a in accounts]) + ')'
