@@ -244,8 +244,11 @@ def job_list_service(manage_account_id):
 
 def child_list_service(manage_account_id):
     rets = []
-    accounts = get_manage_staffs(manage_account_id)
-    accounts = [manage_account_id] + accounts
+    rs = get_manage_staffs(manage_account_id)
+    accounts = [manage_account_id]
+    for r in rs:
+        accounts.append(r[0])
+
     for account in accounts:
         tag_infos = query_profile_id_tag_v3(account, "Linkedin")
 
