@@ -1362,7 +1362,7 @@ def search_profile_by_tag_web_v2():
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
-    raw_manage_account_id = request.cookies.get('manage_account_id', None)
+    raw_manage_account_id = request.json.get('manage_account_id', None)
     if raw_manage_account_id is not None:
         manage_account_id = raw_manage_account_id
 
