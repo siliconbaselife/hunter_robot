@@ -1374,6 +1374,23 @@ def search_profile_by_tag_web_v2():
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
 
+@tools_web.route("/backend/tools/profile/setTop", methods=['POST'])
+@web_exception_handler
+def set_profile_top():
+    cookie_user_name = request.cookies.get('user_name', None)
+    tag = request.json.get('tag')
+    candidate_id = request.json.get('candidateId')
+    top = request.json.get('top')
+
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+
+    set_top(manage_account_id, tag, candidate_id, top)
+    return Response(json.dumps(get_web_res_suc_with_data(None), ensure_ascii=False))
+
+
 @tools_web.route("/backend/tools/manage/searchProfile", methods=['POST'])
 @web_exception_handler
 def search_profile_manage():

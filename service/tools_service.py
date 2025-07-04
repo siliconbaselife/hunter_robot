@@ -1899,6 +1899,7 @@ def transfer_data_to_profiles(manage_account_id, contact2str, rows, normal=True)
         if profile is None:
             continue
         profile['candidateId'] = row[0]
+        profile['is_top'] = row[6]
         if normal:
             profile['cvUrl'] = row[2]
             profile['status'] = row[3]
@@ -1925,6 +1926,10 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
 
     return data, None
+
+
+def set_top(manage_account_id, tag, candidate_id, top):
+    update_profile_top(manage_account_id, tag, candidate_id, top)
 
 
 def search_manage_profile_by_tag_v2(manage_account_id, platform, company, candidate_name, status, stage, page, min_age,

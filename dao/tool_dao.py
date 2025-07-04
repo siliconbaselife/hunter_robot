@@ -540,7 +540,7 @@ def query_tag_filter_profiles_manage(platform, company, candidate_name, stage, s
 def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, candidate_name, stage, status, min_age,
                                   max_age, race, page,
                                   limit):
-    sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
+    sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log, a.top from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.tag = '{tag}'"
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
     if candidate_name is not None and len(candidate_name) > 0:
@@ -554,7 +554,7 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
     if min_age is not None and max_age is not None:
         sql += f" and b.age >= {min_age} and b.age <= {max_age}"
 
-    sql += f" limit {page}, {limit}"
+    sql += f" order by a.is_top desc, a.update_time desc  limit {page}, {limit}"
 
     # print(f"sql => {sql}")
     s = time.time()
@@ -562,6 +562,11 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
     e = time.time()
     logger.info(f"query_tag_filter_profiles_new: {sql} time: {e - s}")
     return data
+
+
+def update_profile_top(manage_account_id, tag, candidate_id, top):
+    sql = f"update user_profile_tag_relation set top = {top} where manage_account_id = '{manage_account_id}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    dbm.update(sql)
 
 
 def query_filter_profiles_new(manage_account_id, platform, company, candidate_name, stage, status, min_age,
