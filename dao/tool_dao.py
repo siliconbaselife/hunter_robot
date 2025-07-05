@@ -566,6 +566,7 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
 
 def update_profile_top(manage_account_id, tag, candidate_id, top):
     sql = f"update user_profile_tag_relation set is_top = {top} where manage_account_id = '{manage_account_id}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
+    logger.info(f"update_profile_top => {sql}")
     dbm.update(sql)
 
 
