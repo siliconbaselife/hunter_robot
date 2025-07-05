@@ -1379,7 +1379,7 @@ def search_profile_by_tag_web_v2():
 def set_profile_top():
     cookie_user_name = request.cookies.get('user_name', None)
     tag = request.json.get('tag')
-    candidate_id = request.json.get('candidateId')
+    candidate_id = request.json.get('candidate_id')
     top = request.json.get('top')
 
     if cookie_user_name == None:
