@@ -20,6 +20,12 @@ if __name__ == "__main__":
             if platform != "Linkedin":
                 continue
 
+            raw_profile = raw_profile.replace("\n", "\\n")
+            raw_profile = raw_profile.replace("\'", "\\'")
+            raw_profile = raw_profile.replace('\"', '\\"')
+            name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+            company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+
             profiles.append({
                 "candidate_id": candidate_id,
                 "platform": platform,
