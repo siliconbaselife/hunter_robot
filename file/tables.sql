@@ -382,3 +382,21 @@ CREATE TABLE `staff_manage` (
   PRIMARY KEY (`id`),
   KEY `manage_account_id` (manage_account_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
+CREATE TABLE all_resume (
+id bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+candidate_id varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT '' COMMENT '候选人id',
+platform varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL COMMENT '平台',
+raw_profile longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs COMMENT '原始在线简历信息',
+cv_url varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT '' COMMENT '简历链接',
+name varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT '' COMMENT '候选人name',
+company varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs NOT NULL DEFAULT '' COMMENT '候选人comapny',
+age int DEFAULT '-1',
+race tinyint DEFAULT NULL,
+profile_time timestamp NOT NULL COMMENT '简历更新时间',
+create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+update_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+PRIMARY KEY (id),
+KEY key_candidate_id(candidate_id),
+CONSTRAINT `candidate_id` UNIQUE(`candidate_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=948892 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
