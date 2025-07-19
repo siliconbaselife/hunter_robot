@@ -44,7 +44,7 @@ if __name__ == "__main__":
                 "race": race,
                 "create_time": create_time
             })
-        print(f"get profiles {len(profiles)}")
+        print(f"get profiles {len(profiles)} now id: {id}")
 
         for profile in profiles:
             profile_time = select_all_profile_time(profile["candidate_id"])

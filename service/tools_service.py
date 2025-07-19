@@ -587,6 +587,12 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             upload_online_profile(manage_account_id, platform, json.dumps(p, ensure_ascii=False), candidate_id,
                                   parsed['name'] if parsed['name'] else '',
                                   parsed['company'] if parsed['company'] else '', parsed['age'], parsed['isChinese'])
+
+            try:
+                upload_all_resume(candidate_id, platform, json.dumps(p, ensure_ascii=False), parsed["cv_curl"], parsed["name"], parsed["company"], parsed["age"], parsed["race"])
+            except BaseException as e:
+                logger.error(traceback.format_exc())
+
             logger.info(f'upload_online_profile used time: {time.time() - b1}')
 
         if tag and len(tag) > 0:
@@ -607,6 +613,19 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
             logger.error(str(traceback.format_exc()))
     logger.info(f"linkedin_online_resume_upload_processor => used time: {time.time() - before_time}")
     return count
+
+
+def upload_all_resume(candidate_id, platform, raw_profile, cv_url, name, company, age, race):
+    profile_time = select_all_profile_time(candidate_id)
+
+    now_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if profile_time is None:
+        insert_all_profile(candidate_id, platform, raw_profile, cv_url,
+                           name, company, age, race, now_time)
+        return
+
+    update_all_profile(candidate_id, platform, raw_profile, cv_url,
+                       name, company, age, race, now_time)
 
 
 def filter_already_linkedin_ids(manage_account_id, linkedin_ids):
