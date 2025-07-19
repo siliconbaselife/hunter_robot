@@ -2293,9 +2293,13 @@ def parse_profile_gpt(profile, language):
 def parse_profile_by_ai_service(manage_account_id, platform, candidate_id, use_ai, language):
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, [candidate_id], 0, 10)
     if len(rows) == 0:
-        return {}
+        rows = query_all_profile_by_candidate_id(candidate_id)
+        if len(rows) == 0:
+            return {}
+        raw_profile = deserialize_raw_profile(rows[0][0])
+    else:
+        raw_profile = deserialize_raw_profile(rows[0][1])
 
-    raw_profile = deserialize_raw_profile(rows[0][1])
     profile = parse_profile(raw_profile, 'no', True)
     if 'cv' in profile:
         del profile['cv']

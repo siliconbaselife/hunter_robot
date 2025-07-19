@@ -744,3 +744,8 @@ def update_all_profile(candidate_id, platform, raw_profile, cv_url, name, compan
     sql = f"update all_resume set platform = '{platform}', raw_profile = '{raw_profile}', cv_url= '{cv_url}', name = '{name}', company = '{company}', age = '{age}', race = {'null' if race is None else race}, profile_time = '{profile_time}' where candidate_id = '{candidate_id}'"
     # print(sql)
     dbm.update(sql)
+
+
+def query_all_profile_by_candidate_id(candidate_id):
+    sql = f"select raw_profile from all_resume where candidate_id = '{candidate_id}'"
+    rows = dbm.query(sql)
