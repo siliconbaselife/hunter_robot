@@ -40,14 +40,11 @@ if __name__ == "__main__":
         print(f"get profiles {len(profiles)}")
 
         for profile in profiles:
-            rows = select_all_profile_time(profile["create_time"])
-            if len(rows) == 0:
-                profile_time = None
-            else:
-                profile_time = rows[0][0]
+            profile_time = select_all_profile_time(profile["create_time"])
 
-            if profile_time is None:
+            if profile_time is not None:
                 insert_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["create_time"])
+                continue
 
             if profile_time >= profile["create_time"]:
                 update_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["create_time"])
