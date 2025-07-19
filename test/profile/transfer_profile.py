@@ -20,6 +20,9 @@ if __name__ == "__main__":
             if platform != "Linkedin":
                 continue
 
+            if raw_profile is None:
+                continue
+
             raw_profile = raw_profile.replace("\n", "\\n")
             raw_profile = raw_profile.replace("\'", "\\'")
             raw_profile = raw_profile.replace('\"', '\\"')
