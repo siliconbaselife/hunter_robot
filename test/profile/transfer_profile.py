@@ -32,10 +32,10 @@ if __name__ == "__main__":
         for profile in profiles:
             profile_time = select_all_profile_time(profile["create_time"])
             if profile_time is None:
-                insert_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["profile_time"])
+                insert_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["create_time"])
 
             if profile_time >= profile["create_time"]:
-                update_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["profile_time"])
+                update_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["create_time"])
         break
 
     print("end")
