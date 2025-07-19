@@ -136,7 +136,7 @@ def upload_online_profile(manage_account_id, platform, raw_profile, candidate_id
     raw_profile = raw_profile.replace("\n", "\\n")
     raw_profile = raw_profile.replace("\'", "\\'")
     raw_profile = raw_profile.replace('\"', '\\"')
-    name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
+    name = name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
     company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
 
     age = -1 if age is None else age
