@@ -717,3 +717,28 @@ def select_profile_infos(manage_accout_id, start_day, end_day):
     sql = f"select candidate_id, status from online_resume where manage_account_id = '{manage_accout_id}' and update_time > '{start_day}' and update_time < '{end_day}'"
     rows = dbm.query(sql)
     return rows
+
+
+def select_profile_hundred(id):
+    sql = f"select id, candidate_id, platform, raw_profile, cv_url, name, company, age, race, create_time from online_resume where id > {id} limit 0, 100"
+    rows = dbm.query(sql)
+    return rows
+
+
+def select_all_profile_time(candidate_id):
+    sql = f"select profile_time from all_resume where candidate_id = '{candidate_id}'"
+    rows = dbm.query(sql)
+    if len(rows) == 0:
+        return None
+
+    return rows[0][0]
+
+
+def insert_all_profile(candidate_id, platform, raw_profile, cv_url, name, company, age, race, profile_time):
+    sql = f"insert into all_resume(candidate_id, platform, raw_profile, cv_url, name, company, age, race, profile_time) values('{candidate_id}', '{platform}', '{raw_profile}', '{cv_url}', '{name}', '{company}', '{age}', '{race}', '{profile_time}')"
+    dbm.insert(sql)
+
+
+def update_all_profile(candidate_id, platform, raw_profile, cv_url, name, company, age, race, profile_time):
+    sql = f"update all_resume set platform = '{platform}', raw_profile = '{raw_profile}', cv_url= '{cv_url}', name = '{name}', company = '{company}', age = '{age}', race = '{race}', profile_time = '{profile_time}' where candidate_id = '{candidate_id}'"
+    dbm.update(sql)
