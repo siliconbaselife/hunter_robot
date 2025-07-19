@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     while True:
         rows = select_profile_hundred(id)
-        print(f"get rows {len(rows)}")
+
         if len(rows) == 0:
             break
 
@@ -31,6 +31,7 @@ if __name__ == "__main__":
                 "race": race,
                 "create_time": create_time
             })
+        print(f"get profiles {len(profiles)}")
 
         for profile in profiles:
             profile_time = select_all_profile_time(profile["create_time"])
