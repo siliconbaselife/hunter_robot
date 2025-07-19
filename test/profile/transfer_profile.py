@@ -26,7 +26,9 @@ if __name__ == "__main__":
             raw_profile = raw_profile.replace("\n", "\\n")
             raw_profile = raw_profile.replace("\'", "\\'")
             raw_profile = raw_profile.replace('\"', '\\"')
-            raw_profile = raw_profile.replace("’", "\\'")
+            raw_profile = raw_profile.replace('\\"', '')
+            raw_profile = raw_profile.replace('\\', '')
+            # raw_profile = raw_profile.replace("’", "\\'")
             name = name.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
             company = company.replace("\n", "\\n").replace("\'", "\\'").replace('\"', '\\"')
 
