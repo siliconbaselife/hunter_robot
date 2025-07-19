@@ -40,6 +40,7 @@ if __name__ == "__main__":
 
             if profile_time >= profile["create_time"]:
                 update_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["create_time"])
-        break
+        if len(profiles) > 0:
+            break
 
     print("end")
