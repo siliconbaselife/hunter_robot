@@ -2,6 +2,7 @@ from dao.tool_dao import insert_all_profile
 from dao.tool_dao import update_all_profile
 from dao.tool_dao import select_profile_hundred
 from dao.tool_dao import select_all_profile_time
+import time
 
 if __name__ == "__main__":
     print("begin transfer profile")
@@ -51,6 +52,7 @@ if __name__ == "__main__":
 
             if profile_time is None:
                 insert_all_profile(profile["candidate_id"], profile["platform"], profile["raw_profile"], profile["cv_url"], profile["name"], profile["company"], profile["age"], profile["race"], profile["create_time"])
+                time.sleep(0.01)
                 continue
 
             if profile_time < profile["create_time"]:
