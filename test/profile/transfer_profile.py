@@ -17,6 +17,9 @@ if __name__ == "__main__":
         profiles = []
         for row in rows:
             _, candidate_id, platform, raw_profile, cv_url, name, company, age, race, create_time = row
+            if platform != "Linkedin":
+                continue
+
             profiles.append({
                 "candidate_id": candidate_id,
                 "platform": platform,
