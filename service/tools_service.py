@@ -589,7 +589,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                                   parsed['company'] if parsed['company'] else '', parsed['age'], parsed['isChinese'])
 
             try:
-                upload_all_resume(candidate_id, platform, json.dumps(p, ensure_ascii=False), parsed["cv_curl"], parsed["name"], parsed["company"], parsed["age"], parsed["race"])
+                upload_all_resume(candidate_id, platform, json.dumps(p, ensure_ascii=False), parsed["cv"], parsed["name"], parsed["company"], parsed["age"], parsed["isChinese"])
             except BaseException as e:
                 logger.error(traceback.format_exc())
 
@@ -617,6 +617,7 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
 
 def upload_all_resume(candidate_id, platform, raw_profile, cv_url, name, company, age, race):
     profile_time = select_all_profile_time(candidate_id)
+
 
     now_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     if profile_time is None:
