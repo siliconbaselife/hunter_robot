@@ -24,6 +24,7 @@ from service.user_service import user_register, user_verify_email
 from dao.task_dao import get_job_by_id
 from utils.utils import key
 from service.google_service import *
+from service.common_service import *
 import time
 from service.business_service import *
 
@@ -1806,4 +1807,39 @@ def save_company():
     logger.info(f"save company tag: {tag} company_id: {company_id}")
     save_company_service(tag, company_id, linkedin_doc)
 
+    return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/common/getConfig", methods=['POST'])
+@web_exception_handler
+def get_config_list():
+    # platform = request.json.get('platform', '')
+    keys = request.json.get('keys', None)
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    result = get_configs(keys)
+    return Response(json.dumps(get_web_res_suc_with_data(result), ensure_ascii=False))
+
+@tools_web.route("/backend/tools/common/setConfig", methods=['POST'])
+@web_exception_handler
+def set_config():
+    # platform = request.json.get('platform', '')
+    key = request.json.get('key', None)
+    value = request.json.get('value', '')
+    cookie_user_name = request.json.get('user_name', None)
+    if cookie_user_name == None:
+        return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
+    else:
+        manage_account_id = decrypt(cookie_user_name, key)
+    if not cookie_check_service(manage_account_id):
+        return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
+    
+    if key is None:
+        return Response(json.dumps(get_web_res_fail("参数错误key"), ensure_ascii=False))
+    
+    update_config(key, value)
     return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))

@@ -59,6 +59,17 @@ sql_dict = {
     "query_google_account": "select openid, manage_account_id, name, picture, google_account_email, credentials from google_account where manage_account_id = '{}';",
     "get_google_account": "select openid, manage_account_id, name, picture, google_account_email, credentials from google_account where openid = '{}' and manage_account_id = '{}';",
     'delete_google_account': "delete from google_account where openid = '{}' and manage_account_id = '{}';",
+    "get_configs_by_keys": "SELECT `key`, `value` FROM common_config WHERE `key` IN ({})",
+    "get_config_by_key": "SELECT `value` FROM common_config WHERE `key` = '{}'",
+    "create_config": "INSERT INTO common_config (`key`, `value`) VALUES ('{}', '{}')",
+    "upsert_config": """
+        INSERT INTO common_config (`key`, `value`)
+        VALUES ('{}', '{}')
+        ON DUPLICATE KEY UPDATE
+            `value` = VALUES(`value`),
+            update_time = CURRENT_TIMESTAMP
+    """,
+    "update_config": "UPDATE common_config SET `value` = '{}', update_time = CURRENT_TIMESTAMP WHERE `key` = '{}'"
 }
 
 
@@ -748,3 +759,27 @@ def query_all_profile_by_candidate_id(candidate_id):
     sql = f"select raw_profile from all_resume where candidate_id = '{candidate_id}'"
     rows = dbm.query(sql)
     return rows
+
+def escape_sql_value(value: str) -> str:
+    return value.replace("'", "''").replace('\\', '\\\\')
+
+def get_configs_by_keys(keys):
+    if not keys:
+        return {}
+        
+    safe_keys = [escape_sql_value(key) for key in keys]
+    keys_str = ",".join(f"'{key}'" for key in safe_keys)
+    
+    sql = sql_dict['get_configs_by_keys'].format(keys_str)
+    results = dbm.query(sql)
+    
+    config_dict = {}
+    for row in results:
+        config_dict[row[0]] = row[1]
+    return config_dict
+
+def upsert_config(key: str, value: str) -> None:
+    safe_key = escape_sql_value(key)
+    safe_value = escape_sql_value(str(value))
+    sql = sql_dict['upsert_config'].format(safe_key, safe_value)
+    dbm.update(sql)
