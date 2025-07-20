@@ -736,6 +736,7 @@ def select_all_profile_time(candidate_id):
 
 def insert_all_profile(candidate_id, platform, raw_profile, cv_url, name, company, age, race, profile_time):
     sql = f"insert into all_resume(candidate_id, platform, raw_profile, cv_url, name, company, age, race, profile_time) values('{candidate_id}', '{platform}', '{raw_profile}', '{cv_url}', '{name}', '{company}', {age}, {'null' if race is None else race}, '{profile_time}')"
+    logger.info(f"insert_all_profile sql: {sql}")
     dbm.insert(sql)
 
 
