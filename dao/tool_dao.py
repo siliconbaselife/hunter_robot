@@ -778,8 +778,15 @@ def get_configs_by_keys(keys):
         config_dict[row[0]] = row[1]
     return config_dict
 
-def upsert_config(key: str, value: str) -> None:
-    safe_key = escape_sql_value(key)
-    safe_value = escape_sql_value(str(value))
+def upsert_config(key: str, value) -> None:  # 移除 value 的类型注解
+    safe_key = escape_sql_value(str(key))  # 确保 key 是字符串
+    
+    if value is None:
+        safe_value = "NULL"
+    elif isinstance(value, (int, float)):
+        safe_value = str(value)
+    else:
+        safe_value = "'" + escape_sql_value(str(value)) + "'"
+    
     sql = sql_dict['upsert_config'].format(safe_key, safe_value)
     dbm.update(sql)
