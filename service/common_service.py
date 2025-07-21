@@ -23,7 +23,13 @@ def update_config(key, value):
     )
     if key is None:
         return None
-    elif value is None:
+    
+    # 确保 key 是字符串
+    key = str(key)
+    
+    # 处理 value 类型
+    if value is None:
         value = ""
+    
     upsert_config(key, value)
     return None
