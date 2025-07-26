@@ -64,7 +64,7 @@ sql_dict = {
     "create_config": "INSERT INTO common_config (`key`, `value`) VALUES ('{}', '{}')",
     "upsert_config": """
         INSERT INTO common_config (`key`, `value`)
-        VALUES ('{}', '{}')
+        VALUES ('{}', {})
         ON DUPLICATE KEY UPDATE
             `value` = VALUES(`value`),
             update_time = CURRENT_TIMESTAMP
@@ -761,7 +761,23 @@ def query_all_profile_by_candidate_id(candidate_id):
     return rows
 
 def escape_sql_value(value: str) -> str:
-    return value.replace("'", "''").replace('\\', '\\\\')
+    """增强的 SQL 值转义函数"""
+    if value is None:
+        return ""
+    
+    # 确保值是字符串
+    value_str = str(value)
+    
+    # 转义特殊字符
+    value_str = value_str.replace("\\", "\\\\")
+    value_str = value_str.replace("'", "''")
+    value_str = value_str.replace('"', '""')
+    value_str = value_str.replace("\0", "\\0")
+    value_str = value_str.replace("\n", "\\n")
+    value_str = value_str.replace("\r", "\\r")
+    value_str = value_str.replace("\x1a", "\\Z")
+    
+    return value_str
 
 def get_configs_by_keys(keys):
     if not keys:
@@ -778,15 +794,49 @@ def get_configs_by_keys(keys):
         config_dict[row[0]] = row[1]
     return config_dict
 
-def upsert_config(key: str, value) -> None:  # 移除 value 的类型注解
-    safe_key = escape_sql_value(str(key))  # 确保 key 是字符串
-    
-    if value is None:
-        safe_value = "NULL"
-    elif isinstance(value, (int, float)):
-        safe_value = str(value)
-    else:
-        safe_value = "'" + escape_sql_value(str(value)) + "'"
-    
-    sql = sql_dict['upsert_config'].format(safe_key, safe_value)
-    dbm.update(sql)
+import json
+
+def upsert_config(key: str, value) -> None:
+    try:
+        logger.info("开始 upsert_config: key=%s, value=%s, type=%s", key, value, type(value))
+        
+        # 确保 key 是字符串
+        key = str(key)
+        
+        # 处理特殊值
+        if value is None:
+            value = ""
+        elif isinstance(value, (dict, list)):
+            # 如果是字典或列表，转换为 JSON 字符串
+            try:
+                value = json.dumps(value, ensure_ascii=False)
+                logger.info("值转换为 JSON: %s", value)
+            except Exception as e:
+                logger.error("JSON 序列化失败: %s", e)
+                value = str(value)
+        
+        # 获取 SQL 模板
+        sql_template = sql_dict['upsert_config']
+        logger.info("SQL 模板: %s", sql_template)
+        
+        # 转义 key 和 value
+        safe_key = escape_sql_value(key)
+        safe_value = escape_sql_value(str(value))
+        logger.info("转义后的 key: %s", safe_key)
+        logger.info("转义后的 value: %s", safe_value)
+        
+        # 正确添加引号
+        safe_value_quoted = f"'{safe_value}'"
+        logger.info("引号包裹后的 value: %s", safe_value_quoted)
+        
+        # 构建完整 SQL
+        sql = sql_template.format(safe_key, safe_value_quoted)
+        logger.info("完整 SQL: %s", sql)
+        
+        # 执行 SQL
+        dbm.update(sql)
+        logger.info("upsert_config 执行成功")
+        
+    except Exception as e:
+        logger.exception("upsert_config 执行失败")
+        raise
