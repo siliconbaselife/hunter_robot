@@ -584,7 +584,7 @@ def update_profile_top(manage_account_id, tag, candidate_id, top):
 def query_filter_profiles_new(manage_account_id, platform, company, candidate_name, stage, status, min_age,
                               max_age, race, page,
                               limit):
-    sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.logs, a.is_top from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}'"
+    sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log, a.is_top from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}'"
     if company is not None and len(company) > 0:
         sql += f" and b.company = '{company}' "
     if candidate_name is not None and len(candidate_name) > 0:
