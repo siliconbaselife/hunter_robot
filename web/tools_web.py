@@ -1498,10 +1498,14 @@ def search_tag_infos():
     tag = request.json.get('tag', '')
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
+    raw_manage_account_id = request.json.get('manage_account_id', '')
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
+
+    if raw_manage_account_id is not None and len(raw_manage_account_id) > 0:
+        manage_account_id = raw_manage_account_id
 
     infos = search_tag_flow_infos(manage_account_id, platform, tag)
     logger.info(
