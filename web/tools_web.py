@@ -1832,18 +1832,36 @@ def get_config_list():
 @web_exception_handler
 def set_config():
     # platform = request.json.get('platform', '')
-    key = request.json.get('key', None)
+    key_params = request.json.get('key', None)
     value = request.json.get('value', '')
     cookie_user_name = request.json.get('user_name', None)
+    
     if cookie_user_name == None:
         return Response(json.dumps(get_web_res_fail("未登录"), ensure_ascii=False))
     else:
         manage_account_id = decrypt(cookie_user_name, key)
+    
     if not cookie_check_service(manage_account_id):
         return Response(json.dumps(get_web_res_fail("用户不存在"), ensure_ascii=False))
     
-    if key is None:
+    if key_params is None:
         return Response(json.dumps(get_web_res_fail("参数错误key"), ensure_ascii=False))
     
-    update_config(key, value)
-    return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))
+    try:
+        # 确保 key 是字符串
+        key_params = str(key_params)
+        
+        # 处理 value 类型
+        if isinstance(value, (int, float)):
+            # 保持数字类型
+            pass
+        elif value is None:
+            value = ""
+        else:
+            value = str(value)
+        
+        update_config(key_params, value)
+        return Response(json.dumps(get_web_res_suc_with_data("success"), ensure_ascii=False))
+    except Exception as e:
+        logger.error("设置配置失败: %s", e)
+        return Response(json.dumps(get_web_res_fail("设置配置失败"), ensure_ascii=False))
