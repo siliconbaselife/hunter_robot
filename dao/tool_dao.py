@@ -575,6 +575,16 @@ def query_tag_filter_profiles_new(manage_account_id, platform, tag, company, can
     return data
 
 
+def query_profile_info_by_id(manage_account_id, platform, candidate_id):
+    sql = f"select a.candidate_id, b.raw_profile, b.cv_url, b.status, a.flow_status, a.log, a.is_top from user_profile_tag_relation a inner join online_resume b on a.manage_account_id = b.manage_account_id and a.candidate_id = b.candidate_id where a.manage_account_id = '{manage_account_id}' and a.platform = '{platform}' and a.candidate_id = '{candidate_id}'"
+
+    s = time.time()
+    data = dbm.query(sql)
+    e = time.time()
+
+    return data
+
+
 def update_profile_top(manage_account_id, tag, candidate_id, top):
     sql = f"update user_profile_tag_relation set is_top = {top} where manage_account_id = '{manage_account_id}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
     logger.info(f"update_profile_top => {sql}")
@@ -760,14 +770,15 @@ def query_all_profile_by_candidate_id(candidate_id):
     rows = dbm.query(sql)
     return rows
 
+
 def escape_sql_value(value: str) -> str:
     """增强的 SQL 值转义函数"""
     if value is None:
         return ""
-    
+
     # 确保值是字符串
     value_str = str(value)
-    
+
     # 转义特殊字符
     value_str = value_str.replace("\\", "\\\\")
     value_str = value_str.replace("'", "''")
@@ -776,33 +787,36 @@ def escape_sql_value(value: str) -> str:
     value_str = value_str.replace("\n", "\\n")
     value_str = value_str.replace("\r", "\\r")
     value_str = value_str.replace("\x1a", "\\Z")
-    
+
     return value_str
+
 
 def get_configs_by_keys(keys):
     if not keys:
         return {}
-        
+
     safe_keys = [escape_sql_value(key) for key in keys]
     keys_str = ",".join(f"'{key}'" for key in safe_keys)
-    
+
     sql = sql_dict['get_configs_by_keys'].format(keys_str)
     results = dbm.query(sql)
-    
+
     config_dict = {}
     for row in results:
         config_dict[row[0]] = row[1]
     return config_dict
 
+
 import json
+
 
 def upsert_config(key: str, value) -> None:
     try:
         logger.info("开始 upsert_config: key=%s, value=%s, type=%s", key, value, type(value))
-        
+
         # 确保 key 是字符串
         key = str(key)
-        
+
         # 处理特殊值
         if value is None:
             value = ""
@@ -814,29 +828,29 @@ def upsert_config(key: str, value) -> None:
             except Exception as e:
                 logger.error("JSON 序列化失败: %s", e)
                 value = str(value)
-        
+
         # 获取 SQL 模板
         sql_template = sql_dict['upsert_config']
         logger.info("SQL 模板: %s", sql_template)
-        
+
         # 转义 key 和 value
         safe_key = escape_sql_value(key)
         safe_value = escape_sql_value(str(value))
         logger.info("转义后的 key: %s", safe_key)
         logger.info("转义后的 value: %s", safe_value)
-        
+
         # 正确添加引号
         safe_value_quoted = f"'{safe_value}'"
         logger.info("引号包裹后的 value: %s", safe_value_quoted)
-        
+
         # 构建完整 SQL
         sql = sql_template.format(safe_key, safe_value_quoted)
         logger.info("完整 SQL: %s", sql)
-        
+
         # 执行 SQL
         dbm.update(sql)
         logger.info("upsert_config 执行成功")
-        
+
     except Exception as e:
         logger.exception("upsert_config 执行失败")
         raise

@@ -589,7 +589,8 @@ def linkedin_online_resume_upload_processor(manage_account_id, profile, platform
                                   parsed['company'] if parsed['company'] else '', parsed['age'], parsed['isChinese'])
 
             try:
-                upload_all_resume(candidate_id, platform, json.dumps(p, ensure_ascii=False), "null", parsed["name"], parsed["company"], parsed["age"], parsed["isChinese"])
+                upload_all_resume(candidate_id, platform, json.dumps(p, ensure_ascii=False), "null", parsed["name"],
+                                  parsed["company"], parsed["age"], parsed["isChinese"])
             except BaseException as e:
                 logger.error(traceback.format_exc())
 
@@ -1945,6 +1946,16 @@ def search_profile_by_tag_v2(manage_account_id, platform, tag, company, candidat
     data = {'page': page, 'limit': limit, 'total': total_count, 'details': details}
 
     return data, None
+
+
+def search_profile_by_candidate_id(manage_account_id, platform, candidate_id):
+    rows = query_profile_info_by_id(manage_account_id, platform, candidate_id)
+    if len(rows) == 0:
+        return None
+
+    details = transfer_data_to_profiles(manage_account_id, False, rows)
+
+    return details[0]
 
 
 def set_top(manage_account_id, tag, candidate_id, top):
