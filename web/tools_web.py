@@ -1341,7 +1341,7 @@ def download_profile_by_tag_web():
 
 @tools_web.route("/backend/tools/searchProfileInfoById", methods=['POST'])
 @web_exception_handler
-def search_profile_by_tag_web_v2():
+def search_profile_by_id():
     cookie_user_name = request.cookies.get('user_name', None)
     platform = request.json.get('platform', '')
     candidate_id = request.json.get('candidate_id', '')
