@@ -394,12 +394,14 @@ def update_flow_status(manage_account_id, platform, tag, candidate_id, flow_stat
 
 
 def fetch_tag_log(manage_account_id, platform, tag, candidate_id):
-    sql = f"select log from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}' order by create_time desc"
+    sql = f"select log from user_profile_tag_relation where manage_account_id = '{manage_account_id}' and platform = '{platform}' and tag = '{tag}' and candidate_id = '{candidate_id}'"
     logger.info(f'fetch_tag_log sql: {sql}')
     data = dbm.query(sql)
     if len(data) > 0:
         logs = data[0][0].replace('\n', '\\n')
-        return json.loads(logs)
+        logs = json.loads(logs)
+        logs = sorted(logs, key=lambda x: x["time"], reverse=True)
+        return logs
     else:
         return []
 
