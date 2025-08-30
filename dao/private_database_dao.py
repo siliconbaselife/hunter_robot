@@ -7,7 +7,9 @@ logger = get_logger(config['log']['log_file'])
 table_names = {
     "lishundong2009@163.com": {
         "华为": "huawei",
-        "宁德时代测试": "catl",
+        "宁德时代测试": "catl"
+    },
+    "Clement.hu@tbirecruit.com": {
         "美国-物流仓长-test": "warehouse"
     }
 }
