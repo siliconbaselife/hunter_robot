@@ -6,11 +6,10 @@ from service.tools_service import query_tag_filter_profiles_new, transfer_data_t
 
 def get_warehouse_profiles():
     total_num = query_tag_filter_num_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-物流仓长", None, None, None, None)
+    total_num = 10
     all_profiles = []
     page_len = 50
     for i in range(int(total_num / page_len) + 1):
-        if i > 10:
-            break
 
         rows = query_tag_filter_profiles_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-物流仓长", None, None, None,
                                              None, None, None, None, i * page_len, page_len)

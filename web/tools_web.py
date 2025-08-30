@@ -1454,7 +1454,7 @@ def search_profile_by_tag_web_v3():
     data = search_profile_by_tag_v3(manage_account_id, page, limit, tag, filters)
 
     logger.info(
-        f"search_profile_by_tag_web_v2 manage_account_id: {manage_account_id} limit: {limit} filters: {filters}")
+        f"search_profile_by_tag_web_v3 manage_account_id: {manage_account_id} limit: {limit} filters: {filters}")
     return Response(json.dumps(get_web_res_suc_with_data(data), ensure_ascii=False))
 
 
