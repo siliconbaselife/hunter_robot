@@ -175,7 +175,7 @@ def get_age(profile):
             #     f"get_age age_sure: {age_sure} has_education: {has_education} has_bachelor: {has_bachelor} min_education_start_year: {min_education_start_year}")
             return None if age_sure > 100 or age_sure <= 0 else age_sure
 
-        if not has_experience:
+        if not has_experience and age_compare is not None:
             # print('age compare !has_experience')
             return None if age_compare > 100 else age_compare
         elif age_compare is None:
