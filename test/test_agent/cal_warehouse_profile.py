@@ -32,9 +32,11 @@ def deal_profile(profile):
         "company": profile["department"],
         "chinese": "yes" if res["chinese"] else "no",
         "graduate_school": res["graduate_school"],
-        "education_background": res["education_background"],
-        "school_level": res["school_level"],
-        "function_type": res["function_type"],
+        "location": res["location"],
+        "warehouse_duration": res["warehouse_duration"],
+        "oversea_background": res["oversea_background"],
+        "first_experience": res["first_experience"],
+        "system_experience": res["system_experience"],
         "profile": profile["profile"]
     }
     add_warehouse_profile(profile_info)
