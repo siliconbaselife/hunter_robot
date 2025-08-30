@@ -81,7 +81,7 @@ def add_warehouse_profile(profile_info):
 
     profile = profile_info["profile"]
 
-    insert = f"insert into catl(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, Location, Larehouse_Duration, " \
+    insert = f"insert into warehouse(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, Location, warehouse_Duration, " \
              f"Oversea_Background, First_Experience, System_Experience, profile) " \
              f"values('{candidate_id}', {age}, '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{location}', '{warehouse_duration}', " \
              f"'{oversea_background}', '{first_experience}', '{system_experience}', '{profile}')"
