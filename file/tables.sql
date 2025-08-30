@@ -369,7 +369,7 @@ CREATE TABLE `warehouse` (
   `Graduate_School` VARCHAR(255) NOT NULL,
   `Education_Background` VARCHAR(255) NOT NULL,
   `Location` VARCHAR(255) NOT NULL,
-  `warehouse_Duration` VARCHAR(20) NOT NULL,
+  `warehouse_Duration` int NOT NULL,
   `Oversea_Background` VARCHAR(20) NOT NULL,
   `First_Experience` VARCHAR(20) NOT NULL,
   `System_Experience` VARCHAR(20) NOT NULL,
