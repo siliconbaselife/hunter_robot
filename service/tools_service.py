@@ -1919,7 +1919,11 @@ def transfer_data_to_profiles(manage_account_id, contact2str, rows, normal=True)
         if profile is None:
             continue
         profile['candidateId'] = row[0]
-        profile['is_top'] = row[6]
+        if len(row) == 7:
+            profile['is_top'] = row[6]
+        else:
+            profile['is_top'] = 0
+
         if normal:
             profile['cvUrl'] = row[2]
             profile['status'] = row[3]
