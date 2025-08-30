@@ -87,3 +87,25 @@ def add_warehouse_profile(profile_info):
              f"'{oversea_background}', '{first_experience}', '{system_experience}', '{profile}')"
 
     dbm.insert(insert)
+
+def add_american_phd_profile(profile_info):
+    candidate_id = profile_info['candidate_id']
+    age = profile_info['age']
+    name = profile_info['name']
+    company = profile_info['company']
+    chinese = profile_info['chinese']
+    graduate_school = profile_info['graduate_school']
+    education_background = profile_info['education_background']
+    school_level = profile_info['school_level']
+    work_time = profile_info['work_time']
+    science = profile_info['science']
+
+    profile = profile_info["profile"]
+
+    insert = f"insert into american_phd(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, school_level, work_time, " \
+             f"science, profile) " \
+             f"values('{candidate_id}', {age}, '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{school_level}', '{work_time}', " \
+             f"'{science}', '{profile}')"
+
+    dbm.insert(insert)
+

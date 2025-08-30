@@ -10,7 +10,8 @@ table_names = {
         "宁德时代测试": "catl"
     },
     "Clement.hu@tbirecruit.com": {
-        "美国-物流仓长-test": "warehouse"
+        "美国-物流仓长-test": "warehouse",
+        "美国-PhD-chinese-test": "american_phd"
     }
 }
 

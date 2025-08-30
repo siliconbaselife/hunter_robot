@@ -1,11 +1,12 @@
-from service.llm_agent_service import warehousePeopleAgent
+from service.llm_agent_service import AmericanPHDPeopleAgent
 from dao.profile_dao import *
 from dao.tool_dao import query_tag_filter_num_new
 from service.tools_service import query_tag_filter_profiles_new, transfer_data_to_profiles
 
 
-def get_warehouse_profiles():
-    total_num = query_tag_filter_num_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-物流仓长", None, None, None, None)
+def get_phd_profiles():
+    total_num = query_tag_filter_num_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-物流仓长", None, None, None,
+                                         None)
     all_profiles = []
     page_len = 50
     for i in range(int(total_num / page_len) + 1):
@@ -31,22 +32,20 @@ def deal_profile(profile):
         "chinese": "yes" if res["chinese"] else "no",
         "graduate_school": res["graduate_school"],
         "education_background": res["education_background"],
-        "location": res["location"],
-        "warehouse_duration": res["warehouse_duration"],
-        "oversea_background": res["oversea_background"],
-        "first_experience": res["first_experience"],
-        "system_experience": res["system_experience"],
+        "school_level": res["school_level"],
+        "work_time": res["work_time"],
+        "science": res["science"],
         "profile": profile["profile"]
     }
-    add_warehouse_profile(profile_info)
+    add_american_phd_profile(profile_info)
 
 
 if __name__ == "__main__":
     global agent
     print("开始做识别")
-    profiles = get_warehouse_profiles()
+    profiles = get_phd_profiles()
     print(f"获取到 {len(profiles)} 份简历")
-    agent = warehousePeopleAgent()
+    agent = AmericanPHDPeopleAgent()
     for profile in profiles:
         try:
             deal_profile(profile)
