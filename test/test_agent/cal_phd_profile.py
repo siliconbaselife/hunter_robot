@@ -5,13 +5,13 @@ from service.tools_service import query_tag_filter_profiles_new, transfer_data_t
 
 
 def get_phd_profiles():
-    total_num = query_tag_filter_num_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-PhD-chinese", None, None, None,
+    total_num = query_tag_filter_num_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-PH.D&D.sc&M.D.-chinese", None, None, None,
                                          None)
     all_profiles = []
     page_len = 50
     for i in range(int(total_num / page_len) + 1):
 
-        rows = query_tag_filter_profiles_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-PhD-chinese", None, None, None,
+        rows = query_tag_filter_profiles_new("Clement.hu@tbirecruit.com", "Linkedin", "美国-PH.D&D.sc&M.D.-chinese", None, None, None,
                                              None, None, None, None, i * page_len, page_len)
         profiles = transfer_data_to_profiles("Clement.hu@tbirecruit.com", "False", rows)
         for i, profile in enumerate(profiles):
