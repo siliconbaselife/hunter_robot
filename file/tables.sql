@@ -359,6 +359,27 @@ CREATE TABLE `catl` (
   UNIQUE KEY `candidate_id` (candidate_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+CREATE TABLE `warehouse` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `candidate_id` varchar(255) NOT NULL,
+  `Age` int NOT NULL,
+  `Name` VARCHAR(255) NOT NULL,
+  `Company` VARCHAR(255) NOT NULL,
+  `Chinese` VARCHAR(255) NOT NULL,
+  `Graduate_School` VARCHAR(255) NOT NULL,
+  `Education_Background` VARCHAR(255) NOT NULL,
+  `Location` VARCHAR(255) NOT NULL,
+  `Larehouse_Duration` VARCHAR(20) NOT NULL,
+  `Oversea_Background` VARCHAR(20) NOT NULL,
+  `First_Experience` VARCHAR(20) NOT NULL,
+  `System_Experience` VARCHAR(20) NOT NULL,
+  `profile` longtext NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `candidate_id` (candidate_id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
 CREATE TABLE `agent_function` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `agent_name` varchar(100) NOT NULL DEFAULT "" COMMENT 'agent名字',

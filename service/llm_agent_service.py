@@ -864,6 +864,41 @@ class catlPeopleAgent:
         return json.loads(rres)
 
 
+class warehousePeopleAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        output_parser = StrOutputParser()
+        prompt = PromptTemplate(
+            input_variables=["profile"],
+            template='{profile}\n'
+                     '====================================\n'
+                     '以上是一个候选人在linkedin的简历。请帮我对该简历进行分析，并返回json格式。\n'
+                     '需要萃取出的字段如下\n'
+                     'age => 通过学校毕业的时间，大学 + 22，研究生 + 25，高中 + 18\n'
+                     'chinese => 是否是中国人\n'
+                     'graduate_school => 毕业学校，最高学历学校。如果没有 返回 "无法判断"\n'
+                     'education_background => 学历，枚举值 "本科" "研究生" "博士" "博士后" "其他"，不能判断就返回 "其他"\n'
+                     'location => 国家-洲-城市\n'
+                     'warehouse_duration => 仓储运营相关的工作年限时长。根据简历中的工作经历判断。\n'
+                     'oversea_background => 是否拥有跨境电商/物流、海外仓、快递行业或者制造业仓库运营等背景。返回 "是" 或者 "否"\n'
+                     'first_experience => 是否拥有0~1的仓储搭建经验。返回 "是" 或者 "否"\n'
+                     'system_experience => 是否 WMS（仓储管理系统）、TMS（运输管理系统）、OMS（订单管理系统）、ERP 系统。返回 "是" 或者 "否"'
+        )
+
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, profile):
+        res = self.chain.invoke({"profile": profile})
+        print(res)
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if "```" in line:
+                continue
+            rres += line
+        return json.loads(rres)
+
+
 class huiweiPeopleAgent:
     def __init__(self):
         chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)

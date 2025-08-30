@@ -63,3 +63,27 @@ def add_catl_profile(profile_info):
 
     print(insert)
     dbm.insert(insert)
+
+
+def add_warehouse_profile(profile_info):
+    candidate_id = profile_info['candidate_id']
+    age = profile_info['age']
+    name = profile_info['name']
+    company = profile_info['company']
+    chinese = profile_info['chinese']
+    graduate_school = profile_info['graduate_school']
+    education_background = profile_info['education_background']
+    location = profile_info['location']
+    warehouse_duration = profile_info['warehouse_duration']
+    oversea_background = profile_info['oversea_background']
+    first_experience = profile_info['first_experience']
+    system_experience = profile_info['system_experience']
+
+    profile = profile_info["profile"]
+
+    insert = f"insert into catl(candidate_id, Age, Name, Company, Chinese, Graduate_School, Education_Background, Location, Larehouse_Duration, " \
+             f"Oversea_Background, First_Experience, System_Experience, profile) " \
+             f"values('{candidate_id}', {age}, '{name}', '{company}', '{chinese}', '{graduate_school}', '{education_background}', '{location}', '{warehouse_duration}', " \
+             f"'{oversea_background}', '{first_experience}', '{system_experience}', '{profile}')"
+
+    dbm.insert(insert)
