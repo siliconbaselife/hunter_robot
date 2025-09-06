@@ -399,6 +399,24 @@ CREATE TABLE `american_phd` (
   UNIQUE KEY `candidate_id` (candidate_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
 
+CREATE TABLE `american_hr` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `candidate_id` varchar(255) NOT NULL,
+  `Age` int NOT NULL,
+  `work_year` int NOT NULL,
+  `Chinese` VARCHAR(50) NOT NULL,
+  `Graduate_School` VARCHAR(255) NOT NULL,
+  `Education_Background` VARCHAR(255) NOT NULL,
+  `Work_Location` VARCHAR(50) NOT NULL,
+  `HR_Experience` VARCHAR(50) NOT NULL,
+  `Labour_Experience` VARCHAR(50) NOT NULL,
+  `Oversea_Experince` VARCHAR(50) NOT NULL,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `candidate_id` (candidate_id)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_as_cs;
+
 CREATE TABLE `agent_function` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
   `agent_name` varchar(100) NOT NULL DEFAULT "" COMMENT 'agent名字',

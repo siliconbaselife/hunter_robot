@@ -88,6 +88,7 @@ def add_warehouse_profile(profile_info):
 
     dbm.insert(insert)
 
+
 def add_american_phd_profile(profile_info):
     candidate_id = profile_info['candidate_id']
     age = profile_info['age']
@@ -109,3 +110,23 @@ def add_american_phd_profile(profile_info):
 
     dbm.insert(insert)
 
+
+def add_american_hr_profile(profile_info):
+    candidate_id = profile_info['candidate_id']
+    age = profile_info['age']
+    work_year = profile_info['work_year']
+    chinese = profile_info['chinese']
+    graduate_school = profile_info['graduate_school']
+    education_background = profile_info['education_background']
+    work_location = profile_info['work_location']
+    HR_experience = profile_info['HR_experience']
+    labour_experience = profile_info['labour_experience']
+    oversea_experince = profile_info['oversea_experince']
+
+    profile = profile_info["profile"]
+
+    insert = f"insert into american_hr(candidate_id, Age, work_year, Chinese, Graduate_School, Education_Background, Work_Location, HR_Experience, Labour_Experience, Oversea_Experince) " \
+             f"values('{candidate_id}', {age}, '{work_year}', '{chinese}', '{graduate_school}', '{education_background}', '{work_location}', '{HR_experience}', " \
+             f"'{labour_experience}', '{oversea_experince}')"
+
+    dbm.insert(insert)

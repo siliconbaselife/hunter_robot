@@ -930,6 +930,40 @@ class AmericanPHDPeopleAgent:
             rres += line
         return json.loads(rres)
 
+class AmericanHRAgent:
+    def __init__(self):
+        chat = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        output_parser = StrOutputParser()
+        prompt = PromptTemplate(
+            input_variables=["profile"],
+            template='{profile}\n'
+                     '====================================\n'
+                     '以上是一个候选人在linkedin的简历。请帮我对该简历进行分析，并返回json格式。\n'
+                     '需要萃取出的字段如下\n'
+                     'age => 通过学校毕业的时间，大学 + 22，研究生 + 25，高中 + 18\n'
+                     'work_year => 工作年限，通过学校毕业的时间进行推测，返回数字'
+                     'chinese => 是否是中国人。返回 "是" "否" "未知"\n'
+                     'graduate_school => 毕业学校，最高学历学校。如果没有 返回 "无法判断"\n'
+                     'education_background => 学历，枚举值 "本科" "研究生" "博士" "博士后" "其他"，不能判断就返回 "其他"\n'
+                     'work_location => 工作地点在洛杉矶哪里，如果不知道就返回"未知"\n'
+                     'HR_experience => 是否有3年以上人事管理经验，返回 "是" "否" "未知"\n'
+                     'labour_experience => 是否拥有第三方劳务公司的经验，返回 "是" "否" "未知"\n'
+                     'oversea_experince => 是否拥有跨境电商/物流、海外仓、快递行业或者制造业仓库运营等背景，返回 "是" "否" "未知"\n'
+        )
+
+        self.chain = prompt | chat | output_parser
+
+    def cal(self, profile):
+        res = self.chain.invoke({"profile": profile})
+        print(res)
+        lines = res.split('\n')
+        rres = ""
+        for line in lines:
+            if "```" in line:
+                continue
+            rres += line
+        return json.loads(rres)
+
 
 class huiweiPeopleAgent:
     def __init__(self):
