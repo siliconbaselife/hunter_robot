@@ -945,7 +945,7 @@ class AmericanHRAgent:
                      'chinese => 是否是中国人。返回 "是" "否" "未知"\n'
                      'graduate_school => 毕业学校，最高学历学校。如果没有 返回 "无法判断"\n'
                      'education_background => 学历，枚举值 "本科" "研究生" "博士" "博士后" "其他"，不能判断就返回 "其他"\n'
-                     'work_location => 工作地点在洛杉矶哪里，如果不知道就返回"未知"\n'
+                     'work_location => 工作地点在洛杉矶的哪个街区，如果不知道就返回"未知"\n'
                      'HR_experience => 是否有3年以上人事管理经验，返回 "是" "否" "未知"\n'
                      'labour_experience => 是否拥有第三方劳务公司的经验，返回 "是" "否" "未知"\n'
                      'oversea_experince => 是否拥有跨境电商/物流、海外仓、快递行业或者制造业仓库运营等背景，返回 "是" "否" "未知"\n'
