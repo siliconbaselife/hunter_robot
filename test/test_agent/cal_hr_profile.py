@@ -32,7 +32,7 @@ def deal_profile(profile):
         "chinese": res["chinese"],
         "graduate_school": res["graduate_school"],
         "education_background": res["education_background"],
-        "work_year": res["work_year"],
+        "work_year": -1 if res["age"] == "未知" else int(res["work_year"]),
         "work_location": res["work_location"],
         "HR_experience": res["HR_experience"],
         "labour_experience": res["labour_experience"],
