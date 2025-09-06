@@ -29,13 +29,13 @@ def deal_profile(profile):
         "age": -1 if res["age"] == "无法判断" else int(res["age"]),
         "name": profile["name"],
         "company": profile["department"],
-        "chinese": "yes" if res["chinese"] else "no",
+        "chinese": res["chinese"],
         "graduate_school": res["graduate_school"],
         "education_background": res["education_background"],
-        "school_level": res["school_level"],
-        "work_time": res["work_time"],
-        "science": res["science"],
-        "profile": profile["profile"]
+        "work_year": res["work_year"],
+        "HR_experience": res["HR_experience"],
+        "labour_experience": res["labour_experience"],
+        "oversea_experince": res["oversea_experince"]
     }
     add_american_hr_profile(profile_info)
 
