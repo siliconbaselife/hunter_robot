@@ -1322,9 +1322,7 @@ def download_profile_by_tag_web():
     cur_time = datetime.datetime.now()
     file_path = join('tmp', '{}-{}.xls'.format(manage_account_id, cur_time.strftime("%Y-%m-%d-%H-%M-%S")))
 
-    titles = ["candidate-Id", "company", "name", "title", "location", "contact", "cv", "educations", "5years Jump",
-              "age", "Chinese", "languages"]
-    excel_data = search_profile_by_tag_excel(manage_account_id, platform, tags[0], page, limit)
+    excel_data, titles = search_profile_by_tag_excel(manage_account_id, platform, tags[0], page, limit)
     logger.info(f"download_profile_by_tag_web excel_data => {excel_data}")
     data_to_excel_file(file_path, titles, excel_data)
 

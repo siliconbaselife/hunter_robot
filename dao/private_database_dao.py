@@ -59,9 +59,7 @@ def query_private_tags_old(manage_account_id, tag):
 def query_private_tags(manage_account_id, tag):
     table = table_names[manage_account_id][tag]
     sql = f"show columns from {table}"
-    print(sql)
     rows = dbm.query(sql)
-    print(rows)
 
     tag_infos = {}
     for row in rows:
@@ -144,4 +142,12 @@ def query_private_tag_filter_profiles(manage_account_id, tag, column_infos, page
 
     rows = dbm.query(sql)
 
+    return rows
+
+
+def query_private_tag_filter_profiles_for_excel(manage_account_id, tag, titles):
+    table_name = table_names[manage_account_id][tag]
+    titles_str = ",".join(titles)
+    sql = f'select {titles_str} from {table_name}'
+    rows = dbm.query(sql)
     return rows

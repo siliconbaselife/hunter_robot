@@ -1821,7 +1821,30 @@ def transfer_languages(languages_json):
     return languages_str
 
 
+def is_special_tag(manage_account_id, tag):
+    return manage_account_id in table_names and tag in table_names[manage_account_id]
+
+
 def search_profile_by_tag_excel(manage_account_id, platform, tag, page, limit):
+    if is_special_tag(manage_account_id, tag):
+        excel_data, titles = search_profile_by_tag_excel_special(manage_account_id, platform, tag, page, limit)
+    else:
+        excel_data = search_profile_by_tag_excel_normal(manage_account_id, platform, tag, page, limit)
+        titles = ["candidate-Id", "company", "name", "title", "location", "contact", "cv", "educations", "5years Jump",
+                  "age", "Chinese", "languages"]
+
+    return excel_data, titles
+
+
+def search_profile_by_tag_excel_special(manage_account_id, platform, tag, page, limit):
+    tag_infos = query_private_tags(manage_account_id, tag)
+    keys = ["candidate_id"] + list(tag_infos.keys())
+    rows = query_private_tag_filter_profiles_for_excel(manage_account_id, tag, keys)
+
+    return rows, keys
+
+
+def search_profile_by_tag_excel_normal(manage_account_id, platform, tag, page, limit):
     candidate_ids = query_candidate_id_by_tag_relation(manage_account_id, platform, [tag])
     rows = get_resume_by_candidate_ids_and_platform(manage_account_id, platform, candidate_ids, page, limit)
 
