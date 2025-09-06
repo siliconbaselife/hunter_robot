@@ -36,7 +36,8 @@ def deal_profile(profile):
         "work_location": res["work_location"],
         "HR_experience": res["HR_experience"],
         "labour_experience": res["labour_experience"],
-        "oversea_experince": res["oversea_experince"]
+        "oversea_experince": res["oversea_experince"],
+        "profile": profile["profile"]
     }
     add_american_hr_profile(profile_info)
 

@@ -411,6 +411,7 @@ CREATE TABLE `american_hr` (
   `HR_Experience` VARCHAR(50) NOT NULL,
   `Labour_Experience` VARCHAR(50) NOT NULL,
   `Oversea_Experince` VARCHAR(50) NOT NULL,
+  `profile` longtext NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
