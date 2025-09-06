@@ -122,9 +122,10 @@ def add_american_hr_profile(profile_info):
     HR_experience = profile_info['HR_experience']
     labour_experience = profile_info['labour_experience']
     oversea_experince = profile_info['oversea_experince']
+    profile = profile_info['profile']
 
-    insert = f"insert into american_hr(candidate_id, Age, work_year, Chinese, Graduate_School, Education_Background, Work_Location, HR_Experience, Labour_Experience, Oversea_Experince) " \
+    insert = f"insert into american_hr(candidate_id, Age, work_year, Chinese, Graduate_School, Education_Background, Work_Location, HR_Experience, Labour_Experience, Oversea_Experince, profile) " \
              f"values('{candidate_id}', {age}, '{work_year}', '{chinese}', '{graduate_school}', '{education_background}', '{work_location}', '{HR_experience}', " \
-             f"'{labour_experience}', '{oversea_experince}')"
+             f"'{labour_experience}', '{oversea_experince}', '{profile}')"
 
     dbm.insert(insert)
