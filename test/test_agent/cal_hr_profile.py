@@ -26,7 +26,7 @@ def deal_profile(profile):
     res = agent.cal(profile["profile"])
     profile_info = {
         "candidate_id": candidate_id,
-        "age": -1 if res["age"] == "无法判断" else int(res["age"]),
+        "age": -1 if res["age"] == "未知" else int(res["age"]),
         "name": profile["name"],
         "company": profile["department"],
         "chinese": res["chinese"],
