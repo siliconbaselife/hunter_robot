@@ -12,7 +12,7 @@ table_names = {
     "Clement.hu@tbirecruit.com": {
         "美国-物流仓长-test": "warehouse",
         "美国-PhD-chinese-test": "american_phd",
-        "美国-洛杉矶-HR-test": "ameracan_hr"
+        "美国-洛杉矶-HR-test": "american_hr"
     }
 }
 
