@@ -33,6 +33,7 @@ def deal_profile(profile):
         "graduate_school": res["graduate_school"],
         "education_background": res["education_background"],
         "work_year": res["work_year"],
+        "work_location": res["work_location"],
         "HR_experience": res["HR_experience"],
         "labour_experience": res["labour_experience"],
         "oversea_experince": res["oversea_experince"]
